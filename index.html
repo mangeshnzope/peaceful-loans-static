@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>Peaceful Loans — The Most Trusted Home Loan Advisor</title>
+  <meta name="description" content="Unbiased home loan advisory for borrowers seeking ₹2 Crore+. We work for you, not the bank.">
+  <link rel="icon" type="image/jpeg" href="/assets/icon-jpg.jpg">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div id="app"></div>
+<script src="/components.js"></script>
+<script>
+// ===== DATA =====
+const conversations = [
+  {customer:"Which bank can give me the lowest rate right now for my 2.2 cr home purchase?",advisor:"I am going to be repaying this loan in next 8-10 years. I want to save rupee on interest paid to the bank. Can you get me the market's lowest interest rate possible with my CIBIL?"},
+  {customer:"I want maximum sanction limit.",advisor:"I want to pay least amount from my pocket. Can you find a way that I can only pay the first 10% downpayment and rest is paid by the bank till the possession?"},
+  {customer:"Will my rate actually go down when RBI cuts rates?",advisor:"I want only RBI's repo rate linked interest rate. I've heard banks find ways to not pass on the benefit. I want to pick a bank that plays fair even after disbursement."},
+  {customer:"Will the bank force me to buy insurance?",advisor:"I don't want to be forced to buy insurance for this Home Loan. Suggest me a bank which does that. If buying a small insurance can get me the lowest interest rate, do let me know that as well. I can think about it."},
+  {customer:"Are there any hidden charges I should know about?",advisor:"I hate last moment surprises. Please tell me all the charges associated with this loan upfront only."},
+  {customer:"Can I prepay without any penalty? Can I do it without visiting the branch? Can I do it online?",advisor:"The faster I can close this loan, the better I'll sleep. I don't want to beg a bank branch to accept my own money to close this loan faster. I don't want drama later on that you can repay online, there is penalty for this. You need to come to branch and fill this form."},
+  {customer:"How many times will I have to visit the bank?",advisor:"I have a job, a life, a possession deadline. I need this to run on my schedule, not the bank's. I don't want to go to bank branch every few months to fill forms for changing interest rates, pre payment and small small things. Suggest me a bank which doesn't need this."},
+  {customer:"Can you just tell me what the best option is for my situation?",advisor:"I've read 12 articles and I'm more confused than before. I just need one person who knows this deeply and helps me find the best deal to save money."}
+];
+
+const testimonials = [
+  {quote:"Information asymmetry is real. Banks withhold information. Builders withhold information. And the two collude to make the customer's outcome worse. One single 30-minute consultation revealed several points that put me in a much stronger position vis-\u00e0-vis both the banker and the builder.",name:"Rony Roy",location:"Google Review"},
+  {quote:"The best thing about Peaceful Loans is that they tell you the dirty details hidden in home loan terms that no other agent will tell you. Canara Bank has a clause that the interest rate will be reviewed every 3 years \u2014 I was talking to Canara before I spoke to Mangesh but nobody mentioned this to me.",name:"Nirmal Dalmia",location:"Google Review"},
+  {quote:"It was complicated to get me a loan due to how my income is structured. Don't just go with someone because they're promising lower interest rates. What you won't get with anyone else is the clear professional attention to detail towards your account.",name:"Ninad Pathak",location:"Google Review"},
+  {quote:"On the day of the loan agreement signature, Mangesh helped me visualize how the loan will be structured, the expected EMI, and the best paths forward. Overall, the home loan buying experience was very peaceful.",name:"Naman Gupta",location:"Google Review"},
+  {quote:"Learned more in one 1-on-1 conversation with Mangesh than from multiple bank visits. He clearly explained hidden clauses and interest rate reversion risks after 3 years that neither the bank nor builder told me.",name:"Raman K Pandita",location:"Google Review"},
+  {quote:"Every paperwork was done, but in the end the bank told me my rate would be higher than initially quoted. Peaceful Loans suggested a different bank \u2014 they were right. I got a cheaper rate of interest.",name:"Sameer Kalra",location:"Google Review"},
+  {quote:"I just took care of taking the decisions \u2014 execution was all taken care of by Mangesh and team. They don't mis-sell, unlike many who will promise the world but never deliver.",name:"Ajith Nayak",location:"Google Review"}
+];
+
+const communityReviews = {
+  reddit:[
+    {user:"PitchJumpy1372",sub:"r/indianrealestate",text:"Mangesh discussed common pitfalls, differences between banks, and even a workaround for my specific situation that could save me ~\u20b91.5L over the next few years \u2014 all this even though I was never going to be their customer for this loan. That level of enthusiasm and conviction really stood out."},
+    {user:"Inside_Dimension5308",sub:"r/indianrealestate",text:"I had a really bad experience with HDFC's transparency \u2014 reluctant to give anything in writing, making false promises. You should ask people from Peaceful Loans. They really helped me get the best offer from BOM."}
+  ],
+  linkedin:[
+    {user:"Manoj Kanodia",sub:"CEO, Inspira Enterprises",text:"It has been wonderful dealing with Mangesh and his team of Peaceful-Loans. The insight they bring is extremely valuable. If you are looking for a loan you must talk to them."}
+  ]
+};
+
+const fearCards = [
+  {title:"The Rate You Were Promised",desc:"The 'teaser rate' quoted over the phone rarely makes it to the final agreement. By the time you notice, you've already paid the processing fee and signed the loan agreement."},
+  {title:"The Unexplained Spread Change",desc:"Banks never address the fact that interest rates can change by changing the spread. The spread need not change only when the repo rate changes \u2014 and they use this to raise your EMI silently."},
+  {title:"The 40-Page Agreement",desc:"Hidden clauses about 'reset periods' and 'force majeure hikes' are buried in legal jargon. We audit every line so you aren't signing away your future flexibility."}
+];
+
+const bankBombs = [
+  {tag:"Private Bank A",title:"The Rate Bait",truth:"They promise 7.15%\u20137.25% to everyone at the start. Once your application is done and you're too deep to walk away, they say \u2014 'this rate is only available if you purchase our credit insurance.' By then, your possession deadline is real and your options feel limited."},
+  {tag:"PSU Bank B",title:"The Zero Processing Fee Trap",truth:"They lead with 'zero processing fees' and you feel like you've won. Then comes the bill \u2014 Account Handling Charges, CERSAI Noting, CERSAI Search, Due Diligence, Docket Charges, Legal Report, Valuation Report, Legal Vetting, MOTD Charges, Property Insurance, NOI Charges. Zero processing fee. Everything else? Full price."},
+  {tag:"PSU Bank C",title:"The Disappearing Discount",truth:"They proudly announce the lowest rate in the market. What they won't tell you \u2014 that 'special discount' has an expiry date. After 3 years, it quietly disappears and your rate jumps by 0.85%. On a \u20b92 Cr loan, that's lakhs more in interest over your remaining tenure."}
+];
+
+const steps = [
+  {num:"Step 1",title:"Book a Free Consultation Call",desc:"A focused 30-minute call giving you tailored advice \u2014 not generic gyan.",color:"#FFB800"},
+  {num:"Step 2",title:"12 Questions",desc:"We don't start with 'share your documents.' We start with your goals. 12 questions define your problem statement and timeline.",color:"#E84118"},
+  {num:"Step 3",title:"Identify the Bank to Save You Money",desc:"We don't spray and pray. We know approval and discount criteria banks keep undisclosed. We leverage that knowledge to match the best bank for your goal.",color:"#1A4CC8"},
+  {num:"Step 4",title:"You Take a Back Seat",desc:"From documentation to legal vetting, we handle the friction. You just show up for the final signature \u2014 fully informed, with no last-minute surprises.",color:"#0A2A6B"}
+];
+
+const products = [
+  {icon: icons.home, label:"Home Loan"},
+  {icon: icons.arrowLeftRight, label:"Balance Transfer"},
+  {icon: icons.building, label:"Home Construction Loan"},
+  {icon: icons.mapPin, label:"Plot Only Loan"},
+  {icon: icons.layers, label:"Plot + Construction"},
+  {icon: icons.landmark, label:"Loan Against Property"},
+  {icon: icons.globe, label:"NRI Home Loan"},
+  {icon: icons.trendingUp, label:"Top-up Loan"}
+];
+
+const optimizeList = [
+  "Highest loan sanction amount",
+  "Lowest interest rate",
+  "Best pre-payment facilities",
+  "Fastest loan sanction",
+  "Minimum branch visits"
+];
+
+// ===== RENDER =====
+function render() {
+  document.getElementById('app').innerHTML = `
+${navHTML('/')}
+
+<!-- Trust Bar -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item"><span class="star">${icons.star}</span> 5.0 Google rating</div>
+      <div class="trust-item"><span style="color:#1A4CC8">${icons.gradCap}</span> Founded by IIM Calcutta Alumnus</div>
+      <div class="trust-item"><span style="color:#1A4CC8">${icons.shield}</span> No Bias for Any Bank</div>
+      <div class="trust-item"><span style="color:#E84118">${icons.target}</span> \u20b92 Crore+ Loans expert</div>
+    </div>
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <h1>The Most Trusted Home Loan Advisor.</h1>
+        <div class="hero-sub">
+          <p>We tell what banks hide. Spot mis-selling before it is too late.</p>
+          <p>We work for you and not for the bank.</p>
+        </div>
+        <div class="hero-ctas">
+          <a href="${URLS.callForm}" target="_blank" rel="noreferrer" class="btn btn-primary">${icons.phone} Book a Free Call</a>
+          <a href="${URLS.whatsappForm}" target="_blank" rel="noreferrer" class="btn btn-outline"><span style="color:#16a34a">${icons.whatsapp}</span> WhatsApp Us</a>
+        </div>
+        <p class="hero-note">30 mins of tailor-made, structured &amp; fact-based advice on saving money on your home loan.</p>
+      </div>
+      <div>
+        <p class="hero-phone-label">We Understand You</p>
+        <div class="phone-wrap"><div id="whatsappPhone"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What We Advise On -->
+<section class="section section-gray" id="what-we-advise">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:3rem">
+      <h2 class="section-title">What We Advise On</h2>
+      <p class="section-subtitle">Free home loan advisory for \u20b92 Crore+ buyers across all major loan types.</p>
+    </div>
+    <div class="products-grid">
+      ${products.map(p => `<div class="product-card"><div class="icon">${p.icon}</div><p>${p.label}</p></div>`).join('')}
+    </div>
+  </div>
+</section>
+
+<!-- Shield -->
+<section class="section section-white" id="shield">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:3rem">
+      <div style="display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:rgba(26,76,200,.1);margin-bottom:1.25rem"><span style="color:#1A4CC8">${icons.shield}</span></div>
+      <h2 class="section-title">The Shield Against Mis-selling</h2>
+      <p class="section-subtitle section-subtitle-lg">We don't just find a loan. We explain the fine print that banks try to hide from you.</p>
+    </div>
+    <div class="shield-cards">
+      <div class="shield-card shield-card-danger">
+        <div class="card-head"><span style="color:#ef4444">${icons.alertTriangle}</span><h3>No Time To Read</h3></div>
+        <p>Risky signatures lead to decades of hidden costs. Most borrowers sign a 40-page agreement without reading a word of it.</p>
+      </div>
+      <div class="shield-card shield-card-safe">
+        <div class="card-head"><span style="color:#1A4CC8">${icons.shieldCheck}</span><h3>We Read This For You</h3></div>
+        <p>Every clause decoded. Every risk mitigated. Peace of mind. Your 40-page agreement, explained by experts so you never sign blind.</p>
+      </div>
+    </div>
+    <div class="optimize-box">
+      <p style="font-size:14px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem;text-align:center">We Will Optimise For</p>
+      <div class="optimize-grid">
+        ${optimizeList.map(item => `<div class="optimize-item"><div class="optimize-check"><span style="color:#1A4CC8">${icons.check}</span></div><span>${item}</span></div>`).join('')}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="section section-gray" id="how-it-works">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:3.5rem">
+      <p class="section-label">Our Process</p>
+      <h2 class="section-title">How Peaceful-Loans Works for You</h2>
+      <p class="section-subtitle">Our mission is to save your hard-earned money and safeguard you against mis-selling.</p>
+    </div>
+    <div class="steps-grid">
+      ${steps.map(s => `<div class="step-card" style="border-top:4px solid ${s.color}"><p class="step-num">${s.num}</p><h3>${s.title}</h3><p>${s.desc}</p></div>`).join('')}
+    </div>
+    <div class="commission-note">
+      <p>At our scale, all banks give us the same commission. Unlike traditional DSAs, we do not let commissions earned from banks cloud our judgement. Our loyalty is to save you hard earned money.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Fear Section -->
+<section class="section section-dark" id="fear">
+  <div class="fear-bg" style="background-image:url(/assets/icon-png.png)"></div>
+  <div class="container" style="position:relative">
+    <div class="text-center" style="margin-bottom:3.5rem">
+      <div class="fear-badge">${icons.alertOctagon} Without Peaceful-Loans</div>
+      <h2 class="section-title" style="color:#fff">THREE Things That Go Wrong</h2>
+      <p style="color:#9ca3af;margin-top:.75rem;max-width:32rem;margin-left:auto;margin-right:auto">These are not edge cases \u2014 they happen to most borrowers without a good advisor.</p>
+    </div>
+    <div class="fear-grid">
+      ${fearCards.map((f,i) => `<div class="fear-card"><div class="fear-num"><span>${i+1}</span></div><h3>${f.title}</h3><p>${f.desc}</p></div>`).join('')}
+    </div>
+  </div>
+</section>
+
+<!-- Bank Truths -->
+<section class="section section-white" id="bank-truths">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:3rem">
+      <p class="section-label section-label-red">What Your Banker Won't Tell You</p>
+      <h2 class="section-title">Bank Truth Bombs</h2>
+      <p class="section-subtitle">These are facts, not opinions. We see these patterns daily in the sanction letters we study.</p>
+    </div>
+    <div class="bomb-grid">
+      ${bankBombs.map(b => `<div class="bomb-card"><span class="bomb-tag">${b.tag}</span><h3>${b.title}</h3><p>${b.truth}</p></div>`).join('')}
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Carousel -->
+<section class="section section-gray" id="testimonials">
+  <div class="container-sm">
+    <div class="text-center" style="margin-bottom:3rem">
+      <p class="section-label">Client Stories</p>
+      <h2 class="section-title">What Our Clients Say</h2>
+      <div class="rating-display" style="margin-top:.5rem">
+        <div class="stars">${starsHTML(5, 15)}</div>
+        <span style="font-size:14px;color:#9ca3af">5.0 &middot; 100+ Google Reviews</span>
+      </div>
+    </div>
+    <div id="testimonialCarousel"></div>
+  </div>
+</section>
+
+<!-- Community Reviews -->
+<section class="section section-white" id="community">
+  <div class="container-xs">
+    <div class="text-center" style="margin-bottom:2.5rem">
+      <p class="section-label">From the Community</p>
+      <h2 class="section-title">What Borrowers Are Saying</h2>
+    </div>
+    <div class="community-tabs" id="communityTabs"></div>
+    <div id="communityContent"></div>
+  </div>
+</section>
+
+<!-- Founder -->
+<section class="section section-gray" id="founder">
+  <div class="container-sm">
+    <div class="founder-grid">
+      <div style="display:flex;flex-direction:column;gap:1.25rem">
+        <p class="section-label section-label-gray">About Peaceful-Loans</p>
+        <h2 class="section-title">Built by Someone Who Saw the Fleecing Firsthand</h2>
+        <div class="founder-quote">
+          ${tricolorVHTML(12)}
+          <p>I started Peaceful-Loans after a decade in corporate world because I got fleeced by 'relationship managers' I trusted. Every week new information, all promises fizzled out. Buying first property turned from Happy and proud moment to "let's just get this done" moment.</p>
+        </div>
+        <p style="color:#6b7280;line-height:1.65">The financial industry is built on asymmetric information. Banks know the fine print; you don't. Builders know the delay clauses; you don't. Our job is to level the playing field.</p>
+      </div>
+      <div>
+        <div class="founder-card">
+          <div class="founder-img">
+            <img src="/assets/founder.jpeg" alt="Mangesh Zope, Founder of Peaceful-Loans">
+            <div class="founder-img-overlay"></div>
+            <div class="founder-img-text">
+              <h3>Mangesh Zope</h3>
+              <p>Founder &middot; IIM Calcutta 2012</p>
+            </div>
+          </div>
+          <div class="founder-card-body">
+            <p class="label">Safeguarding the Borrower</p>
+            <p class="desc">One mission: to make sure borrowers choose based on facts and never sign blind again.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+${ctaSectionHTML()}
+
+<!-- Footer -->
+${footerHTML()}
+`;
+
+  initNav();
+  initWhatsAppPhone();
+  initTestimonialCarousel();
+  initCommunityTabs();
+}
+
+// ===== WhatsApp Phone Mockup =====
+function initWhatsAppPhone() {
+  const container = document.getElementById('whatsappPhone');
+  if (!container) return;
+
+  let convIndex = 0;
+  let phase = 'customer'; // customer, dots, advisor, fade
+  let customerText = '';
+  let advisorText = '';
+  let timers = [];
+  const SPEED = 42;
+
+  function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+
+  function renderPhone() {
+    const fadeClass = phase === 'fade' ? 'style="opacity:0"' : '';
+    container.innerHTML = `
+<div class="phone">
+  <div class="phone-btn phone-btn-l1"></div>
+  <div class="phone-btn phone-btn-l2"></div>
+  <div class="phone-btn phone-btn-l3"></div>
+  <div class="phone-btn phone-btn-r"></div>
+  <div class="phone-screen">
+    <div class="wa-header">
+      <span class="wa-header-time">9:41</span>
+      <div class="wa-notch"><div class="wa-notch-dot"></div></div>
+      <div style="display:flex;gap:4px;align-items:center">
+        <svg width="15" height="11" viewBox="0 0 15 11" fill="none"><rect x="0" y="5" width="2.5" height="6" rx="1" fill="white"/><rect x="3.5" y="3.5" width="2.5" height="7.5" rx="1" fill="white"/><rect x="7" y="1.5" width="2.5" height="9.5" rx="1" fill="white"/><rect x="10.5" y="0" width="2.5" height="11" rx="1" fill="white"/></svg>
+        <svg width="14" height="11" viewBox="0 0 14 11" fill="none"><path d="M7 8.5a1 1 0 110 2 1 1 0 010-2z" fill="white"/><path d="M3.5 6A4.9 4.9 0 017 4.8a4.9 4.9 0 013.5 1.2l1-1.2A6.3 6.3 0 007 3.3a6.3 6.3 0 00-4.5 1.5L3.5 6z" fill="white"/><path d="M.5 3.2A9.4 9.4 0 017 1a9.4 9.4 0 016.5 2.2L12.4 4.4A7.8 7.8 0 007 2.4a7.8 7.8 0 00-5.4 2L.5 3.2z" fill="white"/></svg>
+        <svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x="0" y="1" width="20" height="9" rx="2.5" stroke="white" stroke-width="1"/><rect x="1.5" y="2.5" width="15" height="6" rx="1.5" fill="white"/><rect x="21" y="3.5" width="2.5" height="4" rx="1" fill="white"/></svg>
+      </div>
+    </div>
+    <div class="wa-contact">
+      <svg width="10" height="17" viewBox="0 0 10 17" fill="none"><path d="M9 1L1 8.5L9 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="wa-avatar"><img src="/assets/icon-jpg.jpg" alt="PL"></div>
+      <div><div class="wa-name">Peaceful-Loans</div><div class="wa-online">online</div></div>
+      <div style="margin-left:auto;display:flex;gap:20px">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="white" opacity="0.8"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="white" opacity="0.8"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+      </div>
+    </div>
+    <div class="wa-chat">
+      <div class="wa-date"><span>TODAY</span></div>
+      ${customerText ? `<div class="wa-bubble-out" ${fadeClass}><div class="wa-bubble-out-inner">${customerText}${phase==='customer'&&customerText.length>0?'<span class="cursor-blink"></span>':''}${phase!=='customer'?`<div class="wa-time-row"><span class="wa-time">10:42</span><svg width="14" height="9" viewBox="0 0 16 11" fill="none"><path d="M1 5.5l3.5 4L15 1" stroke="#4FC3F7" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M5 9.5L8.5 6" stroke="#4FC3F7" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></div>`:''}</div></div>` : ''}
+      ${phase==='dots'?`<div class="wa-bubble-in" ${fadeClass}><div class="wa-bubble-in-avatar"><img src="/assets/icon-jpg.jpg" alt="PL"></div><div class="wa-bubble-in-inner"><div class="typing-dots"><span></span><span></span><span></span></div></div></div>`:''}
+      ${(phase==='advisor'||phase==='hold'||phase==='fade')&&advisorText?`<div class="wa-bubble-in" ${fadeClass}><div class="wa-bubble-in-avatar"><img src="/assets/icon-jpg.jpg" alt="PL"></div><div class="wa-bubble-in-inner"><div class="wa-bubble-in-name">Peaceful-Loans</div>${advisorText}${phase==='advisor'?'<span class="cursor-blink"></span>':''}${phase!=='advisor'?'<div style="text-align:right;margin-top:3px"><span class="wa-time">10:42</span></div>':''}</div></div>`:''}
+    </div>
+    <div class="wa-input-bar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#8a8a8a"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/></svg>
+      <div class="wa-input">Message</div>
+      <div class="wa-send"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></div>
+    </div>
+    <div class="wa-home-indicator"><div></div></div>
+  </div>
+</div>`;
+  }
+
+  function runConversation() {
+    clearTimers();
+    customerText = '';
+    advisorText = '';
+    phase = 'customer';
+    const conv = conversations[convIndex];
+    let ci = 0;
+
+    function typeCustomer() {
+      if (ci < conv.customer.length) {
+        ci++;
+        customerText = conv.customer.slice(0, ci);
+        renderPhone();
+        timers.push(setTimeout(typeCustomer, SPEED));
+      } else {
+        timers.push(setTimeout(() => {
+          phase = 'dots';
+          renderPhone();
+          timers.push(setTimeout(() => {
+            phase = 'advisor';
+            let ai = 0;
+            function typeAdvisor() {
+              if (ai < conv.advisor.length) {
+                ai++;
+                advisorText = conv.advisor.slice(0, ai);
+                renderPhone();
+                timers.push(setTimeout(typeAdvisor, SPEED));
+              } else {
+                phase = 'hold';
+                renderPhone();
+                timers.push(setTimeout(() => {
+                  phase = 'fade';
+                  renderPhone();
+                  timers.push(setTimeout(() => {
+                    convIndex = (convIndex + 1) % conversations.length;
+                    runConversation();
+                  }, 700));
+                }, 4000));
+              }
+            }
+            typeAdvisor();
+          }, 1800));
+        }, 400));
+      }
+    }
+    typeCustomer();
+  }
+
+  renderPhone();
+  runConversation();
+}
+
+// ===== Testimonial Carousel =====
+function initTestimonialCarousel() {
+  const container = document.getElementById('testimonialCarousel');
+  if (!container) return;
+  let current = 0;
+
+  function renderTestimonial() {
+    const t = testimonials[current];
+    container.innerHTML = `
+<div class="testimonial-box">
+  <div class="big-quote">\u201c</div>
+  <blockquote>${t.quote}</blockquote>
+  <div class="testimonial-author">
+    <div class="avatar-circle"><span>${t.name[0]}</span></div>
+    <div>
+      <p style="font-weight:600;color:#111827">${t.name}</p>
+      <p style="font-size:14px;color:#9ca3af">${t.location} &middot; \u2605\u2605\u2605\u2605\u2605</p>
+    </div>
+  </div>
+</div>
+<div class="testimonial-nav">
+  <button onclick="prevTestimonial()" aria-label="Previous">${icons.chevronLeft}</button>
+  <div class="dots">${testimonials.map((_, i) => `<button class="dot ${i===current?'dot-active':'dot-inactive'}" onclick="goTestimonial(${i})" aria-label="Slide ${i+1}"></button>`).join('')}</div>
+  <button onclick="nextTestimonial()" aria-label="Next">${icons.chevronRight}</button>
+</div>`;
+  }
+
+  window.prevTestimonial = () => { current = current === 0 ? testimonials.length - 1 : current - 1; renderTestimonial(); };
+  window.nextTestimonial = () => { current = (current + 1) % testimonials.length; renderTestimonial(); };
+  window.goTestimonial = (i) => { current = i; renderTestimonial(); };
+
+  renderTestimonial();
+  setInterval(() => { current = (current + 1) % testimonials.length; renderTestimonial(); }, 5000);
+}
+
+// ===== Community Tabs =====
+function initCommunityTabs() {
+  const tabsEl = document.getElementById('communityTabs');
+  const contentEl = document.getElementById('communityContent');
+  if (!tabsEl) return;
+  let activeTab = 'reddit';
+
+  function renderCommunity() {
+    tabsEl.innerHTML = ['reddit','linkedin'].map(t =>
+      `<button class="tab-btn ${t===activeTab?'active':''}" onclick="switchCommunityTab('${t}')">${t==='reddit'?'Reddit \u00b7 r/indianrealestate':'LinkedIn'}</button>`
+    ).join('');
+
+    const reviews = communityReviews[activeTab];
+    contentEl.innerHTML = reviews.map(r => `
+<div class="community-card">
+  <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
+    <div class="community-avatar" style="background:${activeTab==='reddit'?'#FF4500':'#0077B5'}"><span>${activeTab==='reddit'?'r/':'in'}</span></div>
+    <div>
+      <p style="font-weight:600;font-size:14px;color:#111827">${r.user}</p>
+      <p style="font-size:12px;color:#9ca3af">${r.sub}</p>
+    </div>
+  </div>
+  <p style="color:#374151;font-size:14px;line-height:1.65">${r.text}</p>
+</div>`).join('');
+  }
+
+  window.switchCommunityTab = (tab) => { activeTab = tab; renderCommunity(); };
+  renderCommunity();
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', render);
+</script>
+</body>
+</html>

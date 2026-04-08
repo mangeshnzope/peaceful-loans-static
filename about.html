@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>About — Peaceful Loans</title>
+  <meta name="description" content="A boutique advisory that works exclusively for you — not the bank, not the builder.">
+  <link rel="icon" type="image/jpeg" href="/assets/icon-jpg.jpg">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div id="app"></div>
+<script src="/components.js"></script>
+<script>
+document.getElementById('app').innerHTML = `
+${navHTML('/about.html')}
+
+<div class="page-header">
+  <div class="container-sm text-center">
+    <p class="section-label section-label-gray">Our Story</p>
+    <h1>About Peaceful-Loans</h1>
+    <p style="margin-top:1.25rem">A boutique advisory that works exclusively for you — not the bank, not the builder.</p>
+  </div>
+</div>
+
+<div class="about-content" style="display:flex;flex-direction:column;gap:2.5rem">
+  <div class="blockquote">
+    ${tricolorVHTML(12)}
+    <p>"I started Peaceful-Loans after a decade in high-finance because I saw my own friends getting fleeced by 'relationship managers' they trusted."</p>
+  </div>
+
+  <div class="about-text">
+    <p>We are not a tech platform that aggregates loans. We are a boutique advisory that represents you. We are the modern advocates of your debt — ensuring every paisa is accounted for and every risk is mitigated.</p>
+    <p>The financial industry is built on asymmetric information. Banks know the fine print; you don't. Builders know the delay clauses; you don't. Our job is to level the playing field — permanently, at every step of your loan journey.</p>
+    <p>Unlike traditional brokers, we do not let commissions earned by banks cloud our judgement. At our scale, all major banks give us the same commission — so there is zero financial incentive for us to push you towards any specific lender.</p>
+    <p>We don't work for the bank. We don't work for the builder. We work for you.</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card stat-blue"><p class="num">\u20b92Cr+</p><p>Average loan size we advise on</p></div>
+    <div class="stat-card stat-red"><p class="num">123+</p><p>5-star Google reviews</p></div>
+    <div class="stat-card stat-amber"><p class="num">2012</p><p>IIM Calcutta alumnus</p></div>
+  </div>
+
+  <div style="padding-top:1rem;border-top:1px solid #f3f4f6">
+    <div style="display:flex;align-items:flex-start;gap:1.25rem">
+      <div class="avatar-circle" style="width:64px;height:64px;font-size:1.5rem;flex-shrink:0"><span>M</span></div>
+      <div>
+        <h3 style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;margin-bottom:.25rem">Mangesh Zope</h3>
+        <p style="font-size:14px;color:#9ca3af">Founder | IIM Calcutta (2012)</p>
+        <p style="font-size:14px;font-weight:600;color:#E84118;text-transform:uppercase;letter-spacing:.08em;margin-top:.5rem">Advocating for the Borrower</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+${ctaSectionHTML()}
+${footerHTML()}
+`;
+initNav();
+</script>
+</body>
+</html>

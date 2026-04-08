@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>Reviews — Peaceful Loans</title>
+  <meta name="description" content="What our clients say about Peaceful Loans home loan advisory.">
+  <link rel="icon" type="image/jpeg" href="/assets/icon-jpg.jpg">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div id="app"></div>
+<script src="/components.js"></script>
+<script>
+const googleReviews = [
+  {name:"Rony Roy",tag:"30-Min Consultation",text:"Information asymmetry is real. Banks withhold information. Builders withhold information. And the two collude to make the customer\u2019s outcome worse. One single 30-minute consultation revealed several points that put me in a much stronger position vis-\u00e0-vis both the banker and the builder."},
+  {name:"Nirmal Dalmia",tag:"Hidden Clauses Revealed",text:"The best thing about Peaceful Loans is that they tell you the dirty details hidden in home loan terms that no other agent will tell you. Canara Bank has a clause that the interest rate will be reviewed every 3 years \u2014 I was talking to Canara before I spoke to Mangesh but nobody mentioned this to me."},
+  {name:"Ninad Pathak",tag:"Complex Income Structure",text:"It was complicated to get me a loan due to how my income is structured. Don\u2019t just go with someone because they\u2019re promising lower interest rates. What you won\u2019t get with anyone else is the clear professional attention to detail towards your account."},
+  {name:"Naman Gupta",tag:"Agreement Day Support",text:"On the day of the loan agreement signature, Mangesh helped me visualize how the loan will be structured, the expected EMI, and the best paths forward. Overall, the home loan buying experience was very peaceful."},
+  {name:"Raman K Pandita",tag:"Rate Reversion Risk",text:"Learned more in one 1-on-1 conversation with Mangesh than from multiple bank visits. He clearly explained hidden clauses and interest rate reversion risks after 3 years that neither the bank nor builder told me."},
+  {name:"Sameer Kalra",tag:"Better Bank Found",text:"Every paperwork was done, but in the end the bank told me my rate would be higher than initially quoted. Peaceful Loans suggested a different bank \u2014 they were right. I got a cheaper rate of interest."},
+  {name:"Ajith Nayak",tag:"End-to-End Execution",text:"I just took care of taking the decisions \u2014 execution was all taken care of by Mangesh and team. They don\u2019t mis-sell, unlike many who will promise the world but never deliver."}
+];
+
+const communityReviews = [
+  {platform:"Reddit",user:"PitchJumpy1372",sub:"r/indianrealestate",color:"#FF4500",text:"Mangesh discussed common pitfalls, differences between banks, and even a workaround for my specific situation that could save me ~\u20b91.5L over the next few years \u2014 all this even though I was never going to be their customer for this loan. That level of enthusiasm and conviction really stood out."},
+  {platform:"Reddit",user:"Inside_Dimension5308",sub:"r/indianrealestate",color:"#FF4500",text:"I had a really bad experience with HDFC\u2019s transparency \u2014 reluctant to give anything in writing, making false promises. You should ask people from Peaceful Loans. They really helped me get the best offer from BOM."},
+  {platform:"LinkedIn",user:"Manoj Kanodia",sub:"CEO, Inspira Enterprises",color:"#0077B5",text:"It has been wonderful dealing with Mangesh and his team of Peaceful-Loans. The insight they bring is extremely valuable. If you are looking for a loan you must talk to them."}
+];
+
+document.getElementById('app').innerHTML = `
+${navHTML('/reviews.html')}
+
+<div class="page-header">
+  <div class="container-sm text-center">
+    <p class="section-label section-label-gray">Client Reviews</p>
+    <h1>What Our Clients Say</h1>
+    <div class="rating-display" style="margin-top:.75rem">
+      <div class="stars">${starsHTML(5, 16)}</div>
+      <span style="color:#6b7280">5.0 &middot; 100+ Google Reviews</span>
+    </div>
+  </div>
+</div>
+
+<div class="container-sm" style="padding:4rem 1rem">
+  <p class="section-label" style="margin-bottom:2rem">Google Reviews</p>
+  <div style="margin-bottom:4rem">
+    ${googleReviews.map((r, i) => `
+    <div class="review-card">
+      <div class="review-head">
+        <div class="avatar-circle"><span>${r.name[0]}</span></div>
+        <div class="flex-1">
+          <p style="font-weight:600;color:#111827">${r.name}</p>
+          <div class="stars" style="margin-top:2px">${starsHTML(5, 11)}</div>
+        </div>
+        <span class="review-tag">${r.tag}</span>
+      </div>
+      <p class="review-text">"${r.text}"</p>
+    </div>`).join('')}
+  </div>
+
+  <div style="border-top:1px solid #f3f4f6;padding-top:3rem;margin-bottom:3rem">
+    <p class="section-label" style="margin-bottom:2rem">From the Community</p>
+    ${communityReviews.map(r => `
+    <div class="community-card">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
+        <div class="community-avatar" style="background:${r.color}"><span>${r.platform==='Reddit'?'r/':'in'}</span></div>
+        <div>
+          <p style="font-weight:600;font-size:14px;color:#111827">${r.user}</p>
+          <p style="font-size:12px;color:#9ca3af">${r.sub}</p>
+        </div>
+      </div>
+      <p style="color:#374151;font-size:14px;line-height:1.65">"${r.text}"</p>
+    </div>`).join('')}
+  </div>
+
+  <div class="text-center">
+    <p style="color:#6b7280;font-family:var(--font-serif);font-style:italic;font-size:1.125rem;margin-bottom:1.5rem">Want to experience the same clarity?</p>
+    <div style="display:flex;flex-direction:column;gap:.75rem;justify-content:center;align-items:center">
+      <div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center">
+        <a href="${URLS.callForm}" target="_blank" rel="noreferrer" class="btn btn-primary">${icons.phone} Book a Free Call</a>
+        <a href="${URLS.whatsappForm}" target="_blank" rel="noreferrer" class="btn btn-outline-gray"><span style="color:#16a34a">${icons.whatsapp}</span> WhatsApp Us</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+${ctaSectionHTML()}
+${footerHTML()}
+`;
+initNav();
+</script>
+</body>
+</html>

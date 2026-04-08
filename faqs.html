@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>FAQs — Peaceful Loans</title>
+  <meta name="description" content="Everything you wanted to know about working with Peaceful-Loans — answered honestly.">
+  <link rel="icon" type="image/jpeg" href="/assets/icon-jpg.jpg">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div id="app"></div>
+<script src="/components.js"></script>
+<script>
+const faqs = [
+  {q:"How is Peaceful-Loans different from a loan agent or DSA?",a:"A loan agent (DSA) works for the bank \u2014 their job is to get you to sign, and they earn a commission when you do. We work for you. We have studied every bank\u2019s sanction letter, identify hidden clauses, and make you aware. Our advice is not influenced by which bank pays us the highest commission. It is influenced by ensuring you save the maximum money."},
+  {q:"Is this service really free? How do you make money?",a:"The advisory is free for you. Like most mortgage advisors, we receive a standard referral fee from the bank you ultimately choose. The key difference: at our scale, all major banks pay us the same rate \u2014 so there is zero financial incentive for us to recommend one bank over another. Your best outcome is also our best outcome."},
+  {q:"Do you work with all banks?",a:"We work with all major public and private sector banks including SBI, BOB, UBI, Bank of Maharashtra, Canara Bank, Bank of India, HDFC, ICICI, Axis, Kotak, and others. We select banks based on your specific profile, goals, and the terms they can offer \u2014 not because of partnership agreements."},
+  {q:"What if my loan amount is under \u20b92 Crore?",a:"Our advisory is designed for buyers seeking \u20b92 Crore and above. The complexity and stakes at this loan size justify our detailed approach. If your loan is smaller, you may still be able to help \u2014 reach out and we\u2019ll be honest about whether we\u2019re the right fit."},
+  {q:"How long does the process take?",a:"After our initial 12-question discovery call, we typically identify and process the best bank match within 2-4 weeks for a standard home purchase. Complex cases (NRI, LAP, balance transfer) may take longer. We keep you updated at every step so there are no surprises."},
+  {q:"What is a \u2018spread\u2019 and why does it matter?",a:"Your home loan rate = Benchmark Rate (like RLLR or MCLR) + Spread. While banks talk about benchmark changes, they rarely tell you they can also change the spread at their discretion. A silent spread increase of 0.5% on a \u20b92 Crore loan over 20 years can cost you \u20b912-15 Lakhs extra. We flag this risk in the advisory stages itself."},
+  {q:"What should I look for in a sanction letter?",a:"Key things to check: (1) The actual interest rate and spread components. (2) Prepayment penalty clauses. (3) Reset period and conditions. (4) Force majeure clauses that allow rate changes. (5) Insurance mandates \u2014 many are illegal cross-sells. (6) Disbursement conditions tied to construction stages. We have studied these for many customers, and communicate the risks to you without holding back."},
+  {q:"Can you help with a balance transfer on an existing loan?",a:"Yes. Balance transfer advisory is one of our key services. We calculate the true cost of switching \u2014 including processing fees, legal charges, and break-even timelines \u2014 so you know whether a transfer actually saves you money or just looks like it does on paper."}
+];
+
+// FAQ Schema for SEO
+const schemaScript = document.createElement('script');
+schemaScript.type = 'application/ld+json';
+schemaScript.textContent = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(f => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a }
+  }))
+});
+document.head.appendChild(schemaScript);
+
+document.getElementById('app').innerHTML = `
+${navHTML('/faqs.html')}
+
+<div class="page-header">
+  <div class="container-xs text-center">
+    <p class="section-label section-label-gray">Your Questions Answered</p>
+    <h1 style="color:var(--blue)">Frequently Asked Questions</h1>
+    <p style="color:#6b7280;font-size:1.125rem;margin-top:1.25rem">Everything you wanted to know about working with Peaceful-Loans — answered honestly.</p>
+  </div>
+</div>
+
+<div class="container-xs" style="padding:4rem 1rem">
+  <div style="margin-bottom:2rem">
+    ${faqs.map((f, i) => `
+    <div class="faq-item">
+      <button class="faq-toggle" onclick="toggleFAQ(this)" aria-expanded="false">
+        <span>${f.q}</span>
+        ${icons.chevronDown}
+      </button>
+      <div class="faq-answer" style="display:none"><p>${f.a}</p></div>
+    </div>`).join('')}
+  </div>
+
+  <!-- YouTube Section -->
+  <div style="background:rgba(26,76,200,.05);border:1px solid rgba(26,76,200,.1);border-radius:1rem;padding:2rem;margin-bottom:3rem">
+    <h2 class="section-title text-center" style="color:var(--blue);margin-bottom:.75rem">Insights on YouTube. Questions of real consumers and their answers.</h2>
+    <p style="color:#6b7280;font-size:14px;text-align:center;margin-bottom:2rem">Short, sharp truths about home loans. No fluff. No scripts.</p>
+    <div class="yt-grid">
+      <div class="yt-embed"><iframe src="https://www.youtube.com/embed/C_Ji2oROYSY" title="Peaceful-Loans insight 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="yt-embed" style="background:#f3f4f6;display:flex;align-items:center;justify-content:center;color:#9ca3af;font-size:14px">Coming Soon</div>
+      <div class="yt-embed" style="background:#f3f4f6;display:flex;align-items:center;justify-content:center;color:#9ca3af;font-size:14px">Coming Soon</div>
+    </div>
+  </div>
+
+  <div class="text-center" style="padding-bottom:1rem">
+    <p style="font-family:var(--font-serif);font-size:1.125rem;font-style:italic;color:#6b7280;margin-bottom:1.25rem">Still have questions? Let's talk.</p>
+    <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+      <a href="${URLS.callForm}" target="_blank" rel="noreferrer" class="btn btn-primary">${icons.phone} Book a Free Call</a>
+      <a href="${URLS.whatsappForm}" target="_blank" rel="noreferrer" class="btn btn-outline-gray"><span style="color:#16a34a">${icons.whatsapp}</span> WhatsApp Us</a>
+    </div>
+  </div>
+</div>
+
+${ctaSectionHTML()}
+${footerHTML()}
+`;
+
+initNav();
+
+function toggleFAQ(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = answer.style.display !== 'none';
+  answer.style.display = isOpen ? 'none' : 'block';
+  btn.classList.toggle('open', !isOpen);
+  btn.setAttribute('aria-expanded', !isOpen);
+}
+</script>
+</body>
+</html>
