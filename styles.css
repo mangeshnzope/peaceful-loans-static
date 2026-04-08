@@ -125,7 +125,7 @@ ul { list-style: none; }
 @media (min-width: 1024px) {
   .hero-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
   .hero h1 { font-size: 3.25rem; }
-  .hero { padding: 1rem 0 7rem; }
+  .hero { padding: 1rem 0 2rem; }
 }
 
 /* ===== WHATSAPP PHONE MOCKUP ===== */
