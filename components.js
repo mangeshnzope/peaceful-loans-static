@@ -47,8 +47,8 @@ function tricolorVHTML(width = 12) {
 function navHTML(currentPath) {
   const isHome = currentPath === '/' || currentPath === '/index.html';
   const links = [
-    { label: 'How It Works', href: isHome ? '#how-it-works' : '/index.html#how-it-works' },
-    { label: 'What We Check', href: isHome ? '#shield' : '/index.html#shield' },
+    { label: 'How It Works', href: isHome ? '#how-it-works' : 'https://www.peaceful-loan.com/save-money-on-home-loan/#how-it-works' },
+    { label: 'What We Check', href: isHome ? '#shield' : 'https://www.peaceful-loan.com/save-money-on-home-loan/#shield' },
     { label: 'Reviews', href: '/reviews.html' },
     { label: 'FAQs', href: '/faqs.html' },
   ];
@@ -56,7 +56,7 @@ function navHTML(currentPath) {
 <nav class="nav" id="navbar">
   <div class="container">
     <div class="nav-inner">
-      <a href="/index.html" class="nav-logo"><img src="/assets/logo-horizontal.jpg" alt="Peaceful Loans"></a>
+      <a href="https://www.peaceful-loan.com/save-money-on-home-loan/" class="nav-logo"><img src="/assets/logo-horizontal.jpg" alt="Peaceful Loans"></a>
       <div class="nav-links">${links.map(l => `<a href="${l.href}">${l.label}</a>`).join('')}</div>
       <div class="nav-ctas">
         <a href="${URLS.callForm}" target="_blank" rel="noreferrer" class="btn btn-primary btn-sm">${icons.phone} Book a Free Call</a>
@@ -90,8 +90,8 @@ function footerHTML() {
       <div>
         <h4>Navigation</h4>
         <ul>
-          <li><a href="/index.html#how-it-works">How It Works</a></li>
-          <li><a href="/index.html#shield">What We Check</a></li>
+          <li><a href="https://www.peaceful-loan.com/save-money-on-home-loan/#how-it-works">How It Works</a></li>
+          <li><a href="https://www.peaceful-loan.com/save-money-on-home-loan/#shield">What We Check</a></li>
           <li><a href="/reviews.html">Reviews</a></li>
           <li><a href="/faqs.html">FAQs</a></li>
           <li><a href="/about.html">About</a></li>
