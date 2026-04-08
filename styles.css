@@ -63,7 +63,7 @@ ul { list-style: none; }
 .nav-menu-btn svg { width: 22px; height: 22px; }
 .mobile-menu { display: none; background: #fff; border-bottom: 1px solid var(--gray-100); padding: 0 1rem 1rem; }
 .mobile-menu.open { display: block; }
-.mobile-menu a { display: block; padding: .5rem 0; font-size: 14px; font-weight: 500; color: var(--gray-700); }
+.mobile-menu > a { display: block; padding: .5rem 0; font-size: 14px; font-weight: 500; color: var(--gray-700); }
 .mobile-menu .mobile-ctas { display: flex; flex-direction: column; gap: .5rem; padding-top: .75rem; }
 
 @media (min-width: 768px) {
