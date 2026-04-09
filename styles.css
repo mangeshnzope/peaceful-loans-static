@@ -129,14 +129,14 @@ ul { list-style: none; }
 }
 
 /* ===== WHATSAPP PHONE MOCKUP ===== */
-.phone-wrap { overflow: hidden; height: 460px; width: 100%; display: flex; justify-content: center; align-items: flex-start; }
+.phone-wrap { overflow: hidden; height: 600px; width: 100%; display: flex; justify-content: center; align-items: flex-start; }
 .phone { width: 360px; margin: 0 auto; background: #1C1C1E; border-radius: 54px; padding: 12px 4px; box-shadow: 0 0 0 1px #3a3a3c, 0 32px 80px rgba(0,0,0,.45), inset 0 0 0 2px #2c2c2e; position: relative; user-select: none; flex-shrink: 0; }
 .phone-btn { position: absolute; background: #3a3a3c; }
 .phone-btn-l1 { left: -3px; top: 105px; width: 3px; height: 34px; border-radius: 3px 0 0 3px; }
 .phone-btn-l2 { left: -3px; top: 152px; width: 3px; height: 64px; border-radius: 3px 0 0 3px; }
 .phone-btn-l3 { left: -3px; top: 228px; width: 3px; height: 64px; border-radius: 3px 0 0 3px; }
 .phone-btn-r { right: -3px; top: 170px; width: 3px; height: 82px; border-radius: 0 3px 3px 0; }
-.phone-screen { border-radius: 44px; overflow: hidden; display: flex; flex-direction: column; height: 580px; }
+.phone-screen { border-radius: 44px; overflow: hidden; display: flex; flex-direction: column; height: 680px; }
 .wa-header { background: #075E54; padding: 13px 18px 4px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
 .wa-header-time { color: #fff; font-size: 12px; font-weight: 700; }
 .wa-notch { background: #1C1C1E; border-radius: 20px; width: 96px; height: 26px; display: flex; align-items: center; justify-content: center; }
