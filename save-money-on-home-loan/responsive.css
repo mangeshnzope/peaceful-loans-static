@@ -1,0 +1,435 @@
+@media (max-width:1440px) {
+    header nav .navbar-nav .nav-item {
+        padding: 21px 5px 13px 5px;
+    }
+
+    .banner-home .banner-content {
+        top: 58%;
+    }
+
+
+
+    .about-home .bg-1 {
+        position: absolute;
+        bottom: 0;
+        opacity: 0.5;
+        left: 375px;
+        max-width: 20%;
+
+    }
+
+    .banner-home .banner-content h2 {
+        font-size: 35px;
+    }
+
+    .banner-home .contact-form {
+        padding: 30px 25px;
+    }
+}
+
+@media (max-width:1366px) {
+    .luxury-loan-hero {
+        color: var(--dark-black);
+        background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.85), rgba(38, 105, 207, 0.95)), url(img/home-banner.jpeg);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        padding-top: 10.5rem !important;
+        padding-bottom: 3rem;
+    }
+}
+
+@media (max-width:1196px) {
+    .banner-home .banner-content h2 {
+        font-size: 76px;
+    }
+
+    header nav .navbar-brand img {
+        max-width: 100px;
+    }
+
+    header nav .navbar-nav .nav-item .nav-link {
+        font-size: 13px;
+    }
+
+    header nav .navbar-nav .nav-item {
+        padding: 20px 0px;
+    }
+
+    header.sticky nav .navbar-nav .nav-item,
+    header.sec-nav nav .navbar-nav .nav-item {
+        padding: 19px 0px;
+    }
+
+    header.sticky nav .navbar-brand img,
+    header.sec-nav nav .navbar-brand img {
+        max-width: 100px;
+    }
+
+    header.sticky nav .navbar-nav .nav-item .nav-link,
+    header.sec-nav nav .navbar-nav .nav-item .nav-link {
+        font-size: 13px;
+    }
+
+    .our-scrolling-ticker .scrolling-content span {
+        font-size: 26px;
+    }
+
+    .service .services-main .service-item {
+        padding: 25px;
+        min-height: 305px;
+    }
+
+    .testi-client .review-box {
+        padding: 29px;
+    }
+
+    .testi-client .review-box h4 {
+        font-size: 22px;
+    }
+}
+
+@media(max-width:1024px) {
+
+    .about .circle {
+        right: 35px;
+    }
+
+    .activities .actvitie-main .activite-item h3 {
+        font-size: 17px;
+    }
+
+    .common-heading {
+        font-size: 40px;
+    }
+
+    header.sticky nav .navbar-nav .nav-item .nav-link,
+    header.sec-nav nav .navbar-nav .nav-item .nav-link {
+        font-size: 14px;
+    }
+
+
+}
+
+@media (max-width:986px) {
+
+    header nav .navbar-nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    header nav .navbar-nav .nav-item {
+        padding: 0px 0px;
+    }
+
+    header nav .navbar-nav .nav-item .nav-link {
+        padding: 5px 5px;
+    }
+
+    .banner-home .desktop {
+        display: none !important;
+    }
+
+    .banner-home .mobile {
+        display: block !important;
+    }
+
+    .banner-home .banner-content h2 {
+        font-size: 54px;
+    }
+
+    .banner-home .banner-content p {
+        margin-top: 0;
+    }
+
+
+    .banner-home .banner-content .sub-heading {
+        font-size: 45px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+
+    .footer .contact-form {
+        margin-top: 20px;
+    }
+
+
+
+
+
+    header nav .navbar-brand img {
+        max-width: 180px;
+    }
+
+    a.navbar-brand.logo-wrapper {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .navbar-toggler {
+        display: none;
+    }
+
+    header .common-btn {
+        position: fixed;
+        bottom: 30px;
+        left: 20px;
+    }
+
+
+    .navbar-collapse {
+        background: #000;
+        padding: 10px;
+    }
+
+
+
+
+    header nav .navbar-nav .nav-item .nav-link {
+        font-size: 14px;
+        padding: 0px 10px;
+    }
+
+    header .social-links {
+        padding-left: 15px;
+    }
+
+    .about-home .mission-grid {
+        margin-top: 35px;
+    }
+
+    .case-studies .case-studies-main {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .case-studies .case-studies-main .case-item-2,
+    .case-studies .case-studies-main .case-item {
+        padding: 10px 25px;
+    }
+
+    footer .footer-widget {
+        padding: 60px 0 0px 0px;
+    }
+
+    footer .centred {
+        position: relative;
+        margin-top: 60px;
+    }
+
+    footer .middle-widget-sec {
+        border-bottom: 0px solid rgba(255, 255, 255, 0.1);
+    }
+
+    header.sticky button.navbar-toggler {
+        filter: brightness(0);
+    }
+
+    header.sticky .navbar-collapse {
+        background: #ffffff;
+        padding: 10px;
+    }
+
+
+    header.sticky nav .navbar-nav .nav-item,
+    header.sec-nav nav .navbar-nav .nav-item {
+        padding: 0px 0px;
+    }
+
+    .luxury-loan-hero .contact-form {
+
+        margin-top: 20px;
+        margin-bottom: 50px;
+    }
+
+    .luxury-loan-hero .sub-rev {
+        display: flex;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+@media (max-width:575px) {
+    .desktop-Btn {
+        display: none;
+    }
+
+    .mobile-Btn {
+        display: block;
+        margin-bottom: 1.5rem;
+    }
+
+    .luxury-loan-hero .sub-rev {
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .banner-home .banner-content h2 {
+        font-size: 28px;
+    }
+
+    .banner-home .banner-content p {
+        line-height: 25px;
+        font-size: 21px;
+    }
+
+
+
+    .banner-home button.owl-next span {
+        font-size: 134px;
+    }
+
+    .banner-home button.owl-prev span {
+        font-size: 134px;
+    }
+
+    .about .circle {
+        display: none;
+    }
+
+    .luxury-room .lux-room {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .common-heading {
+        font-size: 25px;
+    }
+
+
+
+
+    .footer .cont-s .dt-box a {
+        font-size: 16px;
+    }
+
+    .footer .contact-form {
+        background: aliceblue;
+        padding: 24px 15px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .banner-home button.owl-next span {
+        font-size: 54px;
+    }
+
+    .banner-home button.owl-prev span {
+        font-size: 54px;
+    }
+
+    .banner-home .banner-content h2.text-end {
+        text-align: start !important;
+    }
+
+    header.sticky nav .navbar-brand img,
+    header.sec-nav nav .navbar-brand img {
+        max-width: 156px;
+    }
+
+    .banner-home .banner-content .para {
+        width: 100%;
+        line-height: 30px;
+    }
+
+    .banner-home .banner-content .sub-heading {
+        font-size: 24px;
+    }
+
+
+    header.sticky nav .navbar-brand img,
+    header.sec-nav nav .navbar-brand img {
+        max-width: 120px;
+    }
+
+    .case-studies .case-studies-main .case-item-2,
+    .case-studies .case-studies-main .case-item {
+        padding: 10px 10px;
+    }
+
+    .testi-client button.owl-next {
+        top: 100%;
+    }
+
+    .testi-client button.owl-prev {
+        top: 100%;
+    }
+
+    footer a {
+        font-size: 14px;
+    }
+
+    footer .centred p {
+        font-size: 14px;
+    }
+
+    .trusted-section .hero-cta-button {
+        margin-top: 0;
+    }
+
+    .solved-problems-section .hero-cta-button {
+        margin-top: 0;
+    }
+
+    .testimonials-section .testinomials-wrappers {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(1, 1fr)
+    }
+
+    .contact-quote-section .quote-form-wrapper {
+
+        padding: 30px 7px;
+    }
+
+    .site-footer .copyright-notice {
+        margin-top: 1.5rem;
+    }
+
+    .hero-glass-effect {
+        width: 100%;
+        justify-content: center;
+        background: rgb(255 255 255 / 0%);
+    }
+
+    .hero-rating-box .stars {
+        color: var(--theme-color);
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+
+    .hero-rating-box .google-text {
+        font-size: 23px;
+    }
+
+    .hero-rating-box .rating-text {
+
+        font-size: 17px;
+    }
+
+    .luxury-loan-hero {
+        padding-top: 6.5rem !important;
+        /* background-image: linear-gradient(0deg, #0a326ff2, #0041a3), url(img/home-banner.jpeg); */
+    }
+
+}
+
+@media (max-width:375px) {
+    .banner-home .banner-content h2 {
+        font-size: 39px;
+        color: #ffffff;
+        text-shadow: 1px 1px 3px #000;
+    }
+
+    .footer-botom p {
+        font-size: 15px;
+    }
+
+    .banner-home .banner-content p {
+        line-height: 25px;
+        font-size: 16px;
+    }
+
+}
+
+@media (max-width:320px) {}
