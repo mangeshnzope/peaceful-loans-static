@@ -99,16 +99,8 @@ ul { list-style: none; }
 .hero-sub { font-size: 1.125rem; color: var(--gray-500); line-height: 1.65; max-width: 32rem; margin-top: 1rem; }
 .hero-sub p { 
   margin-bottom: .25rem; 
-  background: linear-gradient(110deg, var(--gray-500) 45%, var(--gray-900) 50%, var(--gray-500) 55%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: reading-sheen 5s linear infinite;
+  color: #1a1a1a;
 }
-.hero-sub p:nth-child(2) { animation-delay: 0.5s; }
-.hero-sub p:nth-child(3) { animation-delay: 1s; }
-.hero-sub p:nth-child(4) { animation-delay: 1.5s; }
 
 @keyframes reading-sheen {
   0% { background-position: 150% 0; }

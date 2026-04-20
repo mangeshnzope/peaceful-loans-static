@@ -1054,10 +1054,7 @@ header {
         color: var(--title-color);
 
         .text-highlight {
-            color: var(--main-color);
-            background: -webkit-linear-gradient(53deg, var(--main-color), #FFBC00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #1a1a1a;
         }
     }
 

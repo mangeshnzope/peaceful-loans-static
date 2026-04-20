@@ -872,10 +872,7 @@ header.sticky1 .navbar-nav .nav-link.show {
   color: var(--title-color);
 }
 .trusted-section .section-heading .text-highlight {
-  color: var(--main-color);
-  background: -webkit-linear-gradient(53deg, var(--main-color), #FFBC00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #1a1a1a;
 }
 .trusted-section .hero-cta-button {
   margin-top: 2.5rem;
