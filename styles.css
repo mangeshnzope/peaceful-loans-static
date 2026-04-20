@@ -99,7 +99,7 @@ ul { list-style: none; }
 .hero-sub { font-size: 1.125rem; color: var(--gray-500); line-height: 1.65; max-width: 32rem; margin-top: 1rem; }
 .hero-sub p { 
   margin-bottom: .25rem; 
-  color: #1a1a1a;
+  color: var(--gray-900);
 }
 
 @keyframes reading-sheen {
