@@ -13,7 +13,7 @@
   <title>Reviews — Peaceful Loans</title>
   <meta name="description" content="What our clients say about Peaceful Loans home loan advisory.">
   <link rel="icon" type="image/jpeg" href="/assets/icon-jpg.jpg">
-  <link rel="stylesheet" href="/styles.css?v=6">
+  <link rel="stylesheet" href="/styles.css?v=7">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -49,7 +49,7 @@ ${navHTML('/reviews.html')}
     <h1>What Our Clients Say</h1>
     <div class="rating-display" style="margin-top:.75rem">
       <div class="stars">${starsHTML(5, 16)}</div>
-      <span style="color:#6b7280">5.0 &middot; 100+ Google Reviews</span>
+      <span class="section-subtitle" style="color:inherit">5.0 &middot; 100+ Google Reviews</span>
     </div>
   </div>
 </div>
@@ -62,7 +62,7 @@ ${navHTML('/reviews.html')}
       <div class="review-head">
         <div class="avatar-circle"><span>${r.name[0]}</span></div>
         <div class="flex-1">
-          <p style="font-weight:600;color:#111827">${r.name}</p>
+          <p class="reviewer-name" style="font-weight:600">${r.name}</p>
           <div class="stars" style="margin-top:2px">${starsHTML(5, 11)}</div>
         </div>
         <span class="review-tag">${r.tag}</span>
@@ -78,16 +78,16 @@ ${navHTML('/reviews.html')}
       <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
         <div class="community-avatar" style="background:${r.color}"><span>${r.platform==='Reddit'?'r/':'in'}</span></div>
         <div>
-          <p style="font-weight:600;font-size:14px;color:#111827">${r.user}</p>
+          <p class="reviewer-name" style="font-weight:600;font-size:14px">${r.user}</p>
           <p style="font-size:12px;color:#9ca3af">${r.sub}</p>
         </div>
       </div>
-      <p style="color:#374151;font-size:14px;line-height:1.65">"${r.text}"</p>
+      <p class="review-body" style="font-size:14px;line-height:1.65">"${r.text}"</p>
     </div>`).join('')}
   </div>
 
   <div class="text-center">
-    <p style="color:#6b7280;font-family:var(--font-serif);font-style:italic;font-size:1.125rem;margin-bottom:1.5rem">Want to experience the same clarity?</p>
+    <p class="section-subtitle" style="font-family:var(--font-serif);font-style:italic;font-size:1.125rem;margin-bottom:1.5rem;max-width:none;margin-left:0;margin-right:0">Want to experience the same clarity?</p>
     <div style="display:flex;flex-direction:column;gap:.75rem;justify-content:center;align-items:center">
       <div style="display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center">
         <a href="${URLS.callForm}" target="_blank" rel="noreferrer" class="btn btn-primary">${icons.phone} Book a Free Call</a>

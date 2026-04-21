@@ -13,7 +13,7 @@
   <title>Peaceful Loans — The Most Trusted Home Loan Advisor</title>
   <meta name="description" content="Unbiased home loan advisory for borrowers seeking ₹2 Crore+. We work for you, not the bank.">
   <link rel="icon" type="image/jpeg" href="/assets/icon-jpg.jpg">
-  <link rel="stylesheet" href="/styles.css?v=6">
+  <link rel="stylesheet" href="/styles.css?v=7">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -196,7 +196,7 @@ ${navHTML('/')}
     <div class="text-center" style="margin-bottom:3.5rem">
       <div class="fear-badge">${icons.alertOctagon} Without Peaceful-Loans</div>
       <h2 class="section-title" style="color:#fff">THREE Things That Go Wrong</h2>
-      <p style="color:#9ca3af;margin-top:.75rem;max-width:32rem;margin-left:auto;margin-right:auto">These are not edge cases \u2014 they happen to most borrowers without a good advisor.</p>
+      <p class="section-subtitle" style="margin-top:.75rem;max-width:32rem;margin-left:auto;margin-right:auto">These are not edge cases \u2014 they happen to most borrowers without a good advisor.</p>
     </div>
     <div class="fear-grid">
       ${fearCards.map((f,i) => `<div class="fear-card"><div class="fear-num"><span>${i+1}</span></div><h3>${f.title}</h3><p>${f.desc}</p></div>`).join('')}
@@ -256,7 +256,7 @@ ${navHTML('/')}
           ${tricolorVHTML(12)}
           <p>I started Peaceful-Loans after a decade in corporate world because I got fleeced by 'relationship managers' I trusted. Every week new information, all promises fizzled out. Buying first property turned from Happy and proud moment to "let's just get this done" moment.</p>
         </div>
-        <p style="color:#6b7280;line-height:1.65">The financial industry is built on asymmetric information. Banks know the fine print; you don't. Builders know the delay clauses; you don't. Our job is to level the playing field.</p>
+        <p class="section-subtitle" style="line-height:1.65;max-width:none;margin-left:0;margin-right:0;text-align:left">The financial industry is built on asymmetric information. Banks know the fine print; you don't. Builders know the delay clauses; you don't. Our job is to level the playing field.</p>
       </div>
       <div>
         <div class="founder-card">
@@ -415,7 +415,7 @@ function initTestimonialCarousel() {
   <div class="testimonial-author">
     <div class="avatar-circle"><span>${t.name[0]}</span></div>
     <div>
-      <p style="font-weight:600;color:#111827">${t.name}</p>
+      <p class="reviewer-name" style="font-weight:600">${t.name}</p>
       <p style="font-size:14px;color:#9ca3af">${t.location} &middot; \u2605\u2605\u2605\u2605\u2605</p>
     </div>
   </div>
@@ -453,11 +453,11 @@ function initCommunityTabs() {
   <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
     <div class="community-avatar" style="background:${activeTab==='reddit'?'#FF4500':'#0077B5'}"><span>${activeTab==='reddit'?'r/':'in'}</span></div>
     <div>
-      <p style="font-weight:600;font-size:14px;color:#111827">${r.user}</p>
+      <p class="reviewer-name" style="font-weight:600;font-size:14px">${r.user}</p>
       <p style="font-size:12px;color:#9ca3af">${r.sub}</p>
     </div>
   </div>
-  <p style="color:#374151;font-size:14px;line-height:1.65">${r.text}</p>
+  <p class="review-body" style="font-size:14px;line-height:1.65">${r.text}</p>
 </div>`).join('');
   }
 
