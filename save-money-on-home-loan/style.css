@@ -138,11 +138,12 @@ h6 {
 }
 
 .sub-heading {
-  font-family: var(--theme-font);
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
   font-size: 14px;
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 3px;
+  font-variant-caps: all-small-caps;
+  font-feature-settings: "smcp" 1, "c2sc" 1;
+  letter-spacing: 0.04em;
   color: #000000;
   margin-bottom: 5px;
   margin-top: 5px;
@@ -410,11 +411,12 @@ header .call-btn a:hover i {
   transform: translateY(-50%);
 }
 .banner-home .banner-content .sub-heading {
-  font-family: var(--theme-font);
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
   font-size: 92px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 4px;
+  font-variant-caps: all-small-caps;
+  font-feature-settings: "smcp" 1, "c2sc" 1;
+  letter-spacing: 0.04em;
   color: #f18d75;
   margin-bottom: 20px;
   margin-top: 20px;
@@ -787,7 +789,10 @@ header.sticky1 .navbar-nav .nav-link.show {
   }
 }
 .hero-sub-heading {
-  font-family: var(--theme-font);
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  font-variant-caps: all-small-caps;
+  font-feature-settings: "smcp" 1, "c2sc" 1;
+  letter-spacing: 0.04em;
   max-width: 900px;
   color: #fff;
   font-size: 20px;
@@ -1569,3 +1574,14 @@ header.sticky1 .navbar-nav .nav-link.show {
 .score, .after { font-weight: 500 !important; }
 .stat-value { font-weight: 600 !important; }
 .result-value, .hero-main-heading, .review-title { font-weight: 600; }
+
+/* Gate 3b — Tabular Figures */
+.stat-number,
+.stat-value,
+.stat-value .text-muted,
+.stat-value .after,
+.result-value,
+.score {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}

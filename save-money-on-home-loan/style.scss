@@ -4,7 +4,7 @@
     --theme-blue: rgb(0 65 153);
     --dark-black: #ffffff;
     --heading-font: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-    --theme-font: var(--heading-font);
+    --theme-font: 'Source Serif 4', Georgia, 'Times New Roman', serif;
     --nav-font: "Poppins", sans-serif;
     --title-color: #000000;
 
@@ -22,7 +22,7 @@
 
 
 .title {
-    font-family: var(--heading-font);
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
     color: var(--theme-color);
     font-size: 30px;
     position: relative;
@@ -41,7 +41,7 @@
 
 .common-heading {
     font-size: 45px;
-    font-family: var(--heading-font);
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
     font-weight: 500;
     color: #000000;
     position: relative;
@@ -144,12 +144,12 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: var(--heading-font);
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
 }
 
 
 .sub-heading {
-    font-family: var(--heading-font);
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
     font-size: 14px;
     font-weight: 500;
     font-variant-caps: all-small-caps;
@@ -494,7 +494,7 @@ header {
         transform: translateY(-50%);
 
         .sub-heading {
-            font-family: var(--heading-font);
+            font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
             font-size: 92px;
             font-weight: 600;
             font-variant-caps: all-small-caps;
@@ -932,7 +932,7 @@ header {
 }
 
 .hero-main-heading {
-    font-family: var(--heading-font);
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
     color: var(--dark-black);
 
     span {
@@ -964,7 +964,7 @@ header {
 }
 
 .hero-sub-heading {
-    font-family: var(--heading-font);
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
     font-variant-caps: all-small-caps;
     font-feature-settings: "smcp" 1, "c2sc" 1;
     letter-spacing: 0.04em;
@@ -1040,7 +1040,7 @@ header {
 
 
 .section-heading {
-    font-family: var(--heading-font);
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
     font-weight: 600;
     color: var(--title-color);
 
@@ -1054,7 +1054,7 @@ header {
     background-color: rgb(249 250 251);
 
     .section-heading {
-        font-family: var(--heading-font);
+        font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
         font-weight: 600;
         color: var(--title-color);
 
@@ -1088,7 +1088,7 @@ header {
         }
 
         .stat-number {
-            font-family: var(--heading-font);
+            font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
             font-size: 1.6rem;
             font-weight: 600;
             color: var(--theme-blue);
@@ -1171,7 +1171,7 @@ header {
         }
 
         .feature-title {
-            font-family: var(--heading-font);
+            font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
             color: rgb(17 24 39);
             font-size: 20px;
             font-weight: 500;
