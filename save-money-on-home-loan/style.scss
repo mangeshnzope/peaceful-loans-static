@@ -149,11 +149,12 @@ h6 {
 
 
 .sub-heading {
-    font-family: var(--theme-font);
+    font-family: var(--heading-font);
     font-size: 14px;
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 3px;
+    font-variant-caps: all-small-caps;
+    font-feature-settings: "smcp" 1, "c2sc" 1;
+    letter-spacing: 0.04em;
     color: #000000;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -493,11 +494,12 @@ header {
         transform: translateY(-50%);
 
         .sub-heading {
-            font-family: var(--theme-font);
+            font-family: var(--heading-font);
             font-size: 92px;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 4px;
+            font-variant-caps: all-small-caps;
+            font-feature-settings: "smcp" 1, "c2sc" 1;
+            letter-spacing: 0.04em;
             color: #f18d75;
             margin-bottom: 20px;
             margin-top: 20px;
@@ -962,7 +964,10 @@ header {
 }
 
 .hero-sub-heading {
-    font-family: var(--theme-font);
+    font-family: var(--heading-font);
+    font-variant-caps: all-small-caps;
+    font-feature-settings: "smcp" 1, "c2sc" 1;
+    letter-spacing: 0.04em;
     max-width: 900px; // Keep text from getting too wide
     color: #fff;
     font-size: 20px;
@@ -1088,6 +1093,8 @@ header {
             font-weight: 600;
             color: var(--theme-blue);
             margin-bottom: 0.5rem;
+            font-variant-numeric: tabular-nums lining-nums;
+            font-feature-settings: "tnum" 1, "lnum" 1;
         }
 
         .stat-title {
@@ -1938,5 +1945,5 @@ header {
 }
 /* Gate 4 Custom CSS */
 .score, .after { font-weight: 500 !important; }
-.stat-value { font-weight: 600 !important; }
+.stat-value { font-weight: 600 !important; font-variant-numeric: tabular-nums lining-nums; font-feature-settings: "tnum" 1, "lnum" 1; }
 .result-value, .hero-main-heading, .review-title { font-weight: 600; }
