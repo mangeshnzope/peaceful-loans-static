@@ -257,7 +257,7 @@ ul { list-style: none; }
 /* ===== TESTIMONIALS CAROUSEL ===== */
 .testimonial-box { background: var(--c-surface); border-radius: 1rem; border: 1px solid var(--gray-100); padding: 2rem; box-shadow: 0 1px 3px rgba(0,0,0,.05); min-height: 240px; }
 .testimonial-box .big-quote { font-size: 3rem; color: var(--gray-200); font-family: var(--font-serif); line-height: 1; margin-bottom: 1rem; }
-.testimonial-box blockquote { font-family: var(--font-serif); font-size: 1.125rem; color: var(--c-body); line-height: 1.65; margin-bottom: 2rem; }
+.testimonial-box blockquote { font-family: var(--font-serif); font-size: 1.125rem; color: var(--gray-800); line-height: 1.65; margin-bottom: 2rem; }
 .testimonial-author { display: flex; align-items: center; gap: .75rem; }
 .avatar-circle { width: 40px; height: 40px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .avatar-circle span { color: #fff; font-weight: 500; font-size: 14px; }
@@ -330,15 +330,15 @@ ul { list-style: none; }
 /* ===== ABOUT PAGE ===== */
 .page-header { padding: 4rem 0; background: var(--gray-50); border-bottom: 1px solid var(--gray-100); margin-top: 64px; }
 .page-header h1 { font-family: var(--font-serif); font-size: 2.25rem; font-weight: 600; color: var(--c-ink); }
-.page-header p { color: var(--c-body); font-size: 1.125rem; max-width: 36rem; margin: 0 auto; }
+.page-header p { color: var(--gray-500); font-size: 1.125rem; max-width: 36rem; margin: 0 auto; }
 .about-content { max-width: 56rem; margin: 0 auto; padding: 4rem 1rem; }
 .about-content .blockquote { display: flex; gap: 1.25rem; align-items: flex-start; }
-.about-content .blockquote p { font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--c-body); line-height: 1.65; }
-.about-text p { color: var(--c-body); line-height: 1.65; margin-bottom: 1.25rem; }
+.about-content .blockquote p { font-family: var(--font-serif); font-style: italic; font-size: 1.25rem; color: var(--gray-600); line-height: 1.65; }
+.about-text p { color: var(--gray-500); line-height: 1.65; margin-bottom: 1.25rem; }
 .stats-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1rem; }
 .stat-card { border-radius: .75rem; padding: 1.5rem; }
 .stat-card .num { font-size: 1.875rem; font-weight: 600; font-family: var(--font-serif); margin-bottom: .5rem; }
-.stat-card p { font-size: 14px; color: var(--c-body); }
+.stat-card p { font-size: 14px; color: var(--gray-500); }
 .stat-blue { background: rgba(26,76,200,.05); border: 1px solid rgba(26,76,200,.15); }
 .stat-blue .num { color: var(--blue); }
 .stat-red { background: rgba(232,65,24,.05); border: 1px solid rgba(232,65,24,.15); }
@@ -370,7 +370,7 @@ ul { list-style: none; }
 .faq-toggle svg { flex-shrink: 0; color: var(--gray-400); transition: transform .2s; }
 .faq-toggle.open svg { transform: rotate(180deg); }
 .faq-answer { padding: 0 1.5rem 1.5rem; background: rgba(0,0,0,.01); }
-.faq-answer p { color: var(--c-body); font-size: 14px; line-height: 1.65; }
+.faq-answer p { color: var(--gray-500); font-size: 14px; line-height: 1.65; }
 
 @media (min-width: 768px) { .faq-toggle span { font-size: 1rem; } }
 
@@ -391,7 +391,7 @@ ul { list-style: none; }
 .lp-hero-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
 .lp-hero h1 { font-family: var(--font-serif); font-size: 2.75rem; font-weight: 600; line-height: 1.1; margin-bottom: 1.5rem; }
 .lp-hero h1 span { color: var(--amber); }
-.lp-hero p { font-size: 1.125rem; color: var(--c-body); margin-bottom: 2rem; max-width: 40rem; }
+.lp-hero p { font-size: 1.125rem; color: var(--gray-400); margin-bottom: 2rem; max-width: 40rem; }
 
 .lp-feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
 .lp-feature-item { display: flex; align-items: center; gap: .75rem; font-size: 14px; font-weight: 500; color: rgba(255,255,255,.9); }
@@ -407,10 +407,10 @@ ul { list-style: none; }
 .success-story-card { background: var(--c-surface); border: 1px solid var(--gray-100); border-radius: 1rem; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); height: 100%; display: flex; flex-direction: column; }
 .story-location { font-size: 12px; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: .05em; margin-bottom: .5rem; }
 .story-title { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: var(--c-ink); }
-.story-problem { font-size: 13px; font-weight: 600; color: var(--c-body); margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--gray-200); }
+.story-problem { font-size: 13px; font-weight: 600; color: var(--gray-500); margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--gray-200); }
 .story-stats { display: flex; flex-direction: column; gap: .5rem; margin-bottom: 1.5rem; }
 .story-stat-item { display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
-.story-stat-item .label { color: var(--c-body); }
+.story-stat-item .label { color: var(--gray-500); }
 .story-stat-item .value { font-weight: 600; color: var(--c-ink); }
 .story-stat-item .old-value { text-decoration: line-through; color: var(--gray-400); margin-right: .5rem; }
 .story-benefit { background: var(--gray-50); border-radius: .75rem; padding: 1rem; text-align: center; margin-top: auto; }
@@ -421,9 +421,9 @@ ul { list-style: none; }
 .problem-card-lp:hover { border-color: var(--blue); transform: translateY(-4px); }
 .problem-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(26,76,200,.1); display: flex; align-items: center; justify-content: center; color: var(--blue); margin-bottom: 1.5rem; }
 .problem-card-lp h3 { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: .75rem; color: var(--c-ink); }
-.problem-card-lp p { color: var(--c-body); font-size: 14px; line-height: 1.6; }
+.problem-card-lp p { color: var(--gray-500); font-size: 14px; line-height: 1.6; }
 
 .form-container { background: var(--c-surface); border-radius: 1.5rem; overflow: hidden; border: 1px solid var(--gray-200); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
 .form-header { background: var(--gray-900); color: #fff; padding: 1.5rem 2rem; }
 .form-header h3 { font-family: var(--font-serif); font-weight: 600; font-size: 1.25rem; }
-.form-header p { font-size: 14px; color: var(--c-body); margin-top: .25rem; }
+.form-header p { font-size: 14px; color: var(--gray-400); margin-top: .25rem; }
