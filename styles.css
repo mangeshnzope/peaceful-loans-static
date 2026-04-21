@@ -205,9 +205,9 @@ ul { list-style: none; }
 .shield-card-danger { background: #fef2f2; border: 1px solid #fee2e2; }
 .shield-card-safe { background: rgba(26,76,200,.05); border: 1px solid rgba(26,76,200,.2); }
 .shield-card .card-head { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; }
-.shield-card-danger h3 { font-weight: 600; color: #991b1b; }
+.shield-card-danger h3 { font-family: var(--font-serif); font-weight: 600; color: #991b1b; }
 .shield-card-danger p { color: #b91c1c; font-size: 14px; line-height: 1.65; }
-.shield-card-safe h3 { font-weight: 600; color: var(--blue); }
+.shield-card-safe h3 { font-family: var(--font-serif); font-weight: 600; color: var(--blue); }
 .shield-card-safe p { color: rgba(26,76,200,.8); font-size: 14px; line-height: 1.65; }
 .optimize-box { max-width: 40rem; margin: 0 auto; background: var(--c-surface); border-radius: .75rem; border: 1px solid var(--gray-200); padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
 .optimize-grid { display: grid; grid-template-columns: 1fr; gap: .75rem; }
