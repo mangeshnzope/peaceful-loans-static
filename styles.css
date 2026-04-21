@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap');
+/* Fonts loaded via HTML <link> tags */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -19,7 +19,7 @@
   --gray-800: #1f2937;
   --gray-900: #111827;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: 'Newsreader', Georgia, serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
 
   /* Gate 5 — palette tokens */
   --c-ink: #1a1a1a;
@@ -295,7 +295,7 @@ ul { list-style: none; }
 .founder-img-text p { color: rgba(255,255,255,.7); font-size: 12px; margin-top: 2px; }
 .founder-card-body { padding: 1.25rem; }
 .founder-card-body .label { font-size: 12px; color: var(--red); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .5rem; }
-.founder-card-body .desc { font-size: 12px; color: var(--gray-400); line-height: 1.55; }
+.founder-card-body .desc { font-size: 12px; color: var(--c-body); line-height: 1.55; }
 
 @media (min-width: 768px) { .founder-grid { grid-template-columns: 3fr 2fr; } }
 
