@@ -56,7 +56,7 @@ function navHTML(currentPath) {
 <nav class="nav" id="navbar">
   <div class="container">
     <div class="nav-inner">
-      <a href="/index.html" class="nav-logo"><img src="/assets/logo-horizontal.jpg" alt="Peaceful Loans"></a>
+      <a href="/index.html" class="nav-logo"><img src="/assets/logo-horizontal.png" alt="Peaceful Loans"></a>
       <div class="nav-links">${links.map(l => `<a href="${l.href}">${l.label}</a>`).join('')}</div>
       <div class="nav-ctas">
         <a href="${URLS.callForm}" target="_blank" rel="noreferrer" class="btn btn-primary btn-sm">${icons.phone} Book a Free Call</a>
@@ -84,7 +84,7 @@ function footerHTML() {
   <div class="container" style="padding-top:3.5rem;padding-bottom:3.5rem">
     <div class="footer-grid">
       <div>
-        <div class="footer-logo"><img src="/assets/logo-horizontal.jpg" alt="Peaceful Loans"></div>
+        <div class="footer-logo"><img src="/assets/logo-horizontal.png" alt="Peaceful Loans"></div>
         <p class="footer-desc">Unbiased analysis for the modern home loan borrower. We work for you, not the bank.</p>
       </div>
       <div>
