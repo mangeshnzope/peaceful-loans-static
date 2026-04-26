@@ -1,0 +1,19 @@
+{
+  "redirects": [
+    {
+      "source": "/fy26-27intrates",
+      "destination": "/FY26-27IntRates",
+      "permanent": true
+    },
+    {
+      "source": "/FY26-27INTRATES",
+      "destination": "/FY26-27IntRates",
+      "permanent": true
+    },
+    {
+      "source": "/rate-update-fy26-27",
+      "destination": "/FY26-27IntRates",
+      "permanent": true
+    }
+  ]
+}
