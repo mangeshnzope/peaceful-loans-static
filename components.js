@@ -148,3 +148,15 @@ function closeMobileMenu() {
   const menu = document.getElementById('mobileMenu');
   menu.classList.remove('open');
 }
+
+function toggleReview(id, btn) {
+  const el = document.getElementById(id);
+  if (el.classList.contains('expanded')) {
+    el.classList.remove('expanded');
+    btn.innerText = 'Read more';
+  } else {
+    el.classList.add('expanded');
+    btn.innerText = 'Show less';
+  }
+}
+window.toggleReview = toggleReview;
