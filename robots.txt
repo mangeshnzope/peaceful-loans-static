@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /components.js
+Disallow: /styles.css
+
+Sitemap: https://peaceful-loans.com/sitemap.xml
