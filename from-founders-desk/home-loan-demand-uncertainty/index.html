@@ -203,49 +203,75 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--muted);
-    margin-bottom: 16px;
+    margin-bottom: 24px;
+    text-align: center;
   }
-  .refs ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  .refs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
-  .refs li {
-    margin-bottom: 12px;
-    font-size: 14px;
+  @media (max-width: 640px) {
+    .refs-grid { grid-template-columns: 1fr; }
   }
-  .refs a {
-    color: var(--pl-blue);
+  .ref-card {
+    background: #fff;
+    border: 1px solid var(--hair);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
     text-decoration: none;
-    word-break: break-all;
+    transition: all 0.2s;
   }
-  .refs a:hover { text-decoration: underline; }
+  .ref-card:hover {
+    border-color: var(--pl-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+  }
+  .ref-card .ref-lbl { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .ref-card .ref-val { font-size: 14px; font-weight: 600; color: var(--pl-blue); line-height: 1.3; }
+
+  /* ===== TRICOLOR ===== */
+  .tricolor { display: flex; width: 100%; height: 3px; }
+  .tc-blue { flex: 1; background: #1A4CC8; }
+  .tc-red { flex: 1; background: #E84118; }
+  .tc-amber { flex: 1; background: #FFB800; }
 
   /* ===== FOOTER ===== */
   .cta{
-    margin-top: 48px;padding:32px;background:var(--slate);color:#fff;
-    border-radius:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px;
+    margin-top: 56px;padding:48px 32px;background:var(--slate);color:#fff;
+    border-radius:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:28px;
     position:relative;z-index:1;
+    overflow: hidden;
   }
-  .cta .line{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1.2;color:#fff}
-  .cta .btns{display:flex;gap:12px;width:100%;justify-content:center}
+  .cta::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, #1A4CC8, #E84118, #FFB800);
+  }
+  .cta .line{font-family:var(--serif);font-size:32px;font-weight:600;line-height:1.2;color:#fff; max-width: 500px;}
+  @media (max-width: 640px) { .cta .line { font-size: 24px; } }
+  .cta .btns{display:flex;gap:16px;width:100%;justify-content:center}
   @media (max-width: 480px) {
     .cta .btns { flex-direction: column; }
   }
   .cta .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:12px;
-    font-weight:600;font-size:15px;text-decoration:none;transition: transform 0.2s;
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 28px;border-radius:12px;
+    font-weight:600;font-size:16px;text-decoration:none;transition: all 0.2s;
   }
-  .cta .btn:hover { transform: translateY(-2px); }
+  .cta .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.2); }
   .btn-prim{background:var(--pl-blue);color:#fff}
-  .btn-wa{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-wa{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3)}
+  .btn-wa:hover { border-color: #fff; background: rgba(255,255,255,.05); }
 
   .foot{
-    margin-top:32px;display:flex;justify-content:space-between;align-items:center;
+    margin-top:40px; padding-top: 24px; border-top: 1px solid var(--hair);
+    display:flex;justify-content:space-between;align-items:center;
     font-size:12px;color:var(--muted);position:relative;z-index:1;
   }
-  @media (max-width: 480px) {
-    .foot { flex-direction: column; gap: 12px; text-align: center; }
+  @media (max-width: 640px) {
+    .foot { flex-direction: column; gap: 16px; text-align: center; }
   }
 </style>
 
@@ -363,12 +389,24 @@
 
     <div class="refs">
       <h3>Data Sources & Reference Links</h3>
-      <ul>
-        <li>Volume of Home Loan outstanding: <a href="https://www.nhb.org.in/monthly-credit-flow-data/" target="_blank">NHB Monthly Credit Flow Data</a></li>
-        <li>CRIF High Mark: <a href="https://www.crifhighmark.com/media/5720/how-india-lends-sept-2025.pdf" target="_blank">How India Lends Report (Sept 2025)</a></li>
-        <li>TransUnion CIBIL: <a href="https://www.transunioncibil.com/content/dam/transunion-cibil/corporate/documents/cmi-digital-report-mar26.pdf" target="_blank">CMI Digital Report (Mar 2026)</a></li>
-        <li>TransUnion CIBIL: <a href="https://www.transunioncibil.com/content/dam/transunion-cibil/business/collateral/report/credit-market-indicator-report-september-2025.pdf" target="_blank">CMI Report (Sept 2025)</a></li>
-      </ul>
+      <div class="refs-grid">
+        <a href="https://www.nhb.org.in/monthly-credit-flow-data/" target="_blank" class="ref-card">
+          <span class="ref-lbl">NHB Data</span>
+          <span class="ref-val">Volume of Home Loan outstanding</span>
+        </a>
+        <a href="https://www.crifhighmark.com/media/5720/how-india-lends-sept-2025.pdf" target="_blank" class="ref-card">
+          <span class="ref-lbl">CRIF High Mark</span>
+          <span class="ref-val">How India Lends Report (Sept 2025)</span>
+        </a>
+        <a href="https://www.transunioncibil.com/content/dam/transunion-cibil/corporate/documents/cmi-digital-report-mar26.pdf" target="_blank" class="ref-card">
+          <span class="ref-lbl">TransUnion CIBIL</span>
+          <span class="ref-val">CMI Digital Report (Mar 2026)</span>
+        </a>
+        <a href="https://www.transunioncibil.com/content/dam/transunion-cibil/business/collateral/report/credit-market-indicator-report-september-2025.pdf" target="_blank" class="ref-card">
+          <span class="ref-lbl">TransUnion CIBIL</span>
+          <span class="ref-val">CMI Report (Sept 2025)</span>
+        </a>
+      </div>
     </div>
   </article>
 
