@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<title>Is there a drop in Home Loans owing to white collar job uncertainty? · From Founder's Desk — Peaceful Loans</title>
+<meta name="description" content="Analyzing home loan demand amidst white-collar job uncertainty. We look at TransUnion CIBIL, NHB, and CRIF data vs anecdotal evidence.">
+<link rel="canonical" href="https://peaceful-loans.com/from-founders-desk/home-loan-demand-uncertainty/">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Is there a drop in Home Loans owing to white collar job uncertainty?">
+<meta property="og:description" content="Data vs Anecdotes: Analyzing the impact of IT layoffs and job uncertainty on the Indian home loan market.">
+<meta property="og:url" content="https://peaceful-loans.com/from-founders-desk/home-loan-demand-uncertainty/">
+<meta property="og:site_name" content="Peaceful Loans">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Is there a drop in Home Loans owing to white collar job uncertainty?">
+<meta name="twitter:description" content="Analyzing home loan demand amidst white-collar job uncertainty.">
+
+<meta name="robots" content="index, follow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pl-blue:#1A4CC8;
+    --pl-ink:#0A2A6B;
+    --pl-orange:#E84118;
+    --pl-gold:#FFB800;
+    --pl-green:#16A34A;
+    --ivory:#FBFAF7;
+    --mist:#F9FAFB;
+    --paper:#FFFFFF;
+    --slate:#0F172A;
+    --ink:#1A1A1A;
+    --body:#4A4A4A;
+    --muted:#9CA3AF;
+    --hair:#F3F4F6;
+    --serif:"Source Serif 4", Georgia, serif;
+    --sans:"Inter", -apple-system, system-ui, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#E5E7EB}
+  body{font-family:var(--sans);-webkit-font-smoothing:antialiased;color:var(--body);line-height:1.6}
+
+  .page{
+    max-width:800px;
+    margin:40px auto;
+    background:var(--ivory);
+    padding:56px 56px 48px;
+    box-shadow:0 20px 60px rgba(0,0,0,.08);
+    border-radius:24px;
+    position:relative;
+    overflow:hidden;
+  }
+  @media (max-width: 640px) {
+    .page { margin: 0; border-radius: 0; padding: 32px 20px; }
+  }
+
+  .page::before{
+    content:"";position:absolute;top:-120px;right:-120px;width:360px;height:360px;
+    background:radial-gradient(circle at center, rgba(26,76,200,.08), transparent 70%);
+    pointer-events:none;
+  }
+
+  /* ===== BRAND ROW ===== */
+  .brand{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-bottom:24px;border-bottom:1px solid var(--hair);margin-bottom:28px;
+    position:relative;z-index:1;
+  }
+  .brand-mark { display: flex; align-items: center; }
+  .brand-mark .brand-logo{
+    height:36px;width:auto;display:block;
+  }
+  .brand-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .brand-meta{display:flex;flex-direction:column;text-align:right;gap:4px;align-items:flex-end;}
+  .brand-meta .eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--pl-orange);text-transform:uppercase}
+  .brand-meta .date{font-size:12px;color:var(--muted)}
+
+  .brand-ctas { display: flex; gap: 10px; align-items: center; }
+  .btn-sm {
+    padding: 8px 16px;
+    font-size: 13px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .brand-btn-prim { background: var(--pl-blue); color: #fff; }
+  .brand-btn-wa { background: #fff; color: var(--body); border: 1.5px solid var(--hair); }
+  .brand-btn-wa:hover { background: var(--hair); }
+  .brand-btn-prim:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  @media (max-width: 850px) {
+    .brand-ctas { display: none; }
+  }
+
+  /* ===== HEADLINE ===== */
+  .headline{margin-bottom:40px;position:relative;z-index:1}
+  .eyebrow-main{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--pl-blue);margin-bottom:14px;text-transform:uppercase}
+  h1{
+    font-family:var(--serif);font-size:38px;line-height:1.2;
+    color:var(--ink);font-weight:600;margin:0 0 16px;letter-spacing:-.015em;
+  }
+  @media (max-width: 640px) {
+    h1 { font-size: 28px; }
+  }
+
+  .author-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .author-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--hair);
+  }
+  .author-info p { margin: 0; line-height: 1.2; }
+  .author-name { font-weight: 600; color: var(--ink); font-size: 14px; }
+  .author-title { font-size: 12px; color: var(--muted); }
+
+  /* ===== CONTENT ===== */
+  .content {
+    font-family: var(--serif);
+    font-size: 19px;
+    color: var(--ink);
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 640px) {
+    .content { font-size: 17px; }
+  }
+  .content p { margin-bottom: 24px; }
+  .content blockquote {
+    margin: 32px 0;
+    padding: 24px 32px;
+    background: var(--mist);
+    border-left: 4px solid var(--pl-blue);
+    font-style: italic;
+    font-size: 21px;
+    color: var(--pl-ink);
+  }
+  .content h2 {
+    font-family: var(--sans);
+    font-size: 24px;
+    font-weight: 700;
+    margin: 48px 0 20px;
+    color: var(--pl-ink);
+  }
+
+  .stats-box {
+    background: #fff;
+    border: 1px solid var(--hair);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 32px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    text-align: center;
+  }
+  @media (max-width: 480px) {
+    .stats-box { grid-template-columns: 1fr; }
+  }
+  .stat-item .val {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--pl-blue);
+    font-family: var(--sans);
+  }
+  .stat-item .lbl {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== REFERENCES ===== */
+  .refs {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--hair);
+  }
+  .refs h3 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .refs ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .refs li {
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+  .refs a {
+    color: var(--pl-blue);
+    text-decoration: none;
+    word-break: break-all;
+  }
+  .refs a:hover { text-decoration: underline; }
+
+  /* ===== FOOTER ===== */
+  .cta{
+    margin-top: 48px;padding:32px;background:var(--slate);color:#fff;
+    border-radius:24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px;
+    position:relative;z-index:1;
+  }
+  .cta .line{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1.2;color:#fff}
+  .cta .btns{display:flex;gap:12px;width:100%;justify-content:center}
+  @media (max-width: 480px) {
+    .cta .btns { flex-direction: column; }
+  }
+  .cta .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 24px;border-radius:12px;
+    font-weight:600;font-size:15px;text-decoration:none;transition: transform 0.2s;
+  }
+  .cta .btn:hover { transform: translateY(-2px); }
+  .btn-prim{background:var(--pl-blue);color:#fff}
+  .btn-wa{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+
+  .foot{
+    margin-top:32px;display:flex;justify-content:space-between;align-items:center;
+    font-size:12px;color:var(--muted);position:relative;z-index:1;
+  }
+  @media (max-width: 480px) {
+    .foot { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Is there a drop in Home Loans owing to white collar job uncertainty?",
+  "description": "Analyzing home loan demand amidst white-collar job uncertainty using data from TransUnion CIBIL, NHB, and CRIF.",
+  "author": {
+    "@type": "Person",
+    "name": "Mangesh Zope",
+    "url": "https://peaceful-loans.com/about.html"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Peaceful Loans",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://peaceful-loans.com/assets/logo-horizontal.png"
+    }
+  },
+  "datePublished": "2026-04-27",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://peaceful-loans.com/from-founders-desk/home-loan-demand-uncertainty/"
+  }
+}
+</script>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Brand row -->
+  <div class="brand">
+    <div class="brand-mark">
+      <a href="/index.html"><img src="../../assets/logo-horizontal.png" alt="Peaceful Loans" class="brand-logo"></a>
+    </div>
+    <div class="brand-right">
+      <div class="brand-ctas">
+        <a href="https://forms.zohopublic.in/mangeshpeacef1/form/Contactforsupport/formperma/_ps6Hq-7OvODRTnKowl1_FxyIIKmnPIywn1z6WV7i4M" target="_blank" class="btn-sm brand-btn-prim">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Book a Free Call
+        </a>
+        <a href="https://forms.zohopublic.in/mangeshpeacef1/form/WhatsAppButtonForm/formperma/F2z-Z2bBLbkttGWHBPPvrqSwlSXzd_WnD4sUAWNnjh4" target="_blank" class="btn-sm brand-btn-wa">
+          <svg width="14" height="14" viewBox="0 0 448 512" fill="#16a34a"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+          WhatsApp Us
+        </a>
+      </div>
+      <div class="brand-meta">
+        <span class="eyebrow">From Founder's Desk</span>
+        <span class="date">27 April 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Headline -->
+  <div class="headline">
+    <span class="eyebrow-main">Market Insight · Macro Data</span>
+    <h1>Is there a drop in people who are taking home loans owing to white collar job uncertainty in the recent times?</h1>
+  </div>
+
+  <div class="author-row">
+    <img src="../../assets/founder.jpeg" alt="Mangesh Zope" class="author-img">
+    <div class="author-info">
+      <p class="author-name">Mangesh Zope</p>
+      <p class="author-title">Founder, Peaceful Loans · IIM Calcutta Alumnus</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <article class="content">
+    <p>Over this weekend a customer asked us a question: <strong>"Is there a drop in people who are taking home loans owing to white collar jobs uncertainty in the recent times?"</strong></p>
+
+    <p>There are two parts to the question. One, stats and data; and other, anecdotal. Jeff Bezos' famous philosophy regarding data and anecdotes is:</p>
+
+    <blockquote>"When the data and the anecdotes disagree, the anecdotes are usually right."</blockquote>
+
+    <p>I am sure this is playing on everyone's mind who is in the market. First and foremost, we at Peaceful-Loans facilitate about ₹500 Cr of home loans per annum out of a ₹10 lakh Cr INR fresh home loan disbursement industry. We serve only ₹2 Cr + ticket size home purchasing customers. So, at our scale, we can't really comment on the stats of the entire industry from a first-person point of view.</p>
+
+    <p>For that, you can read any reports for originations from <strong>TransUnion CIBIL</strong>, <strong>CRIF</strong>, or the <strong>NHB</strong>. I will share the links below.</p>
+
+    <h2>What the Data Says</h2>
+    <p>The Transunion data clearly states that the Credit "Top of the funnel" (which is called as origination data in these reports) is growing. Comparing Dec '25 vs Dec '24 data YoY, there is clear growth. After that, origination data will take time to come, but a reliable surrogate is the <strong>total outstanding</strong> of home loans, which continues to grow.</p>
+
+    <div class="stats-box">
+      <div class="stat-item">
+        <span class="lbl">Dec 2025</span>
+        <span class="val">₹38.10L Cr</span>
+      </div>
+      <div class="stat-item">
+        <span class="lbl">Jan 2026</span>
+        <span class="val">₹38.30L Cr</span>
+      </div>
+      <div class="stat-item">
+        <span class="lbl">Feb 2026</span>
+        <span class="val">₹38.56L Cr</span>
+      </div>
+    </div>
+
+    <p>This is a clear indicator that the Home Loan market is growing in absolute terms. In fact, the Credit Market Indicator (CMI) for supply rose in the December 2025 quarter, driven by consistent credit demand across age segments.</p>
+
+
+    <h2>The Anecdotes: A Polarising Reality</h2>
+    <p>Now let us come to anecdotes and consumer sentiment among high-salaried consumers buying homes.</p>
+
+    <p><strong>Business owners, NRIs, and professionals</strong> (doctors, lawyers, Chartered Accountants) seem fairly unaffected so far. Their demand for high-ticket property remains robust.</p>
+
+    <p>However, the share of uncertainty is largely in the <strong>salaried individual segments</strong>. The salaried class in India has historically been used to job security. The sudden change in the last 2-3 years owing to layoffs has shaken their core beliefs. Many are not aware of how to deal with this shift.</p>
+
+    <p>This is the same phenomenon explained well in the book <em>"The Buying Brain"</em>. It talks about how many people are caught unprepared for financial longevity or sudden shifts because they haven't been trained by generational knowledge on how to save or navigate such long-term uncertainties. </p>
+
+    <p>This problem is felt much more sharply in <strong>IT segments</strong> due to AI and its perceived impact on jobs in the near future. We have noticed very polarising emotions in these consumers—while the data shows the market is moving, the individual sentiment is guarded.</p>
+
+    <div class="refs">
+      <h3>Data Sources & Reference Links</h3>
+      <ul>
+        <li>Volume of Home Loan outstanding: <a href="https://www.nhb.org.in/monthly-credit-flow-data/" target="_blank">NHB Monthly Credit Flow Data</a></li>
+        <li>CRIF High Mark: <a href="https://www.crifhighmark.com/media/5720/how-india-lends-sept-2025.pdf" target="_blank">How India Lends Report (Sept 2025)</a></li>
+        <li>TransUnion CIBIL: <a href="https://www.transunioncibil.com/content/dam/transunion-cibil/corporate/documents/cmi-digital-report-mar26.pdf" target="_blank">CMI Digital Report (Mar 2026)</a></li>
+        <li>TransUnion CIBIL: <a href="https://www.transunioncibil.com/content/dam/transunion-cibil/business/collateral/report/credit-market-indicator-report-september-2025.pdf" target="_blank">CMI Report (Sept 2025)</a></li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- CTA -->
+  <div class="cta">
+    <span class="line">Confused about your home loan strategy in this market?</span>
+    <div class="btns">
+      <a class="btn btn-prim" href="https://forms.zohopublic.in/mangeshpeacef1/form/Contactforsupport/formperma/_ps6Hq-7OvODRTnKowl1_FxyIIKmnPIywn1z6WV7i4M" target="_blank">Book a Free Advisory Call</a>
+      <a class="btn btn-wa" href="https://forms.zohopublic.in/mangeshpeacef1/form/WhatsAppButtonForm/formperma/F2z-Z2bBLbkttGWHBPPvrqSwlSXzd_WnD4sUAWNnjh4" target="_blank">WhatsApp Us</a>
+    </div>
+  </div>
+
+  <!-- Meta footer -->
+  <div class="foot">
+    <div class="left">
+      <span>peaceful-loans.com</span>
+      &nbsp;·&nbsp;
+      <span>Unbiased Advisory · IIM Calcutta Alumnus Initiative</span>
+    </div>
+    <div>© 2026 Peaceful Loans</div>
+  </div>
+
+</div>
+
+</body>
+</html>
