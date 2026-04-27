@@ -239,6 +239,50 @@
   .tc-red { flex: 1; background: #E84118; }
   .tc-amber { flex: 1; background: #FFB800; }
 
+  /* ===== DATA TABLE ===== */
+  .data-table-wrapper {
+    margin: 40px 0;
+    overflow-x: auto;
+    background: #fff;
+    border: 1px solid var(--hair);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .data-table-wrapper h3 {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 14px;
+  }
+  .data-table th {
+    text-align: left;
+    padding: 12px 16px;
+    background: var(--mist);
+    color: var(--pl-ink);
+    font-weight: 700;
+    border-bottom: 2px solid var(--hair);
+  }
+  .data-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--hair);
+    color: var(--ink);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table .prod-name { font-weight: 600; color: var(--pl-ink); }
+  .data-table .val-up { color: var(--pl-green); font-weight: 600; }
+  .data-table .val-down { color: var(--pl-orange); font-weight: 600; }
+  .data-table .val-neutral { color: var(--muted); }
+
   /* ===== FOOTER ===== */
   .cta-blue {
     margin-top: 64px;
@@ -422,6 +466,61 @@
     </div>
 
     <p>This is a clear indicator that the Home Loan market is growing in absolute terms. In fact, the Credit Market Indicator (CMI) for supply rose in the December 2025 quarter, driven by consistent credit demand across age segments.</p>
+
+    <div class="data-table-wrapper">
+      <h3>YoY Growth in Originations (3M Ended Dec '25)</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Volume</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="prod-name">Home Loan</td>
+            <td class="val-up">2%</td>
+            <td class="val-up">13%</td>
+          </tr>
+          <tr>
+            <td class="prod-name">Property Loan</td>
+            <td class="val-down">-1%</td>
+            <td class="val-up">23%</td>
+          </tr>
+          <tr>
+            <td class="prod-name">Auto Loan</td>
+            <td class="val-up">9%</td>
+            <td class="val-up">8%</td>
+          </tr>
+          <tr>
+            <td class="prod-name">Two-Wheeler Loan</td>
+            <td class="val-up">7%</td>
+            <td class="val-up">6%</td>
+          </tr>
+          <tr>
+            <td class="prod-name">Personal Loan</td>
+            <td class="val-up">15%</td>
+            <td class="val-up">35%</td>
+          </tr>
+          <tr>
+            <td class="prod-name">Credit Card</td>
+            <td class="val-down">-11%</td>
+            <td class="val-neutral">-</td>
+          </tr>
+          <tr>
+            <td class="prod-name">Consumer Durable Loan</td>
+            <td class="val-up">17%</td>
+            <td class="val-up">10%</td>
+          </tr>
+          <tr>
+            <td class="prod-name">Gold Loan</td>
+            <td class="val-up">45%</td>
+            <td class="val-up">108%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
 
     <h2>The Anecdotes: A Polarising Reality</h2>
