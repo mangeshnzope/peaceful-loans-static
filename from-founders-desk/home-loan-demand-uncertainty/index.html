@@ -11,10 +11,12 @@
 <meta property="og:description" content="Data vs Anecdotes: Analyzing the impact of IT layoffs and job uncertainty on the Indian home loan market.">
 <meta property="og:url" content="https://peaceful-loans.com/from-founders-desk/home-loan-demand-uncertainty/">
 <meta property="og:site_name" content="Peaceful Loans">
+<meta property="og:image" content="https://peaceful-loans.com/assets/logo-horizontal.png">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Is there a drop in Home Loans owing to white collar job uncertainty?">
 <meta name="twitter:description" content="Analyzing home loan demand amidst white-collar job uncertainty.">
+<meta name="twitter:image" content="https://peaceful-loans.com/assets/logo-horizontal.png">
 
 <meta name="robots" content="index, follow">
 <meta charset="utf-8">
@@ -239,50 +241,18 @@
   .tc-red { flex: 1; background: #E84118; }
   .tc-amber { flex: 1; background: #FFB800; }
 
-  /* ===== DATA TABLE ===== */
-  .data-table-wrapper {
+  /* ===== REPORT IMAGE ===== */
+  .report-img-wrapper {
     margin: 40px 0;
-    overflow-x: auto;
-    background: #fff;
-    border: 1px solid var(--hair);
-    border-radius: 16px;
-    padding: 24px;
-  }
-  .data-table-wrapper h3 {
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    margin-bottom: 20px;
     text-align: center;
   }
-  .data-table {
+  .report-img {
     width: 100%;
-    border-collapse: collapse;
-    font-family: var(--sans);
-    font-size: 14px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.1);
+    border: 1px solid var(--hair);
   }
-  .data-table th {
-    text-align: left;
-    padding: 12px 16px;
-    background: var(--mist);
-    color: var(--pl-ink);
-    font-weight: 700;
-    border-bottom: 2px solid var(--hair);
-  }
-  .data-table td {
-    padding: 14px 16px;
-    border-bottom: 1px solid var(--hair);
-    color: var(--ink);
-  }
-  .data-table tr:last-child td { border-bottom: none; }
-  .data-table .prod-name { font-weight: 600; color: var(--pl-ink); }
-  .data-table .val-up { color: var(--pl-green); font-weight: 600; }
-  .data-table .val-down { color: var(--pl-orange); font-weight: 600; }
-  .data-table .val-neutral { color: var(--muted); }
-
   .table-source {
     font-size: 11px;
     color: var(--muted);
@@ -476,59 +446,8 @@
 
     <p>This is a clear indicator that the Home Loan market is growing in absolute terms. In fact, the Credit Market Indicator (CMI) for supply rose in the December 2025 quarter, driven by consistent credit demand across age segments.</p>
 
-    <div class="data-table-wrapper">
-      <h3>YoY Growth in Originations (3M Ended Dec '25)</h3>
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Volume</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="prod-name">Home Loan</td>
-            <td class="val-up">2%</td>
-            <td class="val-up">13%</td>
-          </tr>
-          <tr>
-            <td class="prod-name">Property Loan</td>
-            <td class="val-down">-1%</td>
-            <td class="val-up">23%</td>
-          </tr>
-          <tr>
-            <td class="prod-name">Auto Loan</td>
-            <td class="val-up">9%</td>
-            <td class="val-up">8%</td>
-          </tr>
-          <tr>
-            <td class="prod-name">Two-Wheeler Loan</td>
-            <td class="val-up">7%</td>
-            <td class="val-up">6%</td>
-          </tr>
-          <tr>
-            <td class="prod-name">Personal Loan</td>
-            <td class="val-up">15%</td>
-            <td class="val-up">35%</td>
-          </tr>
-          <tr>
-            <td class="prod-name">Credit Card</td>
-            <td class="val-down">-11%</td>
-            <td class="val-neutral">-</td>
-          </tr>
-          <tr>
-            <td class="prod-name">Consumer Durable Loan</td>
-            <td class="val-up">17%</td>
-            <td class="val-up">10%</td>
-          </tr>
-          <tr>
-            <td class="prod-name">Gold Loan</td>
-            <td class="val-up">45%</td>
-            <td class="val-up">108%</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="report-img-wrapper">
+      <img src="transunion-cmi-report.png" alt="TransUnion CIBIL Credit Market Indicator Report March 2026" class="report-img">
       <div class="table-source">(ref Transunion report Credit Market Indicator March 2026)</div>
     </div>
 
