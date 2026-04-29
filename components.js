@@ -94,6 +94,7 @@ function footerHTML() {
           <li><a href="/index.html#shield">What We Check</a></li>
           <li><a href="/reviews.html">Reviews</a></li>
           <li><a href="/faqs.html">FAQs</a></li>
+          <li><a href="/from-founders-desk/">Founder's Desk (Blog)</a></li>
           <li><a href="/about.html">About</a></li>
         </ul>
       </div>
