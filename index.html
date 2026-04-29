@@ -323,16 +323,101 @@ ${navHTML('/')}
 <!-- Insights from Founder's Desk -->
 <section class="section section-white" id="blog-preview">
   <div class="container">
-    <div class="text-center" style="margin-bottom:3rem">
+    <div class="text-center" style="margin-bottom:3.5rem">
       <p class="section-label">From Founder's Desk</p>
       <h2 class="section-title">Insights & Strategy</h2>
-      <p class="section-subtitle">Unbiased analysis and weekly strategies to help you save lakhs on your home loan.</p>
     </div>
-    <div class="text-center">
-      <a href="/from-founders-desk/" class="btn btn-primary">Read Our Blogs</a>
+    
+    <div class="blog-featured-card">
+      <a href="/from-founders-desk/home-loan-overdraft-sbi-maxgain/" class="blog-featured-inner">
+        <div class="blog-featured-img">
+          <img src="/assets/blogs/od-overdraft.png" alt="SBI Maxgain vs Home Loan Overdraft">
+        </div>
+        <div class="blog-featured-content">
+          <span class="blog-tag">Latest Update · 29 April 2026</span>
+          <h3>SBI Maxgain vs Home Loan Overdraft: Why Liquidity is King</h3>
+          <p>Understand the "Curse of Knowledge" in the home loan industry and why Overdraft products are a superior way to manage your debt without losing liquidity.</p>
+          <span class="blog-more">Read Article <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
+        </div>
+      </a>
+    </div>
+
+    <div class="text-center" style="margin-top:3rem">
+      <a href="/from-founders-desk/" class="btn btn-outline-gray">Explore All Insights</a>
     </div>
   </div>
 </section>
+
+<style>
+  .blog-featured-card {
+    background: #fff;
+    border: 1px solid var(--hair);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .blog-featured-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+    border-color: var(--pl-blue);
+  }
+  .blog-featured-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-decoration: none;
+    color: inherit;
+  }
+  @media (max-width: 640px) {
+    .blog-featured-inner { grid-template-columns: 1fr; }
+  }
+  .blog-featured-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .blog-featured-content {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  @media (max-width: 640px) {
+    .blog-featured-content { padding: 24px; }
+  }
+  .blog-tag {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 12px;
+    display: block;
+  }
+  .blog-featured-content h3 {
+    font-family: var(--serif);
+    font-size: 26px;
+    line-height: 1.2;
+    margin: 0 0 16px;
+    color: var(--ink);
+  }
+  .blog-featured-content p {
+    font-size: 15px;
+    color: var(--body);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .blog-more {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--pl-blue);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+</style>
 
 <!-- CTA -->
 ${ctaSectionHTML()}
