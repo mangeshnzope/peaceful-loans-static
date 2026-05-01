@@ -7,6 +7,59 @@
   <link rel="icon" type="image/jpeg" href="/assets/icon-jpg.jpg">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css?v=13">
+  <style>
+    .article-page { padding: 4rem 0; margin-top: 64px; }
+    .article-wrap { max-width: 800px; margin: 0 auto; }
+    .pub-banner {
+      display: flex; align-items: center; gap: 1.5rem;
+      padding: 1.5rem 2rem; background: #f9fafb; border: 1px solid #e5e7eb;
+      border-radius: 12px; margin-bottom: 2rem;
+    }
+    .pub-banner img { height: 40px; width: auto; }
+    .pub-banner .pub-info { font-size: 14px; color: #6b7280; }
+    .pub-banner .pub-info strong { color: #1a1a1a; display: block; margin-bottom: 2px; }
+    .article-title {
+      font-family: var(--font-serif); font-size: 2.25rem; font-weight: 700;
+      color: #000; line-height: 1.2; margin-bottom: 1rem;
+    }
+    @media (max-width: 640px) { .article-title { font-size: 1.75rem; } }
+    .article-meta { font-size: 14px; color: #9ca3af; margin-bottom: 2rem; }
+    .article-actions {
+      display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 3rem;
+      padding-bottom: 2rem; border-bottom: 1px solid #e5e7eb;
+    }
+    .article-body { font-family: var(--font-serif); font-size: 1.125rem; line-height: 1.85; color: #374151; }
+    .article-body h2 {
+      font-size: 1.5rem; font-weight: 700; color: #000;
+      margin: 2.5rem 0 1rem; padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+    }
+    .article-body p { margin-bottom: 1.25rem; }
+    .article-body ul { margin: 1rem 0 1.5rem 1.5rem; list-style: disc; }
+    .article-body ul li { margin-bottom: 0.75rem; }
+    .highlight-quote {
+      background: linear-gradient(135deg, rgba(255, 184, 0, 0.08), rgba(255, 184, 0, 0.15));
+      border-left: 4px solid #FFB800; padding: 1.5rem 2rem; margin: 2rem 0;
+      border-radius: 0 12px 12px 0;
+    }
+    .highlight-quote p { font-style: italic; font-size: 1.2rem; color: #000; margin-bottom: 0.5rem !important; }
+    .highlight-quote footer { font-weight: 700; font-style: normal; font-size: 0.875rem; color: #1A4CC8; }
+    .pdf-download-box {
+      background: #0f172a; color: #fff; border-radius: 16px; padding: 2rem;
+      margin: 3rem 0; display: flex; align-items: center; justify-content: space-between;
+      gap: 1.5rem; flex-wrap: wrap;
+    }
+    .pdf-download-box .pdf-info h3 { font-family: var(--font-serif); font-size: 1.125rem; margin-bottom: 0.25rem; }
+    .pdf-download-box .pdf-info p { font-size: 14px; color: #9ca3af; }
+    .source-link-box {
+      background: #f9fafb; border: 1px solid #e5e7eb; padding: 1.5rem;
+      border-radius: 12px; margin-top: 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .source-link-box p { font-size: 14px; color: #6b7280; }
+    .source-link-box p strong { color: #1a1a1a; display: block; margin-bottom: 2px; }
+  </style>
 </head>
 <body>
 <div id="app"></div>
@@ -18,71 +71,101 @@ ${navHTML('/from-founders-desk/mint-rbi-rate-cuts-nbfc-vs-banks/')}
 
 <main class="article-page">
   <div class="container">
-    <header class="article-header">
-      <p class="expert-tag" style="margin-bottom:1rem">Media Coverage &middot; Mint</p>
+    <div class="article-wrap">
+
+      <div class="pub-banner">
+        <img src="/assets/logos/mint.svg" alt="Mint">
+        <div class="pub-info">
+          <strong>Published in Mint (LiveMint)</strong>
+          Personal Finance · 29th April 2026
+        </div>
+      </div>
+
       <h1 class="article-title">Not seeing lower EMIs? Why you may need to act on your home loan</h1>
-      <p class="article-meta">Published on 29th April 2026 &middot; By Ananya Grover</p>
-      
+      <p class="article-meta">By Ananya Grover · 29th April 2026</p>
+
       <div class="article-actions">
-        <a href="/assets/pdfs/articles/mint-apr-2026.pdf" download class="btn btn-primary">Download PDF</a>
-        <a href="https://www.livemint.com/money/personal-finance/rbi-rate-cuts-nbfc-vs-banks-home-loan-rates-india-emi-11777380452717.html" target="_blank" rel="noopener" class="btn btn-outline-gray">View Original Article</a>
+        <a href="/assets/pdfs/articles/mint-apr-2026.pdf" download class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
+        </a>
+        <a href="https://www.livemint.com/money/personal-finance/rbi-rate-cuts-nbfc-vs-banks-home-loan-rates-india-emi-11777380452717.html" target="_blank" rel="noopener" class="btn btn-outline-gray">View on Mint →</a>
       </div>
-    </header>
 
-    <div class="pdf-viewer-container">
-      <embed src="/assets/pdfs/articles/mint-apr-2026.pdf" type="application/pdf" width="100%" height="100%">
-      <div class="pdf-fallback" style="padding: 2rem; text-align: center; display: none;">
-        <p>PDF viewer not supported. <a href="/assets/pdfs/articles/mint-apr-2026.pdf" download>Download the PDF to read</a>.</p>
+      <article class="article-body">
+        <p>The year 2025 proved highly significant for those tracking interest rates, as the Reserve Bank of India (RBI) embarked on its most aggressive easing cycle since 2019. Over the course of four policy meetings, the central bank reduced the repo rate by a total of 1.25 percentage points, bringing it down to 5.25%.</p>
+
+        <p>For borrowers who had taken floating-rate home loans from banks, this came as a much-needed relief after they had faced a sharp rise in borrowing costs following the RBI's 2.25% rate hike between May 2022 and February 2023.</p>
+
+        <p>But for those who took loans from non-banking financial companies (NBFCs), rate transmission has been weaker than in bank loans.</p>
+
+        <h2>When rates rise — the hidden tenure trap</h2>
+
+        <p>While the transmission of rate changes is more evident with the banks, certain practices can obscure the real impact of rate changes for borrowers. When interest rates climbed sharply, many lenders chose to extend loan tenures instead of increasing EMIs.</p>
+
+        <div class="highlight-quote">
+          <p>"Lenders often avoid increasing EMI amount because borrowers notice that immediately, especially since it can disrupt their monthly budget and cash flow. Most people don't pay attention to the tenure change communicated through emails."</p>
+          <footer>— Mangesh Zope, Founder, Peaceful-Loans</footer>
+        </div>
+
+        <p>As a result, interest rate increases are often passed on by extending the loan tenure instead. While this approach keeps monthly payments stable, it has long-term consequences like lower principal repayment in early years, higher total interest outgo, and a significantly longer loan life.</p>
+
+        <h2>Who should consider NBFC loans</h2>
+
+        <p>NBFCs and housing finance companies (HFCs) fill the gap in access to credit and service the segment that banks don't fund. These are suitable if you are buying a property in gram panchayat areas, are self-employed or have irregular income, need faster loan approvals, and have a lower credit score.</p>
+
+        <p>Their lending rates are typically higher due to the risk profile of borrowers, and unlike banks, they are not permitted to accept public savings deposits, forcing them to raise money at higher market rates.</p>
+
+        <p>According to RBI's April bulletin, scheduled commercial banks passed on about 87 basis points of the 125 bps rate cut and NBFCs passed on only about 12 basis points as of February 2026.</p>
+
+        <h2>When rate cuts don't reach you</h2>
+
+        <p>Loans for gram panchayat properties are mostly only approved by NBFCs. While they offer good rates initially, they keep rising by 1-2%.</p>
+
+        <div class="highlight-quote">
+          <p>"Once the property falls under municipal limits, most government banks are open to taking over the loan. If the borrower has a good CIBIL score and stable income, they can save about 1–2% on interest."</p>
+          <footer>— Mangesh Zope, Peaceful-Loans</footer>
+        </div>
+
+        <h2>Staying alert</h2>
+
+        <p>While falling rates can help reduce tenure and interest burden, especially for those with bank loans linked to external benchmarks, other borrowers continue to pay higher rates due to slower transmission, particularly in the NBFC segment.</p>
+
+        <div class="highlight-quote">
+          <p>"As an NBFC borrower, you have to keep looking over your shoulder all the time to see if the terms are not the same as earlier."</p>
+          <footer>— Mangesh Zope, Peaceful-Loans</footer>
+        </div>
+
+        <p>Interest rate cycles are inevitable, but borrowers need to stay vigilant, as terms can change over time.</p>
+      </article>
+
+      <div class="pdf-download-box">
+        <div class="pdf-info">
+          <h3>Download the full article as PDF</h3>
+          <p>Save a copy for offline reading.</p>
+        </div>
+        <a href="/assets/pdfs/articles/mint-apr-2026.pdf" download class="btn btn-amber">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
+        </a>
       </div>
+
+      <div class="source-link-box">
+        <p>
+          <strong>Read the original on LiveMint</strong>
+          Direct link to the full article for Mint subscribers.
+        </p>
+        <a href="https://www.livemint.com/money/personal-finance/rbi-rate-cuts-nbfc-vs-banks-home-loan-rates-india-emi-11777380452717.html" target="_blank" rel="noopener" class="btn btn-outline-gray">Visit Mint →</a>
+      </div>
+
     </div>
-
-    <article class="article-content-body">
-      <div class="article-transcript">
-        <h2>Article Summary & Context</h2>
-        <p>The year 2025 saw the Reserve Bank of India (RBI) embark on an aggressive easing cycle, reducing the repo rate by 125 basis points to 5.25%. While bank borrowers linked to external benchmarks saw relief, NBFC borrowers experienced much slower rate transmission.</p>
-
-        <div class="highlight-quote">
-          <p>“Lenders often avoid increasing EMI amount because borrowers notice that immediately, especially since it can disrupt their monthly budget and cash flow. Most people don’t pay attention to the tenure change communicated through emails.”</p>
-          <footer style="margin-top: 0.5rem; font-weight: 600; font-style: normal;">— Mangesh Zope, Founder, Peaceful-Loans</footer>
-        </div>
-
-        <p>The article explores why transmission is uneven, particularly in the NBFC segment where loans are often linked to internal benchmarks like the Prime Lending Rate (PLR). According to RBI data, while banks passed on nearly 87 basis points of the cut, NBFCs passed on only 12 basis points.</p>
-
-        <h2>Key Insights for Borrowers</h2>
-        <ul>
-          <li><strong>NBFC vs Banks:</strong> NBFC loans are suitable for gram panchayat properties or irregular income, but they come with higher rates and slower transmission.</li>
-          <li><strong>The Tenure Trap:</strong> Banks often extend loan tenures instead of increasing EMIs during rate hikes, which can add years to your loan without you noticing.</li>
-          <li><strong>Refinancing Strategy:</strong> For older MCLR-linked loans or NBFC loans, moving to a repo-linked product can save 1-2% in interest.</li>
-        </ul>
-
-        <div class="highlight-quote">
-          <p>“As an NBFC borrower, you have to keep looking over your shoulder all the time to see if the terms are not the same as earlier.”</p>
-          <footer style="margin-top: 0.5rem; font-weight: 600; font-style: normal;">— Mangesh Zope, Peaceful-Loans</footer>
-        </div>
-
-        <div class="article-link-box">
-          <div>
-            <p style="font-weight: 600; margin-bottom: 0.25rem;">Read the full discussion on LiveMint</p>
-            <p style="font-size: 14px; color: var(--gray-500);">Direct link to the original article for subscribers.</p>
-          </div>
-          <a href="https://www.livemint.com/money/personal-finance/rbi-rate-cuts-nbfc-vs-banks-home-loan-rates-india-emi-11777380452717.html" target="_blank" rel="noopener" class="btn btn-outline-gray">Visit Mint</a>
-        </div>
-      </div>
-    </article>
   </div>
 </main>
 
 ${footerHTML()}
 `;
-
   initNav();
-  // Check if embed is supported
-  const embed = document.querySelector('embed');
-  if (embed && !embed.getSVGDocument) {
-    // Basic check for support, show fallback if needed
-  }
 }
-
 document.addEventListener('DOMContentLoaded', render);
 </script>
 </body>
