@@ -27,6 +27,12 @@
   --c-ground: #fbfaf7;
   --c-surface: #ffffff;
   --c-navy: #0b1f3a;
+  
+  /* Economist Style */
+  --economist-red: #e3120b;
+  --economist-black: #000000;
+  --economist-offwhite: #fbfaf7;
+  --economist-hair: #d1d5db;
 }
 
 html { scroll-behavior: smooth; }
@@ -445,3 +451,190 @@ ul { list-style: none; }
 .truncate-text.expanded { -webkit-line-clamp: unset; }
 .read-more-btn { background: none; border: none; color: var(--blue); font-size: 13px; font-weight: 600; cursor: pointer; padding: 0; margin-top: 0.5rem; font-family: inherit; display: inline-block; }
 .read-more-btn:hover { text-decoration: underline; }
+
+/* ===== ECONOMIST STYLE SECTION ===== */
+.economist-section {
+  padding: 4rem 0;
+  background: var(--c-surface);
+}
+
+.economist-header {
+  border-top: 4px solid var(--economist-red);
+  padding-top: 1rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.economist-header h2 {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--economist-black);
+  line-height: 1.1;
+}
+
+.economist-header .expert-tag {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--economist-red);
+  letter-spacing: 0.1em;
+}
+
+.coverage-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .coverage-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.coverage-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  transition: all 0.3s;
+  text-decoration: none;
+}
+
+.coverage-card:hover {
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  border-color: var(--economist-red);
+  transform: translateY(-4px);
+}
+
+.coverage-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+.coverage-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.coverage-content h3 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--economist-black);
+  line-height: 1.3;
+}
+
+.coverage-content p {
+  font-size: 14px;
+  color: var(--gray-600);
+  line-height: 1.5;
+}
+
+.coverage-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--economist-red);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ===== ARTICLE PAGE (PDF VIEWER) ===== */
+.article-page {
+  padding: 4rem 0;
+  margin-top: 64px;
+}
+
+.article-header {
+  margin-bottom: 3rem;
+  max-width: 800px;
+}
+
+.article-meta {
+  font-size: 14px;
+  color: var(--gray-500);
+  margin-bottom: 1rem;
+}
+
+.article-title {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--economist-black);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.article-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.pdf-viewer-container {
+  width: 100%;
+  height: 800px;
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--gray-100);
+  margin-bottom: 4rem;
+}
+
+.pdf-viewer-container embed, 
+.pdf-viewer-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.article-content-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.article-transcript {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--gray-800);
+}
+
+.article-transcript h2 {
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+}
+
+.highlight-quote {
+  background: rgba(255, 184, 0, 0.1);
+  border-left: 4px solid var(--amber);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--economist-black);
+}
+
+.article-link-box {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

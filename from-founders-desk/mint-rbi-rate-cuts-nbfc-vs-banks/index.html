@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RBI Rate Cuts: NBFC vs Banks | Peaceful Loans Media Coverage</title>
+  <link rel="icon" type="image/jpeg" href="/assets/icon-jpg.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=13">
+</head>
+<body>
+<div id="app"></div>
+<script src="/components.js"></script>
+<script>
+function render() {
+  document.getElementById('app').innerHTML = `
+${navHTML('/from-founders-desk/mint-rbi-rate-cuts-nbfc-vs-banks/')}
+
+<main class="article-page">
+  <div class="container">
+    <header class="article-header">
+      <p class="expert-tag" style="margin-bottom:1rem">Media Coverage &middot; Mint</p>
+      <h1 class="article-title">Not seeing lower EMIs? Why you may need to act on your home loan</h1>
+      <p class="article-meta">Published on 29th April 2026 &middot; By Ananya Grover</p>
+      
+      <div class="article-actions">
+        <a href="/assets/pdfs/articles/mint-apr-2026.pdf" download class="btn btn-primary">Download PDF</a>
+        <a href="https://www.livemint.com/money/personal-finance/rbi-rate-cuts-nbfc-vs-banks-home-loan-rates-india-emi-11777380452717.html" target="_blank" rel="noopener" class="btn btn-outline-gray">View Original Article</a>
+      </div>
+    </header>
+
+    <div class="pdf-viewer-container">
+      <embed src="/assets/pdfs/articles/mint-apr-2026.pdf" type="application/pdf" width="100%" height="100%">
+      <div class="pdf-fallback" style="padding: 2rem; text-align: center; display: none;">
+        <p>PDF viewer not supported. <a href="/assets/pdfs/articles/mint-apr-2026.pdf" download>Download the PDF to read</a>.</p>
+      </div>
+    </div>
+
+    <article class="article-content-body">
+      <div class="article-transcript">
+        <h2>Article Summary & Context</h2>
+        <p>The year 2025 saw the Reserve Bank of India (RBI) embark on an aggressive easing cycle, reducing the repo rate by 125 basis points to 5.25%. While bank borrowers linked to external benchmarks saw relief, NBFC borrowers experienced much slower rate transmission.</p>
+
+        <div class="highlight-quote">
+          <p>“Lenders often avoid increasing EMI amount because borrowers notice that immediately, especially since it can disrupt their monthly budget and cash flow. Most people don’t pay attention to the tenure change communicated through emails.”</p>
+          <footer style="margin-top: 0.5rem; font-weight: 600; font-style: normal;">— Mangesh Zope, Founder, Peaceful-Loans</footer>
+        </div>
+
+        <p>The article explores why transmission is uneven, particularly in the NBFC segment where loans are often linked to internal benchmarks like the Prime Lending Rate (PLR). According to RBI data, while banks passed on nearly 87 basis points of the cut, NBFCs passed on only 12 basis points.</p>
+
+        <h2>Key Insights for Borrowers</h2>
+        <ul>
+          <li><strong>NBFC vs Banks:</strong> NBFC loans are suitable for gram panchayat properties or irregular income, but they come with higher rates and slower transmission.</li>
+          <li><strong>The Tenure Trap:</strong> Banks often extend loan tenures instead of increasing EMIs during rate hikes, which can add years to your loan without you noticing.</li>
+          <li><strong>Refinancing Strategy:</strong> For older MCLR-linked loans or NBFC loans, moving to a repo-linked product can save 1-2% in interest.</li>
+        </ul>
+
+        <div class="highlight-quote">
+          <p>“As an NBFC borrower, you have to keep looking over your shoulder all the time to see if the terms are not the same as earlier.”</p>
+          <footer style="margin-top: 0.5rem; font-weight: 600; font-style: normal;">— Mangesh Zope, Peaceful-Loans</footer>
+        </div>
+
+        <div class="article-link-box">
+          <div>
+            <p style="font-weight: 600; margin-bottom: 0.25rem;">Read the full discussion on LiveMint</p>
+            <p style="font-size: 14px; color: var(--gray-500);">Direct link to the original article for subscribers.</p>
+          </div>
+          <a href="https://www.livemint.com/money/personal-finance/rbi-rate-cuts-nbfc-vs-banks-home-loan-rates-india-emi-11777380452717.html" target="_blank" rel="noopener" class="btn btn-outline-gray">Visit Mint</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</main>
+
+${footerHTML()}
+`;
+
+  initNav();
+  // Check if embed is supported
+  const embed = document.querySelector('embed');
+  if (embed && !embed.getSVGDocument) {
+    // Basic check for support, show fallback if needed
+  }
+}
+
+document.addEventListener('DOMContentLoaded', render);
+</script>
+</body>
+</html>
