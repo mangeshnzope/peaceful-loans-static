@@ -1,0 +1,246 @@
+import os
+import re
+import shutil
+from datetime import datetime
+
+MD_FILE = '/Users/mangeshpeaceful-loans/Downloads/PEACEFUL-LOANS-ALL-39-ARTICLES_1.md'
+BLOG_DIR = '/Users/mangeshpeaceful-loans/Development/Website/from-founders-desk'
+INDEX_FILE = os.path.join(BLOG_DIR, 'index.html')
+TEMPLATE_FILE = os.path.join(BLOG_DIR, 'home-loan-overdraft-sbi-maxgain', 'index.html')
+
+def slugify(text):
+    text = text.lower()
+    text = re.sub(r'[^a-z0-9\s-]', '', text)
+    text = re.sub(r'[\s-]+', '-', text).strip('-')
+    return text
+
+def parse_markdown():
+    with open(MD_FILE, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # Split by articles
+    parts = content.split('<a id="article-')
+    articles = []
+
+    for part in parts[1:]: # Skip TOC
+        lines = part.split('\n')
+        
+        # The first few lines will be like:
+        # 01"></a>
+        #
+        # # Article 01
+        #
+        # # Can Self-Employed Professionals Get Home Loans in India?
+        title = ""
+        body_lines = []
+        found_title = False
+        author_passed = False
+        
+        for line in lines:
+            if line.startswith('# Article'):
+                continue
+            elif line.startswith('# ') and not found_title:
+                title = line.replace('# ', '').strip()
+                found_title = True
+            elif found_title and line.startswith('*From Founder'):
+                continue
+            elif found_title and line.startswith('*By Mangesh Zope'):
+                author_passed = True
+                continue
+            elif author_passed:
+                body_lines.append(line)
+
+        # Cleanup body lines
+        while body_lines and body_lines[0].strip() == '':
+            body_lines.pop(0)
+        
+        # remove trailing hr and br
+        while body_lines and (body_lines[-1].strip() in ['', '---', '<br><br>']):
+            body_lines.pop()
+
+        if not title:
+            continue
+
+        # Extract excerpt
+        excerpt = ""
+        for line in body_lines:
+            if line.strip() and not line.startswith('#'):
+                # remove markdown bold/italic
+                clean_line = re.sub(r'[*_]{1,2}', '', line)
+                clean_line = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', clean_line)
+                excerpt = clean_line[:150] + "..." if len(clean_line) > 150 else clean_line
+                break
+
+        # Convert markdown body to HTML manually (simple parsing)
+        html_body = []
+        in_list = False
+        for line in body_lines:
+            line = line.strip()
+            if not line:
+                if in_list:
+                    html_body.append('</ul>')
+                    in_list = False
+                continue
+                
+            # Headers
+            if line.startswith('### '):
+                if in_list: html_body.append('</ul>'); in_list = False
+                html_body.append(f'<h3>{line[4:]}</h3>')
+            elif line.startswith('## '):
+                if in_list: html_body.append('</ul>'); in_list = False
+                html_body.append(f'<h2>{line[3:]}</h2>')
+            elif line.startswith('# '):
+                if in_list: html_body.append('</ul>'); in_list = False
+                html_body.append(f'<h2>{line[2:]}</h2>')
+            elif line.startswith('- '):
+                if not in_list:
+                    html_body.append('<ul>')
+                    in_list = True
+                html_body.append(f'<li>{line[2:]}</li>')
+            elif line.startswith('**') and line.endswith('**') and len(line) < 100:
+                # bold headers
+                if in_list: html_body.append('</ul>'); in_list = False
+                html_body.append(f'<p><strong>{line[2:-2]}</strong></p>')
+            else:
+                if in_list: html_body.append('</ul>'); in_list = False
+                # inline bold/italics
+                line = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', line)
+                line = re.sub(r'\*(.+?)\*', r'<em>\1</em>', line)
+                html_body.append(f'<p>{line}</p>')
+                
+        if in_list: html_body.append('</ul>')
+
+        articles.append({
+            'title': title,
+            'slug': slugify(title),
+            'excerpt': excerpt,
+            'html_content': '\n'.join(html_body),
+            'date': '3 May 2026'
+        })
+
+    return articles
+
+def create_article_pages(articles):
+    with open(TEMPLATE_FILE, 'r', encoding='utf-8') as f:
+        template = f.read()
+
+    for art in articles:
+        slug = art['slug']
+        title = art['title']
+        excerpt = art['excerpt']
+        html_content = art['html_content']
+        date = art['date']
+        
+        # Read template and replace
+        # Replace Title
+        page = re.sub(r'<title>.*?</title>', f'<title>{title} · From Founder\'s Desk — Peaceful Loans</title>', template, flags=re.DOTALL)
+        
+        # Replace meta description
+        page = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{excerpt}">', page)
+        
+        # Replace og:title
+        page = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{title}">', page)
+        page = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{excerpt}">', page)
+        page = re.sub(r'<meta property="og:url" content="[^"]*">', f'<meta property="og:url" content="https://peaceful-loans.com/from-founders-desk/{slug}/">', page)
+        
+        # Twitter cards
+        page = re.sub(r'<meta name="twitter:title" content="[^"]*">', f'<meta name="twitter:title" content="{title}">', page)
+        page = re.sub(r'<meta name="twitter:description" content="[^"]*">', f'<meta name="twitter:description" content="{excerpt}">', page)
+
+        # JSON-LD
+        json_ld = f'''{{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{title}",
+  "description": "{excerpt}",
+  "author": {{
+    "@type": "Person",
+    "name": "Mangesh Zope",
+    "url": "https://peaceful-loans.com/about.html"
+  }},
+  "publisher": {{
+    "@type": "Organization",
+    "name": "Peaceful Loans",
+    "logo": {{
+      "@type": "ImageObject",
+      "url": "https://peaceful-loans.com/assets/logo-horizontal.png"
+    }}
+  }},
+  "datePublished": "2026-05-03",
+  "mainEntityOfPage": {{
+    "@type": "WebPage",
+    "@id": "https://peaceful-loans.com/from-founders-desk/{slug}/"
+  }},
+  "image": "https://peaceful-loans.com/assets/blogs/{slug}.png"
+}}'''
+        page = re.sub(r'<script type="application/ld\+json">.*?</script>', f'<script type="application/ld+json">\n{json_ld}\n</script>', page, flags=re.DOTALL)
+
+        # Replace H1
+        page = re.sub(r'<h1>.*?</h1>', f'<h1>{title}</h1>', page, flags=re.DOTALL)
+        
+        # Replace date in brand-meta
+        page = re.sub(r'<span class="date">[^<]*</span>', f'<span class="date">{date}</span>', page)
+
+        # Replace content
+        page = re.sub(r'<article class="content">.*?</article>', f'<article class="content">\n{html_content}\n  </article>', page, flags=re.DOTALL)
+
+        # Save to file
+        art_dir = os.path.join(BLOG_DIR, slug)
+        os.makedirs(art_dir, exist_ok=True)
+        with open(os.path.join(art_dir, 'index.html'), 'w', encoding='utf-8') as f:
+            f.write(page)
+        
+        print(f"Generated: {slug}")
+
+def update_index_page(articles):
+    with open(INDEX_FILE, 'r', encoding='utf-8') as f:
+        index_content = f.read()
+
+    # Find the post grid
+    match = re.search(r'<div class="post-grid">(.*?)</div>\s*<footer>', index_content, flags=re.DOTALL)
+    if not match:
+        print("Could not find post-grid in index.html")
+        return
+        
+    grid_content = match.group(1)
+    
+    # Check if we already added it to avoid duplicates
+    if slugify(articles[0]['title']) in grid_content:
+        print("Articles already present in index.")
+        return
+
+    new_items = []
+    for art in articles:
+        slug = art['slug']
+        title = art['title']
+        excerpt = art['excerpt']
+        date = art['date']
+        
+        item = f'''
+    <!-- Post -->
+    <a href="{slug}/" class="post-item">
+      <div class="post-img-wrap">
+        <img src="../assets/blogs/{slug}.png" alt="{title}">
+      </div>
+      <h2 class="post-title">{title}</h2>
+      <p class="post-excerpt">{excerpt}</p>
+      <div class="post-meta-row">
+        <span>By Mangesh Zope</span>
+        <span class="post-author">· {date}</span>
+      </div>
+    </a>'''
+        new_items.append(item)
+
+    # Insert new items at the top of the grid
+    updated_grid = '\n'.join(new_items) + '\n' + grid_content
+    updated_index = index_content[:match.start(1)] + updated_grid + index_content[match.end(1):]
+
+    with open(INDEX_FILE, 'w', encoding='utf-8') as f:
+        f.write(updated_index)
+    print("Updated index.html")
+
+if __name__ == '__main__':
+    articles = parse_markdown()
+    print(f"Parsed {len(articles)} articles.")
+    create_article_pages(articles)
+    update_index_page(articles)
