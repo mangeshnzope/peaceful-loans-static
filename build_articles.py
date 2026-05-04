@@ -146,6 +146,10 @@ def create_article_pages(articles):
         # Twitter cards
         page = re.sub(r'<meta name="twitter:title" content="[^"]*">', f'<meta name="twitter:title" content="{title}">', page)
         page = re.sub(r'<meta name="twitter:description" content="[^"]*">', f'<meta name="twitter:description" content="{excerpt}">', page)
+        page = re.sub(r'<meta name="twitter:image" content="[^"]*">', f'<meta name="twitter:image" content="https://peaceful-loans.com/assets/blogs/{slug}.png">', page)
+
+        # Canonical Link
+        page = re.sub(r'<link rel="canonical" href="[^"]*">', f'<link rel="canonical" href="https://peaceful-loans.com/from-founders-desk/{slug}/">', page)
 
         # JSON-LD
         json_ld = f'''{{
@@ -239,8 +243,49 @@ def update_index_page(articles):
         f.write(updated_index)
     print("Updated index.html")
 
+def update_sitemap():
+    sitemap_file = os.path.join(os.path.dirname(BLOG_DIR), 'sitemap.xml')
+    today = datetime.now().strftime('%Y-%m-%d')
+    
+    urls = [
+        {'loc': 'https://peaceful-loans.com/', 'priority': '1.0', 'changefreq': 'weekly'},
+        {'loc': 'https://peaceful-loans.com/reviews.html', 'priority': '0.9', 'changefreq': 'weekly'},
+        {'loc': 'https://peaceful-loans.com/about.html', 'priority': '0.8', 'changefreq': 'monthly'},
+        {'loc': 'https://peaceful-loans.com/faqs.html', 'priority': '0.8', 'changefreq': 'monthly'},
+        {'loc': 'https://peaceful-loans.com/save-money-on-home-loan/', 'priority': '0.8', 'changefreq': 'monthly'},
+        {'loc': 'https://peaceful-loans.com/FY26-27IntRates/', 'priority': '0.9', 'changefreq': 'weekly'},
+        {'loc': 'https://peaceful-loans.com/from-founders-desk/', 'priority': '0.9', 'changefreq': 'weekly'},
+    ]
+    
+    # Add all blog posts
+    blog_slugs = [d for d in os.listdir(BLOG_DIR) if os.path.isdir(os.path.join(BLOG_DIR, d))]
+    for slug in sorted(blog_slugs):
+        urls.append({
+            'loc': f'https://peaceful-loans.com/from-founders-desk/{slug}/',
+            'priority': '0.8',
+            'changefreq': 'monthly'
+        })
+        
+    sitemap_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    sitemap_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    
+    for url in urls:
+        sitemap_content += '  <url>\n'
+        sitemap_content += f'    <loc>{url["loc"]}</loc>\n'
+        sitemap_content += f'    <lastmod>{today}</lastmod>\n'
+        sitemap_content += f'    <changefreq>{url["changefreq"]}</changefreq>\n'
+        sitemap_content += f'    <priority>{url["priority"]}</priority>\n'
+        sitemap_content += '  </url>\n'
+        
+    sitemap_content += '</urlset>\n'
+    
+    with open(sitemap_file, 'w', encoding='utf-8') as f:
+        f.write(sitemap_content)
+    print(f"Sitemap updated with {len(urls)} URLs.")
+
 if __name__ == '__main__':
     articles = parse_markdown()
     print(f"Parsed {len(articles)} articles.")
     create_article_pages(articles)
     update_index_page(articles)
+    update_sitemap()
