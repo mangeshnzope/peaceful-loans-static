@@ -173,6 +173,50 @@
     color: var(--pl-ink);
   }
 
+  /* ===== RATES TABLE ===== */
+  .rates-table-wrapper {
+    margin: 40px 0;
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    border: 1px solid var(--hair);
+  }
+  .rates-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    font-family: var(--sans);
+    font-size: 15px;
+  }
+  .rates-table th, .rates-table td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--hair);
+  }
+  .rates-table th {
+    background: #f1f5f9;
+    font-weight: 700;
+    color: var(--pl-ink);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .rates-table tr:last-child td {
+    border-bottom: none;
+  }
+  .rates-table tbody tr:hover {
+    background: #fafafa;
+  }
+  .rates-table .bank-type {
+    font-weight: 700;
+    color: var(--ink);
+    background: #f8fafc;
+    vertical-align: top;
+  }
+  .rates-table .penalty-val {
+    font-weight: 600;
+    color: var(--pl-orange);
+  }
+
   /* ===== REPORT IMAGE ===== */
   .report-img-wrapper {
     margin: 40px 0;
@@ -375,8 +419,61 @@
     <h2>Current CRE Rates for Top Banks</h2>
     <p>We've attached the current CRE rates and the penalty delta for the top 4-5 banks in the table below.</p>
 
-    <div class="report-img-wrapper">
-      <img src="rates.png" alt="Current CRE Rates for Top 4-5 Banks" class="report-img">
+    <div class="rates-table-wrapper">
+      <table class="rates-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Bank</th>
+            <th>Extra 3rd Home</th>
+            <th>Extra 4th Home</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="bank-type" rowspan="6">Govt Bank</td>
+            <td>CBI</td>
+            <td class="penalty-val">1.15%</td>
+            <td class="penalty-val">1.15%</td>
+          </tr>
+          <tr>
+            <td>UBI</td>
+            <td class="penalty-val">0.25%</td>
+            <td class="penalty-val">0.75%</td>
+          </tr>
+          <tr>
+            <td>BOI</td>
+            <td class="penalty-val">0.50%</td>
+            <td class="penalty-val">0.50%</td>
+          </tr>
+          <tr>
+            <td>SBI</td>
+            <td class="penalty-val">0.75%</td>
+            <td class="penalty-val">0.75%</td>
+          </tr>
+          <tr>
+            <td>BOB</td>
+            <td class="penalty-val">0.25%</td>
+            <td class="penalty-val">0.25%</td>
+          </tr>
+          <tr>
+            <td>Canara Bank</td>
+            <td class="penalty-val">0.25%</td>
+            <td class="penalty-val">0.50%</td>
+          </tr>
+          <tr>
+            <td class="bank-type" rowspan="2">Private Banks</td>
+            <td>HDFC</td>
+            <td class="penalty-val">0.25%</td>
+            <td class="penalty-val">0.25%</td>
+          </tr>
+          <tr>
+            <td>ICICI</td>
+            <td class="penalty-val">0.25%</td>
+            <td class="penalty-val">0.25%</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
   </article>
