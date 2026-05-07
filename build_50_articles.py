@@ -2,7 +2,7 @@ import os
 import re
 from datetime import datetime
 
-MD_FILE = '/Users/mangeshpeaceful-loans/Downloads/PEACEFUL-LOANS-UNPUBLISHED-50-ARTICLES_1.md'
+MD_FILE = '/Users/mangeshpeaceful-loans/Downloads/Peaceful-Loans-Plot-Loans-Complete.md'
 BLOG_DIR = '/Users/mangeshpeaceful-loans/Development/Website/from-founders-desk'
 INDEX_FILE = os.path.join(BLOG_DIR, 'index.html')
 TEMPLATE_FILE = os.path.join(BLOG_DIR, 'home-loan-overdraft-sbi-maxgain', 'index.html')
@@ -30,10 +30,8 @@ def parse_markdown():
         author_passed = False
         
         for line in lines:
-            if line.startswith('# Part'):
-                continue
-            elif line.startswith('# ') and not found_title:
-                title = line.replace('# ', '').strip()
+            if line.startswith('# Article ') and not found_title:
+                title = re.sub(r'^# Article \d+:\s*', '', line).strip()
                 found_title = True
             elif found_title and line.startswith('*From Founder'):
                 continue
@@ -182,28 +180,56 @@ def create_article_pages(articles):
         # JSON-LD
         json_ld = f'''{{
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "{title}",
-  "description": "{excerpt}",
-  "author": {{
-    "@type": "Person",
-    "name": "Mangesh Zope",
-    "url": "https://peaceful-loans.com/about.html"
-  }},
-  "publisher": {{
-    "@type": "Organization",
-    "name": "Peaceful Loans",
-    "logo": {{
-      "@type": "ImageObject",
-      "url": "https://peaceful-loans.com/assets/logo-horizontal.png"
+  "@graph": [
+    {{
+      "@type": "BlogPosting",
+      "headline": "{title}",
+      "description": "{excerpt}",
+      "author": {{
+        "@type": "Person",
+        "name": "Mangesh Zope",
+        "url": "https://peaceful-loans.com/about.html"
+      }},
+      "publisher": {{
+        "@type": "Organization",
+        "name": "Peaceful Loans",
+        "logo": {{
+          "@type": "ImageObject",
+          "url": "https://peaceful-loans.com/assets/logo-horizontal.png"
+        }}
+      }},
+      "datePublished": "2026-05-05",
+      "dateModified": "2026-05-05",
+      "mainEntityOfPage": {{
+        "@type": "WebPage",
+        "@id": "https://peaceful-loans.com/from-founders-desk/{slug}/"
+      }},
+      "image": "https://peaceful-loans.com/assets/blogs/{slug}.png"
+    }},
+    {{
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://peaceful-loans.com/"
+        }},
+        {{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "From Founder's Desk",
+          "item": "https://peaceful-loans.com/from-founders-desk/"
+        }},
+        {{
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{title}",
+          "item": "https://peaceful-loans.com/from-founders-desk/{slug}/"
+        }}
+      ]
     }}
-  }},
-  "datePublished": "2026-05-05",
-  "mainEntityOfPage": {{
-    "@type": "WebPage",
-    "@id": "https://peaceful-loans.com/from-founders-desk/{slug}/"
-  }},
-  "image": "https://peaceful-loans.com/assets/blogs/{slug}.png"
+  ]
 }}'''
         page = re.sub(r'<script type="application/ld\+json">.*?</script>', f'<script type="application/ld+json">\n{json_ld}\n</script>', page, flags=re.DOTALL)
 
