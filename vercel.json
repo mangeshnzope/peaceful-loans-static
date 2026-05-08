@@ -1,6 +1,17 @@
 {
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.peaceful-loans.com"
+        }
+      ],
+      "destination": "https://peaceful-loans.com/:path*",
+      "permanent": true
+    },
+    {
       "source": "/fy26-27intrates",
       "destination": "/FY26-27IntRates",
       "permanent": true
