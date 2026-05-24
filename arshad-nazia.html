@@ -1003,11 +1003,158 @@
     .breakdown-val.success-val {
       color: var(--green);
     }
+
+    /* Password lock screen styling */
+    #password-lock-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: linear-gradient(135deg, var(--blue-darkest) 0%, #0B1F3A 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      transition: opacity 0.5s ease;
+    }
+    
+    .lock-box {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+      color: #fff;
+      transition: var(--transition-base);
+    }
+    
+    .lock-logo {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .lock-logo span {
+      color: var(--amber);
+    }
+    
+    .lock-tagline {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 32px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+    
+    .lock-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      text-align: left;
+    }
+    
+    .lock-input-group label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .lock-input {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 14px;
+      color: #fff;
+      font-size: 16px;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: var(--transition-base);
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+    
+    .lock-input:focus {
+      border-color: var(--amber);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 4px rgba(255, 184, 0, 0.15);
+    }
+    
+    .lock-btn {
+      background: var(--amber);
+      color: var(--gray-900);
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: var(--transition-base);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    
+    .lock-btn:hover {
+      background: #F0A800;
+      transform: translateY(-1px);
+    }
+    
+    .lock-error {
+      color: #f87171;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 16px;
+      display: none;
+      text-align: center;
+    }
+    
+    /* Shake animation for wrong password */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+    
+    .shake {
+      animation: shake 0.4s ease;
+    }
   </style>
 </head>
 <body>
 
-<div class="report-card">
+<!-- PASSWORD LOCK SCREEN -->
+<div id="password-lock-screen">
+  <div class="lock-box">
+    <div class="lock-logo">Peaceful<span>Loans</span></div>
+    <div class="lock-tagline">Secure Personalised Client Portal</div>
+    
+    <div class="lock-input-group">
+      <label for="lock-password">Enter Client Password</label>
+      <input type="password" id="lock-password" class="lock-input" placeholder="••••••••" autocomplete="off" autofocus>
+      <button onclick="checkPassword()" class="lock-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Unlock Report
+      </button>
+    </div>
+    <div id="lock-error" class="lock-error">⚠️ Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<!-- SECURE REPORT CONTENT (Hidden by default) -->
+<div id="secure-content" style="display: none;">
+  <div class="report-card">
   <!-- Brand Tricolor Bar at the top -->
   <div class="tricolor-bar">
     <div class="bar-blue"></div>
@@ -1772,7 +1919,7 @@
     </footer>
 
   </div>
-</div>
+</div> <!-- end of #secure-content -->
 
 <script>
   function toggleFeesBreakdown(cardId, event) {
@@ -1788,6 +1935,50 @@
       event.stopPropagation();
     }
   }
+
+  function checkPassword() {
+    const passwordInput = document.getElementById('lock-password');
+    const lockScreen = document.getElementById('password-lock-screen');
+    const secureContent = document.getElementById('secure-content');
+    const lockError = document.getElementById('lock-error');
+    const lockBox = document.querySelector('.lock-box');
+    
+    if (passwordInput && passwordInput.value.trim() === 'Arshad') {
+      lockScreen.style.opacity = '0';
+      secureContent.style.display = 'block';
+      setTimeout(() => {
+        lockScreen.style.display = 'none';
+      }, 500);
+    } else {
+      if (lockError) lockError.style.display = 'block';
+      if (lockBox) {
+        lockBox.classList.add('shake');
+        setTimeout(() => {
+          lockBox.classList.remove('shake');
+        }, 400);
+      }
+      if (passwordInput) {
+        passwordInput.value = '';
+        passwordInput.focus();
+      }
+    }
+  }
+  
+  // Submit on Enter keypress
+  document.addEventListener('DOMContentLoaded', () => {
+    const passwordInput = document.getElementById('lock-password');
+    if (passwordInput) {
+      passwordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          checkPassword();
+        }
+      });
+      // Focus input on page load
+      setTimeout(() => {
+        passwordInput.focus();
+      }, 100);
+    }
+  });
 </script>
 
 </body>
