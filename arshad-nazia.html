@@ -817,6 +817,104 @@
         align-items: flex-start;
       }
     }
+
+    /* Decision Pathways / Scenarios styling */
+    .pathways-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 24px;
+    }
+    
+    .pathway-card {
+      background: var(--c-surface);
+      border: 1px solid rgba(26, 76, 200, 0.1);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-base);
+    }
+    
+    .pathway-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(26, 76, 200, 0.25);
+    }
+    
+    .pathway-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-bottom: 1px solid var(--gray-100);
+      padding-bottom: 8px;
+    }
+    
+    .pathway-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray-500);
+    }
+    
+    .pathway-bank {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--blue-darkest);
+    }
+    
+    .pathway-body {
+      font-size: 13px;
+      color: var(--gray-700);
+      line-height: 1.55;
+    }
+    
+    .pathway-downside {
+      margin-top: auto;
+      background: #FFF2EC;
+      border: 1px solid rgba(232, 65, 24, 0.12);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #C2410C;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    
+    .pathway-downside svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .pathway-no-downside {
+      margin-top: auto;
+      background: #F0FDF4;
+      border: 1px solid rgba(22, 163, 74, 0.15);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #15803D;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .pathway-no-downside svg {
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 900px) {
+      .pathways-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -894,16 +992,79 @@
     </section>
 
     <!-- SECTION 3: OUR RECOMMENDATION (HIGHLIGHTED CALLOUT) -->
-    <section class="recommendation-callout">
-      <div class="rec-title-wrap">
-        <span class="rec-badge">Unbiased Verdict</span>
-        <h2 class="rec-heading">Our Expert Recommendation</h2>
+    <section class="recommendation-callout" style="padding: 28px;">
+      <div class="rec-title-wrap" style="margin-bottom: 16px;">
+        <span class="rec-badge" style="background: var(--blue-darkest); padding: 4px 12px; font-size: 10px;">Strategic Verdict</span>
+        <h2 class="rec-heading" style="font-size: 20px;">Your Custom Match: 4 Strategic Decision Pathways</h2>
       </div>
-      <div class="rec-sentence">
-        We recommend prioritizing <strong>Canara Bank</strong> or <strong>Bank of Maharashtra</strong> for their industry-lowest floating rates (7.15%–7.25%), whilst maintaining your pre-approved <strong>SBI</strong> offer as your robust backup if you require the absolute maximum leverage of ₹2.52 Cr.
+      <div class="rec-sentence" style="font-size: 15px; font-family: var(--font-sans); color: var(--gray-700); margin-bottom: 20px; line-height: 1.6; font-weight: 400;">
+        Instead of a single choice, we have mapped out <strong>4 tailored scenarios</strong>. Depending on what you prioritize most—upfront liquidity, absolute lowest long-term cost, or a fast entry rate—choose the path that fits your goals:
       </div>
-      <div class="rec-reasoning">
-        Canara Bank provides the most cost-effective path: a flat 7.15% rate on a ₹2.10 Cr loan with near-zero insurance push and minimal upfront processing fees. Bank of Maharashtra's 7.25% is an exceptional fallback once their project clearance (APF) is finalized this week. Avoid private lenders (HDFC and ICICI) unless maximum funding leverage is absolutely mandatory; they require substantial upfront MOTD registration fees and aggressively bundle optional credit insurance, which will inflate your initial cash outflows by over ₹60K to ₹4 Lakhs.
+      
+      <div class="pathways-grid">
+        <!-- Pathway 1: Max Sanction (SBI) -->
+        <div class="pathway-card">
+          <div class="pathway-header">
+            <span class="pathway-title" style="color: var(--blue);">Scenario 1 · Max Leverage</span>
+            <span class="pathway-bank">SBI</span>
+          </div>
+          <div class="pathway-body">
+            <strong>Goal:</strong> Maximize your sanction limit so that you pay the absolute minimum from your own pocket until possession. 
+            <p style="margin-top: 6px;">SBI offers a <strong>90% sanction limit</strong> (up to ₹2.52 Cr), keeping your self-funding requirement extremely low.</p>
+          </div>
+          <div class="pathway-downside">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span><strong>Downside:</strong> Slightly higher entry interest rate (7.50%–7.65%).</span>
+          </div>
+        </div>
+
+        <!-- Pathway 2: Lowest Long Term Cost (BOM) -->
+        <div class="pathway-card">
+          <div class="pathway-header">
+            <span class="pathway-title" style="color: var(--green);">Scenario 2 · Lowest Lifetime Cost</span>
+            <span class="pathway-bank">Bank of Maharashtra</span>
+          </div>
+          <div class="pathway-body">
+            <strong>Goal:</strong> Achieve the absolute lowest true long-term cost over the entire life of your loan.
+            <p style="margin-top: 6px;">BOM passes on Repo rate benefits (both hikes and cuts) transparently without silent markups, keeping your rate highly consistent through the years.</p>
+          </div>
+          <div class="pathway-no-downside">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span><strong>No Downside:</strong> Highly fair and borrower-friendly long-term lender behavior.</span>
+          </div>
+        </div>
+
+        <!-- Pathway 3: Lowest entry rate (Canara) -->
+        <div class="pathway-card">
+          <div class="pathway-header">
+            <span class="pathway-title" style="color: var(--blue-dark);">Scenario 3 · Lowest Entry Rate</span>
+            <span class="pathway-bank">Canara Bank</span>
+          </div>
+          <div class="pathway-body">
+            <strong>Goal:</strong> Get the absolute lowest possible floating interest rate stamped on your sanction letter today.
+            <p style="margin-top: 6px;">Canara Bank offers a rock-bottom rate of <strong>7.15%</strong> with very low administrative overhead.</p>
+          </div>
+          <div class="pathway-downside">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span><strong>Downside:</strong> Rate goes up automatically to ~8.00% base after 3 years.</span>
+          </div>
+        </div>
+
+        <!-- Pathway 4: High sanction + Private Bank (HDFC) -->
+        <div class="pathway-card">
+          <div class="pathway-header">
+            <span class="pathway-title" style="color: var(--red);">Scenario 4 · Balanced Private Banking</span>
+            <span class="pathway-bank">HDFC</span>
+          </div>
+          <div class="pathway-body">
+            <strong>Goal:</strong> Combine a low floating rate (7.25%), high funding limit (₹2.45 Cr), and a private bank experience.
+            <p style="margin-top: 6px;">Good option if you require high leverage and prefer HDFC's digital interface and speed.</p>
+          </div>
+          <div class="pathway-downside">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span><strong>Downsides:</strong> Heavy pre-payment friction online and forced purchase of expensive insurance.</span>
+          </div>
+        </div>
       </div>
     </section>
 
