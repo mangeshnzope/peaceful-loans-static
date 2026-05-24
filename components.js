@@ -97,6 +97,7 @@ function footerHTML() {
           <li><a href="/faqs.html">FAQs</a></li>
           <li><a href="/from-founders-desk/">Founder's Desk (Blog)</a></li>
           <li><a href="/about.html">About</a></li>
+          <li><a href="/index-booster/">Sitemap Booster</a></li>
         </ul>
       </div>
       <div>
@@ -108,8 +109,8 @@ function footerHTML() {
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 Peaceful-Loans &middot; IIM Calcutta Alumnus Initiative &middot; Mumbai</p>
-      <p>Unbiased analysis for the modern borrower.</p>
+      <p>&copy; 2025-2026 Peaceful-Loans &middot; IIM Calcutta Alumnus Initiative &middot; Mumbai</p>
+      <p style="margin-top:0.5rem;margin-bottom:0.75rem;font-size:11px;color:#9ca3af;line-height:1.5">Disclaimer: Peaceful Loans is an independent advisory portal. Interest rates, LTV caps, processing fees, and approval criteria are subject to change and are decided solely by the respective banks at the time of application. We do not guarantee specific loan outcomes or interest rates.</p>
     </div>
   </div>
 </footer>`;
