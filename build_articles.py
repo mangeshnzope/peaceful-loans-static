@@ -289,3 +289,14 @@ if __name__ == '__main__':
     create_article_pages(articles)
     update_index_page(articles)
     update_sitemap()
+    
+    # Auto-trigger Sitemap Booster regeneration for 100% SEO coverage parity
+    try:
+        import subprocess
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        booster_script = os.path.join(script_dir, 'generate_booster.py')
+        if os.path.exists(booster_script):
+            print("Auto-triggering Sitemap Booster regeneration...")
+            subprocess.run(["python3", booster_script], check=True)
+    except Exception as e:
+        print(f"Warning: Could not auto-trigger Sitemap Booster: {e}")
