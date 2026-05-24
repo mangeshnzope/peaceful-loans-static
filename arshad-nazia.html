@@ -915,6 +915,94 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* Card Expansion panel styling */
+    .fees-breakdown-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out, opacity 0.3s ease-out;
+      opacity: 0;
+      margin-top: 0;
+      border-top: 1px dashed var(--gray-200);
+      padding-top: 0;
+    }
+    
+    .bank-card.expanded .fees-breakdown-panel {
+      max-height: 600px;
+      opacity: 1;
+      margin-top: 16px;
+      padding-top: 16px;
+    }
+
+    .expand-cue {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      user-select: none;
+      transition: var(--transition-base);
+    }
+    .bank-card.expanded .expand-cue {
+      color: var(--gray-400);
+    }
+    
+    .expand-cue svg {
+      transition: transform 0.3s ease;
+    }
+    .bank-card.expanded .expand-cue svg {
+      transform: rotate(180deg);
+    }
+    
+    .breakdown-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: var(--gray-50);
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--gray-200);
+    }
+    
+    .breakdown-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      font-size: 12.5px;
+      line-height: 1.4;
+    }
+    
+    .breakdown-lbl {
+      color: var(--gray-600);
+      font-weight: 500;
+      text-align: left;
+    }
+    .breakdown-lbl small {
+      display: block;
+      color: var(--gray-400);
+      font-size: 10px;
+      margin-top: 2px;
+    }
+    
+    .breakdown-val {
+      font-weight: 600;
+      color: var(--c-ink);
+      text-align: right;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+    }
+    
+    .breakdown-val.alert-val {
+      color: var(--red);
+    }
+    .breakdown-val.success-val {
+      color: var(--green);
+    }
   </style>
 </head>
 <body>
@@ -1085,7 +1173,7 @@
     
     <section class="cards-grid">
       <!-- Card 1: Canara Bank -->
-      <div class="bank-card top-pick-card">
+      <div class="bank-card top-pick-card" id="canara-card" onclick="toggleFeesBreakdown('canara-card', event)" style="cursor: pointer;">
         <div class="card-header-row">
           <div class="card-title-block">
             <h3 class="bank-brand-name">Canara Bank</h3>
@@ -1111,20 +1199,54 @@
           </div>
           <div class="number-row">
             <span class="num-label">Upfront Fees</span>
-            <span class="num-value">~₹24,000</span>
+            <span class="num-value" style="font-weight: 700; color: var(--blue-dark);">₹23,950</span>
           </div>
           <div class="number-row">
             <span class="num-label">MOTD Registration</span>
-            <span class="num-value">Near Possession</span>
+            <span class="num-value">₹1,57,993 (At Possession)</span>
           </div>
         </div>
         <div class="note-chip green">
-          <strong>Pro:</strong> Industry-lowest interest rate and processing fees with zero mandatory insurance pressure.
+          <strong>Pro:</strong> Zero credit insurance forced (₹0). Property insurance is mandatory for all banks. MOTD is deferred to possession.
+        </div>
+        <div class="expand-cue">
+          <span>Click to view fee breakdown</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        
+        <!-- Breakdown panel -->
+        <div class="fees-breakdown-panel">
+          <div class="breakdown-list">
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Processing Fees<small>Paid upfront at login</small></span>
+              <span class="breakdown-val">₹11,800</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Legal & Technical<small>Prior to bank sanction</small></span>
+              <span class="breakdown-val">₹8,000</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Stamp Paper & CERSAI/Misc<small>Paid at agreement signing</small></span>
+              <span class="breakdown-val">₹4,150</span>
+            </div>
+            <div class="breakdown-item" style="border-top: 1px dashed var(--gray-200); padding-top: 8px;">
+              <span class="breakdown-lbl">Property Insurance<small>Mandatory for all banks (per year)</small></span>
+              <span class="breakdown-val">₹6,583</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">MOTD registration charge<small>Paid later at possession</small></span>
+              <span class="breakdown-val success-val">₹1,57,993 <br><small style="color: var(--green); font-weight: 500;">Deferred to Possession</small></span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Credit Insurance<small>Optional coverage (Skipped)</small></span>
+              <span class="breakdown-val success-val">₹0 <br><small style="color: var(--green); font-weight: 500;">Saved</small></span>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Card 2: Bank of Maharashtra -->
-      <div class="bank-card">
+      <div class="bank-card" id="bom-card" onclick="toggleFeesBreakdown('bom-card', event)" style="cursor: pointer;">
         <div class="card-header-row">
           <div class="card-title-block">
             <h3 class="bank-brand-name">Bank of Maharashtra</h3>
@@ -1147,20 +1269,54 @@
           </div>
           <div class="number-row">
             <span class="num-label">Upfront Fees</span>
-            <span class="num-value">~₹20,000</span>
+            <span class="num-value" style="font-weight: 700; color: var(--blue-dark);">₹43,590</span>
           </div>
           <div class="number-row">
             <span class="num-label">MOTD Registration</span>
-            <span class="num-value">Near Possession</span>
+            <span class="num-value">₹1,46,062 (At Possession)</span>
           </div>
         </div>
         <div class="note-chip grey">
-          <strong>Pending:</strong> Project's APF clearance is underway, will be approved very soon.
+          <strong>Pending:</strong> Project's APF clearance is underway. Zero credit insurance forced (₹0). MOTD deferred to possession.
+        </div>
+        <div class="expand-cue">
+          <span>Click to view fee breakdown</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        
+        <!-- Breakdown panel -->
+        <div class="fees-breakdown-panel">
+          <div class="breakdown-list">
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Processing Fees<small>Paid upfront at login</small></span>
+              <span class="breakdown-val">₹29,500</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Legal & Technical<small>Prior to bank sanction</small></span>
+              <span class="breakdown-val">₹9,000</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Stamp Paper & CERSAI/Misc<small>Paid at agreement signing</small></span>
+              <span class="breakdown-val">₹5,090</span>
+            </div>
+            <div class="breakdown-item" style="border-top: 1px dashed var(--gray-200); padding-top: 8px;">
+              <span class="breakdown-lbl">Property Insurance<small>Mandatory for all banks (per year)</small></span>
+              <span class="breakdown-val">₹6,086</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">MOTD registration charge<small>Paid later at possession</small></span>
+              <span class="breakdown-val success-val">₹1,46,062 <br><small style="color: var(--green); font-weight: 500;">Deferred to Possession</small></span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Credit Insurance<small>Optional coverage (Skipped)</small></span>
+              <span class="breakdown-val success-val">₹0 <br><small style="color: var(--green); font-weight: 500;">Saved</small></span>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Card 3: SBI -->
-      <div class="bank-card">
+      <div class="bank-card" id="sbi-card" onclick="toggleFeesBreakdown('sbi-card', event)" style="cursor: pointer;">
         <div class="card-header-row">
           <div class="card-title-block">
             <h3 class="bank-brand-name">SBI</h3>
@@ -1183,20 +1339,54 @@
           </div>
           <div class="number-row">
             <span class="num-label">Upfront Fees</span>
-            <span class="num-value">~₹21,000</span>
+            <span class="num-value" style="font-weight: 700; color: var(--blue-dark);">₹21,318</span>
           </div>
           <div class="number-row">
             <span class="num-label">MOTD Registration</span>
-            <span class="num-value">Near Possession</span>
+            <span class="num-value">₹1,74,424 (At Possession)</span>
           </div>
         </div>
         <div class="note-chip green">
-          <strong>Pro:</strong> Maximum approved loan amount (₹2.52 Cr) with legal fees capped and MOTD at possession.
+          <strong>Pro:</strong> Max funding approved. Zero credit insurance forced (₹0). MOTD registration deferred to possession.
+        </div>
+        <div class="expand-cue">
+          <span>Click to view fee breakdown</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        
+        <!-- Breakdown panel -->
+        <div class="fees-breakdown-panel">
+          <div class="breakdown-list">
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Processing Fees<small>Paid upfront at login</small></span>
+              <span class="breakdown-val">₹17,700</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Legal & Technical<small>Prior to bank sanction</small></span>
+              <span class="breakdown-val">₹0 <br><small style="color: var(--gray-400); font-weight: 500;">Waived</small></span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Stamp Paper & CERSAI/Misc<small>Paid at agreement signing</small></span>
+              <span class="breakdown-val">₹3,618</span>
+            </div>
+            <div class="breakdown-item" style="border-top: 1px dashed var(--gray-200); padding-top: 8px;">
+              <span class="breakdown-lbl">Property Insurance<small>Mandatory for all banks (per year)</small></span>
+              <span class="breakdown-val">₹7,268</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">MOTD registration charge<small>Paid later at possession</small></span>
+              <span class="breakdown-val success-val">₹1,74,424 <br><small style="color: var(--green); font-weight: 500;">Deferred to Possession</small></span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Credit Insurance<small>Optional coverage (Skipped)</small></span>
+              <span class="breakdown-val success-val">₹0 <br><small style="color: var(--green); font-weight: 500;">Saved</small></span>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Card 4: ICICI Bank -->
-      <div class="bank-card caution-card">
+      <div class="bank-card caution-card" id="icici-card" onclick="toggleFeesBreakdown('icici-card', event)" style="cursor: pointer;">
         <div class="card-header-row">
           <div class="card-title-block">
             <h3 class="bank-brand-name">ICICI Bank</h3>
@@ -1222,20 +1412,54 @@
           </div>
           <div class="number-row">
             <span class="num-label">Upfront Fees</span>
-            <span class="num-value">~₹85,000</span>
+            <span class="num-value" style="font-weight: 800; font-size: 17px; color: var(--red);">₹3,40,497</span>
           </div>
           <div class="number-row">
             <span class="num-label">MOTD Registration</span>
-            <span class="num-value" style="color: var(--red);">Upfront at 1st Disb.</span>
+            <span class="num-value" style="color: var(--red);">₹1,28,220 (Paid Upfront)</span>
           </div>
         </div>
         <div class="note-chip red">
-          <strong>Caution:</strong> High processing fees and MOTD charges are collected upfront prior to first disbursement.
+          <strong>Caution:</strong> Forced upfront MOTD payment (₹1,28,220) and forced Credit Insurance purchase (₹1,92,330 - money wasted!).
+        </div>
+        <div class="expand-cue">
+          <span style="color: var(--red);">Click to view forced fee breakdown ⚠️</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--red);"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        
+        <!-- Breakdown panel -->
+        <div class="fees-breakdown-panel">
+          <div class="breakdown-list">
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Processing Fees<small>Paid upfront at login</small></span>
+              <span class="breakdown-val">₹11,800</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Legal & Technical<small>Waived by panel lawyer</small></span>
+              <span class="breakdown-val">₹0</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Stamp Paper & CERSAI/Misc<small>Paid at agreement signing</small></span>
+              <span class="breakdown-val">₹1,736</span>
+            </div>
+            <div class="breakdown-item" style="border-top: 1px dashed var(--gray-200); padding-top: 8px;">
+              <span class="breakdown-lbl">Property Insurance<small>Mandatory for all banks (per year)</small></span>
+              <span class="breakdown-val">₹6,411</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">MOTD registration charge<small>FORCED UPFRONT at 1st disbursement</small></span>
+              <span class="breakdown-val alert-val">₹1,28,220 <br><small style="color: var(--red); font-weight: 500;">Upfront Outflow</small></span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Credit Insurance<small>FORCED UPFRONT (Money Wasted! ⚠️)</small></span>
+              <span class="breakdown-val alert-val">₹1,92,330 <br><small style="color: var(--red); font-weight: 500;">Upfront Outflow</small></span>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Card 5: HDFC -->
-      <div class="bank-card caution-card">
+      <div class="bank-card caution-card" id="hdfc-card" onclick="toggleFeesBreakdown('hdfc-card', event)" style="cursor: pointer;">
         <div class="card-header-row">
           <div class="card-title-block">
             <h3 class="bank-brand-name">HDFC</h3>
@@ -1261,20 +1485,54 @@
           </div>
           <div class="number-row">
             <span class="num-label">Upfront Fees</span>
-            <span class="num-value">~₹65,000</span>
+            <span class="num-value" style="font-weight: 800; font-size: 17px; color: var(--red);">₹355,729</span>
           </div>
           <div class="number-row">
             <span class="num-label">MOTD Registration</span>
-            <span class="num-value" style="color: var(--red);">Upfront at 1st Disb.</span>
+            <span class="num-value" style="color: var(--red);">₹1,35,094 (Paid Upfront)</span>
           </div>
         </div>
         <div class="note-chip red">
-          <strong>Caution:</strong> Low headline rate but aggressively pushes optional credit insurance and upfront MOTD.
+          <strong>Caution:</strong> Forced upfront MOTD payment (₹1,35,094) and forced Credit Insurance purchase (₹2,02,642 - money wasted!).
+        </div>
+        <div class="expand-cue">
+          <span style="color: var(--red);">Click to view forced fee breakdown ⚠️</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--red);"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        
+        <!-- Breakdown panel -->
+        <div class="fees-breakdown-panel">
+          <div class="breakdown-list">
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Processing Fees<small>Paid upfront at login</small></span>
+              <span class="breakdown-val">₹10,620</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Legal & Technical<small>Waived by panel lawyer</small></span>
+              <span class="breakdown-val">₹0</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Stamp Paper & CERSAI/Misc<small>Paid at agreement signing</small></span>
+              <span class="breakdown-val">₹500</span>
+            </div>
+            <div class="breakdown-item" style="border-top: 1px dashed var(--gray-200); padding-top: 8px;">
+              <span class="breakdown-lbl">Property Insurance<small>Mandatory for all banks (per year)</small></span>
+              <span class="breakdown-val">₹6,755</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">MOTD registration charge<small>FORCED UPFRONT at 1st disbursement</small></span>
+              <span class="breakdown-val alert-val">₹1,35,094 <br><small style="color: var(--red); font-weight: 500;">Upfront Outflow</small></span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Credit Insurance<small>FORCED UPFRONT (Money Wasted! ⚠️)</small></span>
+              <span class="breakdown-val alert-val">₹2,02,642 <br><small style="color: var(--red); font-weight: 500;">Upfront Outflow</small></span>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Card 6: Bank of India -->
-      <div class="bank-card">
+      <div class="bank-card" id="boi-card" onclick="toggleFeesBreakdown('boi-card', event)" style="cursor: pointer;">
         <div class="card-header-row">
           <div class="card-title-block">
             <h3 class="bank-brand-name">Bank of India</h3>
@@ -1297,15 +1555,49 @@
           </div>
           <div class="number-row">
             <span class="num-label">Upfront Fees</span>
-            <span class="num-value">~₹25,000</span>
+            <span class="num-value" style="font-weight: 700; color: var(--blue-dark);">₹18,390</span>
           </div>
           <div class="number-row">
             <span class="num-label">MOTD Registration</span>
-            <span class="num-value">Near Possession</span>
+            <span class="num-value">₹1,62,245 (At Possession)</span>
           </div>
         </div>
         <div class="note-chip grey">
-          <strong>Pending:</strong> Project's APF clearance is underway, will be approved very soon.
+          <strong>Pending:</strong> Project's APF clearance is underway. Zero credit insurance forced (₹0). MOTD deferred to possession.
+        </div>
+        <div class="expand-cue">
+          <span>Click to view fee breakdown</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        
+        <!-- Breakdown panel -->
+        <div class="fees-breakdown-panel">
+          <div class="breakdown-list">
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Processing Fees<small>Paid upfront at login</small></span>
+              <span class="breakdown-val">₹11,800</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Legal & Technical<small>Waived by panel lawyer</small></span>
+              <span class="breakdown-val">₹0 <br><small style="color: var(--gray-400); font-weight: 500;">Waived</small></span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Stamp Paper & CERSAI/Misc<small>Paid at agreement signing</small></span>
+              <span class="breakdown-val">₹6,590</span>
+            </div>
+            <div class="breakdown-item" style="border-top: 1px dashed var(--gray-200); padding-top: 8px;">
+              <span class="breakdown-lbl">Property Insurance<small>Mandatory for all banks (per year)</small></span>
+              <span class="breakdown-val">₹6,760</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">MOTD registration charge<small>Paid later at possession</small></span>
+              <span class="breakdown-val success-val">₹162,245 <br><small style="color: var(--green); font-weight: 500;">Deferred to Possession</small></span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-lbl">Credit Insurance<small>Optional coverage (Skipped)</small></span>
+              <span class="breakdown-val success-val">₹0 <br><small style="color: var(--green); font-weight: 500;">Saved</small></span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1334,9 +1626,9 @@
             <td class="fee-title">Processing Fee</td>
             <td>Bank's administrative charge for login & background checks.</td>
             <td>Upfront at Login</td>
-            <td class="val-govt">₹10,000 + GST</td>
-            <td class="val-govt">₹10,000 + GST</td>
-            <td class="val-warning">₹15,000 + GST</td>
+            <td class="val-govt">₹11,800</td>
+            <td class="val-govt">₹17,700</td>
+            <td class="val-warning">₹10,620</td>
           </tr>
           <!-- Row 2 -->
           <tr>
@@ -1344,51 +1636,51 @@
             <td>Charges for bank's panel lawyer and engineer reports on the property.</td>
             <td>Prior to Sanction</td>
             <td class="val-govt">₹8,000</td>
-            <td class="val-govt">₹8,000</td>
-            <td class="val-govt">₹5,000</td>
+            <td class="val-govt">₹0 <br><small style="color: var(--gray-400); font-weight: 500;">(Waived)</small></td>
+            <td class="val-govt">₹0 <br><small style="color: var(--gray-400); font-weight: 500;">(Waived)</small></td>
           </tr>
           <!-- Row 3 -->
           <tr>
             <td class="fee-title">MOTD Registration</td>
             <td>Government charge (0.2%) to register the bank's mortgage lien. <span class="highlight-note">⚠️ Note private bank upfront policy</span></td>
             <td>Timeline Varies</td>
-            <td class="val-govt">Paid near possession <br><span class="highlight-note">(Saves early cash flow)</span></td>
-            <td class="val-govt">Paid near possession <br><span class="highlight-note">(Saves early cash flow)</span></td>
-            <td class="val-warning">Paid UPFRONT at 1st disb. <br><span class="highlight-note">(~₹49,000 immediate outflow)</span></td>
+            <td class="val-govt">₹1,57,993 <br><small style="color: var(--green); font-weight: 500;">Paid near possession</small></td>
+            <td class="val-govt">₹1,74,424 <br><small style="color: var(--green); font-weight: 500;">Paid near possession</small></td>
+            <td class="val-warning">₹1,35,094 <br><small style="color: var(--red); font-weight: 600;">Paid UPFRONT at 1st disb. ⚠️</small></td>
           </tr>
           <!-- Row 4 -->
           <tr>
             <td class="fee-title">Credit Insurance</td>
-            <td>Optional life insurance covering the loan amount. <span class="highlight-note">⚠️ Highly pushed but not mandatory</span></td>
-            <td>Optional</td>
-            <td class="val-govt">Zero Pressure <br><span class="highlight-note">(Optional)</span></td>
-            <td class="val-govt">Zero Pressure <br><span class="highlight-note">(Optional)</span></td>
-            <td class="val-warning">Aggressively Pushed <br><span class="highlight-note">(Can add ~₹3-4L to loan)</span></td>
+            <td>Life insurance covering the loan liability. <span class="highlight-note">⚠️ Mandatory only for HDFC and ICICI</span></td>
+            <td>Timeline Varies</td>
+            <td class="val-govt">₹0 <br><small style="color: var(--green); font-weight: 500;">(Optional - Skipped)</small></td>
+            <td class="val-govt">₹0 <br><small style="color: var(--green); font-weight: 500;">(Optional - Skipped)</small></td>
+            <td class="val-warning">₹2,02,642 <br><small style="color: var(--red); font-weight: 600;">FORCED UPFRONT <br>(Money Wasted! ⚠️)</small></td>
           </tr>
           <!-- Row 5 -->
           <tr>
             <td class="fee-title">Property Insurance</td>
-            <td>Mandatory insurance protecting the building against disasters.</td>
+            <td>Mandatory insurance protecting the building structure against damage.</td>
             <td>At Disbursement</td>
-            <td class="val-govt">~₹3,500 / year</td>
-            <td class="val-govt">~₹3,500 / year</td>
-            <td class="val-govt">~₹3,500 / year</td>
+            <td class="val-govt">₹6,583 / year <br><small style="color: var(--gray-500); font-weight: 500;">(Mandatory for all)</small></td>
+            <td class="val-govt">₹7,268 / year <br><small style="color: var(--gray-500); font-weight: 500;">(Mandatory for all)</small></td>
+            <td class="val-govt">₹6,755 / year <br><small style="color: var(--gray-500); font-weight: 500;">(Mandatory for all)</small></td>
           </tr>
           <!-- Row 6 -->
           <tr>
             <td class="fee-title">Stamp Paper & CERSAI</td>
             <td>Filing charges to record the loan on the central national registry.</td>
             <td>At Agreement Signing</td>
-            <td class="val-govt">~₹1,000</td>
-            <td class="val-govt">~₹1,000</td>
-            <td class="val-govt">~₹1,000</td>
+            <td class="val-govt">₹4,150 <br><small style="color: var(--gray-400);">(Stamp + CERSAI/Misc)</small></td>
+            <td class="val-govt">₹3,618 <br><small style="color: var(--gray-400);">(Stamp + CERSAI/Misc)</small></td>
+            <td class="val-govt">₹618 <br><small style="color: var(--gray-400);">(Stamp + CERSAI/Misc)</small></td>
           </tr>
           <!-- Summary Row -->
           <tr class="summary-row">
             <td colspan="3">Total Immediate Upfront Outflow</td>
-            <td>~₹18,000 <br><small style="font-weight: 500; font-size: 11px;">(MOTD & insurance deferred)</small></td>
-            <td>~₹18,000 <br><small style="font-weight: 500; font-size: 11px;">(MOTD & insurance deferred)</small></td>
-            <td class="val-warning">~₹69,000 + Insurance <br><small style="color: var(--red); font-weight: 500; font-size: 11px;">(MOTD paid immediately upfront)</small></td>
+            <td style="font-weight: 700;">₹23,950 <br><small style="font-weight: 500; font-size: 11px;">(MOTD near possession)</small></td>
+            <td style="font-weight: 700;">₹21,318 <br><small style="font-weight: 500; font-size: 11px;">(MOTD near possession)</small></td>
+            <td class="val-warning" style="font-weight: 800; color: var(--red);">₹355,729 <br><small style="color: var(--red); font-weight: 500; font-size: 11px;">(Forced MOTD & Insurance upfront! ⚠️)</small></td>
           </tr>
         </tbody>
       </table>
@@ -1481,6 +1773,22 @@
 
   </div>
 </div>
+
+<script>
+  function toggleFeesBreakdown(cardId, event) {
+    // Find the card container
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    
+    // Toggle the expanded class
+    card.classList.toggle('expanded');
+    
+    // Stop propagation so clicking inner buttons doesn't trigger nested calls
+    if (event) {
+      event.stopPropagation();
+    }
+  }
+</script>
 
 </body>
 </html>
