@@ -51,6 +51,7 @@ function navHTML(currentPath) {
     { label: 'What We Check', href: isHome ? '#shield' : '/index.html#shield' },
     { label: 'Reviews', href: '/reviews.html' },
     { label: 'FAQs', href: '/faqs.html' },
+    { label: "From Founder's Desk", href: '/from-founders-desk/' },
   ];
   return `
 <nav class="nav" id="navbar">
