@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>Home Loan Comparison Report · Arshad & Nazia — Peaceful Loans</title>
+  <meta name="description" content="Personalised home loan comparison report prepared for Arshad & Nazia by Peaceful Loans. Unbiased expert analysis comparing Canara, BOM, SBI, ICICI, HDFC and BOI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --blue: #1A4CC8;
+      --blue-dark: #1540A8;
+      --blue-darkest: #0A2A6B;
+      --red: #E84118;
+      --amber: #FFB800;
+      --green: #16A34A;
+      --green-bg: #F0FDF4;
+      --green-border: rgba(22, 163, 74, 0.2);
+      
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      
+      --c-ink: #1a1a1a;
+      --c-body: #4a4a4a;
+      --c-ground: #FBFAF7;
+      --c-surface: #ffffff;
+      --c-navy: #0b1f3a;
+      
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+      
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+      --shadow-premium: 0 20px 40px -15px rgba(26, 76, 200, 0.08);
+      --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: var(--font-sans);
+      color: var(--c-body);
+      background: #F3F4F6; /* Modern light gray background to anchor the premium paper container */
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 40px 20px;
+    }
+    
+    /* ===== PREMIUM PAPER CONTAINER ===== */
+    .report-card {
+      max-width: 1120px;
+      margin: 0 auto;
+      background: var(--c-ground);
+      border-radius: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .report-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle at top right, rgba(26, 76, 200, 0.04), transparent 70%);
+      pointer-events: none;
+    }
+    
+    .report-card::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle at bottom left, rgba(232, 65, 24, 0.03), transparent 70%);
+      pointer-events: none;
+    }
+    
+    .report-content {
+      padding: 48px 48px 40px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding: 10px 0;
+      }
+      .report-card {
+        border-radius: 0;
+      }
+      .report-content {
+        padding: 24px 16px;
+      }
+    }
+    
+    /* ===== TRICOLOR BAR ===== */
+    .tricolor-bar {
+      display: flex;
+      height: 4px;
+      width: 100%;
+    }
+    .tricolor-bar .bar-blue { background: var(--blue); flex: 1; }
+    .tricolor-bar .bar-red { background: var(--red); flex: 1; }
+    .tricolor-bar .bar-amber { background: var(--amber); flex: 1; }
+    
+    /* ===== HEADER ===== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--gray-200);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+    
+    .logo-area {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    
+    .logo-text {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--blue-darkest);
+      letter-spacing: -0.02em;
+    }
+    .logo-text span {
+      color: var(--blue);
+    }
+    
+    .logo-tagline {
+      font-family: var(--font-serif);
+      font-size: 13px;
+      font-style: italic;
+      color: var(--gray-500);
+    }
+    
+    .client-meta {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .client-meta .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--red);
+      text-transform: uppercase;
+    }
+    
+    .client-meta .name {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--c-ink);
+    }
+    
+    .client-meta .date {
+      font-size: 13px;
+      color: var(--gray-500);
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+    }
+    
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+      }
+      .client-meta {
+        text-align: left;
+        border-top: 1px dashed var(--gray-200);
+        padding-top: 16px;
+      }
+    }
+    
+    /* ===== PROPERTY SNAPSHOT BAR ===== */
+    .snapshot-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    
+    .snapshot-pill {
+      background: var(--c-surface);
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-base);
+    }
+    
+    .snapshot-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(26, 76, 200, 0.2);
+    }
+    
+    .snapshot-pill .pill-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gray-500);
+    }
+    
+    .snapshot-pill .pill-header svg {
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+    
+    .snapshot-pill .pill-val {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue-darkest);
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+    }
+    
+    .snapshot-pill .pill-sub {
+      font-size: 11px;
+      color: var(--gray-400);
+      font-weight: 500;
+    }
+    
+    @media (max-width: 900px) {
+      .snapshot-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .snapshot-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .snapshot-pill.full-width-mobile {
+        grid-column: span 2;
+      }
+    }
+    
+    /* ===== OUR RECOMMENDATION (HIGHLIGHTED CALLOUT) ===== */
+    .recommendation-callout {
+      background: linear-gradient(135deg, #F0F4FF 0%, #E6EEFF 100%);
+      border: 1px solid rgba(26, 76, 200, 0.15);
+      border-left: 6px solid var(--blue);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 40px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .recommendation-callout::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle at top right, rgba(26, 76, 200, 0.05), transparent 70%);
+      pointer-events: none;
+    }
+    
+    .rec-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    
+    .rec-badge {
+      background: var(--blue);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      box-shadow: 0 2px 4px rgba(26, 76, 200, 0.2);
+    }
+    
+    .rec-heading {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue-darkest);
+    }
+    
+    .rec-sentence {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--gray-900);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .rec-sentence strong {
+      color: var(--blue-dark);
+      font-weight: 700;
+    }
+    
+    .rec-reasoning {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--gray-700);
+    }
+    
+    /* ===== BANK CARDS GRID ===== */
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--blue-darkest);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--gray-200);
+    }
+    
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    
+    .bank-card {
+      background: var(--c-surface);
+      border: 1px solid var(--gray-200);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    
+    .bank-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-premium);
+      border-color: rgba(26, 76, 200, 0.25);
+    }
+    
+    /* Top Pick Custom Border */
+    .bank-card.top-pick-card {
+      border: 2px solid var(--blue);
+      box-shadow: 0 10px 25px -5px rgba(26, 76, 200, 0.08);
+    }
+    .bank-card.top-pick-card:hover {
+      box-shadow: 0 20px 40px -10px rgba(26, 76, 200, 0.15);
+    }
+    
+    /* Caution Card Custom Styling */
+    .bank-card.caution-card {
+      border-left: 5px solid var(--red);
+    }
+    
+    .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    
+    .card-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    
+    .bank-brand-name {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--c-ink);
+      line-height: 1.2;
+    }
+    
+    .bank-type-tag {
+      font-size: 11px;
+      color: var(--gray-400);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    /* Status Badges */
+    .status-badge {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      display: inline-block;
+    }
+    
+    .status-badge.top-pick {
+      background: var(--blue);
+      color: #fff;
+    }
+    .status-badge.pre-approved {
+      background: rgba(22, 163, 74, 0.1);
+      color: var(--green);
+      border: 1px solid rgba(22, 163, 74, 0.2);
+    }
+    .status-badge.pending {
+      background: var(--gray-100);
+      color: var(--gray-600);
+      border: 1px solid var(--gray-200);
+    }
+    .status-badge.caution {
+      background: rgba(232, 65, 24, 0.1);
+      color: var(--red);
+      border: 1px solid rgba(232, 65, 24, 0.2);
+    }
+    
+    /* Key Numbers styling */
+    .card-numbers {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+      border-top: 1px solid var(--gray-100);
+      padding-top: 16px;
+    }
+    
+    .number-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13.5px;
+    }
+    
+    .number-row .num-label {
+      color: var(--gray-500);
+    }
+    
+    .number-row .num-value {
+      font-weight: 600;
+      color: var(--c-ink);
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+    }
+    
+    .number-row .num-value.highlight-rate {
+      color: var(--blue-dark);
+      font-size: 16px;
+      font-weight: 700;
+      font-family: var(--font-serif);
+    }
+    
+    /* One-line Note Chip */
+    .note-chip {
+      margin-top: auto;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 12px;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+    .note-chip.green {
+      background: #F0FDF4;
+      color: #15803D;
+      border: 1px solid rgba(22, 163, 74, 0.15);
+    }
+    .note-chip.grey {
+      background: var(--gray-50);
+      color: var(--gray-600);
+      border: 1px solid var(--gray-200);
+    }
+    .note-chip.red {
+      background: #FFF2EC;
+      color: #C2410C;
+      border: 1px solid rgba(232, 65, 24, 0.15);
+    }
+    
+    @media (max-width: 900px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* ===== FEE EXPLAINER TABLE ===== */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 48px;
+      background: var(--c-surface);
+    }
+    
+    .fee-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      min-width: 800px;
+    }
+    
+    .fee-table th {
+      background: var(--blue-darkest);
+      color: #fff;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 16px 20px;
+      border-bottom: 2px solid var(--blue-dark);
+    }
+    
+    .fee-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 13.5px;
+      color: var(--gray-700);
+      font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+    }
+    
+    .fee-table tbody tr:nth-child(even) {
+      background: var(--gray-50);
+    }
+    
+    .fee-table tbody tr:hover {
+      background: #F4F7FF;
+    }
+    
+    .fee-table .fee-title {
+      font-weight: 600;
+      color: var(--c-ink);
+      font-size: 14px;
+    }
+    
+    .fee-table .highlight-note {
+      font-style: italic;
+      color: var(--gray-500);
+      font-size: 12px;
+      display: block;
+      margin-top: 4px;
+    }
+    
+    .fee-table .val-govt {
+      color: var(--c-ink);
+      font-weight: 500;
+    }
+    
+    .fee-table .val-warning {
+      color: var(--red);
+      font-weight: 600;
+    }
+    
+    /* Bold Summary Row */
+    .fee-table tr.summary-row {
+      background: #F0F4FF !important;
+      border-top: 2px solid var(--blue);
+      border-bottom: 2px solid var(--blue);
+    }
+    
+    .fee-table tr.summary-row td {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--blue-darkest);
+      padding: 20px;
+    }
+    
+    /* ===== THINGS TO WATCH ===== */
+    .watch-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    
+    .watch-card {
+      background: var(--c-surface);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-base);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    
+    .watch-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(232, 65, 24, 0.2);
+    }
+    
+    .watch-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .watch-card.warning .watch-icon-wrap {
+      background: #FFF2EC;
+      color: var(--red);
+    }
+    .watch-card.info .watch-icon-wrap {
+      background: rgba(26, 76, 200, 0.08);
+      color: var(--blue);
+    }
+    
+    .watch-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    
+    .watch-body h3 {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--c-ink);
+    }
+    
+    .watch-body p {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--gray-600);
+    }
+    
+    @media (max-width: 768px) {
+      .watch-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* ===== WHAT HAPPENS NEXT ===== */
+    .next-steps-section {
+      background: var(--gray-900);
+      color: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .next-steps-section::after {
+      content: "";
+      position: absolute;
+      right: -100px;
+      bottom: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(26, 76, 200, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+    
+    .next-steps-section h2 {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .next-steps-section h2::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+    
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+    
+    .step-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      box-shadow: 0 0 0 4px rgba(26, 76, 200, 0.25);
+    }
+    
+    .step-item h3 {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+    }
+    
+    .step-item p {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--gray-400);
+    }
+    
+    @media (max-width: 768px) {
+      .steps-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+    
+    /* ===== FOOTER ===== */
+    .footer {
+      border-top: 1px solid var(--gray-200);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    
+    .footer-brand .copyright {
+      font-size: 12px;
+      color: var(--gray-500);
+      font-weight: 500;
+    }
+    
+    .footer-brand .disclaimer {
+      font-size: 10px;
+      color: var(--gray-400);
+      max-width: 600px;
+      line-height: 1.4;
+    }
+    
+    .footer-cta {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--blue-dark);
+      font-weight: 600;
+    }
+    
+    @media (max-width: 768px) {
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="report-card">
+  <!-- Brand Tricolor Bar at the top -->
+  <div class="tricolor-bar">
+    <div class="bar-blue"></div>
+    <div class="bar-red"></div>
+    <div class="bar-amber"></div>
+  </div>
+
+  <div class="report-content">
+    
+    <!-- SECTION 1: HEADER -->
+    <header class="header">
+      <div class="logo-area">
+        <div class="logo-text">Peaceful<span>Loans</span></div>
+        <div class="logo-tagline">We are here to save your hard earned money with our unbiased expert advise</div>
+      </div>
+      <div class="client-meta">
+        <div class="eyebrow">Personalised Home Loan Report</div>
+        <div class="name">Arshad & Nazia</div>
+        <div class="date">Prepared: May 24, 2026</div>
+      </div>
+    </header>
+
+    <!-- SECTION 2: PROPERTY SNAPSHOT BAR -->
+    <section class="snapshot-grid">
+      <!-- Pill 1 -->
+      <div class="snapshot-pill">
+        <div class="pill-header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Property Value
+        </div>
+        <div class="pill-val">₹2.80 Cr</div>
+        <div class="pill-sub">Estimated Valuation</div>
+      </div>
+      <!-- Pill 2 -->
+      <div class="snapshot-pill">
+        <div class="pill-header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          Max Approved Loan
+        </div>
+        <div class="pill-val">~₹2.52 Cr</div>
+        <div class="pill-sub">90% LTV Maximum Limit</div>
+      </div>
+      <!-- Pill 3 -->
+      <div class="snapshot-pill">
+        <div class="pill-header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          CIBIL Scores
+        </div>
+        <div class="pill-val">791 / 784</div>
+        <div class="pill-sub">Excellent Tier Profile</div>
+      </div>
+      <!-- Pill 4 -->
+      <div class="snapshot-pill">
+        <div class="pill-header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"/><line x1="12" y1="4" x2="12" y2="20"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+          Combined Income
+        </div>
+        <div class="pill-val">₹4.92 L/mo</div>
+        <div class="pill-sub">Net Take-Home Salary</div>
+      </div>
+      <!-- Pill 5 -->
+      <div class="snapshot-pill full-width-mobile">
+        <div class="pill-header">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/><path d="M12 22v-4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M16 14h.01"/><path d="M16 18h.01"/><path d="M8 18h.01"/></svg>
+          Pre-Approved Banks
+        </div>
+        <div class="pill-val" style="font-size: 15px; font-weight: 600; padding-top: 2px;">HDFC · SBI · ICICI</div>
+        <div class="pill-sub">Active Approvals Linked</div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: OUR RECOMMENDATION (HIGHLIGHTED CALLOUT) -->
+    <section class="recommendation-callout">
+      <div class="rec-title-wrap">
+        <span class="rec-badge">Unbiased Verdict</span>
+        <h2 class="rec-heading">Our Expert Recommendation</h2>
+      </div>
+      <div class="rec-sentence">
+        We recommend prioritizing <strong>Canara Bank</strong> or <strong>Bank of Maharashtra</strong> for their industry-lowest floating rates (7.15%–7.25%), whilst maintaining your pre-approved <strong>SBI</strong> offer as your robust backup if you require the absolute maximum leverage of ₹2.52 Cr.
+      </div>
+      <div class="rec-reasoning">
+        Canara Bank provides the most cost-effective path: a flat 7.15% rate on a ₹2.10 Cr loan with near-zero insurance push and minimal upfront processing fees. Bank of Maharashtra's 7.25% is an exceptional fallback once their project clearance (APF) is finalized this week. Avoid private lenders (HDFC and ICICI) unless maximum funding leverage is absolutely mandatory; they require substantial upfront MOTD registration fees and aggressively bundle optional credit insurance, which will inflate your initial cash outflows by over ₹60K to ₹4 Lakhs.
+      </div>
+    </section>
+
+    <!-- SECTION 4: BANK CARDS GRID -->
+    <h2 class="section-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--blue);"><path d="M3 21h18"/><path d="M19 21v-4a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v4"/><path d="M9 22V10a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      Eligible Lenders Comparison
+    </h2>
+    
+    <section class="cards-grid">
+      <!-- Card 1: Canara Bank -->
+      <div class="bank-card top-pick-card">
+        <div class="card-header-row">
+          <div class="card-title-block">
+            <h3 class="bank-brand-name">Canara Bank</h3>
+            <span class="bank-type-tag">Government Bank</span>
+          </div>
+          <span class="status-badge top-pick">Top Pick</span>
+        </div>
+        <div class="card-numbers">
+          <div class="number-row">
+            <span class="num-label">Interest Rate</span>
+            <span class="num-value highlight-rate" style="color: var(--green);">7.15%</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Loan Amount</span>
+            <span class="num-value">₹2.10 Cr</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Est. Monthly EMI</span>
+            <span class="num-value">₹1,64,708</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Upfront Fees</span>
+            <span class="num-value">~₹24,000</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">MOTD Registration</span>
+            <span class="num-value">Near Possession</span>
+          </div>
+        </div>
+        <div class="note-chip green">
+          <strong>Pro:</strong> Industry-lowest interest rate and processing fees with zero mandatory insurance pressure.
+        </div>
+      </div>
+
+      <!-- Card 2: Bank of Maharashtra -->
+      <div class="bank-card">
+        <div class="card-header-row">
+          <div class="card-title-block">
+            <h3 class="bank-brand-name">Bank of Maharashtra</h3>
+            <span class="bank-type-tag">Government Bank</span>
+          </div>
+          <span class="status-badge pending">Pending APF</span>
+        </div>
+        <div class="card-numbers">
+          <div class="number-row">
+            <span class="num-label">Interest Rate</span>
+            <span class="num-value highlight-rate">7.25%</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Loan Amount</span>
+            <span class="num-value">₹2.21 Cr</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Est. Monthly EMI</span>
+            <span class="num-value">₹1,74,673</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Upfront Fees</span>
+            <span class="num-value">~₹20,000</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">MOTD Registration</span>
+            <span class="num-value">Near Possession</span>
+          </div>
+        </div>
+        <div class="note-chip grey">
+          <strong>Pending:</strong> Project's APF clearance is underway, expected to be approved by this weekend.
+        </div>
+      </div>
+
+      <!-- Card 3: SBI -->
+      <div class="bank-card">
+        <div class="card-header-row">
+          <div class="card-title-block">
+            <h3 class="bank-brand-name">SBI</h3>
+            <span class="bank-type-tag">Government Bank</span>
+          </div>
+          <span class="status-badge pre-approved">Pre-Approved</span>
+        </div>
+        <div class="card-numbers">
+          <div class="number-row">
+            <span class="num-label">Interest Rate</span>
+            <span class="num-value highlight-rate">7.50% - 7.65%</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Loan Amount</span>
+            <span class="num-value">₹2.52 Cr</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Est. Monthly EMI</span>
+            <span class="num-value">₹203,009</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Upfront Fees</span>
+            <span class="num-value">~₹21,000</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">MOTD Registration</span>
+            <span class="num-value">Near Possession</span>
+          </div>
+        </div>
+        <div class="note-chip green">
+          <strong>Pro:</strong> Maximum approved loan amount (₹2.52 Cr) with legal fees capped and MOTD at possession.
+        </div>
+      </div>
+
+      <!-- Card 4: ICICI Bank -->
+      <div class="bank-card caution-card">
+        <div class="card-header-row">
+          <div class="card-title-block">
+            <h3 class="bank-brand-name">ICICI Bank</h3>
+            <span class="bank-type-tag">Private Bank</span>
+          </div>
+          <span class="status-badge caution">Caution</span>
+        </div>
+        <div class="card-numbers">
+          <div class="number-row">
+            <span class="num-label">Interest Rate</span>
+            <span class="num-value highlight-rate" style="color: var(--red);">7.60% - 7.70%</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Loan Amount</span>
+            <span class="num-value">₹2.33 Cr</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Est. Monthly EMI</span>
+            <span class="num-value">₹189,130</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Upfront Fees</span>
+            <span class="num-value">~₹85,000</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">MOTD Registration</span>
+            <span class="num-value" style="color: var(--red);">Upfront at 1st Disb.</span>
+          </div>
+        </div>
+        <div class="note-chip red">
+          <strong>Caution:</strong> High processing fees and MOTD charges are collected upfront prior to first disbursement.
+        </div>
+      </div>
+
+      <!-- Card 5: HDFC -->
+      <div class="bank-card caution-card">
+        <div class="card-header-row">
+          <div class="card-title-block">
+            <h3 class="bank-brand-name">HDFC</h3>
+            <span class="bank-type-tag">Private Bank</span>
+          </div>
+          <span class="status-badge caution">Caution</span>
+        </div>
+        <div class="card-numbers">
+          <div class="number-row">
+            <span class="num-label">Interest Rate</span>
+            <span class="num-value highlight-rate" style="color: var(--red);">7.25% - 7.30%</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Loan Amount</span>
+            <span class="num-value">₹2.45 Cr</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Est. Monthly EMI</span>
+            <span class="num-value">₹193,642</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Upfront Fees</span>
+            <span class="num-value">~₹65,000</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">MOTD Registration</span>
+            <span class="num-value" style="color: var(--red);">Upfront at 1st Disb.</span>
+          </div>
+        </div>
+        <div class="note-chip red">
+          <strong>Caution:</strong> Low headline rate but aggressively pushes optional credit insurance and upfront MOTD.
+        </div>
+      </div>
+
+      <!-- Card 6: Bank of India -->
+      <div class="bank-card">
+        <div class="card-header-row">
+          <div class="card-title-block">
+            <h3 class="bank-brand-name">Bank of India</h3>
+            <span class="bank-type-tag">Government Bank</span>
+          </div>
+          <span class="status-badge pending">Pending APF</span>
+        </div>
+        <div class="card-numbers">
+          <div class="number-row">
+            <span class="num-label">Interest Rate</span>
+            <span class="num-value highlight-rate">7.15% - 7.25%</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Loan Amount</span>
+            <span class="num-value">₹2.35 Cr</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Est. Monthly EMI</span>
+            <span class="num-value">₹184,317</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">Upfront Fees</span>
+            <span class="num-value">~₹25,000</span>
+          </div>
+          <div class="number-row">
+            <span class="num-label">MOTD Registration</span>
+            <span class="num-value">Near Possession</span>
+          </div>
+        </div>
+        <div class="note-chip grey">
+          <strong>Pending:</strong> Project's APF clearance is underway, expected to be approved next week.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: FEE EXPLAINER TABLE -->
+    <h2 class="section-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--blue);"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"/><line x1="12" y1="4" x2="12" y2="20"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+      Fee Breakdown & Outflow Timeline
+    </h2>
+    
+    <div class="table-container">
+      <table class="fee-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Fee Name</th>
+            <th style="width: 25%;">What It Is (Plain English)</th>
+            <th style="width: 15%;">When You Pay</th>
+            <th style="width: 13.3%;">Canara Bank (Govt)</th>
+            <th style="width: 13.3%;">SBI (Govt)</th>
+            <th style="width: 13.3%;">HDFC (Private)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Row 1 -->
+          <tr>
+            <td class="fee-title">Processing Fee</td>
+            <td>Bank's administrative charge for login & background checks.</td>
+            <td>Upfront at Login</td>
+            <td class="val-govt">₹10,000 + GST</td>
+            <td class="val-govt">₹10,000 + GST</td>
+            <td class="val-warning">₹15,000 + GST</td>
+          </tr>
+          <!-- Row 2 -->
+          <tr>
+            <td class="fee-title">Legal & Technical</td>
+            <td>Charges for bank's panel lawyer and engineer reports on the property.</td>
+            <td>Prior to Sanction</td>
+            <td class="val-govt">₹8,000</td>
+            <td class="val-govt">₹8,000</td>
+            <td class="val-govt">₹5,000</td>
+          </tr>
+          <!-- Row 3 -->
+          <tr>
+            <td class="fee-title">MOTD Registration</td>
+            <td>Government charge (0.2%) to register the bank's mortgage lien. <span class="highlight-note">⚠️ Note private bank upfront policy</span></td>
+            <td>Timeline Varies</td>
+            <td class="val-govt">Paid near possession <br><span class="highlight-note">(Saves early cash flow)</span></td>
+            <td class="val-govt">Paid near possession <br><span class="highlight-note">(Saves early cash flow)</span></td>
+            <td class="val-warning">Paid UPFRONT at 1st disb. <br><span class="highlight-note">(~₹49,000 immediate outflow)</span></td>
+          </tr>
+          <!-- Row 4 -->
+          <tr>
+            <td class="fee-title">Credit Insurance</td>
+            <td>Optional life insurance covering the loan amount. <span class="highlight-note">⚠️ Highly pushed but not mandatory</span></td>
+            <td>Optional</td>
+            <td class="val-govt">Zero Pressure <br><span class="highlight-note">(Optional)</span></td>
+            <td class="val-govt">Zero Pressure <br><span class="highlight-note">(Optional)</span></td>
+            <td class="val-warning">Aggressively Pushed <br><span class="highlight-note">(Can add ~₹3-4L to loan)</span></td>
+          </tr>
+          <!-- Row 5 -->
+          <tr>
+            <td class="fee-title">Property Insurance</td>
+            <td>Mandatory insurance protecting the building against disasters.</td>
+            <td>At Disbursement</td>
+            <td class="val-govt">~₹3,500 / year</td>
+            <td class="val-govt">~₹3,500 / year</td>
+            <td class="val-govt">~₹3,500 / year</td>
+          </tr>
+          <!-- Row 6 -->
+          <tr>
+            <td class="fee-title">Stamp Paper & CERSAI</td>
+            <td>Filing charges to record the loan on the central national registry.</td>
+            <td>At Agreement Signing</td>
+            <td class="val-govt">~₹1,000</td>
+            <td class="val-govt">~₹1,000</td>
+            <td class="val-govt">~₹1,000</td>
+          </tr>
+          <!-- Summary Row -->
+          <tr class="summary-row">
+            <td colspan="3">Total Immediate Upfront Outflow</td>
+            <td>~₹18,000 <br><small style="font-weight: 500; font-size: 11px;">(MOTD & insurance deferred)</small></td>
+            <td>~₹18,000 <br><small style="font-weight: 500; font-size: 11px;">(MOTD & insurance deferred)</small></td>
+            <td class="val-warning">~₹69,000 + Insurance <br><small style="color: var(--red); font-weight: 500; font-size: 11px;">(MOTD paid immediately upfront)</small></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 6: THINGS TO WATCH -->
+    <h2 class="section-title">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--blue);"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Critical Checklist: Things to Watch
+    </h2>
+    
+    <section class="watch-grid">
+      <!-- Item 1 -->
+      <div class="watch-card warning">
+        <div class="watch-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="watch-body">
+          <h3>Insurance Bundling Pushes</h3>
+          <p>Private lenders like HDFC and ICICI often make low interest rates conditional upon buying expensive home loan protection plans (~₹3-4L). These are 100% optional by RBI mandate. We will ensure this is kept completely unbundled or skipped entirely.</p>
+        </div>
+      </div>
+      <!-- Item 2 -->
+      <div class="watch-card info">
+        <div class="watch-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="watch-body">
+          <h3>MOTD Registration Timing</h3>
+          <p>Government banks (Canara, SBI) defer the 0.2% MOTD charge until the final property registration stage near possession. Private banks force you to pay this 0.2% upfront at first disbursement, draining cash flow in early construction phases.</p>
+        </div>
+      </div>
+      <!-- Item 3 -->
+      <div class="watch-card info">
+        <div class="watch-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <div class="watch-body">
+          <h3>Top-Up Interiors Loan</h3>
+          <p>Some banks permit you to club an interiors styling/renovation top-up loan alongside your main home loan once the structure is fully completed. Let us know if you require this top-up so we can lock in matching approvals.</p>
+        </div>
+      </div>
+      <!-- Item 4 -->
+      <div class="watch-card warning">
+        <div class="watch-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="watch-body">
+          <h3>Rate Movements (Floating Rates)</h3>
+          <p>All home loan rates are floating and pegged to the Repo Rate (EBLR/RLLR). If the RBI cuts the base repo rate, your floating interest rates will fall in lockstep automatically within 3 months, irrespective of the bank you choose.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: WHAT HAPPENS NEXT -->
+    <section class="next-steps-section">
+      <h2>What Happens Next</h2>
+      <div class="steps-row">
+        <!-- Step 1 -->
+        <div class="step-item">
+          <div class="step-badge">1</div>
+          <h3>Tell us your preferred bank</h3>
+          <p>Review this comparison sheet and let us know which bank(s) align best with your funding goals. We'll proceed with those options.</p>
+        </div>
+        <!-- Step 2 -->
+        <div class="step-item">
+          <div class="step-badge">2</div>
+          <h3>Document collection</h3>
+          <p>We'll handle all the documentation, compliance checks, and legal reviews. Absolutely nothing moves without your explicit consent.</p>
+        </div>
+        <!-- Step 3 -->
+        <div class="step-item">
+          <div class="step-badge">3</div>
+          <h3>Sanction in 7–10 days</h3>
+          <p>We coordinate directly with the bank's underwriters to secure your formal sanction letter, managing all red tape for you.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: FOOTER -->
+    <footer class="footer">
+      <div class="footer-brand">
+        <div class="copyright">&copy; 2026 Peaceful Loans · IIM Calcutta Alumnus Initiative</div>
+        <div class="disclaimer">Disclaimer: Peaceful Loans is an independent advisory portal. Interest rates, LTV caps, processing fees, and bank approval criteria are subject to sole bank underwriters' decisions and may vary based on final documentation.</div>
+      </div>
+      <div class="footer-cta">
+        Questions? Reply to this or reach Mangesh directly.
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+</body>
+</html>
