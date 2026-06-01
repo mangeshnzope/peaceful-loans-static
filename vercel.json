@@ -1,11 +1,6 @@
 {
   "redirects": [
     {
-      "source": "/arshad-nazia",
-      "destination": "/mr-husband-mrs-wife",
-      "permanent": true
-    },
-    {
       "source": "/:path*",
       "has": [
         {
