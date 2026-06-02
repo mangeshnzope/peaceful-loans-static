@@ -217,6 +217,132 @@
     text-align: center;
     color: var(--muted);
   }
+
+  /* ===== SEARCH SYSTEM ===== */
+  .search-wrapper {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .search-bar-container {
+    position: relative;
+    width: 100%;
+  }
+  .search-input {
+    width: 100%;
+    padding: 16px 20px 16px 54px;
+    font-family: var(--sans);
+    font-size: 16px;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--hair);
+    border-radius: 12px;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  }
+  .search-input:focus {
+    border-color: var(--ink);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  }
+  .search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    pointer-events: none;
+    transition: color 0.3s;
+  }
+  .search-input:focus + .search-icon {
+    color: var(--ink);
+  }
+  
+  .filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .filter-label {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    margin-right: 8px;
+  }
+  .chip {
+    padding: 8px 18px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    background: #fff;
+    border: 1px solid var(--hair);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+  }
+  .chip:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .chip.active {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+
+  .search-results-meta {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    display: none;
+    font-weight: 600;
+  }
+  
+  .search-empty-state {
+    text-align: center;
+    padding: 60px 24px;
+    border: 1px dashed var(--hair);
+    border-radius: 16px;
+    background: #fff;
+    margin-top: 20px;
+    display: none;
+  }
+  .search-empty-state h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 12px;
+  }
+  .search-empty-state p {
+    color: var(--muted);
+    font-size: 15px;
+    font-family: var(--sans);
+    margin: 0 0 24px;
+  }
+  .reset-search-btn {
+    padding: 10px 20px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .reset-search-btn:hover {
+    opacity: 0.9;
+  }
 </style>
 </head>
 <body>
@@ -236,6 +362,31 @@
   </header>
 
   <div class="section-label-main">Latest Insights</div>
+
+  <!-- Search & Filter Wrapper -->
+  <div class="search-wrapper">
+    <div class="search-bar-container">
+      <input type="text" id="search-input" class="search-input" placeholder="Search by title, keywords or strategy..." autocomplete="off">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </div>
+    
+    <div class="filter-chips">
+      <span class="filter-label">Filter Topics:</span>
+      <button class="chip active" data-category="all">All Insights</button>
+      <button class="chip" data-category="Plot Loans">Plot Loans</button>
+      <button class="chip" data-category="NRI Home Loans">NRI Home Loans</button>
+      <button class="chip" data-category="Tax & Strategy">Tax & Strategy</button>
+      <button class="chip" data-category="Home Loan Guides">General Guides</button>
+    </div>
+  </div>
+
+  <div id="search-results-meta" class="search-results-meta"></div>
+
+  <div id="search-empty-state" class="search-empty-state">
+    <h3>No Insights Found</h3>
+    <p>We couldn't find any articles matching your search terms. Try adjusting your keywords or filters.</p>
+    <button onclick="resetSearch()" class="reset-search-btn">Reset Search</button>
+  </div>
 
   <div class="post-grid">
     <!-- Post -->
@@ -2153,6 +2304,127 @@
     &copy; 2026 Peaceful Loans &middot; IIM Calcutta Alumnus Initiative
   </footer>
 </div>
+
+<script>
+  let searchIndex = [];
+  const searchInput = document.getElementById('search-input');
+  const chips = document.querySelectorAll('.chip');
+  const resultsMeta = document.getElementById('search-results-meta');
+  const emptyState = document.getElementById('search-empty-state');
+  const postGrid = document.querySelector('.post-grid');
+  
+  // Track current search state
+  let currentQuery = '';
+  let currentCategory = 'all';
+
+  // Fetch index
+  async function initSearch() {
+    try {
+      const res = await fetch('search-index.json');
+      if (res.ok) {
+        searchIndex = await res.json();
+      }
+    } catch (e) {
+      console.warn("Search index could not be loaded:", e);
+    }
+  }
+
+  // Perform search filtering on DOM elements directly
+  function filterPosts() {
+    const posts = Array.from(postGrid.querySelectorAll('.post-item'));
+    let visibleCount = 0;
+    
+    const query = currentQuery.toLowerCase().trim();
+    
+    posts.forEach(post => {
+      const href = post.getAttribute('href');
+      // Normalize href to match json slugs (e.g. "section-54f/" -> "section-54f")
+      const slug = href.replace(/^\/|^\.\/|^\.\.\/|/g, '').replace(/\/$/, '');
+      const meta = searchIndex.find(item => item.slug === slug);
+      
+      let matchesQuery = true;
+      let matchesCategory = true;
+      
+      if (meta) {
+        // Query match
+        if (query) {
+          const matchTitle = meta.title.toLowerCase().includes(query);
+          const matchExcerpt = meta.excerpt.toLowerCase().includes(query);
+          const matchTags = meta.tags.some(tag => tag.toLowerCase().includes(query));
+          matchesQuery = matchTitle || matchExcerpt || matchTags;
+        }
+        
+        // Category match
+        if (currentCategory !== 'all') {
+          matchesCategory = meta.category === currentCategory;
+        }
+      } else {
+        // Fallback search
+        if (query) {
+          const titleText = post.querySelector('.post-title').textContent.toLowerCase();
+          const excerptText = post.querySelector('.post-excerpt').textContent.toLowerCase();
+          matchesQuery = titleText.includes(query) || excerptText.includes(query);
+        }
+      }
+      
+      if (matchesQuery && matchesCategory) {
+        post.style.display = 'flex';
+        visibleCount++;
+      } else {
+        post.style.display = 'none';
+      }
+    });
+
+    // Update Results Meta
+    if (query || currentCategory !== 'all') {
+      resultsMeta.style.display = 'block';
+      resultsMeta.textContent = `Showing ${visibleCount} of 147 insights`;
+    } else {
+      resultsMeta.style.display = 'none';
+    }
+
+    // Update Empty State
+    if (visibleCount === 0) {
+      emptyState.style.display = 'block';
+      postGrid.style.display = 'none';
+    } else {
+      postGrid.removeAttribute('style');
+      emptyState.style.display = 'none';
+    }
+  }
+
+  // Reset Search
+  function resetSearch() {
+    searchInput.value = '';
+    currentQuery = '';
+    currentCategory = 'all';
+    
+    chips.forEach(c => c.classList.remove('active'));
+    document.querySelector('.chip[data-category="all"]').classList.add('active');
+    
+    filterPosts();
+  }
+
+  // Event Listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    initSearch().then(() => {
+      searchInput.addEventListener('input', (e) => {
+        currentQuery = e.target.value;
+        filterPosts();
+      });
+      
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          
+          currentCategory = chip.getAttribute('data-category');
+          filterPosts();
+        });
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
