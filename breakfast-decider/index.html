@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Prutha's Breakfast Decider</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #FF8C42; min-height: 100vh; }
+
+/* Desktop Blocker CSS */
+#desktop-warning {
+  display: none;
+}
+
+@media (min-width: 481px) {
+  body {
+    background: #11141a !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+  #desktop-warning {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px;
+    background: #1a1e26;
+    border: 1px solid #2a313d;
+    border-radius: 28px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    color: #f5f5f5;
+    max-width: 380px;
+    width: 90%;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  #desktop-warning h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #FF8C42;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  #desktop-warning p {
+    font-size: 14px;
+    color: #a0aab8;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  #desktop-warning .instructions {
+    font-size: 12px;
+    background: #12151c;
+    padding: 16px 20px;
+    border-radius: 16px;
+    border-left: 4px solid #FF8C42;
+    text-align: left;
+    color: #cbd5e1;
+    width: 100%;
+  }
+  #desktop-warning ol {
+    margin-left: 20px;
+    margin-top: 8px;
+  }
+  #desktop-warning li {
+    margin-bottom: 6px;
+  }
+  #desktop-warning kbd {
+    background: #2a313d;
+    border: 1px solid #475569;
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-size: 11px;
+    font-family: monospace;
+  }
+  #app-container {
+    display: none !important; /* Hide app completely on desktop */
+  }
+}
+
+/* App CSS */
+.bg {
+  background: linear-gradient(165deg, #FFC371 0%, #FF8C42 52%, #FF6B6B 100%);
+  padding: 28px 16px 40px;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Password Gate CSS */
+.lock-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 28px;
+  padding: 24px 20px;
+  width: 100%;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.lock-illustration {
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 220px;
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 2px solid #FFF3D6;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: #FFF3D6;
+}
+.lock-illustration img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.lock-header {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+  text-shadow: 0 1px 2px rgba(122,46,0,0.2);
+}
+.lock-sub {
+  font-size: 13px;
+  color: #FFF3D6;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+.input-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+#passwordInput {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 2px solid #E8B873;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  color: #7A3E00;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  text-align: center;
+}
+#passwordInput:focus {
+  border-color: #0E7C7B;
+  box-shadow: 0 0 0 3px rgba(14, 124, 123, 0.2);
+}
+#submitPassBtn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: #0E7C7B;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(14, 124, 123, 0.3);
+  transition: background 0.2s, transform 0.1s;
+}
+#submitPassBtn:active {
+  transform: translateY(2px);
+  background: #0B5E5D;
+}
+.error-msg {
+  font-size: 12px;
+  color: #c92a2a;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  margin-top: 12px;
+  min-height: 24px;
+  display: none;
+}
+.lock-btn {
+  margin-top: 24px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.15);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.lock-btn:hover {
+  background: rgba(0,0,0,0.25);
+  color: #fff;
+}
+
+/* Shake Animation Keyframes */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+/* Slot Machine CSS */
+.good-morning { font-size: 12px; color: #7A2E00; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+.main-title { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 22px; text-shadow: 0 1px 2px rgba(122,46,0,0.25); }
+
+.tea-pill {
+  display: flex; align-items: center; gap: 10px;
+  background: #FFF3D6; border: 1px solid #E8B873;
+  border-radius: 50px; padding: 6px 16px 6px 6px; margin-bottom: 26px;
+  width: 100%;
+}
+.tea-ico {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: #0B5E5D; overflow: hidden; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.tea-ico img { width: 100%; height: 100%; object-fit: cover; }
+.tea-pill-label { font-size: 13px; color: #7A3E00; font-weight: 600; }
+.tea-always {
+  margin-left: auto; font-size: 10px; font-weight: 700;
+  background: #F0B429; color: #6B3500; border-radius: 20px;
+  padding: 3px 10px; letter-spacing: 0.06em; text-transform: uppercase;
+}
+
+.machine-body {
+  width: 100%;
+  background: #0E7C7B;
+  border-radius: 28px;
+  border: 3px solid #FFD23F;
+  padding: 4px;
+}
+.machine-face { background: #0B5E5D; border-radius: 24px; padding: 16px 14px 18px; }
+.machine-header {
+  text-align: center; font-size: 12px; color: #FFD89E;
+  letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+  background: #094A49; border-radius: 30px; padding: 8px 16px;
+  margin-bottom: 14px; border: 1px solid #0E7C7B;
+}
+
+.reels-outer {
+  background: #FFCE3A; border-radius: 16px;
+  border: 2px solid #E8B100;
+  padding: 8px; margin-bottom: 16px;
+  display: flex; gap: 6px;
+}
+.reel {
+  flex: 1; height: 116px; overflow: hidden;
+  border-radius: 10px; background: #FFF8E8;
+  border: 1px solid #EAD9A8; position: relative;
+}
+.reel-strip { position: absolute; top: 0; left: 0; width: 100%; display: flex; flex-direction: column; }
+.reel-cell {
+  height: 116px; flex-shrink: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 5px; padding: 6px 4px;
+}
+.thumb { width: 58px; height: 58px; display: flex; align-items: center; justify-content: center; }
+.thumb img { width: 58px; height: 58px; object-fit: cover; border-radius: 10px; }
+.thumb svg { width: 58px; height: 58px; }
+.reel-cell span { font-size: 10px; color: #0B5E5D; font-weight: 600; text-align: center; line-height: 1.2; }
+
+.spin-btn {
+  width: 100%; height: 58px; border: none; cursor: pointer;
+  border-radius: 14px; font-size: 22px; font-weight: 700;
+  letter-spacing: 0.12em; color: #6b3500;
+  background: #F0B429;
+  border-bottom: 5px solid #A07010;
+  transition: transform 0.1s, border-bottom 0.1s;
+  text-transform: uppercase;
+}
+.spin-btn:active, .spin-btn.pressed { transform: translateY(4px); border-bottom: 1px solid #A07010; }
+.spin-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.result {
+  margin-top: 14px; border-radius: 12px; padding: 11px 14px;
+  background: #094A49; border: 1px solid #0E7C7B;
+  text-align: center; font-size: 13px; color: #8FC9C3;
+  min-height: 42px; display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.result.win { background: #FFD23F; border-color: #FFE17A; color: #6B3500; font-weight: 700; font-size: 14px; }
+@keyframes glow { 0%,100%{box-shadow:0 0 0 rgba(255,210,63,0)} 50%{box-shadow:0 0 16px rgba(255,210,63,0.7)} }
+.result.win { animation: glow 0.5s ease 3; }
+</style>
+</head>
+<body>
+
+<!-- DESKTOP SCREEN WARNING -->
+<div id="desktop-warning">
+  <h2>Mobile Screen Required</h2>
+  <div class="mock-phone-container" style="margin: 20px 0; width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center;">
+    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#FF8C42" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+      <line x1="12" y1="18" x2="12.01" y2="18"></line>
+    </svg>
+  </div>
+  <p>Prutha's Breakfast Decider is designed exclusively for mobile screens to fit perfectly in your pocket.</p>
+  <div class="instructions">
+    <strong>To test on desktop:</strong>
+    <ol>
+      <li>Right-click anywhere and select <strong>Inspect</strong>.</li>
+      <li>Click the <strong>Device Toggle Toolbar</strong> button (or press <kbd>Cmd+Shift+M</kbd> on Mac / <kbd>Ctrl+Shift+M</kbd> on Windows).</li>
+      <li>Set simulation to a phone preset (e.g. iPhone) or resize the window width below 480px.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- MAIN APP CONTAINER (MOBILE PORT) -->
+<div class="bg" id="app-container">
+
+  <!-- PASSWORD LOCK SCREEN -->
+  <div id="password-gate" style="display: none; width: 100%; max-width: 340px; flex-direction: column; align-items: center;">
+    <div class="lock-card">
+      <div class="lock-illustration">
+        <img src="images/intro.jpg" alt="Breakfast Illustration">
+      </div>
+      <div class="lock-header">Secret Code Required</div>
+      <p class="lock-sub">Please enter the password to access Prutha's Breakfast Decider.</p>
+      <div class="input-wrapper">
+        <input type="password" id="passwordInput" placeholder="Password..." autocomplete="current-password">
+        <button onclick="checkPassword()" id="submitPassBtn">Unlock</button>
+      </div>
+      <div class="error-msg" id="errorMsg"></div>
+    </div>
+  </div>
+
+  <!-- SLOT MACHINE WORKSPACE -->
+  <div id="slot-machine-app" style="display: none; width: 100%; max-width: 340px; flex-direction: column; align-items: center;">
+    <div class="good-morning">Good morning, Prutha</div>
+    <div class="main-title">Breakfast Decider</div>
+
+    <div class="tea-pill">
+      <span class="tea-ico" id="teaIco"></span>
+      <span class="tea-pill-label">Chai &mdash; always first</span>
+      <span class="tea-always">Always</span>
+    </div>
+
+    <div class="machine-body">
+      <div class="machine-face">
+        <div class="machine-header">What's for breakfast?</div>
+        <div class="reels-outer">
+          <div class="reel"><div class="reel-strip" id="r0"></div></div>
+          <div class="reel"><div class="reel-strip" id="r1"></div></div>
+          <div class="reel"><div class="reel-strip" id="r2"></div></div>
+        </div>
+        <button class="spin-btn" id="spinBtn" onclick="go()">SPIN</button>
+        <div class="result" id="result">Hit SPIN to decide</div>
+      </div>
+    </div>
+
+    <button class="lock-btn" onclick="lockApp()">Lock App</button>
+  </div>
+
+</div>
+
+<script>
+/* Built-in SVG fallbacks: shown if an image in images/ is missing. */
+var ART = {
+  vadapav: '<svg viewBox="0 0 64 64"><ellipse cx="32" cy="45" rx="22" ry="9" fill="#E8B873"/><circle cx="32" cy="35" r="13" fill="#8B5A2B"/><path d="M11 33 a21 13 0 0 1 42 0 z" fill="#F0C886"/><circle cx="25" cy="24" r="1.3" fill="#fff"/><circle cx="33" cy="22" r="1.3" fill="#fff"/><circle cx="40" cy="25" r="1.3" fill="#fff"/></svg>',
+  bhaji: '<svg viewBox="0 0 64 64"><circle cx="46" cy="34" r="9" fill="#E8B873"/><path d="M37 34 a9 6 0 0 1 18 0 z" fill="#F0C886"/><path d="M6 34 a15 11 0 0 0 30 0 z" fill="#D94F2A"/><ellipse cx="21" cy="34" rx="15" ry="4" fill="#E85D2E"/><rect x="17" y="27" width="6" height="6" rx="1" fill="#F4D03F"/><circle cx="13" cy="31" r="1.6" fill="#2E7D32"/><circle cx="28" cy="30" r="1.6" fill="#2E7D32"/></svg>',
+  samosa: '<svg viewBox="0 0 64 64"><path d="M32 11 L53 50 L11 50 Z" fill="#E0A33A"/><path d="M32 11 L53 50 L11 50 Z" fill="none" stroke="#B5751F" stroke-width="2.5"/><path d="M32 11 L32 50" stroke="#B5751F" stroke-width="1.5"/></svg>',
+  dosa: '<svg viewBox="0 0 64 64"><g transform="rotate(-14 32 32)"><rect x="6" y="25" width="52" height="15" rx="7.5" fill="#E8B860"/><rect x="6" y="25" width="52" height="6" rx="3" fill="#F2CE8A"/><ellipse cx="12" cy="38" rx="5" ry="7" fill="#D49B45"/></g></svg>',
+  appe: '<svg viewBox="0 0 64 64"><circle cx="22" cy="25" r="9" fill="#C8822F"/><circle cx="42" cy="25" r="9" fill="#D18F38"/><circle cx="32" cy="42" r="9" fill="#C8822F"/><circle cx="19" cy="22" r="2.5" fill="#E5AC5E"/><circle cx="39" cy="22" r="2.5" fill="#E5AC5E"/><circle cx="29" cy="39" r="2.5" fill="#E5AC5E"/></svg>',
+  uttapam: '<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" fill="#E8C07A"/><circle cx="32" cy="32" r="22" fill="none" stroke="#D4A95E" stroke-width="2"/><circle cx="24" cy="25" r="3" fill="#D94F2A"/><circle cx="40" cy="27" r="3" fill="#2E9E4F"/><circle cx="34" cy="40" r="3" fill="#E8902E"/><circle cx="22" cy="38" r="2.5" fill="#2E9E4F"/><circle cx="42" cy="40" r="2.5" fill="#D94F2A"/></svg>',
+  idli: '<svg viewBox="0 0 64 64"><ellipse cx="32" cy="42" rx="20" ry="9" fill="#FBFBF2" stroke="#D8D8C5" stroke-width="1.5"/><ellipse cx="32" cy="31" rx="17" ry="8" fill="#FFFFFA" stroke="#D8D8C5" stroke-width="1.5"/><ellipse cx="32" cy="22" rx="13" ry="6" fill="#FFFFFF" stroke="#D8D8C5" stroke-width="1.5"/></svg>',
+  chila: '<svg viewBox="0 0 64 64"><path d="M9 41 a23 16 0 0 1 46 0 z" fill="#EFC524"/><path d="M9 41 a23 16 0 0 1 46 0 z" fill="none" stroke="#D4A800" stroke-width="1.5"/><ellipse cx="32" cy="41" rx="23" ry="4" fill="#E0B41A"/><circle cx="24" cy="34" r="1.6" fill="#2E7D32"/><circle cx="36" cy="32" r="1.6" fill="#2E7D32"/><circle cx="42" cy="36" r="1.6" fill="#D94F2A"/></svg>',
+  thalipeeth: '<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="22" fill="#B57C3A"/><circle cx="32" cy="32" r="22" fill="none" stroke="#8F6228" stroke-width="2"/><circle cx="32" cy="32" r="4" fill="#7A4E1E"/><circle cx="22" cy="24" r="1.6" fill="#6B4418"/><circle cx="42" cy="26" r="1.6" fill="#6B4418"/><circle cx="40" cy="42" r="1.6" fill="#6B4418"/><circle cx="24" cy="42" r="1.6" fill="#6B4418"/></svg>',
+  poha: '<svg viewBox="0 0 64 64"><ellipse cx="32" cy="35" rx="21" ry="12" fill="#F2C838" stroke="#D9A92E" stroke-width="1.5"/><ellipse cx="32" cy="32" rx="20" ry="9" fill="#F6D24E"/><circle cx="24" cy="30" r="2" fill="#C8822F"/><circle cx="41" cy="33" r="2" fill="#C8822F"/><circle cx="32" cy="28" r="1.6" fill="#2E9E4F"/><circle cx="37" cy="37" r="1.6" fill="#2E9E4F"/></svg>',
+  chai: '<svg viewBox="0 0 64 64"><path d="M14 27 h30 v7 a15 13 0 0 1 -30 0 z" fill="#fff"/><ellipse cx="29" cy="27" rx="15" ry="5" fill="#B5702A"/><path d="M44 29 a8 7 0 0 1 0 12" fill="none" stroke="#fff" stroke-width="3.5"/></svg>'
+};
+
+/* Each dish: display name, image filename, and fallback art key. */
+var foods = [
+  { name: "Vada pav",    file: "vada-pav.jpg",    key: "vadapav" },
+  { name: "Pav bhaji",   file: "pav-bhaji.jpg",   key: "bhaji" },
+  { name: "Samosa",      file: "samosa.jpg",      key: "samosa" },
+  { name: "Dosa",        file: "dosa.jpg",        key: "dosa" },
+  { name: "Appe",        file: "appe.jpg",        key: "appe" },
+  { name: "Uttapam",     file: "uttapam.jpg",     key: "uttapam" },
+  { name: "Idli",        file: "idli.jpg",        key: "idli" },
+  { name: "Besan chila", file: "besan-chila.jpg", key: "chila" },
+  { name: "Thalipeeth",  file: "thalipeeth.jpg",  key: "thalipeeth" },
+  { name: "Poha",        file: "poha.jpg",        key: "poha" }
+];
+
+var spinning = false, ac = null;
+function getAC(){ if(!ac) ac = new (window.AudioContext || window.webkitAudioContext)(); return ac; }
+
+/* Mechanical clunk when SPIN is pressed. */
+function clunk(){
+  try { var c = getAC(), t = c.currentTime;
+    var defs = [[220,80,0,0.22,'sawtooth',0.28],[140,60,0.06,0.35,'square',0.18]];
+    for (var i=0;i<defs.length;i++){ (function(d){
+      var o=c.createOscillator(), g=c.createGain(); o.connect(g); g.connect(c.destination); o.type=d[4];
+      o.frequency.setValueAtTime(d[0], t+d[2]); o.frequency.exponentialRampToValueAtTime(d[1], t+d[2]+d[3]);
+      g.gain.setValueAtTime(d[5], t+d[2]); g.gain.exponentialRampToValueAtTime(0.001, t+d[2]+d[3]+0.05);
+      o.start(t+d[2]); o.stop(t+d[2]+d[3]+0.1);
+    })(defs[i]); }
+  } catch(e){}
+}
+/* Tick on each reel frame change. */
+function tick(){
+  try { var c=getAC(), t=c.currentTime, o=c.createOscillator(), g=c.createGain();
+    o.connect(g); g.connect(c.destination); o.type='triangle'; o.frequency.value=400+Math.random()*600;
+    g.gain.setValueAtTime(0.07,t); g.gain.exponentialRampToValueAtTime(0.001,t+0.04); o.start(t); o.stop(t+0.04);
+  } catch(e){}
+}
+/* Victory chime on final result. */
+function chime(){
+  try { var c=getAC(), notes=[523,659,784,1047];
+    for (var i=0;i<notes.length;i++){ (function(f,i){
+      var o=c.createOscillator(), g=c.createGain(); o.connect(g); g.connect(c.destination); o.type='sine'; o.frequency.value=f;
+      var t=c.currentTime+i*0.13; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(0.2,t+0.05);
+      g.gain.exponentialRampToValueAtTime(0.001,t+0.35); o.start(t); o.stop(t+0.4);
+    })(notes[i],i); }
+  } catch(e){}
+}
+
+function imgFail(el, key){ var p = el.parentNode; if(p) p.innerHTML = ART[key]; }
+
+function cell(f){
+  return '<div class="reel-cell"><div class="thumb"><img src="images/' + f.file +
+         '" alt="' + f.name + '" onerror="imgFail(this,\'' + f.key + '\')"></div><span>' +
+         f.name + '</span></div>';
+}
+
+function initApp(){
+  /* Chai header icon: tries images/chai-tea.jpg, falls back to drawn cup. */
+  document.getElementById('teaIco').innerHTML =
+    '<img src="images/chai-tea.jpg" alt="Chai" onerror="this.parentNode.innerHTML=ART.chai">';
+
+  var s = foods[Math.floor(Math.random()*foods.length)];
+  for (var i=0;i<3;i++) document.getElementById('r'+i).innerHTML = cell(s);
+}
+
+function go(){
+  if (spinning) return; spinning = true;
+  var sb = document.getElementById('spinBtn'), res = document.getElementById('result');
+  sb.disabled = true; sb.classList.add('pressed');
+  res.className = 'result'; res.textContent = 'Spinning...';
+  clunk();
+  setTimeout(function(){ sb.classList.remove('pressed'); }, 300);
+
+  var winner = foods[Math.floor(Math.random()*foods.length)];
+  var durations = [1200, 1700, 2200];
+  for (var ri=0; ri<3; ri++){ (function(ri){
+    var el = 0, dur = durations[ri];
+    var iv = setInterval(function(){
+      document.getElementById('r'+ri).innerHTML = cell(foods[Math.floor(Math.random()*foods.length)]);
+      tick(); el += 80;
+      if (el >= dur){
+        clearInterval(iv);
+        document.getElementById('r'+ri).innerHTML = cell(winner);
+        if (ri === 2){
+          setTimeout(function(){
+            chime();
+            res.className = 'result win';
+            res.textContent = 'Chai + ' + winner.name + ' today!';
+            sb.disabled = false; spinning = false;
+          }, 80);
+        }
+      }
+    }, 80);
+  })(ri); }
+}
+
+/* Password Gate Logic */
+function checkPassword(){
+  var input = document.getElementById('passwordInput');
+  var pass = input.value.trim().toLowerCase();
+  var error = document.getElementById('errorMsg');
+  var card = document.querySelector('.lock-card');
+  
+  if (pass === 'joy') {
+    sessionStorage.setItem('breakfast_decider_auth', 'true');
+    error.style.display = 'none';
+    revealApp();
+    // Warm up the Web Audio Context after user gesture
+    getAC();
+  } else {
+    error.textContent = 'Incorrect Password. Try again!';
+    error.style.display = 'block';
+    card.classList.add('shake');
+    input.value = '';
+    setTimeout(function(){
+      card.classList.remove('shake');
+    }, 400);
+  }
+}
+
+function revealApp(){
+  document.getElementById('password-gate').style.display = 'none';
+  document.getElementById('slot-machine-app').style.display = 'flex';
+  initApp();
+}
+
+function lockApp(){
+  sessionStorage.removeItem('breakfast_decider_auth');
+  location.reload();
+}
+
+/* Initialize gate state */
+window.addEventListener('DOMContentLoaded', function(){
+  // Bind Enter key to submit
+  document.getElementById('passwordInput').addEventListener('keypress', function(e){
+    if (e.key === 'Enter') {
+      checkPassword();
+    }
+  });
+
+  if (sessionStorage.getItem('breakfast_decider_auth') === 'true') {
+    revealApp();
+  } else {
+    document.getElementById('password-gate').style.display = 'flex';
+    document.getElementById('slot-machine-app').style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>
