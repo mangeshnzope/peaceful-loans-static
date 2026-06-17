@@ -1,0 +1,13 @@
+{
+  "name": "peaceful-loans-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "esbuild _worker.src.ts --bundle --format=esm --target=es2022 --outfile=_worker.js"
+  },
+  "devDependencies": {
+    "@dualmark/cloudflare": "^0.7.0",
+    "@dualmark/core": "^0.7.0",
+    "esbuild": "^0.28.1"
+  }
+}

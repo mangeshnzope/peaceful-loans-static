@@ -1,0 +1,893 @@
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+
+// .wrangler/tmp/pages-uNv8tK/bundledWorker-0.5669834458206883.mjs
+var __defProp2 = Object.defineProperty;
+var __name2 = /* @__PURE__ */ __name((target, value) => __defProp2(target, "name", { value, configurable: true }), "__name");
+function parseAcceptHeader(header) {
+  if (!header) return [];
+  return header.split(",").map((range) => {
+    const [mediaType, ...params] = range.trim().split(";");
+    const [type = "*", subtype = "*"] = (mediaType ?? "").trim().split("/");
+    let quality = 1;
+    for (const param of params) {
+      const [key, value] = param.trim().split("=");
+      if (key?.trim() === "q") {
+        quality = Math.min(1, Math.max(0, parseFloat(value ?? "0") || 0));
+      }
+    }
+    return {
+      type: (type ?? "*").toLowerCase(),
+      subtype: (subtype ?? "*").toLowerCase(),
+      quality
+    };
+  }).sort((a, b) => {
+    if (b.quality !== a.quality) return b.quality - a.quality;
+    const specA = (a.type === "*" ? 0 : 1) + (a.subtype === "*" ? 0 : 1);
+    const specB = (b.type === "*" ? 0 : 1) + (b.subtype === "*" ? 0 : 1);
+    return specB - specA;
+  });
+}
+__name(parseAcceptHeader, "parseAcceptHeader");
+__name2(parseAcceptHeader, "parseAcceptHeader");
+function mediaTypeMatches(pref, type, subtype) {
+  if (pref.quality === 0) return false;
+  if (pref.type !== "*" && pref.type !== type) return false;
+  if (pref.subtype !== "*" && pref.subtype !== subtype) return false;
+  return true;
+}
+__name(mediaTypeMatches, "mediaTypeMatches");
+__name2(mediaTypeMatches, "mediaTypeMatches");
+var FORMAT_REGISTRY = /* @__PURE__ */ new Map([
+  [
+    "html",
+    [
+      ["text", "html"],
+      ["application", "xhtml+xml"]
+    ]
+  ],
+  ["markdown", [["text", "markdown"]]]
+]);
+var DEFAULT_AVAILABLE = ["html", "markdown"];
+function negotiateFormat(accept, available) {
+  const formats = available ?? DEFAULT_AVAILABLE;
+  if (formats.length === 0) return null;
+  const prefs = parseAcceptHeader(accept);
+  if (prefs.length === 0) return formats[0] ?? null;
+  const formatQ = /* @__PURE__ */ new Map();
+  for (const fmt of formats) formatQ.set(fmt, -1);
+  for (const pref of prefs) {
+    for (const fmt of formats) {
+      if ((formatQ.get(fmt) ?? -1) >= 0) continue;
+      const mediaTypes = FORMAT_REGISTRY.get(fmt);
+      if (!mediaTypes) continue;
+      for (const [type, subtype] of mediaTypes) {
+        if (mediaTypeMatches(pref, type, subtype)) {
+          formatQ.set(fmt, pref.quality);
+          break;
+        }
+      }
+    }
+  }
+  for (const fmt of formats) {
+    if ((formatQ.get(fmt) ?? -1) >= 0) continue;
+    const mediaTypes = FORMAT_REGISTRY.get(fmt);
+    if (!mediaTypes) continue;
+    const primaryType = mediaTypes[0]?.[0];
+    for (const pref of prefs) {
+      if (pref.type === "*" || primaryType !== void 0 && pref.type === primaryType && pref.subtype === "*") {
+        formatQ.set(fmt, pref.quality);
+        break;
+      }
+    }
+  }
+  let best = null;
+  formats.forEach((fmt, idx) => {
+    const q = formatQ.get(fmt) ?? -1;
+    if (q <= 0) return;
+    if (best === null || q > best.q || q === best.q && idx < best.idx) {
+      best = { fmt, q, idx };
+    }
+  });
+  return best === null ? null : best.fmt;
+}
+__name(negotiateFormat, "negotiateFormat");
+__name2(negotiateFormat, "negotiateFormat");
+var defaultEstimator = /* @__PURE__ */ __name2((text) => text.split(/\s+/).filter(Boolean).length, "defaultEstimator");
+var currentEstimator = defaultEstimator;
+function estimateTokens(text) {
+  return currentEstimator(text);
+}
+__name(estimateTokens, "estimateTokens");
+__name2(estimateTokens, "estimateTokens");
+function toMarkdownPath(pathname) {
+  if (pathname.endsWith(".md")) return pathname;
+  const trimmed = pathname.replace(/\/+$/, "");
+  if (trimmed === "") return "/index.md";
+  return trimmed + ".md";
+}
+__name(toMarkdownPath, "toMarkdownPath");
+__name2(toMarkdownPath, "toMarkdownPath");
+var AI_BOTS = [
+  {
+    name: "GPTBot",
+    uaPattern: "GPTBot",
+    vendor: "OpenAI",
+    purpose: "training",
+    docsUrl: "https://platform.openai.com/docs/gptbot"
+  },
+  {
+    name: "ChatGPT-User",
+    uaPattern: "ChatGPT-User",
+    vendor: "OpenAI",
+    purpose: "user-action",
+    docsUrl: "https://platform.openai.com/docs/bots"
+  },
+  {
+    name: "OAI-SearchBot",
+    uaPattern: "OAI-SearchBot",
+    vendor: "OpenAI",
+    purpose: "search",
+    docsUrl: "https://platform.openai.com/docs/bots"
+  },
+  {
+    name: "ClaudeBot",
+    uaPattern: "ClaudeBot",
+    vendor: "Anthropic",
+    purpose: "training",
+    docsUrl: "https://support.anthropic.com/en/articles/8896518"
+  },
+  {
+    name: "Anthropic-ai",
+    uaPattern: "Anthropic-ai",
+    vendor: "Anthropic",
+    purpose: "training"
+  },
+  {
+    name: "Claude-Web",
+    uaPattern: "Claude-Web",
+    vendor: "Anthropic",
+    purpose: "user-action"
+  },
+  {
+    name: "Claude-SearchBot",
+    uaPattern: "Claude-SearchBot",
+    vendor: "Anthropic",
+    purpose: "search",
+    docsUrl: "https://support.anthropic.com/en/articles/8896518"
+  },
+  {
+    name: "Claude-User",
+    uaPattern: "Claude-User",
+    vendor: "Anthropic",
+    purpose: "user-action",
+    docsUrl: "https://support.anthropic.com/en/articles/8896518"
+  },
+  {
+    name: "PerplexityBot",
+    uaPattern: "PerplexityBot",
+    vendor: "Perplexity",
+    purpose: "search",
+    docsUrl: "https://docs.perplexity.ai/guides/bots"
+  },
+  {
+    name: "Perplexity-User",
+    uaPattern: "Perplexity-User",
+    vendor: "Perplexity",
+    purpose: "user-action",
+    docsUrl: "https://docs.perplexity.ai/guides/bots"
+  },
+  {
+    name: "Google-Extended",
+    uaPattern: "Google-Extended",
+    vendor: "Google",
+    purpose: "training",
+    docsUrl: "https://developers.google.com/search/docs/crawling-indexing/google-extended"
+  },
+  {
+    name: "Applebot-Extended",
+    uaPattern: "Applebot-Extended",
+    vendor: "Apple",
+    purpose: "training",
+    docsUrl: "https://support.apple.com/en-us/119829"
+  },
+  {
+    name: "cohere-ai",
+    uaPattern: "cohere-ai",
+    vendor: "Cohere",
+    purpose: "training"
+  },
+  {
+    name: "CCBot",
+    uaPattern: "CCBot",
+    vendor: "Common Crawl",
+    purpose: "training",
+    docsUrl: "https://commoncrawl.org/ccbot"
+  },
+  {
+    name: "Bytespider",
+    uaPattern: "Bytespider",
+    vendor: "ByteDance",
+    purpose: "training"
+  },
+  {
+    name: "DeepSeekBot",
+    uaPattern: "DeepSeekBot",
+    vendor: "DeepSeek",
+    purpose: "training"
+  },
+  {
+    name: "Amazonbot",
+    uaPattern: "Amazonbot",
+    vendor: "Amazon",
+    purpose: "training",
+    docsUrl: "https://developer.amazon.com/amazonbot"
+  },
+  {
+    name: "YouBot",
+    uaPattern: "YouBot",
+    vendor: "You.com",
+    purpose: "search"
+  },
+  {
+    name: "Diffbot",
+    uaPattern: "Diffbot",
+    vendor: "Diffbot",
+    purpose: "training"
+  },
+  {
+    name: "ImagesiftBot",
+    uaPattern: "ImagesiftBot",
+    vendor: "ImageSift",
+    purpose: "training"
+  },
+  {
+    name: "Omgilibot",
+    uaPattern: "Omgilibot",
+    vendor: "Webz.io",
+    purpose: "training"
+  },
+  {
+    name: "DuckAssistBot",
+    uaPattern: "DuckAssistBot",
+    vendor: "DuckDuckGo",
+    purpose: "search"
+  },
+  {
+    name: "Meta-ExternalAgent",
+    uaPattern: "meta-externalagent",
+    vendor: "Meta",
+    purpose: "training"
+  },
+  {
+    name: "Meta-ExternalFetcher",
+    uaPattern: "meta-externalfetcher",
+    vendor: "Meta",
+    purpose: "user-action"
+  }
+];
+function matches(ua, pattern) {
+  if (typeof pattern === "string") {
+    return ua.toLowerCase().includes(pattern.toLowerCase());
+  }
+  return pattern.test(ua);
+}
+__name(matches, "matches");
+__name2(matches, "matches");
+function detectAIBot(userAgent) {
+  if (!userAgent) {
+    return { isBot: false, name: null, vendor: null, purpose: null };
+  }
+  for (const entry of AI_BOTS) {
+    if (matches(userAgent, entry.uaPattern)) {
+      return {
+        isBot: true,
+        name: entry.name,
+        vendor: entry.vendor,
+        purpose: entry.purpose
+      };
+    }
+  }
+  return { isBot: false, name: null, vendor: null, purpose: null };
+}
+__name(detectAIBot, "detectAIBot");
+__name2(detectAIBot, "detectAIBot");
+var DEFAULT_SKIP_PREFIXES = ["/admin", "/api/", "/_"];
+var DEFAULT_ASSET_EXTENSIONS = [
+  ".js",
+  ".css",
+  ".png",
+  ".jpg",
+  ".jpeg",
+  ".webp",
+  ".svg",
+  ".gif",
+  ".ico",
+  ".woff",
+  ".woff2",
+  ".xml",
+  ".json",
+  ".txt",
+  ".pdf"
+];
+var DEFAULT_CACHE_CONTROL = "public, max-age=3600";
+function shouldSkip(pathname, prefixes, extensions) {
+  if (extensions.some((ext) => pathname.endsWith(ext))) return true;
+  return prefixes.some((p) => pathname.startsWith(p));
+}
+__name(shouldSkip, "shouldSkip");
+__name2(shouldSkip, "shouldSkip");
+function normalizePath(pathname) {
+  return pathname.replace(/\/$/, "") || "/";
+}
+__name(normalizePath, "normalizePath");
+__name2(normalizePath, "normalizePath");
+function buildMarkdownHeaders(body, cacheControl, redirectFrom, redirectTo) {
+  const tokens = estimateTokens(body);
+  const headers = new Headers({
+    "Content-Type": "text/markdown; charset=utf-8",
+    "X-Content-Type-Options": "nosniff",
+    "X-Robots-Tag": "noindex",
+    "X-Markdown-Tokens": String(tokens),
+    "X-AEO-Version": "1.0",
+    "Cache-Control": cacheControl,
+    Vary: "Accept"
+  });
+  if (redirectFrom) headers.set("X-Redirect-From", redirectFrom);
+  if (redirectTo) headers.set("X-Redirect-To", redirectTo);
+  return headers;
+}
+__name(buildMarkdownHeaders, "buildMarkdownHeaders");
+__name2(buildMarkdownHeaders, "buildMarkdownHeaders");
+function trackAnalytics(env, bindingName, info, request) {
+  if (!bindingName) return;
+  const ds = env[bindingName];
+  if (!ds || typeof ds.writeDataPoint !== "function") return;
+  const indexKey = info.botName ?? "accept:text/markdown";
+  const ua = (request.headers.get("user-agent") ?? "unknown").slice(0, 256);
+  const country = request.headers.get("cf-ipcountry") ?? "unknown";
+  ds.writeDataPoint({
+    indexes: [indexKey],
+    blobs: [indexKey, info.pathname, country, info.cacheStatus, ua],
+    doubles: [info.tokens, 1]
+  });
+}
+__name(trackAnalytics, "trackAnalytics");
+__name2(trackAnalytics, "trackAnalytics");
+function createAEOWorker(options) {
+  const skipPrefixes = options.skip?.prefixes ?? DEFAULT_SKIP_PREFIXES;
+  const skipExtensions = options.skip?.extensions ?? DEFAULT_ASSET_EXTENSIONS;
+  const internalRedirects = options.redirects?.internal ?? {};
+  const externalRedirects = options.redirects?.external ?? {};
+  const trailingSlash = options.trailingSlash ?? "never";
+  const cacheControl = options.headers?.cacheControl ?? DEFAULT_CACHE_CONTROL;
+  const analyticsBinding = options.analytics?.binding;
+  const enableLinkHeader = options.enableLinkHeader !== false;
+  const onAIRequest = options.hooks?.onAIRequest;
+  const onMiss = options.hooks?.onMiss;
+  return {
+    async fetch(request, env, ctx) {
+      const url = new URL(request.url);
+      const pathname = url.pathname;
+      if (trailingSlash === "never" && pathname !== "/" && pathname.endsWith("/") && !shouldSkip(pathname, skipPrefixes, skipExtensions)) {
+        const clean = pathname.replace(/\/+$/, "");
+        const target = new URL(clean + url.search, url.origin);
+        return new Response(null, {
+          status: 301,
+          headers: { Location: target.href }
+        });
+      }
+      if (trailingSlash === "always" && pathname !== "/" && !pathname.endsWith("/") && !pathname.endsWith(".md") && !shouldSkip(pathname, skipPrefixes, skipExtensions)) {
+        const target = new URL(pathname + "/" + url.search, url.origin);
+        return new Response(null, { status: 301, headers: { Location: target.href } });
+      }
+      if (pathname.endsWith(".md") && !shouldSkip(pathname, skipPrefixes, skipExtensions)) {
+        let assetResponse = null;
+        try {
+          assetResponse = await env.ASSETS.fetch(new URL(pathname, url.origin));
+        } catch {
+          assetResponse = null;
+        }
+        if (assetResponse && assetResponse.ok) {
+          const body = await assetResponse.text();
+          return new Response(body, {
+            status: 200,
+            headers: buildMarkdownHeaders(body, cacheControl)
+          });
+        }
+        return assetResponse ?? new Response("Not Found", { status: 404 });
+      }
+      if (!pathname.endsWith(".md") && !shouldSkip(pathname, skipPrefixes, skipExtensions)) {
+        const ua = request.headers.get("user-agent") ?? "";
+        const accept = request.headers.get("accept") ?? "";
+        const bot = detectAIBot(ua);
+        const fmt = negotiateFormat(accept);
+        if (fmt === null && accept) {
+          return new Response(
+            "Not Acceptable\n\nSupported types: text/html, text/markdown\n",
+            {
+              status: 406,
+              headers: {
+                "Content-Type": "text/plain; charset=utf-8",
+                Vary: "Accept"
+              }
+            }
+          );
+        }
+        const serveMarkdown = bot.isBot || fmt === "markdown";
+        if (serveMarkdown) {
+          const mdPath = toMarkdownPath(pathname);
+          const assetUrl = new URL(mdPath, url.origin);
+          let assetResponse = null;
+          try {
+            assetResponse = await env.ASSETS.fetch(assetUrl);
+          } catch {
+            assetResponse = null;
+          }
+          if (assetResponse && assetResponse.ok) {
+            const body = await assetResponse.text();
+            const tokens = estimateTokens(body);
+            const info = {
+              url,
+              botName: bot.name,
+              botVendor: bot.vendor,
+              acceptHeader: accept,
+              pathname,
+              cacheStatus: "hit",
+              tokens
+            };
+            trackAnalytics(env, analyticsBinding, info, request);
+            if (onAIRequest) ctx.waitUntil(Promise.resolve(onAIRequest(info)));
+            return new Response(body, {
+              status: 200,
+              headers: buildMarkdownHeaders(body, cacheControl)
+            });
+          }
+          const cleanPath = normalizePath(pathname);
+          const internalTarget = internalRedirects[cleanPath];
+          if (internalTarget) {
+            const targetMd = toMarkdownPath(internalTarget);
+            try {
+              const targetResp = await env.ASSETS.fetch(new URL(targetMd, url.origin));
+              if (targetResp.ok) {
+                const body = await targetResp.text();
+                const tokens = estimateTokens(body);
+                const info = {
+                  url,
+                  botName: bot.name,
+                  botVendor: bot.vendor,
+                  acceptHeader: accept,
+                  pathname,
+                  cacheStatus: "hit",
+                  tokens
+                };
+                trackAnalytics(env, analyticsBinding, info, request);
+                if (onAIRequest) ctx.waitUntil(Promise.resolve(onAIRequest(info)));
+                return new Response(body, {
+                  status: 200,
+                  headers: buildMarkdownHeaders(body, cacheControl, cleanPath, internalTarget)
+                });
+              }
+            } catch {
+            }
+          }
+          const externalTarget = externalRedirects[cleanPath];
+          if (externalTarget) {
+            const body = `# Redirect
+
+This page has moved to an external location.
+
+- **Redirect**: [${externalTarget}](${externalTarget})
+`;
+            const tokens = estimateTokens(body);
+            const info = {
+              url,
+              botName: bot.name,
+              botVendor: bot.vendor,
+              acceptHeader: accept,
+              pathname,
+              cacheStatus: "hit",
+              tokens
+            };
+            trackAnalytics(env, analyticsBinding, info, request);
+            if (onAIRequest) ctx.waitUntil(Promise.resolve(onAIRequest(info)));
+            return new Response(body, {
+              status: 200,
+              headers: buildMarkdownHeaders(body, cacheControl, cleanPath, externalTarget)
+            });
+          }
+          const missInfo = {
+            url,
+            botName: bot.name,
+            pathname,
+            acceptHeader: accept
+          };
+          const missAnalytics = {
+            botName: bot.name,
+            botVendor: bot.vendor,
+            pathname,
+            cacheStatus: "miss",
+            tokens: 0
+          };
+          trackAnalytics(env, analyticsBinding, missAnalytics, request);
+          if (onMiss) ctx.waitUntil(Promise.resolve(onMiss(missInfo)));
+        }
+      }
+      const upstreamResponse = await options.upstream.fetch(request, env, ctx);
+      if (enableLinkHeader && !shouldSkip(pathname, skipPrefixes, skipExtensions) && !pathname.endsWith(".md") && upstreamResponse.headers.get("content-type")?.includes("text/html")) {
+        const mdPath = toMarkdownPath(pathname);
+        const newHeaders = new Headers(upstreamResponse.headers);
+        const link = `<${mdPath}>; rel="alternate"; type="text/markdown"`;
+        const existing = newHeaders.get("Link");
+        newHeaders.set("Link", existing ? `${existing}, ${link}` : link);
+        const vary = newHeaders.get("Vary");
+        if (!vary) {
+          newHeaders.set("Vary", "Accept");
+        } else if (!vary.split(",").map((s) => s.trim().toLowerCase()).includes("accept")) {
+          newHeaders.set("Vary", `${vary}, Accept`);
+        }
+        return new Response(upstreamResponse.body, {
+          status: upstreamResponse.status,
+          statusText: upstreamResponse.statusText,
+          headers: newHeaders
+        });
+      }
+      return upstreamResponse;
+    }
+  };
+}
+__name(createAEOWorker, "createAEOWorker");
+__name2(createAEOWorker, "createAEOWorker");
+var worker_src_default = createAEOWorker({
+  upstream: {
+    async fetch(request, env, _ctx) {
+      return env.ASSETS.fetch(request);
+    }
+  },
+  trailingSlash: "never",
+  enableLinkHeader: true
+});
+var drainBody = /* @__PURE__ */ __name2(async (request, env, _ctx, middlewareCtx) => {
+  try {
+    return await middlewareCtx.next(request, env);
+  } finally {
+    try {
+      if (request.body !== null && !request.bodyUsed) {
+        const reader = request.body.getReader();
+        while (!(await reader.read()).done) {
+        }
+      }
+    } catch (e) {
+      console.error("Failed to drain the unused request body.", e);
+    }
+  }
+}, "drainBody");
+var middleware_ensure_req_body_drained_default = drainBody;
+function reduceError(e) {
+  return {
+    name: e?.name,
+    message: e?.message ?? String(e),
+    stack: e?.stack,
+    cause: e?.cause === void 0 ? void 0 : reduceError(e.cause)
+  };
+}
+__name(reduceError, "reduceError");
+__name2(reduceError, "reduceError");
+var jsonError = /* @__PURE__ */ __name2(async (request, env, _ctx, middlewareCtx) => {
+  try {
+    return await middlewareCtx.next(request, env);
+  } catch (e) {
+    const error = reduceError(e);
+    return Response.json(error, {
+      status: 500,
+      headers: { "MF-Experimental-Error-Stack": "true" }
+    });
+  }
+}, "jsonError");
+var middleware_miniflare3_json_error_default = jsonError;
+var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
+  middleware_ensure_req_body_drained_default,
+  middleware_miniflare3_json_error_default
+];
+var middleware_insertion_facade_default = worker_src_default;
+var __facade_middleware__ = [];
+function __facade_register__(...args) {
+  __facade_middleware__.push(...args.flat());
+}
+__name(__facade_register__, "__facade_register__");
+__name2(__facade_register__, "__facade_register__");
+function __facade_invokeChain__(request, env, ctx, dispatch, middlewareChain) {
+  const [head, ...tail] = middlewareChain;
+  const middlewareCtx = {
+    dispatch,
+    next(newRequest, newEnv) {
+      return __facade_invokeChain__(newRequest, newEnv, ctx, dispatch, tail);
+    }
+  };
+  return head(request, env, ctx, middlewareCtx);
+}
+__name(__facade_invokeChain__, "__facade_invokeChain__");
+__name2(__facade_invokeChain__, "__facade_invokeChain__");
+function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
+  return __facade_invokeChain__(request, env, ctx, dispatch, [
+    ...__facade_middleware__,
+    finalMiddleware
+  ]);
+}
+__name(__facade_invoke__, "__facade_invoke__");
+__name2(__facade_invoke__, "__facade_invoke__");
+var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
+  static {
+    __name(this, "___Facade_ScheduledController__");
+  }
+  constructor(scheduledTime, cron, noRetry) {
+    this.scheduledTime = scheduledTime;
+    this.cron = cron;
+    this.#noRetry = noRetry;
+  }
+  static {
+    __name2(this, "__Facade_ScheduledController__");
+  }
+  #noRetry;
+  noRetry() {
+    if (!(this instanceof ___Facade_ScheduledController__)) {
+      throw new TypeError("Illegal invocation");
+    }
+    this.#noRetry();
+  }
+};
+function wrapExportedHandler(worker) {
+  if (__INTERNAL_WRANGLER_MIDDLEWARE__ === void 0 || __INTERNAL_WRANGLER_MIDDLEWARE__.length === 0) {
+    return worker;
+  }
+  for (const middleware of __INTERNAL_WRANGLER_MIDDLEWARE__) {
+    __facade_register__(middleware);
+  }
+  const fetchDispatcher = /* @__PURE__ */ __name2(function(request, env, ctx) {
+    if (worker.fetch === void 0) {
+      throw new Error("Handler does not export a fetch() function.");
+    }
+    return worker.fetch(request, env, ctx);
+  }, "fetchDispatcher");
+  return {
+    ...worker,
+    fetch(request, env, ctx) {
+      const dispatcher = /* @__PURE__ */ __name2(function(type, init) {
+        if (type === "scheduled" && worker.scheduled !== void 0) {
+          const controller = new __Facade_ScheduledController__(
+            Date.now(),
+            init.cron ?? "",
+            () => {
+            }
+          );
+          return worker.scheduled(controller, env, ctx);
+        }
+      }, "dispatcher");
+      return __facade_invoke__(request, env, ctx, dispatcher, fetchDispatcher);
+    }
+  };
+}
+__name(wrapExportedHandler, "wrapExportedHandler");
+__name2(wrapExportedHandler, "wrapExportedHandler");
+function wrapWorkerEntrypoint(klass) {
+  if (__INTERNAL_WRANGLER_MIDDLEWARE__ === void 0 || __INTERNAL_WRANGLER_MIDDLEWARE__.length === 0) {
+    return klass;
+  }
+  for (const middleware of __INTERNAL_WRANGLER_MIDDLEWARE__) {
+    __facade_register__(middleware);
+  }
+  return class extends klass {
+    #fetchDispatcher = /* @__PURE__ */ __name2((request, env, ctx) => {
+      this.env = env;
+      this.ctx = ctx;
+      if (super.fetch === void 0) {
+        throw new Error("Entrypoint class does not define a fetch() function.");
+      }
+      return super.fetch(request);
+    }, "#fetchDispatcher");
+    #dispatcher = /* @__PURE__ */ __name2((type, init) => {
+      if (type === "scheduled" && super.scheduled !== void 0) {
+        const controller = new __Facade_ScheduledController__(
+          Date.now(),
+          init.cron ?? "",
+          () => {
+          }
+        );
+        return super.scheduled(controller);
+      }
+    }, "#dispatcher");
+    fetch(request) {
+      return __facade_invoke__(
+        request,
+        this.env,
+        this.ctx,
+        this.#dispatcher,
+        this.#fetchDispatcher
+      );
+    }
+  };
+}
+__name(wrapWorkerEntrypoint, "wrapWorkerEntrypoint");
+__name2(wrapWorkerEntrypoint, "wrapWorkerEntrypoint");
+var WRAPPED_ENTRY;
+if (typeof middleware_insertion_facade_default === "object") {
+  WRAPPED_ENTRY = wrapExportedHandler(middleware_insertion_facade_default);
+} else if (typeof middleware_insertion_facade_default === "function") {
+  WRAPPED_ENTRY = wrapWorkerEntrypoint(middleware_insertion_facade_default);
+}
+var middleware_loader_entry_default = WRAPPED_ENTRY;
+
+// ../../.npm/_npx/32026684e21afda6/node_modules/wrangler/templates/middleware/middleware-ensure-req-body-drained.ts
+var drainBody2 = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx) => {
+  try {
+    return await middlewareCtx.next(request, env);
+  } finally {
+    try {
+      if (request.body !== null && !request.bodyUsed) {
+        const reader = request.body.getReader();
+        while (!(await reader.read()).done) {
+        }
+      }
+    } catch (e) {
+      console.error("Failed to drain the unused request body.", e);
+    }
+  }
+}, "drainBody");
+var middleware_ensure_req_body_drained_default2 = drainBody2;
+
+// ../../.npm/_npx/32026684e21afda6/node_modules/wrangler/templates/middleware/middleware-miniflare3-json-error.ts
+function reduceError2(e) {
+  return {
+    name: e?.name,
+    message: e?.message ?? String(e),
+    stack: e?.stack,
+    cause: e?.cause === void 0 ? void 0 : reduceError2(e.cause)
+  };
+}
+__name(reduceError2, "reduceError");
+var jsonError2 = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx) => {
+  try {
+    return await middlewareCtx.next(request, env);
+  } catch (e) {
+    const error = reduceError2(e);
+    return Response.json(error, {
+      status: 500,
+      headers: { "MF-Experimental-Error-Stack": "true" }
+    });
+  }
+}, "jsonError");
+var middleware_miniflare3_json_error_default2 = jsonError2;
+
+// .wrangler/tmp/bundle-9PdSqY/middleware-insertion-facade.js
+var __INTERNAL_WRANGLER_MIDDLEWARE__2 = [
+  middleware_ensure_req_body_drained_default2,
+  middleware_miniflare3_json_error_default2
+];
+var middleware_insertion_facade_default2 = middleware_loader_entry_default;
+
+// ../../.npm/_npx/32026684e21afda6/node_modules/wrangler/templates/middleware/common.ts
+var __facade_middleware__2 = [];
+function __facade_register__2(...args) {
+  __facade_middleware__2.push(...args.flat());
+}
+__name(__facade_register__2, "__facade_register__");
+function __facade_invokeChain__2(request, env, ctx, dispatch, middlewareChain) {
+  const [head, ...tail] = middlewareChain;
+  const middlewareCtx = {
+    dispatch,
+    next(newRequest, newEnv) {
+      return __facade_invokeChain__2(newRequest, newEnv, ctx, dispatch, tail);
+    }
+  };
+  return head(request, env, ctx, middlewareCtx);
+}
+__name(__facade_invokeChain__2, "__facade_invokeChain__");
+function __facade_invoke__2(request, env, ctx, dispatch, finalMiddleware) {
+  return __facade_invokeChain__2(request, env, ctx, dispatch, [
+    ...__facade_middleware__2,
+    finalMiddleware
+  ]);
+}
+__name(__facade_invoke__2, "__facade_invoke__");
+
+// .wrangler/tmp/bundle-9PdSqY/middleware-loader.entry.ts
+var __Facade_ScheduledController__2 = class ___Facade_ScheduledController__2 {
+  constructor(scheduledTime, cron, noRetry) {
+    this.scheduledTime = scheduledTime;
+    this.cron = cron;
+    this.#noRetry = noRetry;
+  }
+  static {
+    __name(this, "__Facade_ScheduledController__");
+  }
+  #noRetry;
+  noRetry() {
+    if (!(this instanceof ___Facade_ScheduledController__2)) {
+      throw new TypeError("Illegal invocation");
+    }
+    this.#noRetry();
+  }
+};
+function wrapExportedHandler2(worker) {
+  if (__INTERNAL_WRANGLER_MIDDLEWARE__2 === void 0 || __INTERNAL_WRANGLER_MIDDLEWARE__2.length === 0) {
+    return worker;
+  }
+  for (const middleware of __INTERNAL_WRANGLER_MIDDLEWARE__2) {
+    __facade_register__2(middleware);
+  }
+  const fetchDispatcher = /* @__PURE__ */ __name(function(request, env, ctx) {
+    if (worker.fetch === void 0) {
+      throw new Error("Handler does not export a fetch() function.");
+    }
+    return worker.fetch(request, env, ctx);
+  }, "fetchDispatcher");
+  return {
+    ...worker,
+    fetch(request, env, ctx) {
+      const dispatcher = /* @__PURE__ */ __name(function(type, init) {
+        if (type === "scheduled" && worker.scheduled !== void 0) {
+          const controller = new __Facade_ScheduledController__2(
+            Date.now(),
+            init.cron ?? "",
+            () => {
+            }
+          );
+          return worker.scheduled(controller, env, ctx);
+        }
+      }, "dispatcher");
+      return __facade_invoke__2(request, env, ctx, dispatcher, fetchDispatcher);
+    }
+  };
+}
+__name(wrapExportedHandler2, "wrapExportedHandler");
+function wrapWorkerEntrypoint2(klass) {
+  if (__INTERNAL_WRANGLER_MIDDLEWARE__2 === void 0 || __INTERNAL_WRANGLER_MIDDLEWARE__2.length === 0) {
+    return klass;
+  }
+  for (const middleware of __INTERNAL_WRANGLER_MIDDLEWARE__2) {
+    __facade_register__2(middleware);
+  }
+  return class extends klass {
+    #fetchDispatcher = /* @__PURE__ */ __name((request, env, ctx) => {
+      this.env = env;
+      this.ctx = ctx;
+      if (super.fetch === void 0) {
+        throw new Error("Entrypoint class does not define a fetch() function.");
+      }
+      return super.fetch(request);
+    }, "#fetchDispatcher");
+    #dispatcher = /* @__PURE__ */ __name((type, init) => {
+      if (type === "scheduled" && super.scheduled !== void 0) {
+        const controller = new __Facade_ScheduledController__2(
+          Date.now(),
+          init.cron ?? "",
+          () => {
+          }
+        );
+        return super.scheduled(controller);
+      }
+    }, "#dispatcher");
+    fetch(request) {
+      return __facade_invoke__2(
+        request,
+        this.env,
+        this.ctx,
+        this.#dispatcher,
+        this.#fetchDispatcher
+      );
+    }
+  };
+}
+__name(wrapWorkerEntrypoint2, "wrapWorkerEntrypoint");
+var WRAPPED_ENTRY2;
+if (typeof middleware_insertion_facade_default2 === "object") {
+  WRAPPED_ENTRY2 = wrapExportedHandler2(middleware_insertion_facade_default2);
+} else if (typeof middleware_insertion_facade_default2 === "function") {
+  WRAPPED_ENTRY2 = wrapWorkerEntrypoint2(middleware_insertion_facade_default2);
+}
+var middleware_loader_entry_default2 = WRAPPED_ENTRY2;
+export {
+  __INTERNAL_WRANGLER_MIDDLEWARE__2 as __INTERNAL_WRANGLER_MIDDLEWARE__,
+  middleware_loader_entry_default2 as default
+};
+//# sourceMappingURL=bundledWorker-0.5669834458206883.js.map

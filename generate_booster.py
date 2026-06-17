@@ -433,5 +433,16 @@ initNav();
 
     print("Generated index-booster/index.html successfully!")
 
+    # Auto-trigger Markdown twins generation for DualMark AEO coverage parity
+    try:
+        import subprocess
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        twins_script = os.path.join(script_dir, 'generate_markdown_twins.py')
+        if os.path.exists(twins_script):
+            print("Auto-triggering Markdown twins generation...")
+            subprocess.run(["python3", twins_script], check=True)
+    except Exception as e:
+        print(f"Warning: Could not auto-trigger Markdown twins: {e}")
+
 if __name__ == '__main__':
     run()
