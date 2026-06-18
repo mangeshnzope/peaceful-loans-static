@@ -12,6 +12,16 @@
       "permanent": true
     },
     {
+      "source": "/save-money-on-home-loan",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/save-money-on-home-loan/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/fy26-27intrates",
       "destination": "/FY26-27IntRates",
       "permanent": true

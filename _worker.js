@@ -513,7 +513,7 @@ This page has moved to an external location.
 }
 
 // _worker.src.ts
-var worker_src_default = createAEOWorker({
+var aeoWorker = createAEOWorker({
   upstream: {
     async fetch(request, env, _ctx) {
       return env.ASSETS.fetch(request);
@@ -522,6 +522,16 @@ var worker_src_default = createAEOWorker({
   trailingSlash: "preserve",
   enableLinkHeader: true
 });
+var worker_src_default = {
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    const cleanPath = url.pathname.replace(/\/+$/, "");
+    if (cleanPath === "/save-money-on-home-loan") {
+      return Response.redirect(new URL("/", url.origin).toString(), 301);
+    }
+    return aeoWorker.fetch(request, env, ctx);
+  }
+};
 export {
   worker_src_default as default
 };

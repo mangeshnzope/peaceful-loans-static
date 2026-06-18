@@ -332,7 +332,7 @@ def run():
     <div class="category-section">
       <h2 class="category-title">
         <span>Core Pages & Key Entry Tools</span>
-        <span class="category-count">6 Pages</span>
+        <span class="category-count">5 Pages</span>
       </h2>
       <div class="links-grid" style="grid-template-columns: 1fr 1fr;">
         <a href="/index.html" class="link-card">
@@ -354,11 +354,6 @@ def run():
           <h3>Frequently Asked Questions</h3>
           <p>Detailed breakdowns regarding processing fees, RBLR vs MCLR spreads, foreclosure terms, and forced insurance.</p>
           <div class="link-meta"><span>FAQs</span><span class="link-bullet"></span><span>Monthly</span></div>
-        </a>
-        <a href="/save-money-on-home-loan/" class="link-card">
-          <h3>Save Money on Home Loans Guide</h3>
-          <p>Actionable, comprehensive advisory guide to optimization methods, prepayments, and balance transfer schemes.</p>
-          <div class="link-meta"><span>Guide</span><span class="link-bullet"></span><span>Monthly</span></div>
         </a>
         <a href="/FY26-27IntRates/" class="link-card">
           <h3>Home Loan Interest Rates FY26-27</h3>

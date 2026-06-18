@@ -25,52 +25,54 @@ let newStyles = styles.split('\n').map(line => {
 }).join('\n');
 fs.writeFileSync('styles.css', newStyles);
 
-// SCSS
-let scss = fs.readFileSync('save-money-on-home-loan/style.scss', 'utf8');
-scss = scss.replace(/\.form-group label\s*\{\s*font-weight: 800;/g, '.form-group label { font-weight: 500;');
-scss = scss.replace(/\.after\s*\{\s*font-weight: 800;/g, '.after { font-weight: 500;');
-scss = scss.replace(/\.hero-main-heading\s*\{\s*font-weight: 900;/g, '.hero-main-heading { font-weight: 600;');
-scss = scss.replace(/#results \.result-value\s*\{\s*font-weight: 700;/g, '#results .result-value { font-weight: 600;');
-scss = scss.replace(/\.whatsapp-cta\s*\{\s*font-weight: 700;/g, '.whatsapp-cta { font-weight: 500;');
-scss = scss.replace(/\.mobile-menu-inner p\.mb-1 \s*\{\s*font-weight: bold;/g, '.mobile-menu-inner p.mb-1 { font-weight: 500;');
-scss = scss.replace(/\.faq-accordion \.accordion-button\s*\{\s*font-weight: 700;/g, '.faq-accordion .accordion-button { font-weight: 500;');
-scss = scss.replace(/p\.review-title\s*\{\s*font-weight: 700;/g, 'p.review-title { font-weight: 600;');
-scss = scss.replace(/\.footer-logo\s*\{\s*font-weight: 700;/g, '.footer-logo { font-weight: 500;');
+// SCSS & CSS & HTML replacements for save-money-on-home-loan
+if (fs.existsSync('save-money-on-home-loan')) {
+  let scss = fs.readFileSync('save-money-on-home-loan/style.scss', 'utf8');
+  scss = scss.replace(/\.form-group label\s*\{\s*font-weight: 800;/g, '.form-group label { font-weight: 500;');
+  scss = scss.replace(/\.after\s*\{\s*font-weight: 800;/g, '.after { font-weight: 500;');
+  scss = scss.replace(/\.hero-main-heading\s*\{\s*font-weight: 900;/g, '.hero-main-heading { font-weight: 600;');
+  scss = scss.replace(/#results \.result-value\s*\{\s*font-weight: 700;/g, '#results .result-value { font-weight: 600;');
+  scss = scss.replace(/\.whatsapp-cta\s*\{\s*font-weight: 700;/g, '.whatsapp-cta { font-weight: 500;');
+  scss = scss.replace(/\.mobile-menu-inner p\.mb-1 \s*\{\s*font-weight: bold;/g, '.mobile-menu-inner p.mb-1 { font-weight: 500;');
+  scss = scss.replace(/\.faq-accordion \.accordion-button\s*\{\s*font-weight: 700;/g, '.faq-accordion .accordion-button { font-weight: 500;');
+  scss = scss.replace(/p\.review-title\s*\{\s*font-weight: 700;/g, 'p.review-title { font-weight: 600;');
+  scss = scss.replace(/\.footer-logo\s*\{\s*font-weight: 700;/g, '.footer-logo { font-weight: 500;');
 
-// Also add `.score` and `.stat-value` rules if I removed fw-bold
-// Actually better to just append the utility classes to the end of style.scss since they replace fw-bold:
-scss += `
+  // Also add `.score` and `.stat-value` rules if I removed fw-bold
+  // Actually better to just append the utility classes to the end of style.scss since they replace fw-bold:
+  scss += `
 
 /* Gate 4 Custom replacements for stripped fw-bold */
 .score, .stat-value, .after { font-weight: 500; }
 .result-value, .hero-main-heading, .review-title { font-weight: 600; }
 `;
 
-fs.writeFileSync('save-money-on-home-loan/style.scss', scss);
+  fs.writeFileSync('save-money-on-home-loan/style.scss', scss);
 
-// CSS counterpart
-let css = fs.readFileSync('save-money-on-home-loan/style.css', 'utf8');
-css = css.replace(/font-weight: 800;/g, 'font-weight: 500;');
-css = css.replace(/font-weight: 900;/g, 'font-weight: 600;');
-css = css.replace(/font-weight: 700;/g, function(match, offset, str) {
-  let context = str.substring(Math.max(0, offset - 50), offset + 30);
-  if (context.includes('.result-value') || context.includes('.review-title') || context.includes('.stat-value')) return 'font-weight: 600;';
-  return 'font-weight: 500;';
-});
-css = css.replace(/font-weight: bold;/g, 'font-weight: 500;');
-css += `
+  // CSS counterpart
+  let css = fs.readFileSync('save-money-on-home-loan/style.css', 'utf8');
+  css = css.replace(/font-weight: 800;/g, 'font-weight: 500;');
+  css = css.replace(/font-weight: 900;/g, 'font-weight: 600;');
+  css = css.replace(/font-weight: 700;/g, function(match, offset, str) {
+    let context = str.substring(Math.max(0, offset - 50), offset + 30);
+    if (context.includes('.result-value') || context.includes('.review-title') || context.includes('.stat-value')) return 'font-weight: 600;';
+    return 'font-weight: 500;';
+  });
+  css = css.replace(/font-weight: bold;/g, 'font-weight: 500;');
+  css += `
 /* Gate 4 Custom */
 .score, .stat-value, .after { font-weight: 500; }
 .result-value, .hero-main-heading, .review-title { font-weight: 600; }
 `;
-fs.writeFileSync('save-money-on-home-loan/style.css', css);
+  fs.writeFileSync('save-money-on-home-loan/style.css', css);
 
-// HTML fw-bold cleanup
-let html = fs.readFileSync('save-money-on-home-loan/index.html', 'utf8');
-html = html.replace(/<span class="fw-bold">/g, '<span style="font-weight: 600;">');
-html = html.replace(/<h6 class="text-white fw-bold mb-3">/g, '<h6 class="text-white mb-3" style="font-weight: 600;">');
-html = html.replace(/\s*fw-bolder\b/g, '');
-html = html.replace(/\s*fw-bold\b/g, '');
-fs.writeFileSync('save-money-on-home-loan/index.html', html);
+  // HTML fw-bold cleanup
+  let html = fs.readFileSync('save-money-on-home-loan/index.html', 'utf8');
+  html = html.replace(/<span class="fw-bold">/g, '<span style="font-weight: 600;">');
+  html = html.replace(/<h6 class="text-white fw-bold mb-3">/g, '<h6 class="text-white mb-3" style="font-weight: 600;">');
+  html = html.replace(/\s*fw-bolder\b/g, '');
+  html = html.replace(/\s*fw-bold\b/g, '');
+  fs.writeFileSync('save-money-on-home-loan/index.html', html);
 
-console.log("Done text replacements");
+  console.log("Done text replacements");
+}
