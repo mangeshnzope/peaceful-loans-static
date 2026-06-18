@@ -7,6 +7,6 @@ export default createAEOWorker({
       return env.ASSETS.fetch(request);
     },
   },
-  trailingSlash: "never",
+  trailingSlash: "preserve",
   enableLinkHeader: true,
 });

@@ -519,7 +519,7 @@ var worker_src_default = createAEOWorker({
       return env.ASSETS.fetch(request);
     }
   },
-  trailingSlash: "never",
+  trailingSlash: "preserve",
   enableLinkHeader: true
 });
 export {
