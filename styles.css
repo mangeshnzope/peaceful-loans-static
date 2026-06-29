@@ -638,3 +638,84 @@ ul { list-style: none; }
   align-items: center;
   justify-content: space-between;
 }
+
+/* Review & Post link badge styles */
+.review-card-link-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.review-card-link-badge svg {
+  transition: transform 0.2s ease;
+}
+
+.review-card-link-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.review-card-link-badge:hover svg {
+  transform: translate(1px, -1px);
+}
+
+/* Platform specific badge colors */
+.badge-google {
+  color: #4285F4;
+  border: 1px solid rgba(66, 133, 244, 0.2);
+  background: rgba(66, 133, 244, 0.05);
+}
+.badge-google:hover {
+  background: rgba(66, 133, 244, 0.1);
+  border-color: rgba(66, 133, 244, 0.4);
+}
+
+.badge-reddit {
+  color: #FF4500;
+  border: 1px solid rgba(255, 69, 0, 0.2);
+  background: rgba(255, 69, 0, 0.05);
+}
+.badge-reddit:hover {
+  background: rgba(255, 69, 0, 0.1);
+  border-color: rgba(255, 69, 0, 0.4);
+}
+
+.badge-linkedin {
+  color: #0077B5;
+  border: 1px solid rgba(0, 119, 181, 0.2);
+  background: rgba(0, 119, 181, 0.05);
+}
+.badge-linkedin:hover {
+  background: rgba(0, 119, 181, 0.1);
+  border-color: rgba(0, 119, 181, 0.4);
+}
+
+.badge-trustpilot {
+  color: #00b67a;
+  border: 1px solid rgba(0, 182, 122, 0.2);
+  background: rgba(0, 182, 122, 0.05);
+}
+.badge-trustpilot:hover {
+  background: rgba(0, 182, 122, 0.1);
+  border-color: rgba(0, 182, 122, 0.4);
+}
+
+.testimonial-platform-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(156, 163, 175, 0.5);
+  transition: all 0.2s ease;
+}
+
+.testimonial-platform-link:hover {
+  color: var(--economist-black);
+  border-bottom-color: var(--economist-black);
+}
+

@@ -234,6 +234,10 @@ REVIEWS_MD = """# Customer Reviews — Peaceful Loans
 
 What our clients say about Peaceful Loans home loan advisory.
 
+### Siddhant Lath
+> "Buying a home is a dream goal for people. A decision that lasts a lifetime. With it people often take bank loans. The bank loan process is difficult, tedious, and very long. Peaceful loans takes away your issues and burdens by taking them on themselves, and providing clarity and guidance at every step. Very happy with the service"
+> — Google Review
+
 ### Rohit Gupta
 > "Highly recommend! Mr. Mangesh knowledge, experience, and understanding about home loan is outstanding. He guided me with patience and clarity. Truly grateful for the support."
 > — Google Review
