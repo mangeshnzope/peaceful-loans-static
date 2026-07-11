@@ -721,38 +721,38 @@ ul { list-style: none; }
 
 /* Fear Section White Background Overrides */
 #fear.section-white {
-  background: var(--c-bg);
+  background: var(--c-ground);
   color: var(--c-ink);
 }
 
 #fear.section-white .fear-card {
-  background: rgba(127, 29, 29, 0.02);
-  border-color: rgba(127, 29, 29, 0.12);
+  background: #fef2f2;
+  border-color: #fee2e2;
 }
 
 #fear.section-white .fear-card:hover {
-  border-color: rgba(185, 28, 28, 0.25);
+  border-color: #fca5a5;
 }
 
 #fear.section-white .fear-card h3 {
-  color: var(--c-ink);
+  color: #991b1b;
 }
 
 #fear.section-white .fear-card p {
-  color: var(--gray-600);
+  color: #7f1d1d;
 }
 
 #fear.section-white .fear-badge {
-  background: rgba(220, 38, 38, 0.08);
-  color: #dc2626;
+  background: #fee2e2;
+  color: #991b1b;
 }
 
 #fear.section-white .fear-num {
-  background: rgba(220, 38, 38, 0.1);
+  background: #fee2e2;
 }
 
 #fear.section-white .fear-num span {
-  color: #dc2626;
+  color: #991b1b;
 }
 
 #fear.section-white .fear-bg {

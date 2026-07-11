@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /q1-fy26-27-results
+Disallow: /q1-fy26-27-results.html
+Disallow: /q1-fy26-27-results.md
 
 Sitemap: https://peaceful-loans.com/sitemap.xml

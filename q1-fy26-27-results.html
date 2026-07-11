@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Q1 FY26-27 Internal Results Dashboard — Peaceful Loans</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&display=swap" rel="stylesheet">
+  
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="/styles.css?v=14">
+  
+  <style>
+    :root {
+      --primary-blue: #1A4CC8;
+      --blue-dark: #1540A8;
+      --blue-darkest: #0A2A6B;
+      --amber: #FFB800;
+      --red: #E84118;
+      --green: #16a34a;
+      --background-warm: #fbfaf7;
+      --surface: #ffffff;
+      --ink: #1a1a1a;
+      --body: #4a4a4a;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--background-warm);
+      color: var(--ink);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Typography & Numeric */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      color: var(--ink);
+    }
+    
+    .num-data, td, th, .metric-value, .chart-label {
+      font-variant-numeric: tabular-nums lining-nums;
+    }
+
+    /* Custom Header & Layout */
+    .dashboard-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 1.5rem 0 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .header-logo img {
+      height: 32px;
+      width: auto;
+    }
+
+    .header-meta {
+      font-size: 0.85rem;
+      color: var(--body);
+      text-align: right;
+    }
+
+    .header-meta strong {
+      color: var(--ink);
+    }
+
+    /* Tab Navigation */
+    .tab-container {
+      overflow-x: auto;
+      white-space: nowrap;
+      margin-top: 0.5rem;
+      scrollbar-width: none; /* Firefox */
+    }
+    
+    .tab-container::-webkit-scrollbar {
+      display: none; /* Safari/Chrome */
+    }
+
+    .tab-bar {
+      display: inline-flex;
+      gap: 1.5rem;
+      padding: 0 1rem;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 0.25rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--body);
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+    }
+
+    .tab-btn:hover {
+      color: var(--primary-blue);
+    }
+
+    .tab-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      background-color: var(--gray-100);
+      color: var(--gray-600);
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--primary-blue);
+      border-bottom-color: var(--amber);
+    }
+
+    .tab-btn.active .tab-badge {
+      background-color: var(--amber);
+      color: var(--ink);
+    }
+
+    /* Tricolor Header Bar */
+    .header-tricolor {
+      display: flex;
+      height: 3px;
+      width: 100%;
+    }
+    .tricolor-segment {
+      flex: 1;
+    }
+    .tricolor-blue { background-color: var(--primary-blue); }
+    .tricolor-amber { background-color: var(--amber); }
+    .tricolor-red { background-color: var(--red); }
+
+    /* Content Area */
+    .dashboard-content {
+      flex: 1;
+      padding: 2.5rem 0;
+    }
+
+    .report-section {
+      display: none;
+    }
+
+    .report-section.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Common Card Styling */
+    .report-title-area {
+      margin-bottom: 2rem;
+    }
+
+    .report-title-area h2 {
+      font-size: 2.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      line-height: 1.25;
+    }
+
+    .report-subtitle {
+      font-size: 1.1rem;
+      color: var(--body);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .dark-box {
+      background-color: var(--blue-darkest);
+      color: #ffffff;
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+      border-left: 5px solid var(--amber);
+    }
+
+    .dark-box h3 {
+      color: #ffffff;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .dark-box p {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.95rem;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--body);
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .metric-desc {
+      font-size: 0.85rem;
+      color: var(--body);
+      margin-top: 0.5rem;
+    }
+
+    /* Colors and states for cards */
+    .card-blue { border-top: 4px solid var(--primary-blue); }
+    .card-amber { border-top: 4px solid var(--amber); }
+    .card-red { border-top: 4px solid var(--red); }
+    .card-green { border-top: 4px solid var(--green); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 4px;
+      margin-top: 0.5rem;
+    }
+
+    .badge-green { background: #e6f4ea; color: var(--green); }
+    .badge-amber { background: #fef7e0; color: #b06000; }
+    .badge-red { background: #fce8e6; color: var(--red); }
+    .badge-blue { background: #e8f0fe; color: var(--primary-blue); }
+
+    /* Tables */
+    .table-container {
+      background: var(--surface);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      overflow-x: auto;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: var(--gray-50);
+      color: var(--ink);
+      font-weight: 600;
+      padding: 0.85rem 1rem;
+      border-bottom: 2px solid var(--gray-200);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--gray-200);
+      color: var(--body);
+      vertical-align: middle;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr.row-highlight {
+      background-color: rgba(26, 76, 200, 0.04);
+    }
+
+    tr.row-highlight td {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* Charts (Custom CSS flex/grid based charts) */
+    .chart-container {
+      background: var(--surface);
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .chart-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--ink);
+    }
+
+    /* Bar Chart Report 1 */
+    .bar-chart-r1 {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 280px;
+      padding-top: 2rem;
+      border-bottom: 1px solid var(--gray-300);
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 18%;
+      height: 100%;
+      justify-content: flex-end;
+      position: relative;
+    }
+
+    .bar-block {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      transition: height 0.6s ease;
+    }
+
+    .bar-actual-blue {
+      background-color: var(--primary-blue);
+    }
+
+    .bar-projected-stack {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .stack-q1-actual {
+      background-color: var(--green);
+      height: 12.3%; /* 20.6 / 167 */
+      border-radius: 0;
+    }
+
+    .stack-q-projected {
+      background: repeating-linear-gradient(45deg, #22c55e, #22c55e 6px, #86efac 6px, #86efac 12px);
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .chart-badge {
+      position: absolute;
+      top: -2.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+    }
+
+    .bar-label {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-align: center;
+    }
+
+    .bar-val {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+
+    /* Trend Row for Funnel */
+    .trend-row-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .trend-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0.75rem;
+      background: var(--surface);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+    }
+
+    .trend-label {
+      width: 120px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    .trend-track {
+      flex: 1;
+      height: 24px;
+      background: var(--gray-100);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .track-segment {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding-left: 0.5rem;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .seg-el { background-color: var(--primary-blue); }
+    .seg-hl { background-color: var(--red); }
+
+    .trend-info {
+      width: 150px;
+      text-align: right;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    /* Multi Column Layouts */
+    .columns-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .columns-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .columns-2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (min-width: 1024px) {
+      .columns-3 { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    /* Pipeline block list styling */
+    .pipeline-section {
+      background: var(--surface);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pipeline-section h4 {
+      font-size: 1.15rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--gray-200);
+      color: var(--ink);
+    }
+
+    .pipeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .pipeline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border-radius: 4px;
+      background: var(--gray-50);
+      font-size: 0.85rem;
+    }
+
+    .pipeline-item .status-indicator {
+      flex-shrink: 0;
+    }
+
+    .pipeline-item-content {
+      flex: 1;
+    }
+
+    .pipeline-item-title {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .pipeline-item-meta {
+      font-size: 0.75rem;
+      color: var(--body);
+      margin-top: 0.15rem;
+    }
+
+    /* Dot Grid Visualization */
+    .dot-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 0.5rem;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .dot-el { background-color: var(--primary-blue); }
+    .dot-hl { background-color: var(--red); }
+
+    /* Stacked segment track */
+    .segmented-track {
+      height: 32px;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+
+    .track-part {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      transition: width 0.3s ease;
+    }
+
+    /* Footer styling */
+    .report-footer {
+      border-top: 1px solid var(--gray-200);
+      padding-top: 1.5rem;
+      margin-top: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--gray-500);
+    }
+
+    .report-footer strong.internal-only {
+      color: var(--red);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Dashed arrow vector for Report 1 */
+    .projection-line {
+      position: absolute;
+      top: 35px;
+      right: 18%;
+      width: 18%;
+      height: 100px;
+      border-top: 2px dashed var(--green);
+      border-right: 2px dashed var(--green);
+      border-radius: 0 8px 0 0;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- DASHBOARD STICKY HEADER -->
+  <header class="dashboard-header">
+    <div class="container">
+      <div class="header-top">
+        <div class="header-logo">
+          <img src="/assets/logo-horizontal.png" alt="Peaceful Loans Logo">
+        </div>
+        <div class="header-meta">
+          <strong>Investor & Internal Report Suite</strong><br>
+          Q1 FY26-27 Results · 1 July 2026
+        </div>
+      </div>
+      
+      <!-- Tab Controls -->
+      <div class="tab-container">
+        <div class="tab-bar">
+          <button class="tab-btn active" onclick="switchTab(event, 'report-1')">
+            <span class="tab-badge">01</span> Revenue Journey
+          </button>
+          <button class="tab-btn" onclick="switchTab(event, 'report-2')">
+            <span class="tab-badge">02</span> HL Momentum & Targets
+          </button>
+          <button class="tab-btn" onclick="switchTab(event, 'report-3')">
+            <span class="tab-badge">03</span> Revenue Report
+          </button>
+          <button class="tab-btn" onclick="switchTab(event, 'report-4')">
+            <span class="tab-badge">04</span> HL Funnel (Analyst)
+          </button>
+          <button class="tab-btn" onclick="switchTab(event, 'report-5')">
+            <span class="tab-badge">05</span> HL Funnel (Corrected)
+          </button>
+          <button class="tab-btn" onclick="switchTab(event, 'report-6')">
+            <span class="tab-badge">06</span> Funnel by Ticket Size
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Brand Signature Tricolor Bar -->
+    <div class="header-tricolor">
+      <div class="tricolor-segment tricolor-blue"></div>
+      <div class="tricolor-segment tricolor-amber"></div>
+      <div class="tricolor-segment tricolor-red"></div>
+    </div>
+  </header>
+
+  <!-- DASHBOARD MAIN CONTENT -->
+  <main class="dashboard-content">
+    <div class="container">
+
+      <!-- REPORT 1: REVENUE JOURNEY -->
+      <section id="report-1" class="report-section active">
+        <div class="report-title-area">
+          <h2>Three years up. Year four on track for Rs.1.67 Cr</h2>
+          <div class="report-subtitle">Annual revenue growth story prepared for board & investor updates.</div>
+        </div>
+
+        <div class="columns-2">
+          <!-- Left: Chart -->
+          <div class="chart-container">
+            <div class="chart-title">Annual Revenue Journey & Projections</div>
+            <div class="bar-chart-r1">
+              
+              <!-- FY 23-24 -->
+              <div class="bar-col">
+                <div class="bar-val">Rs.5.5L</div>
+                <div class="bar-block bar-actual-blue" style="height: 12%;"></div>
+                <div class="bar-label">FY 23-24<br><small>37 deals</small></div>
+              </div>
+              
+              <!-- FY 24-25 -->
+              <div class="bar-col">
+                <span class="chart-badge badge-amber">+549% YoY</span>
+                <div class="bar-val">Rs.35.7L</div>
+                <div class="bar-block bar-actual-blue" style="height: 38%;"></div>
+                <div class="bar-label">FY 24-25<br><small>145 deals</small></div>
+              </div>
+              
+              <!-- FY 25-26 -->
+              <div class="bar-col">
+                <span class="chart-badge badge-blue">+40% YoY</span>
+                <div class="bar-val">Rs.50.1L</div>
+                <div class="bar-block bar-actual-blue" style="height: 48%;"></div>
+                <div class="bar-label">FY 25-26<br><small>197 deals</small></div>
+              </div>
+
+              <!-- FY 26-27 Projected Stack -->
+              <div class="bar-col">
+                <span class="chart-badge badge-green">+234% YoY</span>
+                <div class="bar-val" style="color: var(--green);">Rs.1.67 Cr</div>
+                <div class="bar-block bar-projected-stack" style="height: 100%;">
+                  <!-- Q2-Q4 Projected (Hatched) -->
+                  <div class="stack-q-projected" title="Q2-Q4 Projections: Rs.146.4L"></div>
+                  <!-- Q1 Actual (Solid Green) -->
+                  <div class="stack-q1-actual" title="Q1 Actual: Rs.20.6L"></div>
+                </div>
+                <div class="bar-label">FY 26-27 (Proj)<br><small>Q1: Solid · Q2-Q4: Hatched</small></div>
+              </div>
+
+              <!-- Dashed arrow SVG representation -->
+              <div class="projection-line"></div>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--body); text-align: center; margin-top: 1rem;">
+              Note: FY 26-27 projected is based on a conservative 50% QoQ growth assumption off the baseline.
+            </p>
+          </div>
+
+          <!-- Right: KPIs and Narrative -->
+          <div>
+            <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
+              <div class="metric-card card-blue">
+                <div class="metric-label">FY 23-24</div>
+                <div class="metric-value">Rs. 5.5L</div>
+                <div class="metric-desc">Founding Year · 37 deals</div>
+              </div>
+              <div class="metric-card card-amber">
+                <div class="metric-label">FY 24-25</div>
+                <div class="metric-value">Rs. 35.7L</div>
+                <div class="metric-desc">Growth Phase · 145 deals</div>
+              </div>
+              <div class="metric-card card-blue">
+                <div class="metric-label">FY 25-26</div>
+                <div class="metric-value">Rs. 50.1L</div>
+                <div class="metric-desc">Consolidation · 197 deals</div>
+              </div>
+              <div class="metric-card card-green">
+                <div class="metric-label">FY 26-27 Proj.</div>
+                <div class="metric-value" style="color: var(--green);">Rs. 1.67 Cr</div>
+                <div class="metric-desc">Scaling Phase · Target Achievable</div>
+              </div>
+            </div>
+
+            <div class="dark-box" style="margin-bottom: 0;">
+              <h3>Strategic Thesis</h3>
+              <p style="margin-bottom: 0.75rem;">
+                Peaceful Loans has successfully established product-market fit. Over the past three financial years, the business has moved from proof-of-concept (FY24) to rapid validation (FY25), followed by sustainable, non-dilutive scaling (FY26). 
+              </p>
+              <p>
+                Our structural pivot toward high-ticket Home Loans (HL) from Education Loans (EL) changes our economics, driving higher average transaction sizes (ATS) and invoicing values. Year 4 projections are firmly grounded in this operational shift.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="report-footer">
+          <div>Report 1 · Peaceful Loans Investor Suite</div>
+          <div><strong class="internal-only">Internal only</strong></div>
+        </div>
+      </section>
+
+      <!-- REPORT 2: HL MOMENTUM + TARGETS -->
+      <section id="report-2" class="report-section">
+        <div class="report-title-area">
+          <h2>Every quarter: more leads, better processing, more disbursals</h2>
+          <div class="report-subtitle">Home Loan performance momentum comparison and Q2 FY27 targets setup.</div>
+        </div>
+
+        <!-- Part A & B: Funnel comparison -->
+        <div class="columns-2">
+          <div class="chart-container">
+            <div class="chart-title">HL Two-Quarter Funnel Comparison</div>
+            <div style="display:flex; flex-direction:column; gap:1.25rem;">
+              
+              <!-- Lead -->
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.25rem; font-size:0.85rem; font-weight:600;">
+                  <span>Top of Funnel (Leads)</span>
+                  <span>Q4: 46 | <span style="color:var(--green)">Q1: 48 (+4%)</span></span>
+                </div>
+                <div class="trend-track">
+                  <div class="track-segment seg-el" style="width: 48%;" title="Q4: 46">Q4 (46)</div>
+                  <div class="track-segment seg-hl" style="width: 50%; background-color: var(--green);" title="Q1: 48">Q1 (48)</div>
+                </div>
+              </div>
+
+              <!-- Processing -->
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.25rem; font-size:0.85rem; font-weight:600;">
+                  <span>Processing</span>
+                  <span>Q4: 13 | <span style="color:var(--green)">Q1: 24 (+85%)</span></span>
+                </div>
+                <div class="trend-track">
+                  <div class="track-segment seg-el" style="width: 35%;" title="Q4: 13">Q4 (13)</div>
+                  <div class="track-segment seg-hl" style="width: 65%; background-color: var(--green);" title="Q1: 24">Q1 (24)</div>
+                </div>
+              </div>
+
+              <!-- Sanctioned -->
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.25rem; font-size:0.85rem; font-weight:600;">
+                  <span>Sanctioned</span>
+                  <span>Q4: 10 | <span style="color:var(--body)">Q1: 9 (lag)</span></span>
+                </div>
+                <div class="trend-track">
+                  <div class="track-segment seg-el" style="width: 52%;" title="Q4: 10">Q4 (10)</div>
+                  <div class="track-segment seg-hl" style="width: 48%; background-color: var(--green);" title="Q1: 9">Q1 (9)</div>
+                </div>
+              </div>
+
+              <!-- Disbursed -->
+              <div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.25rem; font-size:0.85rem; font-weight:600;">
+                  <span>Disbursed</span>
+                  <span>Q4: 7 | <span style="color:var(--body)">Q1: 3 (lag)</span></span>
+                </div>
+                <div class="trend-track">
+                  <div class="track-segment seg-el" style="width: 70%;" title="Q4: 7">Q4 (7)</div>
+                  <div class="track-segment seg-hl" style="width: 30%; background-color: var(--green);" title="Q1: 3">Q1 (3)</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Part C & D: Projections & Narrative -->
+          <div>
+            <div class="dark-box" style="margin-bottom:1.25rem;">
+              <h3>Operational Insights</h3>
+              <ul style="padding-left:1.25rem; list-style-type: disc; font-size:0.9rem; display:flex; flex-direction:column; gap:0.5rem;">
+                <li><strong>Disbursals are lagged:</strong> Home loan cycle takes 60-90 days. The 9 active sanctions in Q1 represents revenue locked to materialize in Q2.</li>
+                <li><strong>Processing rate doubled:</strong> Better team structure and automated SOPs helped push the lead-to-processing rate from 28% to 50%.</li>
+                <li><strong>Ticket size advantage:</strong> Since the average Home Loan ticket size is 4× Education Loans, even 9 disbursals generate Rs.10L+ in commission revenue.</li>
+              </ul>
+            </div>
+
+            <div class="dark-box" style="background-color: var(--blue-darkest); border-left-color: var(--primary-blue); padding:1.25rem;">
+              <h4 style="color:#fff; font-family:'Inter', sans-serif; font-size:1.1rem; margin-bottom:0.75rem;">Q2 FY27 Revenue Projections</h4>
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem; font-size:0.85rem;">
+                <div>Q1 FY27 Actual Revenue</div>
+                <div class="num-data" style="text-align:right; font-weight:700;">Rs. 20.6L</div>
+                
+                <div>9 live sanctions -> Q2 Revenue lock</div>
+                <div class="num-data" style="text-align:right; font-weight:700;">~Rs. 13 - 18L</div>
+                
+                <div style="border-top:1px solid rgba(255,255,255,0.2); padding-top:0.5rem; font-weight:700;">Q2 FY27 Projection Target</div>
+                <div class="num-data" style="border-top:1px solid rgba(255,255,255,0.2); padding-top:0.5rem; text-align:right; font-weight:700; color:var(--amber);">Rs. 30.9L</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Part E: Q2 FY27 Targets -->
+        <h3 style="font-size:1.75rem; margin-bottom:1rem; border-bottom:1px solid var(--gray-200); padding-bottom:0.5rem;">Q2 FY27 Targets (Jul - Sep 2026)</h3>
+        
+        <div class="card-grid">
+          <div class="metric-card card-blue">
+            <div class="metric-label">ATS Submitted Target</div>
+            <div class="metric-value">Rs. 67.5 Cr</div>
+            <div class="metric-desc">~45 deals at avg Rs.1.5Cr ticket</div>
+          </div>
+          <div class="metric-card card-amber">
+            <div class="metric-label">Top of Funnel (>= 2Cr)</div>
+            <div class="metric-value">120 Leads</div>
+            <div class="metric-desc">40 leads/month average requirement</div>
+          </div>
+          <div class="metric-card card-green">
+            <div class="metric-label">Revenue Target (Ex-GST)</div>
+            <div class="metric-value" style="color:var(--green);">Rs. 30.0L</div>
+            <div class="metric-desc">Invoiced commission collections</div>
+          </div>
+          <div class="metric-card card-red">
+            <div class="metric-label">Net Surplus Cashflow</div>
+            <div class="metric-value" style="color:var(--red);">+Rs. 10.0L</div>
+            <div class="metric-desc">Post founder salary & ops cost</div>
+          </div>
+        </div>
+
+        <!-- Cashflow Math Breakdown -->
+        <div class="dark-box" style="border-left-color: var(--amber);">
+          <h3 style="font-size:1.25rem; margin-bottom:1rem;">Cashflow Mathematics (Q2 Target)</h3>
+          <div class="columns-3">
+            <div>
+              <h5 style="color:var(--green); font-size:1rem; margin-bottom:0.5rem;">Revenue Collections</h5>
+              <div class="num-data" style="font-size:1.2rem; font-weight:700;">Rs. 30,00,000</div>
+              <p style="font-size:0.8rem; margin-top:0.25rem; color:rgba(255,255,255,0.7);">Total expected commission payouts collected from banks.</p>
+            </div>
+            <div>
+              <h5 style="color:var(--red); font-size:1rem; margin-bottom:0.5rem;">Operational Expenses</h5>
+              <ul style="font-size:0.85rem; padding-left:0; list-style-type:none; display:flex; flex-direction:column; gap:0.25rem; color:rgba(255,255,255,0.85);" class="num-data">
+                <li>Founder Salary (HUF): -Rs.4,20,000</li>
+                <li>Ops (Komal + admin): -Rs.3,60,000</li>
+                <li>Marketing (Vamsi/Raghav): -Rs.3,30,000</li>
+                <li>Rent, SaaS & Statutory: -Rs.3,00,000</li>
+                <li>Cashbacks & Jyoti interest: -Rs.4,00,000</li>
+                <li>SWYN tranche + Adv. Tax (Sep): -Rs.1,90,000</li>
+                <li style="border-top:1px solid rgba(255,255,255,0.3); font-weight:700; margin-top:0.25rem; color:var(--red);">Est. Total Costs: -Rs.20,00,000</li>
+              </ul>
+            </div>
+            <div>
+              <h5 style="color:var(--amber); font-size:1rem; margin-bottom:0.5rem;">Net surplus</h5>
+              <div class="num-data" style="font-size:1.2rem; font-weight:700; color:var(--amber);">+Rs. 10,00,000</div>
+              <p style="font-size:0.8rem; margin-top:0.25rem; color:rgba(255,255,255,0.7);">Surplus cashflow. Note: Sep-26 is a spike month where both SWYN tranche and CBDT advance taxes land together.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Implication Cards -->
+        <div class="columns-3">
+          <div class="metric-card card-blue">
+            <div class="metric-label" style="color:var(--primary-blue);">Pipeline Multiplier</div>
+            <p style="font-size:0.9rem; margin-top:0.5rem; color:var(--body);">
+              <strong>120 Leads >= 2Cr:</strong> Currently averaging ~8/month. We need to 5× monthly lead intake, which requires expansion beyond Reddit channel into premium organic and paid channels.
+            </p>
+          </div>
+          <div class="metric-card card-amber">
+            <div class="metric-label" style="color:#b06000;">Disbursal Feasibility</div>
+            <p style="font-size:0.9rem; margin-top:0.5rem; color:var(--body);">
+              <strong>Rs.67.5 Cr ATS:</strong> Q1 saw 9 disbursals. Target is achievable if the current active pipeline of Rs.28.6Cr converts successfully, combined with Q2 entries.
+            </p>
+          </div>
+          <div class="metric-card card-green">
+            <div class="metric-label" style="color:var(--green);">Revenue Feasibility</div>
+            <p style="font-size:0.9rem; margin-top:0.5rem; color:var(--body);">
+              <strong>Rs.30L Revenue:</strong> Requires ~20 HL disbursals. By doubling the Q1 count and pushing the 11 carryover sanctions, this target is highly realistic with clean operation.
+            </p>
+          </div>
+        </div>
+
+        <div class="report-footer">
+          <div>Report 2 · Peaceful Loans Q2 Operational Targets</div>
+          <div><strong class="internal-only">Internal only</strong></div>
+        </div>
+      </section>
+
+      <!-- REPORT 3: Q1 FY27 REVENUE REPORT -->
+      <section id="report-3" class="report-section">
+        <div class="report-title-area">
+          <h2>Q1 FY27 Revenue Report</h2>
+          <div class="report-subtitle">Quarterly business breakdown, product mix splits, and deal volume dot analysis.</div>
+        </div>
+
+        <div class="dark-box" style="background-color: var(--blue-darkest); display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1.5rem; border-left-color: var(--red);">
+          <div>
+            <div style="font-size:0.8rem; text-transform:uppercase; color:rgba(255,255,255,0.6);">Q1 FY27 Revenue</div>
+            <div class="num-data" style="font-size:1.75rem; font-weight:700;">Rs. 11,74,734</div>
+          </div>
+          <div>
+            <div style="font-size:0.8rem; text-transform:uppercase; color:rgba(255,255,255,0.6);">Best Quarter Ever</div>
+            <div class="num-data" style="font-size:1.75rem; font-weight:700; color:var(--amber);">Rs. 20.76L (Q4 FY26)</div>
+          </div>
+          <div>
+            <div style="font-size:0.8rem; text-transform:uppercase; color:rgba(255,255,255,0.6);">HL Product Share</div>
+            <div class="num-data" style="font-size:1.75rem; font-weight:700; color:var(--green);">89.8%</div>
+          </div>
+        </div>
+
+        <!-- 6-quarter stacked chart -->
+        <div class="chart-container">
+          <div class="chart-title">6-Quarter Revenue Trend Split (EL vs HL)</div>
+          <div class="trend-row-container">
+            
+            <div class="trend-row" style="background-color: rgba(26,76,200,0.02); border-color: var(--primary-blue);">
+              <div class="trend-label">Q1 FY27 ★</div>
+              <div class="trend-track">
+                <div class="track-segment seg-el" style="width: 10.2%;" title="EL: Rs.1.19L">EL (10%)</div>
+                <div class="track-segment seg-hl" style="width: 89.8%;" title="HL: Rs.10.55L">HL (90%)</div>
+              </div>
+              <div class="trend-info num-data">Rs. 11,74,734</div>
+            </div>
+
+            <div class="trend-row">
+              <div class="trend-label">Q4 FY26</div>
+              <div class="trend-track">
+                <div class="track-segment seg-el" style="width: 50.2%;" title="EL: Rs.10.42L">EL (50%)</div>
+                <div class="track-segment seg-hl" style="width: 49.8%;" title="HL: Rs.10.34L">HL (50%)</div>
+              </div>
+              <div class="trend-info num-data">Rs. 20,76,000</div>
+            </div>
+
+            <div class="trend-row">
+              <div class="trend-label">Q3 FY26</div>
+              <div class="trend-track">
+                <div class="track-segment seg-el" style="width: 62.5%;" title="EL: Rs.7.26L">EL (62%)</div>
+                <div class="track-segment seg-hl" style="width: 37.5%;" title="HL: Rs.4.35L">HL (38%)</div>
+              </div>
+              <div class="trend-info num-data">Rs. 11,61,000</div>
+            </div>
+
+            <div class="trend-row">
+              <div class="trend-label">Q2 FY26</div>
+              <div class="trend-track">
+                <div class="track-segment seg-el" style="width: 94.3%;" title="EL: Rs.9.75L">EL (94%)</div>
+                <div class="track-segment seg-hl" style="width: 5.7%;" title="HL: Rs.0.59L">HL (6%)</div>
+              </div>
+              <div class="trend-info num-data">Rs. 10,34,000</div>
+            </div>
+
+            <div class="trend-row">
+              <div class="trend-label">Q1 FY26</div>
+              <div class="trend-track">
+                <div class="track-segment seg-el" style="width: 49.6%;" title="EL: Rs.3.97L">EL (50%)</div>
+                <div class="track-segment seg-hl" style="width: 50.4%;" title="HL: Rs.4.04L">HL (50%)</div>
+              </div>
+              <div class="trend-info num-data">Rs. 8,01,000</div>
+            </div>
+
+            <div class="trend-row">
+              <div class="trend-label">Q4 FY25</div>
+              <div class="trend-track">
+                <div class="track-segment seg-el" style="width: 90.7%;" title="EL: Rs.15.99L">EL (91%)</div>
+                <div class="track-segment seg-hl" style="width: 9.3%;" title="HL: Rs.1.63L">HL (9%)</div>
+              </div>
+              <div class="trend-info num-data">Rs. 17,62,000</div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="columns-2">
+          <!-- Left: Product details -->
+          <div class="metric-card">
+            <h4 style="margin-bottom: 1rem; font-size:1.25rem;">Q1 FY27 Product Mix</h4>
+            
+            <div style="margin-bottom: 1.25rem;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:0.25rem;">
+                <span style="font-weight:600; color:var(--primary-blue);">Education Loans (EL)</span>
+                <span class="num-data" style="font-weight:700;">10.2% · Rs.1,19,353</span>
+              </div>
+              <div style="font-size:0.8rem; color:var(--body);">12 disbursals completed</div>
+            </div>
+
+            <div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:0.25rem;">
+                <span style="font-weight:600; color:var(--red);">Home Loans (HL)</span>
+                <span class="num-data" style="font-weight:700;">89.8% · Rs.10,55,381</span>
+              </div>
+              <div style="font-size:0.8rem; color:var(--body);">9 disbursals completed</div>
+            </div>
+            
+            <h4 style="margin-top:2rem; margin-bottom:1rem; font-size:1.1rem;">Deal Volume Dot Visualization</h4>
+            <p style="font-size:0.75rem; color:var(--body); margin-bottom:0.5rem;">Blue dots represent EL deals. Red dots represent HL deals.</p>
+            
+            <div style="display:flex; flex-direction:column; gap:0.5rem;">
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <span style="font-size:0.8rem; width:50px; font-weight:600;">EL Deals</span>
+                <div class="dot-grid">
+                  <div class="dot dot-el"></div><div class="dot dot-el"></div><div class="dot dot-el"></div><div class="dot dot-el"></div>
+                  <div class="dot dot-el"></div><div class="dot dot-el"></div><div class="dot dot-el"></div><div class="dot dot-el"></div>
+                  <div class="dot dot-el"></div><div class="dot dot-el"></div><div class="dot dot-el"></div><div class="dot dot-el"></div>
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <span style="font-size:0.8rem; width:50px; font-weight:600;">HL Deals</span>
+                <div class="dot-grid">
+                  <div class="dot dot-hl"></div><div class="dot dot-hl"></div><div class="dot dot-hl"></div><div class="dot dot-hl"></div>
+                  <div class="dot dot-hl"></div><div class="dot dot-hl"></div><div class="dot dot-hl"></div><div class="dot dot-hl"></div>
+                  <div class="dot dot-hl"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Narrative -->
+          <div>
+            <div class="metric-card card-amber" style="margin-bottom:1.25rem;">
+              <h4 style="margin-bottom:0.75rem; font-size:1.15rem;">Q1 Performance Insights</h4>
+              <ul style="padding-left:1.25rem; list-style-type:disc; font-size:0.85rem; display:flex; flex-direction:column; gap:0.5rem; color:var(--body);">
+                <li><strong>HL dominates the product mix:</strong> Home loans now contribute 89.8% of the total revenue. This structural pivot crossed the milestone Rs.10L/quarter mark starting Q4 FY26.</li>
+                <li><strong>Structural Q1 seasonality:</strong> Revenue dipped compared to Q4, which follows the historical pattern of Q1 dip seen in both FY26 (-54.5%) and FY27 (-43.4%). However, Q1 FY27 is 46.8% higher YoY than Q1 FY26.</li>
+                <li><strong>HL Deal conversion rate rising:</strong> We grew from just 1 HL deal in Q1 FY26 to 9 HL deals in Q1 FY27.</li>
+              </ul>
+            </div>
+            
+            <div class="dark-box" style="padding:1.25rem; font-size:0.85rem;">
+              <h5 style="color:var(--amber); margin-bottom:0.5rem; font-size:0.95rem;">6-Quarter Revenue Summary Log</h5>
+              <div style="display:flex; flex-direction:column; gap:0.25rem;" class="num-data">
+                <div style="display:flex; justify-content:space-between;"><span>FY26 Total Revenue:</span> <span>Rs. 50,71,751</span></div>
+                <div style="display:flex; justify-content:space-between;"><span>Q1 FY27 Total:</span> <span>Rs. 11,74,734 (+46.7% YoY)</span></div>
+                <div style="display:flex; justify-content:space-between;"><span>HL share:</span> <span>89.8% (21 deals)</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="report-footer">
+          <div>Report 3 · Q1 FY27 Revenue Audit</div>
+          <div><strong class="internal-only">Internal only</strong></div>
+        </div>
+      </section>
+
+      <!-- REPORT 4: HL FUNNEL - ANALYST VIEW -->
+      <section id="report-4" class="report-section">
+        <div class="report-title-area">
+          <h2>HL Funnel — Analyst View</h2>
+          <div class="report-subtitle">A cold, metrics-driven audit of the 222 Home Loan leads cohort between September 2025 and June 2026.</div>
+        </div>
+
+        <!-- Top Verdict Box -->
+        <div class="dark-box" style="border-left-color: var(--red);">
+          <h3 style="font-size:1.35rem; color:#fff; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:0.5rem; margin-bottom:1rem;">
+            Analyst Verdict: Funnel has real structural strength — but two major problems leak value.
+          </h3>
+          <p style="margin-bottom:1rem; font-style:italic;">
+            Post-sanction conversion is world-class, but the pre-processing drop-off is the main leak.
+          </p>
+          <div class="columns-2" style="gap:1rem;">
+            <div style="background:rgba(255,255,255,0.06); padding:1rem; border-radius:6px; font-size:0.85rem;">
+              <span style="color:#22c55e; font-weight:700;">✅ What's working:</span> 64.5% processing-to-disbursal conversion rate is extremely strong (mature DSA benchmarks are 15-25%). Rs.21.2Cr live sanctions are in hand.
+            </div>
+            <div style="background:rgba(255,255,255,0.06); padding:1rem; border-radius:6px; font-size:0.85rem;">
+              <span style="color:#ef4444; font-weight:700;">❌ Structural problem:</span> 72% of leads drop off before entering processing. Lifting this processing rate from 28% to 40% would add ~25 incremental disbursals annually.
+            </div>
+            <div style="background:rgba(255,255,255,0.06); padding:1rem; border-radius:6px; font-size:0.85rem;">
+              <span style="color:var(--amber); font-weight:700;">⚠️ Watch closely:</span> Stale sanctions (Yogita: 233d, Sahil: 165d, Smruti: 149d). The Oct 2025 cohort is a historical outlier converting at just 5%.
+            </div>
+            <div style="background:rgba(255,255,255,0.06); padding:1rem; border-radius:6px; font-size:0.85rem;">
+              <span style="color:var(--primary-blue); font-weight:700; color:#93c5fd;">📊 Pipeline visibility:</span> B+ grade. Complete loan amounts logged for disbursed/sanctioned, but 6 out of 14 leads in processing lack logged amounts.
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 KPI cards -->
+        <div class="card-grid">
+          <div class="metric-card card-green">
+            <div class="metric-label">Disbursal Rate (Overall)</div>
+            <div class="metric-value" style="color:var(--green);">13.1%</div>
+            <div class="metric-desc">29 disbursed of 222 cohort</div>
+          </div>
+          <div class="metric-card card-green">
+            <div class="metric-label">Processing -> Disbursal</div>
+            <div class="metric-value" style="color:var(--green);">64.5%</div>
+            <div class="metric-desc">High success rate once processing starts</div>
+          </div>
+          <div class="metric-card card-red">
+            <div class="metric-label">Pre-Processing Drop-off</div>
+            <div class="metric-value" style="color:var(--red);">72.0%</div>
+            <div class="metric-desc">160 leads stalled/dropped before docs sent</div>
+          </div>
+          <div class="metric-card card-blue">
+            <div class="metric-label">Avg Disbursed Ticket</div>
+            <div class="metric-value">Rs. 1.47 Cr</div>
+            <div class="metric-desc">Consistent high-ticket client focus</div>
+          </div>
+        </div>
+
+        <!-- Monthly cohort table -->
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Cohort Month</th>
+                <th>Leads</th>
+                <th>Processing %</th>
+                <th>Sanctioned %</th>
+                <th>Disbursed %</th>
+                <th>Active Leads</th>
+                <th>Age (Days)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sep 2025</td>
+                <td>40</td>
+                <td>20%</td>
+                <td>15%</td>
+                <td style="font-weight:700;">15%</td>
+                <td>2</td>
+                <td>296d</td>
+              </tr>
+              <tr style="background-color: #fff9f9;">
+                <td>Oct 2025 ⚠️</td>
+                <td>19</td>
+                <td>11%</td>
+                <td>5%</td>
+                <td style="font-weight:700; color:var(--red);">5% ⚠️</td>
+                <td>0</td>
+                <td>272d</td>
+              </tr>
+              <tr>
+                <td>Nov 2025</td>
+                <td>26</td>
+                <td>31%</td>
+                <td>15%</td>
+                <td style="font-weight:700;">12%</td>
+                <td>3</td>
+                <td>242d</td>
+              </tr>
+              <tr>
+                <td>Dec 2025</td>
+                <td>19</td>
+                <td>21%</td>
+                <td>16%</td>
+                <td style="font-weight:700;">16%</td>
+                <td>0</td>
+                <td>211d</td>
+              </tr>
+              <tr class="row-highlight">
+                <td>Jan 2026 ⭐</td>
+                <td>24</td>
+                <td>38%</td>
+                <td>29%</td>
+                <td style="font-weight:700;">25%</td>
+                <td>2</td>
+                <td>180d</td>
+              </tr>
+              <tr>
+                <td>Feb 2026</td>
+                <td>25</td>
+                <td>20%</td>
+                <td>16%</td>
+                <td style="font-weight:700;">8%</td>
+                <td>4</td>
+                <td>149d</td>
+              </tr>
+              <tr class="row-highlight">
+                <td>Mar 2026</td>
+                <td>21</td>
+                <td>33%</td>
+                <td>29%</td>
+                <td style="font-weight:700;">24%</td>
+                <td>2</td>
+                <td>119d</td>
+              </tr>
+              <tr>
+                <td>Apr 2026 *</td>
+                <td>20</td>
+                <td>30%</td>
+                <td>10%</td>
+                <td style="font-weight:700;">5%*</td>
+                <td>6</td>
+                <td>90d</td>
+              </tr>
+              <tr style="background-color: #f6fff6;">
+                <td>May 2026 *</td>
+                <td>23</td>
+                <td style="font-weight:700; color:var(--green);">52%</td>
+                <td style="font-weight:700; color:var(--green);">30%</td>
+                <td style="font-weight:700;">9%*</td>
+                <td>10</td>
+                <td>60d</td>
+              </tr>
+              <tr>
+                <td>Jun 2026 *</td>
+                <td>5</td>
+                <td>20%</td>
+                <td>0%</td>
+                <td style="font-weight:700;">0%*</td>
+                <td>5</td>
+                <td>22d</td>
+              </tr>
+              <tr style="font-weight:700; background-color: var(--gray-100); color: var(--ink);">
+                <td>TOTAL</td>
+                <td>222</td>
+                <td>28%</td>
+                <td>18%</td>
+                <td>13.1%</td>
+                <td>34</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size:0.75rem; color:var(--body); padding: 0.75rem 1rem; border-top:1px solid var(--gray-200); margin:0;">
+            * Note: Apr, May, Jun 2026 cohorts are immature; final disbursal rate is pending due to the typical 60-90 days HL cycle.
+          </p>
+        </div>
+
+        <!-- 2-column active pipeline lists -->
+        <div class="columns-2">
+          
+          <!-- Column 1: Sanctioned -->
+          <div class="pipeline-section" style="border-top:4px solid var(--amber);">
+            <h4>Sanctioned Pipeline (11 leads · Rs.21.2Cr total)</h4>
+            <div class="pipeline-list">
+              
+              <div class="pipeline-item" style="border-left: 3px solid var(--red);">
+                <div class="status-indicator">⚠️</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Yogita Dand — Rs. 1.00 Cr</div>
+                  <div class="pipeline-item-meta">Stale: 233 days since sanction. Waiting for demand letter.</div>
+                </div>
+              </div>
+              
+              <div class="pipeline-item" style="border-left: 3px solid var(--red);">
+                <div class="status-indicator">⚠️</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Sahil Arora — Rs. 2.40 Cr</div>
+                  <div class="pipeline-item-meta">Stale: 165 days. Prestige CRM wrong TPA. Corrected version pending.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item" style="border-left: 3px solid var(--red);">
+                <div class="status-indicator">⚠️</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Smruti Mohapatra — Rs. 0.80 Cr</div>
+                  <div class="pipeline-item-meta">Stale: 149 days. Stalled post-sanction.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Ankita Ghosh — Rs. 2.40 Cr</div>
+                  <div class="pipeline-item-meta">130 days. Father signature required. Form sent to Pune.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Rustam Sandhu — Rs. 3.28 Cr</div>
+                  <div class="pipeline-item-meta">96 days. Resale deal. Previous owner documentation pending.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Aditya Sen — Rs. 2.50 Cr</div>
+                  <div class="pipeline-item-meta">79 days. Active processing in progress.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Sandeep Mahapatra — Rs. 1.18 Cr</div>
+                  <div class="pipeline-item-meta">57 days. CMO approval at BOB. Imminent.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Manoj Kumar — Rs. 1.86 Cr</div>
+                  <div class="pipeline-item-meta">48 days. CMO approval at BOB. Imminent.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Anand Goswami — Rs. 2.30 Cr</div>
+                  <div class="pipeline-item-meta">46 days. Standard processing.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Tuhin Jain — Rs. 1.48 Cr</div>
+                  <div class="pipeline-item-meta">44 days. ICICI loan under review. Non-standard T Form issue.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Sagar Lohiya — Rs. 1.96 Cr</div>
+                  <div class="pipeline-item-meta">41 days. Resale. Awaiting seller's original registry documents.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Column 2: Processing -->
+          <div class="pipeline-section" style="border-top:4px solid var(--primary-blue);">
+            <h4>Processing Pipeline (14 leads · Rs.16.9Cr estimated value)</h4>
+            <div class="pipeline-list">
+              
+              <div class="pipeline-item" style="border-left: 3px solid var(--red);">
+                <div class="status-indicator">⚠️</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Samish Bedi — Rs. 2.60 Cr</div>
+                  <div class="pipeline-item-meta">Stale: 228 days. BOB project approval (green certificate) pending.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item" style="border-left: 3px solid var(--red);">
+                <div class="status-indicator">⚠️</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Kumar Saheb — Unknown value</div>
+                  <div class="pipeline-item-meta">Stale: 141 days. Basic details missing in Zoho.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Snehashish Roy — Rs. 1.50 Cr</div>
+                  <div class="pipeline-item-meta">107 days. Document collection stage.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Anoop Mathew — Rs. 2.00 Cr</div>
+                  <div class="pipeline-item-meta">81 days. Under credit review at bank.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Sourab Sharma — Rs. 2.40 Cr</div>
+                  <div class="pipeline-item-meta">58 days. Processing started.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Prashanth Srinivasan — Rs. 2.40 Cr</div>
+                  <div class="pipeline-item-meta">40 days. In documentation phase.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Aakash Sharma — Rs. 2.20 Cr</div>
+                  <div class="pipeline-item-meta">39 days. Fresh login done.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item">
+                <div class="status-indicator">🟢</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">Sandeep Kumar — Rs. 2.50 Cr</div>
+                  <div class="pipeline-item-meta">32 days. File submitted to bank.</div>
+                </div>
+              </div>
+
+              <div class="pipeline-item" style="opacity:0.75;">
+                <div class="status-indicator">⚪</div>
+                <div class="pipeline-item-content">
+                  <div class="pipeline-item-title">+ 6 other leads</div>
+                  <div class="pipeline-item-meta">Active < 22 days. Fresh pipeline entries.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 6 Flag cards -->
+        <h4 style="font-size:1.2rem; margin-bottom:1rem;">Operational Flags Identified</h4>
+        <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+          <div class="metric-card card-red">
+            <div class="badge badge-red">Critical</div>
+            <div style="font-size:0.9rem; font-weight:600; margin-top:0.5rem; color:var(--ink);">3 Stale Sanctions > 120 Days</div>
+            <p style="font-size:0.8rem; color:var(--body); margin-top:0.25rem;">Yogita, Sahil, and Smruti represent Rs.4.2Cr value stuck post-sanction.</p>
+          </div>
+          <div class="metric-card card-red">
+            <div class="badge badge-red">Cohort Leak</div>
+            <div style="font-size:0.9rem; font-weight:600; margin-top:0.5rem; color:var(--ink);">Oct 2025 Cohort Outlier (5%)</div>
+            <p style="font-size:0.8rem; color:var(--body); margin-top:0.25rem;">Very poor performance compared to our Jan 2026 cohort (25%). Needs study.</p>
+          </div>
+          <div class="metric-card card-amber">
+            <div class="badge badge-amber">Funnel Leak</div>
+            <div style="font-size:0.9rem; font-weight:600; margin-top:0.5rem; color:var(--ink);">72% Pre-Processing Drop-off</div>
+            <p style="font-size:0.8rem; color:var(--body); margin-top:0.25rem;">Bulk of generated leads drop before completing bank login files.</p>
+          </div>
+          <div class="metric-card card-amber">
+            <div class="badge badge-amber">Process Stall</div>
+            <div style="font-size:0.9rem; font-weight:600; margin-top:0.5rem; color:var(--ink);">Samish Bedi: 228 Days in Processing</div>
+            <p style="font-size:0.8rem; color:var(--body); margin-top:0.25rem;">BOB green certificate delay is stalling Rs.2.6Cr loan value.</p>
+          </div>
+          <div class="metric-card card-green">
+            <div class="badge badge-green">Success Pattern</div>
+            <div style="font-size:0.9rem; font-weight:600; margin-top:0.5rem; color:var(--ink);">May 2026 Best-Ever Cohort</div>
+            <p style="font-size:0.8rem; color:var(--body); margin-top:0.25rem;">Reached 52% processing rate and 30% sanctioned rate. Team SOP working.</p>
+          </div>
+          <div class="metric-card card-blue">
+            <div class="badge badge-blue">Hygiene</div>
+            <div style="font-size:0.9rem; font-weight:600; margin-top:0.5rem; color:var(--ink);">Zoho Data Integrity Gaps</div>
+            <p style="font-size:0.8rem; color:var(--body); margin-top:0.25rem;">6 active processing leads have "unknown" values in Zoho. Must enforce data entry.</p>
+          </div>
+        </div>
+
+        <div class="report-footer">
+          <div>Report 4 · Analyst Home Loan Funnel Review</div>
+          <div><strong class="internal-only">Internal only</strong></div>
+        </div>
+      </section>
+
+      <!-- REPORT 5: HL FUNNEL - CORRECTED VIEW -->
+      <section id="report-5" class="report-section">
+        <div class="report-title-area">
+          <h2>HL Funnel — Corrected View</h2>
+          <div class="report-subtitle">The true story of the funnel after cleansing Zoho data of intentional relegations and auto-declined tickets.</div>
+        </div>
+
+        <!-- Correction banner -->
+        <div class="dark-box" style="background-color: var(--blue-darkest); border-left-color: var(--green);">
+          <h3 style="color:#fff; font-size:1.35rem; margin-bottom:0.5rem;">
+            The 72% "drop-off" is not a leaky funnel problem.
+          </h3>
+          <p style="font-size:1.05rem; line-height:1.4;">
+            It's actually a <strong>deliberate quality filter</strong> — with a very small actual loss layer underneath.
+          </p>
+          <p style="margin-top:0.75rem; font-size:0.85rem; color:rgba(255,255,255,0.75);">
+            Zoho timeline checks reveal: Sep-25 bulk import contained 39 leads immediately marked "Not Live" within 3 days. From April-26, website forms auto-flag and filter out sub-2Cr enquiries (11 leads). Real operational losses are limited to 11 leads.
+          </p>
+        </div>
+
+        <!-- Horizontal stacked bar visual -->
+        <div class="chart-container">
+          <div class="chart-title">Breakdown of the 158 "Drop-Offs"</div>
+          <div class="segmented-track">
+            <div class="track-part" style="width: 25%; background-color:#374151;" title="Intentional Relegation: 39 (25%)">Relegated (25%)</div>
+            <div class="track-part" style="width: 7%; background-color:#6b7280;" title="Sub-2Cr Ticket Declined: 11 (7%)">Sub-2Cr (7%)</div>
+            <div class="track-part" style="width: 3%; background-color:#9ca3af;" title="Responsive Ghost: 4 (3%)">Ghost (3%)</div>
+            <div class="track-part" style="width: 7%; background-color:var(--red);" title="Real Operational Loss: 11 (7%)">Ops Loss (7%)</div>
+            <div class="track-part" style="width: 14%; background-color:#f97316;" title="Pending Follow-up: 22 (14%)">Pending (14%)</div>
+            <div class="track-part" style="width: 44%; background-color:#e5e7eb; color:#4b5563;" title="Cold / Unknown: 71 (44%)">Cold/Other (44%)</div>
+          </div>
+          
+          <!-- Details for segments -->
+          <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:1rem; margin-bottom:0;">
+            <div style="font-size:0.8rem;">
+              <span style="display:inline-block; width:12px; height:12px; background:#374151; border-radius:2px; margin-right:4px;"></span>
+              <strong>Relegated (39)</strong>: Proactive database screening.
+            </div>
+            <div style="font-size:0.8rem;">
+              <span style="display:inline-block; width:12px; height:12px; background:#6b7280; border-radius:2px; margin-right:4px;"></span>
+              <strong>Sub-2Cr (11)</strong>: Declined per stating policies.
+            </div>
+            <div style="font-size:0.8rem;">
+              <span style="display:inline-block; width:12px; height:12px; background:var(--red); border-radius:2px; margin-right:4px;"></span>
+              <strong style="color:var(--red)">Ops Loss (11)</strong>: Started process then dropped.
+            </div>
+            <div style="font-size:0.8rem;">
+              <span style="display:inline-block; width:12px; height:12px; background:#f97316; border-radius:2px; margin-right:4px;"></span>
+              <strong>Pending (22)</strong>: Open followups. 2 are >=2Cr.
+            </div>
+          </div>
+        </div>
+
+        <div class="columns-2">
+          <!-- 4 segment cards -->
+          <div>
+            <div class="card-grid" style="grid-template-columns: 1fr 1fr; margin-bottom:1rem;">
+              <div class="metric-card card-blue">
+                <div class="metric-label">Intentional Relegation</div>
+                <div class="metric-value">39 Leads</div>
+                <div class="metric-desc">Cleared out immediately within 3 days. Not funnel failure.</div>
+              </div>
+              <div class="metric-card card-blue">
+                <div class="metric-label">Sub-2Cr Auto-Declines</div>
+                <div class="metric-value">11 Leads</div>
+                <div class="metric-desc">Declined proactively by policy filter.</div>
+              </div>
+              <div class="metric-card card-amber">
+                <div class="metric-label">Pending Follow-up</div>
+                <div class="metric-value">22 Leads</div>
+                <div class="metric-desc">Open opportunities; 2 have >=2Cr tickets.</div>
+              </div>
+              <div class="metric-card card-red">
+                <div class="metric-label">Real Operational Loss</div>
+                <div class="metric-value" style="color:var(--red);">11 Leads</div>
+                <div class="metric-desc">Had clear intent, started processing, then lost.</div>
+              </div>
+            </div>
+
+            <!-- Revised verdict metrics -->
+            <div class="metric-card card-green">
+              <h4 style="font-size:1.1rem; margin-bottom:0.75rem;">Revised Funnel Metrics</h4>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; font-size:0.85rem;" class="num-data">
+                <div>True Conversion Rate (Disbursed/Pursued):</div>
+                <div style="text-align:right; font-weight:700; color:var(--green)">16.9% (29 of 172)</div>
+                
+                <div>Real Operational Loss Rate:</div>
+                <div style="text-align:right; font-weight:700; color:var(--red)">6.4% (11 of 172)</div>
+                
+                <div>Pending >=2Cr Re-engagement:</div>
+                <div style="text-align:right; font-weight:700;">2 leads</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Table of 11 real losses -->
+          <div class="table-container" style="margin-bottom:0;">
+            <h4 style="font-size:1.1rem; padding: 0.85rem 1rem; margin:0; border-bottom:1px solid var(--gray-200);">The 11 Real Operational Losses</h4>
+            <table>
+              <thead>
+                <tr>
+                  <th>Lead Name</th>
+                  <th>Stage Reached</th>
+                  <th>Reason / Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ASHISH BHAYANA</td>
+                  <td>06. Logins Done</td>
+                  <td>Competitor took deal after docs submitted. Action: <strong>Competitor Loss</strong></td>
+                </tr>
+                <tr>
+                  <td>Shriram Datar</td>
+                  <td>08. Credit Review</td>
+                  <td>Credit profile issue or competitor switch.</td>
+                </tr>
+                <tr>
+                  <td>Shashank Gupta</td>
+                  <td>01. Partial docs</td>
+                  <td>Changed plans or ticket size too small.</td>
+                </tr>
+                <tr>
+                  <td>Priyansh Tiwari</td>
+                  <td>01. Partial docs (2.25Cr)</td>
+                  <td>Went directly to bank (bankable profile).</td>
+                </tr>
+                <tr>
+                  <td>Susant Acharya</td>
+                  <td>02. All docs received</td>
+                  <td>Vanished after docs submitted. Competitor loss.</td>
+                </tr>
+                <tr>
+                  <td>Pradeep Kumar Raju</td>
+                  <td>04. Docs to bank</td>
+                  <td>Stale file. Stalled at bank processing.</td>
+                </tr>
+                <tr>
+                  <td>Uday Kota</td>
+                  <td>03. Pre-process</td>
+                  <td>Likely took alternative option. Outreach.</td>
+                </tr>
+                <tr>
+                  <td>Vatsal Dhanuka</td>
+                  <td>03. Pre-process</td>
+                  <td>Same pattern. Lost early. Outreach.</td>
+                </tr>
+                <tr>
+                  <td>Shubham Gargote</td>
+                  <td>03. Pre-process</td>
+                  <td>Feb 2026. Under-construction timing constraints.</td>
+                </tr>
+                <tr>
+                  <td>Sajit S</td>
+                  <td>03. Pre-process</td>
+                  <td>Ghosted after initial advisory call.</td>
+                </tr>
+                <tr>
+                  <td>Naveen Sai</td>
+                  <td>03. Pre-process</td>
+                  <td>May 2026. Warm. Action: <strong>Re-engage</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Operational Shift narrative box -->
+        <div class="dark-box" style="margin-top:2rem; margin-bottom:0; border-left-color: var(--primary-blue);">
+          <h3>Investor Narrative Impact & The Core Fix</h3>
+          <p style="margin-bottom:0.75rem;">
+            <strong>Reframed Funnel health:</strong> The corrected conversion rate is <strong>16.9%</strong>. This represents a highly healthy DSA conversion rate for Home Loans (the industry standard floats around 10-15%).
+          </p>
+          <p style="margin-bottom:0.75rem;">
+            <strong>The Core operational fix:</strong> To prevent losses in the late processing stages (e.g. ASHISH BHAYANA category), we are implementing a mandatory progress call checklist within 48 hours of all logins being completed.
+          </p>
+          
+          <div style="background-color:rgba(255,255,255,0.06); padding:1rem; border-radius:6px; font-size:0.85rem;" class="num-data">
+            <strong>Funnel Ledger:</strong> Leads Pursued: 172 · Disbursed: 29 (16.9%) · Active Pipeline: 34 (19.8%) · Real Loss: 11 (6.4%) · Cold/Unknown: 98 (57%). Once processing starts, conversion success rate remains <strong>64.5%</strong>.
+          </div>
+        </div>
+
+        <div class="report-footer">
+          <div>Report 5 · Corrected Home Loan Funnel Analytics</div>
+          <div><strong class="internal-only">Internal only</strong></div>
+        </div>
+      </section>
+
+      <!-- REPORT 6: FUNNEL BY TICKET SIZE -->
+      <section id="report-6" class="report-section">
+        <div class="report-title-area">
+          <h2>Funnel by Ticket Size</h2>
+          <div class="report-subtitle">Analysis showing how conversion rates differ significantly by loan value bands.</div>
+        </div>
+
+        <div class="columns-3">
+          
+          <!-- Column 1: Left - Conversion rates by band -->
+          <div class="metric-card">
+            <h4 style="font-size:1.15rem; margin-bottom:1.25rem;">Stage Conversion by Ticket Band</h4>
+            
+            <!-- Band 1: 2Cr+ -->
+            <div style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--gray-100); padding-bottom: 1rem;">
+              <div style="display:flex; justify-content:space-between; font-weight:700; margin-bottom:0.5rem; font-size:0.95rem;">
+                <span style="color:var(--red);">Rs. 2Cr+ Band</span>
+                <span class="num-data" style="color:var(--red);">28% E2E (5 of 18)</span>
+              </div>
+              <div style="font-size:0.8rem; display:flex; flex-direction:column; gap:0.25rem;" class="num-data">
+                <div style="display:flex; justify-content:space-between;"><span>Onboarded -> Processing:</span> <span style="font-weight:600;">94%</span></div>
+                <div style="display:flex; justify-content:space-between;"><span>Processing -> Sanctioned:</span> <span style="font-weight:600;">65%</span></div>
+                <div style="display:flex; justify-content:space-between; background:rgba(232, 65, 24, 0.08); padding:0.15rem; color:var(--red);">
+                  <span>Sanctioned -> Disbursed:</span> <span style="font-weight:700;">45% ⚑ (Blocker)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Band 2: 1-2Cr -->
+            <div style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--gray-100); padding-bottom: 1rem;">
+              <div style="display:flex; justify-content:space-between; font-weight:700; margin-bottom:0.5rem; font-size:0.95rem;">
+                <span style="color:var(--primary-blue);">Rs. 1-2Cr Band</span>
+                <span class="num-data" style="color:var(--primary-blue);">71% E2E (17 of 24)</span>
+              </div>
+              <div style="font-size:0.8rem; display:flex; flex-direction:column; gap:0.25rem;" class="num-data">
+                <div style="display:flex; justify-content:space-between;"><span>Onboarded -> Processing:</span> <span style="font-weight:600;">92%</span></div>
+                <div style="display:flex; justify-content:space-between;"><span>Processing -> Sanctioned:</span> <span style="font-weight:600;">95%</span></div>
+                <div style="display:flex; justify-content:space-between;"><span>Sanctioned -> Disbursed:</span> <span style="font-weight:600;">81%</span></div>
+              </div>
+            </div>
+
+            <!-- Band 3: Sub-1Cr -->
+            <div>
+              <div style="display:flex; justify-content:space-between; font-weight:700; margin-bottom:0.5rem; font-size:0.95rem;">
+                <span style="color:var(--green);">Sub-Rs. 1Cr Band</span>
+                <span class="num-data" style="color:var(--green);">78% E2E (7 of 9)</span>
+              </div>
+              <div style="font-size:0.8rem; display:flex; flex-direction:column; gap:0.25rem;" class="num-data">
+                <div style="display:flex; justify-content:space-between;"><span>Onboarded -> Processing:</span> <span style="font-weight:600;">100%</span></div>
+                <div style="display:flex; justify-content:space-between;"><span>Processing -> Sanctioned:</span> <span style="font-weight:600;">89%</span></div>
+                <div style="display:flex; justify-content:space-between;"><span>Sanctioned -> Disbursed:</span> <span style="font-weight:600;">88%</span></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Column 2: Middle - Active pipeline blockers -->
+          <div>
+            <!-- 2Cr+ blockers -->
+            <div class="pipeline-section" style="border-top:4px solid var(--red);">
+              <h4 style="color:var(--red);">Rs. 2Cr+ Blockers (13 active · Rs.28.6Cr)</h4>
+              <div class="pipeline-list">
+                
+                <div class="pipeline-item" style="border-left: 3px solid var(--red);">
+                  <div class="status-indicator">🔴</div>
+                  <div class="pipeline-item-content">
+                    <div class="pipeline-item-title">Sahil Arora — Rs.2.40Cr</div>
+                    <div class="pipeline-item-meta">Prestige CRM wrong TPA. Corrected version pending. Imminent.</div>
+                  </div>
+                </div>
+
+                <div class="pipeline-item" style="border-left: 3px solid var(--red);">
+                  <div class="status-indicator">🔴</div>
+                  <div class="pipeline-item-content">
+                    <div class="pipeline-item-title">Rustam Sandhu — Rs.3.28Cr</div>
+                    <div class="pipeline-item-meta">Resale. Previous owner TPA documents not submitted.</div>
+                  </div>
+                </div>
+
+                <div class="pipeline-item" style="border-left: 3px solid var(--red);">
+                  <div class="status-indicator">🔴</div>
+                  <div class="pipeline-item-content">
+                    <div class="pipeline-item-title">Ankita Ghosh — Rs.2.40Cr</div>
+                    <div class="pipeline-item-meta">Father signature needed. Form sent to Pune. FNOC pending.</div>
+                  </div>
+                </div>
+
+                <div class="pipeline-item" style="border-left: 3px solid var(--amber);">
+                  <div class="status-indicator">🟡</div>
+                  <div class="pipeline-item-content">
+                    <div class="pipeline-item-title">Samish Bedi — Rs.2.60Cr</div>
+                    <div class="pipeline-item-meta">BOB project approval (green certificate) pending.</div>
+                  </div>
+                </div>
+
+                <div class="pipeline-item" style="border-left: 3px solid var(--primary-blue);">
+                  <div class="status-indicator">🔵</div>
+                  <div class="pipeline-item-content">
+                    <div class="pipeline-item-title">4× June Entries — Rs.9.90Cr</div>
+                    <div class="pipeline-item-meta">Sourab, Prashanth, Aakash, Sandeep. Logins done 20-29 Jun.</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- 1-2Cr blockers -->
+            <div class="pipeline-section" style="border-top:4px solid var(--primary-blue);">
+              <h4>Rs. 1-2Cr Blockers (7 active · Rs.10.0Cr)</h4>
+              <div class="pipeline-list">
+                
+                <div class="pipeline-item" style="border-left: 3px solid var(--green);">
+                  <div class="status-indicator">🟢</div>
+                  <div class="pipeline-item-content">
+                    <div class="pipeline-item-title">S. Mahapatra & M. Kumar — Rs.3.04Cr</div>
+                    <div class="pipeline-item-meta">CMO approval pending at BOB. Imminent release expected.</div>
+                  </div>
+                </div>
+
+                <div class="pipeline-item" style="border-left: 3px solid var(--amber);">
+                  <div class="status-indicator">🟡</div>
+                  <div class="pipeline-item-content">
+                    <div class="pipeline-item-title">Sagar Lohiya — Rs.1.96Cr</div>
+                    <div class="pipeline-item-meta">Sanctioned. Waiting for seller documents (resale).</div>
+                  </div>
+                </div>
+
+                <div class="pipeline-item" style="border-left: 3px solid var(--red);">
+                  <div class="status-indicator">🔴</div>
+                  <div class="pipeline-item-content">
+                    <div class="pipeline-item-title">Tuhin Jain — Rs.1.48Cr</div>
+                    <div class="pipeline-item-meta">ICICI non-standard T Form issue. Risk of Q2 slip.</div>
+                  </div>
+                </div>
+
+                <div class="pipeline-item" style="border-left: 3px solid var(--red);">
+                  <div class="status-indicator">🔴</div>
+                  <div class="pipeline-item-content">
+                    <div class="pipeline-item-title">Yogita Dand — Rs.1.00Cr</div>
+                    <div class="pipeline-item-meta">ICICI sanctioned 8 months ago. Demand letter not shared. Stale.</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 3: Right - Key findings -->
+          <div class="dark-box" style="margin-bottom:0; border-left-color: var(--amber);">
+            <h4 style="color:#fff; font-size:1.25rem; margin-bottom:1rem; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:0.5rem;">
+              Key Finding: The stall is builder documents, not customer complexity.
+            </h4>
+            
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.5rem;" class="num-data">
+              <div style="background:rgba(255,255,255,0.06); padding:0.75rem; border-radius:6px; text-align:center;">
+                <div style="font-size:0.75rem; color:rgba(255,255,255,0.6); text-transform:uppercase;">2Cr+ S->D Rate</div>
+                <div style="font-size:1.5rem; font-weight:700; color:var(--red);">45%</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.06); padding:0.75rem; border-radius:6px; text-align:center;">
+                <div style="font-size:0.75rem; color:rgba(255,255,255,0.6); text-transform:uppercase;">Sanction/Disb.</div>
+                <div style="font-size:1.5rem; font-weight:700; color:var(--green);">64%</div>
+              </div>
+            </div>
+
+            <ul style="padding-left:1.25rem; list-style-type:disc; font-size:0.8rem; display:flex; flex-direction:column; gap:0.5rem; color:rgba(255,255,255,0.85);">
+              <li><strong>Builder TPA/NOC delays</strong> are the single most common blocker post-sanction. Top builders like Prestige, Assetz, and Sobha appear consistently in the stalled list.</li>
+              <li><strong>Bank processing speed is strong:</strong> Onboarded-to-processing rates run at 92-100% across all ticket sizes. Files enter processing cleanly; the struggle is document closure.</li>
+              <li><strong>Zoho pipeline under-reporting:</strong> 3 of the 13 active Rs.2Cr+ leads currently show zero project/bank data in Zoho CRM. Active pipeline value is structurally understated.</li>
+              <li><strong>Maturing lead pipeline:</strong> May 2026 was our highest-ever intake of Rs.2Cr+ leads (8 in a single month). These are maturing now.</li>
+              <li><strong>Significant revenue potential:</strong> Active Rs.2Cr+ pipeline stands at <strong>Rs.28.6Cr</strong> loan value. Successful closure represents ~Rs.22-25L in potential commission revenue.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="report-footer">
+          <div>Report 6 · Home Loan Ticket Size Breakdown</div>
+          <div><strong class="internal-only">Internal only</strong></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- JS CONTROLS FOR SWITCHING TABS -->
+  <script>
+    function switchTab(event, reportId) {
+      // 1. Hide all reports
+      const reports = document.querySelectorAll('.report-section');
+      reports.forEach(report => {
+        report.classList.remove('active');
+      });
+
+      // 2. Deactivate all tab buttons
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      tabButtons.forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // 3. Show current report and activate button
+      const activeReport = document.getElementById(reportId);
+      if (activeReport) {
+        activeReport.classList.add('active');
+      }
+      
+      event.currentTarget.classList.add('active');
+    }
+  </script>
+</body>
+</html>
