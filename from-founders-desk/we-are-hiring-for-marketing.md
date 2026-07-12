@@ -42,6 +42,11 @@ Founder, Peaceful Loans · IIM Calcutta Alumnus
 
   
   
+    ![Organic SEO growth illustration](../../assets/seo-organic-growth-cartoon.jpg)
+  
+
+  
+  
     
 
 Last quarter, we advised multiple HNI consumers purchasing properties worth ₹2.5 crore to ₹5 crore. These are tech directors, startup founders, and senior business leaders who are making some of the largest financial decisions of their lives.
