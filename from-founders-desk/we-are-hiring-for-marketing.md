@@ -3,13 +3,8 @@
     
       
         [
-          
-          Book a Free Call
-        ](https://forms.zohopublic.in/mangeshpeacef1/form/Contactforsupport/formperma/_ps6Hq-7OvODRTnKowl1_FxyIIKmnPIywn1z6WV7i4M)
-        [
-          
-          WhatsApp Us
-        ](https://forms.zohopublic.in/mangeshpeacef1/form/WhatsAppButtonForm/formperma/F2z-Z2bBLbkttGWHBPPvrqSwlSXzd_WnD4sUAWNnjh4)
+          Apply Now
+        ](https://docs.google.com/forms/d/e/1FAIpQLSfC3PGsDSYAL-fG68xk3WrD_jCivRqieD2CHG-YMVn1QC2V1A/viewform)
       
       
         From Founder's Desk
