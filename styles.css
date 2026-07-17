@@ -922,10 +922,11 @@ ul { list-style: none; }
   .ask-grid {
     grid-template-columns: 1fr 1fr; /* Equal symmetrical split */
     gap: 3.5rem;
-    align-items: center; /* Align items vertically in the center to prevent height stretch forcing crops */
+    align-items: start; /* Align items to start so heights flow naturally based on contents */
   }
   .ask-info-panel {
     order: 1; /* left column on desktop */
+    height: auto; /* Let the container wrap the image naturally */
   }
   .ask-card {
     order: 2; /* right column on desktop */
@@ -955,10 +956,10 @@ ul { list-style: none; }
 
 .ask-info-image {
   width: 100%;
-  height: auto; /* Let the aspect ratio flow naturally */
+  height: auto; /* Let height adjust dynamically based on aspect ratio (square) */
   border-radius: 6px;
   border: 1px solid var(--gray-100);
-  object-fit: contain; /* Do not crop the image content */
+  display: block;
 }
 
 /* Trust Badges Strip (INDmoney style) */
