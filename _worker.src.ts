@@ -14,7 +14,53 @@ const aeoWorker = createAEOWorker({
 // A simple in-memory fallback for local dev (persists during isolate lifecycle)
 const localDB = new Map<string, string>();
 
-async function handleApiRequest(request: Request, env: any): Promise<Response> {
+async function sendNotificationEmail(username: string, question: string, env: any): Promise<void> {
+  const apiKey = env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn("RESEND_API_KEY is not set. Email notification skipped.");
+    return;
+  }
+
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        from: "Peaceful Loans Q&A <onboarding@resend.dev>",
+        to: "mangesh@peaceful-loans.com",
+        subject: `New Q&A Question from ${username}`,
+        html: `
+          <div style="font-family:sans-serif; line-height:1.6; max-width:600px; margin:0 auto; padding:1.5rem; border:1px solid #e5e7eb; border-radius:8px;">
+            <h2 style="color:#1a4cc8; margin-top:0;">New Question Received</h2>
+            <p>A borrower has posted a question anonymously on the Q&A landing page.</p>
+            <hr style="border:0; border-top:1px solid #e5e7eb; margin:1.5rem 0;" />
+            <p><strong>Username:</strong> <code style="background:#f3f4f6; padding:0.2rem 0.4rem; border-radius:4px; font-weight:600; color:#1a4cc8;">${username}</code></p>
+            <p><strong>Question:</strong></p>
+            <blockquote style="background:#f9fafb; padding:1.25rem; border-left:4px solid #1a4cc8; margin:0; border-radius:0 8px 8px 0; font-style:italic;">
+              ${question.replace(/\n/g, "<br>")}
+            </blockquote>
+            <hr style="border:0; border-top:1px solid #e5e7eb; margin:1.5rem 0;" />
+            <p style="margin-bottom:0;">
+              <a href="https://peaceful-loans.com/admin-questions.html" style="display:inline-block; background:#1a4cc8; color:#ffffff; padding:0.6rem 1.2rem; border-radius:6px; text-decoration:none; font-weight:600; font-size:14px;">Open Moderator Dashboard</a>
+            </p>
+          </div>
+        `
+      })
+    });
+    
+    if (!res.ok) {
+      const errText = await res.text();
+      console.error(`Resend API error: ${res.status} - ${errText}`);
+    }
+  } catch (err) {
+    console.error("Failed to send notification email:", err);
+  }
+}
+
+async function handleApiRequest(request: Request, env: any, ctx: any): Promise<Response> {
   const url = new URL(request.url);
   const cleanPath = url.pathname.replace(/\/+$/, "");
 
@@ -54,6 +100,13 @@ async function handleApiRequest(request: Request, env: any): Promise<Response> {
         await kv.put(`question:${id}`, JSON.stringify(data));
       } else {
         localDB.set(`question:${id}`, JSON.stringify(data));
+      }
+
+      // Trigger background email notification (don't block client response)
+      if (ctx && typeof ctx.waitUntil === "function") {
+        ctx.waitUntil(sendNotificationEmail(username, question, env));
+      } else {
+        sendNotificationEmail(username, question, env).catch(console.error);
       }
 
       return new Response(JSON.stringify({ id }), { status: 200, headers });
@@ -212,7 +265,7 @@ export default {
     
     // Intercept our Q&A API routes
     if (cleanPath.startsWith("/api/")) {
-      return handleApiRequest(request, env);
+      return handleApiRequest(request, env, ctx);
     }
 
     return aeoWorker.fetch(request, env, ctx);
