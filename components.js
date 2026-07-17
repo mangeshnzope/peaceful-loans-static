@@ -51,6 +51,7 @@ function navHTML(currentPath) {
     { label: 'What We Check', href: isHome ? '#shield' : '/index.html#shield' },
     { label: 'Reviews', href: '/reviews.html' },
     { label: 'FAQs', href: '/faqs.html' },
+    { label: 'Ask Anonymously', href: '/ask.html' },
     { label: "From Founder's Desk", href: '/from-founders-desk/' },
   ];
   return `
@@ -96,6 +97,7 @@ function footerHTML() {
           <li><a href="/reviews.html">Reviews</a></li>
           <li><a href="/faqs.html">FAQs</a></li>
           <li><a href="/from-founders-desk/">Founder's Desk (Blog)</a></li>
+          <li><a href="/ask.html">Ask Anonymously</a></li>
           <li><a href="/about.html">About</a></li>
           <li><a href="/index-booster/">Sitemap Booster</a></li>
         </ul>

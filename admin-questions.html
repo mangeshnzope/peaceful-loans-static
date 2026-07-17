@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>Admin Q&A Dashboard — Peaceful Loans</title>
+  <link rel="icon" type="image/jpeg" href="/assets/icon-jpg.jpg">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=15">
+</head>
+<body>
+<div id="app"></div>
+<script src="/components.js"></script>
+<script>
+let adminSecret = sessionStorage.getItem('admin_secret') || '';
+
+function showPage() {
+  if (!adminSecret) {
+    renderLogin();
+  } else {
+    renderDashboard();
+  }
+}
+
+function renderLogin() {
+  document.getElementById('app').innerHTML = `
+    ${navHTML('/ask.html')}
+    
+    <div class="page-header">
+      <div class="container-sm text-center">
+        <p class="section-label section-label-gray">Security Check</p>
+        <h1>Admin Q&A Login</h1>
+      </div>
+    </div>
+
+    <div class="container-xs" style="padding-top:1rem; padding-bottom:5rem;">
+      <div class="ask-card">
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group" style="margin-bottom:1.5rem">
+            <label for="secretInput" style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Enter Admin Secret Passphrase</label>
+            <input type="password" id="secretInput" required placeholder="••••••••••••" style="width:100%; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; outline:none; transition:border-color 0.2s;" />
+          </div>
+          <div id="loginStatus" style="display:none; padding:1rem; border-radius:6px; font-size:14px; margin-bottom:1.5rem;" class="status-banner status-error"></div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Authenticate</button>
+        </form>
+      </div>
+    </div>
+
+    ${footerHTML()}
+  `;
+  initNav();
+}
+
+function handleLogin(event) {
+  event.preventDefault();
+  const inputVal = document.getElementById('secretInput').value;
+  adminSecret = inputVal;
+  sessionStorage.setItem('admin_secret', adminSecret);
+  renderDashboard();
+}
+
+async function renderDashboard() {
+  document.getElementById('app').innerHTML = `
+    ${navHTML('/ask.html')}
+    
+    <div class="page-header">
+      <div class="container-sm text-center">
+        <p class="section-label section-label-gray">Control Panel</p>
+        <h1>Q&A Moderation Dashboard</h1>
+        <p style="margin-top:1.25rem">Manage anonymous borrower queries, write answers, and track emails.</p>
+        <button onclick="logoutAdmin()" class="btn btn-outline-gray btn-sm" style="margin-top:1rem">Sign Out</button>
+      </div>
+    </div>
+
+    <div class="container-sm" style="padding-top:1rem; padding-bottom:5rem;" id="dashboardContent">
+      <div class="ask-card text-center" style="padding:3rem 2rem;">
+        <div style="font-size:14px; color:var(--gray-500)">Loading questions...</div>
+      </div>
+    </div>
+
+    ${footerHTML()}
+  `;
+  initNav();
+
+  const dashboardContent = document.getElementById('dashboardContent');
+
+  try {
+    const res = await fetch(`/api/admin/questions?secret=${encodeURIComponent(adminSecret)}`);
+    const questions = await res.json();
+
+    if (!res.ok) {
+      throw new Error(questions.error || 'Failed to load questions.');
+    }
+
+    const unanswered = questions.filter(q => q.status === 'pending');
+    const answered = questions.filter(q => q.status === 'answered');
+
+    let unansweredHTML = '<div style="font-size:14px; color:var(--gray-500); padding:2rem 0;">No pending questions to answer.</div>';
+    if (unanswered.length > 0) {
+      unansweredHTML = unanswered.map(q => `
+        <div class="ask-card" style="margin-bottom:1.5rem; border-left:4px solid var(--blue)">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--gray-100); padding-bottom:0.75rem; margin-bottom:1rem;">
+            <div>
+              <span style="font-family:monospace; font-weight:600; color:var(--blue); font-size:14px;">${q.username}</span>
+              ${q.email ? `<span style="font-size:12px; color:var(--gray-500); margin-left:1rem; border-left:1px solid var(--gray-200); padding-left:1rem;">📧 ${q.email}</span>` : ''}
+            </div>
+            <span style="font-size:12px; color:var(--gray-400)">${new Date(q.created_at).toLocaleString()}</span>
+          </div>
+          <p style="font-size:15px; color:var(--gray-800); line-height:1.5; margin-bottom:1.5rem; font-weight:500;">
+            ${q.question.replace(/\n/g, '<br>')}
+          </p>
+          <div style="border-top:1px solid var(--gray-100); padding-top:1.5rem">
+            <h4 style="font-size:13px; font-weight:600; text-transform:uppercase; color:var(--gray-700); margin-bottom:0.5rem">Write Response</h4>
+            <textarea id="answerText-${q.id}" placeholder="Provide expert response..." style="width:100%; height:120px; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; line-height:1.5; outline:none; resize:vertical; margin-bottom:0.75rem;"></textarea>
+            <div style="display:flex; justify-content:flex-end">
+              <button onclick="submitAnswer('${q.id}')" id="answerBtn-${q.id}" class="btn btn-primary btn-sm">Post Answer</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    let answeredHTML = '<div style="font-size:14px; color:var(--gray-500); padding:2rem 0;">No answered questions in the archive.</div>';
+    if (answered.length > 0) {
+      answeredHTML = answered.map(q => `
+        <div class="ask-card" style="margin-bottom:1.5rem; background:#f9fafb; opacity:0.95;">
+          <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--gray-100); padding-bottom:0.75rem; margin-bottom:1rem;">
+            <div>
+              <span style="font-family:monospace; font-weight:600; color:var(--gray-600); font-size:14px;">${q.username}</span>
+              ${q.email ? `<span style="font-size:12px; color:var(--gray-400); margin-left:1rem; border-left:1px solid var(--gray-200); padding-left:1rem;">📧 ${q.email}</span>` : ''}
+            </div>
+            <span style="font-size:12px; color:var(--gray-400)">${new Date(q.created_at).toLocaleString()}</span>
+          </div>
+          <p style="font-size:14px; color:var(--gray-600); line-height:1.5; margin-bottom:1.25rem;">
+            ${q.question.replace(/\n/g, '<br>')}
+          </p>
+          <div style="border-top:1px solid var(--gray-100); padding-top:1rem; background:#fff; border-radius:6px; padding:1rem; border:1px solid var(--gray-200)">
+            <div style="font-size:12px; font-weight:600; color:#16a34a; text-transform:uppercase; margin-bottom:0.5rem">Answered Response</div>
+            <p style="font-size:14.5px; color:var(--gray-800); line-height:1.6; font-family:var(--font-serif)">
+              ${q.answer.replace(/\\n/g, '<br>').replace(/\n/g, '<br>')}
+            </p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    dashboardContent.innerHTML = `
+      <div style="margin-bottom:3rem">
+        <h2 style="font-family:var(--font-serif); font-size:1.8rem; border-bottom:2px solid var(--blue); padding-bottom:0.5rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center">
+          <span>Unanswered Questions</span>
+          <span class="badge" style="background:var(--blue); color:#fff; font-size:14px; padding:0.25rem 0.6rem; border-radius:12px;">${unanswered.length}</span>
+        </h2>
+        ${unansweredHTML}
+      </div>
+
+      <div>
+        <h2 style="font-family:var(--font-serif); font-size:1.8rem; border-bottom:2px solid var(--gray-400); padding-bottom:0.5rem; margin-bottom:1.5rem; display:flex; justify-content:space-between; align-items:center">
+          <span>Answered Archive</span>
+          <span class="badge" style="background:var(--gray-400); color:#fff; font-size:14px; padding:0.25rem 0.6rem; border-radius:12px;">${answered.length}</span>
+        </h2>
+        ${answeredHTML}
+      </div>
+    `;
+
+  } catch (err) {
+    sessionStorage.removeItem('admin_secret');
+    dashboardContent.innerHTML = `
+      <div class="ask-card text-center" style="padding:3rem 2rem; border-color:#fee2e2;">
+        <h3 style="color:#ef4444; margin-bottom:0.5rem">Authentication Failed</h3>
+        <p style="color:var(--gray-600)">${err.message}</p>
+        <button onclick="renderLogin()" class="btn btn-primary btn-sm" style="margin-top:1.5rem">Try Again</button>
+      </div>
+    `;
+  }
+}
+
+async function submitAnswer(id) {
+  const answerText = document.getElementById(`answerText-${id}`).value;
+  const answerBtn = document.getElementById(`answerBtn-${id}`);
+
+  if (!answerText.trim()) {
+    alert('Please enter an answer before posting.');
+    return;
+  }
+
+  answerBtn.disabled = true;
+  answerBtn.innerText = 'Posting...';
+
+  try {
+    const res = await fetch('/api/admin/answer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id,
+        answer: answerText,
+        secret: adminSecret
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || 'Failed to submit answer.');
+    }
+
+    renderDashboard();
+  } catch (err) {
+    answerBtn.disabled = false;
+    answerBtn.innerText = 'Post Answer';
+    alert(err.message);
+  }
+}
+
+function logoutAdmin() {
+  sessionStorage.removeItem('admin_secret');
+  adminSecret = '';
+  renderLogin();
+}
+
+window.onload = showPage;
+</script>
+</body>
+</html>
