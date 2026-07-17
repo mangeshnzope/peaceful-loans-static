@@ -102,6 +102,7 @@ async function renderDashboard() {
           <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--gray-100); padding-bottom:0.75rem; margin-bottom:1rem;">
             <div>
               <span style="font-family:monospace; font-weight:600; color:var(--blue); font-size:14px;">${q.username}</span>
+              <span class="status-badge pending" style="margin-left:0.5rem; font-size:9px; padding:0.15rem 0.35rem;">${q.tag || 'General'}</span>
               ${q.email ? `<span style="font-size:12px; color:var(--gray-500); margin-left:1rem; border-left:1px solid var(--gray-200); padding-left:1rem;">📧 ${q.email}</span>` : ''}
             </div>
             <span style="font-size:12px; color:var(--gray-400)">${new Date(q.created_at).toLocaleString()}</span>
@@ -127,6 +128,7 @@ async function renderDashboard() {
           <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--gray-100); padding-bottom:0.75rem; margin-bottom:1rem;">
             <div>
               <span style="font-family:monospace; font-weight:600; color:var(--gray-600); font-size:14px;">${q.username}</span>
+              <span class="status-badge pending" style="margin-left:0.5rem; font-size:9px; padding:0.15rem 0.35rem;">${q.tag || 'General'}</span>
               ${q.email ? `<span style="font-size:12px; color:var(--gray-400); margin-left:1rem; border-left:1px solid var(--gray-200); padding-left:1rem;">📧 ${q.email}</span>` : ''}
             </div>
             <span style="font-size:12px; color:var(--gray-400)">${new Date(q.created_at).toLocaleString()}</span>

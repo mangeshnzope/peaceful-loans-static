@@ -853,4 +853,45 @@ ul { list-style: none; }
   line-height: 1.5;
 }
 
+/* Q&A Directory specific classes */
+.btn-tag {
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  padding: 0.35rem 0.85rem;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.btn-tag:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: rgba(26, 76, 200, 0.02);
+}
+
+.btn-tag.active {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+}
+
+.qa-accordion-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-color: var(--gray-300) !important;
+}
+
+.qa-accordion-header:hover h3 {
+  color: var(--blue) !important;
+}
+
+#dirSearch:focus {
+  border-color: var(--blue) !important;
+  box-shadow: 0 0 0 3px rgba(26, 76, 200, 0.1);
+}
+
+
 

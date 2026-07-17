@@ -537,7 +537,7 @@ async function handleApiRequest(request, env) {
   }
   if (cleanPath === "/api/questions" && request.method === "POST") {
     try {
-      const { username, question, email } = await request.json();
+      const { username, question, email, tag } = await request.json();
       if (!username || !question) {
         return new Response(JSON.stringify({ error: "Username and question are required." }), { status: 400, headers });
       }
@@ -547,6 +547,7 @@ async function handleApiRequest(request, env) {
         username,
         question,
         email: email || null,
+        tag: tag || "General",
         answer: null,
         status: "pending",
         created_at: (/* @__PURE__ */ new Date()).toISOString()
@@ -564,10 +565,47 @@ async function handleApiRequest(request, env) {
   }
   if (cleanPath === "/api/questions" && request.method === "GET") {
     const id = url.searchParams.get("id");
-    if (!id) {
-      return new Response(JSON.stringify({ error: "Missing question ID." }), { status: 400, headers });
-    }
     const kv = env.QUESTIONS_KV;
+    if (!id) {
+      const questions = [];
+      if (kv) {
+        const list = await kv.list({ prefix: "question:" });
+        for (const key of list.keys) {
+          const val = await kv.get(key.name);
+          if (val) {
+            const parsed = JSON.parse(val);
+            if (parsed.status === "answered") {
+              questions.push({
+                id: parsed.id,
+                username: parsed.username,
+                question: parsed.question,
+                answer: parsed.answer,
+                tag: parsed.tag || "General",
+                status: parsed.status,
+                created_at: parsed.created_at
+              });
+            }
+          }
+        }
+      } else {
+        for (const val of localDB.values()) {
+          const parsed = JSON.parse(val);
+          if (parsed.status === "answered") {
+            questions.push({
+              id: parsed.id,
+              username: parsed.username,
+              question: parsed.question,
+              answer: parsed.answer,
+              tag: parsed.tag || "General",
+              status: parsed.status,
+              created_at: parsed.created_at
+            });
+          }
+        }
+      }
+      questions.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      return new Response(JSON.stringify(questions), { status: 200, headers });
+    }
     let dataStr = kv ? await kv.get(`question:${id}`) : localDB.get(`question:${id}`);
     if (!dataStr) {
       return new Response(JSON.stringify({ error: "Question not found." }), { status: 404, headers });
@@ -578,6 +616,7 @@ async function handleApiRequest(request, env) {
       username: data.username,
       question: data.question,
       answer: data.answer,
+      tag: data.tag || "General",
       status: data.status,
       created_at: data.created_at
     };

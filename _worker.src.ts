@@ -32,7 +32,7 @@ async function handleApiRequest(request: Request, env: any): Promise<Response> {
   // 1. Submit Question
   if (cleanPath === "/api/questions" && request.method === "POST") {
     try {
-      const { username, question, email } = await request.json() as any;
+      const { username, question, email, tag } = await request.json() as any;
       if (!username || !question) {
         return new Response(JSON.stringify({ error: "Username and question are required." }), { status: 400, headers });
       }
@@ -43,6 +43,7 @@ async function handleApiRequest(request: Request, env: any): Promise<Response> {
         username,
         question,
         email: email || null,
+        tag: tag || "General",
         answer: null,
         status: "pending",
         created_at: new Date().toISOString(),
@@ -61,14 +62,56 @@ async function handleApiRequest(request: Request, env: any): Promise<Response> {
     }
   }
 
-  // 2. Retrieve Question
+  // 2. Retrieve Question(s)
   if (cleanPath === "/api/questions" && request.method === "GET") {
     const id = url.searchParams.get("id");
+    const kv = env.QUESTIONS_KV;
+
+    // List all public answered questions if no ID is specified
     if (!id) {
-      return new Response(JSON.stringify({ error: "Missing question ID." }), { status: 400, headers });
+      const questions = [];
+      if (kv) {
+        const list = await kv.list({ prefix: "question:" });
+        for (const key of list.keys) {
+          const val = await kv.get(key.name);
+          if (val) {
+            const parsed = JSON.parse(val);
+            if (parsed.status === "answered") {
+              questions.push({
+                id: parsed.id,
+                username: parsed.username,
+                question: parsed.question,
+                answer: parsed.answer,
+                tag: parsed.tag || "General",
+                status: parsed.status,
+                created_at: parsed.created_at
+              });
+            }
+          }
+        }
+      } else {
+        for (const val of localDB.values()) {
+          const parsed = JSON.parse(val);
+          if (parsed.status === "answered") {
+            questions.push({
+              id: parsed.id,
+              username: parsed.username,
+              question: parsed.question,
+              answer: parsed.answer,
+              tag: parsed.tag || "General",
+              status: parsed.status,
+              created_at: parsed.created_at
+            });
+          }
+        }
+      }
+
+      // Sort by created_at desc
+      questions.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+      return new Response(JSON.stringify(questions), { status: 200, headers });
     }
 
-    const kv = env.QUESTIONS_KV;
+    // Retrieve specific question details
     let dataStr = kv ? await kv.get(`question:${id}`) : localDB.get(`question:${id}`);
 
     if (!dataStr) {
@@ -82,6 +125,7 @@ async function handleApiRequest(request: Request, env: any): Promise<Response> {
       username: data.username,
       question: data.question,
       answer: data.answer,
+      tag: data.tag || "General",
       status: data.status,
       created_at: data.created_at,
     };

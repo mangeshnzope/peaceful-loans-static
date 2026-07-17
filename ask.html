@@ -66,6 +66,13 @@ if (!currentUsername) {
   sessionStorage.setItem('anon_username', currentUsername);
 }
 
+// Global Q&A Directory State
+let allPublicQuestions = [];
+let activeFilterTag = 'All';
+let searchText = '';
+
+const CATEGORY_TAGS = ['All', 'Interest Rates', 'Processing Fees', 'LTV & Funding', 'NRI Loans', 'Documentation', 'General'];
+
 const urlParams = new URLSearchParams(window.location.search);
 const questionId = urlParams.get('id');
 
@@ -89,7 +96,7 @@ function renderAskForm() {
       </div>
     </div>
 
-    <div class="container-xs" style="padding-top:1rem; padding-bottom:5rem;">
+    <div class="container-xs" style="padding-top:1rem; padding-bottom:3rem;">
       <div class="ask-card">
         <form id="askForm" onsubmit="submitQuestion(event)">
           <div class="form-group" style="margin-bottom:1.5rem">
@@ -99,6 +106,18 @@ function renderAskForm() {
               <button type="button" class="btn btn-outline-gray btn-sm" onclick="regenerateUsername()" style="padding:0.75rem 1rem">Regenerate</button>
             </div>
             <p style="font-size:12px; color:var(--gray-500); margin-top:0.4rem">This auto-generated ID keeps your identity completely private.</p>
+          </div>
+
+          <div class="form-group" style="margin-bottom:1.5rem">
+            <label for="tagSelect" style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Question Category</label>
+            <select id="tagSelect" style="width:100%; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; outline:none; background:var(--c-surface); transition:border-color 0.2s;">
+              <option value="General">General Query</option>
+              <option value="Interest Rates">Interest Rates</option>
+              <option value="Processing Fees">Processing Fees</option>
+              <option value="LTV & Funding">LTV & Funding</option>
+              <option value="NRI Loans">NRI Loans</option>
+              <option value="Documentation">Documentation & Process</option>
+            </select>
           </div>
 
           <div class="form-group" style="margin-bottom:1.5rem">
@@ -119,10 +138,13 @@ function renderAskForm() {
       </div>
     </div>
 
+    <div class="container-sm" id="publicDirectoryContainer" style="padding-bottom:5rem;"></div>
+
     ${ctaSectionHTML()}
     ${footerHTML()}
   `;
   initNav();
+  initPublicDirectory();
 }
 
 function regenerateUsername() {
@@ -138,6 +160,7 @@ async function submitQuestion(event) {
   const username = document.getElementById('usernameInput').value;
   const question = document.getElementById('questionText').value;
   const email = document.getElementById('emailInput').value;
+  const tag = document.getElementById('tagSelect').value;
 
   submitBtn.disabled = true;
   submitBtn.innerText = "Posting question...";
@@ -149,7 +172,7 @@ async function submitQuestion(event) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username, question, email })
+      body: JSON.stringify({ username, question, email, tag })
     });
 
     const data = await res.json();
@@ -180,16 +203,19 @@ async function renderQuestionView(id) {
       </div>
     </div>
 
-    <div class="container-xs" style="padding-top:1rem; padding-bottom:5rem;" id="loadingContainer">
+    <div class="container-xs" style="padding-top:1rem; padding-bottom:3rem;" id="loadingContainer">
       <div class="ask-card text-center" style="padding:3rem 2rem;">
         <div style="font-size:14px; color:var(--gray-500)">Fetching your question details...</div>
       </div>
     </div>
 
+    <div class="container-sm" id="publicDirectoryContainer" style="padding-bottom:5rem; margin-top:2rem;"></div>
+
     ${ctaSectionHTML()}
     ${footerHTML()}
   `;
   initNav();
+  initPublicDirectory();
 
   const loadingContainer = document.getElementById('loadingContainer');
 
@@ -227,7 +253,10 @@ async function renderQuestionView(id) {
     loadingContainer.innerHTML = `
       <div class="ask-card" style="margin-bottom:2rem;">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--gray-100); padding-bottom:1rem; margin-bottom:1.5rem;">
-          <span style="font-family:monospace; font-weight:600; color:var(--blue); font-size:15px;">${data.username}</span>
+          <div>
+            <span style="font-family:monospace; font-weight:600; color:var(--blue); font-size:15px;">${data.username}</span>
+            <span class="status-badge pending" style="margin-left:0.75rem; font-size:10px; padding:0.15rem 0.4rem; vertical-align:middle;">${data.tag || 'General'}</span>
+          </div>
           <span style="font-size:12px; color:var(--gray-400)">${new Date(data.created_at).toLocaleDateString(undefined, {dateStyle: 'medium'})}</span>
         </div>
         <p style="font-size:16px; font-weight:500; color:var(--gray-900); line-height:1.5; margin-bottom:1.5rem;">
@@ -264,6 +293,132 @@ function copyShareLink() {
   linkInput.setSelectionRange(0, 99999);
   navigator.clipboard.writeText(linkInput.value);
   alert('Link copied to clipboard! Save it to revisit this page.');
+}
+
+// ===== Public Q&A Directory Component =====
+async function initPublicDirectory() {
+  const container = document.getElementById('publicDirectoryContainer');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="directory-section" style="border-top:1px solid var(--gray-200); padding-top:3.5rem;">
+      <div class="text-center" style="margin-bottom:2rem">
+        <h2 style="font-family:var(--font-serif); font-size:1.8rem; font-weight:600; margin-bottom:0.5rem">Public Q&A Directory</h2>
+        <p style="font-size:14px; color:var(--gray-500)">Search previously answered questions from other borrowers on premium home loans.</p>
+      </div>
+
+      <div style="margin-bottom:1.5rem; display:flex; flex-direction:column; gap:1rem">
+        <div style="position:relative; width:100%">
+          <input type="text" id="dirSearch" placeholder="Search questions or answers..." style="width:100%; padding:0.75rem 1rem 0.75rem 2.5rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; outline:none; box-sizing:border-box;" />
+          <span style="position:absolute; left:0.85rem; top:50%; transform:translateY(-50%); color:var(--gray-400); pointer-events:none; display:flex; align-items:center;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+        </div>
+
+        <div class="tag-buttons" style="display:flex; flex-wrap:wrap; gap:0.5rem">
+          ${CATEGORY_TAGS.map(tag => {
+            const label = tag === 'All' ? 'All Categories' : tag;
+            return `<button type="button" class="btn-tag ${tag === 'All' ? 'active' : ''}" onclick="selectFilterTag('${tag}', this)">${label}</button>`;
+          }).join('')}
+        </div>
+      </div>
+
+      <div id="directoryList" style="display:flex; flex-direction:column; gap:1rem">
+        <div style="text-align:center; padding:2rem; color:var(--gray-400); font-size:14px">Loading answers...</div>
+      </div>
+    </div>
+  `;
+
+  // Register real-time search input event
+  document.getElementById('dirSearch').addEventListener('input', (e) => {
+    searchText = e.target.value.toLowerCase();
+    renderFilteredList();
+  });
+
+  try {
+    const res = await fetch('/api/questions');
+    if (res.ok) {
+      allPublicQuestions = await res.json();
+      renderFilteredList();
+    } else {
+      document.getElementById('directoryList').innerHTML = `<div style="text-align:center; padding:2rem; color:#ef4444; font-size:14px">Failed to load Q&A directory.</div>`;
+    }
+  } catch (err) {
+    document.getElementById('directoryList').innerHTML = `<div style="text-align:center; padding:2rem; color:#ef4444; font-size:14px">Failed to load Q&A directory.</div>`;
+  }
+}
+
+function selectFilterTag(tag, buttonEl) {
+  activeFilterTag = tag;
+  // Update active state in buttons
+  const buttons = document.querySelectorAll('.tag-buttons .btn-tag');
+  buttons.forEach(btn => btn.classList.remove('active'));
+  buttonEl.classList.add('active');
+  renderFilteredList();
+}
+
+function renderFilteredList() {
+  const listEl = document.getElementById('directoryList');
+  if (!listEl) return;
+
+  const filtered = allPublicQuestions.filter(q => {
+    const matchesTag = activeFilterTag === 'All' || q.tag === activeFilterTag;
+    const matchesSearch = !searchText || 
+      q.question.toLowerCase().includes(searchText) || 
+      (q.answer && q.answer.toLowerCase().includes(searchText));
+    return matchesTag && matchesSearch;
+  });
+
+  if (filtered.length === 0) {
+    listEl.innerHTML = `<div style="text-align:center; padding:3rem; color:var(--gray-400); font-size:14px; background:var(--c-surface); border:1px solid var(--gray-200); border-radius:8px;">No matching answered questions found.</div>`;
+    return;
+  }
+
+  listEl.innerHTML = filtered.map((q, idx) => `
+    <div class="qa-accordion-item" style="background:var(--c-surface); border:1px solid var(--gray-200); border-radius:8px; overflow:hidden; transition:box-shadow 0.2s;">
+      <div class="qa-accordion-header" onclick="toggleAccordion('${q.id}')" id="header-${q.id}" style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; padding:1.25rem; cursor:pointer; user-select:none;">
+        <div style="flex:1">
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.4rem; font-size:11px;">
+            <span style="font-family:monospace; font-weight:600; color:var(--gray-500);">${q.username}</span>
+            <span class="status-badge pending" style="padding:0.1rem 0.35rem; font-size:9px; font-weight:600;">${q.tag || 'General'}</span>
+          </div>
+          <h3 style="font-size:15px; font-weight:600; color:var(--gray-900); line-height:1.4; margin:0;">
+            ${q.question}
+          </h3>
+        </div>
+        <span id="icon-${q.id}" style="font-size:18px; color:var(--gray-400); transition:transform 0.2s; align-self:center; display:flex;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </span>
+      </div>
+      <div class="qa-accordion-content" id="content-${q.id}" style="display:none; border-top:1px solid var(--gray-100); background:#fdfdfd; padding:1.25rem;">
+        <div class="answer-card answered" style="margin-bottom:0; border:none; padding:0; background:transparent;">
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.75rem">
+            <img src="/assets/icon-png.png" alt="Peaceful Loans" style="width:20px; height:20px; border-radius:4px; object-fit:contain;" />
+            <span style="font-weight:600; font-size:13px; color:var(--gray-800)">Answered by Peaceful Loans</span>
+          </div>
+          <div style="font-size:14.5px; color:var(--gray-800); line-height:1.6; font-family:var(--font-serif)">
+            ${q.answer ? q.answer.replace(/\\n/g, '<br>').replace(/\n/g, '<br>') : ''}
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleAccordion(id) {
+  const content = document.getElementById(`content-${id}`);
+  const icon = document.getElementById(`icon-${id}`);
+  const header = document.getElementById(`header-${id}`);
+  
+  if (content.style.display === "block") {
+    content.style.display = "none";
+    icon.style.transform = "rotate(0deg)";
+    header.style.background = "var(--c-surface)";
+  } else {
+    content.style.display = "block";
+    icon.style.transform = "rotate(180deg)";
+    header.style.background = "#f9fafb";
+  }
 }
 
 window.onload = showPage;
