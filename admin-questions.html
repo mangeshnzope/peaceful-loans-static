@@ -135,7 +135,10 @@ async function renderDashboard() {
             ${q.question.replace(/\n/g, '<br>')}
           </p>
           <div style="border-top:1px solid var(--gray-100); padding-top:1rem; background:#fff; border-radius:6px; padding:1rem; border:1px solid var(--gray-200)">
-            <div style="font-size:12px; font-weight:600; color:#16a34a; text-transform:uppercase; margin-bottom:0.5rem">Answered Response</div>
+            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem">
+              <img src="/assets/icon-png.png" alt="Peaceful Loans" style="width:16px; height:16px; border-radius:2px; object-fit:contain;" />
+              <span style="font-weight:600; font-size:11px; color:#166534; text-transform:uppercase; letter-spacing:0.02em;">Answered by Peaceful Loans</span>
+            </div>
             <p style="font-size:14.5px; color:var(--gray-800); line-height:1.6; font-family:var(--font-serif)">
               ${q.answer.replace(/\\n/g, '<br>').replace(/\n/g, '<br>')}
             </p>

@@ -213,7 +213,10 @@ async function renderQuestionView(id) {
     if (data.status === 'answered' && data.answer) {
       answerBlock = `
         <div class="answer-card answered">
-          <div class="status-badge answered">Answered by Mangesh Zope</div>
+          <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:1.25rem">
+            <img src="/assets/icon-png.png" alt="Peaceful Loans" style="width:24px; height:24px; border-radius:4px; object-fit:contain;" />
+            <span style="font-weight:600; font-size:14px; color:var(--gray-800)">Answered by Peaceful Loans</span>
+          </div>
           <div class="answer-text" style="font-size:15.5px; color:var(--gray-800); line-height:1.6; font-family:var(--font-serif)">
             ${data.answer.replace(/\\n/g, '<br>').replace(/\n/g, '<br>')}
           </div>
