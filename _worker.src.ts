@@ -60,6 +60,50 @@ async function sendNotificationEmail(username: string, question: string, env: an
   }
 }
 
+async function sendAnswerAlertEmail(borrowerEmail: string, username: string, question: string, id: string, env: any): Promise<void> {
+  const apiKey = env.RESEND_API_KEY;
+  if (!apiKey) return;
+
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        from: "Peaceful Loans <onboarding@resend.dev>",
+        to: borrowerEmail,
+        subject: `Your Home Loan Question has been Answered!`,
+        html: `
+          <div style="font-family:sans-serif; line-height:1.6; max-width:600px; margin:0 auto; padding:1.5rem; border:1px solid #e5e7eb; border-radius:8px;">
+            <h2 style="color:#1a4cc8; margin-top:0;">Your Question has been Answered</h2>
+            <p>Hello ${username},</p>
+            <p>Your anonymous question has been personally answered by our home loan expert.</p>
+            <hr style="border:0; border-top:1px solid #e5e7eb; margin:1.5rem 0;" />
+            <p><strong>Your Question:</strong></p>
+            <blockquote style="background:#f9fafb; padding:1rem; border-left:4px solid #1a4cc8; margin:0; border-radius:0 8px 8px 0; font-style:italic;">
+              ${question.replace(/\n/g, "<br>")}
+            </blockquote>
+            <hr style="border:0; border-top:1px solid #e5e7eb; margin:1.5rem 0;" />
+            <p>You can read the detailed expert answer directly using your private link:</p>
+            <p style="margin-bottom:0; margin-top:1.5rem;">
+              <a href="https://peaceful-loans.com/ask.html?id=${id}" style="display:inline-block; background:#1a4cc8; color:#ffffff; padding:0.6rem 1.2rem; border-radius:6px; text-decoration:none; font-weight:600; font-size:14px;">View Expert Answer</a>
+            </p>
+          </div>
+        `
+      })
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      console.error(`Resend API alert error: ${res.status} - ${errText}`);
+    }
+  } catch (err) {
+    console.error("Failed to send answer alert email:", err);
+  }
+}
+
 async function handleApiRequest(request: Request, env: any, ctx: any): Promise<Response> {
   const url = new URL(request.url);
   const cleanPath = url.pathname.replace(/\/+$/, "");
@@ -244,6 +288,15 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
         await kv.put(`question:${id}`, JSON.stringify(data));
       } else {
         localDB.set(`question:${id}`, JSON.stringify(data));
+      }
+
+      // Trigger background email alert to borrower if they provided an email address
+      if (data.email) {
+        if (ctx && typeof ctx.waitUntil === "function") {
+          ctx.waitUntil(sendAnswerAlertEmail(data.email, data.username, data.question, id, env));
+        } else {
+          sendAnswerAlertEmail(data.email, data.username, data.question, id, env).catch(console.error);
+        }
       }
 
       return new Response(JSON.stringify({ success: true }), { status: 200, headers });
