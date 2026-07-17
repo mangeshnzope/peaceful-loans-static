@@ -904,12 +904,8 @@ ul { list-style: none; }
 .ask-info-panel {
   order: 2; /* below the form on mobile */
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  background: var(--c-surface);
-  border: 1px solid var(--gray-200);
-  border-radius: 8px;
-  padding: 2rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .ask-card {
@@ -920,6 +916,7 @@ ul { list-style: none; }
   .ask-grid {
     grid-template-columns: 1fr 1.2fr;
     gap: 3.5rem;
+    align-items: center;
   }
   .ask-info-panel {
     order: 1; /* left column on desktop */
@@ -952,7 +949,7 @@ ul { list-style: none; }
 
 .ask-info-image {
   width: 100%;
-  max-width: 280px;
+  max-width: 380px; /* Slightly wider since there's no text list next to it */
   margin: 0 auto;
   border-radius: 8px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
@@ -960,38 +957,52 @@ ul { list-style: none; }
   object-fit: cover;
 }
 
-.ask-features-list {
+/* Trust Badges Strip (INDmoney style) */
+.trust-badges-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  max-width: 680px;
+  margin: 0 auto 2rem auto;
+  padding: 0 1rem 1.5rem 1rem;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.trust-badge-item {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  margin-top: 0.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
 }
 
-.ask-feature-item {
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-}
-
-.ask-feature-item svg {
-  color: var(--blue);
+.trust-badge-item svg {
   flex-shrink: 0;
-  margin-top: 0.2rem;
 }
 
-.ask-feature-item h4 {
-  font-size: 14.5px;
-  font-weight: 600;
-  color: var(--gray-900);
-  margin-bottom: 0.2rem;
-  margin-top: 0;
-}
-
-.ask-feature-item p {
-  font-size: 13px;
+.trust-badge-item span {
+  font-size: 11px;
+  font-weight: 700;
   color: var(--gray-600);
-  line-height: 1.45;
-  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+}
+
+@media (min-width: 768px) {
+  .trust-badges-strip {
+    gap: 2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 2.5rem;
+  }
+  .trust-badge-item {
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .trust-badge-item span {
+    font-size: 12px;
+  }
 }
 
 /* DB Activation Trigger */

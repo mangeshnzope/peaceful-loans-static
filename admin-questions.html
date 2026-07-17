@@ -111,7 +111,17 @@ async function renderDashboard() {
             ${q.question.replace(/\n/g, '<br>')}
           </p>
           <div style="border-top:1px solid var(--gray-100); padding-top:1.5rem">
-            <h4 style="font-size:13px; font-weight:600; text-transform:uppercase; color:var(--gray-700); margin-bottom:0.5rem">Write Response</h4>
+            <h4 style="font-size:13px; font-weight:600; text-transform:uppercase; color:var(--gray-700); margin-bottom:0.5rem">Assign Category & Write Response</h4>
+            <div style="margin-bottom:0.75rem">
+              <select id="answerTag-${q.id}" style="padding:0.4rem 0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:13px; outline:none; background:#fff;">
+                <option value="General">General Query</option>
+                <option value="Interest Rates">Interest Rates</option>
+                <option value="Processing Fees">Processing Fees</option>
+                <option value="LTV & Funding">LTV & Funding</option>
+                <option value="NRI Loans">NRI Loans</option>
+                <option value="Documentation">Documentation & Process</option>
+              </select>
+            </div>
             <textarea id="answerText-${q.id}" placeholder="Provide expert response..." style="width:100%; height:120px; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; line-height:1.5; outline:none; resize:vertical; margin-bottom:0.75rem;"></textarea>
             <div style="display:flex; justify-content:flex-end">
               <button onclick="submitAnswer('${q.id}')" id="answerBtn-${q.id}" class="btn btn-primary btn-sm">Post Answer</button>
@@ -181,6 +191,7 @@ async function renderDashboard() {
 
 async function submitAnswer(id) {
   const answerText = document.getElementById(`answerText-${id}`).value;
+  const answerTag = document.getElementById(`answerTag-${id}`).value;
   const answerBtn = document.getElementById(`answerBtn-${id}`);
 
   if (!answerText.trim()) {
@@ -200,6 +211,7 @@ async function submitAnswer(id) {
       body: JSON.stringify({
         id,
         answer: answerText,
+        tag: answerTag,
         secret: adminSecret
       })
     });

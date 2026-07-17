@@ -88,7 +88,7 @@ function renderAskForm() {
   document.getElementById('app').innerHTML = `
     ${navHTML('/ask.html')}
     
-    <div class="page-header">
+    <div class="page-header" style="padding-bottom:1.5rem;">
       <div class="container-sm text-center">
         <p class="section-label section-label-gray">Confidential & Unbiased</p>
         <h1>Ask Anonymously</h1>
@@ -96,37 +96,30 @@ function renderAskForm() {
       </div>
     </div>
 
-    <div class="container-sm" style="padding-top:1rem; padding-bottom:3rem;">
+    <!-- Trust Badges Strip (INDmoney style) -->
+    <div class="container-sm">
+      <div class="trust-badges-strip">
+        <div class="trust-badge-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>100% Anonymous</span>
+        </div>
+        <div class="trust-badge-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>IIM Alumnus Expert</span>
+        </div>
+        <div class="trust-badge-item">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>Unbiased & Free</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-sm" style="padding-top:0.5rem; padding-bottom:3rem;">
       <div class="ask-grid">
         
-        <!-- Left Column: Trust Info & Illustration -->
+        <!-- Left Column: Illustration -->
         <div class="ask-info-panel">
           <img src="/assets/confidential-expert.jpg" alt="Confidential Expert Advisory" class="ask-info-image" />
-          <div class="ask-features-list">
-            <div class="ask-feature-item">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <div>
-                <h4>Privacy Guaranteed</h4>
-                <p>100% anonymous submission. No registration, personal documents, or login procedures required.</p>
-              </div>
-            </div>
-            
-            <div class="ask-feature-item">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <div>
-                <h4>Expert Advisory</h4>
-                <p>Get answers directly from IIM Calcutta alumnus Mangesh Zope, specialized in premium home loans above ₹2 Crores.</p>
-              </div>
-            </div>
-            
-            <div class="ask-feature-item">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-              <div>
-                <h4>Completely Free & Unbiased</h4>
-                <p>We work exclusively for you. We clarify resets, cap options, and hidden terms with absolute transparency.</p>
-              </div>
-            </div>
-          </div>
         </div>
 
         <!-- Right Column: The Form Card -->
@@ -139,18 +132,6 @@ function renderAskForm() {
                 <button type="button" class="btn btn-outline-gray btn-sm" onclick="regenerateUsername()" style="padding:0.75rem 1rem">Regenerate</button>
               </div>
               <p style="font-size:12px; color:var(--gray-500); margin-top:0.4rem">This auto-generated ID keeps your identity completely private.</p>
-            </div>
-
-            <div class="form-group" style="margin-bottom:1.5rem">
-              <label for="tagSelect" style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Question Category</label>
-              <select id="tagSelect" style="width:100%; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; outline:none; background:var(--c-surface); transition:border-color 0.2s;">
-                <option value="General">General Query</option>
-                <option value="Interest Rates">Interest Rates</option>
-                <option value="Processing Fees">Processing Fees</option>
-                <option value="LTV & Funding">LTV & Funding</option>
-                <option value="NRI Loans">NRI Loans</option>
-                <option value="Documentation">Documentation & Process</option>
-              </select>
             </div>
 
             <div class="form-group" style="margin-bottom:1.5rem">
@@ -195,7 +176,7 @@ async function submitQuestion(event) {
   const username = document.getElementById('usernameInput').value;
   const question = document.getElementById('questionText').value;
   const email = document.getElementById('emailInput').value;
-  const tag = document.getElementById('tagSelect').value;
+  const tag = "General";
 
   submitBtn.disabled = true;
   submitBtn.innerText = "Posting question...";

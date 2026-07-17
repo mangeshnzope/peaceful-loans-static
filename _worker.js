@@ -646,7 +646,7 @@ async function handleApiRequest(request, env) {
   }
   if (cleanPath === "/api/admin/answer" && request.method === "POST") {
     try {
-      const { id, answer, secret } = await request.json();
+      const { id, answer, tag, secret } = await request.json();
       const adminSecret = env.ADMIN_SECRET || "PeacefulLoansAdmin2026";
       if (!secret || secret !== adminSecret) {
         return new Response(JSON.stringify({ error: "Unauthorized." }), { status: 401, headers });
@@ -662,6 +662,9 @@ async function handleApiRequest(request, env) {
       const data = JSON.parse(dataStr);
       data.answer = answer;
       data.status = "answered";
+      if (tag) {
+        data.tag = tag;
+      }
       if (kv) {
         await kv.put(`question:${id}`, JSON.stringify(data));
       } else {
