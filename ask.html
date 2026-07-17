@@ -96,45 +96,80 @@ function renderAskForm() {
       </div>
     </div>
 
-    <div class="container-xs" style="padding-top:1rem; padding-bottom:3rem;">
-      <div class="ask-card">
-        <form id="askForm" onsubmit="submitQuestion(event)">
-          <div class="form-group" style="margin-bottom:1.5rem">
-            <label style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Your Anonymous Username</label>
-            <div style="display:flex; align-items:center; gap:0.75rem">
-              <input type="text" id="usernameInput" value="${currentUsername}" readonly style="flex:1; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; background:var(--gray-50); font-weight:600; color:var(--blue); font-family:monospace; font-size:15px; outline:none;" />
-              <button type="button" class="btn btn-outline-gray btn-sm" onclick="regenerateUsername()" style="padding:0.75rem 1rem">Regenerate</button>
+    <div class="container-sm" style="padding-top:1rem; padding-bottom:3rem;">
+      <div class="ask-grid">
+        
+        <!-- Left Column: Trust Info & Illustration -->
+        <div class="ask-info-panel">
+          <img src="/assets/confidential-expert.jpg" alt="Confidential Expert Advisory" class="ask-info-image" />
+          <div class="ask-features-list">
+            <div class="ask-feature-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <div>
+                <h4>Privacy Guaranteed</h4>
+                <p>100% anonymous submission. No registration, personal documents, or login procedures required.</p>
+              </div>
             </div>
-            <p style="font-size:12px; color:var(--gray-500); margin-top:0.4rem">This auto-generated ID keeps your identity completely private.</p>
+            
+            <div class="ask-feature-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <div>
+                <h4>Expert Advisory</h4>
+                <p>Get answers directly from IIM Calcutta alumnus Mangesh Zope, specialized in premium home loans above ₹2 Crores.</p>
+              </div>
+            </div>
+            
+            <div class="ask-feature-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              <div>
+                <h4>Completely Free & Unbiased</h4>
+                <p>We work exclusively for you. We clarify resets, cap options, and hidden terms with absolute transparency.</p>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div class="form-group" style="margin-bottom:1.5rem">
-            <label for="tagSelect" style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Question Category</label>
-            <select id="tagSelect" style="width:100%; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; outline:none; background:var(--c-surface); transition:border-color 0.2s;">
-              <option value="General">General Query</option>
-              <option value="Interest Rates">Interest Rates</option>
-              <option value="Processing Fees">Processing Fees</option>
-              <option value="LTV & Funding">LTV & Funding</option>
-              <option value="NRI Loans">NRI Loans</option>
-              <option value="Documentation">Documentation & Process</option>
-            </select>
-          </div>
+        <!-- Right Column: The Form Card -->
+        <div class="ask-card">
+          <form id="askForm" onsubmit="submitQuestion(event)">
+            <div class="form-group" style="margin-bottom:1.5rem">
+              <label style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Your Anonymous Username</label>
+              <div style="display:flex; align-items:center; gap:0.75rem">
+                <input type="text" id="usernameInput" value="${currentUsername}" readonly style="flex:1; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; background:var(--gray-50); font-weight:600; color:var(--blue); font-family:monospace; font-size:15px; outline:none;" />
+                <button type="button" class="btn btn-outline-gray btn-sm" onclick="regenerateUsername()" style="padding:0.75rem 1rem">Regenerate</button>
+              </div>
+              <p style="font-size:12px; color:var(--gray-500); margin-top:0.4rem">This auto-generated ID keeps your identity completely private.</p>
+            </div>
 
-          <div class="form-group" style="margin-bottom:1.5rem">
-            <label for="questionText" style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Your Question (Home Loan above ₹2 Cr)</label>
-            <textarea id="questionText" required placeholder="Type your question about processing fees, LTV caps, interest rate resets, hidden charges, or document terms..." style="width:100%; height:160px; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; line-height:1.5; resize:vertical; outline:none; transition:border-color 0.2s;"></textarea>
-          </div>
+            <div class="form-group" style="margin-bottom:1.5rem">
+              <label for="tagSelect" style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Question Category</label>
+              <select id="tagSelect" style="width:100%; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; outline:none; background:var(--c-surface); transition:border-color 0.2s;">
+                <option value="General">General Query</option>
+                <option value="Interest Rates">Interest Rates</option>
+                <option value="Processing Fees">Processing Fees</option>
+                <option value="LTV & Funding">LTV & Funding</option>
+                <option value="NRI Loans">NRI Loans</option>
+                <option value="Documentation">Documentation & Process</option>
+              </select>
+            </div>
 
-          <div class="form-group" style="margin-bottom:2rem">
-            <label for="emailInput" style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Email Address (Optional)</label>
-            <input type="email" id="emailInput" placeholder="name@example.com" style="width:100%; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; outline:none; transition:border-color 0.2s;" />
-            <p style="font-size:12px; color:var(--gray-500); margin-top:0.4rem">Only used to notify you when I answer. If left blank, you must save your private link to check the response.</p>
-          </div>
+            <div class="form-group" style="margin-bottom:1.5rem">
+              <label for="questionText" style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Your Question (Home Loan above ₹2 Cr)</label>
+              <textarea id="questionText" required placeholder="Type your question about processing fees, LTV caps, interest rate resets, hidden charges, or document terms..." style="width:100%; height:160px; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; line-height:1.5; resize:vertical; outline:none; transition:border-color 0.2s;"></textarea>
+            </div>
 
-          <div id="formStatus" style="display:none; padding:1rem; border-radius:6px; font-size:14px; margin-bottom:1.5rem;"></div>
+            <div class="form-group" style="margin-bottom:2rem">
+              <label for="emailInput" style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Email Address (Optional)</label>
+              <input type="email" id="emailInput" placeholder="name@example.com" style="width:100%; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; outline:none; transition:border-color 0.2s;" />
+              <p style="font-size:12px; color:var(--gray-500); margin-top:0.4rem">Only used to notify you when I answer. If left blank, you must save your private link to check the response.</p>
+            </div>
 
-          <button type="submit" id="submitBtn" class="btn btn-primary" style="width:100%; display:flex; justify-content:center;">Post Question Anonymously</button>
-        </form>
+            <div id="formStatus" style="display:none; padding:1rem; border-radius:6px; font-size:14px; margin-bottom:1.5rem;"></div>
+
+            <button type="submit" id="submitBtn" class="btn btn-primary" style="width:100%; display:flex; justify-content:center;">Post Question Anonymously</button>
+          </form>
+        </div>
+
       </div>
     </div>
 

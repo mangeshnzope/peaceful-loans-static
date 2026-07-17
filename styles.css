@@ -893,5 +893,75 @@ ul { list-style: none; }
   box-shadow: 0 0 0 3px rgba(26, 76, 200, 0.1);
 }
 
+/* 2-Column Ask Page Grid & Features */
+.ask-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (min-width: 992px) {
+  .ask-grid {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3.5rem;
+  }
+}
+
+.ask-info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: var(--c-surface);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 2rem;
+}
+
+.ask-info-image {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--gray-200);
+  object-fit: cover;
+}
+
+.ask-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.ask-feature-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.ask-feature-item svg {
+  color: var(--blue);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.ask-feature-item h4 {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 0.2rem;
+  margin-top: 0;
+}
+
+.ask-feature-item p {
+  font-size: 13px;
+  color: var(--gray-600);
+  line-height: 1.45;
+  margin: 0;
+}
+
+
 
 
