@@ -30,7 +30,7 @@ async function sendNotificationEmail(username: string, question: string, env: an
       },
       body: JSON.stringify({
         from: "Peaceful Loans Q&A <onboarding@resend.dev>",
-        to: "mangesh@peaceful-loans.com",
+        to: "mangesh@peaceful-loan.com",
         subject: `New Q&A Question from ${username}`,
         html: `
           <div style="font-family:sans-serif; line-height:1.6; max-width:600px; margin:0 auto; padding:1.5rem; border:1px solid #e5e7eb; border-radius:8px;">
