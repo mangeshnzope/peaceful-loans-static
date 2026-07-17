@@ -904,8 +904,14 @@ ul { list-style: none; }
 .ask-info-panel {
   order: 2; /* below the form on mobile */
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
+  background: var(--c-surface);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
 }
 
 .ask-card {
@@ -914,12 +920,13 @@ ul { list-style: none; }
 
 @media (min-width: 992px) {
   .ask-grid {
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 1fr 1fr; /* Equal symmetrical split */
     gap: 3.5rem;
-    align-items: center;
+    align-items: stretch; /* Stretch columns to match height dynamically */
   }
   .ask-info-panel {
     order: 1; /* left column on desktop */
+    height: 100%;
   }
   .ask-card {
     order: 2; /* right column on desktop */
@@ -949,12 +956,12 @@ ul { list-style: none; }
 
 .ask-info-image {
   width: 100%;
-  max-width: 380px; /* Slightly wider since there's no text list next to it */
-  margin: 0 auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  border: 1px solid var(--gray-200);
+  height: 100%;
+  border-radius: 6px;
+  border: 1px solid var(--gray-100);
   object-fit: cover;
+  flex: 1;
+  min-height: 0;
 }
 
 /* Trust Badges Strip (INDmoney style) */
