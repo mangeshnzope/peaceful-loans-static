@@ -29,7 +29,7 @@ async function sendNotificationEmail(username: string, question: string, env: an
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "Peaceful Loans Q&A <onboarding@resend.dev>",
+        from: "Peaceful Loans Q&A <info@peaceful-loan.com>",
         to: "mangesh@peaceful-loan.com",
         subject: `New Q&A Question from ${username}`,
         html: `
@@ -72,7 +72,7 @@ async function sendAnswerAlertEmail(borrowerEmail: string, username: string, que
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "Peaceful Loans <onboarding@resend.dev>",
+        from: "Mangesh from Peaceful Loans <mangesh@peaceful-loan.com>",
         to: borrowerEmail,
         subject: `Your Home Loan Question has been Answered!`,
         html: `
