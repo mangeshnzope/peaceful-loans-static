@@ -56,6 +56,16 @@ And Vivek Kaul's analysis perfectly codifies the structural reasons why. India's
 
 Here is our curation of the six core reasons why property prices rarely correct in India, and what it means for your home buying strategy.
 
+## Slide Deck Summary
+
+Flip through our quick summary slide deck below, or download the full presentation:
+
+[
+
+Download PDF Slide Deck
+
+](why-prices-of-homes-never-fall-in-india.pdf)
+
 ## The Big Idea
 
 Prices staying firm even in a soft market isn't magic. It's the product of wealth, incentives, and psychology as much as supply and demand.
