@@ -18,7 +18,7 @@ def get_category_and_tags(slug, title):
         return 'Plot Loans', ['Plot', 'Land', 'Real Estate']
         
     # Tax & Strategy
-    elif any(k in slug_lower or k in title_lower for k in ['tax', 'benefit', 'ltcg', '54f', 'interest-rate', 'rate', 'emi', 'savings', 'calculate', 'afford', 'cost', 'fee', 'charge', 'budget', 'overdraft', 'maxgain', 'repay', 'foreclose', 'prepay', 'top-up']):
+    elif any(k in slug_lower or k in title_lower for k in ['tax', 'benefit', 'ltcg', '54f', 'interest-rate', 'rate', 'emi', 'savings', 'calculate', 'afford', 'cost', 'fee', 'charge', 'budget', 'overdraft', 'maxgain', 'repay', 'foreclose', 'prepay', 'home loan top-up', 'home-loan-top-up']):
         return 'Tax & Strategy', ['Tax', 'Strategy', 'Finance']
         
     # General Home Loan Guides
