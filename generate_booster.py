@@ -323,7 +323,7 @@ def run():
 
 <div id="app"></div>
 
-<script src="/components.js"></script>
+<script src="/components.js?v=2"></script>
 <script>
   // Dynamic page injection matching home-loan component architecture
   const contentHTML = `
