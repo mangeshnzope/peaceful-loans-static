@@ -250,6 +250,7 @@ def update_sitemap():
     urls = [
         {'loc': 'https://peaceful-loans.com/', 'priority': '1.0', 'changefreq': 'weekly'},
         {'loc': 'https://peaceful-loans.com/reviews.html', 'priority': '0.9', 'changefreq': 'weekly'},
+        {'loc': 'https://peaceful-loans.com/media-coverage.html', 'priority': '0.9', 'changefreq': 'weekly'},
         {'loc': 'https://peaceful-loans.com/about.html', 'priority': '0.8', 'changefreq': 'monthly'},
         {'loc': 'https://peaceful-loans.com/faqs.html', 'priority': '0.8', 'changefreq': 'monthly'},
         {'loc': 'https://peaceful-loans.com/FY26-27IntRates/', 'priority': '0.9', 'changefreq': 'weekly'},

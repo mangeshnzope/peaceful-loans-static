@@ -353,7 +353,7 @@ def run():
     <div class="category-section">
       <h2 class="category-title">
         <span>Core Pages & Key Entry Tools</span>
-        <span class="category-count">5 Pages</span>
+        <span class="category-count">6 Pages</span>
       </h2>
       <div class="links-grid" style="grid-template-columns: 1fr 1fr;">
         <a href="/index.html" class="link-card">
@@ -365,6 +365,11 @@ def run():
           <h3>Customer Reviews & Appreciations</h3>
           <p>Unfiltered appreciations and case studies from software engineers, startup founders, and senior corporate leaders.</p>
           <div class="link-meta"><span>Trust Signals</span><span class="link-bullet"></span><span>Weekly</span></div>
+        </a>
+        <a href="/media-coverage.html" class="link-card">
+          <h3>Media Coverage & Insights</h3>
+          <p>Read columns and features in leading publications like Mint and The Economic Times featuring founder Mangesh Zope.</p>
+          <div class="link-meta"><span>Media Coverage</span><span class="link-bullet"></span><span>Weekly</span></div>
         </a>
         <a href="/about.html" class="link-card">
           <h3>About Peaceful Loans</h3>

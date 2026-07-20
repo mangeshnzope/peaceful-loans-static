@@ -485,18 +485,33 @@ ul { list-style: none; }
 }
 
 .coverage-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
 }
 
-@media (min-width: 768px) {
-  .coverage-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+.coverage-grid::-webkit-scrollbar {
+  height: 6px;
+}
+.coverage-grid::-webkit-scrollbar-track {
+  background: var(--gray-100);
+  border-radius: 3px;
+}
+.coverage-grid::-webkit-scrollbar-thumb {
+  background: var(--gray-400);
+  border-radius: 3px;
+}
+.coverage-grid::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
 }
 
 .coverage-card {
+  flex: 0 0 290px;
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -511,6 +526,18 @@ ul { list-style: none; }
   box-shadow: 0 10px 30px rgba(0,0,0,.08);
   border-color: var(--economist-red);
   transform: translateY(-4px);
+}
+
+@media (min-width: 640px) {
+  .coverage-card {
+    flex: 0 0 340px;
+  }
+}
+
+@media (min-width: 768px) {
+  .coverage-card {
+    flex: 0 0 380px;
+  }
 }
 
 .coverage-logo {
@@ -1011,6 +1038,248 @@ ul { list-style: none; }
 }
 
 /* DB Activation Trigger */
+
+/* ===== THE KEN THEME MEDIA COVERAGE PAGE ===== */
+.ken-page {
+  padding: 4rem 0;
+  margin-top: 64px;
+  background-color: #fafafa;
+}
+
+.ken-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+  .ken-layout {
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+  }
+}
+
+/* Featured / Hero Story Card (The Ken Style) */
+.ken-featured-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ken-featured-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.ken-featured-img-wrap {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #edf2f7;
+  padding: 2.5rem;
+}
+
+.ken-featured-img-wrap img {
+  max-width: 60%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+.ken-featured-content {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ken-featured-content .meta-category {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--economist-red);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.ken-featured-content h2 {
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1a202c;
+  line-height: 1.15;
+}
+
+.ken-featured-content .meta-author {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: #718096;
+}
+
+.ken-featured-content p {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+/* Secondary stories list */
+.ken-stories-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .ken-stories-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ken-story-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.ken-story-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.ken-story-img-wrap {
+  width: 100%;
+  height: 180px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #edf2f7;
+  padding: 1.5rem;
+}
+
+.ken-story-img-wrap img {
+  max-width: 50%;
+  max-height: 70%;
+  object-fit: contain;
+}
+
+.ken-story-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-grow: 1;
+}
+
+.ken-story-content .meta-category {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--economist-red);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.ken-story-content h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1a202c;
+  line-height: 1.25;
+}
+
+.ken-story-content p {
+  font-size: 14px;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+.ken-story-content .meta-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: #718096;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #f7fafc;
+}
+
+/* Sidebar Subscription Block (Corporate widget) */
+.ken-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.ken-promo-widget {
+  background: #111827;
+  color: #f9fafb;
+  padding: 2.5rem;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: sticky;
+  top: 96px;
+}
+
+.ken-promo-widget h3 {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #fff;
+}
+
+.ken-promo-widget p {
+  font-size: 15px;
+  color: #d1d5db;
+  line-height: 1.6;
+}
+
+.ken-promo-widget ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0.5rem 0;
+}
+
+.ken-promo-widget li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 14px;
+  color: #e5e7eb;
+}
+
+.ken-promo-widget li svg {
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+  color: #10b981;
+}
+
+.ken-promo-widget .btn {
+  width: 100%;
+  justify-content: center;
+  padding: 0.875rem;
+}
 
 
 
