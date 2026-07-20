@@ -1,15 +1,41 @@
 [
   {
+    "slug": "why-property-prices-almost-never-fall-in-india",
+    "title": "Why Property Prices (Almost) Never Fall in India",
+    "excerpt": "Six reasons why property prices rarely correct in India based on Vivek Kaul's BasisPoint series, and what it means for your home buying strategy.",
+    "date": "18 July 2026",
+    "image": "../assets/blogs/why-property-prices-almost-never-fall-in-india.png",
+    "category": "Home Loan Guides",
+    "tags": [
+      "Home Loan",
+      "Guide",
+      "General"
+    ]
+  },
+  {
+    "slug": "what-is-a-home-loan-top-up-and-when-should-you-consider-it",
+    "title": "Mint: What is a home loan top-up and when should you consider it?",
+    "excerpt": "A home loan top-up can offer cheaper credit than a personal loan—but only if you understand the costs, eligibility rules and hidden pitfalls. Featuring insights from Mangesh Zope.",
+    "date": "16 July 2026",
+    "image": "/assets/logos/Mint_(newspaper)_logo.svg",
+    "category": "Tax & Strategy",
+    "tags": [
+      "Tax",
+      "Strategy",
+      "Finance"
+    ]
+  },
+  {
     "slug": "economic-times-wealth-home-loan-trap",
     "title": "Economic Times Wealth: The Home Loan Trap: Is it ruling your life?",
     "excerpt": "Oversized home loan EMIs silently dictate career paths, lifestyle choices, and family goals. Mangesh Zope explains key stress tests and hidden ancillary costs for borrowers.",
     "date": "6 July 2026",
     "image": "/assets/logos/Economic-Times.png",
-    "category": "Tax & Strategy",
+    "category": "Home Loan Guides",
     "tags": [
-      "Strategy",
-      "Finance",
-      "Media"
+      "Home Loan",
+      "Guide",
+      "General"
     ]
   },
   {

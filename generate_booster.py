@@ -39,7 +39,7 @@ def run():
         
         plot_keywords = ['plot', 'land', 'agricultural', 'construction', 'acre', 'buy-a-plot', 'building', 'commercial', 'residential']
         nri_keywords = ['nri', 'abroad', 'visa', 'citizen', 'foreign', 'h-1b', 'f-1', 'opt']
-        eligibility_keywords = ['income', 'eligibility', 'salary', 'itr', 'employed', 'business', 'credit', 'cibil', 'score', 'documentation', 'rejected', 'down-payment', 'downpayment', 'saving', 'tax', 'ltv', 'emi', 'afford', 'negotiate', 'insurance', 'scam', 'hidden', 'cost', 'foreclose', 'prepay', 'close', 'repay', 'loss', 'security', 'job']
+        eligibility_keywords = ['income', 'eligibility', 'salary', 'itr', 'employed', 'business', 'credit', 'cibil', 'score', 'documentation', 'rejected', 'down-payment', 'downpayment', 'saving', 'tax', 'ltv', 'emi', 'afford', 'negotiate', 'insurance', 'scam', 'hidden', 'cost', 'foreclose', 'prepay', 'close', 'repay', 'loss', 'security', 'job', 'top-up']
         strategy_keywords = ['rate', 'interest', 'bank', 'nbfc', 'rbi', 'fixed', 'floating', 'cut', 'repo', 'rblr', 'mclr', 'overdraft', 'maxgain', 'deal', 'credila', 'hdfc', 'sbi', 'bom', 'canara', 'rural', 'urban', 'it-professionals', 'startup', 'founder', 'woman', 'married', 'joint']
 
         if any(k in slug for k in plot_keywords):
