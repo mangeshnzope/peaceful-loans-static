@@ -79,7 +79,7 @@ ul { list-style: none; }
 .mobile-menu > a { display: block; padding: .5rem 0; font-size: 14px; font-weight: 500; color: var(--gray-700); }
 .mobile-menu .mobile-ctas { display: flex; flex-direction: column; gap: .5rem; padding-top: .75rem; }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .nav-links { display: flex; }
   .nav-ctas { display: flex; }
   .nav-menu-btn { display: none; }
