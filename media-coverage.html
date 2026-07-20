@@ -64,7 +64,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="/components.js"></script>
 <script>
 document.getElementById('app').innerHTML = `
-\${navHTML('/media-coverage.html')}
+${navHTML('/media-coverage.html')}
 
 <div class="ken-page">
   <div class="container">
@@ -174,15 +174,15 @@ document.getElementById('app').innerHTML = `
               <span>Compare 15+ lenders dynamically</span>
             </li>
           </ul>
-          <a href="${URLS.callForm}" target="_blank" rel="noreferrer" class="btn btn-amber">\${icons.phone} Book a Free Call</a>
-          <a href="${URLS.whatsappForm}" target="_blank" rel="noreferrer" class="btn btn-outline-white" style="justify-content:center">\${icons.whatsapp} WhatsApp Us</a>
+          <a href="${URLS.callForm}" target="_blank" rel="noreferrer" class="btn btn-amber">${icons.phone} Book a Free Call</a>
+          <a href="${URLS.whatsappForm}" target="_blank" rel="noreferrer" class="btn btn-outline-white" style="justify-content:center">${icons.whatsapp} WhatsApp Us</a>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-\${footerHTML()}
+${footerHTML()}
 `;
 initNav();
 </script>
