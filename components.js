@@ -47,12 +47,9 @@ function tricolorVHTML(width = 12) {
 function navHTML(currentPath) {
   const isHome = currentPath === '/' || currentPath === '/index.html';
   const links = [
-    { label: 'How It Works', href: isHome ? '#how-it-works' : '/index.html#how-it-works' },
-    { label: 'What We Check', href: isHome ? '#shield' : '/index.html#shield' },
+    { label: 'Ask Anonymously', href: '/ask.html' },
     { label: 'Reviews', href: '/reviews.html' },
     { label: 'Media Coverage', href: '/media-coverage.html' },
-    { label: 'FAQs', href: '/faqs.html' },
-    { label: 'Ask Anonymously', href: '/ask.html' },
     { label: "From Founder's Desk", href: '/from-founders-desk/' },
   ];
   return `
