@@ -95,7 +95,7 @@ def run():
   <meta property="og:title" content="Sitemap Booster & Indexing Directory · Peaceful Loans">
   <meta property="og:description" content="A complete index booster directory of home loan guides, plot financing options, and unbiased loan insights.">
   <meta property="og:url" content="https://peaceful-loans.com/index-booster/">
-  <meta property="og:image" content="https://peaceful-loans.com/assets/og-image.png?v=2">
+  <meta property="og:image" content="https://peaceful-loans.com/assets/og-image.png?v=3">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
