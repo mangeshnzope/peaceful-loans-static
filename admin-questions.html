@@ -13,6 +13,7 @@
 <script src="/components.js?v=2"></script>
 <script>
 let adminSecret = sessionStorage.getItem('admin_secret') || '';
+let allQuestions = [];
 
 function showPage() {
   if (!adminSecret) {
@@ -92,6 +93,8 @@ async function renderDashboard() {
       throw new Error(questions.error || 'Failed to load questions.');
     }
 
+    allQuestions = questions;
+
     const unanswered = questions.filter(q => q.status === 'pending');
     const answered = questions.filter(q => q.status === 'answered');
 
@@ -119,6 +122,7 @@ async function renderDashboard() {
                 <option value="Processing Fees">Processing Fees</option>
                 <option value="LTV & Funding">LTV & Funding</option>
                 <option value="NRI Loans">NRI Loans</option>
+                <option value="Insurance with Home Loan">Insurance with Home Loan</option>
                 <option value="Documentation">Documentation & Process</option>
               </select>
             </div>
@@ -154,6 +158,19 @@ async function renderDashboard() {
             <p style="font-size:14.5px; color:var(--gray-800); line-height:1.6; font-family:var(--font-serif)">
               ${q.answer.replace(/\\n/g, '<br>').replace(/\n/g, '<br>')}
             </p>
+          </div>
+          <div style="border-top:1px solid var(--gray-100); padding-top:0.75rem; margin-top:0.75rem; display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+            <span style="font-size:12px; color:var(--gray-500); font-weight:500;">Change Category:</span>
+            <select id="editTag-${q.id}" onchange="updateQuestionTag('${q.id}')" style="padding:0.25rem 0.5rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:12px; outline:none; background:#fff; cursor:pointer;">
+              <option value="General" ${q.tag === 'General' ? 'selected' : ''}>General Query</option>
+              <option value="Interest Rates" ${q.tag === 'Interest Rates' ? 'selected' : ''}>Interest Rates</option>
+              <option value="Processing Fees" ${q.tag === 'Processing Fees' ? 'selected' : ''}>Processing Fees</option>
+              <option value="LTV & Funding" ${q.tag === 'LTV & Funding' ? 'selected' : ''}>LTV & Funding</option>
+              <option value="NRI Loans" ${q.tag === 'NRI Loans' ? 'selected' : ''}>NRI Loans</option>
+              <option value="Insurance with Home Loan" ${q.tag === 'Insurance with Home Loan' ? 'selected' : ''}>Insurance with Home Loan</option>
+              <option value="Documentation" ${q.tag === 'Documentation' ? 'selected' : ''}>Documentation & Process</option>
+            </select>
+            <span id="updateStatus-${q.id}" style="font-size:11px; font-weight:600; display:none; margin-left:0.25rem;"></span>
           </div>
         </div>
       `).join('');
@@ -226,6 +243,55 @@ async function submitAnswer(id) {
     answerBtn.disabled = false;
     answerBtn.innerText = 'Post Answer';
     alert(err.message);
+  }
+}
+
+async function updateQuestionTag(id) {
+  const q = allQuestions.find(item => item.id === id);
+  if (!q) return;
+
+  const newTag = document.getElementById(`editTag-${id}`).value;
+  const statusEl = document.getElementById(`updateStatus-${id}`);
+  const selectEl = document.getElementById(`editTag-${id}`);
+
+  selectEl.disabled = true;
+  statusEl.style.color = 'var(--gray-500)';
+  statusEl.textContent = 'Updating...';
+  statusEl.style.display = 'inline';
+
+  try {
+    const res = await fetch('/api/admin/answer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id,
+        answer: q.answer,
+        tag: newTag,
+        secret: adminSecret
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.error || 'Failed to update category.');
+    }
+
+    statusEl.style.color = '#166534';
+    statusEl.textContent = '✓ Saved';
+    q.tag = newTag;
+
+    setTimeout(() => {
+      statusEl.style.display = 'none';
+      renderDashboard();
+    }, 800);
+  } catch (err) {
+    statusEl.style.color = '#dc2626';
+    statusEl.textContent = '✗ Error';
+    alert(err.message);
+  } finally {
+    selectEl.disabled = false;
   }
 }
 

@@ -69,8 +69,8 @@ function generateRandomNumber() {
 
 // Generate default username
 let currentUsername = sessionStorage.getItem('anon_username');
-if (!currentUsername) {
-  currentUsername = `c/Peaceful-Loans-${generateRandomNumber()}`;
+if (!currentUsername || (currentUsername.startsWith('c/Peaceful-Loans-') && !currentUsername.startsWith('c/Peaceful-Loans-Home-Loans-'))) {
+  currentUsername = `c/Peaceful-Loans-Home-Loans-${generateRandomNumber()}`;
   sessionStorage.setItem('anon_username', currentUsername);
 }
 
@@ -79,7 +79,7 @@ let allPublicQuestions = [];
 let activeFilterTag = 'All';
 let searchText = '';
 
-const CATEGORY_TAGS = ['All', 'Interest Rates', 'Processing Fees', 'LTV & Funding', 'NRI Loans', 'Documentation', 'General'];
+const CATEGORY_TAGS = ['All', 'Interest Rates', 'Processing Fees', 'LTV & Funding', 'NRI Loans', 'Insurance with Home Loan', 'Documentation', 'General'];
 
 const urlParams = new URLSearchParams(window.location.search);
 const questionId = urlParams.get('id');
@@ -154,7 +154,7 @@ function renderAskForm() {
 }
 
 function regenerateUsername() {
-  currentUsername = `c/Peaceful-Loans-${generateRandomNumber()}`;
+  currentUsername = `c/Peaceful-Loans-Home-Loans-${generateRandomNumber()}`;
   sessionStorage.setItem('anon_username', currentUsername);
   document.getElementById('usernameInput').value = currentUsername;
 }
