@@ -92,7 +92,7 @@ function showPage() {
 }
 
 function renderAskForm() {
-  document.body.classList.add('has-sticky-cta');
+  document.body.classList.remove('has-sticky-cta');
   document.getElementById('app').innerHTML = `
     ${navHTML('/ask.html')}
     
@@ -107,78 +107,58 @@ function renderAskForm() {
     </div>
 
     <!-- Main public Q&A container -->
-    <div class="container-sm" id="publicDirectoryContainer" style="padding-bottom:5rem;"></div>
+    <div class="container-sm" id="publicDirectoryContainer" style="padding-bottom:3rem;"></div>
 
-    <!-- Sticky Bottom CTA for Mobile -->
-    <div class="sticky-cta-bar">
-      <div class="sticky-cta-container">
-        <div class="sticky-cta-text">
-          <h4>Have a confidential question?</h4>
-          <p>Get a direct expert answer anonymously</p>
+    <!-- Old Ask Anonymously Form Card (at the bottom) -->
+    <div class="container-sm" style="padding-top:2rem; padding-bottom:5rem; border-top: 1px solid var(--gray-200);">
+      <div class="text-center" style="margin-bottom:2.5rem">
+        <p class="section-label section-label-gray" style="margin-bottom: 0.5rem;">Didn't find your answer?</p>
+        <h2 style="font-family:var(--font-serif); font-size:1.8rem; font-weight:600; color:var(--c-ink)">Ask Your Question Anonymously</h2>
+        <p style="font-size:14px; color:var(--gray-500); margin-top:0.5rem">Got a complex question about a home loan above ₹2 Crores? Ask anonymously, and I will personally answer it here.</p>
+      </div>
+
+      <div class="ask-grid">
+        <!-- Left Column: Illustration -->
+        <div class="ask-info-panel">
+          <img src="/assets/confidential-expert.jpg" alt="Confidential Expert Advisory" class="ask-info-image" />
         </div>
-        <button type="button" class="btn btn-sticky-ask" onclick="openAskDialog()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-top:-1px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Ask Anonymously
-        </button>
+
+        <!-- Right Column: The Form Card -->
+        <div class="ask-card">
+          <form id="askForm" onsubmit="submitQuestion(event)">
+            <div class="form-group" style="margin-bottom:1.5rem">
+              <label style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Your Anonymous Username</label>
+              <div style="display:flex; align-items:center; gap:0.75rem">
+                <input type="text" id="usernameInput" value="${currentUsername}" readonly style="flex:1; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; background:var(--gray-50); font-weight:600; color:var(--blue); font-family:monospace; font-size:15px; outline:none;" />
+                <button type="button" class="btn btn-outline-gray btn-sm" onclick="regenerateUsername()" style="padding:0.75rem 1rem">Regenerate</button>
+              </div>
+              <p style="font-size:12px; color:var(--gray-500); margin-top:0.4rem">This auto-generated ID keeps your identity completely private.</p>
+            </div>
+
+            <div class="form-group" style="margin-bottom:1.5rem">
+              <label for="questionText" style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Your Question (Home Loan above ₹2 Cr)</label>
+              <textarea id="questionText" required placeholder="Type your question about processing fees, LTV caps, interest rate resets, hidden charges, or document terms..." style="width:100%; height:160px; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; line-height:1.5; resize:vertical; outline:none; transition:border-color 0.2s;"></textarea>
+            </div>
+
+            <div class="form-group" style="margin-bottom:2rem">
+              <label for="emailInput" style="display:block; font-weight:500; font-size:14px; margin-bottom:0.5rem; color:var(--gray-800)">Email Address (Optional)</label>
+              <input type="email" id="emailInput" placeholder="name@example.com" style="width:100%; padding:0.75rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:14px; outline:none; transition:border-color 0.2s;" />
+              <p style="font-size:12px; color:var(--gray-500); margin-top:0.4rem">Only used to notify you when I answer. If left blank, you must save your private link to check the response.</p>
+            </div>
+
+            <div id="formStatus" style="display:none; padding:1rem; border-radius:6px; font-size:14px; margin-bottom:1.5rem;"></div>
+
+            <button type="submit" id="submitBtn" class="btn btn-primary" style="width:100%; display:flex; justify-content:center;">Post Question Anonymously</button>
+          </form>
+        </div>
       </div>
     </div>
-
-    <!-- Native Dialog Modal -->
-    <dialog id="askDialog" class="ask-dialog">
-      <div class="dialog-content">
-        <div class="dialog-header">
-          <h3>Ask Anonymously</h3>
-          <button type="button" class="dialog-close-btn" onclick="closeAskDialog()" aria-label="Close">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          </button>
-        </div>
-        <form id="askForm" onsubmit="submitQuestion(event)">
-          <div class="form-group" style="margin-bottom:1.25rem">
-            <label style="display:block; font-weight:500; font-size:13px; margin-bottom:0.4rem; color:var(--gray-800)">Your Anonymous Username</label>
-            <div style="display:flex; align-items:center; gap:0.5rem">
-              <input type="text" id="usernameInput" value="${currentUsername}" readonly style="flex:1; padding:0.6rem; border:1px solid var(--gray-200); border-radius:6px; background:var(--gray-50); font-weight:600; color:var(--blue); font-family:monospace; font-size:14px; outline:none;" />
-              <button type="button" class="btn btn-outline-gray btn-sm" onclick="regenerateUsername()" style="padding:0.6rem 0.85rem; font-size:12px;">Regenerate</button>
-            </div>
-            <p style="font-size:11px; color:var(--gray-500); margin-top:0.3rem">Keeps your identity completely private from banks and builders.</p>
-          </div>
-
-          <div class="form-group" style="margin-bottom:1.25rem">
-            <label for="questionText" style="display:block; font-weight:500; font-size:13px; margin-bottom:0.4rem; color:var(--gray-800)">Your Question (Home Loan above ₹2 Cr)</label>
-            <textarea id="questionText" required placeholder="Type your question about processing fees, LTV caps, interest rate resets, hidden charges, or document terms..." style="width:100%; height:120px; padding:0.6rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:13.5px; line-height:1.4; resize:vertical; outline:none; box-sizing:border-box;"></textarea>
-          </div>
-
-          <div class="form-group" style="margin-bottom:1.5rem">
-            <label for="emailInput" style="display:block; font-weight:500; font-size:13px; margin-bottom:0.4rem; color:var(--gray-800)">Email Address (Optional)</label>
-            <input type="email" id="emailInput" placeholder="name@example.com" style="width:100%; padding:0.6rem; border:1px solid var(--gray-200); border-radius:6px; font-family:inherit; font-size:13.5px; outline:none; box-sizing:border-box;" />
-            <p style="font-size:11px; color:var(--gray-500); margin-top:0.3rem">Only used to notify you when answered. If blank, you must save your private link.</p>
-          </div>
-
-          <div id="formStatus" style="display:none; padding:0.75rem; border-radius:6px; font-size:13px; margin-bottom:1rem;"></div>
-
-          <button type="submit" id="submitBtn" class="btn btn-primary" style="width:100%; display:flex; justify-content:center; padding:0.75rem;">Post Question Anonymously</button>
-        </form>
-      </div>
-    </dialog>
 
     ${ctaSectionHTML()}
     ${footerHTML()}
   `;
   initNav();
   initPublicDirectory();
-
-  // Attach backdrop-close handler for the dialog modal
-  const dialog = document.getElementById('askDialog');
-  dialog.addEventListener('click', (e) => {
-    const dialogDimensions = dialog.getBoundingClientRect();
-    if (
-      e.clientX < dialogDimensions.left ||
-      e.clientX > dialogDimensions.right ||
-      e.clientY < dialogDimensions.top ||
-      e.clientY > dialogDimensions.bottom
-    ) {
-      dialog.close();
-    }
-  });
 }
 
 function regenerateUsername() {
@@ -190,33 +170,13 @@ function regenerateUsername() {
   }
 }
 
-function openAskDialog() {
-  const dialog = document.getElementById('askDialog');
-  if (!dialog) return;
-
-  if (!currentUsername) {
-    regenerateUsername();
-  } else {
-    const usernameInput = document.getElementById('usernameInput');
-    if (usernameInput) usernameInput.value = currentUsername;
+function scrollToAskForm() {
+  const formElement = document.getElementById('askForm');
+  if (formElement) {
+    formElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const questionText = document.getElementById('questionText');
+    if (questionText) questionText.focus();
   }
-
-  // Reset status and fields
-  document.getElementById('questionText').value = '';
-  document.getElementById('emailInput').value = '';
-  const formStatus = document.getElementById('formStatus');
-  formStatus.style.display = 'none';
-
-  const submitBtn = document.getElementById('submitBtn');
-  submitBtn.disabled = false;
-  submitBtn.innerText = "Post Question Anonymously";
-
-  dialog.showModal();
-}
-
-function closeAskDialog() {
-  const dialog = document.getElementById('askDialog');
-  if (dialog) dialog.close();
 }
 
 async function submitQuestion(event) {
@@ -390,7 +350,7 @@ async function initPublicDirectory() {
       <!-- Quick stats / prompt block inside Q&A directory -->
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; font-size:13px; color:var(--gray-500); padding:0 0.25rem;">
         <div id="resultCount">Showing answered questions...</div>
-        <div style="display:flex; align-items:center; gap:0.25rem; color:var(--blue); font-weight:600; cursor:pointer;" onclick="openAskDialog()">
+        <div style="display:flex; align-items:center; gap:0.25rem; color:var(--blue); font-weight:600; cursor:pointer;" onclick="scrollToAskForm()">
           <span>Didn't find yours? Ask anonymously</span> &rarr;
         </div>
       </div>
