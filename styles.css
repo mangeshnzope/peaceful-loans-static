@@ -1281,6 +1281,268 @@ ul { list-style: none; }
   padding: 0.875rem;
 }
 
+/* ===== REDESIGNED ASK PAGE STYLES ===== */
+
+/* 1. Shimmer Skeleton Loaders */
+.skeleton-card {
+  background: var(--c-surface);
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.skeleton-shimmer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+  animation: shimmer-swipe 1.6s infinite;
+  z-index: 1;
+}
+
+@keyframes shimmer-swipe {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.skeleton-badge {
+  width: 80px;
+  height: 16px;
+  background: var(--gray-100);
+  border-radius: 4px;
+}
+
+.skeleton-title {
+  width: 85%;
+  height: 20px;
+  background: var(--gray-100);
+  border-radius: 4px;
+}
+
+.skeleton-body {
+  width: 100%;
+  height: 14px;
+  background: var(--gray-50);
+  border-radius: 4px;
+  margin-top: 0.25rem;
+}
+
+.skeleton-body-short {
+  width: 60%;
+  height: 14px;
+  background: var(--gray-50);
+  border-radius: 4px;
+}
+
+/* 2. Category tag horizontal scroll optimization */
+.tag-buttons {
+  display: flex;
+  flex-wrap: nowrap !important; /* Force single line horizontal scroll on mobile */
+  overflow-x: auto;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+
+.tag-buttons::-webkit-scrollbar {
+  display: none; /* Hide scrollbar Chrome/Safari */
+}
+
+.btn-tag {
+  flex-shrink: 0; /* Prevent compression */
+  white-space: nowrap;
+}
+
+/* 3. Sticky Bottom CTA Bar & Desktop Floating */
+.sticky-cta-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border-top: 1px solid var(--gray-200);
+  padding: 0.875rem 1rem;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sticky-cta-container {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sticky-cta-text {
+  display: none; /* Default hide detailed text on small mobile */
+}
+
+@media (min-width: 480px) {
+  .sticky-cta-text {
+    display: block;
+  }
+  .sticky-cta-text h4 {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .sticky-cta-text p {
+    font-size: 11.5px;
+    color: var(--gray-500);
+    margin: 0.15rem 0 0 0;
+    line-height: 1.2;
+  }
+}
+
+.btn-sticky-ask {
+  flex: 1;
+  max-width: 100%;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14.5px;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(26, 76, 200, 0.25);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-sticky-ask::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 45%, rgba(255, 255, 255, 0.3) 50%, transparent 55%);
+  transform: rotate(-45deg);
+  animation: shine-btn 4s infinite ease-in-out;
+}
+
+@keyframes shine-btn {
+  0% { left: -100%; }
+  10%, 100% { left: 100%; }
+}
+
+@media (min-width: 480px) {
+  .btn-sticky-ask {
+    flex: 0 0 auto;
+    width: auto;
+  }
+}
+
+/* 4. Native Dialog Styles */
+dialog.ask-dialog {
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.25);
+  background: var(--c-surface);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  z-index: 200;
+}
+
+dialog.ask-dialog::backdrop {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: backdrop-fade-in 0.3s forwards;
+}
+
+@keyframes backdrop-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Dialog wrapper styling */
+.dialog-content {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--gray-100);
+  padding-bottom: 0.75rem;
+}
+
+.dialog-header h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.dialog-close-btn {
+  color: var(--gray-400);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dialog-close-btn:hover {
+  background: var(--gray-100);
+  color: var(--gray-700);
+}
+
+/* Custom CSS to prevent page content overlapping with bottom sticky bar */
+body.has-sticky-cta {
+  padding-bottom: 72px !important;
+}
+
+/* 5. Custom styles for search bar container and badges */
+.search-header-container {
+  background: linear-gradient(135deg, rgba(26, 76, 200, 0.03) 0%, rgba(255, 184, 0, 0.02) 100%);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Transition for accordion height */
+.qa-accordion-content {
+  transition: all 0.25s ease-out;
+}
+
+
 
 
 
