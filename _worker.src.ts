@@ -104,6 +104,121 @@ async function sendAnswerAlertEmail(borrowerEmail: string, username: string, que
   }
 }
 
+async function sendDailyCsvEmail(env: any): Promise<void> {
+  const apiKey = env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn("RESEND_API_KEY is not set. Scheduled CSV email skipped.");
+    return;
+  }
+
+  try {
+    const kv = env.QUESTIONS_KV;
+    const questions = [];
+
+    if (kv) {
+      const list = await kv.list({ prefix: "question:" });
+      for (const key of list.keys) {
+        const val = await kv.get(key.name);
+        if (val) questions.push(JSON.parse(val));
+      }
+    } else {
+      for (const val of localDB.values()) {
+        questions.push(JSON.parse(val));
+      }
+    }
+
+    // Sort by created_at desc
+    questions.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+    // Build CSV content
+    const csvRows = [];
+    const headers = ["ID", "Username", "Email", "Category", "Status", "Created At", "Question", "Answer", "IP Address", "Referrer", "li_fat_id", "UTM Source", "UTM Medium", "UTM Campaign", "UTM Term", "UTM Content"];
+    csvRows.push(headers.map(h => `"${h.replace(/"/g, '""')}"`).join(","));
+
+    for (const q of questions) {
+      const utm = q.utm_params || {};
+      const row = [
+        q.id || "",
+        q.username || "",
+        q.email || "",
+        q.tag || "General",
+        q.status || "",
+        q.created_at || "",
+        q.question || "",
+        q.answer || "",
+        q.ip || "Unknown",
+        q.referrer || "Direct",
+        q.li_fat_id || "",
+        utm.utm_source || "",
+        utm.utm_medium || "",
+        utm.utm_campaign || "",
+        utm.utm_term || "",
+        utm.utm_content || ""
+      ];
+
+      const escapedRow = row.map(val => {
+        const stringVal = String(val).replace(/\r?\n/g, " ").replace(/"/g, '""');
+        return `"${stringVal}"`;
+      });
+      csvRows.push(escapedRow.join(","));
+    }
+
+    const csvString = csvRows.join("\r\n");
+    
+    // Convert to Base64 (Using TextEncoder and btoa)
+    const utf8Encoder = new TextEncoder();
+    const u8arr = utf8Encoder.encode(csvString);
+    let binary = "";
+    for (let i = 0; i < u8arr.byteLength; i++) {
+      binary += String.fromCharCode(u8arr[i]);
+    }
+    const base64Csv = btoa(binary);
+
+    const dateStr = new Date().toISOString().slice(0, 10);
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        from: "Peaceful Loans Reports <info@peaceful-loans.com>",
+        to: "mangesh@peaceful-loans.com",
+        subject: `Daily Q&A Report - ${dateStr}`,
+        html: `
+          <div style="font-family:sans-serif; line-height:1.6; max-width:600px; margin:0 auto; padding:1.5rem; border:1px solid #e5e7eb; border-radius:8px;">
+            <h2 style="color:#1a4cc8; margin-top:0;">Daily Q&A Export Report</h2>
+            <p>Hello,</p>
+            <p>Please find attached the daily Q&A export report containing all questions, answers, and tracking/session details compiled up to today.</p>
+            <hr style="border:0; border-top:1px solid #e5e7eb; margin:1.5rem 0;" />
+            <p><strong>Export Date:</strong> ${new Date().toLocaleString()}</p>
+            <p><strong>Total Records:</strong> ${questions.length}</p>
+            <p>If you need to view the live moderator interface, please use the link below:</p>
+            <p style="margin-bottom:0; margin-top:1.5rem;">
+              <a href="https://peaceful-loans.com/admin-questions.html" style="display:inline-block; background:#1a4cc8; color:#ffffff; padding:0.6rem 1.2rem; border-radius:6px; text-decoration:none; font-weight:600; font-size:14px;">Open Moderator Dashboard</a>
+            </p>
+          </div>
+        `,
+        attachments: [
+          {
+            filename: `peaceful_loans_questions_${dateStr}.csv`,
+            content: base64Csv
+          }
+        ]
+      })
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      console.error(`Resend API CSV email error: ${res.status} - ${errText}`);
+    } else {
+      console.log("Daily CSV Q&A email sent successfully.");
+    }
+  } catch (err) {
+    console.error("Failed to compile and send daily CSV email:", err);
+  }
+}
+
 async function handleApiRequest(request: Request, env: any, ctx: any): Promise<Response> {
   const url = new URL(request.url);
   const cleanPath = url.pathname.replace(/\/+$/, "");
@@ -310,6 +425,27 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
     }
   }
 
+  // 5. Admin: Manually trigger Daily CSV email report
+  if (cleanPath === "/api/admin/send-report" && request.method === "POST") {
+    try {
+      const { secret } = await request.json() as any;
+      const adminSecret = env.ADMIN_SECRET || "PeacefulLoansAdmin2026";
+      if (!secret || secret !== adminSecret) {
+        return new Response(JSON.stringify({ error: "Unauthorized." }), { status: 401, headers });
+      }
+
+      if (ctx && typeof ctx.waitUntil === "function") {
+        ctx.waitUntil(sendDailyCsvEmail(env));
+      } else {
+        await sendDailyCsvEmail(env);
+      }
+
+      return new Response(JSON.stringify({ success: true, message: "Report dispatch scheduled/triggered successfully." }), { status: 200, headers });
+    } catch (err: any) {
+      return new Response(JSON.stringify({ error: err.message }), { status: 500, headers });
+    }
+  }
+
   return new Response(JSON.stringify({ error: "Not Found" }), { status: 404, headers });
 }
 
@@ -327,5 +463,9 @@ export default {
     }
 
     return aeoWorker.fetch(request, env, ctx);
+  },
+
+  async scheduled(event: any, env: any, ctx: any) {
+    ctx.waitUntil(sendDailyCsvEmail(env));
   }
 };
