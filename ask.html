@@ -74,6 +74,31 @@ if (!currentUsername || (currentUsername.startsWith('c/Peaceful-Loans-') && !cur
   sessionStorage.setItem('anon_username', currentUsername);
 }
 
+// Capture and store UTM parameters in sessionStorage
+function captureUtmParams() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  utmKeys.forEach(key => {
+    const val = urlParams.get(key);
+    if (val) {
+      sessionStorage.setItem(key, val);
+    }
+  });
+}
+captureUtmParams();
+
+function getUtmParams() {
+  const utms = {};
+  const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  utmKeys.forEach(key => {
+    const stored = sessionStorage.getItem(key);
+    if (stored) {
+      utms[key] = stored;
+    }
+  });
+  return Object.keys(utms).length > 0 ? utms : null;
+}
+
 // Global Q&A Directory State
 let allPublicQuestions = [];
 let activeFilterTag = 'All';
@@ -198,7 +223,7 @@ async function submitQuestion(event) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username, question, email, tag })
+      body: JSON.stringify({ username, question, email, tag, utm_params: getUtmParams() })
     });
 
     const data = await res.json();

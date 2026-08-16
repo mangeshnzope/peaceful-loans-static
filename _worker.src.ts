@@ -29,8 +29,8 @@ async function sendNotificationEmail(username: string, question: string, env: an
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "Peaceful Loans Q&A <info@peaceful-loan.com>",
-        to: "mangesh@peaceful-loan.com",
+        from: "Peaceful Loans Q&A <info@peaceful-loans.com>",
+        to: "mangesh@peaceful-loans.com",
         subject: `New Q&A Question from ${username}`,
         html: `
           <div style="font-family:sans-serif; line-height:1.6; max-width:600px; margin:0 auto; padding:1.5rem; border:1px solid #e5e7eb; border-radius:8px;">
@@ -72,7 +72,7 @@ async function sendAnswerAlertEmail(borrowerEmail: string, username: string, que
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: "Mangesh from Peaceful Loans <mangesh@peaceful-loan.com>",
+        from: "Mangesh from Peaceful Loans <mangesh@peaceful-loans.com>",
         to: borrowerEmail,
         subject: `Your Home Loan Question has been Answered!`,
         html: `
@@ -122,7 +122,7 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
   // 1. Submit Question
   if (cleanPath === "/api/questions" && request.method === "POST") {
     try {
-      const { username, question, email, tag } = await request.json() as any;
+      const { username, question, email, tag, utm_params } = await request.json() as any;
       if (!username || !question) {
         return new Response(JSON.stringify({ error: "Username and question are required." }), { status: 400, headers });
       }
@@ -137,6 +137,7 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
         answer: null,
         status: "pending",
         created_at: new Date().toISOString(),
+        utm_params: utm_params || null,
       };
 
       const kv = env.QUESTIONS_KV;

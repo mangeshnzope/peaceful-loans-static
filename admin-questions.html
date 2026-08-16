@@ -69,7 +69,10 @@ async function renderDashboard() {
         <p class="section-label section-label-gray">Control Panel</p>
         <h1>Q&A Moderation Dashboard</h1>
         <p style="margin-top:1.25rem">Manage anonymous borrower queries, write answers, and track emails.</p>
-        <button onclick="logoutAdmin()" class="btn btn-outline-gray btn-sm" style="margin-top:1rem">Sign Out</button>
+        <div style="margin-top:1rem; display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap;">
+          <button onclick="downloadQuestionsCSV()" class="btn btn-outline-gray btn-sm">Download CSV</button>
+          <button onclick="logoutAdmin()" class="btn btn-outline-gray btn-sm">Sign Out</button>
+        </div>
       </div>
     </div>
 
@@ -107,6 +110,7 @@ async function renderDashboard() {
               <span style="font-family:monospace; font-weight:600; color:var(--blue); font-size:14px;">${q.username}</span>
               <span class="status-badge pending" style="margin-left:0.5rem; font-size:9px; padding:0.15rem 0.35rem;">${q.tag || 'General'}</span>
               ${q.email ? `<span style="font-size:12px; color:var(--gray-500); margin-left:1rem; border-left:1px solid var(--gray-200); padding-left:1rem;">📧 ${q.email}</span>` : ''}
+              ${renderUtmParams(q.utm_params)}
             </div>
             <span style="font-size:12px; color:var(--gray-400)">${new Date(q.created_at).toLocaleString()}</span>
           </div>
@@ -144,6 +148,7 @@ async function renderDashboard() {
               <span style="font-family:monospace; font-weight:600; color:var(--gray-600); font-size:14px;">${q.username}</span>
               <span class="status-badge pending" style="margin-left:0.5rem; font-size:9px; padding:0.15rem 0.35rem;">${q.tag || 'General'}</span>
               ${q.email ? `<span style="font-size:12px; color:var(--gray-400); margin-left:1rem; border-left:1px solid var(--gray-200); padding-left:1rem;">📧 ${q.email}</span>` : ''}
+              ${renderUtmParams(q.utm_params)}
             </div>
             <span style="font-size:12px; color:var(--gray-400)">${new Date(q.created_at).toLocaleString()}</span>
           </div>
@@ -299,6 +304,73 @@ function logoutAdmin() {
   sessionStorage.removeItem('admin_secret');
   adminSecret = '';
   renderLogin();
+}
+
+function renderUtmParams(utm_params) {
+  if (!utm_params) return '';
+  const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  const parts = [];
+  keys.forEach(k => {
+    if (utm_params[k]) {
+      parts.push(`<strong>${k.replace('utm_', '')}:</strong> <code style="background:#f3f4f6; padding:0.1rem 0.35rem; border-radius:4px; font-size:11px; border:1px solid #e5e7eb; font-family:monospace; color:#1a4cc8;">${utm_params[k]}</code>`);
+    }
+  });
+  if (parts.length === 0) return '';
+  return `
+    <div style="margin-top:0.6rem; font-size:12px; color:var(--gray-600); display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;">
+      <span style="font-weight:500;">🎯 UTMs:</span>
+      ${parts.join(' ')}
+    </div>
+  `;
+}
+
+function downloadQuestionsCSV() {
+  if (!allQuestions || allQuestions.length === 0) {
+    alert("No questions available to download.");
+    return;
+  }
+
+  const csvRows = [];
+  // Define headers
+  const headers = ["ID", "Username", "Email", "Category", "Status", "Created At", "Question", "Answer", "UTM Source", "UTM Medium", "UTM Campaign", "UTM Term", "UTM Content"];
+  csvRows.push(headers.map(h => `"${h.replace(/"/g, '""')}"`).join(","));
+
+  for (const q of allQuestions) {
+    const utm = q.utm_params || {};
+    const row = [
+      q.id || "",
+      q.username || "",
+      q.email || "",
+      q.tag || "General",
+      q.status || "",
+      q.created_at || "",
+      q.question || "",
+      q.answer || "",
+      utm.utm_source || "",
+      utm.utm_medium || "",
+      utm.utm_campaign || "",
+      utm.utm_term || "",
+      utm.utm_content || ""
+    ];
+
+    const escapedRow = row.map(val => {
+      const stringVal = String(val).replace(/\r?\n/g, " ").replace(/"/g, '""');
+      return `"${stringVal}"`;
+    });
+    csvRows.push(escapedRow.join(","));
+  }
+
+  const csvString = csvRows.join("\r\n");
+  const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.setAttribute("href", url);
+  link.setAttribute("download", `peaceful_loans_questions_${new Date().toISOString().slice(0,10)}.csv`);
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 }
 
 window.onload = showPage;
