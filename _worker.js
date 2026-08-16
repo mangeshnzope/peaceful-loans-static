@@ -621,7 +621,7 @@ async function handleApiRequest(request, env, ctx) {
   }
   if (cleanPath === "/api/questions" && request.method === "POST") {
     try {
-      const { username, question, email, tag, utm_params, referrer } = await request.json();
+      const { username, question, email, tag, utm_params, referrer, li_fat_id } = await request.json();
       if (!username || !question) {
         return new Response(JSON.stringify({ error: "Username and question are required." }), { status: 400, headers });
       }
@@ -638,7 +638,8 @@ async function handleApiRequest(request, env, ctx) {
         created_at: (/* @__PURE__ */ new Date()).toISOString(),
         utm_params: utm_params || null,
         ip: clientIp,
-        referrer: referrer || "Direct"
+        referrer: referrer || "Direct",
+        li_fat_id: li_fat_id || null
       };
       const kv = env.QUESTIONS_KV;
       if (kv) {

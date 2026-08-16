@@ -74,11 +74,11 @@ if (!currentUsername || (currentUsername.startsWith('c/Peaceful-Loans-') && !cur
   sessionStorage.setItem('anon_username', currentUsername);
 }
 
-// Capture and store UTM parameters in sessionStorage
+// Capture and store UTM parameters & li_fat_id in sessionStorage
 function captureUtmParams() {
   const urlParams = new URLSearchParams(window.location.search);
-  const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
-  utmKeys.forEach(key => {
+  const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'li_fat_id'];
+  keys.forEach(key => {
     const val = urlParams.get(key);
     if (val) {
       sessionStorage.setItem(key, val);
@@ -237,7 +237,8 @@ async function submitQuestion(event) {
         email,
         tag,
         utm_params: getUtmParams(),
-        referrer: sessionStorage.getItem('initial_referrer') || document.referrer || 'Direct'
+        referrer: sessionStorage.getItem('initial_referrer') || document.referrer || 'Direct',
+        li_fat_id: sessionStorage.getItem('li_fat_id') || null
       })
     });
 

@@ -122,7 +122,7 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
   // 1. Submit Question
   if (cleanPath === "/api/questions" && request.method === "POST") {
     try {
-      const { username, question, email, tag, utm_params, referrer } = await request.json() as any;
+      const { username, question, email, tag, utm_params, referrer, li_fat_id } = await request.json() as any;
       if (!username || !question) {
         return new Response(JSON.stringify({ error: "Username and question are required." }), { status: 400, headers });
       }
@@ -141,6 +141,7 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
         utm_params: utm_params || null,
         ip: clientIp,
         referrer: referrer || "Direct",
+        li_fat_id: li_fat_id || null,
       };
 
       const kv = env.QUESTIONS_KV;
