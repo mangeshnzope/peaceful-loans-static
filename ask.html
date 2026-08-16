@@ -284,7 +284,7 @@ async function renderQuestionView(id) {
             <span style="font-family:monospace; font-weight:600; color:var(--blue); font-size:15px;">${data.username}</span>
             <span class="status-badge pending" style="margin-left:0.75rem; font-size:10px; padding:0.15rem 0.4rem; vertical-align:middle;">${data.tag || 'General'}</span>
           </div>
-          <span style="font-size:12px; color:var(--gray-400)">${new Date(data.created_at).toLocaleDateString(undefined, {dateStyle: 'medium'})}</span>
+          <span style="font-size:12px; color:var(--gray-400)">${data.created_at ? new Date(data.created_at).toLocaleString(undefined, {dateStyle: 'medium', timeStyle: 'short'}) : ''}</span>
         </div>
         <p style="font-size:16px; font-weight:500; color:var(--gray-900); line-height:1.5; margin-bottom:1.5rem;">
           ${data.question.replace(/\n/g, '<br>')}
@@ -437,6 +437,7 @@ function renderFilteredList() {
           <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.4rem; font-size:11px;">
             <span style="font-family:monospace; font-weight:600; color:var(--gray-500);">${q.username}</span>
             <span class="status-badge answered" style="padding:0.1rem 0.35rem; font-size:9px; font-weight:600; margin-bottom:0;">${q.tag || 'General'}</span>
+            <span style="color:var(--gray-400); margin-left:auto; font-size:11px; padding-right:0.25rem;">${q.created_at ? new Date(q.created_at).toLocaleString(undefined, {dateStyle: 'medium', timeStyle: 'short'}) : ''}</span>
           </div>
           <h3 style="font-size:15px; font-weight:600; color:var(--gray-900); line-height:1.4; margin:0;">
             ${q.question}
