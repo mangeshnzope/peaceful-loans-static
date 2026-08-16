@@ -122,12 +122,13 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
   // 1. Submit Question
   if (cleanPath === "/api/questions" && request.method === "POST") {
     try {
-      const { username, question, email, tag, utm_params } = await request.json() as any;
+      const { username, question, email, tag, utm_params, referrer } = await request.json() as any;
       if (!username || !question) {
         return new Response(JSON.stringify({ error: "Username and question are required." }), { status: 400, headers });
       }
 
       const id = Math.random().toString(36).substring(2, 10);
+      const clientIp = request.headers.get("CF-Connecting-IP") || request.headers.get("cf-connecting-ip") || "Unknown";
       const data = {
         id,
         username,
@@ -138,6 +139,8 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
         status: "pending",
         created_at: new Date().toISOString(),
         utm_params: utm_params || null,
+        ip: clientIp,
+        referrer: referrer || "Direct",
       };
 
       const kv = env.QUESTIONS_KV;

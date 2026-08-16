@@ -87,6 +87,14 @@ function captureUtmParams() {
 }
 captureUtmParams();
 
+// Capture and store initial referrer in sessionStorage
+function captureReferrer() {
+  if (!sessionStorage.getItem('initial_referrer')) {
+    sessionStorage.setItem('initial_referrer', document.referrer || 'Direct');
+  }
+}
+captureReferrer();
+
 function getUtmParams() {
   const utms = {};
   const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
@@ -223,7 +231,14 @@ async function submitQuestion(event) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username, question, email, tag, utm_params: getUtmParams() })
+      body: JSON.stringify({
+        username,
+        question,
+        email,
+        tag,
+        utm_params: getUtmParams(),
+        referrer: sessionStorage.getItem('initial_referrer') || document.referrer || 'Direct'
+      })
     });
 
     const data = await res.json();

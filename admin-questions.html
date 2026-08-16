@@ -106,13 +106,15 @@ async function renderDashboard() {
       unansweredHTML = unanswered.map(q => `
         <div class="ask-card" style="margin-bottom:1.5rem; border-left:4px solid var(--blue)">
           <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--gray-100); padding-bottom:0.75rem; margin-bottom:1rem;">
-            <div>
-              <span style="font-family:monospace; font-weight:600; color:var(--blue); font-size:14px;">${q.username}</span>
-              <span class="status-badge pending" style="margin-left:0.5rem; font-size:9px; padding:0.15rem 0.35rem;">${q.tag || 'General'}</span>
-              ${q.email ? `<span style="font-size:12px; color:var(--gray-500); margin-left:1rem; border-left:1px solid var(--gray-200); padding-left:1rem;">📧 ${q.email}</span>` : ''}
-              ${renderUtmParams(q.utm_params)}
+            <div style="width: 100%;">
+              <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.4rem;">
+                <span style="font-family:monospace; font-weight:600; color:var(--blue); font-size:14px;">${q.username}</span>
+                <span class="status-badge pending" style="font-size:9px; padding:0.15rem 0.35rem;">${q.tag || 'General'}</span>
+                ${q.email ? `<span style="font-size:12px; color:var(--gray-500); border-left:1px solid var(--gray-200); padding-left:0.5rem;">📧 ${q.email}</span>` : ''}
+              </div>
+              ${renderTrackingDetails(q)}
             </div>
-            <span style="font-size:12px; color:var(--gray-400)">${new Date(q.created_at).toLocaleString()}</span>
+            <span style="font-size:12px; color:var(--gray-400); white-space:nowrap; margin-left:1rem;">${new Date(q.created_at).toLocaleString()}</span>
           </div>
           <p style="font-size:15px; color:var(--gray-800); line-height:1.5; margin-bottom:1.5rem; font-weight:500;">
             ${q.question.replace(/\n/g, '<br>')}
@@ -144,13 +146,15 @@ async function renderDashboard() {
       answeredHTML = answered.map(q => `
         <div class="ask-card" style="margin-bottom:1.5rem; background:#f9fafb; opacity:0.95;">
           <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--gray-100); padding-bottom:0.75rem; margin-bottom:1rem;">
-            <div>
-              <span style="font-family:monospace; font-weight:600; color:var(--gray-600); font-size:14px;">${q.username}</span>
-              <span class="status-badge pending" style="margin-left:0.5rem; font-size:9px; padding:0.15rem 0.35rem;">${q.tag || 'General'}</span>
-              ${q.email ? `<span style="font-size:12px; color:var(--gray-400); margin-left:1rem; border-left:1px solid var(--gray-200); padding-left:1rem;">📧 ${q.email}</span>` : ''}
-              ${renderUtmParams(q.utm_params)}
+            <div style="width: 100%;">
+              <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.4rem;">
+                <span style="font-family:monospace; font-weight:600; color:var(--gray-600); font-size:14px;">${q.username}</span>
+                <span class="status-badge pending" style="font-size:9px; padding:0.15rem 0.35rem;">${q.tag || 'General'}</span>
+                ${q.email ? `<span style="font-size:12px; color:var(--gray-400); border-left:1px solid var(--gray-200); padding-left:0.5rem;">📧 ${q.email}</span>` : ''}
+              </div>
+              ${renderTrackingDetails(q)}
             </div>
-            <span style="font-size:12px; color:var(--gray-400)">${new Date(q.created_at).toLocaleString()}</span>
+            <span style="font-size:12px; color:var(--gray-400); white-space:nowrap; margin-left:1rem;">${new Date(q.created_at).toLocaleString()}</span>
           </div>
           <p style="font-size:14px; color:var(--gray-600); line-height:1.5; margin-bottom:1.25rem;">
             ${q.question.replace(/\n/g, '<br>')}
@@ -317,9 +321,36 @@ function renderUtmParams(utm_params) {
   });
   if (parts.length === 0) return '';
   return `
-    <div style="margin-top:0.6rem; font-size:12px; color:var(--gray-600); display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;">
+    <div style="font-size:11px; color:var(--gray-600); display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;">
       <span style="font-weight:500;">🎯 UTMs:</span>
       ${parts.join(' ')}
+    </div>
+  `;
+}
+
+function renderTrackingDetails(q) {
+  const parts = [];
+  if (q.ip) {
+    parts.push(`<strong>IP:</strong> <code style="background:#f3f4f6; padding:0.1rem 0.35rem; border-radius:4px; font-size:11px; border:1px solid #e5e7eb; font-family:monospace; color:#4b5563;">${q.ip}</code>`);
+  }
+  if (q.referrer && q.referrer !== 'Direct') {
+    const escapedRef = q.referrer.replace(/"/g, '&quot;');
+    parts.push(`<strong>Referrer:</strong> <a href="${escapedRef}" target="_blank" style="font-size:11px; color:var(--blue); text-decoration:underline; word-break:break-all;">${q.referrer}</a>`);
+  } else {
+    parts.push(`<strong>Referrer:</strong> <span style="font-size:11px; color:var(--gray-500);">Direct</span>`);
+  }
+
+  const utmHtml = renderUtmParams(q.utm_params);
+  
+  if (!utmHtml && parts.length === 0) return '';
+
+  return `
+    <div style="margin-top:0.5rem; display:flex; flex-direction:column; gap:0.4rem; border-top:1px dashed #e5e7eb; padding-top:0.5rem; width: 100%;">
+      ${utmHtml}
+      <div style="font-size:11px; color:var(--gray-600); display:flex; flex-wrap:wrap; gap:0.5rem 1rem; align-items:center;">
+        <span>ℹ️ Session:</span>
+        ${parts.join(' | ')}
+      </div>
     </div>
   `;
 }
@@ -332,7 +363,7 @@ function downloadQuestionsCSV() {
 
   const csvRows = [];
   // Define headers
-  const headers = ["ID", "Username", "Email", "Category", "Status", "Created At", "Question", "Answer", "UTM Source", "UTM Medium", "UTM Campaign", "UTM Term", "UTM Content"];
+  const headers = ["ID", "Username", "Email", "Category", "Status", "Created At", "Question", "Answer", "IP Address", "Referrer", "UTM Source", "UTM Medium", "UTM Campaign", "UTM Term", "UTM Content"];
   csvRows.push(headers.map(h => `"${h.replace(/"/g, '""')}"`).join(","));
 
   for (const q of allQuestions) {
@@ -346,6 +377,8 @@ function downloadQuestionsCSV() {
       q.created_at || "",
       q.question || "",
       q.answer || "",
+      q.ip || "Unknown",
+      q.referrer || "Direct",
       utm.utm_source || "",
       utm.utm_medium || "",
       utm.utm_campaign || "",
