@@ -87,10 +87,10 @@ function captureUtmParams() {
 }
 captureUtmParams();
 
-// Capture and store initial referrer in sessionStorage
+// Capture and store initial landing page URL in sessionStorage
 function captureReferrer() {
   if (!sessionStorage.getItem('initial_referrer')) {
-    sessionStorage.setItem('initial_referrer', document.referrer || 'Direct');
+    sessionStorage.setItem('initial_referrer', window.location.href);
   }
 }
 captureReferrer();
