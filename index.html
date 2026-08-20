@@ -679,7 +679,6 @@ function initTestimonialCarousel() {
   window.goTestimonial = (i) => { current = i; renderTestimonial(); };
 
   renderTestimonial();
-  setInterval(() => { current = (current + 1) % testimonials.length; renderTestimonial(); }, 5000);
 }
 
 // ===== Community Tabs =====
