@@ -60,10 +60,13 @@ Here is our curation of the six core reasons why property prices rarely correct 
 
 Flip through our quick summary slide deck below, or download the full presentation:
 
+  [
+    ![Why Property Prices (Almost) Never Fall in India Slide Deck](page-1.png)
+  ](why-prices-of-homes-never-fall-in-india.pdf)
+
 [
 
 Download PDF Slide Deck
-
 ](why-prices-of-homes-never-fall-in-india.pdf)
 
 ## The Big Idea
@@ -117,6 +120,23 @@ Maintenance, illiquidity, and the time-value of money rarely enter the calculati
 > ~1 crore flats lie vacant across India — bought as investments, not homes.
 
 > — **NREDC, 2024**
+
+## Full Presentation Slide Deck
+
+Flip through the slides below to see the complete analysis:
+
+  
+    ![Slide 1](page-1.png)
+    ![Slide 2](page-2.png)
+    ![Slide 3](page-3.png)
+    ![Slide 4](page-4.png)
+    ![Slide 5](page-5.png)
+    ![Slide 6](page-6.png)
+    ![Slide 7](page-7.png)
+    ![Slide 8](page-8.png)
+  
+  ❮
+  ❯
 
 ## What This Means For You
 

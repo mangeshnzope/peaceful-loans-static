@@ -284,6 +284,69 @@
   .tc-blue { flex: 1; background: #1A4CC8; }
   .tc-red { flex: 1; background: #E84118; }
   .tc-amber { flex: 1; background: #FFB800; }
+  
+  /* ===== SLIDE CAROUSEL ===== */
+  .carousel-container {
+    position: relative;
+    margin: 40px 0;
+    overflow: hidden;
+    border: 1.5px solid var(--hair);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    background: #fff;
+  }
+  .carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel-track {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+  }
+  .carousel-slide img {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    display: block;
+  }
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    z-index: 10;
+    transition: background 0.2s;
+  }
+  .carousel-btn:hover {
+    background: rgba(0,0,0,0.8);
+  }
+  .carousel-prev { left: 16px; }
+  .carousel-next { right: 16px; }
 </style>
 
 <script type="application/ld+json">
@@ -414,13 +477,15 @@
 <hr>
 <h2>Slide Deck Summary</h2>
 <p>Flip through our quick summary slide deck below, or download the full presentation:</p>
-<div class="pdf-container" style="margin: 32px 0 16px; border: 1.5px solid var(--hair); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.08); background: #f3f4f6;">
-<iframe src="why-prices-of-homes-never-fall-in-india.pdf#toolbar=0" width="100%" height="600px" style="border: none; display: block;"></iframe>
+<div class="slide-preview-container" style="margin: 32px 0 16px; border: 1.5px solid var(--hair); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.08); background: #fff; text-align: center;">
+  <a href="why-prices-of-homes-never-fall-in-india.pdf" target="_blank">
+    <img src="page-1.png" alt="Why Property Prices (Almost) Never Fall in India Slide Deck" style="width: 100%; max-width: 800px; height: auto; display: block; margin: 0 auto;">
+  </a>
 </div>
 <p style="text-align: center; margin-bottom: 40px;">
 <a href="why-prices-of-homes-never-fall-in-india.pdf" target="_blank" class="btn-sm brand-btn-prim" style="display: inline-flex; align-items: center; gap: 8px; text-decoration: none;">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-<p>Download PDF Slide Deck</p>
+Download PDF Slide Deck
 </a>
 </p>
 <hr>
@@ -456,6 +521,32 @@
 <p>Maintenance, illiquidity, and the time-value of money rarely enter the calculation when people tout real-estate "returns." Meanwhile, flats bought purely as investments sit locked — quietly removing supply from the real market.</p>
 <p>> ~1 crore flats lie vacant across India — bought as investments, not homes.</p>
 <p>> — <strong>NREDC, 2024</strong></p>
+<hr>
+<h2>Full Presentation Slide Deck</h2>
+<p>Flip through the slides below to see the complete analysis:</p>
+<div class="carousel-container">
+  <div class="carousel-track">
+    <div class="carousel-slide"><img src="page-1.png" alt="Slide 1"></div>
+    <div class="carousel-slide"><img src="page-2.png" alt="Slide 2"></div>
+    <div class="carousel-slide"><img src="page-3.png" alt="Slide 3"></div>
+    <div class="carousel-slide"><img src="page-4.png" alt="Slide 4"></div>
+    <div class="carousel-slide"><img src="page-5.png" alt="Slide 5"></div>
+    <div class="carousel-slide"><img src="page-6.png" alt="Slide 6"></div>
+    <div class="carousel-slide"><img src="page-7.png" alt="Slide 7"></div>
+    <div class="carousel-slide"><img src="page-8.png" alt="Slide 8"></div>
+  </div>
+  <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)">&#10094;</button>
+  <button class="carousel-btn carousel-next" onclick="moveCarousel(1)">&#10095;</button>
+</div>
+
+<script>
+  function moveCarousel(direction) {
+    const track = document.querySelector('.carousel-track');
+    const slideWidth = track.querySelector('.carousel-slide').clientWidth;
+    track.scrollBy({ left: slideWidth * direction, behavior: 'smooth' });
+  }
+</script>
+
 <hr>
 <h2>What This Means For You</h2>
 <p>Don't wait for a "correction" that may never come.</p>
