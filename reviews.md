@@ -26,4 +26,16 @@ What our clients say about Peaceful Loans home loan advisory.
 > "I had the pleasure of interacting with Mangesh while trying to switch my home loan. The best thing about Peaceful loans is that they tell you the dirty details hidden in home loan terms that no other agent will tell you. For eg, Canara Bank has a clause that the interest rate will be reviewed every 3 years. I was talking to Canara even before I spoke to Mangesh but nobody mentioned this to me. Mangesh takes the time to understand your requirements in-depth before suggesting any bank. They care about their customers and be upfront about pros and cons of each bank. 10/10 would definitely recommend these guys."
 > — Google Review
 
+### Wing Commander Satyendra Chauhan
+> "We live in an era shaped by instant gratification, quick fixes, and rapid exits, where everyone wants things 'kal nahi, aaj hi'. But as the age-old adage goes, 'sabar ka phal meetha hota hai.'
+> 
+> Huge congratulations to Mangesh Zope and Team Peaceful Loans on making the BW Disrupt 40 Under 40 list! Scaling a completely bootstrapped venture from ₹15 crore to ₹75 crore a quarter is an incredible financial triumph.
+> 
+> In a world rushing toward immediate results, receiving a handwritten, deeply thoughtful welcome letter is a masterclass in human connection. Wise people said, it's all about consonance of 'thoughts (intent), words and action' - 'Mansa, Vaacha, Karmana'. I go a step further and add 'feelings' (emotions), the 'Bhavna', to it.
+> 
+> It highlights the subtle behavioral nuances that matter most: patience, empathy, and emotional resonance. True legacy isn't built on transactional speed, 'kyunki rishte dil se bante hain, sirf deals se nahi'.
+> 
+> This milestone proves that conscious relationship-building is the true hallmark of a long-distance runner in business. Kudos, Mangesh, I'm sure you are destined for winning the long game with heart!"
+> — LinkedIn Recommendation
+
 [Book a Free Call](https://forms.zohopublic.in/mangeshpeacef1/form/Contactforsupport/formperma/_ps6Hq-7OvODRTnKowl1_FxyIIKmnPIywn1z6WV7i4M) | [WhatsApp Us](https://forms.zohopublic.in/mangeshpeacef1/form/WhatsAppButtonForm/formperma/F2z-Z2bBLbkttGWHBPPvrqSwlSXzd_WnD4sUAWNnjh4)
