@@ -1,4 +1,4 @@
-# Mangesh Zope Wins BW Disrupt 40 Under 40 Award 2026
+# Peaceful-Loans Wins BW Disrupt 40 Under 40 Award 2026
 
 **Published by BW Disrupt & BW Businessworld**  
 *16th September 2026*  
