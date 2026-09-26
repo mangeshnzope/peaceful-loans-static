@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Peaceful-Loans TG Reach</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    :root {
+      --bg: #F4F6F5;
+      --surface: #FFFFFF;
+      --ink: #15201C;
+      --muted: #5C6A65;
+      --rule: #DCE2DF;
+      --grid: #E7ECEA;
+      --accent: #1F6F66;
+      --accent-soft: #D6EAE6;
+      --target: #B96A10;
+      --target-soft: #F6E6D1;
+      --good: #2E7D4F;
+      --bad: #B3412F;
+      --disp: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+      --body: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+      --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --bg: #0F1513;
+        --surface: #161F1C;
+        --ink: #E4EBE8;
+        --muted: #98A6A1;
+        --rule: #28332F;
+        --grid: #222C29;
+        --accent: #5CC1B3;
+        --accent-soft: #1D3833;
+        --target: #E3A24B;
+        --target-soft: #3A2A15;
+        --good: #6CC08C;
+        --bad: #E57C69;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0F1513;
+      --surface: #161F1C;
+      --ink: #E4EBE8;
+      --muted: #98A6A1;
+      --rule: #28332F;
+      --grid: #222C29;
+      --accent: #5CC1B3;
+      --accent-soft: #1D3833;
+      --target: #E3A24B;
+      --target-soft: #3A2A15;
+      --good: #6CC08C;
+      --bad: #E57C69;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.5 var(--body);
+      margin: 0;
+      padding-inline: 16px;
+      padding-block: 24px 48px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      width: 100%;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--disp);
+      text-wrap: balance;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+    h1 { font-size: clamp(24px, 4vw, 36px); line-height: 1.15; font-weight: 700; }
+    h2 { font-size: 20px; font-weight: 600; }
+    h3 { font-size: 16px; font-weight: 600; }
+
+    .eyebrow { font: 500 11px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .muted { color: var(--muted); }
+    .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+    .note { font-size: 13px; color: var(--muted); max-width: 80ch; margin: 0; }
+
+    header { display: flex; flex-direction: column; gap: 12px; }
+    .header-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+    .user-status { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--muted); }
+    .btn-logout { background: transparent; border: 1px solid var(--rule); color: var(--ink); border-radius: 6px; padding: 4px 10px; font: 500 12px var(--body); cursor: pointer; }
+    .btn-logout:hover { border-color: var(--ink); }
+
+    .sources { display: flex; gap: 8px; flex-wrap: wrap; }
+    .source-btn { border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 6px 14px; font: 500 13px var(--body); cursor: pointer; display: inline-flex; align-items: center; }
+    .source-btn[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .source-btn .pill { font: 500 10px var(--mono); margin-left: 6px; opacity: 0.75; }
+
+    .nav-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--rule); flex-wrap: wrap; }
+    .nav-tab { border: 0; background: none; color: var(--muted); font: 600 14px var(--body); padding: 10px 14px; border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer; text-decoration: none; }
+    .nav-tab:hover { color: var(--ink); }
+    .nav-tab[aria-selected="true"] { color: var(--ink); border-color: var(--target); }
+
+    .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+    .kpi { background: var(--surface); padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+    .kpi .v { font: 600 26px/1.1 var(--disp); }
+    .kpi .s { font-size: 13px; color: var(--muted); }
+    .kpi.t .v { color: var(--target); }
+
+    .card { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px; overflow: hidden; }
+    .tw { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+    table { border-collapse: collapse; width: 100%; font-size: 13px; min-width: 680px; }
+    th { font: 500 11px var(--mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+    th.l, td.l { text-align: left; }
+    th.sort { cursor: pointer; user-select: none; }
+    th.sort:hover { color: var(--ink); }
+    td { padding: 8px 10px; border-bottom: 1px solid var(--grid); text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    td.l { font-family: var(--body); white-space: normal; }
+    tr.cr td { background: color-mix(in srgb, var(--accent-soft) 40%, transparent); }
+
+    .chip { display: inline-block; font: 500 10px var(--mono); padding: 2px 6px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); margin-left: 6px; vertical-align: 1px; }
+    .chip.w { background: var(--target-soft); color: var(--target); }
+    .up { color: var(--good); }
+    .dn { color: var(--bad); }
+    .tbar { display: inline-block; height: 6px; border-radius: 3px; background: var(--target); vertical-align: middle; margin-right: 6px; }
+
+    .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+    .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+
+    .filters { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .filters label { font: 500 12px var(--mono); color: var(--muted); display: flex; gap: 6px; align-items: center; }
+    .filters input[type="date"], .filters input[type="text"], .filters input[type="password"] { font: 13px var(--mono); padding: 5px 8px; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); color: var(--ink); outline: none; }
+    .pre { border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 5px 12px; font: 500 12px var(--body); cursor: pointer; }
+    .pre:hover { border-color: var(--ink); }
+    .pre.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+    .dlb { border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: 6px; padding: 6px 12px; font: 500 12px var(--body); cursor: pointer; display: inline-flex; gap: 6px; align-items: center; text-decoration: none; }
+    .dlb:hover { border-color: var(--ink); }
+    .dlrow { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+
+    .mix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .mr { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(60px, 1fr) 38px; gap: 10px; align-items: center; font-size: 13px; padding: 4px 0; }
+    .mr span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .mr .b { height: 8px; border-radius: 4px; background: var(--grid); position: relative; }
+    .mr .b i { position: absolute; inset: 0 auto 0 0; border-radius: 4px; background: var(--muted); }
+    .mr.t .b i { background: var(--target); }
+    .mr.t span:first-child { font-weight: 600; }
+
+    .chart { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    svg text { font-family: var(--mono); font-size: 10px; fill: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button:focus-visible, a:focus-visible, th:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+    .dgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+    .pending { padding: 36px 16px; text-align: center; color: var(--muted); }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="app">
+    <div style="text-align: center; padding: 60px 16px; color: var(--muted);">
+      <p>Loading Creator Chart TG Reach Dashboard…</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const $ = id => document.getElementById(id);
+      const fmt = n => n === null || n === undefined ? "–" : Math.round(n).toLocaleString("en-IN");
+      const pct = n => n === null || n === undefined ? "–" : n.toFixed(1) + "%";
+      const dd = s => {
+        if (!s) return "";
+        const [y, m, d] = s.split("-").map(Number);
+        const dt = new Date(Date.UTC(y, m - 1, d));
+        return dt.toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+      };
+      const wd = s => {
+        if (!s) return "";
+        const [y, m, d] = s.split("-").map(Number);
+        const dt = new Date(Date.UTC(y, m - 1, d));
+        return dt.toLocaleDateString("en-GB", { weekday: "short", timeZone: "UTC" });
+      };
+
+      const parseDate = s => {
+        const [y, m, d] = s.split("-").map(Number);
+        return new Date(Date.UTC(y, m - 1, d));
+      };
+      const addDays = (s, k) => {
+        const d = parseDate(s);
+        d.setUTCDate(d.getUTCDate() + k);
+        return d.toISOString().slice(0, 10);
+      };
+      const daysBetween = (s1, s2) => {
+        return Math.round((parseDate(s2) - parseDate(s1)) / 864e5) + 1;
+      };
+
+      let DASHBOARD_DATA = null;
+      let CURRENT_USER = null;
+      let ACTIVE_TAB = "daily";
+      let ACTIVE_SOURCE = "profile";
+
+      async function init() {
+        try {
+          const authRes = await fetch("/api/linkedin-analytics/auth");
+          if (!authRes.ok) {
+            renderLogin();
+            return;
+          }
+          const authData = await authRes.json();
+          CURRENT_USER = authData.user;
+
+          const dataRes = await fetch("/api/linkedin-analytics/data");
+          if (!dataRes.ok) {
+            $("app").innerHTML = `<div class="card" style="text-align:center;padding:40px;color:var(--bad)">Failed to load dashboard data (${dataRes.status}). Please try again.</div>`;
+            return;
+          }
+          DASHBOARD_DATA = await dataRes.json();
+
+          // Sync with URL hash
+          const hash = window.location.hash.replace("#", "");
+          if (["daily", "weekly", "monthly", "posts", "works", "data"].includes(hash)) {
+            ACTIVE_TAB = hash;
+          }
+
+          window.addEventListener("hashchange", () => {
+            const h = window.location.hash.replace("#", "");
+            if (["daily", "weekly", "monthly", "posts", "works", "data"].includes(h)) {
+              ACTIVE_TAB = h;
+              renderDashboard();
+            }
+          });
+
+          renderDashboard();
+        } catch (e) {
+          $("app").innerHTML = `<div class="card" style="text-align:center;padding:40px;color:var(--bad)">Connection error: ${e.message}</div>`;
+        }
+      }
+
+      function renderLogin(errorMsg = null) {
+        $("app").innerHTML = `
+          <div style="max-width:380px;margin:60px auto;width:100%">
+            <div class="card" style="padding:32px 24px">
+              <div style="margin-bottom:24px;text-align:center">
+                <span class="eyebrow" style="display:block;margin-bottom:6px">Creator Chart · Target Audience Reach</span>
+                <h1 style="font-size:24px;font-weight:700;margin:0">Peaceful-Loans</h1>
+                <p class="note" style="margin-top:8px;font-size:13px">Sign in to access the LinkedIn TG reach dashboard</p>
+              </div>
+
+              <form id="loginForm" style="display:flex;flex-direction:column;gap:16px">
+                ${errorMsg ? `
+                  <div style="background:color-mix(in srgb, var(--bad) 12%, transparent);color:var(--bad);padding:10px 14px;border-radius:6px;font-size:13px;border:1px solid color-mix(in srgb, var(--bad) 30%, transparent)" role="alert">
+                    ${errorMsg}
+                  </div>
+                ` : ""}
+
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <label for="emailInput" style="font:500 12px var(--mono);color:var(--muted)">Email address</label>
+                  <input id="emailInput" type="email" autocomplete="email" required placeholder="you@creatorchart.com" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);font:14px var(--body)">
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <label for="pwdInput" style="font:500 12px var(--mono);color:var(--muted)">Password</label>
+                  <input id="pwdInput" type="password" autocomplete="current-password" required placeholder="••••••••••••" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);font:14px var(--body)">
+                </div>
+
+                <button type="submit" id="loginBtn" style="background:var(--ink);color:var(--bg);border:1px solid var(--ink);padding:10px 16px;border-radius:6px;font:600 14px var(--body);cursor:pointer;margin-top:8px">
+                  Sign in
+                </button>
+              </form>
+            </div>
+          </div>
+        `;
+
+        $("loginForm").onsubmit = async (e) => {
+          e.preventDefault();
+          const btn = $("loginBtn");
+          btn.disabled = true;
+          btn.textContent = "Signing in…";
+          const email = $("emailInput").value.trim();
+          const password = $("pwdInput").value.trim();
+
+          try {
+            const res = await fetch("/api/linkedin-analytics/auth", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+            if (!res.ok) {
+              renderLogin(data.error || "Email or password is incorrect");
+              return;
+            }
+            init();
+          } catch (err) {
+            renderLogin("Network error. Please try again.");
+          }
+        };
+      }
+
+      function renderDashboard() {
+        const meta = DASHBOARD_DATA.meta;
+        const tabs = [
+          { id: "daily", label: "Daily" },
+          { id: "weekly", label: "Weekly" },
+          { id: "monthly", label: "Monthly" },
+          { id: "posts", label: "Posts" },
+          { id: "works", label: "What works" },
+          { id: "data", label: "Data" }
+        ];
+
+        let contentHtml = "";
+        if (ACTIVE_SOURCE === "page") {
+          contentHtml = `<div class="card pending">Peaceful-Loans page not pulled yet.</div>`;
+        } else if (ACTIVE_SOURCE === "news") {
+          contentHtml = `<div class="card pending">Newsletter not pulled yet.</div>`;
+        } else {
+          if (ACTIVE_TAB === "daily") contentHtml = renderDailyTabHtml();
+          else if (ACTIVE_TAB === "weekly") contentHtml = renderWeeklyTabHtml();
+          else if (ACTIVE_TAB === "monthly") contentHtml = renderMonthlyTabHtml();
+          else if (ACTIVE_TAB === "posts") contentHtml = renderPostsTabHtml();
+          else if (ACTIVE_TAB === "works") contentHtml = renderWhatWorksTabHtml();
+          else if (ACTIVE_TAB === "data") contentHtml = renderDataTabHtml();
+        }
+
+        $("app").innerHTML = `
+          <header>
+            <div class="header-top">
+              <span class="eyebrow" id="eyeb">LinkedIn · target-audience reach · 1 Jan – ${dd(meta.data_to)}</span>
+              ${CURRENT_USER ? `
+                <div class="user-status">
+                  <span>${CURRENT_USER.email}</span>
+                  ${CURRENT_USER.role === "admin" ? `<button id="adminBtn" class="dlb" style="padding:2px 8px;font-size:11px;color:var(--target);border-color:var(--target)">Admin</button>` : ""}
+                  <button id="logoutBtn" class="btn-logout">Log out</button>
+                </div>
+              ` : ""}
+            </div>
+
+            <h1>Is our content reaching our target audience?</h1>
+
+            <p class="note">
+              Two numbers, everywhere. <b>TG impressions</b>: views from people whose LinkedIn seniority is <b>Manager, Director, VP, Owner, CXO or Partner</b>, the closest match to ₹50L+ households taking ₹2 Cr+ home loans. <b>TG share</b>: the % of all views that came from them. A rising share means the content speaks to our TG and LinkedIn is pushing it to them. Creator onboarded 1 Aug; first Creator Chart Era post 19 Aug.
+            </p>
+
+            <div style="font-size:12px;color:var(--muted)">Data to ${dd(meta.data_to)} · built ${meta.built}</div>
+
+            <div class="sources" role="tablist">
+              <button class="source-btn" id="src-profile" aria-selected="${ACTIVE_SOURCE === "profile"}">Mangesh Zope profile</button>
+              <button class="source-btn" id="src-page" aria-selected="${ACTIVE_SOURCE === "page"}">Peaceful-Loans page <span class="pill">PENDING</span></button>
+              <button class="source-btn" id="src-news" aria-selected="${ACTIVE_SOURCE === "news"}">Newsletter <span class="pill">PENDING</span></button>
+            </div>
+
+            ${ACTIVE_SOURCE === "profile" ? `
+              <nav class="nav-tabs" role="tablist">
+                ${tabs.map(t => `<button class="nav-tab" data-t="${t.id}" aria-selected="${ACTIVE_TAB === t.id}">${t.label}</button>`).join("")}
+              </nav>
+            ` : ""}
+          </header>
+
+          <main id="tabContent" style="display:flex;flex-direction:column;gap:24px;width:100%">
+            ${contentHtml}
+          </main>
+
+          <div id="adminModal" hidden style="position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999;padding:16px">
+            <div class="card" style="max-width:640px;width:100%;max-height:90vh;overflow-y:auto;display:flex;flex-direction:column;gap:16px">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <h2>Admin Console: Upload Data</h2>
+                <button id="closeAdminModal" class="dlb">✕ Close</button>
+              </div>
+              <p class="note">Upload a new <code>creator_chart_dashboard_data.json</code> file. Enforces zero total impressions keys and monotonic dates.</p>
+              <input type="file" id="adminFileInput" accept=".json" style="padding:8px;border:1px solid var(--rule);border-radius:6px;background:var(--bg)">
+              <div id="adminUploadStatus" style="font-size:13px"></div>
+              <button id="adminSubmitUpload" class="dlb" style="background:var(--ink);color:var(--bg);border-color:var(--ink);justify-content:center">Validate and Upload</button>
+            </div>
+          </div>
+        `;
+
+        // Wire Header Controls
+        if ($("logoutBtn")) {
+          $("logoutBtn").onclick = async () => {
+            await fetch("/api/linkedin-analytics/auth", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ action: "logout" })
+            });
+            renderLogin();
+          };
+        }
+
+        if ($("adminBtn")) {
+          $("adminBtn").onclick = () => { $("adminModal").hidden = false; };
+          $("closeAdminModal").onclick = () => { $("adminModal").hidden = true; };
+          $("adminSubmitUpload").onclick = handleAdminUpload;
+        }
+
+        ["profile", "page", "news"].forEach(src => {
+          $(`src-${src}`).onclick = () => {
+            ACTIVE_SOURCE = src;
+            renderDashboard();
+          };
+        });
+
+        document.querySelectorAll(".nav-tab").forEach(tab => {
+          tab.onclick = () => {
+            ACTIVE_TAB = tab.dataset.t;
+            window.location.hash = ACTIVE_TAB;
+            renderDashboard();
+          };
+        });
+
+        // Wire Tab-specific Events
+        if (ACTIVE_SOURCE === "profile") {
+          if (ACTIVE_TAB === "daily") setupDailyTabEvents();
+          else if (ACTIVE_TAB === "posts") setupPostsTabEvents();
+          else if (ACTIVE_TAB === "data") setupDataTabEvents();
+        }
+      }
+
+      // --- DAILY TAB ---
+      let dailyFrom = "2026-08-19";
+      let dailyTo = "2026-09-25";
+
+      function renderDailyTabHtml() {
+        const meta = DASHBOARD_DATA.meta;
+        dailyTo = meta.data_to;
+        const presets = [
+          { label: "Last 7 days", from: addDays(dailyTo, -6), to: dailyTo },
+          { label: "Last 30 days", from: addDays(dailyTo, -29), to: dailyTo },
+          { label: "September", from: "2026-09-01", to: dailyTo },
+          { label: "August", from: "2026-08-01", to: "2026-08-31" },
+          { label: "Creator Chart Era", from: "2026-08-19", to: dailyTo },
+          { label: "Before creator", from: "2026-04-01", to: "2026-07-31" },
+          { label: "All 2026", from: meta.data_from, to: dailyTo }
+        ];
+
+        // Aggregate current period
+        const agg = aggregateRange(dailyFrom, dailyTo);
+        const L = daysBetween(dailyFrom, dailyTo);
+        const prevEnd = addDays(dailyFrom, -1);
+        const prevStart = addDays(prevEnd, -(L - 1));
+        const prevAgg = prevStart >= meta.data_from ? aggregateRange(prevStart, prevEnd) : null;
+
+        const impChg = prevAgg && prevAgg.tg > 0 ? (agg.tg - prevAgg.tg) / prevAgg.tg * 100 : null;
+        const shPts = prevAgg && agg.sh !== null && prevAgg.sh !== null ? agg.sh - prevAgg.sh : null;
+
+        const R = DASHBOARD_DATA.daily.filter(d => d.date >= dailyFrom && d.date <= dailyTo);
+        const maxImp = Math.max(50, ...R.map(d => d.tg_impressions || 0));
+        const step = maxImp > 4000 ? 1000 : maxImp > 1500 ? 500 : maxImp > 400 ? 100 : maxImp > 100 ? 25 : 10;
+        const top = Math.ceil(maxImp / step) * step;
+
+        const width = Math.max(900, R.length * (R.length > 120 ? 4 : 10));
+        const height = 250;
+        const margin = { left: 48, right: 44, top: 16, bottom: 34 };
+        const innerWidth = width - margin.left - margin.right;
+        const innerHeight = height - margin.top - margin.bottom;
+        const barWidth = innerWidth / Math.max(1, R.length);
+
+        const yImp = v => margin.top + innerHeight - (v / top) * innerHeight;
+        const yShare = v => margin.top + innerHeight - (v / 70) * innerHeight;
+        const labelStep = Math.max(1, Math.ceil(R.length / 14));
+
+        let svgHtml = "";
+        for (let v = 0; v <= top; v += step) {
+          svgHtml += `
+            <line x1="${margin.left}" x2="${width - margin.right}" y1="${yImp(v)}" y2="${yImp(v)}" stroke="var(--grid)" />
+            <text x="${margin.left - 6}" y="${yImp(v) + 3}" text-anchor="end">${v >= 1000 ? v / 1000 + "k" : v}</text>
+          `;
+        }
+        [0, 20, 40, 60].forEach(v => {
+          svgHtml += `<text x="${width - margin.right + 6}" y="${yShare(v) + 3}" style="fill:var(--accent)">${v}%</text>`;
+        });
+
+        R.forEach((row, i) => {
+          const x = margin.left + i * barWidth;
+          const hasImp = row.tg_impressions !== null;
+          const barH = hasImp ? Math.max(1, margin.top + innerHeight - yImp(row.tg_impressions)) : 0;
+          const isEra = row.date === "2026-08-19";
+          const isOnboard = row.date === "2026-08-01";
+
+          if (isEra || isOnboard) {
+            svgHtml += `
+              <line x1="${x + barWidth / 2}" x2="${x + barWidth / 2}" y1="${margin.top}" y2="${margin.top + innerHeight}" stroke="var(--ink)" stroke-dasharray="3 3" opacity="0.5" />
+              <text x="${x + barWidth / 2 + 4}" y="${margin.top + (isOnboard ? 12 : 24)}" style="fill:var(--ink);font-weight:500">${isOnboard ? "Creator onboarded" : "First creator post"}</text>
+            `;
+          }
+
+          if (hasImp) {
+            svgHtml += `
+              <rect x="${x + barWidth * 0.12}" y="${yImp(row.tg_impressions)}" width="${Math.max(1, barWidth * 0.76)}" height="${barH}" rx="1.5" fill="var(--target)">
+                <title>${wd(row.date)} ${dd(row.date)}: ${fmt(row.tg_impressions)} TG impressions${row.tg_share_pct !== null ? ` (${pct(row.tg_share_pct)} share)` : ""}</title>
+              </rect>
+            `;
+          }
+
+          if (row.tg_share_pct !== null) {
+            svgHtml += `
+              <circle cx="${x + barWidth / 2}" cy="${yShare(row.tg_share_pct)}" r="${barWidth > 8 ? 3 : 2}" fill="var(--accent)">
+                <title>${dd(row.date)}: TG share ${pct(row.tg_share_pct)}</title>
+              </circle>
+            `;
+          }
+
+          if (i % labelStep === 0) {
+            svgHtml += `<text x="${x + barWidth / 2}" y="${height - 14}" text-anchor="middle">${dd(row.date)}</text>`;
+          }
+        });
+
+        // Viewer mix cards
+        const dims = ["Seniority", "Job title", "Industry", "Location", "Company size", "Company"];
+        let mixHtml = "";
+        dims.forEach(dim => {
+          const items = getViewerMix(dim, dailyFrom, dailyTo);
+          const maxV = Math.max(1, ...items.map(it => it.pct));
+          mixHtml += `
+            <div class="card">
+              <h3 style="margin-bottom:12px">${dim}</h3>
+              ${items.length ? `
+                <div>
+                  ${items.map(it => {
+                    const isTg = dim === "Seniority" && meta.tg_definition.includes(it.name);
+                    return `
+                      <div class="mr ${isTg ? "t" : ""}">
+                        <span title="${it.name}">${it.name}</span>
+                        <span class="b"><i style="width:${(it.pct / maxV) * 100}%"></i></span>
+                        <span class="num">${it.pct < 1 ? "<1" : Math.round(it.pct)}%</span>
+                      </div>
+                    `;
+                  }).join("")}
+                </div>
+              ` : `<span style="font-size:13px;color:var(--muted)">No breakdown for these dates</span>`}
+            </div>
+          `;
+        });
+
+        // Table HTML
+        let tableRowsHtml = "";
+        [...R].reverse().forEach(row => {
+          const isCreator = row.date >= "2026-08-19";
+          tableRowsHtml += `
+            <tr class="${isCreator ? "cr" : ""}">
+              <td class="l" style="min-width:120px">${wd(row.date)} ${dd(row.date)}</td>
+              <td>${row.tg_impressions !== null ? `${fmt(row.tg_impressions)}${row.tg_may_be_higher ? `<span class="chip w">TG may be higher</span>` : ""}` : `<span class="muted">–</span>`}</td>
+              <td>${row.tg_share_pct !== null ? `<span class="tbar" style="width:${row.tg_share_pct * 1.2}px;background:var(--accent)"></span>${pct(row.tg_share_pct)}` : `<span class="muted">–</span>`}</td>
+              <td>${fmt(row.engagements)}</td>
+              <td>${fmt(row.new_followers)}</td>
+              <td>${row.posts_published || "–"}</td>
+            </tr>
+          `;
+        });
+
+        return `
+          <div class="filters">
+            <label>From <input type="date" id="dFrom" min="${meta.data_from}" max="${meta.data_to}" value="${dailyFrom}"></label>
+            <label>To <input type="date" id="dTo" min="${meta.data_from}" max="${meta.data_to}" value="${dailyTo}"></label>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              ${presets.map(p => `
+                <button class="pre ${dailyFrom === p.from && dailyTo === p.to ? "on" : ""}" data-from="${p.from}" data-to="${p.to}">${p.label}</button>
+              `).join("")}
+            </div>
+          </div>
+
+          <div class="kpis">
+            <div class="kpi t">
+              <span className="eyebrow">TG impressions</span>
+              <span class="v num">${fmt(agg.tg)}</span>
+              <span class="s">
+                ${prevAgg ? `<span class="${impChg >= 0 ? "up" : "dn"}">${impChg >= 0 ? "+" : ""}${Math.round(impChg)}%</span> vs previous ${L} days` : `${L} days`}
+              </span>
+            </div>
+
+            <div class="kpi t">
+              <span class="eyebrow">TG share of views</span>
+              <span class="v num">${pct(agg.sh)}</span>
+              <span class="s">
+                ${prevAgg && shPts !== null ? `<span class="${shPts >= 0 ? "up" : "dn"}">${shPts >= 0 ? "+" : ""}${shPts.toFixed(1)} pts</span> vs previous ${L} days` : "of all views in range"}
+              </span>
+            </div>
+
+            <div class="kpi">
+              <span class="eyebrow">Avg TG impressions / day</span>
+              <span class="v num">${fmt(L > 0 ? agg.tg / L : 0)}</span>
+              <span class="s">${dd(dailyFrom)} – ${dd(dailyTo)}</span>
+            </div>
+
+            <div class="kpi">
+              <span class="eyebrow">Engagements</span>
+              <span class="v num">${fmt(agg.eng)}</span>
+              <span class="s">reactions, comments, reposts</span>
+            </div>
+
+            <div class="kpi">
+              <span class="eyebrow">New followers</span>
+              <span class="v num">${fmt(agg.nf)}</span>
+              <span class="s">${agg.p} post${agg.p === 1 ? "" : "s"} published in range</span>
+            </div>
+          </div>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>TG impressions by day</h2>
+            <div class="legend">
+              <span><i class="sw" style="background:var(--target)"></i>TG impressions</span>
+              <span><i class="sw" style="background:var(--accent);border-radius:50%"></i>TG share (right axis)</span>
+            </div>
+            <div class="card chart">
+              <svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img">${svgHtml}</svg>
+            </div>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <div class="dlrow">
+              <h2>Who saw the content in this period</h2>
+              <button id="dlMixRange" class="dlb">↓ Download viewer mix (CSV)</button>
+            </div>
+            <p class="note">Share of all views in the selected dates, from LinkedIn's daily viewer breakdown. LinkedIn lists only the biggest groups each day, so shares don't add to 100%.</p>
+            <div class="mix-grid">${mixHtml}</div>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <div class="dlrow">
+              <h2>Day by day</h2>
+              <button id="dlDaysRange" class="dlb">↓ Download these days (CSV)</button>
+            </div>
+            <div class="card tw">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="l">Date</th>
+                    <th>TG impressions</th>
+                    <th>TG share</th>
+                    <th>Engagements</th>
+                    <th>New followers</th>
+                    <th>Posts published</th>
+                  </tr>
+                </thead>
+                <tbody>${tableRowsHtml}</tbody>
+              </table>
+            </div>
+            <p class="note">From one LinkedIn export per day. On quiet days (under ~50 views) LinkedIn gives no usable seniority split, so those show "–". For TG numbers on quiet stretches use the Weekly or Monthly tab, which come from their own exports. "TG may be higher" = LinkedIn hid some small groups that day. A date range adds up the daily files in it.</p>
+          </section>
+        `;
+      }
+
+      function setupDailyTabEvents() {
+        $("dFrom").onchange = e => {
+          let v = e.target.value;
+          if (v > dailyTo) { dailyFrom = dailyTo; dailyTo = v; } else { dailyFrom = v; }
+          renderDashboard();
+        };
+        $("dTo").onchange = e => {
+          let v = e.target.value;
+          if (v < dailyFrom) { dailyTo = dailyFrom; dailyFrom = v; } else { dailyTo = v; }
+          renderDashboard();
+        };
+
+        document.querySelectorAll(".pre").forEach(btn => {
+          btn.onclick = () => {
+            dailyFrom = btn.dataset.from;
+            dailyTo = btn.dataset.to;
+            renderDashboard();
+          };
+        });
+
+        $("dlDaysRange").onclick = () => {
+          const R = DASHBOARD_DATA.daily.filter(d => d.date >= dailyFrom && d.date <= dailyTo);
+          const headers = ["date", "tg_impressions", "tg_share_pct", "tg_may_be_higher", "engagements", "new_followers", "posts_published"];
+          const rows = R.map(d => [d.date, d.tg_impressions !== null ? d.tg_impressions : "", d.tg_share_pct !== null ? d.tg_share_pct.toFixed(1) : "", d.tg_may_be_higher ? "yes" : "", d.engagements, d.new_followers, d.posts_published]);
+          saveCsv(`daily_tg_${dailyFrom}_to_${dailyTo}.csv`, [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
+        };
+
+        $("dlMixRange").onclick = () => {
+          const dims = ["Seniority", "Job title", "Industry", "Location", "Company size", "Company"];
+          const headers = ["from", "to", "dimension", "value", "pct_of_views"];
+          const rows = [];
+          dims.forEach(dim => {
+            const items = getViewerMix(dim, dailyFrom, dailyTo, 50);
+            items.forEach(it => {
+              rows.push([dailyFrom, dailyTo, dim, `"${it.name.replace(/"/g, '""')}"`, it.pct.toFixed(1)]);
+            });
+          });
+          saveCsv(`viewer_mix_${dailyFrom}_to_${dailyTo}.csv`, [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
+        };
+      }
+
+      function aggregateRange(start, end) {
+        let tg = 0, impliedSum = 0, eng = 0, nf = 0, p = 0;
+        DASHBOARD_DATA.daily.forEach(d => {
+          if (d.date >= start && d.date <= end) {
+            eng += d.engagements;
+            nf += d.new_followers;
+            p += d.posts_published;
+            if (d.tg_impressions !== null && d.tg_share_pct !== null && d.tg_share_pct > 0) {
+              tg += d.tg_impressions;
+              impliedSum += d.tg_impressions / (d.tg_share_pct / 100);
+            }
+          }
+        });
+        return { tg, sh: impliedSum > 0 ? (tg / impliedSum) * 100 : null, eng, nf, p };
+      }
+
+      function getViewerMix(dim, start, end, limit = null) {
+        const dimObj = DASHBOARD_DATA.viewer_mix.pct_of_views[dim];
+        if (!dimObj) return [];
+        const weights = DASHBOARD_DATA.viewer_mix.day_weight;
+
+        const datesWithDim = new Set();
+        for (const grp in dimObj) {
+          for (const d in dimObj[grp]) {
+            if (d >= start && d <= end && weights[d] !== undefined) datesWithDim.add(d);
+          }
+        }
+        const totalWeight = Array.from(datesWithDim).reduce((acc, d) => acc + (weights[d] || 0), 0);
+        if (totalWeight <= 0) return [];
+
+        const items = [];
+        for (const grp in dimObj) {
+          let sum = 0;
+          for (const d in dimObj[grp]) {
+            if (d >= start && d <= end && weights[d] !== undefined) {
+              sum += dimObj[grp][d] * weights[d];
+            }
+          }
+          const pctVal = sum / totalWeight;
+          if (pctVal > 0) items.push({ name: grp, pct: pctVal });
+        }
+        items.sort((a, b) => b.pct - a.pct);
+        const maxLimit = limit || (dim === "Seniority" ? 10 : 8);
+        return items.slice(0, maxLimit);
+      }
+
+      // --- WEEKLY TAB ---
+      function renderWeeklyTabHtml() {
+        const W = DASHBOARD_DATA.weekly;
+        const fullWeeks = W.filter(w => daysBetween(w.week_start, w.week_end) === 7);
+        const postWeeks = W.filter(w => w.week_start >= "2026-08-17" && w.week_start <= "2026-09-14" && w.tg_impressions !== null);
+        const preWeeks = W.filter(w => w.week_start >= "2026-04-13" && w.week_start <= "2026-07-27" && w.tg_impressions !== null);
+
+        const avgPost = postWeeks.length ? postWeeks.reduce((acc, w) => acc + (w.tg_impressions || 0), 0) / postWeeks.length : 0;
+        const avgPre = preWeeks.length ? preWeeks.reduce((acc, w) => acc + (w.tg_impressions || 0), 0) / preWeeks.length : 0;
+
+        const calcShare = wks => {
+          const tgSum = wks.reduce((acc, w) => acc + (w.tg_impressions || 0), 0);
+          const implied = wks.reduce((acc, w) => acc + (w.tg_impressions || 0) / ((w.tg_share_pct || 1) / 100), 0);
+          return implied > 0 ? (tgSum / implied) * 100 : null;
+        };
+
+        const bestImp = [...fullWeeks].sort((a, b) => (b.tg_impressions || 0) - (a.tg_impressions || 0))[0];
+        const bestSh = [...fullWeeks].filter(w => (w.tg_impressions || 0) >= 300 && w.tg_share_pct !== null).sort((a, b) => (b.tg_share_pct || 0) - (a.tg_share_pct || 0))[0];
+
+        // Chart
+        const width = Math.max(900, W.length * 24);
+        const height = 250;
+        const margin = { left: 48, right: 44, top: 16, bottom: 36 };
+        const innerWidth = width - margin.left - margin.right;
+        const innerHeight = height - margin.top - margin.bottom;
+        const barWidth = innerWidth / Math.max(1, W.length);
+
+        const top = 10000;
+        const yImp = v => margin.top + innerHeight - (v / top) * innerHeight;
+        const yShare = v => margin.top + innerHeight - (v / 70) * innerHeight;
+
+        let path = "";
+        W.forEach((wk, i) => {
+          if (wk.tg_share_pct !== null) {
+            const x = margin.left + i * barWidth + barWidth / 2;
+            const y = yShare(wk.tg_share_pct);
+            path += (path === "" ? "M" : "L") + `${x} ${y}`;
+          }
+        });
+
+        let svgHtml = "";
+        [0, 2500, 5000, 7500, 10000].forEach(v => {
+          svgHtml += `
+            <line x1="${margin.left}" x2="${width - margin.right}" y1="${yImp(v)}" y2="${yImp(v)}" stroke="var(--grid)" />
+            <text x="${margin.left - 6}" y="${yImp(v) + 3}" text-anchor="end">${v / 1000}k</text>
+          `;
+        });
+        [0, 20, 40, 60].forEach(v => {
+          svgHtml += `<text x="${width - margin.right + 6}" y="${yShare(v) + 3}" style="fill:var(--accent)">${v}%</text>`;
+        });
+
+        [
+          { date: "2026-08-01", label: "Creator onboarded", yOffset: 12 },
+          { date: "2026-08-19", label: "First creator post", yOffset: 24 }
+        ].forEach(marker => {
+          const idx = W.findIndex(w => w.week_start <= marker.date && marker.date <= w.week_end);
+          if (idx !== -1) {
+            const x = margin.left + idx * barWidth + barWidth / 2;
+            svgHtml += `
+              <line x1="${x}" x2="${x}" y1="${margin.top}" y2="${margin.top + innerHeight}" stroke="var(--ink)" stroke-dasharray="3 3" opacity="0.5" />
+              <text x="${x - 4}" y="${margin.top + marker.yOffset}" text-anchor="end" style="fill:var(--ink);font-weight:500">${marker.label}</text>
+            `;
+          }
+        });
+
+        W.forEach((wk, i) => {
+          const x = margin.left + i * barWidth;
+          const hasImp = wk.tg_impressions !== null;
+          const barH = hasImp ? Math.max(1, margin.top + innerHeight - yImp(wk.tg_impressions)) : 0;
+          const isEra = wk.week_start >= "2026-08-17";
+
+          if (hasImp) {
+            svgHtml += `
+              <rect x="${x + 3}" y="${yImp(wk.tg_impressions)}" width="${Math.max(1, barWidth - 6)}" height="${barH}" rx="2" fill="var(--target)" opacity="${isEra ? 1 : 0.75}">
+                <title>${dd(wk.week_start)} – ${dd(wk.week_end)}: ${fmt(wk.tg_impressions)} TG impressions, ${pct(wk.tg_share_pct)} share</title>
+              </rect>
+            `;
+          }
+
+          if (i % 2 === 0) {
+            svgHtml += `<text x="${x + barWidth / 2}" y="${height - 14}" text-anchor="middle">${dd(wk.week_start)}</text>`;
+          }
+        });
+
+        if (path) svgHtml += `<path d="${path}" fill="none" stroke="var(--accent)" stroke-width="1.5" opacity="0.8" />`;
+
+        W.forEach((wk, i) => {
+          if (wk.tg_share_pct !== null) {
+            const cx = margin.left + i * barWidth + barWidth / 2;
+            const cy = yShare(wk.tg_share_pct);
+            svgHtml += `<circle cx="${cx}" cy="${cy}" r="3.5" fill="var(--accent)" stroke="var(--surface)" stroke-width="1"><title>${dd(wk.week_start)}: TG share ${pct(wk.tg_share_pct)}</title></circle>`;
+          }
+        });
+
+        // Table
+        let tableRows = "";
+        [...W].reverse().forEach((wk, ri) => {
+          const i = W.length - 1 - ri;
+          const prev = i > 0 ? W[i - 1] : null;
+          const isPart = daysBetween(wk.week_start, wk.week_end) < 7;
+          let wowImp = null, wowSh = null;
+          if (!isPart && prev && daysBetween(prev.week_start, prev.week_end) === 7) {
+            if (wk.tg_impressions !== null && prev.tg_impressions !== null && prev.tg_impressions > 0) {
+              wowImp = (wk.tg_impressions - prev.tg_impressions) / prev.tg_impressions * 100;
+            }
+            if (wk.tg_share_pct !== null && prev.tg_share_pct !== null) {
+              wowSh = wk.tg_share_pct - prev.tg_share_pct;
+            }
+          }
+          const isEra = wk.week_start >= "2026-08-17";
+
+          tableRows += `
+            <tr class="${isEra ? "cr" : ""}">
+              <td class="l" style="min-width:160px">${dd(wk.week_start)} – ${dd(wk.week_end)}${isPart ? `<span class="chip w">partial week</span>` : ""}</td>
+              <td>${wk.tg_impressions !== null ? `${fmt(wk.tg_impressions)}${wk.tg_may_be_higher ? `<span class="chip w">TG may be higher</span>` : ""}` : `<span class="muted">below LinkedIn threshold</span>`}</td>
+              <td>${wowImp !== null ? `<span class="${wowImp >= 0 ? "up" : "dn"}">${wowImp >= 0 ? "+" : ""}${Math.round(wowImp)}%</span>` : `<span class="muted">–</span>`}</td>
+              <td>${wk.tg_share_pct !== null ? `<span class="tbar" style="width:${wk.tg_share_pct * 1.2}px;background:var(--accent)"></span>${pct(wk.tg_share_pct)}` : `<span class="muted">–</span>`}</td>
+              <td>${wowSh !== null ? `<span class="${wowSh >= 0 ? "up" : "dn"}">${wowSh >= 0 ? "+" : ""}${wowSh.toFixed(1)} pts</span>` : `<span class="muted">–</span>`}</td>
+              <td>${fmt(wk.engagements)}</td>
+              <td>${fmt(wk.new_followers)}</td>
+              <td>${wk.posts_published || "–"}</td>
+            </tr>
+          `;
+        });
+
+        return `
+          <div class="kpis">
+            <div class="kpi t">
+              <span class="eyebrow">Avg weekly TG impressions</span>
+              <span class="v num">${fmt(avgPost)}</span>
+              <span class="s">Creator Chart Era (17 Aug – 20 Sep) vs ${fmt(avgPre)} (13 Apr – 2 Aug)</span>
+            </div>
+            <div class="kpi t">
+              <span class="eyebrow">TG share, Creator Chart Era</span>
+              <span class="v num">${pct(calcShare(postWeeks))}</span>
+              <span class="s">vs ${pct(calcShare(preWeeks))} for 13 Apr – 2 Aug</span>
+            </div>
+            <div class="kpi">
+              <span class="eyebrow">Best week, TG impressions</span>
+              <span class="v num">${bestImp ? fmt(bestImp.tg_impressions) : "–"}</span>
+              <span class="s">${bestImp ? `${dd(bestImp.week_start)} – ${dd(bestImp.week_end)}` : ""}</span>
+            </div>
+            <div class="kpi">
+              <span class="eyebrow">Best week, TG share</span>
+              <span class="v num">${bestSh ? pct(bestSh.tg_share_pct) : "–"}</span>
+              <span class="s">${bestSh ? `${dd(bestSh.week_start)} – ${dd(bestSh.week_end)} (weeks with 300+ TG views)` : ""}</span>
+            </div>
+          </div>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>TG impressions and TG share, week by week</h2>
+            <div class="legend">
+              <span><i class="sw" style="background:var(--target)"></i>TG impressions</span>
+              <span><i class="sw" style="background:var(--accent);border-radius:50%"></i>TG share (right axis)</span>
+            </div>
+            <div class="card chart">
+              <svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img">${svgHtml}</svg>
+            </div>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <div class="dlrow">
+              <h2>Week-on-week</h2>
+              <button id="dlWeeklyBtn" class="dlb">↓ Download weekly data (CSV)</button>
+            </div>
+            <div class="card tw">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="l">Week</th>
+                    <th>TG impressions</th>
+                    <th>WoW</th>
+                    <th>TG share</th>
+                    <th>WoW share</th>
+                    <th>Engagements</th>
+                    <th>New followers</th>
+                    <th>Posts published</th>
+                  </tr>
+                </thead>
+                <tbody>${tableRows}</tbody>
+              </table>
+            </div>
+            <p class="note">Weeks run Monday–Sunday, from one LinkedIn export per week. The first (1–4 Jan) and last (21–25 Sep) weeks are partial, so they get no WoW figure.</p>
+          </section>
+        `;
+      }
+
+      // --- MONTHLY TAB ---
+      function renderMonthlyTabHtml() {
+        const M = DASHBOARD_DATA.monthly;
+        const P = DASHBOARD_DATA.posts;
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        let rowsHtml = "";
+        M.forEach((m, i) => {
+          const prev = i > 0 ? M[i - 1] : null;
+          const [y, mon] = m.month_start.split("-").map(Number);
+          const lastDayOfMonth = new Date(Date.UTC(y, mon, 0)).getUTCDate();
+          const endDay = parseInt(m.month_end.slice(8), 10);
+          const isPart = endDay < lastDayOfMonth;
+
+          let momImp = null, momSh = null;
+          if (!isPart && prev && m.tg_impressions !== null && prev.tg_impressions !== null && prev.tg_impressions > 0) {
+            momImp = (m.tg_impressions - prev.tg_impressions) / prev.tg_impressions * 100;
+          }
+          if (prev && m.tg_share_pct !== null && prev.tg_share_pct !== null) {
+            momSh = m.tg_share_pct - prev.tg_share_pct;
+          }
+
+          const ym = m.month_start.slice(0, 7);
+          const mPosts = P.filter(p => p.published.startsWith(ym));
+          const vPosts = mPosts.filter(p => p.tg_impressions_lifetime !== null && p.tg_share_pct !== null);
+
+          const postsTg = vPosts.reduce((acc, p) => acc + (p.tg_impressions_lifetime || 0), 0);
+          const postsImplied = vPosts.reduce((acc, p) => acc + (p.tg_impressions_lifetime || 0) / ((p.tg_share_pct || 1) / 100), 0);
+          const postsShare = postsImplied > 0 ? (postsTg / postsImplied) * 100 : null;
+          const belowThresh = mPosts.length - vPosts.length;
+          const isEra = m.month_start >= "2026-08-01";
+
+          rowsHtml += `
+            <tr class="${isEra ? "cr" : ""}">
+              <td class="l" style="min-width:140px">${monthNames[mon - 1]} 2026${isPart ? `<span class="chip w">to ${dd(m.month_end)}</span>` : ""}</td>
+              <td>${m.tg_impressions !== null ? `${fmt(m.tg_impressions)}${m.tg_may_be_higher ? `<span class="chip w">TG may be higher</span>` : ""}` : `<span class="muted">below LinkedIn threshold</span>`}</td>
+              <td>${momImp !== null ? `<span class="${momImp >= 0 ? "up" : "dn"}">${momImp >= 0 ? "+" : ""}${Math.round(momImp)}%</span>` : `<span class="muted">–</span>`}</td>
+              <td>${m.tg_share_pct !== null ? `<span class="tbar" style="width:${m.tg_share_pct * 1.2}px;background:var(--accent)"></span>${pct(m.tg_share_pct)}` : `<span class="muted">–</span>`}</td>
+              <td>${momSh !== null ? `<span class="${momSh >= 0 ? "up" : "dn"}">${momSh >= 0 ? "+" : ""}${momSh.toFixed(1)} pts</span>` : `<span class="muted">–</span>`}</td>
+              <td>${fmt(m.engagements)}</td>
+              <td>${fmt(m.new_followers)}</td>
+              <td>${m.posts_published || "–"}${belowThresh > 0 ? `<span class="chip w">${belowThresh} below threshold</span>` : ""}</td>
+              <td>${vPosts.length ? fmt(postsTg) : "–"}</td>
+              <td>${postsShare !== null ? pct(postsShare) : "–"}</td>
+            </tr>
+          `;
+        });
+
+        return `
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <div class="dlrow">
+              <h2>Month on month</h2>
+              <button id="dlMonthlyBtn" class="dlb">↓ Download monthly data (CSV)</button>
+            </div>
+            <div class="card tw">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="l">Month</th>
+                    <th>TG impressions</th>
+                    <th>MoM</th>
+                    <th>TG share</th>
+                    <th>MoM share</th>
+                    <th>Engagements</th>
+                    <th>New followers</th>
+                    <th>Posts published</th>
+                    <th>TG impressions from those posts</th>
+                    <th>Their TG share</th>
+                  </tr>
+                </thead>
+                <tbody>${rowsHtml}</tbody>
+              </table>
+            </div>
+            <p class="note">From one LinkedIn export per calendar month; nothing is added up from days or weeks. September runs to 25 Sep, so it gets no MoM for TG impressions (its share change is still shown). <b>TG impressions from those posts</b> = lifetime TG views of the posts published that month, from each post's own page (posts too small for a seniority split are left out).</p>
+          </section>
+        `;
+      }
+
+      // --- POSTS TAB ---
+      let postCatFilter = "All";
+      let postSortCol = "published";
+      let postSortAsc = false;
+
+      function renderPostsTabHtml() {
+        const P = DASHBOARD_DATA.posts;
+        const cats = ["All", ...Array.from(new Set(P.map(p => p.type)))];
+        const maxTg = Math.max(...P.map(p => p.tg_impressions_lifetime || 0));
+
+        let filtered = P.filter(p => postCatFilter === "All" || p.type === postCatFilter);
+        filtered.sort((a, b) => {
+          const va = a[postSortCol];
+          const vb = b[postSortCol];
+          if (va === null || va === undefined) return 1;
+          if (vb === null || vb === undefined) return -1;
+          if (va < vb) return postSortAsc ? -1 : 1;
+          if (va > vb) return postSortAsc ? 1 : -1;
+          return 0;
+        });
+
+        const cols = [
+          { key: "published", label: "Published", align: "l" },
+          { key: "title", label: "Post", align: "l" },
+          { key: "type", label: "Type", align: "l" },
+          { key: "tg_impressions_lifetime", label: "TG impressions", align: "r" },
+          { key: "tg_share_pct", label: "TG share", align: "r" },
+          { key: "out_of_network_pct", label: "Out-of-network", align: "r" },
+          { key: "engagements", label: "Engagements", align: "r" },
+          { key: "comments", label: "Comments", align: "r" },
+          { key: "reposts", label: "Reposts", align: "r" },
+          { key: "followers_gained", label: "Followers gained", align: "r" }
+        ];
+
+        return `
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <div class="dlrow">
+              <h2>Post by post</h2>
+              <button id="dlPostsBtn" class="dlb">↓ Download post data (CSV)</button>
+            </div>
+            <p class="note">Every post published in 2026 (${P.length}), newest first, from one LinkedIn export per post (lifetime numbers). <b>Out-of-network</b> = % of the post's views from people who are not your followers or connections: reach LinkedIn gave the post beyond your network. "–" TG = post too small for LinkedIn to give a seniority split. Shaded rows = Creator Chart Era (from 19 Aug). Click a column to sort.</p>
+
+            <div class="filters">
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                ${cats.map(c => `<button class="pre ${postCatFilter === c ? "on" : ""}" data-c="${c}">${c}</button>`).join("")}
+              </div>
+            </div>
+
+            <div class="card tw">
+              <table>
+                <thead>
+                  <tr>
+                    ${cols.map(c => `
+                      <th class="sort ${c.align === "l" ? "l" : ""}" data-k="${c.key}">
+                        ${c.label}${postSortCol === c.key ? (postSortAsc ? " ↑" : " ↓") : ""}
+                      </th>
+                    `).join("")}
+                  </tr>
+                </thead>
+                <tbody>
+                  ${filtered.map(p => {
+                    const isMedia = p.format && p.format.startsWith("Media");
+                    return `
+                      <tr class="${p.creator_chart_era ? "cr" : ""}">
+                        <td class="l" style="min-width:70px;white-space:nowrap">${dd(p.published)}</td>
+                        <td class="l" style="min-width:240px">
+                          <a href="${p.url}" target="_blank" rel="noopener noreferrer">${p.title}</a>
+                          ${isMedia ? `<span class="chip">media</span>` : ""}
+                        </td>
+                        <td class="l" style="min-width:130px;font-size:12px">${p.type}</td>
+                        <td>${p.tg_impressions_lifetime !== null ? `<span class="tbar" style="width:${(p.tg_impressions_lifetime / maxTg) * 90}px"></span>${fmt(p.tg_impressions_lifetime)}` : `<span class="muted">–</span>`}</td>
+                        <td>${p.tg_share_pct !== null ? `<span class="tbar" style="width:${p.tg_share_pct * 1.2}px;background:var(--accent)"></span>${pct(p.tg_share_pct)}` : `<span class="muted">–</span>`}</td>
+                        <td>${p.out_of_network_pct !== null ? `${p.out_of_network_pct}%` : `<span class="muted">n/a</span>`}</td>
+                        <td>${fmt(p.engagements)}</td>
+                        <td>${fmt(p.comments)}</td>
+                        <td>${fmt(p.reposts)}</td>
+                        <td>${fmt(p.followers_gained)}</td>
+                      </tr>
+                    `;
+                  }).join("")}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        `;
+      }
+
+      function setupPostsTabEvents() {
+        document.querySelectorAll(".pre[data-c]").forEach(b => {
+          b.onclick = () => {
+            postCatFilter = b.dataset.c;
+            renderDashboard();
+          };
+        });
+
+        document.querySelectorAll("th.sort").forEach(th => {
+          th.onclick = () => {
+            const k = th.dataset.k;
+            if (postSortCol === k) {
+              postSortAsc = !postSortAsc;
+            } else {
+              postSortCol = k;
+              postSortAsc = (k === "title" || k === "type");
+            }
+            renderDashboard();
+          };
+        });
+
+        $("dlPostsBtn").onclick = () => {
+          const headers = ["published", "post", "url", "type", "format", "tg_impressions_lifetime", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
+          const rows = DASHBOARD_DATA.posts.map(p => [
+            p.published,
+            `"${p.title.replace(/"/g, '""')}"`,
+            p.url,
+            `"${p.type.replace(/"/g, '""')}"`,
+            p.format,
+            p.tg_impressions_lifetime !== null ? p.tg_impressions_lifetime : "",
+            p.tg_share_pct !== null ? p.tg_share_pct.toFixed(1) : "",
+            p.out_of_network_pct !== null ? p.out_of_network_pct : "",
+            p.engagements,
+            p.comments,
+            p.reposts,
+            p.followers_gained,
+            p.creator_chart_era ? "yes" : ""
+          ]);
+          saveCsv("posts_tg.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
+        };
+      }
+
+      // --- WHAT WORKS TAB ---
+      function renderWhatWorksTabHtml() {
+        const I = DASHBOARD_DATA.insights;
+        const P = DASHBOARD_DATA.posts.filter(p => p.out_of_network_pct !== null && p.tg_share_pct !== null);
+        const maxTg = Math.max(...P.map(p => p.tg_impressions_lifetime || 0));
+
+        const formatP = p => p === null || p === undefined ? "–" : p < 0.001 ? "<0.001" : p.toFixed(3);
+        const sigChip = p => p === null || p === undefined ? "" : p < 0.05 ? `<span class="chip">reliable</span>` : p < 0.15 ? `<span class="chip w">lean</span>` : `<span class="chip w" style="opacity:.7">not proven</span>`;
+
+        const renderTable = (grp, label, order = null) => {
+          let rows = [...grp.rows];
+          if (order) rows.sort((a, b) => order.indexOf(a.g) - order.indexOf(b.g));
+          else rows.sort((a, b) => (b.tg || 0) - (a.tg || 0));
+
+          const eligible = rows.filter(r => r.n >= 3);
+          const maxTg = Math.max(...eligible.map(r => r.tg || 0));
+          const maxSh = Math.max(...eligible.map(r => r.sh || 0));
+          const maxOut = Math.max(...eligible.map(r => r.out || 0));
+          const maxEr = Math.max(...eligible.map(r => r.er || 0));
+
+          return `
+            <div class="card tw">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="l">${label}</th>
+                    <th>Posts</th>
+                    <th>Median TG impressions</th>
+                    <th>Total TG impressions</th>
+                    <th>Median TG share</th>
+                    <th>Median out-of-network</th>
+                    <th>Median engagement rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rows.map(r => {
+                    const isEl = r.n >= 3;
+                    return `
+                      <tr>
+                        <td class="l">${r.g}</td>
+                        <td>${r.n}</td>
+                        <td>${isEl && r.tg === maxTg ? `<b style="color:var(--target)">${fmt(r.tg)}</b>` : fmt(r.tg)}</td>
+                        <td>${fmt(r.tgsum)}</td>
+                        <td>${isEl && r.sh === maxSh ? `<b style="color:var(--target)">${pct(r.sh)}</b>` : pct(r.sh)}</td>
+                        <td>${r.out !== null ? (isEl && r.out === maxOut ? `<b style="color:var(--target)">${r.out}%</b>` : `${r.out}%`) : "–"}</td>
+                        <td>${r.er !== null ? (isEl && r.er === maxEr ? `<b style="color:var(--target)">${r.er}%</b>` : `${r.er}%`) : "–"}</td>
+                      </tr>
+                    `;
+                  }).join("")}
+                  <tr>
+                    <td class="l muted" style="font-weight:500">Is the gap real?</td>
+                    <td></td>
+                    <td>p ${formatP(grp.p.tg)} ${sigChip(grp.p.tg)}</td>
+                    <td></td>
+                    <td>p ${formatP(grp.p.sh)} ${sigChip(grp.p.sh)}</td>
+                    <td>p ${formatP(grp.p.outnet)} ${sigChip(grp.p.outnet)}</td>
+                    <td>p ${formatP(grp.p.er)} ${sigChip(grp.p.er)}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          `;
+        };
+
+        const catMap = Object.fromEntries(I.groups.cat.rows.map(r => [r.g, r]));
+        const fmtMap = Object.fromEntries(I.groups.fmt.rows.map(r => [r.g, r]));
+        const eraMap = Object.fromEntries(I.groups.era.rows.map(r => [r.g, r]));
+        const slopeVal = Math.abs(I.fit.slope10).toFixed(1);
+
+        const kf = [
+          {
+            title: "The wider a post travels outside your network, the lower its TG share.",
+            desc: `Every +10 pts of out-of-network views costs about ${slopeVal} pts of TG share (Spearman ρ ${I.corr.out_vs_share.rho}, p ${formatP(I.corr.out_vs_share.p)}, ${I.corr.out_vs_share.n} posts). Your followers and connections are TG-dense; strangers LinkedIn adds are less senior. But more reach still means more TG impressions overall (the two aren't in conflict), so aim for reach that stays senior.`
+          },
+          {
+            title: "Comments and reposts are what push a post out of network.",
+            desc: `Comments ρ ${I.corr.comments_vs_out.rho} and reposts ρ ${I.corr.reposts_vs_out.rho} with out-of-network share (both p ${formatP(I.corr.comments_vs_out.p)}). Posts that invite a reply or a reshare are the ones LinkedIn distributes beyond your network.`
+          },
+          {
+            title: "Founder journey & milestones and Hiring & team bring the most TG impressions per post.",
+            desc: `Median ${fmt(catMap["Founder journey & milestones"]?.tg)} and ${fmt(catMap["Hiring & team"]?.tg)} TG impressions vs ${fmt(catMap["Home-loan explainer"]?.tg)} for explainers and ${fmt(catMap["Opinion & life lessons"]?.tg)} for opinion posts (p ${formatP(I.groups.cat.p.tg)}, reliable). Founder journey posts also produced the single biggest TG post (10,000-crore listed company, 7,502 TG impressions). Hiring posts get volume but the lowest TG share (${pct(catMap["Hiring & team"]?.sh)}): job-seekers are junior.`
+          },
+          {
+            title: 'Bank & industry critique is the best "dog-whistle" candidate.',
+            desc: `Highest median TG share (${pct(catMap["Bank & industry critique"]?.sh)}), highest out-of-network reach (${catMap["Bank & industry critique"]?.out}%) and highest engagement rate (${catMap["Bank & industry critique"]?.er}%). It travels AND stays senior. It's the Creator Chart Era's main format (6 of 7 such posts) but TG impressions per post are still modest (${fmt(catMap["Bank & industry critique"]?.tg)}); pairing it with a founder/Peaceful-Loans angle is the obvious test.`
+          },
+          {
+            title: "Media posts stay inside your network; text posts travel.",
+            desc: `Out-of-network ${fmtMap["Media (ugcPost)"]?.out}% for media (image/video/document) vs ${fmtMap["Text/share"]?.out}% for text posts (p ${formatP(I.groups.fmt.p.outnet)}, reliable). TG share is similar (${pct(fmtMap["Media (ugcPost)"]?.sh)} vs ${pct(fmtMap["Text/share"]?.sh)}, not proven).`
+          },
+          {
+            title: "Creator Chart Era: more reach and engagement, same TG share, fewer TG impressions per post so far.",
+            desc: `Out-of-network ${eraMap["Before"]?.out}% → ${eraMap["Creator Chart Era"]?.out}% (p ${formatP(I.groups.era.p.outnet)}), engagement rate ${eraMap["Before"]?.er}% → ${eraMap["Creator Chart Era"]?.er}% (p ${formatP(I.groups.era.p.er)}), TG share ${pct(eraMap["Before"]?.sh)} → ${pct(eraMap["Creator Chart Era"]?.sh)} (not proven), median TG impressions per post ${fmt(eraMap["Before"]?.tg)} → ${fmt(eraMap["Creator Chart Era"]?.tg)} (p ${formatP(I.groups.era.p.tg)}). Newer posts have had less time to collect views, so the last point partly reflects post age.`
+          }
+        ];
+
+        // Scatter chart SVG
+        const width = 800, height = 320;
+        const margin = { left: 48, right: 24, top: 16, bottom: 44 };
+        const innerWidth = width - margin.left - margin.right;
+        const innerHeight = height - margin.top - margin.bottom;
+
+        const xPos = v => margin.left + (v / 100) * innerWidth;
+        const yPos = v => margin.top + innerHeight - ((v - 25) / 35) * innerHeight;
+
+        let scSvg = "";
+        [30, 40, 50, 60].forEach(v => {
+          scSvg += `
+            <line x1="${margin.left}" x2="${width - margin.right}" y1="${yPos(v)}" y2="${yPos(v)}" stroke="var(--grid)" />
+            <text x="${margin.left - 6}" y="${yPos(v) + 3}" text-anchor="end">${v}%</text>
+          `;
+        });
+        [0, 25, 50, 75, 100].forEach(v => {
+          scSvg += `<text x="${xPos(v)}" y="${height - 24}" text-anchor="middle">${v}%</text>`;
+        });
+
+        scSvg += `
+          <text x="${margin.left + innerWidth / 2}" y="${height - 6}" text-anchor="middle" style="fill:var(--ink)">Out-of-network share of views →</text>
+          <text x="12" y="${margin.top + innerHeight / 2}" transform="rotate(-90 12 ${margin.top + innerHeight / 2})" text-anchor="middle" style="fill:var(--ink)">TG share →</text>
+          <line x1="${xPos(0)}" y1="${yPos(I.fit.a)}" x2="${xPos(100)}" y2="${yPos(I.fit.a + I.fit.b * 100)}" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="5 4" opacity="0.7" />
+        `;
+
+        P.forEach(p => {
+          const cx = xPos(p.out_of_network_pct);
+          const cy = yPos(p.tg_share_pct);
+          const radius = 3 + Math.sqrt((p.tg_impressions_lifetime || 0) / maxTg) * 14;
+          scSvg += `
+            <circle cx="${cx}" cy="${cy}" r="${radius}" fill="var(--target)" fill-opacity="${p.creator_chart_era ? 0.85 : 0.45}" stroke="var(--surface)" stroke-width="1">
+              <title>${dd(p.published)} · ${p.title}\n${p.type}\nTG share ${p.tg_share_pct}% · out-of-network ${p.out_of_network_pct}% · ${fmt(p.tg_impressions_lifetime)} TG impressions</title>
+            </circle>
+          `;
+        });
+
+        return `
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>What works: TG share, TG impressions and out-of-network reach</h2>
+            <p class="note">Statistical read of all ${DASHBOARD_DATA.posts.length} posts of 2026, each from its own post export. Medians are used because a few viral posts would distort averages. <b>p</b> = chance the gap between groups is just noise (Kruskal–Wallis test for groups, Spearman for relationships). Under 0.05 = reliable, 0.05–0.15 = a lean, above = not proven. With 5–12 posts per group, treat leans as hypotheses to test, not rules.</p>
+            <div class="card">
+              <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:14px">
+                ${kf.map(item => `<li><b>${item.title}</b><br><span style="font-size:13px;color:var(--muted);display:inline-block;margin-top:2px">${item.desc}</span></li>`).join("")}
+              </ol>
+            </div>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>By type of post</h2>
+            ${renderTable(I.groups.cat, "Type")}
+            <p class="note">Categories were assigned from each post's opening line. <b>Bank &amp; industry critique</b> = calling out lender practices, RBI/IRDAI moves, bank ads. <b>Home-loan explainer</b> = how rates, EMIs, eligibility work. <b>Client story</b> = a real client or consumer conversation. <b>Founder journey &amp; milestones</b> = Peaceful-Loans' story, wins, numbers. <b>Opinion &amp; life lessons</b> = money/behaviour philosophy. <b>Hiring &amp; team</b> = job posts and team shout-outs.</p>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>Out-of-network reach vs TG share</h2>
+            <div class="legend">
+              <span><i class="sw" style="background:var(--target);border-radius:50%"></i>One post (size = TG impressions)</span>
+              <span><i class="sw" style="background:var(--ink);height:2px;vertical-align:3px"></i>Trend line</span>
+            </div>
+            <div class="card chart">
+              <svg viewBox="0 0 ${width} ${height}" width="100%" height="${height}" role="img">${scSvg}</svg>
+            </div>
+          </section>
+
+          <div class="grid2">
+            <section style="display:flex;flex-direction:column;gap:12px">
+              <h2>By format</h2>
+              ${renderTable(I.groups.fmt, "Format")}
+            </section>
+            <section style="display:flex;flex-direction:column;gap:12px">
+              <h2>Before vs Creator Chart Era</h2>
+              ${renderTable(I.groups.era, "Period", ["Before", "Creator Chart Era"])}
+            </section>
+          </div>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>By day posted</h2>
+            ${renderTable(I.groups.dow, "Day", ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"])}
+          </section>
+        `;
+      }
+
+      // --- DATA TAB ---
+      function renderDataTabHtml() {
+        return `
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>Download the data behind this report</h2>
+            <p class="note">Everything this report is built from, as it appears here: TG impressions, TG share, engagements, new followers, posts and viewer mix. Each file comes from its own LinkedIn export (daily, weekly or monthly); nothing is added up.</p>
+            <div class="dgrid">
+              <div class="card" style="display:flex;flex-direction:column;gap:8px">
+                <h3>Daily</h3>
+                <span style="font-size:13px;color:var(--muted);flex:1">One row per day, 1 Jan – 25 Sep 2026: TG impressions, TG share, engagements, new followers, posts published.</span>
+                <div><button class="dlb" id="dlFullDaily">↓ daily_tg.csv</button></div>
+              </div>
+
+              <div class="card" style="display:flex;flex-direction:column;gap:8px">
+                <h3>Weekly</h3>
+                <span style="font-size:13px;color:var(--muted);flex:1">One row per Mon–Sun week, from weekly exports.</span>
+                <div><button class="dlb" id="dlFullWeekly">↓ weekly_tg.csv</button></div>
+              </div>
+
+              <div class="card" style="display:flex;flex-direction:column;gap:8px">
+                <h3>Monthly</h3>
+                <span style="font-size:13px;color:var(--muted);flex:1">One row per calendar month, from monthly exports.</span>
+                <div><button class="dlb" id="dlFullMonthly">↓ monthly_tg.csv</button></div>
+              </div>
+
+              <div class="card" style="display:flex;flex-direction:column;gap:8px">
+                <h3>Posts</h3>
+                <span style="font-size:13px;color:var(--muted);flex:1">Every 2026 post: type, format, lifetime TG impressions, TG share, out-of-network %, engagements, comments, reposts, followers gained.</span>
+                <div><button class="dlb" id="dlFullPosts">↓ posts_tg.csv</button></div>
+              </div>
+
+              <div class="card" style="display:flex;flex-direction:column;gap:8px">
+                <h3>Viewer mix by day</h3>
+                <span style="font-size:13px;color:var(--muted);flex:1">Long format: date, dimension (seniority, job title, industry, location, company size, company), value, % of that day's views.</span>
+                <div><button class="dlb" id="dlFullMix">↓ viewer_mix_daily.csv</button></div>
+              </div>
+
+              <div class="card" style="display:flex;flex-direction:column;gap:8px">
+                <h3>Everything</h3>
+                <span style="font-size:13px;color:var(--muted);flex:1">All of the above in one JSON file, the exact dataset the report is built from (minus day weights).</span>
+                <div><button class="dlb" id="dlFullJson">↓ linkedin_tg_backend.json</button></div>
+              </div>
+            </div>
+          </section>
+        `;
+      }
+
+      function setupDataTabEvents() {
+        $("dlFullDaily").onclick = () => {
+          const headers = ["date", "tg_impressions", "tg_share_pct", "tg_may_be_higher", "engagements", "new_followers", "posts_published"];
+          const rows = DASHBOARD_DATA.daily.map(d => [d.date, d.tg_impressions !== null ? d.tg_impressions : "", d.tg_share_pct !== null ? d.tg_share_pct.toFixed(1) : "", d.tg_may_be_higher ? "yes" : "", d.engagements, d.new_followers, d.posts_published]);
+          saveCsv("daily_tg.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
+        };
+
+        $("dlFullWeekly").onclick = () => {
+          const headers = ["week_start", "week_end", "tg_impressions", "tg_share_pct", "tg_may_be_higher", "engagements", "new_followers", "posts_published"];
+          const rows = DASHBOARD_DATA.weekly.map(w => [w.week_start, w.week_end, w.tg_impressions !== null ? w.tg_impressions : "", w.tg_share_pct !== null ? w.tg_share_pct.toFixed(1) : "", w.tg_may_be_higher ? "yes" : "", w.engagements, w.new_followers, w.posts_published]);
+          saveCsv("weekly_tg.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
+        };
+
+        $("dlFullMonthly").onclick = () => {
+          const headers = ["month_start", "month_end", "tg_impressions", "tg_share_pct", "tg_may_be_higher", "engagements", "new_followers", "posts_published"];
+          const rows = DASHBOARD_DATA.monthly.map(m => [m.month_start, m.month_end, m.tg_impressions !== null ? m.tg_impressions : "", m.tg_share_pct !== null ? m.tg_share_pct.toFixed(1) : "", m.tg_may_be_higher ? "yes" : "", m.engagements, m.new_followers, m.posts_published]);
+          saveCsv("monthly_tg.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
+        };
+
+        $("dlFullPosts").onclick = () => {
+          const headers = ["published", "post", "url", "type", "format", "tg_impressions_lifetime", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
+          const rows = DASHBOARD_DATA.posts.map(p => [p.published, `"${p.title.replace(/"/g, '""')}"`, p.url, `"${p.type.replace(/"/g, '""')}"`, p.format, p.tg_impressions_lifetime !== null ? p.tg_impressions_lifetime : "", p.tg_share_pct !== null ? p.tg_share_pct.toFixed(1) : "", p.out_of_network_pct !== null ? p.out_of_network_pct : "", p.engagements, p.comments, p.reposts, p.followers_gained, p.creator_chart_era ? "yes" : ""]);
+          saveCsv("posts_tg.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
+        };
+
+        $("dlFullMix").onclick = () => {
+          const headers = ["date", "dimension", "value", "pct_of_views"];
+          const rows = [];
+          const pcts = DASHBOARD_DATA.viewer_mix.pct_of_views;
+          for (const dim in pcts) {
+            for (const val in pcts[dim]) {
+              for (const d in pcts[dim][val]) {
+                rows.push([d, dim, `"${val.replace(/"/g, '""')}"`, pcts[dim][val][d]]);
+              }
+            }
+          }
+          rows.sort((a, b) => a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0);
+          saveCsv("viewer_mix_daily.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
+        };
+
+        $("dlFullJson").onclick = () => {
+          const clone = JSON.parse(JSON.stringify(DASHBOARD_DATA));
+          if (clone.viewer_mix) delete clone.viewer_mix.day_weight;
+          const blob = new Blob([JSON.stringify(clone, null, 1)], { type: "application/json;charset=utf-8;" });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "linkedin_tg_backend.json");
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        };
+      }
+
+      function saveCsv(filename, content) {
+        const blob = new Blob([content], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", filename);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      async function handleAdminUpload() {
+        const input = $("adminFileInput");
+        const status = $("adminUploadStatus");
+        if (!input.files || !input.files[0]) {
+          status.innerHTML = `<span style="color:var(--bad)">Please select a file to upload.</span>`;
+          return;
+        }
+
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = async event => {
+          try {
+            status.innerHTML = `<span>Validating and uploading…</span>`;
+            const json = JSON.parse(event.target.result);
+            const res = await fetch("/api/linkedin-analytics/upload", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(json)
+            });
+            const result = await res.json();
+            if (!res.ok) {
+              status.innerHTML = `<span style="color:var(--bad)">${result.error || "Upload failed."}</span>`;
+            } else {
+              status.innerHTML = `<span style="color:var(--good)">✓ Upload successful! Live data updated to ${result.data_to}. Reloading…</span>`;
+              setTimeout(() => {
+                $("adminModal").hidden = true;
+                init();
+              }, 1200);
+            }
+          } catch (err) {
+            status.innerHTML = `<span style="color:var(--bad)">Invalid JSON file format.</span>`;
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      // Initialize
+      init();
+    })();
+  </script>
+</body>
+</html>

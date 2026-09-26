@@ -1,4 +1,5 @@
 import { createAEOWorker } from "@dualmark/cloudflare";
+import defaultDashboardData from "./creator-chart/data/creator_chart_dashboard_data.json";
 
 const aeoWorker = createAEOWorker({
   upstream: {
@@ -13,6 +14,86 @@ const aeoWorker = createAEOWorker({
 
 // A simple in-memory fallback for local dev (persists during isolate lifecycle)
 const localDB = new Map<string, string>();
+
+// --- LinkedIn TG Analytics Auth & Session Helpers ---
+const TG_SESSION_SECRET = "peaceful-loans-creator-chart-tg-dashboard-secure-salt-2026";
+const TG_DEFAULT_TEAM_PASSWORD = "creatorchart2026";
+const TG_DEFAULT_ADMIN_PASSWORD = "PeacefulLoansAdmin2026";
+
+const tgRateLimitMap = new Map<string, { count: number; resetAt: number }>();
+function checkTgRateLimit(key: string, limit = 5, windowMs = 15 * 60 * 1000): boolean {
+  const now = Date.now();
+  const entry = tgRateLimitMap.get(key);
+  if (!entry || now > entry.resetAt) {
+    tgRateLimitMap.set(key, { count: 1, resetAt: now + windowMs });
+    return true;
+  }
+  if (entry.count >= limit) return false;
+  entry.count += 1;
+  return true;
+}
+
+async function getTgSigningKey(): Promise<CryptoKey> {
+  const enc = new TextEncoder();
+  return crypto.subtle.importKey(
+    "raw",
+    enc.encode(TG_SESSION_SECRET),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign", "verify"]
+  );
+}
+
+async function createTgToken(user: { email: string; role: "viewer" | "admin" }): Promise<string> {
+  const payload = JSON.stringify({ ...user, authenticatedAt: Date.now() });
+  const enc = new TextEncoder();
+  const key = await getTgSigningKey();
+  const payloadBytes = enc.encode(payload);
+  let binary = "";
+  for (let i = 0; i < payloadBytes.length; i++) binary += String.fromCharCode(payloadBytes[i]);
+  const payloadBase64 = btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  const sig = await crypto.subtle.sign("HMAC", key, enc.encode(payloadBase64));
+  let sigBinary = "";
+  const sigBytes = new Uint8Array(sig);
+  for (let i = 0; i < sigBytes.length; i++) sigBinary += String.fromCharCode(sigBytes[i]);
+  const sigBase64 = btoa(sigBinary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  return `${payloadBase64}.${sigBase64}`;
+}
+
+async function verifyTgToken(request: Request): Promise<{ email: string; role: "viewer" | "admin" } | null> {
+  try {
+    const cookieHeader = request.headers.get("Cookie") || "";
+    const match = cookieHeader.match(/tg_session=([^;]+)/);
+    if (!match) return null;
+    const token = match[1];
+    const parts = token.split(".");
+    if (parts.length !== 2) return null;
+    const [payloadBase64, sigBase64] = parts;
+
+    const enc = new TextEncoder();
+    const key = await getTgSigningKey();
+
+    let sigB64 = sigBase64.replace(/-/g, "+").replace(/_/g, "/");
+    while (sigB64.length % 4) sigB64 += "=";
+    const sigStr = atob(sigB64);
+    const sigBytes = new Uint8Array(sigStr.length);
+    for (let i = 0; i < sigStr.length; i++) sigBytes[i] = sigStr.charCodeAt(i);
+
+    const valid = await crypto.subtle.verify("HMAC", key, sigBytes, enc.encode(payloadBase64));
+    if (!valid) return null;
+
+    let payB64 = payloadBase64.replace(/-/g, "+").replace(/_/g, "/");
+    while (payB64.length % 4) payB64 += "=";
+    const payloadStr = atob(payB64);
+    const data = JSON.parse(payloadStr);
+
+    if (Date.now() - data.authenticatedAt > 7 * 24 * 60 * 60 * 1000) return null;
+    return { email: data.email, role: data.role };
+  } catch {
+    return null;
+  }
+}
+
 
 async function sendNotificationEmail(username: string, question: string, env: any): Promise<void> {
   const apiKey = env.RESEND_API_KEY;
@@ -446,6 +527,221 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
     }
   }
 
+  // 6. LinkedIn Analytics Auth (Login / Logout / Verify)
+  if (cleanPath === "/api/linkedin-analytics/auth") {
+    if (request.method === "GET") {
+      const user = await verifyTgToken(request);
+      if (!user) {
+        return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers });
+      }
+      return new Response(JSON.stringify({ user }), { status: 200, headers });
+    }
+
+    if (request.method === "POST") {
+      try {
+        const body = await request.json() as any;
+        if (body.action === "logout") {
+          const resHeaders = new Headers(headers);
+          resHeaders.set("Set-Cookie", "tg_session=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax; Secure");
+          return new Response(JSON.stringify({ success: true }), { status: 200, headers: resHeaders });
+        }
+
+        const clientIp = request.headers.get("CF-Connecting-IP") || request.headers.get("cf-connecting-ip") || "unknown-ip";
+        const rateKey = `${clientIp}:${body.email || ""}`;
+        if (!checkTgRateLimit(rateKey)) {
+          return new Response(
+            JSON.stringify({ error: "Too many failed sign-in attempts. Please try again in 15 minutes." }),
+            { status: 429, headers }
+          );
+        }
+
+        const teamPassword = env.TEAM_PASSWORD || TG_DEFAULT_TEAM_PASSWORD;
+        const adminPassword = env.ADMIN_PASSWORD || TG_DEFAULT_ADMIN_PASSWORD;
+
+        let role: "viewer" | "admin" | null = null;
+        if (body.password === adminPassword) {
+          role = "admin";
+        } else if (body.password === teamPassword) {
+          role = "viewer";
+        }
+
+        if (!role) {
+          return new Response(JSON.stringify({ error: "Email or password is incorrect" }), { status: 401, headers });
+        }
+
+        const email = body.email ? body.email.trim() : role === "admin" ? "mangesh@peaceful-loans.com" : "creator@creatorchart.com";
+        const token = await createTgToken({ email, role });
+        const resHeaders = new Headers(headers);
+        resHeaders.set("Set-Cookie", `tg_session=${token}; Path=/; Max-Age=604800; HttpOnly; SameSite=Lax; Secure`);
+
+        return new Response(JSON.stringify({ success: true, user: { email, role } }), { status: 200, headers: resHeaders });
+      } catch (err: any) {
+        return new Response(JSON.stringify({ error: err.message }), { status: 400, headers });
+      }
+    }
+  }
+
+  // 7. LinkedIn Analytics Data (Zero total impressions enforced)
+  if (cleanPath === "/api/linkedin-analytics/data" || cleanPath === "/api/data") {
+    if (request.method === "GET") {
+      const user = await verifyTgToken(request);
+      if (!user) {
+        return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers });
+      }
+
+      let payload = defaultDashboardData;
+      const kv = env.QUESTIONS_KV;
+      if (kv) {
+        try {
+          const liveStr = await kv.get("linkedin_data:live");
+          if (liveStr) {
+            payload = JSON.parse(liveStr);
+          }
+        } catch {
+          // fallback to defaultDashboardData
+        }
+      }
+
+      // Guarantee zero total impressions
+      const forbidden = ["impressions", "imp", "members_reached", "sv"];
+      function sanitizeData(obj: any): any {
+        if (Array.isArray(obj)) return obj.map(sanitizeData);
+        if (obj !== null && typeof obj === "object") {
+          const clean: Record<string, any> = {};
+          for (const [k, v] of Object.entries(obj)) {
+            if (!forbidden.includes(k.toLowerCase())) {
+              clean[k] = sanitizeData(v);
+            }
+          }
+          return clean;
+        }
+        return obj;
+      }
+
+      const resHeaders = new Headers(headers);
+      resHeaders.set("Cache-Control", "private, no-cache, no-store, must-revalidate");
+      resHeaders.set("X-Robots-Tag", "noindex, nofollow");
+      return new Response(JSON.stringify(sanitizeData(payload)), { status: 200, headers: resHeaders });
+    }
+  }
+
+  // 8. LinkedIn Analytics Upload & Rollback (Admin only)
+  if (cleanPath === "/api/linkedin-analytics/upload") {
+    const user = await verifyTgToken(request);
+    const uploadToken = request.headers.get("x-upload-token");
+    const validToken = env.ADMIN_UPLOAD_TOKEN || "PeacefulLoansAdminUpload2026";
+    const isAuthorized = (user && user.role === "admin") || (uploadToken && uploadToken === validToken);
+
+    if (!isAuthorized) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers });
+    }
+
+    const kv = env.QUESTIONS_KV;
+
+    if (request.method === "GET") {
+      let versions: any[] = [];
+      if (kv) {
+        const vStr = await kv.get("linkedin_data:versions");
+        if (vStr) versions = JSON.parse(vStr);
+      }
+      return new Response(JSON.stringify({ versions }), { status: 200, headers });
+    }
+
+    if (request.method === "POST") {
+      try {
+        const body = await request.json() as any;
+
+        // Rollback
+        if (body.action === "rollback") {
+          if (!kv) {
+            return new Response(JSON.stringify({ error: "Storage not configured for rollback" }), { status: 500, headers });
+          }
+          const vStr = await kv.get("linkedin_data:versions");
+          const versions = vStr ? JSON.parse(vStr) : [];
+          const target = versions.find((v: any) => v.id === body.id);
+          if (!target || !target.data) {
+            return new Response(JSON.stringify({ error: "Version not found" }), { status: 404, headers });
+          }
+          await kv.put("linkedin_data:live", JSON.stringify(target.data));
+          return new Response(JSON.stringify({ success: true, message: `Rolled back to ${target.data_to}` }), { status: 200, headers });
+        }
+
+        const payload = body.data || body;
+
+        // Section 9 validation: check 7 required sections
+        const requiredSections = ["meta", "daily", "weekly", "monthly", "posts", "viewer_mix", "insights"];
+        for (const sec of requiredSections) {
+          if (!payload[sec]) {
+            return new Response(JSON.stringify({ error: `Validation failed: missing section '${sec}'.` }), { status: 400, headers });
+          }
+        }
+
+        // Section 9 validation: reject total impressions keys
+        const forbidden = ["impressions", "imp", "members_reached", "sv"];
+        function checkForbiddenKeys(obj: any): string | null {
+          if (Array.isArray(obj)) {
+            for (const item of obj) {
+              const err = checkForbiddenKeys(item);
+              if (err) return err;
+            }
+          } else if (obj !== null && typeof obj === "object") {
+            for (const k of Object.keys(obj)) {
+              if (forbidden.includes(k.toLowerCase())) return k;
+              const err = checkForbiddenKeys(obj[k]);
+              if (err) return err;
+            }
+          }
+          return null;
+        }
+
+        const forbiddenKey = checkForbiddenKeys(payload);
+        if (forbiddenKey) {
+          return new Response(
+            JSON.stringify({ error: `Validation failed: forbidden total impressions key '${forbiddenKey}' found.` }),
+            { status: 400, headers }
+          );
+        }
+
+        // Check monotonic data_to
+        if (payload.meta?.data_to && defaultDashboardData.meta?.data_to) {
+          if (payload.meta.data_to < defaultDashboardData.meta.data_to) {
+            return new Response(
+              JSON.stringify({ error: `Validation failed: data_to (${payload.meta.data_to}) is older than live data_to (${defaultDashboardData.meta.data_to}).` }),
+              { status: 400, headers }
+            );
+          }
+        }
+
+        if (kv) {
+          // Keep version history
+          const vStr = await kv.get("linkedin_data:versions");
+          const versions = vStr ? JSON.parse(vStr) : [];
+          const currentLive = await kv.get("linkedin_data:live");
+          const currentObj = currentLive ? JSON.parse(currentLive) : defaultDashboardData;
+
+          versions.unshift({
+            id: `v_${Date.now()}`,
+            data_to: currentObj.meta?.data_to || "unknown",
+            built: currentObj.meta?.built || "unknown",
+            data: currentObj,
+          });
+
+          // Keep max 5 versions
+          const trimmed = versions.slice(0, 5);
+          await kv.put("linkedin_data:versions", JSON.stringify(trimmed));
+          await kv.put("linkedin_data:live", JSON.stringify(payload));
+        }
+
+        return new Response(
+          JSON.stringify({ success: true, message: "Data uploaded successfully.", data_to: payload.meta?.data_to, built: payload.meta?.built }),
+          { status: 200, headers }
+        );
+      } catch (err: any) {
+        return new Response(JSON.stringify({ error: err.message }), { status: 400, headers });
+      }
+    }
+  }
+
   return new Response(JSON.stringify({ error: "Not Found" }), { status: 404, headers });
 }
 
@@ -456,10 +752,21 @@ export default {
     if (cleanPath === "/save-money-on-home-loan") {
       return Response.redirect(new URL("/", url.origin).toString(), 301);
     }
-    
-    // Intercept our Q&A API routes
+
+    // Intercept our API routes
     if (cleanPath.startsWith("/api/")) {
       return handleApiRequest(request, env, ctx);
+    }
+
+    // Clean URL routing for /linkedin-analytics
+    if (cleanPath === "/linkedin-analytics" || cleanPath === "/linkedin-analytics.html") {
+      const assetReq = new Request(new URL("/linkedin-analytics.html", request.url), request);
+      const res = await aeoWorker.fetch(assetReq, env, ctx);
+      const resHeaders = new Headers(res.headers);
+      resHeaders.set("X-Robots-Tag", "noindex, nofollow");
+      resHeaders.set("X-Frame-Options", "DENY");
+      resHeaders.set("X-Content-Type-Options", "nosniff");
+      return new Response(res.body, { status: res.status, headers: resHeaders });
     }
 
     return aeoWorker.fetch(request, env, ctx);
