@@ -758,18 +758,17 @@ export default {
       return handleApiRequest(request, env, ctx);
     }
 
-    // Clean URL routing for /linkedin-analytics
+    const response = await aeoWorker.fetch(request, env, ctx);
+
     if (cleanPath === "/linkedin-analytics" || cleanPath === "/linkedin-analytics.html") {
-      const assetReq = new Request(new URL("/linkedin-analytics.html", request.url), request);
-      const res = await aeoWorker.fetch(assetReq, env, ctx);
-      const resHeaders = new Headers(res.headers);
+      const resHeaders = new Headers(response.headers);
       resHeaders.set("X-Robots-Tag", "noindex, nofollow");
       resHeaders.set("X-Frame-Options", "DENY");
       resHeaders.set("X-Content-Type-Options", "nosniff");
-      return new Response(res.body, { status: res.status, headers: resHeaders });
+      return new Response(response.body, { status: response.status, headers: resHeaders });
     }
 
-    return aeoWorker.fetch(request, env, ctx);
+    return response;
   },
 
   async scheduled(event: any, env: any, ctx: any) {
