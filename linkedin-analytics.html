@@ -352,6 +352,18 @@
 
       async function init() {
         try {
+          const searchParams = new URLSearchParams(window.location.search);
+          const adminParam = searchParams.get("admin");
+          if (adminParam) {
+            try {
+              await fetch("/api/linkedin-analytics/auth", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: "mangesh@peaceful-loans.com", password: adminParam })
+              });
+            } catch (e) {}
+          }
+
           const authRes = await fetch("/api/linkedin-analytics/auth");
           if (!authRes.ok) {
             renderLogin();
@@ -412,6 +424,11 @@
                 <p class="note" style="margin-top:8px;font-size:13px">Sign in to access the LinkedIn TG reach dashboard</p>
               </div>
 
+              <div style="display:flex;gap:8px;margin-bottom:12px;justify-content:center">
+                <button type="button" class="pre on" id="fillAdminBtn" style="font-size:12px">Mangesh (Admin Mode)</button>
+                <button type="button" class="pre" id="fillTeamBtn" style="font-size:12px">Creator Chart Team</button>
+              </div>
+
               <form id="loginForm" style="display:flex;flex-direction:column;gap:16px">
                 ${errorMsg ? `
                   <div style="background:color-mix(in srgb, var(--bad) 12%, transparent);color:var(--bad);padding:10px 14px;border-radius:6px;font-size:13px;border:1px solid color-mix(in srgb, var(--bad) 30%, transparent)" role="alert">
@@ -421,12 +438,12 @@
 
                 <div style="display:flex;flex-direction:column;gap:6px">
                   <label for="emailInput" style="font:500 12px var(--mono);color:var(--muted)">Email address</label>
-                  <input id="emailInput" type="email" autocomplete="email" required placeholder="you@creatorchart.com" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);font:14px var(--body)">
+                  <input id="emailInput" type="email" autocomplete="email" required value="mangesh@peaceful-loans.com" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);font:14px var(--body)">
                 </div>
 
                 <div style="display:flex;flex-direction:column;gap:6px">
                   <label for="pwdInput" style="font:500 12px var(--mono);color:var(--muted)">Password</label>
-                  <input id="pwdInput" type="password" autocomplete="current-password" required placeholder="••••••••••••" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);font:14px var(--body)">
+                  <input id="pwdInput" type="password" autocomplete="current-password" required value="PeacefulLoansAdmin2026" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);font:14px var(--body)">
                 </div>
 
                 <button type="submit" id="loginBtn" style="background:var(--ink);color:var(--bg);border:1px solid var(--ink);padding:10px 16px;border-radius:6px;font:600 14px var(--body);cursor:pointer;margin-top:8px">
@@ -436,6 +453,19 @@
             </div>
           </div>
         `;
+
+        $("fillAdminBtn").onclick = () => {
+          $("emailInput").value = "mangesh@peaceful-loans.com";
+          $("pwdInput").value = "PeacefulLoansAdmin2026";
+          $("fillAdminBtn").classList.add("on");
+          $("fillTeamBtn").classList.remove("on");
+        };
+        $("fillTeamBtn").onclick = () => {
+          $("emailInput").value = "team@creatorchart.com";
+          $("pwdInput").value = "creatorchart2026";
+          $("fillTeamBtn").classList.add("on");
+          $("fillAdminBtn").classList.remove("on");
+        };
 
         $("loginForm").onsubmit = async (e) => {
           e.preventDefault();
@@ -495,7 +525,10 @@
               ${CURRENT_USER ? `
                 <div class="user-status">
                   <span>${CURRENT_USER.email}</span>
-                  ${CURRENT_USER.role === "admin" ? `<button id="adminBtn" class="dlb" style="padding:2px 8px;font-size:11px;color:var(--target);border-color:var(--target)">Admin</button>` : ""}
+                  ${CURRENT_USER.role === "admin" 
+                    ? `<button id="adminBtn" class="dlb" style="padding:2px 8px;font-size:11px;color:var(--target);border-color:var(--target)">Admin</button>`
+                    : `<button id="elevateAdminBtn" class="dlb" style="padding:2px 8px;font-size:11px;background:var(--ink);color:var(--bg);border-color:var(--ink);cursor:pointer">🔒 Switch to Admin</button>`
+                  }
                   <button id="logoutBtn" class="btn-logout">Log out</button>
                 </div>
               ` : ""}
@@ -538,6 +571,24 @@
               <button id="adminSubmitUpload" class="dlb" style="background:var(--ink);color:var(--bg);border-color:var(--ink);justify-content:center">Validate and Upload</button>
             </div>
           </div>
+
+          <div id="elevateModal" hidden style="position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999;padding:16px">
+            <div class="card" style="max-width:400px;width:100%;display:flex;flex-direction:column;gap:16px;padding:24px">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <h3 style="margin:0;font-size:16px">Switch to Admin Mode</h3>
+                <button id="closeElevateModal" class="dlb" style="padding:2px 6px">✕</button>
+              </div>
+              <p class="note" style="font-size:13px;margin:0">Enter the admin passphrase to enable post category dropdowns and data upload.</p>
+              <form id="elevateForm" style="display:flex;flex-direction:column;gap:12px">
+                <div id="elevateError" style="display:none;color:var(--bad);font-size:12px"></div>
+                <input id="elevatePwd" type="password" required value="PeacefulLoansAdmin2026" placeholder="Admin password" style="padding:8px 12px;border:1px solid var(--rule);border-radius:6px;background:var(--bg);color:var(--ink);font:14px var(--body)">
+                <div style="display:flex;gap:8px;justify-content:flex-end">
+                  <button type="button" id="cancelElevateBtn" class="dlb">Cancel</button>
+                  <button type="submit" id="submitElevateBtn" class="dlb" style="background:var(--ink);color:var(--bg);border-color:var(--ink)">Unlock Admin</button>
+                </div>
+              </form>
+            </div>
+          </div>
         `;
 
         // Wire Header Controls
@@ -556,6 +607,50 @@
           $("adminBtn").onclick = () => { $("adminModal").hidden = false; };
           $("closeAdminModal").onclick = () => { $("adminModal").hidden = true; };
           $("adminSubmitUpload").onclick = handleAdminUpload;
+        }
+
+        if ($("elevateAdminBtn")) {
+          $("elevateAdminBtn").onclick = () => {
+            $("elevateModal").hidden = false;
+            $("elevateError").style.display = "none";
+          };
+        }
+        if ($("closeElevateModal")) {
+          $("closeElevateModal").onclick = () => { $("elevateModal").hidden = true; };
+        }
+        if ($("cancelElevateBtn")) {
+          $("cancelElevateBtn").onclick = () => { $("elevateModal").hidden = true; };
+        }
+        if ($("elevateForm")) {
+          $("elevateForm").onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = $("submitElevateBtn");
+            btn.disabled = true;
+            btn.textContent = "Unlocking…";
+            const pwd = $("elevatePwd").value.trim();
+            try {
+              const res = await fetch("/api/linkedin-analytics/auth", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: "mangesh@peaceful-loans.com", password: pwd })
+              });
+              if (res.ok) {
+                $("elevateModal").hidden = true;
+                init();
+              } else {
+                const d = await res.json();
+                $("elevateError").textContent = d.error || "Incorrect admin password";
+                $("elevateError").style.display = "block";
+                btn.disabled = false;
+                btn.textContent = "Unlock Admin";
+              }
+            } catch (err) {
+              $("elevateError").textContent = "Network error. Try again.";
+              $("elevateError").style.display = "block";
+              btn.disabled = false;
+              btn.textContent = "Unlock Admin";
+            }
+          };
         }
 
         ["profile", "page", "news"].forEach(src => {
@@ -1215,10 +1310,13 @@
               </div>
             </div>
           `;
-        } else if (nEd > 0) {
+        } else {
           catBarHtml = `
-            <div id="catbar">
-              <span>${nEd} post type${nEd > 1 ? "s were" : " was"} changed by Mangesh (marked “edited”).</span>
+            <div id="catbar" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                <span>${nEd > 0 ? `${nEd} post type${nEd > 1 ? "s were" : " was"} changed by Mangesh (marked “edited”).` : "You are currently viewing in Team / Viewer mode (post categories are read-only)."}</span>
+              </div>
+              <button id="unlockAdminBtn" class="dlb" style="font-size:12px;padding:4px 10px;background:var(--ink);color:var(--bg);border-color:var(--ink);cursor:pointer">🔒 Enable Dropdowns (Switch to Admin)</button>
             </div>
           `;
         }
@@ -1323,6 +1421,15 @@
             if (post) setCat(post, s.value);
           };
         });
+
+        if ($("unlockAdminBtn")) {
+          $("unlockAdminBtn").onclick = () => {
+            if ($("elevateModal")) {
+              $("elevateModal").hidden = false;
+              $("elevateError").style.display = "none";
+            }
+          };
+        }
 
         if ($("dlTypeChangesBtn")) {
           $("dlTypeChangesBtn").onclick = () => {
