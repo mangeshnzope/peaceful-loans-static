@@ -10227,7 +10227,7 @@ async function handleApiRequest(request, env, ctx) {
           "Opinion & life lessons",
           "Hiring & team"
         ];
-        if (!validTypes.includes(type)) {
+        if (!validTypes.includes(type) && type !== "RESET" && type !== "DELETE") {
           return new Response(JSON.stringify({ error: `Invalid type. Must be one of: ${validTypes.join(", ")}` }), { status: 400, headers });
         }
         const post = creator_chart_dashboard_data_default.posts.find((p) => p.post_id === post_id);
@@ -10243,7 +10243,7 @@ async function handleApiRequest(request, env, ctx) {
           const memStr = localDB.get("linkedin_data:post_type_overrides");
           if (memStr) overrides = JSON.parse(memStr);
         }
-        if (autoType && type === autoType) {
+        if (type === "RESET" || type === "DELETE" || autoType && type === autoType || !post && overrides[post_id]) {
           delete overrides[post_id];
         } else {
           overrides[post_id] = {

@@ -696,7 +696,7 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
           "Hiring & team"
         ];
 
-        if (!validTypes.includes(type)) {
+        if (!validTypes.includes(type) && type !== "RESET" && type !== "DELETE") {
           return new Response(JSON.stringify({ error: `Invalid type. Must be one of: ${validTypes.join(", ")}` }), { status: 400, headers });
         }
 
@@ -714,7 +714,7 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
           if (memStr) overrides = JSON.parse(memStr);
         }
 
-        if (autoType && type === autoType) {
+        if (type === "RESET" || type === "DELETE" || (autoType && type === autoType) || (!post && overrides[post_id])) {
           delete overrides[post_id];
         } else {
           overrides[post_id] = {
