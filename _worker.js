@@ -528,6 +528,14 @@ var creator_chart_dashboard_data_default = {
     ],
     creator_chart_era_start: "2026-08-19",
     creator_onboarded: "2026-08-01",
+    post_types: [
+      "Bank & industry critique",
+      "Home-loan explainer",
+      "Client story",
+      "Founder journey & milestones",
+      "Opinion & life lessons",
+      "Hiring & team"
+    ],
     notes: "TG impressions = impressions from viewers whose LinkedIn seniority is in tg_definition. TG share = % of all views from TG. Every grain comes from its own LinkedIn export. No total impressions are included by design."
   },
   daily: [
@@ -3439,12 +3447,14 @@ var creator_chart_dashboard_data_default = {
   ],
   posts: [
     {
+      post_id: "7509209819720032256",
       published: "2026-09-25",
       weekday: "Fri",
       time: "4:48 PM",
       title: "Your bank may just have lost a revenue",
       url: "https://www.linkedin.com/posts/mangeshzope_your-bank-may-just-have-lost-a-revenue-share-7509209819720032256-3mbB",
       type: "Bank & industry critique",
+      auto_type: "Bank & industry critique",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 267,
@@ -3458,12 +3468,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.75
     },
     {
+      post_id: "7508405750621310978",
       published: "2026-09-23",
       weekday: "Wed",
       time: "11:33 AM",
       title: "Waiting for the right time to buy a home",
       url: "https://www.linkedin.com/posts/mangeshzope_waiting-for-the-right-time-to-buy-a-home-share-7508405750621310978-nuDC",
       type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 223,
@@ -3477,12 +3489,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 3.57
     },
     {
+      post_id: "7507720186268119040",
       published: "2026-09-21",
       weekday: "Mon",
       time: "2:09 PM",
       title: "Should i take a home loan is the wrong",
       url: "https://www.linkedin.com/posts/mangeshzope_should-i-take-a-home-loan-is-the-wrong-share-7507720186268119040-lN6l",
       type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 293,
@@ -3496,12 +3510,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.71
     },
     {
+      post_id: "7506575936201408512",
       published: "2026-09-18",
       weekday: "Fri",
       time: "10:33 AM",
       title: "A 10000 crore listed company and peaceful loans",
       url: "https://www.linkedin.com/posts/mangeshzope_a-10000-crore-listed-company-and-peaceful-loans-share-7506575936201408512-zFxQ",
       type: "Founder journey & milestones",
+      auto_type: "Founder journey & milestones",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 7586,
@@ -3515,12 +3531,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 3.59
     },
     {
+      post_id: "7506232694943473666",
       published: "2026-09-17",
       weekday: "Thu",
       time: "11:38 AM",
       title: "I have been using instahelp services across",
       url: "https://www.linkedin.com/posts/mangeshzope_i-have-been-using-instahelp-services-across-share-7506232694943473666-3DiR",
       type: "Client story",
+      auto_type: "Client story",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 2253,
@@ -3534,12 +3552,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 0.55
     },
     {
+      post_id: "7505589782421544960",
       published: "2026-09-15",
       weekday: "Tue",
       time: "5:04 PM",
       title: "The bank manager convinces you to fix your",
       url: "https://www.linkedin.com/posts/mangeshzope_the-bank-manager-convinces-you-to-fix-your-share-7505589782421544960-AhLg",
       type: "Bank & industry critique",
+      auto_type: "Bank & industry critique",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 255,
@@ -3553,12 +3573,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.58
     },
     {
+      post_id: "7504055163360362496",
       published: "2026-09-11",
       weekday: "Fri",
       time: "11:26 AM",
       title: "I saw an sbi ad recently aapka bachcha",
       url: "https://www.linkedin.com/posts/mangeshzope_i-saw-an-sbi-ad-recently-aapka-bachcha-ugcPost-7504055163360362496-EDO2",
       type: "Bank & industry critique",
+      auto_type: "Bank & industry critique",
       format: "Media (ugcPost)",
       creator_chart_era: true,
       tg_impressions_lifetime: 479,
@@ -3572,12 +3594,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.06
     },
     {
+      post_id: "7503390922131562496",
       published: "2026-09-09",
       weekday: "Wed",
       time: "3:26 PM",
       title: "Your interest rate went up but your emi",
       url: "https://www.linkedin.com/posts/mangeshzope_your-interest-rate-went-up-but-your-emi-share-7503390922131562496-JObH",
       type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 181,
@@ -3591,12 +3615,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.98
     },
     {
+      post_id: "7502607226914639873",
       published: "2026-09-07",
       weekday: "Mon",
       time: "11:32 AM",
       title: "Paying full in cash for your dream home isnt",
       url: "https://www.linkedin.com/posts/mangeshzope_paying-full-in-cash-for-your-dream-home-isnt-share-7502607226914639873-ndxG",
       type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 171,
@@ -3610,12 +3636,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.32
     },
     {
+      post_id: "7501557451943743492",
       published: "2026-09-04",
       weekday: "Fri",
       time: "2:01 PM",
       title: "If a bank employee cant figure out his own",
       url: "https://www.linkedin.com/posts/mangeshzope_if-a-bank-employee-cant-figure-out-his-own-share-7501557451943743492-1SXu",
       type: "Bank & industry critique",
+      auto_type: "Bank & industry critique",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 295,
@@ -3629,12 +3657,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.65
     },
     {
+      post_id: "7500800657218744321",
       published: "2026-09-02",
       weekday: "Wed",
       time: "11:53 AM",
       title: "One of our clients had been banking with",
       url: "https://www.linkedin.com/posts/mangeshzope_one-of-our-clients-had-been-banking-with-share-7500800657218744321-AucK",
       type: "Client story",
+      auto_type: "Client story",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 201,
@@ -3648,12 +3678,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 3.59
     },
     {
+      post_id: "7500092783240769536",
       published: "2026-08-31",
       weekday: "Mon",
       time: "1:01 PM",
       title: "Net worth doesnt buy financial judgment",
       url: "https://www.linkedin.com/posts/mangeshzope_net-worth-doesnt-buy-financial-judgment-share-7500092783240769536-tWkF",
       type: "Opinion & life lessons",
+      auto_type: "Opinion & life lessons",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 160,
@@ -3667,12 +3699,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 3.41
     },
     {
+      post_id: "7498993755644076033",
       published: "2026-08-28",
       weekday: "Fri",
       time: "12:13 PM",
       title: "Mint quoted me in their article on the rbis",
       url: "https://www.linkedin.com/posts/mangeshzope_mint-quoted-me-in-their-article-on-the-rbis-ugcPost-7498993755644076033-SoRP",
       type: "Bank & industry critique",
+      auto_type: "Bank & industry critique",
       format: "Media (ugcPost)",
       creator_chart_era: true,
       tg_impressions_lifetime: 491,
@@ -3686,12 +3720,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 3.39
     },
     {
+      post_id: "7498269296268324865",
       published: "2026-08-26",
       weekday: "Wed",
       time: "12:15 PM",
       title: "Financial freedom is a lie sold to people",
       url: "https://www.linkedin.com/posts/mangeshzope_financial-freedom-is-a-lie-sold-to-people-share-7498269296268324865-ZI2A",
       type: "Opinion & life lessons",
+      auto_type: "Opinion & life lessons",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 428,
@@ -3705,12 +3741,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.22
     },
     {
+      post_id: "7497535248835076096",
       published: "2026-08-24",
       weekday: "Mon",
       time: "11:38 AM",
       title: "A yes from a bank means nothing until the",
       url: "https://www.linkedin.com/posts/mangeshzope_a-yes-from-a-bank-means-nothing-until-the-share-7497535248835076096-GvMH",
       type: "Bank & industry critique",
+      auto_type: "Bank & industry critique",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 347,
@@ -3724,12 +3762,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.48
     },
     {
+      post_id: "7496445774369669121",
       published: "2026-08-21",
       weekday: "Fri",
       time: "11:29 AM",
       title: "We were on a zoom call with one of our clients",
       url: "https://www.linkedin.com/posts/mangeshzope_we-were-on-a-zoom-call-with-one-of-our-clients-share-7496445774369669121-LRnO",
       type: "Client story",
+      auto_type: "Client story",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 231,
@@ -3743,12 +3783,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 3.51
     },
     {
+      post_id: "7495072253953609731",
       published: "2026-08-19",
       weekday: "Wed",
       time: "9:25 AM",
       title: "When i started peaceful loans i went to",
       url: "https://www.linkedin.com/posts/mangeshzope_when-i-started-peaceful-loans-i-went-to-share-7495072253953609731-g83Z",
       type: "Founder journey & milestones",
+      auto_type: "Founder journey & milestones",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 423,
@@ -3762,12 +3804,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.92
     },
     {
+      post_id: "7495063360074477570",
       published: "2026-08-17",
       weekday: "Mon",
       time: "3:55 PM",
       title: "I was talking to one of our clients today",
       url: "https://www.linkedin.com/posts/mangeshzope_i-was-talking-to-one-of-our-clients-today-share-7495063360074477570-XVvU",
       type: "Client story",
+      auto_type: "Client story",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 288,
@@ -3781,12 +3825,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 3.67
     },
     {
+      post_id: "7486245321606619138",
       published: "2026-07-24",
       weekday: "Fri",
       time: "7:56 AM",
       title: "Recently had a great conversation with an",
       url: "https://www.linkedin.com/posts/mangeshzope_recently-had-a-great-conversation-with-an-share-7486245321606619138-me99",
       type: "Client story",
+      auto_type: "Client story",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 5160,
@@ -3800,12 +3846,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 0.26
     },
     {
+      post_id: "7485494610555781120",
       published: "2026-07-22",
       weekday: "Wed",
       time: "6:13 AM",
       title: "Smita is looking for her next challenge in",
       url: "https://www.linkedin.com/posts/mangeshzope_smita-is-looking-for-her-next-challenge-in-ugcPost-7485494610555781120-9WyG",
       type: "Hiring & team",
+      auto_type: "Hiring & team",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 1376,
@@ -3819,12 +3867,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 0.19
     },
     {
+      post_id: "7485527693921431552",
       published: "2026-07-22",
       weekday: "Wed",
       time: "8:24 AM",
       title: "Love and greed both are blind despite knowledge",
       url: "https://www.linkedin.com/posts/mangeshzope_love-and-greed-both-are-blind-despite-knowledge-share-7485527693921431552-Uhs9",
       type: "Opinion & life lessons",
+      auto_type: "Opinion & life lessons",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 212,
@@ -3838,12 +3888,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.11
     },
     {
+      post_id: "7484796987507335168",
       published: "2026-07-20",
       weekday: "Mon",
       time: "8:01 AM",
       title: "Trying to find interns who are really interested",
       url: "https://www.linkedin.com/posts/mangeshzope_trying-to-find-interns-who-are-really-interested-share-7484796987507335168-oFCC",
       type: "Hiring & team",
+      auto_type: "Hiring & team",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 1071,
@@ -3857,12 +3909,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 0.77
     },
     {
+      post_id: "7484122133548347392",
       published: "2026-07-18",
       weekday: "Sat",
       time: "11:19 AM",
       title: "Peaceful loans why property prices almost",
       url: "https://www.linkedin.com/posts/mangeshzope_peaceful-loans-why-property-prices-almost-ugcPost-7484122133548347392-oQg_",
       type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 450,
@@ -3876,12 +3930,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.73
     },
     {
+      post_id: "7483663913348358144",
       published: "2026-07-17",
       weekday: "Fri",
       time: "4:58 AM",
       title: "Kickass",
       url: "https://www.linkedin.com/posts/mangeshzope_kickass-ugcPost-7483663913348358144-abrO",
       type: "Founder journey & milestones",
+      auto_type: "Founder journey & milestones",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 118,
@@ -3895,12 +3951,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 0
     },
     {
+      post_id: "7482591414866874368",
       published: "2026-07-14",
       weekday: "Tue",
       time: "5:56 AM",
       title: "God rationed brains but he was generous",
       url: "https://www.linkedin.com/posts/mangeshzope_god-rationed-brains-but-he-was-generous-share-7482591414866874368-f09T",
       type: "Opinion & life lessons",
+      auto_type: "Opinion & life lessons",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 147,
@@ -3914,12 +3972,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 3.58
     },
     {
+      post_id: "7482720969816604672",
       published: "2026-07-14",
       weekday: "Tue",
       time: "2:31 PM",
       title: "Moments like these are a validation for us",
       url: "https://www.linkedin.com/posts/mangeshzope_moments-like-these-are-a-validation-for-us-share-7482720969816604672-2K7s",
       type: "Founder journey & milestones",
+      auto_type: "Founder journey & milestones",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 388,
@@ -3933,12 +3993,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.01
     },
     {
+      post_id: "7481948324732866560",
       published: "2026-07-12",
       weekday: "Sun",
       time: "11:21 AM",
       title: "Looking to hire for full time role in our",
       url: "https://www.linkedin.com/posts/mangeshzope_looking-to-hire-for-full-time-role-in-our-share-7481948324732866560-PeR4",
       type: "Hiring & team",
+      auto_type: "Hiring & team",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 692,
@@ -3952,12 +4014,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.08
     },
     {
+      post_id: "7479916369271144448",
       published: "2026-07-06",
       weekday: "Mon",
       time: "8:47 PM",
       title: "Grateful and honestly a little pleasantly",
       url: "https://www.linkedin.com/posts/mangeshzope_grateful-and-honestly-a-little-pleasantly-ugcPost-7479916369271144448-gX5C",
       type: "Founder journey & milestones",
+      auto_type: "Founder journey & milestones",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 735,
@@ -3971,12 +4035,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.34
     },
     {
+      post_id: "7477531824806875137",
       published: "2026-06-30",
       weekday: "Tue",
       time: "6:51 AM",
       title: "Started this journey of ensuring home loan",
       url: "https://www.linkedin.com/posts/mangeshzope_started-this-journey-of-ensuring-home-loan-share-7477531824806875137-sMqv",
       type: "Founder journey & milestones",
+      auto_type: "Founder journey & milestones",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 773,
@@ -3990,12 +4056,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.49
     },
     {
+      post_id: "7476601108128342016",
       published: "2026-06-27",
       weekday: "Sat",
       time: "5:13 PM",
       title: "Witneesed a game of cat and mouse at bluedart",
       url: "https://www.linkedin.com/posts/mangeshzope_witneesed-a-game-of-cat-and-mouse-at-bluedart-share-7476601108128342016-GDa0",
       type: "Client story",
+      auto_type: "Client story",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 253,
@@ -4009,12 +4077,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.81
     },
     {
+      post_id: "7475722402409250816",
       published: "2026-06-25",
       weekday: "Thu",
       time: "7:01 AM",
       title: "When i started my journey 10 years back as",
       url: "https://www.linkedin.com/posts/mangeshzope_when-i-started-my-journey-10-years-back-as-share-7475722402409250816-3ZUJ",
       type: "Founder journey & milestones",
+      auto_type: "Founder journey & milestones",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 689,
@@ -4028,12 +4098,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 4.34
     },
     {
+      post_id: "7475171466703982593",
       published: "2026-06-23",
       weekday: "Tue",
       time: "6:32 PM",
       title: "Winners ego is termed as principles loser",
       url: "https://www.linkedin.com/posts/mangeshzope_winners-ego-is-termed-as-principles-loser-share-7475171466703982593-GPG_",
       type: "Opinion & life lessons",
+      auto_type: "Opinion & life lessons",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 166,
@@ -4047,12 +4119,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 4.16
     },
     {
+      post_id: "7474086780779040768",
       published: "2026-06-20",
       weekday: "Sat",
       time: "6:42 PM",
       title: "Komal nishad 25 of this came in last 30",
       url: "https://www.linkedin.com/posts/mangeshzope_komal-nishad-25-of-this-came-in-last-30-share-7474086780779040768-Z-O-",
       type: "Founder journey & milestones",
+      auto_type: "Founder journey & milestones",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 1043,
@@ -4066,12 +4140,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.22
     },
     {
+      post_id: "7470747187702984704",
       published: "2026-06-11",
       weekday: "Thu",
       time: "1:32 PM",
       title: "A small but meaningful milestone for us at",
       url: "https://www.linkedin.com/posts/mangeshzope_a-small-but-meaningful-milestone-for-us-at-share-7470747187702984704-bz3M",
       type: "Founder journey & milestones",
+      auto_type: "Founder journey & milestones",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 848,
@@ -4085,12 +4161,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.54
     },
     {
+      post_id: "7459504747939799040",
       published: "2026-05-11",
       weekday: "Mon",
       time: "12:58 PM",
       title: "In this day and age where the govt wants",
       url: "https://www.linkedin.com/posts/mangeshzope_in-this-day-and-age-where-the-govt-wants-ugcPost-7459504747939799040-2ig5",
       type: "Opinion & life lessons",
+      auto_type: "Opinion & life lessons",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: null,
@@ -4104,12 +4182,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 0.83
     },
     {
+      post_id: "7458344649280167936",
       published: "2026-05-08",
       weekday: "Fri",
       time: "8:08 AM",
       title: "We are looking to hire a follow up expert",
       url: "https://www.linkedin.com/posts/mangeshzope_we-are-looking-to-hire-a-follow-up-expert-share-7458344649280167936-WASz",
       type: "Hiring & team",
+      auto_type: "Hiring & team",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 820,
@@ -4123,12 +4203,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.16
     },
     {
+      post_id: "7458404010568540160",
       published: "2026-05-08",
       weekday: "Fri",
       time: "12:04 PM",
       title: "Plot loans a topic of interest for every",
       url: "https://www.linkedin.com/posts/mangeshzope_plot-loans-a-topic-of-interest-for-every-ugcPost-7458404010568540160-GDvs",
       type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: null,
@@ -4142,12 +4224,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.68
     },
     {
+      post_id: "7458129287511023616",
       published: "2026-05-07",
       weekday: "Thu",
       time: "5:53 PM",
       title: "Not able to make sense of emi number on net banking",
       url: "https://www.linkedin.com/posts/mangeshzope_not-able-to-make-sense-of-emi-number-on-net-banking-ugcPost-7458129287511023616-8EtG",
       type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: null,
@@ -4161,12 +4245,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.86
     },
     {
+      post_id: "7457669375664377856",
       published: "2026-05-06",
       weekday: "Wed",
       time: "11:25 AM",
       title: "3rd and 4th home loan will attract higher",
       url: "https://www.linkedin.com/posts/mangeshzope_3rd-and-4th-home-loan-will-attract-higher-ugcPost-7457669375664377856-wo-C",
       type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: null,
@@ -4180,12 +4266,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.94
     },
     {
+      post_id: "7457212195207172096",
       published: "2026-05-05",
       weekday: "Tue",
       time: "5:08 AM",
       title: "One consumer conversation over the last few",
       url: "https://www.linkedin.com/posts/mangeshzope_one-consumer-conversation-over-the-last-few-ugcPost-7457212195207172096-6BrX",
       type: "Client story",
+      auto_type: "Client story",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: null,
@@ -4199,12 +4287,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 0.86
     },
     {
+      post_id: "7457285339645116416",
       published: "2026-05-05",
       weekday: "Tue",
       time: "9:59 AM",
       title: "Can self employed professionals get home",
       url: "https://www.linkedin.com/posts/mangeshzope_can-self-employed-professionals-get-home-ugcPost-7457285339645116416-ndNf",
       type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: null,
@@ -4218,12 +4308,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.18
     },
     {
+      post_id: "7456915367701979138",
       published: "2026-05-04",
       weekday: "Mon",
       time: "9:29 AM",
       title: "One consumer conversation over the last few",
       url: "https://www.linkedin.com/posts/mangeshzope_one-consumer-conversation-over-the-last-few-share-7456915367701979138-Gm-S",
       type: "Client story",
+      auto_type: "Client story",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 386,
@@ -4237,12 +4329,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.38
     },
     {
+      post_id: "7455583847884226561",
       published: "2026-04-30",
       weekday: "Thu",
       time: "5:18 PM",
       title: "After 4 years of tireless consumer conversations",
       url: "https://www.linkedin.com/posts/mangeshzope_after-4-years-of-tireless-consumer-conversations-ugcPost-7455583847884226561-E0Hk",
       type: "Founder journey & milestones",
+      auto_type: "Founder journey & milestones",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 926,
@@ -4256,12 +4350,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.57
     },
     {
+      post_id: "7455200922739130368",
       published: "2026-04-29",
       weekday: "Wed",
       time: "3:56 PM",
       title: "There is a professional bias called curse",
       url: "https://www.linkedin.com/posts/mangeshzope_there-is-a-professional-bias-called-curse-share-7455200922739130368-PKjS",
       type: "Opinion & life lessons",
+      auto_type: "Opinion & life lessons",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 272,
@@ -4275,12 +4371,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.72
     },
     {
+      post_id: "7454381198119694336",
       published: "2026-04-27",
       weekday: "Mon",
       time: "4:00 PM",
       title: "Over this weekend a customer asked us a question",
       url: "https://www.linkedin.com/posts/mangeshzope_over-this-weekend-a-customer-asked-us-a-question-share-7454381198119694336-4McC",
       type: "Client story",
+      auto_type: "Client story",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 187,
@@ -4294,12 +4392,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.42
     },
     {
+      post_id: "7454396670374494208",
       published: "2026-04-27",
       weekday: "Mon",
       time: "10:41 AM",
       title: "Freak this is the problem we are solving",
       url: "https://www.linkedin.com/posts/mangeshzope_freak-this-is-the-problem-we-are-solving-share-7454396670374494208-Rc2G",
       type: "Founder journey & milestones",
+      auto_type: "Founder journey & milestones",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 1188,
@@ -4313,12 +4413,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 0.39
     },
     {
+      post_id: "7453637000353603584",
       published: "2026-04-25",
       weekday: "Sat",
       time: "8:22 AM",
       title: "Perfect example of andha andhe ko rah dikha",
       url: "https://www.linkedin.com/posts/mangeshzope_perfect-example-of-andha-andhe-ko-rah-dikha-ugcPost-7453637000353603584-3WJo",
       type: "Opinion & life lessons",
+      auto_type: "Opinion & life lessons",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 588,
@@ -4332,12 +4434,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 0.69
     },
     {
+      post_id: "7453301722514341888",
       published: "2026-04-24",
       weekday: "Fri",
       time: "10:10 AM",
       title: "One of our consumers recently wrote a review",
       url: "https://www.linkedin.com/posts/mangeshzope_one-of-our-consumers-recently-wrote-a-review-share-7453301722514341888-7hJb",
       type: "Client story",
+      auto_type: "Client story",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 443,
@@ -4351,12 +4455,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 0.91
     },
     {
+      post_id: "7452932302931750913",
       published: "2026-04-23",
       weekday: "Thu",
       time: "9:42 AM",
       title: "Recently i was reading a book called trusted",
       url: "https://www.linkedin.com/posts/mangeshzope_recently-i-was-reading-a-book-called-trusted-share-7452932302931750913-j4rg",
       type: "Opinion & life lessons",
+      auto_type: "Opinion & life lessons",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 415,
@@ -4370,12 +4476,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.66
     },
     {
+      post_id: "7452195169958850560",
       published: "2026-04-21",
       weekday: "Tue",
       time: "8:53 AM",
       title: "We at peaceful loans are looking to hire",
       url: "https://www.linkedin.com/posts/mangeshzope_we-at-peaceful-loans-are-looking-to-hire-share-7452195169958850560-1oh6",
       type: "Hiring & team",
+      auto_type: "Hiring & team",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 658,
@@ -4389,12 +4497,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 2.67
     },
     {
+      post_id: "7449605775037145088",
       published: "2026-04-14",
       weekday: "Tue",
       time: "5:23 AM",
       title: "Google we peaceful loanscom had 132",
       url: "https://www.linkedin.com/posts/mangeshzope_google-we-peaceful-loanscom-had-132-share-7449605775037145088-Gvoq",
       type: "Founder journey & milestones",
+      auto_type: "Founder journey & milestones",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 2382,
@@ -4408,12 +4518,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 0.66
     },
     {
+      post_id: "7445459598284767232",
       published: "2026-04-02",
       weekday: "Thu",
       time: "6:48 PM",
       title: "Demystifying home loans contd",
       url: "https://www.linkedin.com/posts/mangeshzope_demystifying-home-loans-contd-ugcPost-7445459598284767232-zx9E",
       type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 315,
@@ -4427,12 +4539,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.49
     },
     {
+      post_id: "7442690322368974849",
       published: "2026-03-26",
       weekday: "Thu",
       time: "3:24 AM",
       title: "Busting the myths on home loans",
       url: "https://www.linkedin.com/posts/mangeshzope_busting-the-myths-on-home-loans-ugcPost-7442690322368974849-PsfV",
       type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 448,
@@ -4446,12 +4560,14 @@ var creator_chart_dashboard_data_default = {
       engagement_rate_pct: 1.44
     },
     {
+      post_id: "7432637819463974912",
       published: "2026-02-26",
       weekday: "Thu",
       time: "9:39 AM",
       title: "Do you think we have a similar state of affairs",
       url: "https://www.linkedin.com/posts/mangeshzope_do-you-think-we-have-a-similar-state-of-affairs-share-7432637819463974912-BU6o",
       type: "Bank & industry critique",
+      auto_type: "Bank & industry critique",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 593,
@@ -10031,7 +10147,7 @@ async function handleApiRequest(request, env, ctx) {
       if (!user) {
         return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers });
       }
-      let payload = creator_chart_dashboard_data_default;
+      let payload = JSON.parse(JSON.stringify(creator_chart_dashboard_data_default));
       const kv = env.QUESTIONS_KV;
       if (kv) {
         try {
@@ -10042,11 +10158,107 @@ async function handleApiRequest(request, env, ctx) {
         } catch {
         }
       }
+      let overrides = {};
+      if (kv) {
+        try {
+          const ovStr = await kv.get("linkedin_data:post_type_overrides");
+          if (ovStr) overrides = JSON.parse(ovStr);
+        } catch {
+        }
+      } else {
+        const memStr = localDB.get("linkedin_data:post_type_overrides");
+        if (memStr) overrides = JSON.parse(memStr);
+      }
+      if (overrides && typeof overrides === "object" && Array.isArray(payload.posts)) {
+        for (const p of payload.posts) {
+          const ov = overrides[p.post_id];
+          if (ov) {
+            p.type = typeof ov === "string" ? ov : ov.type;
+          }
+        }
+      }
+      payload.overrides = overrides;
       const forbidden = ["impressions", "imp", "members_reached", "sv"];
       const resHeaders = new Headers(headers);
       resHeaders.set("Cache-Control", "private, no-cache, no-store, must-revalidate");
       resHeaders.set("X-Robots-Tag", "noindex, nofollow");
       return new Response(JSON.stringify(sanitizeData(payload)), { status: 200, headers: resHeaders });
+    }
+  }
+  if (cleanPath === "/api/linkedin-analytics/post-type" || cleanPath === "/api/post-type") {
+    const user = await verifyTgToken(request);
+    if (!user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers });
+    }
+    const kv = env.QUESTIONS_KV;
+    if (request.method === "GET") {
+      let overrides = {};
+      if (kv) {
+        try {
+          const ovStr = await kv.get("linkedin_data:post_type_overrides");
+          if (ovStr) overrides = JSON.parse(ovStr);
+        } catch {
+        }
+      } else {
+        const memStr = localDB.get("linkedin_data:post_type_overrides");
+        if (memStr) overrides = JSON.parse(memStr);
+      }
+      return new Response(JSON.stringify({ overrides }), { status: 200, headers });
+    }
+    if (request.method === "POST") {
+      if (user.role !== "admin") {
+        return new Response(JSON.stringify({ error: "Only admins can change post types." }), { status: 403, headers });
+      }
+      try {
+        const body = await request.json();
+        const { post_id, type } = body;
+        if (!post_id || typeof post_id !== "string" || !type || typeof type !== "string") {
+          return new Response(JSON.stringify({ error: "post_id and type are required" }), { status: 400, headers });
+        }
+        const validTypes = creator_chart_dashboard_data_default.meta?.post_types || [
+          "Bank & industry critique",
+          "Home-loan explainer",
+          "Client story",
+          "Founder journey & milestones",
+          "Opinion & life lessons",
+          "Hiring & team"
+        ];
+        if (!validTypes.includes(type)) {
+          return new Response(JSON.stringify({ error: `Invalid type. Must be one of: ${validTypes.join(", ")}` }), { status: 400, headers });
+        }
+        const post = creator_chart_dashboard_data_default.posts.find((p) => p.post_id === post_id);
+        const autoType = post ? post.auto_type || post.type : null;
+        let overrides = {};
+        if (kv) {
+          try {
+            const ovStr = await kv.get("linkedin_data:post_type_overrides");
+            if (ovStr) overrides = JSON.parse(ovStr);
+          } catch {
+          }
+        } else {
+          const memStr = localDB.get("linkedin_data:post_type_overrides");
+          if (memStr) overrides = JSON.parse(memStr);
+        }
+        if (autoType && type === autoType) {
+          delete overrides[post_id];
+        } else {
+          overrides[post_id] = {
+            type,
+            auto_type: autoType,
+            title: post ? post.title : "",
+            changed_by: user.email,
+            changed_at: (/* @__PURE__ */ new Date()).toISOString()
+          };
+        }
+        const serialized = JSON.stringify(overrides);
+        if (kv) {
+          await kv.put("linkedin_data:post_type_overrides", serialized);
+        }
+        localDB.set("linkedin_data:post_type_overrides", serialized);
+        return new Response(JSON.stringify({ success: true, post_id, type, auto_type: autoType, overrides }), { status: 200, headers });
+      } catch (err) {
+        return new Response(JSON.stringify({ error: err.message }), { status: 400, headers });
+      }
     }
   }
   if (cleanPath === "/api/linkedin-analytics/upload") {

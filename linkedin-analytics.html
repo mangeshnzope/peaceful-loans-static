@@ -166,6 +166,9 @@
     .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
     .dgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
     .pending { padding: 36px 16px; text-align: center; color: var(--muted); }
+    .catsel { font: 12px var(--body); padding: 4px 6px; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); color: var(--ink); max-width: 210px; width: 100%; cursor: pointer; }
+    .catsel:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+    #catbar { background: var(--accent-soft); border-radius: 8px; padding: 10px 14px; color: var(--ink); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 13px; }
     [hidden] { display: none !important; }
   </style>
 </head>
@@ -212,6 +215,141 @@
       let ACTIVE_TAB = "daily";
       let ACTIVE_SOURCE = "profile";
 
+      const OV = {};
+      let bakedCatIns = null;
+      let catMsg = "";
+
+      const median = a => {
+        a = a.filter(v => v !== null && v !== undefined).sort((x, y) => x - y);
+        if (!a.length) return null;
+        const m = a.length >> 1;
+        const v = a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2;
+        return Math.round(v * 10) / 10;
+      };
+
+      function gammq(a, x) {
+        if (x <= 0) return 1;
+        const gln = (() => {
+          const c = [76.18009172947146, -86.50532032941677, 24.01409824083091, -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5];
+          let y = a, t = a + 5.5;
+          t -= (a + 0.5) * Math.log(t);
+          let s = 1.000000000190015;
+          for (const k of c) s += k / ++y;
+          return -t + Math.log(2.5066282746310005 * s / a);
+        })();
+        if (x < a + 1) {
+          let ap = a, sum = 1 / a, del = sum;
+          for (let n = 0; n < 500; n++) {
+            ap++; del *= x / ap; sum += del;
+            if (Math.abs(del) < Math.abs(sum) * 1e-12) break;
+          }
+          return 1 - sum * Math.exp(-x + a * Math.log(x) - gln);
+        }
+        let b = x + 1 - a, c = 1e300, d = 1 / b, h = d;
+        for (let i = 1; i < 500; i++) {
+          const an = -i * (i - a);
+          b += 2; d = an * d + b;
+          if (Math.abs(d) < 1e-300) d = 1e-300;
+          c = b + an / c;
+          if (Math.abs(c) < 1e-300) c = 1e-300;
+          d = 1 / d;
+          const del = d * c;
+          h *= del;
+          if (Math.abs(del - 1) < 1e-12) break;
+        }
+        return Math.exp(-x + a * Math.log(x) - gln) * h;
+      }
+
+      function kruskal(groups) {
+        const g = groups.filter(v => v.length >= 3);
+        if (g.length < 2) return null;
+        const all = [];
+        g.forEach((v, i) => v.forEach(x => all.push([x, i])));
+        all.sort((a, b) => a[0] - b[0]);
+        const N = all.length, R = new Array(g.length).fill(0);
+        let T = 0;
+        for (let i = 0; i < N;) {
+          let j = i;
+          while (j + 1 < N && all[j + 1][0] === all[i][0]) j++;
+          const r = (i + j) / 2 + 1, t = j - i + 1;
+          T += t * t * t - t;
+          for (let k = i; k <= j; k++) R[all[k][1]] += r;
+          i = j + 1;
+        }
+        let H = 12 / (N * (N + 1)) * g.reduce((s, v, i) => s + R[i] * R[i] / v.length, 0) - 3 * (N + 1);
+        const C = 1 - T / (N * N * N - N);
+        if (C > 0) H /= C;
+        const p = gammq((g.length - 1) / 2, H / 2);
+        return Math.round(p * 1000) / 1000;
+      }
+
+      function catGroups(posts) {
+        const G = {};
+        posts.forEach(p => (G[p.type] = G[p.type] || []).push(p));
+        const rows = Object.entries(G).map(([g, rs]) => ({
+          g,
+          n: rs.length,
+          tg: median(rs.map(r => r.tg_impressions_lifetime)),
+          tgsum: rs.reduce((s, r) => s + (r.tg_impressions_lifetime || 0), 0),
+          sh: median(rs.map(r => r.tg_share_pct)),
+          out: median(rs.map(r => r.out_of_network_pct)),
+          er: median(rs.map(r => r.engagement_rate_pct)),
+          com: median(rs.map(r => r.comments))
+        }));
+        const kw = m => kruskal(Object.values(G).map(rs => rs.map(r => r[m]).filter(v => v !== null && v !== undefined)));
+        return {
+          rows,
+          p: {
+            tg: kw("tg_impressions_lifetime"),
+            sh: kw("tg_share_pct"),
+            outnet: kw("out_of_network_pct"),
+            er: kw("engagement_rate_pct")
+          }
+        };
+      }
+
+      function refreshCats(triggerRender = true) {
+        if (!DASHBOARD_DATA) return;
+        const changed = DASHBOARD_DATA.posts.some(p => p.type !== p.auto_type);
+        if (changed) {
+          DASHBOARD_DATA.insights.groups.cat = catGroups(DASHBOARD_DATA.posts);
+        } else if (bakedCatIns) {
+          DASHBOARD_DATA.insights.groups.cat = JSON.parse(JSON.stringify(bakedCatIns));
+        }
+        if (triggerRender) renderDashboard();
+      }
+
+      async function setCat(post, newType) {
+        const prev = post.type;
+        post.type = newType;
+        if (newType === post.auto_type) {
+          delete OV[post.post_id];
+        } else {
+          OV[post.post_id] = newType;
+        }
+        catMsg = "Saving…";
+        refreshCats();
+
+        try {
+          const res = await fetch("/api/linkedin-analytics/post-type", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ post_id: post.post_id, type: newType })
+          });
+          if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.error || "Failed to save category override");
+          }
+          catMsg = "Saved. What works has been recalculated.";
+        } catch (e) {
+          post.type = prev;
+          if (prev === post.auto_type) delete OV[post.post_id];
+          else OV[post.post_id] = prev;
+          catMsg = e.message || "Couldn't save that change. Try again.";
+        }
+        refreshCats();
+      }
+
       async function init() {
         try {
           const authRes = await fetch("/api/linkedin-analytics/auth");
@@ -228,6 +366,21 @@
             return;
           }
           DASHBOARD_DATA = await dataRes.json();
+
+          // Initialize baseline categories and overrides
+          bakedCatIns = JSON.parse(JSON.stringify(DASHBOARD_DATA.insights.groups.cat));
+          for (const k in OV) delete OV[k];
+          if (DASHBOARD_DATA.overrides) {
+            for (const pid in DASHBOARD_DATA.overrides) {
+              const ov = DASHBOARD_DATA.overrides[pid];
+              OV[pid] = typeof ov === "string" ? ov : ov.type;
+            }
+          }
+          DASHBOARD_DATA.posts.forEach(p => {
+            if (!p.auto_type) p.auto_type = p.type;
+            if (OV[p.post_id]) p.type = OV[p.post_id];
+          });
+          refreshCats(false);
 
           // Sync with URL hash
           const hash = window.location.hash.replace("#", "");
@@ -999,7 +1152,7 @@
                 <tbody>${rowsHtml}</tbody>
               </table>
             </div>
-            <p class="note">From one LinkedIn export per calendar month; nothing is added up from days or weeks. September runs to 25 Sep, so it gets no MoM for TG impressions (its share change is still shown). <b>TG impressions from those posts</b> = lifetime TG views of the posts published that month, from each post's own page (posts too small for a seniority split are left out).</p>
+            <p class="note">From one LinkedIn export per calendar month; nothing is added up from days or weeks. September runs to 26 Sep, so it gets no MoM for TG impressions (its share change is still shown). <b>TG impressions from those posts</b> = lifetime TG views of the posts published that month, from each post's own page (posts too small for a seniority split are left out).</p>
           </section>
         `;
       }
@@ -1011,8 +1164,18 @@
 
       function renderPostsTabHtml() {
         const P = DASHBOARD_DATA.posts;
-        const cats = ["All", ...Array.from(new Set(P.map(p => p.type)))];
+        const CATS = DASHBOARD_DATA.meta?.post_types || [
+          "Bank & industry critique",
+          "Home-loan explainer",
+          "Client story",
+          "Founder journey & milestones",
+          "Opinion & life lessons",
+          "Hiring & team"
+        ];
+        const cats = ["All", ...CATS];
         const maxTg = Math.max(...P.map(p => p.tg_impressions_lifetime || 0));
+        const isAdmin = CURRENT_USER && CURRENT_USER.role === "admin";
+        const nEd = P.filter(p => p.type !== (p.auto_type || p.type)).length;
 
         let filtered = P.filter(p => postCatFilter === "All" || p.type === postCatFilter);
         filtered.sort((a, b) => {
@@ -1038,6 +1201,28 @@
           { key: "followers_gained", label: "Followers gained", align: "r" }
         ];
 
+        let catBarHtml = "";
+        if (isAdmin) {
+          catBarHtml = `
+            <div id="catbar">
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+                <span>Don’t agree with a post’s type? Change it in the <b>Type</b> column. It saves for everyone, recalculates <b>What works</b>, and is kept on every refresh. To undo, pick the option marked “(auto)”.</span>
+                <span class="num" style="font-weight:600">${nEd} changed</span>
+                ${catMsg ? `<span role="status" style="font-style:italic">${catMsg}</span>` : ""}
+              </div>
+              <div>
+                <button class="dlb" id="dlTypeChangesBtn" style="font-size:11px;padding:4px 8px">↓ Download type changes (JSON)</button>
+              </div>
+            </div>
+          `;
+        } else if (nEd > 0) {
+          catBarHtml = `
+            <div id="catbar">
+              <span>${nEd} post type${nEd > 1 ? "s were" : " was"} changed by Mangesh (marked “edited”).</span>
+            </div>
+          `;
+        }
+
         return `
           <section style="display:flex;flex-direction:column;gap:12px">
             <div class="dlrow">
@@ -1046,9 +1231,15 @@
             </div>
             <p class="note">Every post published in 2026 (${P.length}), newest first, from one LinkedIn export per post (lifetime numbers). <b>Out-of-network</b> = % of the post's views from people who are not your followers or connections: reach LinkedIn gave the post beyond your network. "–" TG = post too small for LinkedIn to give a seniority split. Shaded rows = Creator Chart Era (from 19 Aug). Click a column to sort.</p>
 
+            ${catBarHtml}
+
             <div class="filters">
               <div style="display:flex;gap:6px;flex-wrap:wrap">
-                ${cats.map(c => `<button class="pre ${postCatFilter === c ? "on" : ""}" data-c="${c}">${c}</button>`).join("")}
+                ${cats.map(c => `
+                  <button class="pre ${postCatFilter === c ? "on" : ""}" data-c="${c}">
+                    ${c}${c === "All" ? "" : ` <span class="num" style="opacity:.6">${P.filter(p => p.type === c).length}</span>`}
+                  </button>
+                `).join("")}
               </div>
             </div>
 
@@ -1066,6 +1257,7 @@
                 <tbody>
                   ${filtered.map(p => {
                     const isMedia = p.format && p.format.startsWith("Media");
+                    const isEdited = p.type !== (p.auto_type || p.type);
                     return `
                       <tr class="${p.creator_chart_era ? "cr" : ""}">
                         <td class="l" style="min-width:70px;white-space:nowrap">${dd(p.published)}</td>
@@ -1073,7 +1265,20 @@
                           <a href="${p.url}" target="_blank" rel="noopener noreferrer">${p.title}</a>
                           ${isMedia ? `<span class="chip">media</span>` : ""}
                         </td>
-                        <td class="l" style="min-width:130px;font-size:12px">${p.type}</td>
+                        <td class="l" style="min-width:${isAdmin ? 200 : 130}px;font-size:12px">
+                          ${isAdmin ? `
+                            <select class="catsel" data-id="${p.post_id}" aria-label="Type for this post">
+                              ${CATS.map(c => `
+                                <option value="${c}" ${c === p.type ? "selected" : ""}>
+                                  ${c}${isEdited && c === (p.auto_type || p.type) ? " (auto)" : ""}
+                                </option>
+                              `).join("")}
+                            </select>
+                            ${isEdited ? `<span class="chip" title="You changed this">edited</span>` : ""}
+                          ` : `
+                            ${p.type}${isEdited ? `<span class="chip" title="Changed by Mangesh">edited</span>` : ""}
+                          `}
+                        </td>
                         <td>${p.tg_impressions_lifetime !== null ? `<span class="tbar" style="width:${(p.tg_impressions_lifetime / maxTg) * 90}px"></span>${fmt(p.tg_impressions_lifetime)}` : `<span class="muted">–</span>`}</td>
                         <td>${p.tg_share_pct !== null ? `<span class="tbar" style="width:${p.tg_share_pct * 1.2}px;background:var(--accent)"></span>${pct(p.tg_share_pct)}` : `<span class="muted">–</span>`}</td>
                         <td>${p.out_of_network_pct !== null ? `${p.out_of_network_pct}%` : `<span class="muted">n/a</span>`}</td>
@@ -1112,6 +1317,32 @@
           };
         });
 
+        document.querySelectorAll("select.catsel").forEach(s => {
+          s.onchange = () => {
+            const post = DASHBOARD_DATA.posts.find(x => x.post_id === s.dataset.id);
+            if (post) setCat(post, s.value);
+          };
+        });
+
+        if ($("dlTypeChangesBtn")) {
+          $("dlTypeChangesBtn").onclick = () => {
+            const out = {};
+            DASHBOARD_DATA.posts.forEach(p => {
+              if (p.type !== (p.auto_type || p.type)) {
+                out[p.post_id] = p.type;
+              }
+            });
+            const blob = new Blob([JSON.stringify(out, null, 2)], { type: "application/json;charset=utf-8;" });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "post_type_overrides.json");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          };
+        }
+
         $("dlPostsBtn").onclick = () => {
           const headers = ["published", "post", "url", "type", "format", "tg_impressions_lifetime", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
           const rows = DASHBOARD_DATA.posts.map(p => [
@@ -1141,6 +1372,7 @@
 
         const formatP = p => p === null || p === undefined ? "–" : p < 0.001 ? "<0.001" : p.toFixed(3);
         const sigChip = p => p === null || p === undefined ? "" : p < 0.05 ? `<span class="chip">reliable</span>` : p < 0.15 ? `<span class="chip w">lean</span>` : `<span class="chip w" style="opacity:.7">not proven</span>`;
+        const word = p => p === null || p === undefined ? "" : p < 0.05 ? "reliable" : p < 0.15 ? "a lean" : "not proven";
 
         const renderTable = (grp, label, order = null) => {
           let rows = [...grp.rows];
@@ -1197,10 +1429,24 @@
           `;
         };
 
-        const catMap = Object.fromEntries(I.groups.cat.rows.map(r => [r.g, r]));
         const fmtMap = Object.fromEntries(I.groups.fmt.rows.map(r => [r.g, r]));
         const eraMap = Object.fromEntries(I.groups.era.rows.map(r => [r.g, r]));
-        const slopeVal = Math.abs(I.fit.slope10).toFixed(1);
+        const slopeVal = Math.abs(I.fit.slope10).toFixed(2);
+
+        const GC = I.groups.cat;
+        const big = GC.rows.filter(r => r.n >= 3);
+        const byTg = [...big].sort((a, b) => (b.tg || 0) - (a.tg || 0));
+        const bySh = [...big].sort((a, b) => (b.sh || 0) - (a.sh || 0));
+        const topPost = [...DASHBOARD_DATA.posts].sort((a, b) => (b.tg_impressions_lifetime || 0) - (a.tg_impressions_lifetime || 0))[0];
+        const A = byTg[0] || { g: "", tg: 0 };
+        const B = byTg[1] || { g: "", tg: 0 };
+        const lo = byTg.slice(-2);
+        const dw = bySh[0] || { g: "", sh: 0, out: 0, er: 0, tg: 0 };
+        const lowSh = bySh[bySh.length - 1] || { g: "", sh: 0 };
+        const isTop = (m, r) => Math.max(...big.map(x => x[m] || 0)) === r[m];
+        const eraN = DASHBOARD_DATA.posts.filter(p => p.creator_chart_era).length;
+        const eraDw = DASHBOARD_DATA.posts.filter(p => p.creator_chart_era && p.type === dw.g).length;
+        const nEd = DASHBOARD_DATA.posts.filter(p => p.type !== (p.auto_type || p.type)).length;
 
         const kf = [
           {
@@ -1212,20 +1458,20 @@
             desc: `Comments ρ ${I.corr.comments_vs_out.rho} and reposts ρ ${I.corr.reposts_vs_out.rho} with out-of-network share (both p ${formatP(I.corr.comments_vs_out.p)}). Posts that invite a reply or a reshare are the ones LinkedIn distributes beyond your network.`
           },
           {
-            title: "Founder journey & milestones and Hiring & team bring the most TG impressions per post.",
-            desc: `Median ${fmt(catMap["Founder journey & milestones"]?.tg)} and ${fmt(catMap["Hiring & team"]?.tg)} TG impressions vs ${fmt(catMap["Home-loan explainer"]?.tg)} for explainers and ${fmt(catMap["Opinion & life lessons"]?.tg)} for opinion posts (p ${formatP(I.groups.cat.p.tg)}, reliable). Founder journey posts also produced the single biggest TG post (10,000-crore listed company, 7,502 TG impressions). Hiring posts get volume but the lowest TG share (${pct(catMap["Hiring & team"]?.sh)}): job-seekers are junior.`
+            title: `${A.g} and ${B.g} bring the most TG impressions per post.`,
+            desc: `Median ${fmt(A.tg)} and ${fmt(B.tg)} TG impressions per post vs ${lo.map(r => `${fmt(r.tg)} for ${r.g}`).join(' and ')} (p ${formatP(GC.p.tg)}, ${word(GC.p.tg)}). The single biggest TG post was “${topPost.title}” (${topPost.type}, ${fmt(topPost.tg_impressions_lifetime)} TG impressions). ${lowSh.g} has the lowest median TG share (${pct(lowSh.sh)})${lowSh.g === 'Hiring & team' ? ': job-seekers are junior' : ''}.`
           },
           {
-            title: 'Bank & industry critique is the best "dog-whistle" candidate.',
-            desc: `Highest median TG share (${pct(catMap["Bank & industry critique"]?.sh)}), highest out-of-network reach (${catMap["Bank & industry critique"]?.out}%) and highest engagement rate (${catMap["Bank & industry critique"]?.er}%). It travels AND stays senior. It's the Creator Chart Era's main format (6 of 7 such posts) but TG impressions per post are still modest (${fmt(catMap["Bank & industry critique"]?.tg)}); pairing it with a founder/Peaceful-Loans angle is the obvious test.`
+            title: `${dw.g} is the best "dog-whistle" candidate.`,
+            desc: `Highest median TG share (${pct(dw.sh)})${isTop('out', dw) ? `, highest out-of-network reach (${dw.out}%)` : `, out-of-network reach ${dw.out}%`}${isTop('er', dw) ? ` and highest engagement rate (${dw.er}%)` : ` and engagement rate ${dw.er}%`}. TG share differences between types are ${word(GC.p.sh)} (p ${formatP(GC.p.sh)}). ${eraDw} of the ${eraN} Creator Chart Era posts are this type; median TG impressions per post ${fmt(dw.tg)}.`
           },
           {
             title: "Media posts stay inside your network; text posts travel.",
-            desc: `Out-of-network ${fmtMap["Media (ugcPost)"]?.out}% for media (image/video/document) vs ${fmtMap["Text/share"]?.out}% for text posts (p ${formatP(I.groups.fmt.p.outnet)}, reliable). TG share is similar (${pct(fmtMap["Media (ugcPost)"]?.sh)} vs ${pct(fmtMap["Text/share"]?.sh)}, not proven).`
+            desc: `Out-of-network ${fmtMap["Media (ugcPost)"]?.out}% for media (image/video/document) vs ${fmtMap["Text/share"]?.out}% for text posts (p ${formatP(I.groups.fmt.p.outnet)}, ${word(I.groups.fmt.p.outnet)}). TG share ${pct(fmtMap["Media (ugcPost)"]?.sh)} vs ${pct(fmtMap["Text/share"]?.sh)} (${word(I.groups.fmt.p.sh)}).`
           },
           {
             title: "Creator Chart Era: more reach and engagement, same TG share, fewer TG impressions per post so far.",
-            desc: `Out-of-network ${eraMap["Before"]?.out}% → ${eraMap["Creator Chart Era"]?.out}% (p ${formatP(I.groups.era.p.outnet)}), engagement rate ${eraMap["Before"]?.er}% → ${eraMap["Creator Chart Era"]?.er}% (p ${formatP(I.groups.era.p.er)}), TG share ${pct(eraMap["Before"]?.sh)} → ${pct(eraMap["Creator Chart Era"]?.sh)} (not proven), median TG impressions per post ${fmt(eraMap["Before"]?.tg)} → ${fmt(eraMap["Creator Chart Era"]?.tg)} (p ${formatP(I.groups.era.p.tg)}). Newer posts have had less time to collect views, so the last point partly reflects post age.`
+            desc: `Out-of-network ${eraMap["Before"]?.out}% → ${eraMap["Creator Chart Era"]?.out}% (p ${formatP(I.groups.era.p.outnet)}), engagement rate ${eraMap["Before"]?.er}% → ${eraMap["Creator Chart Era"]?.er}% (p ${formatP(I.groups.era.p.er)}), TG share ${pct(eraMap["Before"]?.sh)} → ${pct(eraMap["Creator Chart Era"]?.sh)} (${word(I.groups.era.p.sh)}), median TG impressions per post ${fmt(eraMap["Before"]?.tg)} → ${fmt(eraMap["Creator Chart Era"]?.tg)} (p ${formatP(I.groups.era.p.tg)}, ${word(I.groups.era.p.tg)}). Newer posts have had less time to collect views, so the last point partly reflects post age.`
           }
         ];
 
@@ -1271,6 +1517,7 @@
             <h2>What works: TG share, TG impressions and out-of-network reach</h2>
             <p class="note">Statistical read of all ${DASHBOARD_DATA.posts.length} posts of 2026, each from its own post export. Medians are used because a few viral posts would distort averages. <b>p</b> = chance the gap between groups is just noise (Kruskal–Wallis test for groups, Spearman for relationships). Under 0.05 = reliable, 0.05–0.15 = a lean, above = not proven. With 5–12 posts per group, treat leans as hypotheses to test, not rules.</p>
             <div class="card">
+              ${nEd ? `<p style="font-size:12px;color:var(--muted);margin:0 0 10px">Includes ${nEd} post type${nEd > 1 ? "s" : ""} changed by Mangesh.</p>` : ""}
               <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:14px">
                 ${kf.map(item => `<li><b>${item.title}</b><br><span style="font-size:13px;color:var(--muted);display:inline-block;margin-top:2px">${item.desc}</span></li>`).join("")}
               </ol>
@@ -1280,7 +1527,7 @@
           <section style="display:flex;flex-direction:column;gap:12px">
             <h2>By type of post</h2>
             ${renderTable(I.groups.cat, "Type")}
-            <p class="note">Categories were assigned from each post's opening line. <b>Bank &amp; industry critique</b> = calling out lender practices, RBI/IRDAI moves, bank ads. <b>Home-loan explainer</b> = how rates, EMIs, eligibility work. <b>Client story</b> = a real client or consumer conversation. <b>Founder journey &amp; milestones</b> = Peaceful-Loans' story, wins, numbers. <b>Opinion &amp; life lessons</b> = money/behaviour philosophy. <b>Hiring &amp; team</b> = job posts and team shout-outs.</p>
+            <p class="note">Categories were assigned from each post's opening line; Mangesh can change any post's type in the Posts tab and this table recalculates. <b>Bank &amp; industry critique</b> = calling out lender practices, RBI/IRDAI moves, bank ads. <b>Home-loan explainer</b> = how rates, EMIs, eligibility work. <b>Client story</b> = a real client or consumer conversation. <b>Founder journey &amp; milestones</b> = Peaceful-Loans' story, wins, numbers. <b>Opinion &amp; life lessons</b> = money/behaviour philosophy. <b>Hiring &amp; team</b> = job posts and team shout-outs.</p>
           </section>
 
           <section style="display:flex;flex-direction:column;gap:12px">
@@ -1314,6 +1561,7 @@
 
       // --- DATA TAB ---
       function renderDataTabHtml() {
+        const isAdmin = CURRENT_USER && CURRENT_USER.role === "admin";
         return `
           <section style="display:flex;flex-direction:column;gap:12px">
             <h2>Download the data behind this report</h2>
@@ -1321,7 +1569,7 @@
             <div class="dgrid">
               <div class="card" style="display:flex;flex-direction:column;gap:8px">
                 <h3>Daily</h3>
-                <span style="font-size:13px;color:var(--muted);flex:1">One row per day, 1 Jan – 25 Sep 2026: TG impressions, TG share, engagements, new followers, posts published.</span>
+                <span style="font-size:13px;color:var(--muted);flex:1">One row per day, 1 Jan – ${dd(DASHBOARD_DATA.meta.data_to)} 2026: TG impressions, TG share, engagements, new followers, posts published.</span>
                 <div><button class="dlb" id="dlFullDaily">↓ daily_tg.csv</button></div>
               </div>
 
@@ -1354,6 +1602,14 @@
                 <span style="font-size:13px;color:var(--muted);flex:1">All of the above in one JSON file, the exact dataset the report is built from (minus day weights).</span>
                 <div><button class="dlb" id="dlFullJson">↓ linkedin_tg_backend.json</button></div>
               </div>
+
+              ${isAdmin ? `
+                <div class="card" style="display:flex;flex-direction:column;gap:8px">
+                  <h3>Type changes</h3>
+                  <span style="font-size:13px;color:var(--muted);flex:1">JSON map of all manual post type overrides made by Mangesh.</span>
+                  <div><button class="dlb" id="dlDataTabTypeChanges">↓ post_type_overrides.json</button></div>
+                </div>
+              ` : ""}
             </div>
           </section>
         `;
@@ -1411,6 +1667,25 @@
           link.click();
           document.body.removeChild(link);
         };
+
+        if ($("dlDataTabTypeChanges")) {
+          $("dlDataTabTypeChanges").onclick = () => {
+            const out = {};
+            DASHBOARD_DATA.posts.forEach(p => {
+              if (p.type !== (p.auto_type || p.type)) {
+                out[p.post_id] = p.type;
+              }
+            });
+            const blob = new Blob([JSON.stringify(out, null, 2)], { type: "application/json;charset=utf-8;" });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "post_type_overrides.json");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          };
+        }
       }
 
       function saveCsv(filename, content) {

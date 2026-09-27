@@ -589,7 +589,7 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
         return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers });
       }
 
-      let payload = defaultDashboardData;
+      let payload = JSON.parse(JSON.stringify(defaultDashboardData));
       const kv = env.QUESTIONS_KV;
       if (kv) {
         try {
@@ -601,6 +601,28 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
           // fallback to defaultDashboardData
         }
       }
+
+      // Merge post type overrides (§7.4.1)
+      let overrides: Record<string, any> = {};
+      if (kv) {
+        try {
+          const ovStr = await kv.get("linkedin_data:post_type_overrides");
+          if (ovStr) overrides = JSON.parse(ovStr);
+        } catch {}
+      } else {
+        const memStr = localDB.get("linkedin_data:post_type_overrides");
+        if (memStr) overrides = JSON.parse(memStr);
+      }
+
+      if (overrides && typeof overrides === "object" && Array.isArray(payload.posts)) {
+        for (const p of payload.posts) {
+          const ov = overrides[p.post_id];
+          if (ov) {
+            p.type = typeof ov === "string" ? ov : ov.type;
+          }
+        }
+      }
+      payload.overrides = overrides;
 
       // Guarantee zero total impressions
       const forbidden = ["impressions", "imp", "members_reached", "sv"];
@@ -622,6 +644,94 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
       resHeaders.set("Cache-Control", "private, no-cache, no-store, must-revalidate");
       resHeaders.set("X-Robots-Tag", "noindex, nofollow");
       return new Response(JSON.stringify(sanitizeData(payload)), { status: 200, headers: resHeaders });
+    }
+  }
+
+  // 8. Post Type Overrides (§7.4.1)
+  if (cleanPath === "/api/linkedin-analytics/post-type" || cleanPath === "/api/post-type") {
+    const user = await verifyTgToken(request);
+    if (!user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers });
+    }
+
+    const kv = env.QUESTIONS_KV;
+
+    if (request.method === "GET") {
+      let overrides: Record<string, any> = {};
+      if (kv) {
+        try {
+          const ovStr = await kv.get("linkedin_data:post_type_overrides");
+          if (ovStr) overrides = JSON.parse(ovStr);
+        } catch {}
+      } else {
+        const memStr = localDB.get("linkedin_data:post_type_overrides");
+        if (memStr) overrides = JSON.parse(memStr);
+      }
+      return new Response(JSON.stringify({ overrides }), { status: 200, headers });
+    }
+
+    if (request.method === "POST") {
+      // Role admin only! Acceptance test: viewer receives 403
+      if (user.role !== "admin") {
+        return new Response(JSON.stringify({ error: "Only admins can change post types." }), { status: 403, headers });
+      }
+
+      try {
+        const body = await request.json() as any;
+        const { post_id, type } = body;
+        if (!post_id || typeof post_id !== "string" || !type || typeof type !== "string") {
+          return new Response(JSON.stringify({ error: "post_id and type are required" }), { status: 400, headers });
+        }
+
+        const validTypes = (defaultDashboardData.meta as any)?.post_types || [
+          "Bank & industry critique",
+          "Home-loan explainer",
+          "Client story",
+          "Founder journey & milestones",
+          "Opinion & life lessons",
+          "Hiring & team"
+        ];
+
+        if (!validTypes.includes(type)) {
+          return new Response(JSON.stringify({ error: `Invalid type. Must be one of: ${validTypes.join(", ")}` }), { status: 400, headers });
+        }
+
+        const post = (defaultDashboardData.posts as any[]).find((p: any) => p.post_id === post_id);
+        const autoType = post ? (post.auto_type || post.type) : null;
+
+        let overrides: Record<string, any> = {};
+        if (kv) {
+          try {
+            const ovStr = await kv.get("linkedin_data:post_type_overrides");
+            if (ovStr) overrides = JSON.parse(ovStr);
+          } catch {}
+        } else {
+          const memStr = localDB.get("linkedin_data:post_type_overrides");
+          if (memStr) overrides = JSON.parse(memStr);
+        }
+
+        if (autoType && type === autoType) {
+          delete overrides[post_id];
+        } else {
+          overrides[post_id] = {
+            type,
+            auto_type: autoType,
+            title: post ? post.title : "",
+            changed_by: user.email,
+            changed_at: new Date().toISOString()
+          };
+        }
+
+        const serialized = JSON.stringify(overrides);
+        if (kv) {
+          await kv.put("linkedin_data:post_type_overrides", serialized);
+        }
+        localDB.set("linkedin_data:post_type_overrides", serialized);
+
+        return new Response(JSON.stringify({ success: true, post_id, type, auto_type: autoType, overrides }), { status: 200, headers });
+      } catch (err: any) {
+        return new Response(JSON.stringify({ error: err.message }), { status: 400, headers });
+      }
     }
   }
 

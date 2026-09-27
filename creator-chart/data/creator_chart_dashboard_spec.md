@@ -82,6 +82,7 @@ Load it once after login from `/api/data` and keep it in memory. All values are 
 | `tg_definition` | string[] | `["Manager","Director","VP","Owner","CXO","Partner"]` |
 | `creator_chart_era_start` | date | `2026-08-19` |
 | `creator_onboarded` | date | `2026-08-01` |
+| `post_types` | string[] | The 6 post types, in display order (§7.5). The type picker in §7.4 offers exactly these. |
 | `notes` | string | Plain-English definition. |
 
 ### 4.2 `daily[]`: one row per day, from one LinkedIn export per day
@@ -112,12 +113,14 @@ Fields: `month_start`, `month_end`, `tg_impressions`, `tg_share_pct`, `tg_may_be
 
 | Field | Type | Notes |
 |---|---|---|
+| `post_id` | string | LinkedIn post id (digits). Stable key for a post; use it to store type changes (§7.4.1). |
 | `published` | date | |
 | `weekday` | "Mon"…"Sun" | |
 | `time` | string | e.g. "4:48 PM" |
 | `title` | string | Opening words of the post. |
 | `url` | string | LinkedIn post URL. Open it in a new tab. |
-| `type` | string | One of 6 categories (§8.1). |
+| `type` | string | One of the 6 `meta.post_types`: the type Mangesh has confirmed (Claude's category, or his change made on the claude.ai dashboard). |
+| `auto_type` | string | Claude's original category. Equals `type` unless Mangesh changed it. |
 | `format` | "Media (ugcPost)" \| "Text/share" | Media = image, video or document post. |
 | `creator_chart_era` | bool | Published on or after 19 Aug 2026. |
 | `tg_impressions_lifetime` | int \| null | `null` = post too small for LinkedIn to give a split. |
@@ -271,6 +274,22 @@ Fields: `month_start`, `month_end`, `tg_impressions`, `tg_share_pct`, `tg_may_be
   - Creator Chart Era rows are shaded.
 - **Download button:** "↓ Download post data (CSV)".
 
+#### 7.4.1 Changing a post's type (admin only)
+
+Mangesh may disagree with how a post was categorised. Admins can change it on the site; viewers only see the result.
+
+- **Who:** role `admin` only. For viewers the Type column is plain text; a changed type shows a small "edited" chip.
+- **Control:** for admins, the Type cell is a dropdown with the 6 `meta.post_types`. When the post has been changed, the option equal to `auto_type` is labelled "{type} (auto)", so picking it undoes the change.
+- **Info bar above the table (admins):** "Don't agree with a post's type? Change it in the Type column. It saves for everyone and recalculates What works. To undo, pick the option marked '(auto)'." plus "{n} changed" and a save status ("Saving…", "Saved", or the error).
+- **Storage:** Firestore collection `post_type_overrides`, one document per changed post, id = `post_id`, body `{type, auto_type, title, changed_by, changed_at}`. Choosing the auto type again deletes the document. Writes go through a server route (`POST /api/post-type`) that checks the admin role and that `type` is one of `meta.post_types`. Viewers read overrides through `/api/data` (merge them into `posts[].type` on the server before returning the data).
+- **Effective type** of a post = override if one exists, else `type` from the data file. Use the effective type everywhere: Posts tab filters, pill counts, CSV downloads, the What works tables and findings, and scatter tooltips.
+- **Recalculate What works on change:** when any effective type differs from the data file's `type`, recompute `insights.groups.cat` from `posts[]`; otherwise use the file's precomputed values. Other groups (format, era, day) and correlations don't depend on type, so keep them from the file.
+  - Per type: `n` = posts; `tg` / `sh` / `out` / `er` / `com` = median over non-null values, rounded to 1 decimal; `tgsum` = Σ `tg_impressions_lifetime` (null counts as 0).
+  - p-values (`tg`, `sh`, `outnet`, `er`): Kruskal–Wallis H test over types that have ≥3 non-null values for that metric (skip if fewer than 2 such types), with the standard tie correction, p = upper tail of χ² with (groups − 1) degrees of freedom, rounded to 3 decimals. This is what `scipy.stats.kruskal` returns.
+  - Key findings 3 and 4 must be generated from the recomputed rows (top 2 types by median TG impressions; type with the highest median TG share), not hard-coded to type names.
+- **New data uploads keep the changes:** overrides live apart from the data file, keyed by `post_id`, so they survive every upload. If a new file's `type` already equals an override (Mangesh made the same change on the claude.ai dashboard), the override is harmless; offer an admin "Clear overrides that match the file" button.
+- **Hand-back to the claude.ai build:** an admin-only "↓ Download type changes (JSON)" button saves `{post_id: type}` for all overrides, so Mangesh can give them to Claude and the claude.ai dashboard and future data files use the same types.
+
 ### 7.5 What works (statistics)
 
 - **Intro:** based on all 2026 posts, using medians.
@@ -296,7 +315,7 @@ Fields: `month_start`, `month_end`, `tg_impressions`, `tg_share_pct`, `tg_may_be
   - Columns: Posts, Median TG impressions, Total TG impressions, Median TG share, Median out-of-network, Median engagement rate.
   - A last row, "Is the gap real?", shows p + chip for each metric.
   - Bold the best value in each column, among groups with n ≥ 3.
-- **Category definitions** under the type table:
+- **Category definitions** under the type table (add: "Mangesh can change any post's type in the Posts tab and this table recalculates."):
   - **Bank & industry critique:** calls out lender practices, RBI/IRDAI moves, bank ads.
   - **Home-loan explainer:** how rates, EMIs and eligibility work.
   - **Client story:** a real client or consumer conversation.
@@ -353,6 +372,11 @@ The following must also hold:
 - **Lighthouse accessibility:** score ≥ 90.
 - **Phone width:** works at 375 px.
 
+- **Post type changes (§7.4.1):**
+  - With no overrides, recomputing `insights.groups.cat` in the app gives exactly the file's values (Founder journey & milestones: n 12, median TG 810.5, total 17,099, median share 46.5%; p-values tg 0.002, sh 0.171, outnet 0.274, er 0.65).
+  - Changing the type of the 25 Sep post ("Your bank may just have lost a revenue", `post_id` 7509209819720032256) from Bank & industry critique to Hiring & team gives: Hiring & team n 6, median TG 756, total 4,884; p-values tg 0.006, sh 0.382, outnet 0.239, er 0.878. Undoing it restores the original values.
+  - A viewer (non-admin) sees no dropdown, and `POST /api/post-type` returns 403 for them.
+
 ## 9. Keeping the data fresh
 
 The data is produced by Mangesh's Claude refresh job. It downloads new LinkedIn exports on his Mac, rebuilds, and writes a new `creator_chart_dashboard_data.json` to `~/Downloads/Linkedin analysis/antigravity/`.
@@ -388,6 +412,8 @@ The data is produced by Mangesh's Claude refresh job. It downloads new LinkedIn 
 ---
 
 ## Change log
+
+- **27 Sep 2026 (b):** new feature §7.4.1: admins can change a post's type; What works recalculates. New data fields `post_id`, `auto_type` (posts) and `meta.post_types`. New acceptance tests in §8.
 
 - **27 Sep 2026:** data refreshed to 26 Sep 2026 (new daily file for 26 Sep; new exports for the week 21–26 Sep and the month 1–26 Sep; the last 18 posts re-exported with their in/out-of-network split re-read). The JSON structure and field names are unchanged, so no code changes are needed: upload the new `creator_chart_dashboard_data.json` and check against the updated §8 values. Updated in this spec: the dates, the §7.5 key-finding numbers and the §8 acceptance values. `reference_dashboard.html` is the matching claude.ai build.
 - **26 Sep 2026:** first version (data to 25 Sep).

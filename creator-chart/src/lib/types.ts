@@ -5,6 +5,7 @@ export interface Meta {
   tg_definition: string[];
   creator_chart_era_start: string;
   creator_onboarded: string;
+  post_types?: string[];
   notes: string;
 }
 
@@ -41,12 +42,14 @@ export interface MonthlyRow {
 }
 
 export interface PostRow {
+  post_id?: string;
   published: string;
   weekday: "Mon" | "Tue" | "Wed" | "Thu" | "Fri" | "Sat" | "Sun";
   time: string;
   title: string;
   url: string;
   type: string;
+  auto_type?: string;
   format: "Media (ugcPost)" | "Text/share";
   creator_chart_era: boolean;
   tg_impressions_lifetime: number | null;
