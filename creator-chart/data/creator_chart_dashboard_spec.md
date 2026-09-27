@@ -1,6 +1,6 @@
 # Creator Chart TG Dashboard: build spec for Antigravity
 
-**Owner:** Mangesh Zope, Peaceful-Loans · **Spec date:** 26 Sep 2026 · **Data covers:** 1 Jan – 25 Sep 2026
+**Owner:** Mangesh Zope, Peaceful-Loans · **Spec date:** 27 Sep 2026 (updated) · **Data covers:** 1 Jan – 26 Sep 2026
 
 Build a password-protected web app where the Creator Chart team logs in and sees how well Mangesh Zope's LinkedIn content reaches Peaceful-Loans' target audience (TG). This file is the complete brief. Three files come with it:
 
@@ -77,7 +77,7 @@ Load it once after login from `/api/data` and keep it in memory. All values are 
 
 | Field | Type | Meaning |
 |---|---|---|
-| `built` | string | When the data was built, e.g. "26 Sep 2026". |
+| `built` | string | When the data was built, e.g. "27 Sep 2026". |
 | `data_from`, `data_to` | date | First and last day covered. |
 | `tg_definition` | string[] | `["Manager","Director","VP","Owner","CXO","Partner"]` |
 | `creator_chart_era_start` | date | `2026-08-19` |
@@ -100,7 +100,7 @@ Load it once after login from `/api/data` and keep it in memory. All values are 
 
 Fields: `week_start`, `week_end`, `tg_impressions`, `tg_share_pct`, `tg_may_be_higher`, `engagements`, `new_followers`, `posts_published`.
 
-- **Partial weeks:** the first week (1–4 Jan) and the last (21–25 Sep) are partial. A partial week is one where `week_end - week_start < 6 days`.
+- **Partial weeks:** the first week (1–4 Jan) and the last (21–26 Sep) are partial. A partial week is one where `week_end - week_start < 6 days`.
 
 ### 4.4 `monthly[]`: calendar month, one export per month
 
@@ -228,7 +228,7 @@ Fields: `month_start`, `month_end`, `tg_impressions`, `tg_share_pct`, `tg_may_be
   - Note under the heading: "shares don't add to 100%".
   - Download button: "↓ Download viewer mix (CSV)".
 - **"Day by day" table, newest first:**
-  - Columns: Date (e.g. "Fri 25 Sept"), TG impressions (+ "TG may be higher" chip), TG share (teal bar + %), Engagements, New followers, Posts published.
+  - Columns: Date (e.g. "Sat 26 Sept"), TG impressions (+ "TG may be higher" chip), TG share (teal bar + %), Engagements, New followers, Posts published.
   - Rows from 19 Aug onward are shaded.
   - Download button: "↓ Download these days (CSV)".
 - **Footnote:** quiet days show "–"; use the Weekly/Monthly tabs for quiet stretches; a date range adds up the daily files in it.
@@ -278,20 +278,20 @@ Fields: `month_start`, `month_end`, `tg_impressions`, `tg_share_pct`, `tg_may_be
   - Groups are small (5–12 posts), so leans are hypotheses to test.
 - **Key findings card:** generate these from `insights`, not hard-coded, so they update when the data does. The current texts, for reference:
   1. **The wider a post travels outside your network, the lower its TG share.**
-     - Every +10 pts of out-of-network costs about 1.2 pts of TG share (ρ −0.45, p 0.002).
+     - Every +10 pts of out-of-network costs about 1.25 pts of TG share (ρ −0.45, p 0.002).
      - Followers and connections are TG-dense.
      - More reach still means more TG impressions overall, so aim for reach that stays senior.
   2. **Comments and reposts push a post out of network** (ρ 0.52 each, p < 0.001).
-  3. **Founder journey & milestones and Hiring & team bring the most TG impressions per post** (medians 811 and 820, vs 282 for explainers and 242 for opinion; p 0.003). Hiring has the lowest TG share (40%) because job-seekers are junior.
+  3. **Founder journey & milestones and Hiring & team bring the most TG impressions per post** (medians 811 and 820, vs 293 for explainers and 242 for opinion; p 0.002). Hiring has the lowest TG share (40%) because job-seekers are junior.
   4. **Bank & industry critique is the best "dog-whistle" candidate:**
-     - Highest TG share (47%), out-of-network reach (55.5%) and engagement rate (2.5%).
+     - Highest TG share (47%), out-of-network reach (55.5%) and engagement rate (2.6%).
      - TG impressions per post are still modest (347).
   5. **Media posts stay inside the network, text posts travel** (21.5% vs 40% out-of-network, p 0.01).
-  6. **Creator Chart Era: more reach and engagement, same TG share, fewer TG impressions per post so far:**
+  6. **Creator Chart Era: more reach and engagement, same TG share, fewer TG impressions per post so far (a lean, not proven):**
      - Out-of-network 29 → 47%.
      - Engagement rate 1.5 → 2.6%.
-     - TG share 46 → 45% (not proven).
-     - Median TG impressions per post 588 → 280. Newer posts have had less time to collect views.
+     - TG share 46 → 46% (not proven).
+     - Median TG impressions per post 588 → 293 (p 0.051, a lean). Newer posts have had less time to collect views.
 - **Tables:** "By type of post", "By format", "Before vs Creator Chart Era", "By day posted".
   - Columns: Posts, Median TG impressions, Total TG impressions, Median TG share, Median out-of-network, Median engagement rate.
   - A last row, "Is the gap real?", shows p + chip for each metric.
@@ -332,18 +332,18 @@ With the supplied JSON, the app must show these values exactly:
 
 | Check | Expected |
 |---|---|
-| Daily · All 2026 · TG impressions | **39,314** |
-| Daily · All 2026 · TG share | **44.4%** |
-| Daily · All 2026 · Engagements / New followers / Posts | **1,754 / 805 / 54** |
-| Daily · Creator Chart Era · TG impressions | **14,079**, "+46% vs previous 38 days" (previous 38 days = 9,649) |
-| Daily · Creator Chart Era · TG share | **43.0%**, "−2.9 pts vs previous 38 days" (previous = 45.9%) |
-| Daily · Last 7 days (19–25 Sep) · TG impressions / share | **3,999 / 40.4%** |
+| Daily · All 2026 · TG impressions | **39,527** |
+| Daily · All 2026 · TG share | **44.3%** |
+| Daily · All 2026 · Engagements / New followers / Posts | **1,763 / 806 / 54** |
+| Daily · Creator Chart Era · TG impressions | **14,292**, "+48% vs previous 39 days" (previous 39 days, 11 Jul – 18 Aug = 9,649) |
+| Daily · Creator Chart Era · TG share | **42.9%**, "−3.0 pts vs previous 39 days" (previous = 45.9%) |
+| Daily · Last 7 days (20–26 Sep) · TG impressions / share | **2,740 / 39.7%** (−67%, −4.2 pts vs 13–19 Sep) |
 | Weekly · 14–20 Sep | **8,983 TG impressions, 42.0%** |
-| Weekly · 21–25 Sep | 1,754, 38.0%, "partial week", WoW "–" |
+| Weekly · 21–26 Sep | 1,979, 38.0%, "partial week", WoW "–" |
 | Monthly · Jan 2026 | "below LinkedIn threshold" |
-| Monthly · Sep 2026 | **11,818**, **40.0%**, chip "to 25 Sept" |
-| Posts | **54** rows; **17** shaded Creator Chart Era rows (19 Aug – 25 Sep) |
-| Posts · top by TG impressions | "A 10000 crore listed company and peaceful loans", 18 Sep: 7,502, 47.0%, 66% out-of-network |
+| Monthly · Sep 2026 | **12,055**, **40.0%**, chip "to 26 Sept"; Aug 2026 = 2,906, 41.0% |
+| Posts | **54** rows; **17** shaded Creator Chart Era rows (19 Aug – 26 Sep) |
+| Posts · top by TG impressions | "A 10000 crore listed company and peaceful loans", 18 Sep: 7,586, 47.0%, 66% out-of-network |
 
 The following must also hold:
 
@@ -384,3 +384,10 @@ The data is produced by Mangesh's Claude refresh job. It downloads new LinkedIn 
 4. **Tabs:** Daily → Weekly → Monthly → Posts → What works → Data.
 5. **Admin:** the upload page and validation.
 6. **Checks:** accessibility and mobile pass, then the acceptance tests in §8.
+
+---
+
+## Change log
+
+- **27 Sep 2026:** data refreshed to 26 Sep 2026 (new daily file for 26 Sep; new exports for the week 21–26 Sep and the month 1–26 Sep; the last 18 posts re-exported with their in/out-of-network split re-read). The JSON structure and field names are unchanged, so no code changes are needed: upload the new `creator_chart_dashboard_data.json` and check against the updated §8 values. Updated in this spec: the dates, the §7.5 key-finding numbers and the §8 acceptance values. `reference_dashboard.html` is the matching claude.ai build.
+- **26 Sep 2026:** first version (data to 25 Sep).
