@@ -515,9 +515,9 @@ This page has moved to an external location.
 // creator-chart/data/creator_chart_dashboard_data.json
 var creator_chart_dashboard_data_default = {
   meta: {
-    built: "27 Sep 2026",
+    built: "28 Sep 2026",
     data_from: "2026-01-01",
-    data_to: "2026-09-26",
+    data_to: "2026-09-27",
     tg_definition: [
       "Manager",
       "Director",
@@ -2959,6 +2959,15 @@ var creator_chart_dashboard_data_default = {
       engagements: 9,
       new_followers: 1,
       posts_published: 0
+    },
+    {
+      date: "2026-09-27",
+      tg_impressions: 148,
+      tg_share_pct: 34,
+      tg_may_be_higher: false,
+      engagements: 2,
+      new_followers: 3,
+      posts_published: 0
     }
   ],
   weekly: [
@@ -3344,12 +3353,12 @@ var creator_chart_dashboard_data_default = {
     },
     {
       week_start: "2026-09-21",
-      week_end: "2026-09-26",
-      tg_impressions: 1979,
+      week_end: "2026-09-27",
+      tg_impressions: 2145,
       tg_share_pct: 38,
       tg_may_be_higher: false,
-      engagements: 106,
-      new_followers: 25,
+      engagements: 108,
+      new_followers: 28,
       posts_published: 3
     }
   ],
@@ -3436,12 +3445,12 @@ var creator_chart_dashboard_data_default = {
     },
     {
       month_start: "2026-09-01",
-      month_end: "2026-09-26",
-      tg_impressions: 12055,
+      month_end: "2026-09-27",
+      tg_impressions: 12230,
       tg_share_pct: 40,
       tg_may_be_higher: false,
-      engagements: 779,
-      new_followers: 158,
+      engagements: 781,
+      new_followers: 161,
       posts_published: 11
     }
   ],
@@ -3457,15 +3466,15 @@ var creator_chart_dashboard_data_default = {
       auto_type: "Bank & industry critique",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 267,
-      tg_share_pct: 49,
-      out_of_network_pct: 70,
-      in_network_pct: 30,
+      tg_impressions_lifetime: 316,
+      tg_share_pct: 50,
+      out_of_network_pct: 69,
+      in_network_pct: 31,
       engagements: 15,
       comments: 2,
       reposts: 1,
       followers_gained: 1,
-      engagement_rate_pct: 2.75
+      engagement_rate_pct: 2.37
     },
     {
       post_id: "7508405750621310978",
@@ -3478,15 +3487,15 @@ var creator_chart_dashboard_data_default = {
       auto_type: "Home-loan explainer",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 223,
-      tg_share_pct: 53,
+      tg_impressions_lifetime: 228,
+      tg_share_pct: 52,
       out_of_network_pct: 24,
       in_network_pct: 76,
       engagements: 15,
       comments: 4,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 3.57
+      engagement_rate_pct: 3.42
     },
     {
       post_id: "7507720186268119040",
@@ -3499,7 +3508,7 @@ var creator_chart_dashboard_data_default = {
       auto_type: "Home-loan explainer",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 293,
+      tg_impressions_lifetime: 297,
       tg_share_pct: 50,
       out_of_network_pct: 61,
       in_network_pct: 39,
@@ -3507,7 +3516,7 @@ var creator_chart_dashboard_data_default = {
       comments: 1,
       reposts: 2,
       followers_gained: 0,
-      engagement_rate_pct: 1.71
+      engagement_rate_pct: 1.68
     },
     {
       post_id: "7506575936201408512",
@@ -3520,15 +3529,15 @@ var creator_chart_dashboard_data_default = {
       auto_type: "Founder journey & milestones",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 7586,
-      tg_share_pct: 47,
+      tg_impressions_lifetime: 7848,
+      tg_share_pct: 48,
       out_of_network_pct: 66,
       in_network_pct: 34,
-      engagements: 580,
-      comments: 142,
+      engagements: 585,
+      comments: 143,
       reposts: 4,
       followers_gained: 5,
-      engagement_rate_pct: 3.59
+      engagement_rate_pct: 3.58
     },
     {
       post_id: "7506232694943473666",
@@ -3537,15 +3546,15 @@ var creator_chart_dashboard_data_default = {
       time: "11:38 AM",
       title: "I have been using instahelp services across",
       url: "https://www.linkedin.com/posts/mangeshzope_i-have-been-using-instahelp-services-across-share-7506232694943473666-3DiR",
-      type: "Client story",
+      type: "Founder journey & milestones",
       auto_type: "Client story",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 2253,
+      tg_impressions_lifetime: 2320,
       tg_share_pct: 31,
       out_of_network_pct: 86,
       in_network_pct: 14,
-      engagements: 40,
+      engagements: 41,
       comments: 4,
       reposts: 0,
       followers_gained: 2,
@@ -3562,15 +3571,15 @@ var creator_chart_dashboard_data_default = {
       auto_type: "Bank & industry critique",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 255,
-      tg_share_pct: 47,
-      out_of_network_pct: 54,
-      in_network_pct: 46,
+      tg_impressions_lifetime: 249,
+      tg_share_pct: 45,
+      out_of_network_pct: 53,
+      in_network_pct: 47,
       engagements: 14,
       comments: 2,
       reposts: 1,
       followers_gained: 2,
-      engagement_rate_pct: 2.58
+      engagement_rate_pct: 2.53
     },
     {
       post_id: "7504055163360362496",
@@ -3583,15 +3592,15 @@ var creator_chart_dashboard_data_default = {
       auto_type: "Bank & industry critique",
       format: "Media (ugcPost)",
       creator_chart_era: true,
-      tg_impressions_lifetime: 479,
+      tg_impressions_lifetime: 490,
       tg_share_pct: 52,
-      out_of_network_pct: 31,
-      in_network_pct: 69,
+      out_of_network_pct: 30,
+      in_network_pct: 70,
       engagements: 19,
       comments: 4,
       reposts: 1,
       followers_gained: 1,
-      engagement_rate_pct: 2.06
+      engagement_rate_pct: 2.01
     },
     {
       post_id: "7503390922131562496",
@@ -3604,7 +3613,7 @@ var creator_chart_dashboard_data_default = {
       auto_type: "Home-loan explainer",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 181,
+      tg_impressions_lifetime: 182,
       tg_share_pct: 45,
       out_of_network_pct: 47,
       in_network_pct: 53,
@@ -3612,7 +3621,7 @@ var creator_chart_dashboard_data_default = {
       comments: 0,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 2.98
+      engagement_rate_pct: 2.97
     },
     {
       post_id: "7502607226914639873",
@@ -3625,15 +3634,15 @@ var creator_chart_dashboard_data_default = {
       auto_type: "Home-loan explainer",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 171,
-      tg_share_pct: 44,
+      tg_impressions_lifetime: 167,
+      tg_share_pct: 43,
       out_of_network_pct: 42,
       in_network_pct: 58,
       engagements: 9,
       comments: 0,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 2.32
+      engagement_rate_pct: 2.31
     },
     {
       post_id: "7501557451943743492",
@@ -3646,7 +3655,7 @@ var creator_chart_dashboard_data_default = {
       auto_type: "Bank & industry critique",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 295,
+      tg_impressions_lifetime: 296,
       tg_share_pct: 46,
       out_of_network_pct: 61,
       in_network_pct: 39,
@@ -3654,7 +3663,7 @@ var creator_chart_dashboard_data_default = {
       comments: 2,
       reposts: 1,
       followers_gained: 1,
-      engagement_rate_pct: 2.65
+      engagement_rate_pct: 2.64
     },
     {
       post_id: "7500800657218744321",
@@ -3667,7 +3676,7 @@ var creator_chart_dashboard_data_default = {
       auto_type: "Client story",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 201,
+      tg_impressions_lifetime: 202,
       tg_share_pct: 40,
       out_of_network_pct: 47,
       in_network_pct: 53,
@@ -3675,7 +3684,7 @@ var creator_chart_dashboard_data_default = {
       comments: 2,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 3.59
+      engagement_rate_pct: 3.56
     },
     {
       post_id: "7500092783240769536",
@@ -3688,15 +3697,15 @@ var creator_chart_dashboard_data_default = {
       auto_type: "Opinion & life lessons",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 160,
-      tg_share_pct: 42,
-      out_of_network_pct: 42,
-      in_network_pct: 58,
+      tg_impressions_lifetime: 165,
+      tg_share_pct: 43,
+      out_of_network_pct: 43,
+      in_network_pct: 57,
       engagements: 13,
       comments: 1,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 3.41
+      engagement_rate_pct: 3.39
     },
     {
       post_id: "7498993755644076033",
@@ -4769,7 +4778,8 @@ var creator_chart_dashboard_data_default = {
       "2026-09-23": 0.0714,
       "2026-09-24": 0.0445,
       "2026-09-25": 0.0427,
-      "2026-09-26": 0.0441
+      "2026-09-26": 0.0441,
+      "2026-09-27": 0.0325
     },
     pct_of_views: {
       Seniority: {
@@ -4952,7 +4962,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 27,
           "2026-09-24": 32,
           "2026-09-25": 31,
-          "2026-09-26": 30
+          "2026-09-26": 30,
+          "2026-09-27": 26
         },
         Entry: {
           "2026-02-16": 41,
@@ -5112,7 +5123,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 15,
           "2026-09-24": 15,
           "2026-09-25": 11,
-          "2026-09-26": 15
+          "2026-09-26": 15,
+          "2026-09-27": 20
         },
         Director: {
           "2026-02-26": 15,
@@ -5249,7 +5261,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 10,
           "2026-09-24": 8,
           "2026-09-25": 10,
-          "2026-09-26": 9
+          "2026-09-26": 9,
+          "2026-09-27": 9
         },
         Manager: {
           "2026-02-26": 11,
@@ -5394,7 +5407,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 15,
           "2026-09-24": 9,
           "2026-09-25": 16,
-          "2026-09-26": 11
+          "2026-09-26": 11,
+          "2026-09-27": 12
         },
         Owner: {
           "2026-02-26": 8,
@@ -5508,7 +5522,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 9,
           "2026-09-24": 7,
           "2026-09-25": 6,
-          "2026-09-26": 6
+          "2026-09-26": 6,
+          "2026-09-27": 4
         },
         VP: {
           "2026-02-26": 7,
@@ -5614,7 +5629,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 5,
           "2026-09-24": 5,
           "2026-09-25": 7,
-          "2026-09-26": 7
+          "2026-09-26": 7,
+          "2026-09-27": 5
         },
         CXO: {
           "2026-02-26": 5,
@@ -5697,7 +5713,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 4,
           "2026-09-24": 3,
           "2026-09-25": 4,
-          "2026-09-26": 3
+          "2026-09-26": 3,
+          "2026-09-27": 4
         },
         Partner: {
           "2026-04-14": 2,
@@ -5971,7 +5988,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 22,
           "2026-09-24": 20,
           "2026-09-25": 30,
-          "2026-09-26": 22
+          "2026-09-26": 22,
+          "2026-09-27": 18
         },
         "Greater Delhi Area": {
           "2026-02-26": 15,
@@ -6112,7 +6130,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 15,
           "2026-09-24": 17,
           "2026-09-25": 19,
-          "2026-09-26": 17
+          "2026-09-26": 17,
+          "2026-09-27": 16
         },
         "Greater Bengaluru Area": {
           "2026-02-26": 14,
@@ -6253,7 +6272,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 21,
           "2026-09-24": 23,
           "2026-09-25": 19,
-          "2026-09-26": 19
+          "2026-09-26": 19,
+          "2026-09-27": 20
         },
         "Greater Hyderabad Area": {
           "2026-02-26": 3,
@@ -6322,7 +6342,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 3,
           "2026-09-24": 2,
           "2026-09-25": 2,
-          "2026-09-26": 4
+          "2026-09-26": 4,
+          "2026-09-27": 4
         },
         "Pune/Pimpri-Chinchwad Area": {
           "2026-02-26": 2,
@@ -6410,7 +6431,8 @@ var creator_chart_dashboard_data_default = {
           "2026-07-14": 2,
           "2026-08-19": 2,
           "2026-09-17": 1,
-          "2026-09-26": 1
+          "2026-09-26": 1,
+          "2026-09-27": 2
         },
         "San Francisco Bay Area": {
           "2026-02-26": 2,
@@ -6483,7 +6505,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 2,
           "2026-09-24": 2,
           "2026-09-25": 2,
-          "2026-09-26": 2
+          "2026-09-26": 2,
+          "2026-09-27": 2
         },
         "Greater Ahmedabad Area": {
           "2026-03-26": 3,
@@ -6523,7 +6546,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-21": 2,
           "2026-09-22": 2,
           "2026-09-23": 2,
-          "2026-09-26": 2
+          "2026-09-26": 2,
+          "2026-09-27": 2
         },
         Noida: {
           "2026-03-26": 2,
@@ -6792,7 +6816,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 20,
           "2026-09-24": 18,
           "2026-09-25": 26,
-          "2026-09-26": 24
+          "2026-09-26": 24,
+          "2026-09-27": 22
         },
         "1,001-5,000 employees": {
           "2026-02-26": 16,
@@ -6929,7 +6954,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 11,
           "2026-09-24": 14,
           "2026-09-25": 17,
-          "2026-09-26": 13
+          "2026-09-26": 13,
+          "2026-09-27": 12
         },
         "51-200 employees": {
           "2026-02-26": 11,
@@ -7057,7 +7083,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 9,
           "2026-09-24": 10,
           "2026-09-25": 10,
-          "2026-09-26": 10
+          "2026-09-26": 10,
+          "2026-09-27": 10
         },
         "2-10 employees": {
           "2026-02-26": 9,
@@ -7183,7 +7210,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 9,
           "2026-09-24": 9,
           "2026-09-25": 7,
-          "2026-09-26": 9
+          "2026-09-26": 9,
+          "2026-09-27": 6
         },
         "11-50 employees": {
           "2026-02-26": 8,
@@ -7313,7 +7341,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 11,
           "2026-09-24": 10,
           "2026-09-25": 9,
-          "2026-09-26": 6
+          "2026-09-26": 6,
+          "2026-09-27": 7
         },
         "501-1,000 employees": {
           "2026-02-26": 7,
@@ -7409,7 +7438,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 6,
           "2026-09-24": 6,
           "2026-09-25": 6,
-          "2026-09-26": 5
+          "2026-09-26": 5,
+          "2026-09-27": 5
         },
         "201-500 employees": {
           "2026-02-26": 6,
@@ -7517,7 +7547,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 8,
           "2026-09-24": 5,
           "2026-09-25": 9,
-          "2026-09-26": 6
+          "2026-09-26": 6,
+          "2026-09-27": 9
         },
         "5,001-10,000 employees": {
           "2026-02-26": 5,
@@ -7615,7 +7646,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 7,
           "2026-09-24": 6,
           "2026-09-25": 5,
-          "2026-09-26": 4
+          "2026-09-26": 4,
+          "2026-09-27": 7
         }
       },
       "Job title": {
@@ -7712,7 +7744,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 7,
           "2026-09-24": 5,
           "2026-09-25": 5,
-          "2026-09-26": 6
+          "2026-09-26": 6,
+          "2026-09-27": 4
         },
         "Co-Founder": {
           "2026-02-26": 5,
@@ -7786,7 +7819,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 4,
           "2026-09-24": 3,
           "2026-09-25": 3,
-          "2026-09-26": 2
+          "2026-09-26": 2,
+          "2026-09-27": 3
         },
         "Sales Manager": {
           "2026-02-26": 3,
@@ -7850,7 +7884,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-22": 2,
           "2026-09-23": 4,
           "2026-09-25": 2,
-          "2026-09-26": 2
+          "2026-09-26": 2,
+          "2026-09-27": 3
         },
         "Product Manager": {
           "2026-02-26": 2,
@@ -7952,7 +7987,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-22": 3,
           "2026-09-23": 3,
           "2026-09-24": 3,
-          "2026-09-26": 2
+          "2026-09-26": 2,
+          "2026-09-27": 2
         },
         "General Manager": {
           "2026-03-26": 2,
@@ -8269,7 +8305,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 12,
           "2026-09-24": 9,
           "2026-09-25": 19,
-          "2026-09-26": 13
+          "2026-09-26": 13,
+          "2026-09-27": 11
         },
         "Technology, Information and Internet": {
           "2026-02-26": 8,
@@ -8373,7 +8410,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 7,
           "2026-09-24": 8,
           "2026-09-25": 6,
-          "2026-09-26": 5
+          "2026-09-26": 5,
+          "2026-09-27": 6
         },
         "Education Administration Programs": {
           "2026-02-26": 5,
@@ -8506,7 +8544,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 4,
           "2026-09-24": 4,
           "2026-09-25": 4,
-          "2026-09-26": 4
+          "2026-09-26": 4,
+          "2026-09-27": 4
         },
         "IT Services and IT Consulting": {
           "2026-02-26": 5,
@@ -8617,7 +8656,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 8,
           "2026-09-24": 10,
           "2026-09-25": 7,
-          "2026-09-26": 8
+          "2026-09-26": 8,
+          "2026-09-27": 9
         },
         Banking: {
           "2026-02-26": 5,
@@ -8729,7 +8769,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 7,
           "2026-09-24": 4,
           "2026-09-25": 10,
-          "2026-09-26": 6
+          "2026-09-26": 6,
+          "2026-09-27": 4
         },
         "Higher Education": {
           "2026-02-26": 4,
@@ -8828,7 +8869,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-20": 3,
           "2026-09-22": 3,
           "2026-09-24": 3,
-          "2026-09-25": 3
+          "2026-09-25": 3,
+          "2026-09-27": 3
         },
         "Advertising Services": {
           "2026-02-26": 3,
@@ -8865,7 +8907,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-02": 4,
           "2026-09-11": 4,
           "2026-09-17": 3,
-          "2026-09-26": 4
+          "2026-09-26": 4,
+          "2026-09-27": 4
         },
         Education: {
           "2026-02-26": 3,
@@ -8985,7 +9028,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 3,
           "2026-09-24": 4,
           "2026-09-25": 4,
-          "2026-09-26": 4
+          "2026-09-26": 4,
+          "2026-09-27": 4
         },
         "Real Estate": {
           "2026-04-02": 5,
@@ -9027,7 +9071,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-21": 2,
           "2026-09-23": 2,
           "2026-09-25": 3,
-          "2026-09-26": 2
+          "2026-09-26": 2,
+          "2026-09-27": 4
         },
         Insurance: {
           "2026-05-01": 5,
@@ -9065,7 +9110,8 @@ var creator_chart_dashboard_data_default = {
           "2026-06-27": 3,
           "2026-07-06": 3,
           "2026-08-21": 3,
-          "2026-08-24": 4
+          "2026-08-24": 4,
+          "2026-09-27": 3
         },
         "Marketing Services": {
           "2026-07-12": 3,
@@ -9386,17 +9432,17 @@ var creator_chart_dashboard_data_default = {
             g: "Bank & industry critique",
             n: 7,
             tg: 347,
-            tgsum: 2727,
+            tgsum: 2782,
             sh: 47,
-            out: 55.5,
-            er: 2.6,
+            out: 55,
+            er: 2.5,
             com: 2
           },
           {
             g: "Home-loan explainer",
             n: 11,
-            tg: 293,
-            tgsum: 2081,
+            tg: 297,
+            tgsum: 2087,
             sh: 46,
             out: 25,
             er: 1.7,
@@ -9404,12 +9450,12 @@ var creator_chart_dashboard_data_default = {
           },
           {
             g: "Founder journey & milestones",
-            n: 12,
-            tg: 810.5,
-            tgsum: 17099,
-            sh: 46.5,
-            out: 34,
-            er: 1.7,
+            n: 13,
+            tg: 848,
+            tgsum: 19681,
+            sh: 46,
+            out: 35,
+            er: 1.5,
             com: 2
           },
           {
@@ -9426,7 +9472,7 @@ var creator_chart_dashboard_data_default = {
             g: "Opinion & life lessons",
             n: 9,
             tg: 242,
-            tgsum: 2388,
+            tgsum: 2393,
             sh: 46.5,
             out: 28.5,
             er: 1.7,
@@ -9434,20 +9480,20 @@ var creator_chart_dashboard_data_default = {
           },
           {
             g: "Client story",
-            n: 10,
-            tg: 288,
-            tgsum: 9402,
+            n: 9,
+            tg: 270.5,
+            tgsum: 7150,
             sh: 45,
-            out: 38.5,
-            er: 1.6,
-            com: 0.5
+            out: 33,
+            er: 1.8,
+            com: 0
           }
         ],
         p: {
-          tg: 2e-3,
-          sh: 0.171,
-          outnet: 0.274,
-          er: 0.65
+          tg: 1e-3,
+          sh: 0.247,
+          outnet: 0.386,
+          er: 0.664
         }
       },
       fmt: {
@@ -9456,8 +9502,8 @@ var creator_chart_dashboard_data_default = {
             g: "Text/share",
             n: 38,
             tg: 387,
-            tgsum: 32388,
-            sh: 46,
+            tgsum: 32773,
+            sh: 45.5,
             out: 40,
             er: 2.2,
             com: 2
@@ -9465,8 +9511,8 @@ var creator_chart_dashboard_data_default = {
           {
             g: "Media (ugcPost)",
             n: 16,
-            tg: 485,
-            tgsum: 5926,
+            tg: 490.5,
+            tgsum: 5937,
             sh: 47,
             out: 21.5,
             er: 1.6,
@@ -9474,10 +9520,10 @@ var creator_chart_dashboard_data_default = {
           }
         ],
         p: {
-          tg: 0.31,
-          sh: 0.339,
+          tg: 0.322,
+          sh: 0.333,
           outnet: 0.01,
-          er: 0.062
+          er: 0.07
         }
       },
       era: {
@@ -9495,17 +9541,17 @@ var creator_chart_dashboard_data_default = {
           {
             g: "Creator Chart Era",
             n: 17,
-            tg: 293,
-            tgsum: 14284,
-            sh: 46,
+            tg: 297,
+            tgsum: 14680,
+            sh: 45,
             out: 47,
-            er: 2.6,
+            er: 2.5,
             com: 2
           }
         ],
         p: {
-          tg: 0.051,
-          sh: 0.65,
+          tg: 0.056,
+          sh: 0.721,
           outnet: 2e-3,
           er: 1e-3
         }
@@ -9516,7 +9562,7 @@ var creator_chart_dashboard_data_default = {
             g: "Thu",
             n: 9,
             tg: 641,
-            tgsum: 6487,
+            tgsum: 6554,
             sh: 46,
             out: 28,
             er: 1.7,
@@ -9526,8 +9572,8 @@ var creator_chart_dashboard_data_default = {
             g: "Tue",
             n: 9,
             tg: 388,
-            tgsum: 4769,
-            sh: 46,
+            tgsum: 4763,
+            sh: 45,
             out: 25,
             er: 1.5,
             com: 1
@@ -9535,11 +9581,11 @@ var creator_chart_dashboard_data_default = {
           {
             g: "Fri",
             n: 11,
-            tg: 461,
-            tgsum: 15890,
-            sh: 47,
+            tg: 466.5,
+            tgsum: 16213,
+            sh: 47.5,
             out: 60.5,
-            er: 2.1,
+            er: 2,
             com: 4
           },
           {
@@ -9555,18 +9601,18 @@ var creator_chart_dashboard_data_default = {
           {
             g: "Mon",
             n: 11,
-            tg: 320,
-            tgsum: 4826,
-            sh: 42.5,
-            out: 42,
+            tg: 322,
+            tgsum: 4831,
+            sh: 43,
+            out: 43,
             er: 2.3,
             com: 1
           },
           {
             g: "Wed",
             n: 9,
-            tg: 247.5,
-            tgsum: 3316,
+            tg: 250,
+            tgsum: 3323,
             sh: 48.5,
             out: 29,
             er: 1.9,
@@ -9584,22 +9630,22 @@ var creator_chart_dashboard_data_default = {
           }
         ],
         p: {
-          tg: 0.334,
-          sh: 0.246,
+          tg: 0.319,
+          sh: 0.209,
           outnet: 0.049,
-          er: 0.917
+          er: 0.929
         }
       }
     },
     corr: {
       out_vs_share: {
         rho: -0.45,
-        p: 18e-4,
+        p: 16e-4,
         n: 46
       },
       out_vs_tg: {
-        rho: 0.16,
-        p: 0.2824,
+        rho: 0.17,
+        p: 0.2548,
         n: 46
       },
       comments_vs_out: {
@@ -9613,22 +9659,22 @@ var creator_chart_dashboard_data_default = {
         n: 52
       },
       er_vs_share: {
-        rho: -0.13,
-        p: 0.3853,
+        rho: -0.14,
+        p: 0.3292,
         n: 48
       },
       hour_vs_share: {
-        rho: 0.08,
-        p: 0.6087,
+        rho: 0.05,
+        p: 0.7186,
         n: 48
       }
     },
     fit: {
-      slope10: -1.25,
-      r2: 0.24,
-      p: 6e-4,
-      a: 49.88878740339868,
-      b: -0.1253632420139401
+      slope10: -1.24,
+      r2: 0.23,
+      p: 7e-4,
+      a: 49.81695814917419,
+      b: -0.12418582274197984
     }
   }
 };
@@ -10157,7 +10203,10 @@ async function handleApiRequest(request, env, ctx) {
         try {
           const liveStr = await kv.get("linkedin_data:live");
           if (liveStr) {
-            payload = JSON.parse(liveStr);
+            const liveData = JSON.parse(liveStr);
+            if (!liveData.meta?.data_to || !creator_chart_dashboard_data_default.meta?.data_to || liveData.meta.data_to >= creator_chart_dashboard_data_default.meta.data_to) {
+              payload = liveData;
+            }
           }
         } catch {
         }
@@ -10173,13 +10222,27 @@ async function handleApiRequest(request, env, ctx) {
         const memStr = localDB.get("linkedin_data:post_type_overrides");
         if (memStr) overrides = JSON.parse(memStr);
       }
+      let overridesChanged = false;
       if (overrides && typeof overrides === "object" && Array.isArray(payload.posts)) {
         for (const p of payload.posts) {
           const ov = overrides[p.post_id];
           if (ov) {
-            p.type = typeof ov === "string" ? ov : ov.type;
+            const ovType = typeof ov === "string" ? ov : ov.type;
+            if (ovType === p.type) {
+              delete overrides[p.post_id];
+              overridesChanged = true;
+            } else {
+              p.type = ovType;
+            }
           }
         }
+      }
+      if (overridesChanged) {
+        const serialized = JSON.stringify(overrides);
+        if (kv) {
+          ctx.waitUntil(kv.put("linkedin_data:post_type_overrides", serialized));
+        }
+        localDB.set("linkedin_data:post_type_overrides", serialized);
       }
       payload.overrides = overrides;
       const forbidden = ["impressions", "imp", "members_reached", "sv"];
@@ -10188,6 +10251,32 @@ async function handleApiRequest(request, env, ctx) {
       resHeaders.set("X-Robots-Tag", "noindex, nofollow");
       return new Response(JSON.stringify(sanitizeData(payload)), { status: 200, headers: resHeaders });
     }
+  }
+  if (cleanPath === "/api/linkedin-analytics/post-type/export" || cleanPath === "/api/post-type/export") {
+    const user = await verifyTgToken(request);
+    if (!user || user.role !== "admin") {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: user ? 403 : 401, headers });
+    }
+    const kv = env.QUESTIONS_KV;
+    let overrides = {};
+    if (kv) {
+      try {
+        const ovStr = await kv.get("linkedin_data:post_type_overrides");
+        if (ovStr) overrides = JSON.parse(ovStr);
+      } catch {
+      }
+    } else {
+      const memStr = localDB.get("linkedin_data:post_type_overrides");
+      if (memStr) overrides = JSON.parse(memStr);
+    }
+    const out = {};
+    for (const [k, v] of Object.entries(overrides)) {
+      out[k] = typeof v === "string" ? v : v.type;
+    }
+    const resHeaders = new Headers(headers);
+    resHeaders.set("Content-Disposition", 'attachment; filename="post_type_changes.json"');
+    resHeaders.set("Content-Type", "application/json");
+    return new Response(JSON.stringify(out, null, 2), { status: 200, headers: resHeaders });
   }
   if (cleanPath === "/api/linkedin-analytics/post-type" || cleanPath === "/api/post-type") {
     const user = await verifyTgToken(request);
@@ -10231,6 +10320,9 @@ async function handleApiRequest(request, env, ctx) {
           return new Response(JSON.stringify({ error: `Invalid type. Must be one of: ${validTypes.join(", ")}` }), { status: 400, headers });
         }
         const post = creator_chart_dashboard_data_default.posts.find((p) => p.post_id === post_id);
+        if (!post && type !== "RESET" && type !== "DELETE") {
+          return new Response(JSON.stringify({ error: `Unknown post_id '${post_id}'` }), { status: 404, headers });
+        }
         const autoType = post ? post.auto_type || post.type : null;
         let overrides = {};
         if (kv) {
@@ -10259,7 +10351,11 @@ async function handleApiRequest(request, env, ctx) {
           await kv.put("linkedin_data:post_type_overrides", serialized);
         }
         localDB.set("linkedin_data:post_type_overrides", serialized);
-        return new Response(JSON.stringify({ success: true, post_id, type, auto_type: autoType, overrides }), { status: 200, headers });
+        const outMap = {};
+        for (const [k, v] of Object.entries(overrides)) {
+          outMap[k] = typeof v === "string" ? v : v.type;
+        }
+        return new Response(JSON.stringify({ success: true, post_id, type, auto_type: autoType, overrides: outMap }), { status: 200, headers });
       } catch (err) {
         return new Response(JSON.stringify({ error: err.message }), { status: 400, headers });
       }
@@ -10334,6 +10430,24 @@ async function handleApiRequest(request, env, ctx) {
               JSON.stringify({ error: `Validation failed: data_to (${payload.meta.data_to}) is older than live data_to (${creator_chart_dashboard_data_default.meta.data_to}).` }),
               { status: 400, headers }
             );
+          }
+        }
+        const postTypes = payload.meta?.post_types;
+        if (!Array.isArray(postTypes) || postTypes.length === 0) {
+          return new Response(JSON.stringify({ error: "Validation failed: meta.post_types is required." }), { status: 400, headers });
+        }
+        if (!Array.isArray(payload.posts)) {
+          return new Response(JSON.stringify({ error: "Validation failed: posts must be an array." }), { status: 400, headers });
+        }
+        for (const p of payload.posts) {
+          if (!p.post_id || typeof p.post_id !== "string") {
+            return new Response(JSON.stringify({ error: "Validation failed: every post must have a string post_id." }), { status: 400, headers });
+          }
+          if (!p.type || !postTypes.includes(p.type)) {
+            return new Response(JSON.stringify({ error: `Validation failed: post ${p.post_id} type '${p.type}' not in meta.post_types.` }), { status: 400, headers });
+          }
+          if (!p.auto_type || !postTypes.includes(p.auto_type)) {
+            return new Response(JSON.stringify({ error: `Validation failed: post ${p.post_id} auto_type '${p.auto_type}' not in meta.post_types.` }), { status: 400, headers });
           }
         }
         if (kv) {

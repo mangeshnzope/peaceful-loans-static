@@ -1,8 +1,8 @@
 {
  "meta": {
-  "built": "27 Sep 2026",
+  "built": "28 Sep 2026",
   "data_from": "2026-01-01",
-  "data_to": "2026-09-26",
+  "data_to": "2026-09-27",
   "tg_definition": [
    "Manager",
    "Director",
@@ -2444,6 +2444,15 @@
    "engagements": 9,
    "new_followers": 1,
    "posts_published": 0
+  },
+  {
+   "date": "2026-09-27",
+   "tg_impressions": 148,
+   "tg_share_pct": 34.0,
+   "tg_may_be_higher": false,
+   "engagements": 2,
+   "new_followers": 3,
+   "posts_published": 0
   }
  ],
  "weekly": [
@@ -2829,12 +2838,12 @@
   },
   {
    "week_start": "2026-09-21",
-   "week_end": "2026-09-26",
-   "tg_impressions": 1979,
+   "week_end": "2026-09-27",
+   "tg_impressions": 2145,
    "tg_share_pct": 38.0,
    "tg_may_be_higher": false,
-   "engagements": 106,
-   "new_followers": 25,
+   "engagements": 108,
+   "new_followers": 28,
    "posts_published": 3
   }
  ],
@@ -2921,12 +2930,12 @@
   },
   {
    "month_start": "2026-09-01",
-   "month_end": "2026-09-26",
-   "tg_impressions": 12055,
+   "month_end": "2026-09-27",
+   "tg_impressions": 12230,
    "tg_share_pct": 40.0,
    "tg_may_be_higher": false,
-   "engagements": 779,
-   "new_followers": 158,
+   "engagements": 781,
+   "new_followers": 161,
    "posts_published": 11
   }
  ],
@@ -2942,15 +2951,15 @@
    "auto_type": "Bank & industry critique",
    "format": "Text/share",
    "creator_chart_era": true,
-   "tg_impressions_lifetime": 267,
-   "tg_share_pct": 49.0,
-   "out_of_network_pct": 70,
-   "in_network_pct": 30,
+   "tg_impressions_lifetime": 316,
+   "tg_share_pct": 50.0,
+   "out_of_network_pct": 69,
+   "in_network_pct": 31,
    "engagements": 15,
    "comments": 2,
    "reposts": 1,
    "followers_gained": 1,
-   "engagement_rate_pct": 2.75
+   "engagement_rate_pct": 2.37
   },
   {
    "post_id": "7508405750621310978",
@@ -2963,15 +2972,15 @@
    "auto_type": "Home-loan explainer",
    "format": "Text/share",
    "creator_chart_era": true,
-   "tg_impressions_lifetime": 223,
-   "tg_share_pct": 53.0,
+   "tg_impressions_lifetime": 228,
+   "tg_share_pct": 52.0,
    "out_of_network_pct": 24,
    "in_network_pct": 76,
    "engagements": 15,
    "comments": 4,
    "reposts": 1,
    "followers_gained": 0,
-   "engagement_rate_pct": 3.57
+   "engagement_rate_pct": 3.42
   },
   {
    "post_id": "7507720186268119040",
@@ -2984,7 +2993,7 @@
    "auto_type": "Home-loan explainer",
    "format": "Text/share",
    "creator_chart_era": true,
-   "tg_impressions_lifetime": 293,
+   "tg_impressions_lifetime": 297,
    "tg_share_pct": 50.0,
    "out_of_network_pct": 61,
    "in_network_pct": 39,
@@ -2992,7 +3001,7 @@
    "comments": 1,
    "reposts": 2,
    "followers_gained": 0,
-   "engagement_rate_pct": 1.71
+   "engagement_rate_pct": 1.68
   },
   {
    "post_id": "7506575936201408512",
@@ -3005,15 +3014,15 @@
    "auto_type": "Founder journey & milestones",
    "format": "Text/share",
    "creator_chart_era": true,
-   "tg_impressions_lifetime": 7586,
-   "tg_share_pct": 47.0,
+   "tg_impressions_lifetime": 7848,
+   "tg_share_pct": 48.0,
    "out_of_network_pct": 66,
    "in_network_pct": 34,
-   "engagements": 580,
-   "comments": 142,
+   "engagements": 585,
+   "comments": 143,
    "reposts": 4,
    "followers_gained": 5,
-   "engagement_rate_pct": 3.59
+   "engagement_rate_pct": 3.58
   },
   {
    "post_id": "7506232694943473666",
@@ -3022,15 +3031,15 @@
    "time": "11:38 AM",
    "title": "I have been using instahelp services across",
    "url": "https://www.linkedin.com/posts/mangeshzope_i-have-been-using-instahelp-services-across-share-7506232694943473666-3DiR",
-   "type": "Client story",
+   "type": "Founder journey & milestones",
    "auto_type": "Client story",
    "format": "Text/share",
    "creator_chart_era": true,
-   "tg_impressions_lifetime": 2253,
+   "tg_impressions_lifetime": 2320,
    "tg_share_pct": 31.0,
    "out_of_network_pct": 86,
    "in_network_pct": 14,
-   "engagements": 40,
+   "engagements": 41,
    "comments": 4,
    "reposts": 0,
    "followers_gained": 2,
@@ -3047,15 +3056,15 @@
    "auto_type": "Bank & industry critique",
    "format": "Text/share",
    "creator_chart_era": true,
-   "tg_impressions_lifetime": 255,
-   "tg_share_pct": 47.0,
-   "out_of_network_pct": 54,
-   "in_network_pct": 46,
+   "tg_impressions_lifetime": 249,
+   "tg_share_pct": 45.0,
+   "out_of_network_pct": 53,
+   "in_network_pct": 47,
    "engagements": 14,
    "comments": 2,
    "reposts": 1,
    "followers_gained": 2,
-   "engagement_rate_pct": 2.58
+   "engagement_rate_pct": 2.53
   },
   {
    "post_id": "7504055163360362496",
@@ -3068,15 +3077,15 @@
    "auto_type": "Bank & industry critique",
    "format": "Media (ugcPost)",
    "creator_chart_era": true,
-   "tg_impressions_lifetime": 479,
+   "tg_impressions_lifetime": 490,
    "tg_share_pct": 52.0,
-   "out_of_network_pct": 31,
-   "in_network_pct": 69,
+   "out_of_network_pct": 30,
+   "in_network_pct": 70,
    "engagements": 19,
    "comments": 4,
    "reposts": 1,
    "followers_gained": 1,
-   "engagement_rate_pct": 2.06
+   "engagement_rate_pct": 2.01
   },
   {
    "post_id": "7503390922131562496",
@@ -3089,7 +3098,7 @@
    "auto_type": "Home-loan explainer",
    "format": "Text/share",
    "creator_chart_era": true,
-   "tg_impressions_lifetime": 181,
+   "tg_impressions_lifetime": 182,
    "tg_share_pct": 45.0,
    "out_of_network_pct": 47,
    "in_network_pct": 53,
@@ -3097,7 +3106,7 @@
    "comments": 0,
    "reposts": 1,
    "followers_gained": 0,
-   "engagement_rate_pct": 2.98
+   "engagement_rate_pct": 2.97
   },
   {
    "post_id": "7502607226914639873",
@@ -3110,15 +3119,15 @@
    "auto_type": "Home-loan explainer",
    "format": "Text/share",
    "creator_chart_era": true,
-   "tg_impressions_lifetime": 171,
-   "tg_share_pct": 44.0,
+   "tg_impressions_lifetime": 167,
+   "tg_share_pct": 43.0,
    "out_of_network_pct": 42,
    "in_network_pct": 58,
    "engagements": 9,
    "comments": 0,
    "reposts": 1,
    "followers_gained": 0,
-   "engagement_rate_pct": 2.32
+   "engagement_rate_pct": 2.31
   },
   {
    "post_id": "7501557451943743492",
@@ -3131,7 +3140,7 @@
    "auto_type": "Bank & industry critique",
    "format": "Text/share",
    "creator_chart_era": true,
-   "tg_impressions_lifetime": 295,
+   "tg_impressions_lifetime": 296,
    "tg_share_pct": 46.0,
    "out_of_network_pct": 61,
    "in_network_pct": 39,
@@ -3139,7 +3148,7 @@
    "comments": 2,
    "reposts": 1,
    "followers_gained": 1,
-   "engagement_rate_pct": 2.65
+   "engagement_rate_pct": 2.64
   },
   {
    "post_id": "7500800657218744321",
@@ -3152,7 +3161,7 @@
    "auto_type": "Client story",
    "format": "Text/share",
    "creator_chart_era": true,
-   "tg_impressions_lifetime": 201,
+   "tg_impressions_lifetime": 202,
    "tg_share_pct": 40.0,
    "out_of_network_pct": 47,
    "in_network_pct": 53,
@@ -3160,7 +3169,7 @@
    "comments": 2,
    "reposts": 1,
    "followers_gained": 0,
-   "engagement_rate_pct": 3.59
+   "engagement_rate_pct": 3.56
   },
   {
    "post_id": "7500092783240769536",
@@ -3173,15 +3182,15 @@
    "auto_type": "Opinion & life lessons",
    "format": "Text/share",
    "creator_chart_era": true,
-   "tg_impressions_lifetime": 160,
-   "tg_share_pct": 42.0,
-   "out_of_network_pct": 42,
-   "in_network_pct": 58,
+   "tg_impressions_lifetime": 165,
+   "tg_share_pct": 43.0,
+   "out_of_network_pct": 43,
+   "in_network_pct": 57,
    "engagements": 13,
    "comments": 1,
    "reposts": 1,
    "followers_gained": 0,
-   "engagement_rate_pct": 3.41
+   "engagement_rate_pct": 3.39
   },
   {
    "post_id": "7498993755644076033",
@@ -4254,7 +4263,8 @@
    "2026-09-23": 0.0714,
    "2026-09-24": 0.0445,
    "2026-09-25": 0.0427,
-   "2026-09-26": 0.0441
+   "2026-09-26": 0.0441,
+   "2026-09-27": 0.0325
   },
   "pct_of_views": {
    "Seniority": {
@@ -4437,7 +4447,8 @@
      "2026-09-23": 27.0,
      "2026-09-24": 32.0,
      "2026-09-25": 31.0,
-     "2026-09-26": 30.0
+     "2026-09-26": 30.0,
+     "2026-09-27": 26.0
     },
     "Entry": {
      "2026-02-16": 41.0,
@@ -4597,7 +4608,8 @@
      "2026-09-23": 15.0,
      "2026-09-24": 15.0,
      "2026-09-25": 11.0,
-     "2026-09-26": 15.0
+     "2026-09-26": 15.0,
+     "2026-09-27": 20.0
     },
     "Director": {
      "2026-02-26": 15.0,
@@ -4734,7 +4746,8 @@
      "2026-09-23": 10.0,
      "2026-09-24": 8.0,
      "2026-09-25": 10.0,
-     "2026-09-26": 9.0
+     "2026-09-26": 9.0,
+     "2026-09-27": 9.0
     },
     "Manager": {
      "2026-02-26": 11.0,
@@ -4879,7 +4892,8 @@
      "2026-09-23": 15.0,
      "2026-09-24": 9.0,
      "2026-09-25": 16.0,
-     "2026-09-26": 11.0
+     "2026-09-26": 11.0,
+     "2026-09-27": 12.0
     },
     "Owner": {
      "2026-02-26": 8.0,
@@ -4993,7 +5007,8 @@
      "2026-09-23": 9.0,
      "2026-09-24": 7.0,
      "2026-09-25": 6.0,
-     "2026-09-26": 6.0
+     "2026-09-26": 6.0,
+     "2026-09-27": 4.0
     },
     "VP": {
      "2026-02-26": 7.0,
@@ -5099,7 +5114,8 @@
      "2026-09-23": 5.0,
      "2026-09-24": 5.0,
      "2026-09-25": 7.0,
-     "2026-09-26": 7.0
+     "2026-09-26": 7.0,
+     "2026-09-27": 5.0
     },
     "CXO": {
      "2026-02-26": 5.0,
@@ -5182,7 +5198,8 @@
      "2026-09-23": 4.0,
      "2026-09-24": 3.0,
      "2026-09-25": 4.0,
-     "2026-09-26": 3.0
+     "2026-09-26": 3.0,
+     "2026-09-27": 4.0
     },
     "Partner": {
      "2026-04-14": 2.0,
@@ -5456,7 +5473,8 @@
      "2026-09-23": 22.0,
      "2026-09-24": 20.0,
      "2026-09-25": 30.0,
-     "2026-09-26": 22.0
+     "2026-09-26": 22.0,
+     "2026-09-27": 18.0
     },
     "Greater Delhi Area": {
      "2026-02-26": 15.0,
@@ -5597,7 +5615,8 @@
      "2026-09-23": 15.0,
      "2026-09-24": 17.0,
      "2026-09-25": 19.0,
-     "2026-09-26": 17.0
+     "2026-09-26": 17.0,
+     "2026-09-27": 16.0
     },
     "Greater Bengaluru Area": {
      "2026-02-26": 14.0,
@@ -5738,7 +5757,8 @@
      "2026-09-23": 21.0,
      "2026-09-24": 23.0,
      "2026-09-25": 19.0,
-     "2026-09-26": 19.0
+     "2026-09-26": 19.0,
+     "2026-09-27": 20.0
     },
     "Greater Hyderabad Area": {
      "2026-02-26": 3.0,
@@ -5807,7 +5827,8 @@
      "2026-09-23": 3.0,
      "2026-09-24": 2.0,
      "2026-09-25": 2.0,
-     "2026-09-26": 4.0
+     "2026-09-26": 4.0,
+     "2026-09-27": 4.0
     },
     "Pune/Pimpri-Chinchwad Area": {
      "2026-02-26": 2.0,
@@ -5895,7 +5916,8 @@
      "2026-07-14": 2.0,
      "2026-08-19": 2.0,
      "2026-09-17": 1.0,
-     "2026-09-26": 1.0
+     "2026-09-26": 1.0,
+     "2026-09-27": 2.0
     },
     "San Francisco Bay Area": {
      "2026-02-26": 2.0,
@@ -5968,7 +5990,8 @@
      "2026-09-23": 2.0,
      "2026-09-24": 2.0,
      "2026-09-25": 2.0,
-     "2026-09-26": 2.0
+     "2026-09-26": 2.0,
+     "2026-09-27": 2.0
     },
     "Greater Ahmedabad Area": {
      "2026-03-26": 3.0,
@@ -6008,7 +6031,8 @@
      "2026-09-21": 2.0,
      "2026-09-22": 2.0,
      "2026-09-23": 2.0,
-     "2026-09-26": 2.0
+     "2026-09-26": 2.0,
+     "2026-09-27": 2.0
     },
     "Noida": {
      "2026-03-26": 2.0,
@@ -6277,7 +6301,8 @@
      "2026-09-23": 20.0,
      "2026-09-24": 18.0,
      "2026-09-25": 26.0,
-     "2026-09-26": 24.0
+     "2026-09-26": 24.0,
+     "2026-09-27": 22.0
     },
     "1,001-5,000 employees": {
      "2026-02-26": 16.0,
@@ -6414,7 +6439,8 @@
      "2026-09-23": 11.0,
      "2026-09-24": 14.0,
      "2026-09-25": 17.0,
-     "2026-09-26": 13.0
+     "2026-09-26": 13.0,
+     "2026-09-27": 12.0
     },
     "51-200 employees": {
      "2026-02-26": 11.0,
@@ -6542,7 +6568,8 @@
      "2026-09-23": 9.0,
      "2026-09-24": 10.0,
      "2026-09-25": 10.0,
-     "2026-09-26": 10.0
+     "2026-09-26": 10.0,
+     "2026-09-27": 10.0
     },
     "2-10 employees": {
      "2026-02-26": 9.0,
@@ -6668,7 +6695,8 @@
      "2026-09-23": 9.0,
      "2026-09-24": 9.0,
      "2026-09-25": 7.0,
-     "2026-09-26": 9.0
+     "2026-09-26": 9.0,
+     "2026-09-27": 6.0
     },
     "11-50 employees": {
      "2026-02-26": 8.0,
@@ -6798,7 +6826,8 @@
      "2026-09-23": 11.0,
      "2026-09-24": 10.0,
      "2026-09-25": 9.0,
-     "2026-09-26": 6.0
+     "2026-09-26": 6.0,
+     "2026-09-27": 7.0
     },
     "501-1,000 employees": {
      "2026-02-26": 7.0,
@@ -6894,7 +6923,8 @@
      "2026-09-23": 6.0,
      "2026-09-24": 6.0,
      "2026-09-25": 6.0,
-     "2026-09-26": 5.0
+     "2026-09-26": 5.0,
+     "2026-09-27": 5.0
     },
     "201-500 employees": {
      "2026-02-26": 6.0,
@@ -7002,7 +7032,8 @@
      "2026-09-23": 8.0,
      "2026-09-24": 5.0,
      "2026-09-25": 9.0,
-     "2026-09-26": 6.0
+     "2026-09-26": 6.0,
+     "2026-09-27": 9.0
     },
     "5,001-10,000 employees": {
      "2026-02-26": 5.0,
@@ -7100,7 +7131,8 @@
      "2026-09-23": 7.0,
      "2026-09-24": 6.0,
      "2026-09-25": 5.0,
-     "2026-09-26": 4.0
+     "2026-09-26": 4.0,
+     "2026-09-27": 7.0
     }
    },
    "Job title": {
@@ -7197,7 +7229,8 @@
      "2026-09-23": 7.0,
      "2026-09-24": 5.0,
      "2026-09-25": 5.0,
-     "2026-09-26": 6.0
+     "2026-09-26": 6.0,
+     "2026-09-27": 4.0
     },
     "Co-Founder": {
      "2026-02-26": 5.0,
@@ -7271,7 +7304,8 @@
      "2026-09-23": 4.0,
      "2026-09-24": 3.0,
      "2026-09-25": 3.0,
-     "2026-09-26": 2.0
+     "2026-09-26": 2.0,
+     "2026-09-27": 3.0
     },
     "Sales Manager": {
      "2026-02-26": 3.0,
@@ -7335,7 +7369,8 @@
      "2026-09-22": 2.0,
      "2026-09-23": 4.0,
      "2026-09-25": 2.0,
-     "2026-09-26": 2.0
+     "2026-09-26": 2.0,
+     "2026-09-27": 3.0
     },
     "Product Manager": {
      "2026-02-26": 2.0,
@@ -7437,7 +7472,8 @@
      "2026-09-22": 3.0,
      "2026-09-23": 3.0,
      "2026-09-24": 3.0,
-     "2026-09-26": 2.0
+     "2026-09-26": 2.0,
+     "2026-09-27": 2.0
     },
     "General Manager": {
      "2026-03-26": 2.0,
@@ -7754,7 +7790,8 @@
      "2026-09-23": 12.0,
      "2026-09-24": 9.0,
      "2026-09-25": 19.0,
-     "2026-09-26": 13.0
+     "2026-09-26": 13.0,
+     "2026-09-27": 11.0
     },
     "Technology, Information and Internet": {
      "2026-02-26": 8.0,
@@ -7858,7 +7895,8 @@
      "2026-09-23": 7.0,
      "2026-09-24": 8.0,
      "2026-09-25": 6.0,
-     "2026-09-26": 5.0
+     "2026-09-26": 5.0,
+     "2026-09-27": 6.0
     },
     "Education Administration Programs": {
      "2026-02-26": 5.0,
@@ -7991,7 +8029,8 @@
      "2026-09-23": 4.0,
      "2026-09-24": 4.0,
      "2026-09-25": 4.0,
-     "2026-09-26": 4.0
+     "2026-09-26": 4.0,
+     "2026-09-27": 4.0
     },
     "IT Services and IT Consulting": {
      "2026-02-26": 5.0,
@@ -8102,7 +8141,8 @@
      "2026-09-23": 8.0,
      "2026-09-24": 10.0,
      "2026-09-25": 7.0,
-     "2026-09-26": 8.0
+     "2026-09-26": 8.0,
+     "2026-09-27": 9.0
     },
     "Banking": {
      "2026-02-26": 5.0,
@@ -8214,7 +8254,8 @@
      "2026-09-23": 7.0,
      "2026-09-24": 4.0,
      "2026-09-25": 10.0,
-     "2026-09-26": 6.0
+     "2026-09-26": 6.0,
+     "2026-09-27": 4.0
     },
     "Higher Education": {
      "2026-02-26": 4.0,
@@ -8313,7 +8354,8 @@
      "2026-09-20": 3.0,
      "2026-09-22": 3.0,
      "2026-09-24": 3.0,
-     "2026-09-25": 3.0
+     "2026-09-25": 3.0,
+     "2026-09-27": 3.0
     },
     "Advertising Services": {
      "2026-02-26": 3.0,
@@ -8350,7 +8392,8 @@
      "2026-09-02": 4.0,
      "2026-09-11": 4.0,
      "2026-09-17": 3.0,
-     "2026-09-26": 4.0
+     "2026-09-26": 4.0,
+     "2026-09-27": 4.0
     },
     "Education": {
      "2026-02-26": 3.0,
@@ -8470,7 +8513,8 @@
      "2026-09-23": 3.0,
      "2026-09-24": 4.0,
      "2026-09-25": 4.0,
-     "2026-09-26": 4.0
+     "2026-09-26": 4.0,
+     "2026-09-27": 4.0
     },
     "Real Estate": {
      "2026-04-02": 5.0,
@@ -8512,7 +8556,8 @@
      "2026-09-21": 2.0,
      "2026-09-23": 2.0,
      "2026-09-25": 3.0,
-     "2026-09-26": 2.0
+     "2026-09-26": 2.0,
+     "2026-09-27": 4.0
     },
     "Insurance": {
      "2026-05-01": 5.0,
@@ -8550,7 +8595,8 @@
      "2026-06-27": 3.0,
      "2026-07-06": 3.0,
      "2026-08-21": 3.0,
-     "2026-08-24": 4.0
+     "2026-08-24": 4.0,
+     "2026-09-27": 3.0
     },
     "Marketing Services": {
      "2026-07-12": 3.0,
@@ -8871,17 +8917,17 @@
       "g": "Bank & industry critique",
       "n": 7,
       "tg": 347,
-      "tgsum": 2727,
+      "tgsum": 2782,
       "sh": 47.0,
-      "out": 55.5,
-      "er": 2.6,
+      "out": 55.0,
+      "er": 2.5,
       "com": 2
      },
      {
       "g": "Home-loan explainer",
       "n": 11,
-      "tg": 293,
-      "tgsum": 2081,
+      "tg": 297,
+      "tgsum": 2087,
       "sh": 46.0,
       "out": 25,
       "er": 1.7,
@@ -8889,13 +8935,13 @@
      },
      {
       "g": "Founder journey & milestones",
-      "n": 12,
-      "tg": 810.5,
-      "tgsum": 17099,
-      "sh": 46.5,
-      "out": 34.0,
-      "er": 1.7,
-      "com": 2.0
+      "n": 13,
+      "tg": 848,
+      "tgsum": 19681,
+      "sh": 46.0,
+      "out": 35,
+      "er": 1.5,
+      "com": 2
      },
      {
       "g": "Hiring & team",
@@ -8911,7 +8957,7 @@
       "g": "Opinion & life lessons",
       "n": 9,
       "tg": 242.0,
-      "tgsum": 2388,
+      "tgsum": 2393,
       "sh": 46.5,
       "out": 28.5,
       "er": 1.7,
@@ -8919,20 +8965,20 @@
      },
      {
       "g": "Client story",
-      "n": 10,
-      "tg": 288,
-      "tgsum": 9402,
+      "n": 9,
+      "tg": 270.5,
+      "tgsum": 7150,
       "sh": 45.0,
-      "out": 38.5,
-      "er": 1.6,
-      "com": 0.5
+      "out": 33,
+      "er": 1.8,
+      "com": 0
      }
     ],
     "p": {
-     "tg": 0.002,
-     "sh": 0.171,
-     "outnet": 0.274,
-     "er": 0.65
+     "tg": 0.001,
+     "sh": 0.247,
+     "outnet": 0.386,
+     "er": 0.664
     }
    },
    "fmt": {
@@ -8941,8 +8987,8 @@
       "g": "Text/share",
       "n": 38,
       "tg": 387.0,
-      "tgsum": 32388,
-      "sh": 46.0,
+      "tgsum": 32773,
+      "sh": 45.5,
       "out": 40.0,
       "er": 2.2,
       "com": 2.0
@@ -8950,8 +8996,8 @@
      {
       "g": "Media (ugcPost)",
       "n": 16,
-      "tg": 485.0,
-      "tgsum": 5926,
+      "tg": 490.5,
+      "tgsum": 5937,
       "sh": 47.0,
       "out": 21.5,
       "er": 1.6,
@@ -8959,10 +9005,10 @@
      }
     ],
     "p": {
-     "tg": 0.31,
-     "sh": 0.339,
+     "tg": 0.322,
+     "sh": 0.333,
      "outnet": 0.01,
-     "er": 0.062
+     "er": 0.07
     }
    },
    "era": {
@@ -8980,17 +9026,17 @@
      {
       "g": "Creator Chart Era",
       "n": 17,
-      "tg": 293,
-      "tgsum": 14284,
-      "sh": 46.0,
+      "tg": 297,
+      "tgsum": 14680,
+      "sh": 45.0,
       "out": 47.0,
-      "er": 2.6,
+      "er": 2.5,
       "com": 2
      }
     ],
     "p": {
-     "tg": 0.051,
-     "sh": 0.65,
+     "tg": 0.056,
+     "sh": 0.721,
      "outnet": 0.002,
      "er": 0.001
     }
@@ -9001,7 +9047,7 @@
       "g": "Thu",
       "n": 9,
       "tg": 641.0,
-      "tgsum": 6487,
+      "tgsum": 6554,
       "sh": 46.0,
       "out": 28,
       "er": 1.7,
@@ -9011,8 +9057,8 @@
       "g": "Tue",
       "n": 9,
       "tg": 388,
-      "tgsum": 4769,
-      "sh": 46.0,
+      "tgsum": 4763,
+      "sh": 45.0,
       "out": 25,
       "er": 1.5,
       "com": 1
@@ -9020,11 +9066,11 @@
      {
       "g": "Fri",
       "n": 11,
-      "tg": 461.0,
-      "tgsum": 15890,
-      "sh": 47.0,
+      "tg": 466.5,
+      "tgsum": 16213,
+      "sh": 47.5,
       "out": 60.5,
-      "er": 2.1,
+      "er": 2.0,
       "com": 4
      },
      {
@@ -9040,18 +9086,18 @@
      {
       "g": "Mon",
       "n": 11,
-      "tg": 320.0,
-      "tgsum": 4826,
-      "sh": 42.5,
-      "out": 42,
+      "tg": 322.0,
+      "tgsum": 4831,
+      "sh": 43.0,
+      "out": 43,
       "er": 2.3,
       "com": 1
      },
      {
       "g": "Wed",
       "n": 9,
-      "tg": 247.5,
-      "tgsum": 3316,
+      "tg": 250.0,
+      "tgsum": 3323,
       "sh": 48.5,
       "out": 29,
       "er": 1.9,
@@ -9069,22 +9115,22 @@
      }
     ],
     "p": {
-     "tg": 0.334,
-     "sh": 0.246,
+     "tg": 0.319,
+     "sh": 0.209,
      "outnet": 0.049,
-     "er": 0.917
+     "er": 0.929
     }
    }
   },
   "corr": {
    "out_vs_share": {
     "rho": -0.45,
-    "p": 0.0018,
+    "p": 0.0016,
     "n": 46
    },
    "out_vs_tg": {
-    "rho": 0.16,
-    "p": 0.2824,
+    "rho": 0.17,
+    "p": 0.2548,
     "n": 46
    },
    "comments_vs_out": {
@@ -9098,22 +9144,22 @@
     "n": 52
    },
    "er_vs_share": {
-    "rho": -0.13,
-    "p": 0.3853,
+    "rho": -0.14,
+    "p": 0.3292,
     "n": 48
    },
    "hour_vs_share": {
-    "rho": 0.08,
-    "p": 0.6087,
+    "rho": 0.05,
+    "p": 0.7186,
     "n": 48
    }
   },
   "fit": {
-   "slope10": -1.25,
-   "r2": 0.24,
-   "p": 0.0006,
-   "a": 49.88878740339868,
-   "b": -0.1253632420139401
+   "slope10": -1.24,
+   "r2": 0.23,
+   "p": 0.0007,
+   "a": 49.81695814917419,
+   "b": -0.12418582274197984
   }
  }
 }

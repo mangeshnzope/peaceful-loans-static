@@ -310,7 +310,7 @@
 
       function refreshCats(triggerRender = true) {
         if (!DASHBOARD_DATA) return;
-        const changed = DASHBOARD_DATA.posts.some(p => p.type !== p.auto_type);
+        const changed = DASHBOARD_DATA.posts.some(p => p.type !== p.baked);
         if (changed) {
           DASHBOARD_DATA.insights.groups.cat = catGroups(DASHBOARD_DATA.posts);
         } else if (bakedCatIns) {
@@ -390,6 +390,7 @@
           }
           DASHBOARD_DATA.posts.forEach(p => {
             if (!p.auto_type) p.auto_type = p.type;
+            p.baked = p.type;
             if (OV[p.post_id]) p.type = OV[p.post_id];
           });
           refreshCats(false);
@@ -991,8 +992,9 @@
       function renderWeeklyTabHtml() {
         const W = DASHBOARD_DATA.weekly;
         const fullWeeks = W.filter(w => daysBetween(w.week_start, w.week_end) === 7);
-        const postWeeks = W.filter(w => w.week_start >= "2026-08-17" && w.week_start <= "2026-09-14" && w.tg_impressions !== null);
-        const preWeeks = W.filter(w => w.week_start >= "2026-04-13" && w.week_start <= "2026-07-27" && w.tg_impressions !== null);
+        const postWeeks = fullWeeks.filter(w => w.week_start >= "2026-08-17" && w.tg_impressions !== null);
+        const preWeeks = fullWeeks.filter(w => w.week_start >= "2026-04-13" && w.week_start <= "2026-07-27" && w.tg_impressions !== null);
+        const eraEnd = postWeeks.length ? postWeeks[postWeeks.length - 1].week_end : "2026-09-20";
 
         const avgPost = postWeeks.length ? postWeeks.reduce((acc, w) => acc + (w.tg_impressions || 0), 0) / postWeeks.length : 0;
         const avgPre = preWeeks.length ? preWeeks.reduce((acc, w) => acc + (w.tg_impressions || 0), 0) / preWeeks.length : 0;
@@ -1117,7 +1119,7 @@
             <div class="kpi t">
               <span class="eyebrow">Avg weekly TG impressions</span>
               <span class="v num">${fmt(avgPost)}</span>
-              <span class="s">Creator Chart Era (17 Aug – 20 Sep) vs ${fmt(avgPre)} (13 Apr – 2 Aug)</span>
+              <span class="s">Creator Chart Era (17 Aug – ${dd(eraEnd)}) vs ${fmt(avgPre)} (13 Apr – 2 Aug)</span>
             </div>
             <div class="kpi t">
               <span class="eyebrow">TG share, Creator Chart Era</span>
@@ -1169,7 +1171,7 @@
                 <tbody>${tableRows}</tbody>
               </table>
             </div>
-            <p class="note">Weeks run Monday–Sunday, from one LinkedIn export per week. The first (1–4 Jan) and last (21–25 Sep) weeks are partial, so they get no WoW figure.</p>
+            <p class="note">Weeks run Monday–Sunday, from one LinkedIn export per week. The first week (1–4 Jan) is partial, and so is the latest week until its Sunday is in; partial weeks get no WoW figure.</p>
           </section>
         `;
       }
@@ -1451,12 +1453,13 @@
         }
 
         $("dlPostsBtn").onclick = () => {
-          const headers = ["published", "post", "url", "type", "format", "tg_impressions_lifetime", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
+          const headers = ["published", "post", "url", "type", "auto_type", "format", "tg_impressions_lifetime", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
           const rows = DASHBOARD_DATA.posts.map(p => [
             p.published,
             `"${p.title.replace(/"/g, '""')}"`,
             p.url,
             `"${p.type.replace(/"/g, '""')}"`,
+            `"${(p.auto_type || p.type).replace(/"/g, '""')}"`,
             p.format,
             p.tg_impressions_lifetime !== null ? p.tg_impressions_lifetime : "",
             p.tg_share_pct !== null ? p.tg_share_pct.toFixed(1) : "",
@@ -1622,7 +1625,7 @@
         return `
           <section style="display:flex;flex-direction:column;gap:12px">
             <h2>What works: TG share, TG impressions and out-of-network reach</h2>
-            <p class="note">Statistical read of all ${DASHBOARD_DATA.posts.length} posts of 2026, each from its own post export. Medians are used because a few viral posts would distort averages. <b>p</b> = chance the gap between groups is just noise (Kruskal–Wallis test for groups, Spearman for relationships). Under 0.05 = reliable, 0.05–0.15 = a lean, above = not proven. With 5–12 posts per group, treat leans as hypotheses to test, not rules.</p>
+            <p class="note">Statistical read of all ${DASHBOARD_DATA.posts.length} posts of 2026, each from its own post export. Medians are used because a few viral posts would distort averages. <b>p</b> = chance the gap between groups is just noise (Kruskal–Wallis test for groups, Spearman for relationships). Under 0.05 = reliable, 0.05–0.15 = a lean, above = not proven. With 5–13 posts per group, treat leans as hypotheses to test, not rules.</p>
             <div class="card">
               ${nEd ? `<p style="font-size:12px;color:var(--muted);margin:0 0 10px">Includes ${nEd} post type${nEd > 1 ? "s" : ""} changed by Mangesh.</p>` : ""}
               <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:14px">
@@ -1742,8 +1745,8 @@
         };
 
         $("dlFullPosts").onclick = () => {
-          const headers = ["published", "post", "url", "type", "format", "tg_impressions_lifetime", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
-          const rows = DASHBOARD_DATA.posts.map(p => [p.published, `"${p.title.replace(/"/g, '""')}"`, p.url, `"${p.type.replace(/"/g, '""')}"`, p.format, p.tg_impressions_lifetime !== null ? p.tg_impressions_lifetime : "", p.tg_share_pct !== null ? p.tg_share_pct.toFixed(1) : "", p.out_of_network_pct !== null ? p.out_of_network_pct : "", p.engagements, p.comments, p.reposts, p.followers_gained, p.creator_chart_era ? "yes" : ""]);
+          const headers = ["published", "post", "url", "type", "auto_type", "format", "tg_impressions_lifetime", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
+          const rows = DASHBOARD_DATA.posts.map(p => [p.published, `"${p.title.replace(/"/g, '""')}"`, p.url, `"${p.type.replace(/"/g, '""')}"`, `"${(p.auto_type || p.type).replace(/"/g, '""')}"`, p.format, p.tg_impressions_lifetime !== null ? p.tg_impressions_lifetime : "", p.tg_share_pct !== null ? p.tg_share_pct.toFixed(1) : "", p.out_of_network_pct !== null ? p.out_of_network_pct : "", p.engagements, p.comments, p.reposts, p.followers_gained, p.creator_chart_era ? "yes" : ""]);
           saveCsv("posts_tg.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
         };
 

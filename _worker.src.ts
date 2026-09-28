@@ -599,7 +599,10 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
         try {
           const liveStr = await kv.get("linkedin_data:live");
           if (liveStr) {
-            payload = JSON.parse(liveStr);
+            const liveData = JSON.parse(liveStr);
+            if (!liveData.meta?.data_to || !defaultDashboardData.meta?.data_to || liveData.meta.data_to >= defaultDashboardData.meta.data_to) {
+              payload = liveData;
+            }
           }
         } catch {
           // fallback to defaultDashboardData
@@ -618,13 +621,27 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
         if (memStr) overrides = JSON.parse(memStr);
       }
 
+      let overridesChanged = false;
       if (overrides && typeof overrides === "object" && Array.isArray(payload.posts)) {
         for (const p of payload.posts) {
           const ov = overrides[p.post_id];
           if (ov) {
-            p.type = typeof ov === "string" ? ov : ov.type;
+            const ovType = typeof ov === "string" ? ov : ov.type;
+            if (ovType === p.type) {
+              delete overrides[p.post_id];
+              overridesChanged = true;
+            } else {
+              p.type = ovType;
+            }
           }
         }
+      }
+      if (overridesChanged) {
+        const serialized = JSON.stringify(overrides);
+        if (kv) {
+          ctx.waitUntil(kv.put("linkedin_data:post_type_overrides", serialized));
+        }
+        localDB.set("linkedin_data:post_type_overrides", serialized);
       }
       payload.overrides = overrides;
 
@@ -649,6 +666,33 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
       resHeaders.set("X-Robots-Tag", "noindex, nofollow");
       return new Response(JSON.stringify(sanitizeData(payload)), { status: 200, headers: resHeaders });
     }
+  }
+
+  // 8. Post Type Changes Export (Admin only, §3.2.4)
+  if (cleanPath === "/api/linkedin-analytics/post-type/export" || cleanPath === "/api/post-type/export") {
+    const user = await verifyTgToken(request);
+    if (!user || user.role !== "admin") {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: user ? 403 : 401, headers });
+    }
+    const kv = env.QUESTIONS_KV;
+    let overrides: Record<string, any> = {};
+    if (kv) {
+      try {
+        const ovStr = await kv.get("linkedin_data:post_type_overrides");
+        if (ovStr) overrides = JSON.parse(ovStr);
+      } catch {}
+    } else {
+      const memStr = localDB.get("linkedin_data:post_type_overrides");
+      if (memStr) overrides = JSON.parse(memStr);
+    }
+    const out: Record<string, string> = {};
+    for (const [k, v] of Object.entries(overrides)) {
+      out[k] = typeof v === "string" ? v : v.type;
+    }
+    const resHeaders = new Headers(headers);
+    resHeaders.set("Content-Disposition", 'attachment; filename="post_type_changes.json"');
+    resHeaders.set("Content-Type", "application/json");
+    return new Response(JSON.stringify(out, null, 2), { status: 200, headers: resHeaders });
   }
 
   // 8. Post Type Overrides (§7.4.1)
@@ -701,6 +745,10 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
         }
 
         const post = (defaultDashboardData.posts as any[]).find((p: any) => p.post_id === post_id);
+        if (!post && type !== "RESET" && type !== "DELETE") {
+          return new Response(JSON.stringify({ error: `Unknown post_id '${post_id}'` }), { status: 404, headers });
+        }
+
         const autoType = post ? (post.auto_type || post.type) : null;
 
         let overrides: Record<string, any> = {};
@@ -732,7 +780,12 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
         }
         localDB.set("linkedin_data:post_type_overrides", serialized);
 
-        return new Response(JSON.stringify({ success: true, post_id, type, auto_type: autoType, overrides }), { status: 200, headers });
+        const outMap: Record<string, string> = {};
+        for (const [k, v] of Object.entries(overrides)) {
+          outMap[k] = typeof v === "string" ? v : v.type;
+        }
+
+        return new Response(JSON.stringify({ success: true, post_id, type, auto_type: autoType, overrides: outMap }), { status: 200, headers });
       } catch (err: any) {
         return new Response(JSON.stringify({ error: err.message }), { status: 400, headers });
       }
@@ -823,6 +876,26 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
               JSON.stringify({ error: `Validation failed: data_to (${payload.meta.data_to}) is older than live data_to (${defaultDashboardData.meta.data_to}).` }),
               { status: 400, headers }
             );
+          }
+        }
+
+        // New for v3: check meta.post_types and validate all posts
+        const postTypes = payload.meta?.post_types;
+        if (!Array.isArray(postTypes) || postTypes.length === 0) {
+          return new Response(JSON.stringify({ error: "Validation failed: meta.post_types is required." }), { status: 400, headers });
+        }
+        if (!Array.isArray(payload.posts)) {
+          return new Response(JSON.stringify({ error: "Validation failed: posts must be an array." }), { status: 400, headers });
+        }
+        for (const p of payload.posts) {
+          if (!p.post_id || typeof p.post_id !== "string") {
+            return new Response(JSON.stringify({ error: "Validation failed: every post must have a string post_id." }), { status: 400, headers });
+          }
+          if (!p.type || !postTypes.includes(p.type)) {
+            return new Response(JSON.stringify({ error: `Validation failed: post ${p.post_id} type '${p.type}' not in meta.post_types.` }), { status: 400, headers });
+          }
+          if (!p.auto_type || !postTypes.includes(p.auto_type)) {
+            return new Response(JSON.stringify({ error: `Validation failed: post ${p.post_id} auto_type '${p.auto_type}' not in meta.post_types.` }), { status: 400, headers });
           }
         }
 
