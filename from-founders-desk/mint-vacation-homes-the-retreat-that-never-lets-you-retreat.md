@@ -2,6 +2,7 @@
 
 **Published in Mint (LiveMint) & Mint Money**  
 *By Shipra Singh · 1st October 2026*  
+[Read on LiveMint](https://www.livemint.com/money/personal-finance/the-vacation-home-dream-and-the-cost-of-keeping-it-alive-11790752315425.html) | [Download PDF](/assets/pdfs/articles/vacation-homes-the-retreat-that-never-lets-you-retreat-mint.pdf)
 
 What starts as a weekend destination can become a year-round burden as life changes. Maintaining a property remotely or renting it to paying guests can quickly turn ownership into a small hospitality operation.
 
