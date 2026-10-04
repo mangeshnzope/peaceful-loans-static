@@ -1,10 +1,10 @@
 # Peaceful-Loans Wins BW Disrupt 40 Under 40 Award 2026
 
 **Published by BW Disrupt & BW Businessworld**  
-*16th September 2026*  
+*National Print Edition: 3rd October 2026 (Online: 16th September 2026)*  
 [View on BW Disrupt](https://www.bwdisrupt.com/article/india-s-rising-startup-stars-meet-the-winners-of-10th-edition-of-bw-disrupt-40-under-40-list-623944) | [LinkedIn Announcement](https://www.linkedin.com/feed/update/urn:li:activity:7506578644895571968/) | [Founder Note](https://lnkd.in/p/dcQSdQZv)
 
-Peaceful Loans founder **Mangesh Zope** has been honored in the 10th edition of **BW Disrupt 40 Under 40** by *BW Businessworld* for pioneering borrower-first home loan advisory, building state-of-the-art proprietary mortgage evaluation technology, and driving transparent rate-spread navigation in India.
+Peaceful Loans founder **Mangesh Zope** has been honored in the 10th edition of **BW Disrupt 40 Under 40** by *BW Businessworld* (featured in the national print magazine issue of 3rd October 2026) for pioneering borrower-first home loan advisory, building state-of-the-art proprietary mortgage evaluation technology, and driving transparent rate-spread navigation in India.
 
 ---
 
