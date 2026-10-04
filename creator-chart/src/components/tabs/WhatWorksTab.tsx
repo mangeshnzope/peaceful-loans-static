@@ -148,26 +148,46 @@ export default function WhatWorksTab({ insights, posts }: WhatWorksTabProps) {
 
   // Dynamic Key Findings
   const keyFindings = useMemo(() => {
-    const catMap = Object.fromEntries(groups.cat.rows.map((r) => [r.g, r]));
+    const GC = groups.cat;
+    const big = GC.rows.filter((r) => r.n >= 3);
+    const byTg = [...big].sort((a, b) => (b.tg || 0) - (a.tg || 0));
+    const bySh = [...big].sort((a, b) => (b.sh || 0) - (a.sh || 0));
+    const topPost =
+      [...posts].sort(
+        (a, b) => (b.tg_impressions_lifetime || 0) - (a.tg_impressions_lifetime || 0)
+      )[0] || { title: "", type: "", tg_impressions_lifetime: 0 };
+    const A = byTg[0] || { g: "", tg: 0 };
+    const B = byTg[1] || { g: "", tg: 0 };
+    const lo = byTg.slice(-2);
+    const dw = bySh[0] || { g: "", tg: 0, sh: 0, out: 0, er: 0 };
+    const lowSh = bySh[bySh.length - 1] || { g: "", sh: 0 };
+    const isTop = (m: "out" | "er", r: typeof dw) =>
+      Math.max(...big.map((x) => x[m] || 0)) === r[m];
+    const eraN = posts.filter((p) => p.creator_chart_era).length;
+    const eraDw = posts.filter((p) => p.creator_chart_era && p.type === dw.g).length;
+
+    const word = (p: number | null | undefined) =>
+      p === null || p === undefined
+        ? ""
+        : p < 0.05
+        ? "reliable"
+        : p < 0.15
+        ? "a lean"
+        : "not proven";
+
     const fmtMap = Object.fromEntries(groups.fmt.rows.map((r) => [r.g, r]));
     const eraMap = Object.fromEntries(groups.era.rows.map((r) => [r.g, r]));
-
-    const slopeVal = Math.abs(fit.slope10).toFixed(1);
-    const outShCorr = corr.out_vs_share;
-    const comCorr = corr.comments_vs_out;
-    const repCorr = corr.reposts_vs_out;
-
-    const fj = catMap["Founder journey & milestones"] || {};
-    const ht = catMap["Hiring & team"] || {};
-    const hl = catMap["Home-loan explainer"] || {};
-    const op = catMap["Opinion & life lessons"] || {};
-    const bc = catMap["Bank & industry critique"] || {};
 
     const textFmt = fmtMap["Text/share"] || {};
     const mediaFmt = fmtMap["Media (ugcPost)"] || {};
 
     const beforeEra = eraMap["Before"] || {};
     const creatorEra = eraMap["Creator Chart Era"] || {};
+
+    const slopeVal = Math.abs(fit.slope10).toFixed(1);
+    const outShCorr = corr.out_vs_share;
+    const comCorr = corr.comments_vs_out;
+    const repCorr = corr.reposts_vs_out;
 
     return [
       {
@@ -183,26 +203,40 @@ export default function WhatWorksTab({ insights, posts }: WhatWorksTabProps) {
         )}). Posts that invite a reply or a reshare are the ones LinkedIn distributes beyond your network.`,
       },
       {
-        title: "Founder journey & milestones and Hiring & team bring the most TG impressions per post.",
-        desc: `Median ${fmt(fj.tg)} and ${fmt(ht.tg)} TG impressions vs ${fmt(hl.tg)} for explainers and ${fmt(
-          op.tg
-        )} for opinion posts (p ${formatPValue(groups.cat.p.tg)}, reliable). Founder journey posts also produced the single biggest TG post (10,000-crore listed company, 7,502 TG impressions). Hiring posts get volume but the lowest TG share (${pct(
-          ht.sh
-        )}): job-seekers are junior.`,
+        title: `${A.g} and ${B.g} bring the most TG impressions per post.`,
+        desc: `Median ${fmt(A.tg)} and ${fmt(B.tg)} TG impressions per post vs ${lo
+          .map((r) => `${fmt(r.tg)} for ${r.g}`)
+          .join(" and ")} (p ${formatPValue(GC.p.tg)}, ${word(GC.p.tg)}). The single biggest TG post was “${
+          topPost.title
+        }” (${topPost.type}, ${fmt(topPost.tg_impressions_lifetime)} TG impressions). ${
+          lowSh.g
+        } has the lowest median TG share (${pct(lowSh.sh)})${
+          lowSh.g === "Hiring & team" ? ": job-seekers are junior" : ""
+        }.`,
       },
       {
-        title: 'Bank & industry critique is the best "dog-whistle" candidate.',
-        desc: `Highest median TG share (${pct(bc.sh)}), highest out-of-network reach (${bc.out}%) and highest engagement rate (${
-          bc.er
-        }%). It travels AND stays senior. It's the Creator Chart Era's main format (6 of 7 such posts) but TG impressions per post are still modest (${fmt(
-          bc.tg
-        )}); pairing it with a founder/Peaceful-Loans angle is the obvious test.`,
+        title: `${dw.g} is the best "dog-whistle" candidate.`,
+        desc: `Highest median TG share (${pct(dw.sh)})${
+          isTop("out", dw)
+            ? `, highest out-of-network reach (${dw.out}%)`
+            : `, out-of-network reach ${dw.out}%`
+        }${
+          isTop("er", dw)
+            ? ` and highest engagement rate (${dw.er}%)`
+            : ` and engagement rate ${dw.er}%`
+        }. TG share differences between types are ${word(GC.p.sh)} (p ${formatPValue(
+          GC.p.sh
+        )}). ${eraDw} of the ${eraN} Creator Chart Era posts are this type; median TG impressions per post ${fmt(
+          dw.tg
+        )}.`,
       },
       {
         title: "Media posts stay inside your network; text posts travel.",
         desc: `Out-of-network ${mediaFmt.out}% for media (image/video/document) vs ${textFmt.out}% for text posts (p ${formatPValue(
           groups.fmt.p.outnet
-        )}, reliable). TG share is similar (${pct(mediaFmt.sh)} vs ${pct(textFmt.sh)}, not proven).`,
+        )}, ${word(groups.fmt.p.outnet)}). TG share ${pct(mediaFmt.sh)} vs ${pct(
+          textFmt.sh
+        )} (${word(groups.fmt.p.sh)}).`,
       },
       {
         title: "Creator Chart Era: more reach and engagement, same TG share, fewer TG impressions per post so far.",
@@ -210,14 +244,16 @@ export default function WhatWorksTab({ insights, posts }: WhatWorksTabProps) {
           groups.era.p.outnet
         )}), engagement rate ${beforeEra.er}% → ${creatorEra.er}% (p ${formatPValue(
           groups.era.p.er
-        )}), TG share ${pct(beforeEra.sh)} → ${pct(creatorEra.sh)} (not proven), median TG impressions per post ${fmt(
-          beforeEra.tg
-        )} → ${fmt(creatorEra.tg)} (p ${formatPValue(
+        )}), TG share ${pct(beforeEra.sh)} → ${pct(creatorEra.sh)} (${word(
+          groups.era.p.sh
+        )}), median TG impressions per post ${fmt(beforeEra.tg)} → ${fmt(
+          creatorEra.tg
+        )} (p ${formatPValue(groups.era.p.tg)}, ${word(
           groups.era.p.tg
         )}). Newer posts have had less time to collect views, so the last point partly reflects post age.`,
       },
     ];
-  }, [groups, corr, fit]);
+  }, [groups, corr, fit, posts]);
 
   // Scatter Plot Data
   const scatterPosts = useMemo(() => {

@@ -39,7 +39,7 @@ describe("API Route Handlers In-Process Tests", () => {
 
   it("Admin Upload: Rejects payload with forbidden total impressions keys", async () => {
     const badPayload = {
-      meta: { data_to: "2026-09-30", built: "30 Sep 2026" },
+      meta: { data_to: "2026-10-03", built: "04 Oct 2026" },
       daily: [],
       weekly: [],
       monthly: [],
@@ -66,7 +66,7 @@ describe("API Route Handlers In-Process Tests", () => {
 
   it("Admin Upload: Rejects payload missing required sections", async () => {
     const incompletePayload = {
-      meta: { data_to: "2026-09-30" },
+      meta: { data_to: "2026-10-03" },
       // missing daily, weekly, etc.
     };
 

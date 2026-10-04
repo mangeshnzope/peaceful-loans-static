@@ -13,15 +13,17 @@ export default function WeeklyTab({ weekly }: WeeklyTabProps) {
   const calculatedWeeks = useMemo(() => calculateWeeklyWoW(weekly), [weekly]);
 
   // KPI Calculations
-  const { avgPostImpressions, avgPreImpressions, postShare, preShare, bestWeekImp, bestWeekShare } = useMemo(() => {
+  const { avgPostImpressions, avgPreImpressions, postShare, preShare, bestWeekImp, bestWeekShare, postEnd } = useMemo(() => {
     const fullWeeks = weekly.filter((w) => !isPartialWeek(w.week_start, w.week_end));
 
-    // Creator Chart Era: 17 Aug – 20 Sep (5 full weeks)
-    const postWeeks = weekly.filter(
-      (w) => w.week_start >= "2026-08-17" && w.week_start <= "2026-09-14" && w.tg_impressions !== null
+    // Creator Chart Era: all full weeks starting on or after 17 Aug with data
+    const postWeeks = fullWeeks.filter(
+      (w) => w.week_start >= "2026-08-17" && w.tg_impressions !== null
     );
+    const postEnd = postWeeks.length ? postWeeks[postWeeks.length - 1].week_end : "2026-09-27";
+
     // Baseline: 13 Apr – 2 Aug (16 full weeks)
-    const preWeeks = weekly.filter(
+    const preWeeks = fullWeeks.filter(
       (w) => w.week_start >= "2026-04-13" && w.week_start <= "2026-07-27" && w.tg_impressions !== null
     );
 
@@ -53,6 +55,7 @@ export default function WeeklyTab({ weekly }: WeeklyTabProps) {
       preShare: calcShare(preWeeks),
       bestWeekImp: bestImp,
       bestWeekShare: bestSh,
+      postEnd,
     };
   }, [weekly]);
 
@@ -96,7 +99,7 @@ export default function WeeklyTab({ weekly }: WeeklyTabProps) {
           <span className="eyebrow">Avg weekly TG impressions</span>
           <span className="v num">{fmt(avgPostImpressions)}</span>
           <span className="s">
-            Creator Chart Era (17 Aug – 20 Sep) vs {fmt(avgPreImpressions)} (13 Apr – 2 Aug)
+            Creator Chart Era (17 Aug – {dd(postEnd)}) vs {fmt(avgPreImpressions)} (13 Apr – 2 Aug)
           </span>
         </div>
 

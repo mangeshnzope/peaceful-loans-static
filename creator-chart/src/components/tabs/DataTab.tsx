@@ -156,7 +156,52 @@ export default function DataTab({ data }: DataTabProps) {
     triggerDownload("viewer_mix_daily.csv", csv);
   };
 
-  // 6. Everything (JSON minus viewer_mix.day_weight)
+  // 6. Company page
+  const downloadCompanyPage = () => {
+    if (!data.company_page) return;
+    const headers = ["month_start", "month_end", "tg_page_views", "tg_share_of_page_views_pct"];
+    const rows = data.company_page.visitors_monthly.map((m) => [
+      m.month_start,
+      m.month_end,
+      m.tg_page_views,
+      m.tg_share_pct !== null ? m.tg_share_pct.toFixed(1) : "",
+    ]);
+    const csv = [headers.join(","), ...rows.map((r) => r.map(escapeCsv).join(","))].join("\n");
+    triggerDownload("company_page_tg_monthly.csv", csv);
+  };
+
+  // 7. Newsletter
+  const downloadNewsletter = () => {
+    if (!data.newsletter) return;
+    const headers = [
+      "published",
+      "edition",
+      "url",
+      "tg_impressions_lifetime",
+      "tg_share_pct",
+      "tg_is_floor",
+      "out_of_network_pct",
+      "engagements",
+      "comments",
+      "reposts",
+    ];
+    const rows = data.newsletter.editions.map((e) => [
+      e.published,
+      e.title,
+      e.url,
+      e.tg_impressions_lifetime !== null ? e.tg_impressions_lifetime : "",
+      e.tg_share_pct !== null ? e.tg_share_pct.toFixed(1) : "",
+      e.tg_is_floor ? "yes" : "",
+      e.out_of_network_pct !== null ? e.out_of_network_pct : "",
+      e.engagements,
+      e.comments,
+      e.reposts,
+    ]);
+    const csv = [headers.join(","), ...rows.map((r) => r.map(escapeCsv).join(","))].join("\n");
+    triggerDownload("newsletter_editions_tg.csv", csv);
+  };
+
+  // 8. Everything (JSON minus viewer_mix.day_weight)
   const downloadEverythingJson = () => {
     // Deep clone data and delete day_weight as requested by Spec §7.6
     const clone = JSON.parse(JSON.stringify(data));
@@ -170,7 +215,7 @@ export default function DataTab({ data }: DataTabProps) {
   const cards = [
     {
       title: "Daily",
-      desc: "One row per day, 1 Jan – 25 Sep 2026: TG impressions, TG share, engagements, new followers, posts published.",
+      desc: `One row per day, 1 Jan – ${data.meta.data_to} 2026: TG impressions, TG share, engagements, new followers, posts published.`,
       filename: "daily_tg.csv",
       action: downloadDaily,
     },
@@ -197,6 +242,18 @@ export default function DataTab({ data }: DataTabProps) {
       desc: "Long format: date, dimension (seniority, job title, industry, location, company size, company), value, % of that day's views.",
       filename: "viewer_mix_daily.csv",
       action: downloadViewerMixDaily,
+    },
+    {
+      title: "Company page",
+      desc: "One row per month: TG page views and TG share of page views, each month from its own visitor export.",
+      filename: "company_page_tg_monthly.csv",
+      action: downloadCompanyPage,
+    },
+    {
+      title: "Newsletter",
+      desc: "One row per edition: lifetime TG impressions and TG share (floors), out-of-network %, engagements.",
+      filename: "newsletter_editions_tg.csv",
+      action: downloadNewsletter,
     },
     {
       title: "Everything",

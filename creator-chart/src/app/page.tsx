@@ -8,6 +8,8 @@ import MonthlyTab from "@/components/tabs/MonthlyTab";
 import PostsTab from "@/components/tabs/PostsTab";
 import WhatWorksTab from "@/components/tabs/WhatWorksTab";
 import DataTab from "@/components/tabs/DataTab";
+import CompanyPageTab from "@/components/tabs/CompanyPageTab";
+import NewsletterTab from "@/components/tabs/NewsletterTab";
 import { DashboardData } from "@/lib/types";
 
 export default function DashboardPage() {
@@ -20,21 +22,22 @@ export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState("daily");
 
   useEffect(() => {
-    // Check URL hash on initial load
-    const hash = window.location.hash.replace("#", "");
-    if (["daily", "weekly", "monthly", "posts", "works", "data"].includes(hash)) {
-      setActiveTab(hash);
-    }
-
-    const handleHashChange = () => {
-      const currentHash = window.location.hash.replace("#", "");
-      if (["daily", "weekly", "monthly", "posts", "works", "data"].includes(currentHash)) {
-        setActiveTab(currentHash);
+    // Check URL hash on initial load and on change
+    const syncHash = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (hash === "page") {
+        setActiveSource("page");
+      } else if (hash === "news" || hash === "newsletter") {
+        setActiveSource("news");
+      } else if (["daily", "weekly", "monthly", "posts", "works", "data"].includes(hash)) {
+        setActiveSource("profile");
+        setActiveTab(hash);
       }
     };
 
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    return () => window.removeEventListener("hashchange", syncHash);
   }, []);
 
   useEffect(() => {
@@ -93,11 +96,11 @@ export default function DashboardPage() {
 
       <main style={{ display: "flex", flexDirection: "column", gap: 24, width: "100%" }}>
         {activeSource === "page" && (
-          <div className="card pending">Peaceful-Loans page not pulled yet.</div>
+          <CompanyPageTab companyPage={data.company_page} />
         )}
 
         {activeSource === "news" && (
-          <div className="card pending">Newsletter not pulled yet.</div>
+          <NewsletterTab newsletter={data.newsletter} />
         )}
 
         {activeSource === "profile" && (

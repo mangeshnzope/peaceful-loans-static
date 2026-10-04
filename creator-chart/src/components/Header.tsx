@@ -90,7 +90,10 @@ export default function Header({
           className="source-btn"
           role="tab"
           aria-selected={activeSource === "profile"}
-          onClick={() => setActiveSource("profile")}
+          onClick={() => {
+            setActiveSource("profile");
+            window.location.hash = activeTab;
+          }}
         >
           Mangesh Zope profile
         </button>
@@ -98,17 +101,23 @@ export default function Header({
           className="source-btn"
           role="tab"
           aria-selected={activeSource === "page"}
-          onClick={() => setActiveSource("page")}
+          onClick={() => {
+            setActiveSource("page");
+            window.location.hash = "page";
+          }}
         >
-          Peaceful-Loans page <span className="pill">PENDING</span>
+          Peaceful-Loans page
         </button>
         <button
           className="source-btn"
           role="tab"
           aria-selected={activeSource === "news"}
-          onClick={() => setActiveSource("news")}
+          onClick={() => {
+            setActiveSource("news");
+            window.location.hash = "newsletter";
+          }}
         >
-          Newsletter <span className="pill">PENDING</span>
+          Newsletter
         </button>
       </div>
 

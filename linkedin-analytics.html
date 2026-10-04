@@ -196,6 +196,18 @@
         const dt = new Date(Date.UTC(y, m - 1, d));
         return dt.toLocaleDateString("en-GB", { weekday: "short", timeZone: "UTC" });
       };
+      const dy = s => {
+        if (!s) return "";
+        const [y, m, d] = s.split("-").map(Number);
+        const dt = new Date(Date.UTC(y, m - 1, d));
+        return dt.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+      };
+      const mon = s => {
+        if (!s) return "";
+        const [y, m, d] = s.split("-").map(Number);
+        const dt = new Date(Date.UTC(y, m - 1, d));
+        return dt.toLocaleDateString("en-GB", { month: "short", year: "numeric", timeZone: "UTC" });
+      };
 
       const parseDate = s => {
         const [y, m, d] = s.split("-").map(Number);
@@ -396,17 +408,22 @@
           refreshCats(false);
 
           // Sync with URL hash
-          const hash = window.location.hash.replace("#", "");
-          if (["daily", "weekly", "monthly", "posts", "works", "data"].includes(hash)) {
-            ACTIVE_TAB = hash;
-          }
+          const syncHash = () => {
+            const h = window.location.hash.replace("#", "");
+            if (h === "page") {
+              ACTIVE_SOURCE = "page";
+            } else if (h === "news" || h === "newsletter") {
+              ACTIVE_SOURCE = "news";
+            } else if (["daily", "weekly", "monthly", "posts", "works", "data"].includes(h)) {
+              ACTIVE_SOURCE = "profile";
+              ACTIVE_TAB = h;
+            }
+          };
+          syncHash();
 
           window.addEventListener("hashchange", () => {
-            const h = window.location.hash.replace("#", "");
-            if (["daily", "weekly", "monthly", "posts", "works", "data"].includes(h)) {
-              ACTIVE_TAB = h;
-              renderDashboard();
-            }
+            syncHash();
+            renderDashboard();
           });
 
           renderDashboard();
@@ -507,9 +524,9 @@
 
         let contentHtml = "";
         if (ACTIVE_SOURCE === "page") {
-          contentHtml = `<div class="card pending">Peaceful-Loans page not pulled yet.</div>`;
+          contentHtml = renderCompanyPageHtml();
         } else if (ACTIVE_SOURCE === "news") {
-          contentHtml = `<div class="card pending">Newsletter not pulled yet.</div>`;
+          contentHtml = renderNewsletterHtml();
         } else {
           if (ACTIVE_TAB === "daily") contentHtml = renderDailyTabHtml();
           else if (ACTIVE_TAB === "weekly") contentHtml = renderWeeklyTabHtml();
@@ -545,8 +562,8 @@
 
             <div class="sources" role="tablist">
               <button class="source-btn" id="src-profile" aria-selected="${ACTIVE_SOURCE === "profile"}">Mangesh Zope profile</button>
-              <button class="source-btn" id="src-page" aria-selected="${ACTIVE_SOURCE === "page"}">Peaceful-Loans page <span class="pill">PENDING</span></button>
-              <button class="source-btn" id="src-news" aria-selected="${ACTIVE_SOURCE === "news"}">Newsletter <span class="pill">PENDING</span></button>
+              <button class="source-btn" id="src-page" aria-selected="${ACTIVE_SOURCE === "page"}">Peaceful-Loans page</button>
+              <button class="source-btn" id="src-news" aria-selected="${ACTIVE_SOURCE === "news"}">Newsletter</button>
             </div>
 
             ${ACTIVE_SOURCE === "profile" ? `
@@ -657,6 +674,7 @@
         ["profile", "page", "news"].forEach(src => {
           $(`src-${src}`).onclick = () => {
             ACTIVE_SOURCE = src;
+            window.location.hash = src === "page" ? "page" : src === "news" ? "newsletter" : ACTIVE_TAB;
             renderDashboard();
           };
         });
@@ -674,6 +692,10 @@
           if (ACTIVE_TAB === "daily") setupDailyTabEvents();
           else if (ACTIVE_TAB === "posts") setupPostsTabEvents();
           else if (ACTIVE_TAB === "data") setupDataTabEvents();
+        } else if (ACTIVE_SOURCE === "page") {
+          setupCompanyPageEvents();
+        } else if (ACTIVE_SOURCE === "news") {
+          setupNewsletterEvents();
         }
       }
 
@@ -1249,7 +1271,7 @@
                 <tbody>${rowsHtml}</tbody>
               </table>
             </div>
-            <p class="note">From one LinkedIn export per calendar month; nothing is added up from days or weeks. September is complete (1–30 Sep), so every month now has a full MoM. <b>TG impressions from those posts</b> = lifetime TG views of the posts published that month, from each post's own page (posts too small for a seniority split are left out).</p>
+            <p class="note">From one LinkedIn export per calendar month; nothing is added up from days or weeks. October runs to 3 Oct, so it gets no MoM for TG impressions (its share change is still shown). <b>TG impressions from those posts</b> = lifetime TG views of the posts published that month, from each post's own page (posts too small for a seniority split are left out).</p>
           </section>
         `;
       }
@@ -1708,6 +1730,18 @@
               </div>
 
               <div class="card" style="display:flex;flex-direction:column;gap:8px">
+                <h3>Company page</h3>
+                <span style="font-size:13px;color:var(--muted);flex:1">One row per month: TG page views and TG share of page views, each month from its own visitor export.</span>
+                <div><button class="dlb" id="dlFullCompanyPage">↓ company_page_tg_monthly.csv</button></div>
+              </div>
+
+              <div class="card" style="display:flex;flex-direction:column;gap:8px">
+                <h3>Newsletter</h3>
+                <span style="font-size:13px;color:var(--muted);flex:1">One row per edition: lifetime TG impressions and TG share (floors), out-of-network %, engagements.</span>
+                <div><button class="dlb" id="dlFullNewsletter">↓ newsletter_editions_tg.csv</button></div>
+              </div>
+
+              <div class="card" style="display:flex;flex-direction:column;gap:8px">
                 <h3>Everything</h3>
                 <span style="font-size:13px;color:var(--muted);flex:1">All of the above in one JSON file, the exact dataset the report is built from (minus day weights).</span>
                 <div><button class="dlb" id="dlFullJson">↓ linkedin_tg_backend.json</button></div>
@@ -1765,6 +1799,37 @@
           saveCsv("viewer_mix_daily.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
         };
 
+        if ($("dlFullCompanyPage")) {
+          $("dlFullCompanyPage").onclick = () => {
+            const cp = DASHBOARD_DATA.company_page;
+            if (!cp) return;
+            const headers = ["month_start", "month_end", "tg_page_views", "tg_share_of_page_views_pct"];
+            const rows = cp.visitors_monthly.map(m => [m.month_start, m.month_end, m.tg_page_views, m.tg_share_pct !== null ? m.tg_share_pct.toFixed(1) : ""]);
+            saveCsv("company_page_tg_monthly.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
+          };
+        }
+
+        if ($("dlFullNewsletter")) {
+          $("dlFullNewsletter").onclick = () => {
+            const nl = DASHBOARD_DATA.newsletter;
+            if (!nl) return;
+            const headers = ["published", "edition", "url", "tg_impressions_lifetime", "tg_share_pct", "tg_is_floor", "out_of_network_pct", "engagements", "comments", "reposts"];
+            const rows = nl.editions.filter(e => e.published >= "2026-01-01").map(e => [
+              e.published,
+              `"${e.title.replace(/"/g, '""')}"`,
+              e.url,
+              e.tg_impressions_lifetime !== null ? e.tg_impressions_lifetime : "",
+              e.tg_share_pct !== null ? e.tg_share_pct.toFixed(1) : "",
+              e.tg_is_floor ? "yes" : "",
+              e.out_of_network_pct !== null ? e.out_of_network_pct : "",
+              e.engagements,
+              e.comments,
+              e.reposts
+            ]);
+            saveCsv("newsletter_editions_tg.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
+          };
+        }
+
         $("dlFullJson").onclick = () => {
           const clone = JSON.parse(JSON.stringify(DASHBOARD_DATA));
           if (clone.viewer_mix) delete clone.viewer_mix.day_weight;
@@ -1794,6 +1859,311 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+          };
+        }
+      }
+
+      // --- COMPANY PAGE TAB ---
+      function renderCompanyPageHtml() {
+        const cp = DASHBOARD_DATA.company_page;
+        if (!cp) return `<div class="card pending">Company page data not available.</div>`;
+        const M = cp.visitors_monthly;
+        const V12 = cp.visitors_12m;
+        const F = cp.followers;
+
+        const isFull = o => {
+          const [y, mon] = o.month_start.split("-").map(Number);
+          const lastDay = new Date(Date.UTC(y, mon, 0)).getUTCDate();
+          return parseInt(o.month_end.slice(8), 10) >= lastDay;
+        };
+
+        const fullMonths = M.filter(isFull);
+        const L = fullMonths[fullMonths.length - 1];
+        const P = fullMonths.length > 1 ? fullMonths[fullMonths.length - 2] : null;
+
+        const chgSpan = (a, b) => {
+          if (a === null || a === undefined || !b) return `<span class="muted">–</span>`;
+          const c = (a - b) / b * 100;
+          return `<span class="${c >= 0 ? "up" : "dn"}">${c >= 0 ? "+" : ""}${Math.round(c)}%</span>`;
+        };
+        const ptsSpan = (a, b) => {
+          if (a === null || a === undefined || b === null || b === undefined) return `<span class="muted">–</span>`;
+          const c = a - b;
+          return `<span class="${c >= 0 ? "up" : "dn"}">${c >= 0 ? "+" : ""}${c.toFixed(1)} pts</span>`;
+        };
+
+        // Chart
+        const width = Math.max(560, M.length * 70);
+        const height = 240;
+        const m = { left: 40, right: 40, top: 16, bottom: 30 };
+        const iw = width - m.left - m.right;
+        const ih = height - m.top - m.bottom;
+        const bw = iw / M.length;
+
+        const maxViews = Math.max(...M.map(o => o.tg_page_views)) * 1.15;
+        const y = v => m.top + ih - (v / maxViews) * ih;
+        const ys = v => m.top + ih - ((v - 20) / 40) * ih;
+
+        let gridLines = "";
+        [20, 30, 40, 50, 60].forEach(v => {
+          gridLines += `<line x1="${m.left}" x2="${width - m.right}" y1="${ys(v)}" y2="${ys(v)}" stroke="var(--grid)"/><text x="${width - m.right + 4}" y="${ys(v) + 3}" style="fill:var(--accent);font-size:10px">${v}%</text>`;
+        });
+
+        let pathD = "";
+        M.forEach((o, i) => {
+          const x = m.left + i * bw + bw / 2;
+          if (o.tg_share_pct !== null) {
+            const sc = Math.min(60, Math.max(20, o.tg_share_pct));
+            pathD += (pathD ? "L" : "M") + `${x} ${ys(sc)}`;
+          }
+        });
+
+        let barsSvg = "";
+        M.forEach((o, i) => {
+          const x = m.left + i * bw;
+          const full = isFull(o);
+          const barH = Math.max(1, m.top + ih - y(o.tg_page_views));
+          const barY = y(o.tg_page_views);
+          barsSvg += `
+            <rect x="${x + 8}" y="${barY}" width="${bw - 16}" height="${barH}" rx="2" fill="var(--target)" opacity="${full ? 1 : 0.5}">
+              <title>${mon(o.month_start)}${full ? "" : " (to " + dd(o.month_end) + ")"}: ${o.tg_page_views} TG page views, ${pct(o.tg_share_pct)}</title>
+            </rect>
+            <text x="${x + bw / 2}" y="${barY - 4}" text-anchor="middle" style="fill:var(--ink);font-size:10px">${o.tg_page_views}</text>
+            <text x="${x + bw / 2}" y="${height - 12}" text-anchor="middle" style="fill:var(--muted);font-size:10px">${mon(o.month_start).slice(0, 3)}</text>
+          `;
+          if (o.tg_share_pct !== null) {
+            const sy = ys(Math.min(60, Math.max(20, o.tg_share_pct)));
+            barsSvg += `<circle cx="${x + bw / 2}" cy="${sy}" r="3.5" fill="var(--accent)"><title>${mon(o.month_start)}: TG share ${pct(o.tg_share_pct)}</title></circle>`;
+          }
+        });
+
+        // MoM table
+        let prevFullItem = null;
+        const computedRows = M.map(o => {
+          const full = isFull(o);
+          const p = prevFullItem;
+          if (full) prevFullItem = o;
+          return { ...o, isFull: full, prevFull: p };
+        });
+
+        let tableRows = "";
+        [...computedRows].reverse().forEach(o => {
+          const isEra = o.month_start >= "2026-08-01";
+          tableRows += `
+            <tr class="${isEra ? "cr" : ""}">
+              <td class="l">${mon(o.month_start)}${o.isFull ? "" : `<span class="chip w">to ${dd(o.month_end)}</span>`}</td>
+              <td>${fmt(o.tg_page_views)}</td>
+              <td>${o.isFull ? chgSpan(o.tg_page_views, o.prevFull ? o.prevFull.tg_page_views : null) : `<span class="muted">–</span>`}</td>
+              <td>${o.tg_share_pct !== null ? `<span class="tbar" style="width:${o.tg_share_pct * 1.2}px;background:var(--accent)"></span>${pct(o.tg_share_pct)}` : `<span class="muted">–</span>`}</td>
+              <td>${o.isFull ? ptsSpan(o.tg_share_pct, o.prevFull ? o.prevFull.tg_share_pct : null) : `<span class="muted">–</span>`}</td>
+            </tr>
+          `;
+        });
+
+        return `
+          <p class="note">Peaceful-Loans company page. LinkedIn gives <b>no viewer seniority for Page posts</b>, so Page post reach can't be split into TG. The TG signal for the page is <b>who visits it</b> (TG page views and TG share of page views, from LinkedIn's visitor export, one export per month) and <b>who follows it</b> (followers by seniority). TG share = TG views ÷ views where LinkedIn knows the viewer's seniority.</p>
+          <div class="kpis">
+            <div class="kpi t">
+              <span class="eyebrow">TG page views, ${L ? mon(L.month_start) : ""}</span>
+              <span class="v num">${L ? fmt(L.tg_page_views) : "–"}</span>
+              <span class="s">${L && P ? `${chgSpan(L.tg_page_views, P.tg_page_views)} vs ${mon(P.month_start)}` : "–"}</span>
+            </div>
+            <div class="kpi">
+              <span class="eyebrow">TG share of page views, ${L ? mon(L.month_start) : ""}</span>
+              <span class="v num">${L ? pct(L.tg_share_pct) : "–"}</span>
+              <span class="s">${L && P ? `${ptsSpan(L.tg_share_pct, P.tg_share_pct)} vs ${mon(P.month_start)}` : "–"}</span>
+            </div>
+            <div class="kpi">
+              <span class="eyebrow">TG followers</span>
+              <span class="v num">${fmt(F.tg_followers)}</span>
+              <span class="s">${pct(F.tg_share_pct)} of followers with a known seniority</span>
+            </div>
+            <div class="kpi">
+              <span class="eyebrow">TG share of page views, last 12 months</span>
+              <span class="v num">${pct(V12.tg_share_pct)}</span>
+              <span class="s">${fmt(V12.tg_page_views)} TG page views, ${dy(V12.start)} – ${dy(V12.end)}</span>
+            </div>
+          </div>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>TG page views, month by month</h2>
+            <div class="legend">
+              <span><i class="sw" style="background:var(--target)"></i>TG page views</span>
+              <span><i class="sw" style="background:var(--accent);border-radius:50%"></i>TG share (right axis)</span>
+            </div>
+            <div class="card chart" style="overflow-x:auto">
+              <svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img">
+                ${gridLines}
+                ${barsSvg}
+                <path d="${pathD}" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+              </svg>
+            </div>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <div class="dlrow">
+              <h2>Month on month</h2>
+              <button id="dlPageBtn" class="dlb">↓ Download page data (CSV)</button>
+            </div>
+            <div class="card tw">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="l">Month</th>
+                    <th>TG page views</th>
+                    <th>MoM</th>
+                    <th>TG share</th>
+                    <th>MoM share</th>
+                  </tr>
+                </thead>
+                <tbody>${tableRows}</tbody>
+              </table>
+            </div>
+          </section>
+        `;
+      }
+
+      function setupCompanyPageEvents() {
+        if ($("dlPageBtn")) {
+          $("dlPageBtn").onclick = () => {
+            const cp = DASHBOARD_DATA.company_page;
+            if (!cp) return;
+            const headers = ["month_start", "month_end", "tg_page_views", "tg_share_of_page_views_pct"];
+            const rows = cp.visitors_monthly.map(m => [m.month_start, m.month_end, m.tg_page_views, m.tg_share_pct !== null ? m.tg_share_pct.toFixed(1) : ""]);
+            saveCsv("company_page_tg_monthly.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
+          };
+        }
+      }
+
+      // --- NEWSLETTER TAB ---
+      function renderNewsletterHtml() {
+        const nl = DASHBOARD_DATA.newsletter;
+        if (!nl) return `<div class="card pending">Newsletter data not available.</div>`;
+        const allEditions = nl.editions;
+        const subscribers = nl.subscribers;
+        const editions = allEditions.filter(e => e.published >= "2026-01-01");
+        const latestSub = subscribers[subscribers.length - 1];
+        const latestEd = editions[0];
+
+        const medTg = median(editions.map(e => e.tg_impressions_lifetime));
+        const medShare = median(editions.map(e => e.tg_share_pct));
+        const fl = e => e.tg_is_floor ? "≥ " : "";
+
+        let editionRows = "";
+        editions.forEach(e => {
+          const isEra = e.published >= "2026-08-19";
+          editionRows += `
+            <tr class="${isEra ? "cr" : ""}">
+              <td class="l"><a href="${e.url}" target="_blank" rel="noopener">${e.title.replace(/</g, "&lt;")}</a></td>
+              <td class="l" style="white-space:nowrap">${dd(e.published)}</td>
+              <td>${e.tg_impressions_lifetime !== null ? `${fl(e)}${fmt(e.tg_impressions_lifetime)}${e.tg_is_floor ? `<span class="chip w">TG may be higher</span>` : ""}` : `<span class="muted">–</span>`}</td>
+              <td>${e.tg_share_pct !== null ? `${fl(e)}${pct(e.tg_share_pct)}` : `<span class="muted">–</span>`}</td>
+              <td>${e.out_of_network_pct !== null ? `${e.out_of_network_pct}%` : `<span class="muted">–</span>`}</td>
+              <td>${fmt(e.engagements)}</td>
+              <td>${e.comments}</td>
+              <td>${e.reposts}</td>
+            </tr>
+          `;
+        });
+
+        let subscriberRows = "";
+        [...subscribers].reverse().forEach(s => {
+          subscriberRows += `
+            <tr>
+              <td class="l">${dd(s.date)}</td>
+              <td>${fmt(s.subscribers)}</td>
+              <td>≥ ${s.tg_share_floor_pct}%</td>
+            </tr>
+          `;
+        });
+
+        return `
+          <p class="note">Mangesh's newsletter <b>Demystifying Home Loan India</b>. TG impressions and TG share per edition come from each edition's own LinkedIn export (lifetime, post + article). LinkedIn lists only the top 3–4 seniority groups for an edition, so edition TG is a <b>floor</b>: the real figure can only be higher. Editions also appear as posts in the profile's Posts tab. The newsletter has 22 older editions (2023–2025) that aren't included here.</p>
+          <div class="kpis">
+            <div class="kpi">
+              <span class="eyebrow">Subscribers</span>
+              <span class="v num">${latestSub ? fmt(latestSub.subscribers) : "–"}</span>
+              <span class="s">${latestSub ? `as of ${dd(latestSub.date)}` : "–"}</span>
+            </div>
+            <div class="kpi t">
+              <span class="eyebrow">TG share of subscribers</span>
+              <span class="v num">${latestSub ? `≥ ${latestSub.tg_share_floor_pct}%` : "–"}</span>
+              <span class="s">from LinkedIn's top 5 seniority groups</span>
+            </div>
+            <div class="kpi t">
+              <span class="eyebrow">Latest edition, TG impressions</span>
+              <span class="v num">${latestEd && latestEd.tg_impressions_lifetime !== null ? `≥ ${fmt(latestEd.tg_impressions_lifetime)}` : "–"}</span>
+              <span class="s">${latestEd ? `${dd(latestEd.published)} · TG share ≥ ${pct(latestEd.tg_share_pct)}` : "–"}</span>
+            </div>
+            <div class="kpi">
+              <span class="eyebrow">2026 editions, median TG impressions</span>
+              <span class="v num">${medTg !== null ? fmt(medTg) : "–"}</span>
+              <span class="s">${editions.length} editions · median TG share ${medShare !== null ? pct(medShare) : "–"} (floors)</span>
+            </div>
+          </div>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <div class="dlrow">
+              <h2>Edition by edition (2026)</h2>
+              <button id="dlNewsBtn" class="dlb">↓ Download edition data (CSV)</button>
+            </div>
+            <div class="card tw">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="l">Edition</th>
+                    <th class="l">Published</th>
+                    <th>TG impressions</th>
+                    <th>TG share</th>
+                    <th>Out-of-network</th>
+                    <th>Engagements</th>
+                    <th>Comments</th>
+                    <th>Reposts</th>
+                  </tr>
+                </thead>
+                <tbody>${editionRows}</tbody>
+              </table>
+            </div>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>Subscribers</h2>
+            <div class="card tw">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="l">Recorded</th>
+                    <th>Subscribers</th>
+                    <th>TG share of subscribers</th>
+                  </tr>
+                </thead>
+                <tbody>${subscriberRows}</tbody>
+              </table>
+            </div>
+            <p class="note">LinkedIn has no subscriber export. Each refresh records the subscriber count and the seniority mix shown on the newsletter's analytics page (top 5 groups only, so TG share of subscribers is a floor). The history builds up from 4 Oct 2026.</p>
+          </section>
+        `;
+      }
+
+      function setupNewsletterEvents() {
+        if ($("dlNewsBtn")) {
+          $("dlNewsBtn").onclick = () => {
+            const nl = DASHBOARD_DATA.newsletter;
+            if (!nl) return;
+            const headers = ["published", "edition", "url", "tg_impressions_lifetime", "tg_share_pct", "tg_is_floor", "out_of_network_pct", "engagements", "comments", "reposts"];
+            const rows = nl.editions.filter(e => e.published >= "2026-01-01").map(e => [
+              e.published,
+              `"${e.title.replace(/"/g, '""')}"`,
+              e.url,
+              e.tg_impressions_lifetime !== null ? e.tg_impressions_lifetime : "",
+              e.tg_share_pct !== null ? e.tg_share_pct.toFixed(1) : "",
+              e.tg_is_floor ? "yes" : "",
+              e.out_of_network_pct !== null ? e.out_of_network_pct : "",
+              e.engagements,
+              e.comments,
+              e.reposts
+            ]);
+            saveCsv("newsletter_editions_tg.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
           };
         }
       }

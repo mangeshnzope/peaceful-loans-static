@@ -1,6 +1,6 @@
 # Creator Chart TG Dashboard: build spec for Antigravity
 
-**Owner:** Mangesh Zope, Peaceful-Loans · **Spec date:** 1 Oct 2026 (v4) · **Data covers:** 1 Jan – 30 Sep 2026
+**Owner:** Mangesh Zope, Peaceful-Loans · **Spec date:** 4 Oct 2026 (v5) · **Data covers:** profile 1 Jan – 3 Oct 2026; company page 1 Jan – 2 Oct 2026
 
 Build a password-protected web app where the Creator Chart team logs in and sees how well Mangesh Zope's LinkedIn content reaches Peaceful-Loans' target audience (TG). This file is the complete brief. Three files come with it:
 
@@ -101,7 +101,7 @@ Load it once after login from `/api/data` and keep it in memory. All values are 
 
 Fields: `week_start`, `week_end`, `tg_impressions`, `tg_share_pct`, `tg_may_be_higher`, `engagements`, `new_followers`, `posts_published`.
 
-- **Partial weeks:** a partial week is one where `week_end - week_start < 6 days`. Detect it from the dates on every load; never hard-code which weeks are partial. In the 30 Sep file two weeks are partial: the first (1–4 Jan) and the latest (28–30 Sep), which gets a "partial week" chip and no WoW figure. Once its Sunday is in, it becomes a full week.
+- **Partial weeks:** a partial week is one where `week_end - week_start < 6 days`. Detect it from the dates on every load; never hard-code which weeks are partial. In the 3 Oct file two weeks are partial: the first (1–4 Jan) and the latest (28 Sep – 3 Oct), which gets a "partial week" chip and no WoW figure. Once its Sunday is in, it becomes a full week.
 
 ### 4.4 `monthly[]`: calendar month, one export per month
 
@@ -144,6 +144,22 @@ Fields: `month_start`, `month_end`, `tg_impressions`, `tg_share_pct`, `tg_may_be
   - `p` = Kruskal–Wallis p-value per metric.
 - **`corr`:** Spearman `{rho, p, n}` for each of `out_vs_share`, `out_vs_tg`, `comments_vs_out`, `reposts_vs_out`, `er_vs_share` and `hour_vs_share`.
 - **`fit`:** linear fit of TG share on out-of-network %: `{slope10, r2, p, a, b}`, where `y = a + b·x` and `slope10` = change in TG share per +10 pts.
+
+### 4.8 `company_page`: Peaceful-Loans company page (new in v5)
+
+LinkedIn gives **no viewer seniority for Page posts**, so Page post impressions are not in the file and must never be shown. The page's TG signal comes from page visitors and followers.
+
+- `note`: string.
+- `visitors_monthly[]`: one LinkedIn visitor export per calendar month. Fields `month_start`, `month_end`, `tg_page_views` (int: page views from TG seniorities), `tg_share_pct` (TG page views ÷ page views with a known seniority × 100). The latest month is partial (`month_end` before the month's last day); company data lags LinkedIn by about 2 days, so it can end a day before the profile data.
+- `visitors_12m`: `{start, end, tg_page_views, tg_share_pct}` from one 12-month visitor export.
+- `followers`: `{as_of, tg_followers, tg_share_pct}`: TG followers and their % of followers with a known seniority.
+
+### 4.9 `newsletter`: "Demystifying Home Loan India" (new in v5)
+
+- `name`, `note`: strings.
+- `editions[]`: every 2026 edition, newest first, one LinkedIn export per edition (lifetime). Fields `activity_id`, `post_id` (the edition's feed post, which also appears in `posts[]`), `published`, `title`, `url`, `tg_impressions_lifetime`, `tg_share_pct`, `tg_is_floor`, `out_of_network_pct`, `engagements`, `comments`, `reposts`.
+  - **`tg_is_floor = true`:** LinkedIn listed only the top 3–4 seniority groups for that edition, so the real TG is at least this value. Show "≥ " before the number and the "TG may be higher" chip. All 7 editions in the 3 Oct file are floors.
+- `subscribers[]`: `{date, subscribers, tg_share_floor_pct}`, one row per refresh. LinkedIn has no subscriber export and shows only the top 5 seniority groups, so the TG share is a floor ("≥ 32%").
 
 ## 5. Metric formulas
 
@@ -194,7 +210,7 @@ Fields: `month_start`, `month_end`, `tg_impressions`, `tg_share_pct`, `tg_may_be
   - One-paragraph definition of TG impressions and TG share.
   - "Data to {data_to} · built {built}".
   - Signed-in user's email and a "Log out" link on the right.
-- **Source switcher (pill buttons):** "Mangesh Zope profile" (active), "Peaceful-Loans page · PENDING", "Newsletter · PENDING". The two pending ones show an empty-state card: "Not pulled yet."
+- **Source switcher (pill buttons):** "Mangesh Zope profile" (default), "Peaceful-Loans page", "Newsletter". The profile has the sub-tabs below; the other two are single pages (§7.7, §7.8). Keep the selected source in the URL hash too (`#page`, `#newsletter`).
 - **Tabs (underline style):** **Daily · Weekly · Monthly · Posts · What works · Data**. Daily is the default. Keep the selected tab in the URL hash (`#weekly`) so links can be shared.
 - **Charts:** use hand-drawn SVG or a lightweight library such as Recharts.
   - Bars have a 2 px corner radius.
@@ -242,7 +258,7 @@ Fields: `month_start`, `month_end`, `tg_impressions`, `tg_share_pct`, `tg_may_be
 
   | Tile | Main value | Subtext |
   |---|---|---|
-  | Avg weekly TG impressions | All full weeks starting on or after 17 Aug with data (currently 17 Aug – 27 Sep; 28–30 Sep is partial and excluded); the subtext shows the real end date | vs 13 Apr – 2 Aug |
+  | Avg weekly TG impressions | All full weeks starting on or after 17 Aug with data (currently 17 Aug – 27 Sep; 28 Sep – 3 Oct is partial and excluded); the subtext shows the real end date | vs 13 Apr – 2 Aug |
   | TG share, Creator Chart Era | Σtg ÷ Σ(tg/share) over the same weeks | vs 13 Apr – 2 Aug |
   | Best week, TG impressions | Highest week, full weeks only | Its dates |
   | Best week, TG share | Highest share among full weeks with ≥300 TG impressions | Its dates |
@@ -297,20 +313,20 @@ Mangesh may disagree with how a post was categorised. Admins can change it on th
   - Groups are small (5–13 posts), so leans are hypotheses to test.
 - **Key findings card:** generate these from `insights`, not hard-coded, so they update when the data does. The current texts, for reference:
   1. **The wider a post travels outside your network, the lower its TG share.**
-     - Every +10 pts of out-of-network costs about 1.35 pts of TG share (ρ −0.48, p < 0.001, 48 posts with a split).
+     - Every +10 pts of out-of-network costs about 1.43 pts of TG share (ρ −0.53, p < 0.001, 48 posts with a split).
      - Followers and connections are TG-dense.
      - More reach still means more TG impressions overall, so aim for reach that stays senior.
-  2. **Comments and reposts push a post out of network** (comments ρ 0.50, reposts ρ 0.51, p < 0.001).
-  3. **{top type} and {second type} bring the most TG impressions per post** (types with ≥3 posts, ranked by median TG impressions). Currently: Founder journey & milestones 848 and Hiring & team 820, vs 270.5 (shown as 271) for Client story and 212 for Opinion & life lessons (p 0.001, reliable). Also name the single biggest TG post and the type with the lowest median TG share (currently Hiring & team, 40%: add "job-seekers are junior" only when that type is Hiring & team).
-  4. **{type with the highest median TG share} is the best "dog-whistle" candidate.** Currently Bank & industry critique:
-     - Highest TG share (47%), out-of-network reach (52%) and engagement rate (2.5%). Say "highest" only when it is.
-     - How many Creator Chart Era posts are this type, and its median TG impressions per post (350; 7 of the 19 Creator Chart Era posts).
-  5. **Media posts stay inside the network, text posts travel** (21.5% vs 40% out-of-network, p 0.01).
+  2. **Comments and reposts push a post out of network** (comments ρ 0.53, reposts ρ 0.53, p < 0.001).
+  3. **{top type} and {second type} bring the most TG impressions per post** (types with ≥3 posts, ranked by median TG impressions). Currently: Founder journey & milestones 848 and Hiring & team 820, vs 267.5 (shown as 268) for Client story and 226 for Opinion & life lessons (p 0.001, reliable). Also name the single biggest TG post and the type with the lowest median TG share (currently Hiring & team, 40%: add "job-seekers are junior" only when that type is Hiring & team).
+  4. **{type with the highest median TG share} is the best "dog-whistle" candidate.** Currently Opinion & life lessons (47.0%; Bank & industry critique is now 45.5%):
+     - Highest median TG share (47.0%); show its out-of-network reach (29%) and engagement rate (2%) without calling them highest, because they aren't. Say "highest" only when it is.
+     - How many Creator Chart Era posts are this type, and its median TG impressions per post (226; 3 of the 20 Creator Chart Era posts).
+  5. **Media posts stay inside the network, text posts travel** (18% vs 39.5% out-of-network, p 0.004).
   6. **Creator Chart Era: more reach and engagement, same TG share, fewer TG impressions per post so far:**
-     - Out-of-network 29 → 46.5% (p 0.002).
-     - Engagement rate 1.5 → 2.6% (p < 0.001).
-     - TG share 46 → 47% (p 0.56, not proven).
-     - Median TG impressions per post 588 → 282 (p 0.023, reliable). Newer posts have had less time to collect views.
+     - Out-of-network 29 → 46% (p 0.009).
+     - Engagement rate 1.5 → 2.6% (p 0.002).
+     - TG share 46 → 45% (not proven).
+     - Median TG impressions per post 588 → 283 (p 0.026, reliable). Newer posts have had less time to collect views.
   - Every verdict word ("reliable", "a lean", "not proven") comes from the p-value, never typed in.
 - **Tables:** "By type of post", "By format", "Before vs Creator Chart Era", "By day posted".
   - Columns: Posts, Median TG impressions, Total TG impressions, Median TG share, Median out-of-network, Median engagement rate.
@@ -332,7 +348,7 @@ Mangesh may disagree with how a post was categorised. Admins can change it on th
 ### 7.6 Data (downloads)
 
 - **Intro:** these are the numbers the report is built from; each comes from its own LinkedIn export; nothing is added up.
-- **Six cards with a download button each:**
+- **Eight cards with a download button each** (Company page and Newsletter added in v5, see §7.7–7.8):
 
   | Card | File |
   |---|---|
@@ -341,10 +357,46 @@ Mangesh may disagree with how a post was categorised. Admins can change it on th
   | Monthly | `monthly_tg.csv` |
   | Posts | `posts_tg.csv` |
   | Viewer mix by day | `viewer_mix_daily.csv`, long format: date, dimension, value, pct_of_views |
+  | Company page | `company_page_tg_monthly.csv` |
+  | Newsletter | `newsletter_editions_tg.csv` |
   | Everything | `linkedin_tg_backend.json`, the full data file **minus `viewer_mix.day_weight`** |
 
 - **CSV format:** UTF-8 with a header row, snake_case column names as in §4, and blank for null.
 - **Generation:** client-side from the loaded data (Blob + `<a download>`).
+
+### 7.7 Peaceful-Loans page (source switcher → "Peaceful-Loans page")
+
+- **Intro note:** LinkedIn gives no viewer seniority for Page posts, so Page post reach can't be split into TG. TG for the page = who visits it and who follows it. TG share = TG views ÷ views with a known seniority.
+- **KPI tiles:**
+
+  | Tile | Main value | Subtext |
+  |---|---|---|
+  | TG page views, {latest full month} | `tg_page_views` (amber) | % change vs the previous full month |
+  | TG share of page views, {latest full month} | `tg_share_pct` | pts change vs the previous full month |
+  | TG followers | `followers.tg_followers` | "{tg_share_pct}% of followers with a known seniority" |
+  | TG share of page views, last 12 months | `visitors_12m.tg_share_pct` | "{tg_page_views} TG page views, {start} – {end}" (dates with years) |
+
+- **Chart:** amber bars per month (TG page views, value label on top), teal line with dots (TG share, right axis 20–60%). The partial month's bar is at 50% opacity.
+- **Month-on-month table** (newest first): Month (+ "to {end}" chip if partial), TG page views, MoM, TG share (teal bar + %), MoM share. Partial months get "–" for both MoM columns. MoM compares with the previous **full** month. Creator Chart Era months (Aug onward) shaded.
+- **Download:** `company_page_tg_monthly.csv` (month_start, month_end, tg_page_views, tg_share_of_page_views_pct).
+- Optional, from the claude.ai reference: followers-by-seniority and visitors-by-seniority bar lists and a Page posts list. These need fields that aren't in the JSON yet; skip them in Antigravity for now.
+
+### 7.8 Newsletter (source switcher → "Newsletter")
+
+- **Intro note:** edition TG comes from each edition's own export (post + article, lifetime). LinkedIn lists only the top 3–4 seniority groups per edition, so edition TG is a floor. Editions also appear as posts in the profile's Posts tab. The 22 pre-2026 editions aren't included.
+- **KPI tiles:**
+
+  | Tile | Main value | Subtext |
+  |---|---|---|
+  | Subscribers | latest `subscribers[].subscribers` | "as of {date}" |
+  | TG share of subscribers | "≥ {tg_share_floor_pct}%" (amber) | "from LinkedIn's top 5 seniority groups" |
+  | Latest edition, TG impressions | "≥ " + `tg_impressions_lifetime` of the newest edition (amber) | "{published} · TG share ≥ {tg_share_pct}%" |
+  | 2026 editions, median TG impressions | median of `tg_impressions_lifetime` | "{n} editions · median TG share {x}% (floors)" |
+
+- **Edition table** (newest first): Edition (title, linked to `url`), Published, TG impressions ("≥ " + value + "TG may be higher" chip when `tg_is_floor`), TG share ("≥ " prefix when floor), Out-of-network %, Engagements, Comments, Reposts. Creator Chart Era rows shaded.
+- **Subscribers table** (newest first): Recorded, Subscribers, TG share of subscribers ("≥ x%"). Note: history builds up from 4 Oct 2026, one row per refresh.
+- **Download:** `newsletter_editions_tg.csv` (published, edition, url, tg_impressions_lifetime, tg_share_pct, tg_is_floor, out_of_network_pct, engagements, comments, reposts).
+- **Data tab:** add "Company page" and "Newsletter" cards with the two downloads above. The "Everything" JSON now also includes `company_page` and `newsletter`.
 
 ## 8. Reference values: acceptance tests
 
@@ -352,20 +404,25 @@ With the supplied JSON, the app must show these values exactly:
 
 | Check | Expected |
 |---|---|
-| Daily · All 2026 · TG impressions | **40,318** |
-| Daily · All 2026 · TG share | **44.2%** |
-| Daily · All 2026 · Engagements / New followers / Posts | **1,791 / 815 / 56** |
-| Daily · Creator Chart Era (19 Aug – 30 Sep) · TG impressions | **15,084**, "+53% vs previous 43 days" |
-| Daily · Creator Chart Era · TG share | **42.7%**, "−2.9 pts vs previous 43 days" |
-| Daily · Last 7 days (24–30 Sep) · TG impressions / share | **1,455 / 38.5%** (−86%, −4.6 pts vs 17–23 Sep) |
+| Daily · All 2026 · TG impressions | **40,994** |
+| Daily · All 2026 · TG share | **44.3%** |
+| Daily · All 2026 · Engagements / New followers / Posts | **1,798 / 820 / 57** |
+| Daily · Creator Chart Era (19 Aug – 3 Oct) · TG impressions | **15,761**, "+55% vs previous 46 days" |
+| Daily · Creator Chart Era · TG share | **43.0%**, "−2.6 pts vs previous 46 days" |
+| Daily · Last 7 days (27 Sep – 3 Oct) · TG impressions / share | **1,470 / 44.0%** (−46%, +4.3 pts vs 20–26 Sep) |
 | Weekly · 14–20 Sep | **8,983 TG impressions, 42.0%** |
 | Weekly · 21–27 Sep | **2,145, 38.0%**, full week, WoW **−76%**, **−4.0 pts** |
-| Weekly · 28–30 Sep | **632, 40.0%**, "partial week" chip, WoW "–" |
+| Weekly · 28 Sep – 3 Oct | **1,409, 46.0%**, "partial week" chip, WoW "–" |
 | Weekly · KPI tiles | Avg weekly TG impressions **2,477** (17 Aug – 27 Sep, 6 weeks) vs 1,547; TG share **41.6%** vs 44.5%; best week 14–20 Sep 8,983; best share 27 Jul – 2 Aug 49.0% |
 | Monthly · Jan 2026 | "below LinkedIn threshold" |
-| Monthly · Sep 2026 | **12,860**, **40.0%**, full month (no chip), MoM **+343%**, **−1.0 pts**; Aug 2026 = 2,906, 41.0% |
-| Posts | **56** rows; **19** shaded Creator Chart Era rows (19 Aug – 30 Sep); **1** row with an "edited" chip (17 Sep, "I have been using instahelp services across": `type` Founder journey & milestones, `auto_type` Client story) |
-| Posts · top by TG impressions | "A 10000 crore listed company and peaceful loans", 18 Sep: 7,811, 47.0%, 66% out-of-network |
+| Monthly · Sep 2026 | **12,860**, **40.0%**, full month, MoM **+343%**, **−1.0 pts**; Aug 2026 = 2,906, 41.0% |
+| Monthly · Oct 2026 | **755**, **51.0%**, chip "to 3 Oct", MoM "–", share **+11.0 pts** |
+| Posts | **57** rows; **20** shaded Creator Chart Era rows (19 Aug – 3 Oct); **1** row with an "edited" chip (17 Sep, "I have been using instahelp services across": `type` Founder journey & milestones, `auto_type` Client story) |
+| Posts · top by TG impressions | "A 10000 crore listed company and peaceful loans", 18 Sep: 7,866, 47.0%, 66% out-of-network |
+| Page · KPI tiles | TG page views Sept 2026 **100**, "+28% vs Aug 2026"; TG share **38.8%**, "−6.5 pts vs Aug 2026"; TG followers **150**, 38.7%; last 12 months **42.0%**, 702 TG page views, 3 Oct 2025 – 2 Oct 2026 |
+| Page · monthly table | Oct 2026 **3**, 50.0%, chip "to 2 Oct", MoM "–"; Sep **100**, 38.8%; Aug **78**, 45.3% (+20%, +11.1 pts); Jun **184**, 50.8% (highest month); Jan **29**, 38.7% (no MoM) |
+| Newsletter · KPI tiles | Subscribers **1,843** (as of 4 Oct); TG share of subscribers **≥ 32%**; latest edition (3 Oct, "Are you switching homes every 8-10 years like cars?") **≥ 332**, TG share ≥ 32.0%; median TG impressions **332**, 7 editions, median TG share 31.0% |
+| Newsletter · edition table | 7 rows, all with the "TG may be higher" chip; highest: 11 May "Section 54F - Top class weapon to avoid LTCG" **≥ 567**, ≥ 31.0%, 44% out-of-network |
 
 The following must also hold:
 
@@ -376,8 +433,8 @@ The following must also hold:
 - **Phone width:** works at 375 px.
 
 - **Post type changes (§7.4.1):**
-  - With no overrides, recomputing `insights.groups.cat` in the app gives exactly the file's values (Founder journey & milestones: n 13, median TG 848, total 19,805, median share 46.0%; p-values tg 0.001, sh 0.209, outnet 0.25, er 0.465).
-  - Changing the type of the 25 Sep post ("Your bank may just have lost a revenue", `post_id` 7509209819720032256) from Bank & industry critique to Hiring & team gives: Hiring & team n 6, median TG 756, total 4,960; Bank & industry critique n 7, median TG 356, total 2,571; p-values tg 0.001, sh 0.329, outnet 0.231, er 0.509. Undoing it restores the original values.
+  - With no overrides, recomputing `insights.groups.cat` in the app gives exactly the file's values (Founder journey & milestones: n 13, median TG 848, total 19,823, median share 46.0%; p-values tg 0.001, sh 0.226, outnet 0.27, er 0.455).
+  - Changing the type of the 25 Sep post ("Your bank may just have lost a revenue", `post_id` 7509209819720032256) from Bank & industry critique to Hiring & team gives: Hiring & team n 6, median TG 756, total 4,976; Bank & industry critique n 7, median TG 356, total 2,571; p-values tg 0.001, sh 0.39, outnet 0.247, er 0.501. Undoing it restores the original values.
   - A viewer (non-admin) sees no dropdown, and `POST /api/post-type` returns 403 for them.
 
 ## 9. Keeping the data fresh
@@ -389,7 +446,7 @@ The data is produced by Mangesh's Claude refresh job. It downloads new LinkedIn 
 - **Admin page:** `/admin` (admin role only) has an **Upload data** control.
 - **Validation before replacing the live file:**
   - It parses as JSON.
-  - It has `meta`, `daily`, `weekly`, `monthly`, `posts`, `viewer_mix` and `insights`.
+  - It has `meta`, `daily`, `weekly`, `monthly`, `posts`, `viewer_mix` and `insights` (and, from v5, `company_page` and `newsletter`; accept files without them and show an empty state for that source).
   - `meta.data_to` is on or after the current `data_to`.
   - **Reject** it if any object key equals `impressions`, `imp`, `members_reached` or `sv`.
 - **Versioning:** keep the previous 5 versions in storage, with a "Roll back" button.
@@ -400,7 +457,8 @@ The data is produced by Mangesh's Claude refresh job. It downloads new LinkedIn 
 
 ## 10. Out of scope, pending
 
-- **Peaceful-Loans company page and newsletter tabs:** keep them as "PENDING" placeholders. Later data files will add `company_page` and `newsletter` sections shaped like the profile data.
+- **Company page post reach:** LinkedIn gives no viewer seniority for Page posts, so Page post impressions stay out of the data and the app.
+- **Newsletter editions before 2026** (22 editions, 2023–2025): not included.
 - **Editing and comments:** no editing of data in the UI, and no comments.
 
 ## 11. Suggested build order for Antigravity
@@ -415,6 +473,8 @@ The data is produced by Mangesh's Claude refresh job. It downloads new LinkedIn 
 ---
 
 ## Change log
+
+- **4 Oct 2026 (v5):** data refreshed to 3 Oct (daily 1–3 Oct; partial week 28 Sep – 3 Oct; partial month 1–3 Oct; 21 posts re-exported, 1 new: the 3 Oct newsletter edition's feed post). **New:** `company_page` (§4.8) and `newsletter` (§4.9) data sections and their source tabs (§7.7, §7.8), replacing the PENDING placeholders (§6, §10). Upload validation accepts the new sections (§9). Key finding 4 now picks Opinion & life lessons (§7.5). All §8 values updated, with new company page and newsletter checks.
 
 - **1 Oct 2026 (v4):** data refreshed to 30 Sep (daily 28–30 Sep; partial week 28–30 Sep; September now a full month; 20 posts exported, 2 of them new: 28 Sep "Feeling embarrassed about taking a home loan" and 30 Sep "The day you bought your house 6 people made"). No structure or code changes: upload the new JSON and check against §8. Updated: dates, §4.3 partial-week note, §7.5 key-finding numbers, all §8 values.
 

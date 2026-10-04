@@ -123,6 +123,33 @@ export interface Insights {
   fit: LinearFit;
 }
 
+export interface CompanyPage {
+  note: string;
+  visitors_monthly: { month_start: string; month_end: string; tg_page_views: number; tg_share_pct: number | null }[];
+  visitors_12m: { start: string; end: string; tg_page_views: number; tg_share_pct: number };
+  followers: { as_of: string; tg_followers: number; tg_share_pct: number };
+}
+
+export interface Newsletter {
+  name: string;
+  note: string;
+  editions: {
+    activity_id: string;
+    post_id: string | null;
+    published: string;
+    title: string;
+    url: string;
+    tg_impressions_lifetime: number | null;
+    tg_share_pct: number | null;
+    tg_is_floor: boolean;
+    out_of_network_pct: number | null;
+    engagements: number;
+    comments: number;
+    reposts: number;
+  }[];
+  subscribers: { date: string; subscribers: number; tg_share_floor_pct: number }[];
+}
+
 export interface DashboardData {
   meta: Meta;
   daily: DailyRow[];
@@ -131,4 +158,6 @@ export interface DashboardData {
   posts: PostRow[];
   viewer_mix: ViewerMix;
   insights: Insights;
+  company_page?: CompanyPage;
+  newsletter?: Newsletter;
 }
