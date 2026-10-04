@@ -10677,9 +10677,95 @@ var worker_src_default = {
     if (cleanPath.startsWith("/api/")) {
       return handleApiRequest(request, env, ctx);
     }
+    if (cleanPath === "/.well-known/api-catalog") {
+      try {
+        const assetRes = await env.ASSETS.fetch(new Request(new URL("/.well-known/api-catalog", request.url).toString(), { headers: { Accept: "*/*" } }));
+        if (assetRes.ok) {
+          const text = await assetRes.text();
+          return new Response(text, {
+            status: 200,
+            headers: {
+              "Content-Type": "application/linkset+json; charset=utf-8",
+              "Access-Control-Allow-Origin": "*",
+              "Cache-Control": "public, max-age=3600"
+            }
+          });
+        }
+      } catch {
+      }
+      return new Response(
+        JSON.stringify({
+          linkset: [
+            {
+              anchor: "https://peaceful-loans.com/.well-known/mcp/server-card.json",
+              "service-doc": [{ href: "https://peaceful-loans.com/llms.txt", type: "text/markdown" }],
+              "service-desc": [{ href: "https://peaceful-loans.com/.well-known/mcp/server-card.json", type: "application/json" }]
+            },
+            {
+              anchor: "https://peaceful-loans.com/.well-known/agent-skills/index.json",
+              "service-desc": [{ href: "https://peaceful-loans.com/.well-known/agent-skills/index.json", type: "application/json" }]
+            },
+            {
+              anchor: "https://peaceful-loans.com/.well-known/ai-catalog.json",
+              "service-desc": [{ href: "https://peaceful-loans.com/.well-known/ai-catalog.json", type: "application/json" }]
+            }
+          ]
+        }, null, 2),
+        {
+          status: 200,
+          headers: {
+            "Content-Type": "application/linkset+json; charset=utf-8",
+            "Access-Control-Allow-Origin": "*",
+            "Cache-Control": "public, max-age=3600"
+          }
+        }
+      );
+    }
+    if (cleanPath.startsWith("/.well-known/")) {
+      const assetRes = await env.ASSETS.fetch(new Request(new URL(cleanPath, request.url).toString(), { headers: { Accept: "*/*" } }));
+      const resHeaders2 = new Headers(assetRes.headers);
+      resHeaders2.set("Access-Control-Allow-Origin", "*");
+      if (cleanPath.endsWith(".json")) {
+        resHeaders2.set("Content-Type", "application/json; charset=utf-8");
+      }
+      return new Response(assetRes.body, {
+        status: assetRes.status,
+        headers: resHeaders2
+      });
+    }
+    if (cleanPath === "/llms.txt" || cleanPath === "/llms-full.txt") {
+      const assetRes = await env.ASSETS.fetch(new Request(new URL(cleanPath, request.url).toString(), { headers: { Accept: "*/*" } }));
+      return new Response(assetRes.body, {
+        status: assetRes.status,
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8",
+          "Access-Control-Allow-Origin": "*",
+          "Cache-Control": "public, max-age=3600"
+        }
+      });
+    }
+    if (cleanPath === "/auth.md") {
+      const assetRes = await env.ASSETS.fetch(new Request(new URL("/auth.md", request.url).toString(), { headers: { Accept: "*/*" } }));
+      return new Response(assetRes.body, {
+        status: assetRes.status,
+        headers: {
+          "Content-Type": "text/markdown; charset=utf-8",
+          "Access-Control-Allow-Origin": "*",
+          "Cache-Control": "public, max-age=3600"
+        }
+      });
+    }
     const response = await aeoWorker.fetch(request, env, ctx);
+    const resHeaders = new Headers(response.headers);
+    const existingLink = resHeaders.get("Link");
+    const agentLinks = [
+      '</.well-known/mcp/server-card.json>; rel="service-desc"',
+      '</.well-known/agent-skills/index.json>; rel="describedby"',
+      '</.well-known/api-catalog>; rel="api-catalog"',
+      '</.well-known/ai-catalog.json>; rel="ai-catalog"'
+    ];
+    resHeaders.set("Link", existingLink ? `${existingLink}, ${agentLinks.join(", ")}` : agentLinks.join(", "));
     if (cleanPath === "/linkedin-analytics" || cleanPath === "/linkedin-analytics.html") {
-      const resHeaders = new Headers(response.headers);
       resHeaders.set("X-Robots-Tag", "noindex, nofollow");
       resHeaders.set("X-Frame-Options", "DENY");
       resHeaders.set("X-Content-Type-Options", "nosniff");
@@ -10689,9 +10775,8 @@ var worker_src_default = {
         const token = await createTgToken({ email: "mangesh@peaceful-loans.com", role: "admin" });
         resHeaders.set("Set-Cookie", `tg_session=${token}; Path=/; Max-Age=604800; HttpOnly; SameSite=Lax; Secure`);
       }
-      return new Response(response.body, { status: response.status, headers: resHeaders });
     }
-    return response;
+    return new Response(response.body, { status: response.status, headers: resHeaders });
   },
   async scheduled(event, env, ctx) {
     ctx.waitUntil(sendDailyCsvEmail(env));

@@ -1,0 +1,33 @@
+{
+  "name": "Peaceful Loans Advisor Agent",
+  "version": "1.0.0",
+  "description": "Conflict-free home loan advisory agent for ₹2 Crore+ loan borrowers in India, providing repo-linked interest rate comparisons, sanction auditing, and EMI calculations.",
+  "url": "https://peaceful-loans.com",
+  "supportedInterfaces": [
+    {
+      "url": "https://peaceful-loans.com/a2a",
+      "protocol": "a2a"
+    }
+  ],
+  "capabilities": {
+    "tools": true,
+    "streaming": false
+  },
+  "skills": [
+    {
+      "id": "calculate-emi",
+      "name": "Calculate Loan EMI",
+      "description": "Calculate monthly EMI, total interest, and repayment schedule for Indian home loans."
+    },
+    {
+      "id": "compare-rates",
+      "name": "Compare Interest Rates",
+      "description": "Compare FY26-27 bank interest rates, spreads over RBI repo rate, and processing fees."
+    },
+    {
+      "id": "advisory-guidance",
+      "name": "Advisory Guidance",
+      "description": "Provide conflict-free home loan advisory guidance for high-value borrowers."
+    }
+  ]
+}

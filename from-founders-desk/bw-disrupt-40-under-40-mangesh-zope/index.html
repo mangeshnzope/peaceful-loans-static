@@ -59,6 +59,51 @@
     }
     .highlight-quote p { font-style: italic; font-size: 1.15rem; color: #000; margin-bottom: 0.5rem !important; }
     .highlight-quote footer { font-weight: 700; font-style: normal; font-size: 0.875rem; color: #1A4CC8; }
+    .stat-badge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .stat-badge-card {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .stat-badge-card .stat-val {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #1a202c;
+      margin-bottom: 0.25rem;
+    }
+    .stat-badge-card .stat-lbl {
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.3;
+    }
+    .magazine-scan-card {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 2.5rem 0;
+      text-align: center;
+    }
+    .magazine-scan-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      margin-bottom: 1rem;
+    }
+    .magazine-scan-card figcaption {
+      font-size: 13px;
+      color: #6b7280;
+      font-style: italic;
+    }
     .source-link-box {
       background: #f9fafb; border: 1px solid #e5e7eb; padding: 1.5rem;
       border-radius: 12px; margin-top: 2rem;
@@ -120,55 +165,95 @@ ${navHTML('/from-founders-desk/bw-disrupt-40-under-40-mangesh-zope/')}
         <img src="/assets/logos/bw-disrupt-logo.png" alt="BW Disrupt Businessworld Logo">
         <div class="pub-info">
           <strong>BW Disrupt 40 Under 40 · 10th Edition</strong>
-          BW Businessworld &middot; National Print Issue: 3rd October 2026 (Online: 16th September 2026)
+          BW Businessworld &middot; National Print Issue: 3rd October 2026 (Vol. 45, Issue 25 · Page 73)
         </div>
       </div>
 
       <h1 class="article-title">Peaceful-Loans Wins BW Disrupt 40 Under 40 Award 2026</h1>
-      <p class="article-meta">Published in BW Businessworld Magazine · Print Edition: 3rd October 2026</p>
+      <p class="article-meta">Published in BW Businessworld National Print Edition · 3rd October 2026 · Page 73 Profile Feature</p>
 
       <div class="article-actions">
-        <a href="https://www.bwdisrupt.com/article/india-s-rising-startup-stars-meet-the-winners-of-10th-edition-of-bw-disrupt-40-under-40-list-623944" target="_blank" rel="noopener" class="btn btn-primary">
+        <a href="/assets/pdfs/articles/bw-disrupt-40-under-40-oct-2026.pdf" download class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Print Magazine (PDF)
+        </a>
+        <a href="https://www.bwdisrupt.com/article/india-s-rising-startup-stars-meet-the-winners-of-10th-edition-of-bw-disrupt-40-under-40-list-623944" target="_blank" rel="noopener" class="btn btn-outline-gray">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           View on BW Disrupt →
         </a>
         <a href="https://www.linkedin.com/feed/update/urn:li:activity:7506578644895571968/" target="_blank" rel="noopener" class="btn btn-outline-gray">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 0 0-1.6 1.6 1.6 1.6 0 0 0 1.6 1.6 1.6 1.6 0 0 0 1.6-1.6 1.6 1.6 0 0 0-1.6-1.6Z"/></svg>
-          View LinkedIn Announcement →
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.6 1.6 0 0 0-1.6 1.6 1.6 1.6 0 0 0 1.6 1.6 1.6 1.6 0 0 0-1.6-1.6Z"/></svg>
+          LinkedIn Announcement →
         </a>
         <a href="https://lnkd.in/p/dcQSdQZv" target="_blank" rel="noopener" class="btn btn-outline-gray">
-          Read Founder Note →
+          Founder Note →
         </a>
       </div>
 
       <article class="article-body">
         <div class="award-highlight-box">
           <h3>National Recognition for Transforming Home Loan Advisory</h3>
-          <p>Mangesh Zope, founder of <strong>Peaceful Loans</strong>, has been named one of India's rising changemakers and startup leaders in the prestigious <strong>10th Edition of the BW Disrupt 40 Under 40 List</strong> by <em>BW Businessworld</em>—honoring Peaceful Loans for transforming the home loan advisory space with <strong>100% borrower-first advocacy</strong>, <strong>bootstrapped growth</strong>, <strong>transparent rate-spread navigation</strong>, and <strong>state-of-the-art proprietary technology</strong>.</p>
+          <p>Mangesh Zope, founder of <strong>Peaceful Loans</strong>, has been honored among India's rising business changemakers in the prestigious <strong>10th Edition of BW Disrupt 40 Under 40</strong> by <em>BW Businessworld</em> (published in the 3rd October 2026 national print issue). The feature story, titled <strong>&ldquo;Putting the borrower first&rdquo;</strong>, highlights Peaceful Loans for building a tech-enabled, advice-led advisory model with 100% borrower-first advocacy, proprietary intelligence software, and disciplined bootstrapped profitability.</p>
         </div>
 
-        <h2>Who is the BW Disrupt 40 Under 40 Award Given To?</h2>
-        <p>The <strong>BW Disrupt 40 Under 40</strong>, organized by <em>BW Businessworld</em> and <em>BW Disrupt</em>, is one of India's most respected business recognitions. The platform honours high-impact entrepreneurs, innovators, and intrapreneurs under 40 who are building disruptive ventures, developing game-changing business models, and reshaping established industries through strategy, execution, and technological innovation.</p>
-        <p>Now in its milestone 10th edition, the award celebrates leaders who combine commercial discipline, sustainability, and long-term economic value creation across fintech, technology, consumer brands, healthcare, mobility, and real estate.</p>
+        <div class="stat-badge-grid">
+          <div class="stat-badge-card">
+            <div class="stat-val">₹15–20L</div>
+            <div class="stat-lbl">Average Borrower Savings per ₹1 Cr Loan</div>
+          </div>
+          <div class="stat-badge-card">
+            <div class="stat-val">80%+</div>
+            <div class="stat-lbl">Gross Margin (Consistently Cash-Flow Positive)</div>
+          </div>
+          <div class="stat-badge-card">
+            <div class="stat-val">₹75 Cr</div>
+            <div class="stat-lbl">Quarterly Sanction Milestone (~70% QoQ Growth)</div>
+          </div>
+          <div class="stat-badge-card">
+            <div class="stat-val">&ldquo;Joy&rdquo;</div>
+            <div class="stat-lbl">Proprietary AI &amp; Intelligence Layer</div>
+          </div>
+        </div>
 
-        <h2>Why Peaceful Loans &amp; Mangesh Zope Were Honored</h2>
-        <p>The Indian mortgage and home loan sector has historically been plagued by asymmetric information: opaque interest rate spreads, hidden ancillary costs, forced insurance cross-selling, and relationship managers whose incentives are aligned with lender quotas rather than borrower welfare.</p>
+        <h2>BW Businessworld Print Feature: &ldquo;Putting the Borrower First&rdquo;</h2>
+        <p><em>The following is from the full-page profile published on <strong>Page 73</strong> of BW Businessworld (Volume 45, Issue 25 · 3rd October 2026), authored by <strong>Pooja Patil</strong>:</em></p>
 
-        <p>Founded by <strong>Mangesh Zope (IIM Calcutta 2012)</strong>, <strong>Peaceful Loans</strong> was created to fundamentally transform this ecosystem through four core pillars:</p>
-
-        <ul>
-          <li><strong>100% Borrower-First Advocacy:</strong> Operating strictly as an independent fiduciary for home buyers rather than an agent of banks or developers—eliminating mis-selling and hidden kickbacks.</li>
-          <li><strong>State-of-the-Art Proprietary Technology:</strong> In-house developed algorithmic engines for automated sanction letter audits, fine-print stress testing, real-time rate-spread benchmarking, and multi-lender comparison algorithms that surface hidden APR costs in seconds.</li>
-          <li><strong>Transparent Rate-Spread Navigation:</strong> Equipping home buyers with clear, mathematical breakdowns of benchmark spreads, repo-rate transmission mechanics, and reset clauses before they commit.</li>
-          <li><strong>Disciplined Bootstrapped Growth:</strong> Scaling from ₹15 crore to ₹75 crore+ in quarterly sanctions entirely bootstrapped, driven by customer trust and organic word-of-mouth.</li>
-        </ul>
+        <p>Traditional home-loan distribution in India has long been driven by direct selling agents (DSAs) and bank relationship managers whose incentives are tied to lender commissions rather than borrower outcomes. <strong>Mangesh Zope</strong>, founder of <strong>Peaceful Loans</strong>, is building an alternative: an advice-led advisory model that puts the borrower at the centre of every decision.</p>
 
         <div class="highlight-quote">
-          <p>"True legacy isn't built on transactional speed or opaque rate markups. We built Peaceful Loans on the belief that borrowers deserve complete transparency, independent representation, and expert advice backed by rigorous math and proprietary technology before making the biggest financial commitment of their lives."</p>
+          <p>&ldquo;The gap is Peaceful-Loans,&rdquo; Zope says, pointing to what he sees as a structural conflict in the traditional advisory model where intermediaries are compensated by lenders rather than acting in the borrower's fiduciary interest.</p>
           <footer>— Mangesh Zope, Founder of Peaceful Loans</footer>
         </div>
 
-        <p>Scaling as a bootstrapped enterprise, Peaceful Loans has earned the trust of over 120+ five-star clients, including senior tech leaders, corporate executives, and first-time property buyers.</p>
+        <p>Peaceful Loans focuses on high-income households earning over <strong>₹50 lakh annually</strong> and buying homes valued at <strong>₹2 crore or more</strong>. For these borrowers, the financial stakes are substantial: small variations in interest rate spreads, benchmark linkages, and prepayment clauses can result in massive financial consequences over a multi-decade loan tenure.</p>
+
+        <p>The firm provides end-to-end guidance—from evaluating lenders and structuring loan amounts to benchmarking interest rate spreads and managing switching opportunities over time. By optimizing loan terms, Peaceful Loans helps borrowers save between <strong>₹15 lakh and ₹20 lakh</strong> over the tenure of a ₹1 crore home loan.</p>
+
+        <h2>Powered by &ldquo;Joy&rdquo; — Peaceful Loans' Proprietary Intelligence Engine</h2>
+        <p>Underpinning Peaceful Loans' advisory model is <strong>&ldquo;Joy&rdquo;</strong>, the company's proprietary intelligence layer. Joy captures institutional knowledge and learning from individual loan files, automating complex bank underwriting policies, rate matrices, and banker-specific operating quirks across multiple institutions and cities.</p>
+
+        <div class="highlight-quote">
+          <p>&ldquo;Zope says the technology is designed to ensure that the quality of advice does not depend on a particular employee’s experience.&rdquo;</p>
+          <footer>— BW Businessworld (3rd October 2026 Issue)</footer>
+        </div>
+
+        <p>This systematic algorithmic approach allows Peaceful Loans to run deep sanction-letter stress tests, simulate reset cycles across repo-rate shifts, and identify hidden fees before a borrower signs—delivering institutional-grade advice at scale.</p>
+
+        <h2>Disciplined Bootstrapped Growth &amp; Unit Economics</h2>
+        <p>Unlike conventional fintech platforms that burn venture capital on aggressive customer acquisition, Peaceful Loans has scaled as a completely bootstrapped enterprise. The company has remained consistently cash-flow positive with an <strong>80%-plus gross margin</strong>, powered almost entirely by organic thought leadership content and customer word-of-mouth.</p>
+
+        <p>The company's loan sanction numbers reflect rapid, compounding momentum:</p>
+        <ul>
+          <li><strong>Q3 FY25–26:</strong> ₹15 crore in loan sanctions</li>
+          <li><strong>Q4 FY25–26:</strong> ₹27 crore in loan sanctions</li>
+          <li><strong>Q1 FY26–27:</strong> ₹48.5 crore in loan sanctions</li>
+          <li><strong>Current Quarter:</strong> ₹75 crore projected run-rate (representing nearly 70% quarter-on-quarter growth)</li>
+        </ul>
+
+        <div class="magazine-scan-card">
+          <img src="/assets/bw-40under40-page-73.png" alt="BW Businessworld 3rd October 2026 Page 73 Feature on Mangesh Zope and Peaceful Loans">
+          <figcaption>Full-page feature on Mangesh Zope &amp; Peaceful Loans as published in BW Businessworld Magazine (3rd October 2026, Page 73).</figcaption>
+        </div>
 
         <h2>The Rigorous Multi-Tier Jury Process</h2>
         <p>This year, BW Disrupt received over 125 competitive nominations across India. Following extensive screening, shortlisted finalists presented their strategic vision, scalability metrics, governance standards, and customer impact before an eminent jury of top venture capitalists and industry titans.</p>
@@ -212,7 +297,7 @@ ${navHTML('/from-founders-desk/bw-disrupt-40-under-40-mangesh-zope/')}
         <p>Mangesh Zope shares this milestone with standout entrepreneurs and innovators across India, including founders and leaders from <strong>Nykaa</strong> (Adwaita Nayar), <strong>Rapido</strong> (Rishikesh SR), <strong>Digio</strong> (Abhinav Parashar), <strong>Nothing India</strong> (Akis Evangelidis), <strong>EMotorad</strong> (Himanshu Ratnoo), <strong>Murf AI</strong> (Sneha Roy), and <strong>Bright Money</strong> (Varun Kumar Modi).</p>
 
         <div class="highlight-quote">
-          <p>"Huge congratulations to Mangesh Zope and Team Peaceful Loans on making the BW Disrupt 40 Under 40 list! Scaling a completely bootstrapped venture from ₹15 crore to ₹75 crore a quarter is an incredible financial triumph... This milestone proves that conscious relationship-building is the true hallmark of a long-distance runner in business."</p>
+          <p>&ldquo;Huge congratulations to Mangesh Zope and Team Peaceful Loans on making the BW Disrupt 40 Under 40 list! Scaling a completely bootstrapped venture from ₹15 crore to ₹75 crore a quarter is an incredible financial triumph... This milestone proves that conscious relationship-building is the true hallmark of a long-distance runner in business.&rdquo;</p>
           <footer>— Wing Commander Satyendra Chauhan, War Veteran &amp; Behavioral Consultant</footer>
         </div>
 
@@ -240,3 +325,4 @@ document.addEventListener('DOMContentLoaded', render);
 </script>
 </body>
 </html>
+

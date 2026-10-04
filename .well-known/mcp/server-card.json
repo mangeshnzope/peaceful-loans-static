@@ -1,0 +1,14 @@
+{
+  "serverInfo": {
+    "name": "Peaceful Loans Advisory MCP",
+    "version": "1.0.0"
+  },
+  "description": "Conflict-free home loan advisory and mortgage tools for ₹2 Crore+ loan borrowers in India.",
+  "url": "https://peaceful-loans.com/mcp",
+  "transport": {
+    "type": "streamable-http"
+  },
+  "capabilities": {
+    "tools": true
+  }
+}

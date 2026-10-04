@@ -1,0 +1,28 @@
+# Peaceful Loans
+
+> Unbiased, conflict-free home loan advisory for high-value borrowers (₹2 Crore+) in India. We represent the borrower, not the bank.
+
+Peaceful Loans is an independent mortgage advisory practice founded by Mangesh Zope and based in Mumbai, India. Unlike traditional mortgage brokers and Direct Selling Agents (DSAs) who earn lender commissions, Peaceful Loans operates on a pure client-advisory model. We charge a flat, transparent advisory fee directly to the borrower, accepting ₹0 from banks. This ensures 100% alignment with the borrower to negotiate the lowest interest rate spreads over the RBI repo rate, eliminate hidden bank charges, ensure fair property valuations, and protect borrowers across the entire loan tenure.
+
+## Core Advisory Services
+- [Home Loans (₹2 Cr+)](https://peaceful-loans.com/): End-to-end loan selection, credit profile positioning, sanction structuring, and bank negotiations for luxury and high-value residential properties.
+- [Balance Transfer & Refinance](https://peaceful-loans.com/reviews): Auditing existing home loans, identifying margin leakage / high spreads, and refinancing to the lowest available repo-rate spreads across Indian lenders.
+- [FY26-27 Interest Rate Benchmark](https://peaceful-loans.com/FY26-27IntRates): Live comparison of home loan interest rates, repo-spread margins, and reset terms across SBI, HDFC Bank, ICICI Bank, Bank of Baroda, Kotak Mahindra Bank, and Axis Bank.
+- [From the Founder's Desk](https://peaceful-loans.com/from-founders-desk): Practical case studies, fine print breakdowns, sanction traps, and real borrower experiences from over 100+ high-value loan sanctions.
+- [Client Reviews & Proof](https://peaceful-loans.com/reviews): Verified borrower case studies and interest savings calculations.
+- [Frequently Asked Questions](https://peaceful-loans.com/faqs): Comprehensive guide on home loan EMIs, repo spread resets, CIBIL score optimization, and advisory engagements.
+
+## Machine-Readable Resources & Tools
+- [Full LLM Knowledge Base](https://peaceful-loans.com/llms-full.txt): Comprehensive advisory documentation, calculation formulas, and mortgage guides.
+- [API Catalog](https://peaceful-loans.com/.well-known/api-catalog): RFC 9727 linkset of available endpoints and specs.
+- [MCP Server Card](https://peaceful-loans.com/.well-known/mcp/server-card.json): SEP-1649 Model Context Protocol server card.
+- [Agent Skills](https://peaceful-loans.com/.well-known/agent-skills/index.json): Discovery index for autonomous agent capabilities.
+- [ARD AI Catalog](https://peaceful-loans.com/.well-known/ai-catalog.json): Capability manifest for agentic search and tool integration.
+- [Auth & Access Policy](https://peaceful-loans.com/auth.md): Agent discovery and interaction policy.
+
+## Contact & Advisory Engagement
+- **Website**: [https://peaceful-loans.com](https://peaceful-loans.com)
+- **Founder**: Mangesh Zope
+- **Email**: mangesh@peaceful-loans.com
+- **LinkedIn**: [https://www.linkedin.com/in/mangeshzope/](https://www.linkedin.com/in/mangeshzope/)
+- **Target Borrower Segment**: ₹2 Crore+ loan seekers, CIBIL 750+, salaried professionals, CXOs, and entrepreneurs in India.

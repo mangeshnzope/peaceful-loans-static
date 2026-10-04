@@ -1,0 +1,37 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://peaceful-loans.com/.well-known/mcp/server-card.json",
+      "service-doc": [
+        {
+          "href": "https://peaceful-loans.com/llms.txt",
+          "type": "text/markdown"
+        }
+      ],
+      "service-desc": [
+        {
+          "href": "https://peaceful-loans.com/.well-known/mcp/server-card.json",
+          "type": "application/json"
+        }
+      ]
+    },
+    {
+      "anchor": "https://peaceful-loans.com/.well-known/agent-skills/index.json",
+      "service-desc": [
+        {
+          "href": "https://peaceful-loans.com/.well-known/agent-skills/index.json",
+          "type": "application/json"
+        }
+      ]
+    },
+    {
+      "anchor": "https://peaceful-loans.com/.well-known/ai-catalog.json",
+      "service-desc": [
+        {
+          "href": "https://peaceful-loans.com/.well-known/ai-catalog.json",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}

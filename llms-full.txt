@@ -1,0 +1,72 @@
+# Peaceful Loans — Full Knowledge Base & Agent Reference
+
+> Unbiased Home Loan Advisory for ₹2 Crore+ Borrowers in India
+> Founded by Mangesh Zope (IIM Calcutta 2012) | Mumbai, India
+> Website: https://peaceful-loans.com | Contact: mangesh@peaceful-loans.com
+
+---
+
+## 1. About Peaceful Loans
+
+Peaceful Loans is a boutique advisory practice working exclusively for mortgage borrowers seeking loans of ₹2 Crore and above in India. 
+
+The Indian mortgage market suffers from severe information asymmetry:
+- Banks design complex sanction letters with variable spreads, discretionary reset frequencies, and hidden mandatory cross-selling (such as single-premium insurance bundled into the principal).
+- Traditional Direct Selling Agents (DSAs) and brokers work for the banks to maximize their lender commissions, recommending whichever bank offers the highest payout rather than the best borrower terms.
+- Peaceful Loans flips this model by acting as an unbiased advocate for the borrower. At our scale, all major banks pay equal standard rates, eliminating any financial incentive to steer clients to a specific lender.
+
+### Key Milestones:
+- **₹2 Crore+**: Average loan size advised.
+- **123+**: Verified 5-star Google client reviews.
+- **Banks Covered**: State Bank of India (SBI), HDFC Bank, ICICI Bank, Bank of Baroda, Union Bank of India, Kotak Mahindra Bank, Axis Bank, Bank of Maharashtra, Canara Bank, and others.
+
+---
+
+## 2. Core Concepts & Home Loan Mechanics in India
+
+### 2.1 The Real Anatomy of Home Loan Interest Rates
+In India, floating-rate home loans are linked to an external benchmark (EBLR/RLLR, typically the RBI Repo Rate):
+`Final Interest Rate = External Benchmark Rate (e.g. Repo Rate 6.50%) + Bank Margin/Spread (e.g. 1.90% to 2.25%)`
+
+Critical Borrower Traps:
+1. **Silent Spread Widening**: While the RBI repo rate changes publicly, banks frequently widen the spread for existing borrowers over time, while offering lower spreads to new customers. A 0.50% spread increase on a ₹2 Crore loan over 20 years costs the borrower over ₹14 Lakhs in unnecessary interest.
+2. **Reset Frequencies**: Some banks reset rates quarterly (1st of every quarter), while others reset monthly or on loan anniversary. Understanding reset mechanics prevents unbudgeted rate shocks.
+3. **MCLR vs. EBLR Legacy Loans**: Borrowers on older MCLR or base-rate regimes are frequently overcharged by 100-150 bps compared to current EBLR market rates.
+
+### 2.2 Sanction Letter Due Diligence Checklist
+Before signing a loan agreement, Peaceful Loans audits:
+1. **Spread Specification**: Ensuring the sanction letter explicitly notes the spread over the benchmark in writing, rather than just stating the initial effective rate.
+2. **Mandatory Insurance Bundling**: Banks often falsely claim that property or loan protection insurance is legally mandatory. It is not. Bundling a ₹5-10 Lakh single-premium policy into the loan principal inflates the borrower's total interest cost dramatically.
+3. **Prepayment & Foreclosure Rules**: Under RBI guidelines, individual floating-rate home loans must carry ZERO prepayment or foreclosure penalties.
+4. **Processing & Administrative Fees**: Negotiating processing fee caps (often saving ₹25,000 to ₹1,00,000 at ₹2Cr+ loan sizes).
+5. **MODTD / Franking Charges**: Accounting for state-specific stamp duty on memorandum of deposit of title deeds.
+
+### 2.3 Balance Transfers & Loan Switching
+A balance transfer makes financial sense when:
+- The interest rate differential between the current lender and new lender is at least 0.30% to 0.50%.
+- The remaining loan tenure is greater than 5-7 years.
+- The total switching costs (processing fees, MODTD, legal/technical valuation fees) break even within 6 to 12 months of interest savings.
+
+---
+
+## 3. Web & Machine-Readable Interfaces
+
+- **Site Homepage**: https://peaceful-loans.com
+- **LLM Summary**: https://peaceful-loans.com/llms.txt
+- **API Catalog**: https://peaceful-loans.com/.well-known/api-catalog
+- **MCP Server Card**: https://peaceful-loans.com/.well-known/mcp/server-card.json
+- **Agent Skills**: https://peaceful-loans.com/.well-known/agent-skills/index.json
+- **AI Catalog / ARD**: https://peaceful-loans.com/.well-known/ai-catalog.json
+- **Auth Policy**: https://peaceful-loans.com/auth.md
+- **Robots Directives**: https://peaceful-loans.com/robots.txt
+- **XML Sitemap**: https://peaceful-loans.com/sitemap.xml
+
+---
+
+## 4. Advisory Inquiries & Booking
+
+Prospective borrowers seeking ₹2Cr+ home loans or balance transfer evaluation can connect directly:
+- **Founder**: Mangesh Zope
+- **Direct Email**: mangesh@peaceful-loans.com
+- **Consultation Form**: https://forms.zohopublic.in/mangeshpeacef1/form/Contactforsupport/formperma/_ps6Hq-7OvODRTnKowl1_FxyIIKmnPIywn1z6WV7i4M
+- **WhatsApp Support**: https://forms.zohopublic.in/mangeshpeacef1/form/WhatsAppButtonForm/formperma/F2z-Z2bBLbkttGWHBPPvrqSwlSXzd_WnD4sUAWNnjh4

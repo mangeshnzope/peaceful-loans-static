@@ -22,6 +22,11 @@
   <title>Peaceful Loans — Unbiased Home Loan Advisor in India</title>
   <meta name="description" content="Unbiased home loan advisory for borrowers seeking ₹2 Crore+ home loans in India. We help you secure the lowest interest rates and best terms. We work for you, not the bank.">
   <link rel="canonical" href="https://peaceful-loans.com/">
+  <link rel="ai-catalog" href="/.well-known/ai-catalog.json">
+  <link rel="service-desc" href="/.well-known/mcp/server-card.json">
+  <link rel="describedby" href="/.well-known/agent-skills/index.json">
+  <link rel="api-catalog" href="/.well-known/api-catalog">
+  <link rel="alternate" type="text/markdown" href="/index.md">
   <meta property="og:title" content="Peaceful Loans — Unbiased Home Loan Advisor in India">
   <meta property="og:description" content="Unbiased home loan advisory for borrowers seeking ₹2 Crore+ home loans in India. We help you secure the lowest interest rates and best terms. We work for you, not the bank.">
   <meta property="og:url" content="https://peaceful-loans.com/">
@@ -234,9 +239,9 @@ ${navHTML('/')}
       <a href="/from-founders-desk/bw-disrupt-40-under-40-mangesh-zope/" class="coverage-card">
         <img src="/assets/logos/bw-disrupt-logo.png" alt="BW Disrupt 40 Under 40" class="coverage-logo" style="max-height: 28px; width: auto; object-fit: contain;">
         <div class="coverage-content">
-          <p class="article-meta">3rd October 2026 (Print Issue) &middot; National Recognition</p>
+          <p class="article-meta">3rd October 2026 (Print Issue · Page 73) &middot; National Recognition</p>
           <h3>Peaceful-Loans Wins BW Disrupt 40 Under 40 Award 2026</h3>
-          <p>Honored for transforming the home loan advisory space with 100% borrower-first advocacy, bootstrapped growth, transparent rate-spread navigation, and state-of-the-art proprietary technology.</p>
+          <p>Featured in BW Businessworld magazine (&ldquo;Putting the borrower first&rdquo;) for transforming home loan advisory with 100% borrower advocacy, proprietary &ldquo;Joy&rdquo; software, and scaling to ₹75 Cr quarterly sanctions.</p>
         </div>
         <div class="coverage-footer">Read Full Feature &rarr;</div>
       </a>
@@ -751,6 +756,80 @@ function initCommunityTabs() {
 
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', render);
+</script>
+<script type="module">
+(function() {
+  const getContext = () => (typeof document !== 'undefined' ? document.modelContext : undefined)
+    ?? (typeof navigator !== 'undefined' ? navigator.modelContext : undefined);
+
+  const emiTool = {
+    name: "calculate_home_loan_emi",
+    description: "Calculate monthly EMI, total interest, and total payment for a home loan in India given principal (INR), annual interest rate percentage, and tenure in years.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        principal: { type: "number", description: "Loan principal amount in INR, e.g. 20000000 for ₹2 Crore" },
+        annualRate: { type: "number", description: "Annual interest rate percentage, e.g. 8.4" },
+        tenureYears: { type: "number", description: "Loan tenure in years, e.g. 20" }
+      },
+      required: ["principal", "annualRate", "tenureYears"]
+    },
+    execute: async function(params) {
+      const p = Number(params.principal);
+      const r = (Number(params.annualRate) / 12) / 100;
+      const n = Number(params.tenureYears) * 12;
+      const emi = Math.round(p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1));
+      const totalPayment = emi * n;
+      const totalInterest = totalPayment - p;
+      return {
+        principal: p,
+        annualRate: Number(params.annualRate),
+        tenureYears: Number(params.tenureYears),
+        monthlyEmi: emi,
+        totalInterest,
+        totalPayment,
+        currency: "INR"
+      };
+    },
+    annotations: { readOnlyHint: true }
+  };
+
+  const advisoryTool = {
+    name: "get_home_loan_advisory_overview",
+    description: "Retrieve Peaceful Loans advisory model, conflict-free borrower representation, and bank negotiation standards for ₹2Cr+ home loans in India.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        query: { type: "string", description: "Inquiry topic: 'fees', 'repo-rates', 'negotiation', or 'balance-transfer'" }
+      }
+    },
+    execute: async function(params) {
+      return {
+        service: "Peaceful Loans",
+        founder: "Mangesh Zope (IIM Calcutta 2012)",
+        positioning: "Unbiased home loan advisory for ₹2 Crore+ borrowers in India",
+        model: "100% borrower-aligned advisory fee. Zero commission from banks.",
+        banksCovered: ["SBI", "HDFC Bank", "ICICI Bank", "Bank of Baroda", "Kotak", "Axis Bank"],
+        website: "https://peaceful-loans.com",
+        contact: "mangesh@peaceful-loans.com"
+      };
+    },
+    annotations: { readOnlyHint: true }
+  };
+
+  function register() {
+    const ctx = getContext();
+    if (!ctx || typeof ctx.registerTool !== 'function') return;
+    try {
+      Promise.resolve(ctx.registerTool(emiTool)).catch(err => console.warn('WebMCP EMI tool registration:', err));
+      Promise.resolve(ctx.registerTool(advisoryTool)).catch(err => console.warn('WebMCP advisory tool registration:', err));
+    } catch (e) {
+      console.warn('WebMCP registration error:', e);
+    }
+  }
+
+  register();
+})();
 </script>
 </body>
 </html>

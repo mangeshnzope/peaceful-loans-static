@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "calculate-home-loan-emi",
+      "type": "skill-md",
+      "description": "Calculate monthly EMI, total interest, and complete repayment breakdown for Indian home loans.",
+      "url": "/.well-known/agent-skills/calculate-home-loan-emi/SKILL.md",
+      "digest": "sha256:e58460ec80a29e4b8b40dda24305badfb9144fe867b4e9472c23de5b64fde0e7"
+    },
+    {
+      "name": "compare-bank-interest-rates",
+      "type": "skill-md",
+      "description": "Compare current FY26-27 home loan interest rates, spreads, and benchmark repo rates across major Indian banks.",
+      "url": "/.well-known/agent-skills/compare-bank-interest-rates/SKILL.md",
+      "digest": "sha256:b818f1ec9a9521be72f63721fc53b5ac1f547ed34ff926cf7cefc0dfe1b5989b"
+    },
+    {
+      "name": "home-loan-advisory-checklist",
+      "type": "skill-md",
+      "description": "Comprehensive audit checklist for ₹2Cr+ home loan sanctions, processing fee waivers, and bank spread negotiations.",
+      "url": "/.well-known/agent-skills/home-loan-advisory-checklist/SKILL.md",
+      "digest": "sha256:e7e227770dc01cc81d04900f1fbd954d1cb6cc8add2b88ce3cbbb8a57511f2f6"
+    }
+  ]
+}

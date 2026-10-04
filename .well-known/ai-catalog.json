@@ -1,0 +1,41 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Peaceful Loans",
+    "identifier": "did:web:peaceful-loans.com"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:peaceful-loans.com:server:advisory",
+      "displayName": "Peaceful Loans Advisory & Tools",
+      "type": "application/mcp-server-card+json",
+      "url": "https://peaceful-loans.com/.well-known/mcp/server-card.json",
+      "representativeQueries": [
+        "what are the best home loan interest rates for 2 crore loan in India",
+        "calculate home loan EMI for 3 crore at 8.4 percent",
+        "how to negotiate home loan spread with SBI or HDFC"
+      ]
+    },
+    {
+      "identifier": "urn:air:peaceful-loans.com:skills:index",
+      "displayName": "Peaceful Loans Agent Skills",
+      "type": "application/json",
+      "url": "https://peaceful-loans.com/.well-known/agent-skills/index.json",
+      "representativeQueries": [
+        "compare bank home loan interest rates India",
+        "home loan balance transfer checklist",
+        "home loan sanction letter due diligence"
+      ]
+    },
+    {
+      "identifier": "urn:air:peaceful-loans.com:agent:advisor",
+      "displayName": "Peaceful Loans A2A Advisor Agent",
+      "type": "application/json",
+      "url": "https://peaceful-loans.com/.well-known/agent-card.json",
+      "representativeQueries": [
+        "find independent mortgage advisor in Mumbai",
+        "unbiased home loan advice for luxury property in India"
+      ]
+    }
+  ]
+}
