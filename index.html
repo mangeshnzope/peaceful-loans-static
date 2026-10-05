@@ -72,7 +72,7 @@
   </script>
   <link rel="icon" type="image/jpeg" href="/assets/icon-jpg.jpg">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=14">
+  <link rel="stylesheet" href="/styles.css?v=16">
   <!-- LinkedIn Insight Tag -->
   <script type="text/javascript">
     _linkedin_partner_id = "6873185";
@@ -100,7 +100,7 @@
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <div id="app"></div>
-<script src="/components.js?v=2"></script>
+<script src="/components.js?v=4"></script>
 <script>
 // ===== DATA =====
 const conversations = [
@@ -202,7 +202,8 @@ ${navHTML('/')}
         <div class="trust-grid">
           <a href="https://www.google.com/gasearch?q=peaceful-loans%20reviews" target="_blank" rel="noreferrer" class="trust-item" style="color:inherit; text-decoration:none;"><span class="star">${icons.star}</span> 100+ 5.0 Google Ratings</a>
           <a href="https://www.linkedin.com/in/mangeshzope/" target="_blank" rel="noreferrer" class="trust-item" style="color:inherit; text-decoration:none;"><span style="color:#1A4CC8">${icons.gradCap}</span> Founded by IIM Cal alumnus</a>
-          <div class="trust-item"><span style="color:#E84118">${icons.target}</span> \u20b92 Crore+ Loans expert</div>
+          <div class="trust-item"><span style="color:#E84118">${icons.target}</span> <span>Only for \u20b950 Lakh+<span class="mobile-break"><br></span> salaried income families</span></div>
+          <a href="/from-founders-desk/bw-disrupt-40-under-40-mangesh-zope/" class="trust-item" style="color:inherit; text-decoration:none;"><span style="color:#e11d48">${icons.award}</span> BW Disrupt 40 Under 40</a>
         </div>
         <h1>The Most Trusted <br> Home Loan Advisor.</h1>
         <div class="hero-sub">
@@ -312,19 +313,6 @@ ${navHTML('/')}
   </div>
 </section>
 
-<!-- What We Advise On -->
-<section class="section section-gray" id="what-we-advise">
-  <div class="container">
-    <div class="text-center" style="margin-bottom:3rem">
-      <h2 class="section-title">What We Advise On</h2>
-      <p class="section-subtitle">Free home loan advisory for \u20b92 Crore+ buyers across all major loan types.</p>
-    </div>
-    <div class="products-grid">
-      ${products.map(p => `<div class="product-card"><div class="icon">${p.icon}</div><p>${p.label}</p></div>`).join('')}
-    </div>
-  </div>
-</section>
-
 <!-- Shield -->
 <section class="section section-white" id="shield">
   <div class="container">
@@ -348,23 +336,6 @@ ${navHTML('/')}
       <div class="optimize-grid">
         ${optimizeList.map(item => `<div class="optimize-item"><div class="optimize-check"><span style="color:#1A4CC8">${icons.check}</span></div><span>${item}</span></div>`).join('')}
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- How It Works -->
-<section class="section section-gray" id="how-it-works">
-  <div class="container">
-    <div class="text-center" style="margin-bottom:3.5rem">
-      <p class="section-label">Our Process</p>
-      <h2 class="section-title">How Peaceful-Loans Works for You</h2>
-      <p class="section-subtitle">Our mission is to save your hard-earned money and safeguard you against mis-selling.</p>
-    </div>
-    <div class="steps-grid">
-      ${steps.map(s => `<div class="step-card" style="border-top:4px solid ${s.color}"><p class="step-num">${s.num}</p><h3>${s.title}</h3><p>${s.desc}</p></div>`).join('')}
-    </div>
-    <div class="commission-note">
-      <p>At our scale, all banks give us the same commission. Unlike traditional DSAs, we do not let commissions earned from banks cloud our judgement. Our loyalty is to save you hard earned money.</p>
     </div>
   </div>
 </section>
@@ -394,6 +365,23 @@ ${navHTML('/')}
     </div>
     <div class="bomb-grid">
       ${bankBombs.map(b => `<div class="bomb-card"><span class="bomb-tag">${b.tag}</span><h3>${b.title}</h3><p>${b.truth}</p></div>`).join('')}
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="section section-gray" id="how-it-works">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:3.5rem">
+      <p class="section-label">Our Process</p>
+      <h2 class="section-title">How Peaceful-Loans Works for You</h2>
+      <p class="section-subtitle">Our mission is to save your hard-earned money and safeguard you against mis-selling.</p>
+    </div>
+    <div class="steps-grid">
+      ${steps.map(s => `<div class="step-card" style="border-top:4px solid ${s.color}"><p class="step-num">${s.num}</p><h3>${s.title}</h3><p>${s.desc}</p></div>`).join('')}
+    </div>
+    <div class="commission-note">
+      <p>At our scale, all banks give us the same commission. Unlike traditional DSAs, we do not let commissions earned from banks cloud our judgement. Our loyalty is to save you hard earned money.</p>
     </div>
   </div>
 </section>
@@ -454,6 +442,19 @@ ${navHTML('/')}
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- What We Advise On -->
+<section class="section section-gray" id="what-we-advise">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:3rem">
+      <h2 class="section-title">What We Advise On</h2>
+      <p class="section-subtitle">Free home loan advisory for \u20b92 Crore+ buyers across all major loan types.</p>
+    </div>
+    <div class="products-grid">
+      ${products.map(p => `<div class="product-card"><div class="icon">${p.icon}</div><p>${p.label}</p></div>`).join('')}
     </div>
   </div>
 </section>
@@ -755,7 +756,11 @@ function initCommunityTabs() {
 }
 
 // ===== INIT =====
-document.addEventListener('DOMContentLoaded', render);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', render);
+} else {
+  render();
+}
 </script>
 <script type="module">
 (function() {
