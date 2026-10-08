@@ -1,152 +1,142 @@
-Careers at Peaceful-Loans · Open Role #1
-
+[![Peaceful-Loans](/assets/logo-horizontal.png)](/index.html)
       
-
-# Work With Us
-
-      
-
-        Role: **Marketing Executive (Reddit Content) — Entry Level** (Full-Time)
-      
-
+      Work With Us · Role #1
+    
+    
+      Qualification Round Open
     
   
 
   
+    
+    
+    
+  
+
+  
+  
+    Careers at Peaceful-Loans · Entry Level · Full-Time
+    
+
+# Marketing Executive (Reddit Content)
+
+    
+
+      Peaceful-Loans is hiring a full-time Marketing Executive to be our voice on Reddit: someone who writes clear, original, genuinely useful posts and comments on personal finance, loans, economics and money maths.
+    
+
+    
+      
+        
+        ₹15,000/mo + up to 100% Monthly Bonus
+      
+      
+        
+        6 Days Working · 9:30 AM – 7:30 PM+ (Sunday Off)
+      
+      
+        
+        100% Human-Written · Zero AI Tools
+      
+      
+        Mumbai Preferred (Not Mandatory) · Immediate Start
+      
+    
+  
+
+  
+  
+    
+      
+        
+        For Shortlisted Candidates from LinkedIn
+      
+      Qualification Round → 3 Core Rounds Follow
+    
+
+    
+      
+        
+
+## This Google Form is your Qualification Round — after this, the real rounds begin.
+
+        
+
+          If you were sent this page after applying on LinkedIn, please complete the **Qualification Google Form** to proceed. Please note that **there are multiple rounds after this** — clearing this qualification step is where our core testing and interview rounds begin.
+        
+
+        
+
+          **Forgot which role you applied for?** Many candidates apply to several openings on LinkedIn and forget which post this is for. You can [view the original LinkedIn job post](https://www.linkedin.com/jobs/view/4476533896/) or read the complete role details below before submitting your form.
+        
+
+      
+
+      
+        [
+          
+          Start Qualification Form
+        ](https://docs.google.com/forms/d/e/1FAIpQLSecW_GZLpKaUp3GsNyBkCOTmLC5cPvLwFcFPEEZAddME0lntg/viewform?usp=dialog)
+        [
+          
+          View LinkedIn Job Post
+        ](https://www.linkedin.com/jobs/view/4476533896/)
+        Candidates must clear each stage to advance to the next.
+      
+    
 
     
     
       
-        
-          
-          Selected Candidates · Qualification Round
-        
-        Step 1 of 4 in Evaluation
+        Complete Selection Roadmap (Qualification + 3 Core Steps)
       
       
         
-
-## Shortlisted from LinkedIn? Complete Your Qualification Round Below
-
-        
-
-          If you received a link to this page after applying on LinkedIn, welcome to the next step for the **Marketing Executive (Reddit Content) — Entry Level** role at Peaceful-Loans.
-        
-
-        
           
-
-            **Please Note — More Rounds Follow After This:** This Google Form is an initial **Qualification Round**. There are multiple evaluation rounds after this step. Once you clear this qualification round, the real assessment rounds begin: a **Written Test** (to analyse your writing skills), a **Live Online Math Test on Zoom**, and **2 Rounds of Interviews**.
-          
-
-        
-
-        
-          [
-            
-            Start Qualification Round (Google Form)
-          ](https://docs.google.com/forms/d/e/1FAIpQLSecW_GZLpKaUp3GsNyBkCOTmLC5cPvLwFcFPEEZAddME0lntg/viewform?usp=dialog)
-          [
-            
-            View LinkedIn Job Post
-          ](https://www.linkedin.com/jobs/view/4476533896/)
-        
-
-        
-          
-          
-            **Forgot which role you applied for?** Many candidates apply to multiple openings on LinkedIn and lose track. You can [check the original LinkedIn job post here](https://www.linkedin.com/jobs/view/4476533896/) or read the complete role description, salary, and qualification criteria below before filling out the form.
-          
-        
-      
-    
-
-    
-    
-      
-        
-      
-      
-        
-
-### Strict Full-Time Role Notice (9:30 AM – 7:30 PM Daily)
-
-        
-
-          **This is a full-time role — do not apply if you are still a student and cannot give 9:30 AM to 7:30 PM daily (6 days a week, only Sunday off) to this role.**
-        
-
-      
-    
-
-    
-    
-      
-        
-
-How We Hire
-
-        
-
-## Selection Process: Qualification Round + 3 Core Evaluation Stages
-
-        
-
-          Candidates must clear each round to move to the next. Completing the Google Form on this page is the **Qualification Round** — once you pass this, the real evaluation rounds begin:
-        
-
-      
-
-      
-        
-          
-            Qualification Round
-            Current Stage
+            Stage 01 · Qualification
+            Current
           
           
 
-### Google Form Qualification Screening
+### Google Form Screening
 
           
 
-            For candidates shortlisted from LinkedIn. Submit the qualification Google Form with your details, why finance and economics interest you, academic scores, and a writing sample or Reddit profile link.
-          
+Preliminary qualification round for shortlisted candidates covering academic scores, interest in finance, and writing sample link.
 
         
 
         
           
-            Step 1 · Real Round 1
+            Stage 02 · Real Round 1
           
           
 
-### Written Test (Writing Skills Analysis)
+### Written Test
 
           
 
-            A timed, supervised writing test to analyse your writing skills — such as explaining a loan or interest-rate concept to a beginner in plain, accurate English, written 100% by you without AI tools.
-          
-
-        
-
-        
-          
-            Step 2 · Real Round 2
-          
-          
-
-### Online Math Test (Live on Zoom Call)
-
-          
-
-            A live online mathematics test conducted on a Zoom call to evaluate your comfort with percentages, ratios, compound interest, EMI calculations, and step-by-step financial working.
-          
+Timed, supervised writing test for analysing your writing skills — explaining a loan or interest-rate concept to a beginner without AI.
 
         
 
         
           
-            Step 3 · Real Round 3
+            Stage 03 · Real Round 2
+          
+          
+
+### Online Math Test on Zoom
+
+          
+
+Live mathematics test on a Zoom call testing percentages, ratios, compound interest, EMIs, and step-by-step financial calculations.
+
+        
+
+        
+          
+            Stage 04 · Real Round 3
           
           
 
@@ -154,20 +144,230 @@ How We Hire
 
           
 
-            **Interview 1:** Discussion of your writing test, your finance and economics knowledge, and how you reason through money and maths questions.
-
-            **Interview 2 (Final):** Fit, availability, and working hours, plus a short live writing exercise. **Class 5 to Class 10 marksheets are verified at this stage.**
-          
+**Round 1:** Discussion of your writing test & finance/maths reasoning.
+**Round 2:** Fit, working hours, live writing exercise & Class 5–10 marksheet verification.
 
         
       
     
+  
+
+  
+  
+
+    
+    
+
+      
+      
+        01 · About the Firm
+        
+
+## Company Description
+
+        
+
+          **Peaceful-Loans** is an independent home loan advisory firm focused on buyers purchasing properties above INR 2 crore. The organization analyzes products from over 80 banks and NBFCs across public and private sectors to recommend loan structures that serve clients’ best interests.
+        
+
+        
+
+          Peaceful-Loans reviews each client’s complete financial situation to provide clear, unbiased guidance with no hidden agenda. Founded by an IIM Calcutta alumnus who has witnessed widespread mis-selling in the market, the firm is built on the belief that every buyer deserves straightforward, transparent advice.
+        
+
+      
+
+      
+      
+        02 · Role Overview
+        
+
+## About the Role
+
+        
+
+          Peaceful Loans is hiring a full-time Marketing Executive to be our voice on Reddit: someone who writes clear, original, genuinely useful posts and comments on personal finance, loans, economics and money maths.
+        
+
+        
+          
+          
+
+            This is a full-time role — don’t apply if you are still a student and can’t give 9:30 AM to 7:30 PM daily to this role.
+          
+
+        
+
+        
+
+          Reddit readers spot generic or AI-written text instantly. We want a sharp, curious person who can explain a number properly, in their own words, and earn trust one thread at a time.
+        
+
+      
+
+      
+      
+        03 · Key Responsibilities
+        
+
+## What You Will Do
+
+        
+
+          
+- 
+            01
+            Write original Reddit posts and comments on personal finance, borrowing, credit, interest, inflation and the wider economy, in plain and accurate English.
+          
+          
+- 
+            02
+            Turn numbers into explanations: EMIs, interest rates, compounding, loan comparisons, with the working shown and the maths checked.
+          
+          
+- 
+            03
+            Find and track relevant subreddits and conversations, learn each community’s rules and tone, and take part without spamming or hard-selling.
+          
+          
+- 
+            04
+            Answer questions from real people helpfully, and disclose your affiliation wherever a subreddit requires it.
+          
+          
+- 
+            05
+            Plan a weekly content calendar and share simple reports on posts, upvotes, comments and the conversations that led to enquiries.
+          
+          
+- 
+            06
+            Fact-check every claim against reliable sources before it goes live, and flag any topic that needs compliance review.
+          
+        
+
+      
+
+      
+      
+        04 · Candidate Profile
+        
+
+## What We Are Looking For
+
+        
+
+          
+- 
+            01
+            **Real interest in finance and economics:** you read about interest rates, inflation, markets or personal finance for fun.
+          
+          
+- 
+            02
+            **Strong maths:** comfortable with percentages, ratios, compound interest and simple financial calculations, and able to explain them step by step.
+          
+          
+- 
+            03
+            **Excellent written English** that is clear, correct and in your own voice. **All content must be written by you, without AI tools.**
+          
+          
+- 
+            04
+            **Curiosity and humility:** you check facts, accept feedback and say “I don’t know” instead of guessing.
+          
+          
+- 
+            05
+            **Regular Reddit use.** You understand upvotes, karma, subreddit rules and how communities react to promotion.
+          
+          
+- 
+            06
+            **Discipline** to work consistently, meet weekly publishing targets and manage your own time.
+          
+        
+
+      
+
+      
+      
+        05 · Academic Threshold
+        
+
+## Educational Qualification
+
+        
+          
+            Mathematics (Class 5 to 10)
+            Above 90%
+            
+
+In **each year from Class 5 to Class 10**, or the equivalent grade or score in your board or curriculum.
+
+          
+          
+            English (Class 5 to 10)
+            Above 80%
+            
+
+In **each year from Class 5 to Class 10**, or the equivalent grade or score in your board or curriculum.
+
+          
+        
+        
+          **Marksheet Verification:** Marksheets are verified at the interview stage. Candidates from any board (CBSE, ICSE, State, IB, IGCSE or others) are welcome.
+        
+      
+
+      
+      
+        06 · Additional Context
+        
+
+## Good to Have
+
+        
+
+          
+- 
+            01
+            Prior writing on Reddit, a blog, Quora or a personal finance forum, with a link we can read.
+          
+          
+- 
+            02
+            A degree or coursework in commerce, economics, statistics, mathematics or finance.
+          
+          
+- 
+            03
+            Familiarity with Indian lending terms such as EMI, CIBIL score, APR and prepayment.
+          
+        
+
+        
+          What This Role Is Not
+          
+
+            This is not a copy-paste, automation or bulk-posting job. It is also not a sales-calling role. We measure quality of writing and trust earned, not volume alone.
+          
+
+        
+      
+
+    
 
     
     
       
+        Role Specification
+        
 
-## Job Details
+### Job Details
+
+      
 
       
 
@@ -200,248 +400,50 @@ How We Hire
             
             
           
-          
-            
-            [](https://www.linkedin.com/jobs/view/4476533896/)
-          
         
       | Position | Marketing Executive (Reddit Content) — Entry Level |
 | --- | --- |
-| Employment Type | Full-time |
+| Employment | Full-time |
 | --- | --- |
 | Location | Mumbai preferred, but not mandatory |
 | --- | --- |
 | Reports To | Mangesh Zope / Founder |
 | --- | --- |
-| Salary | ₹15,000 per month + additional 100% bonus possible every month, based on deliverables |
+| Salary | ₹15,000 / month + additional 100% bonus possible every month, based on deliverables |
 | --- | --- |
-| Working Hours | 6 days working, 9:30 AM to whatever time work finishes (minimum 9:30 AM to 7:30 PM daily commitment). Only Sunday off. |
+| Working Hours | 6 days working, 9:30 AM to whatever time work finishes. Only Sunday off. |
 | --- | --- |
 | Start Date | Immediate |
 | --- | --- |
-| LinkedIn Job Listing | https://www.linkedin.com/jobs/view/4476533896/ |
-| --- | --- |
-
-    
-
-    
-    
-      
-
-## Company Description
-
-      
-
-        **Peaceful-Loans** is an independent home loan advisory firm focused on buyers purchasing properties above INR 2 crore. The organization analyzes products from over 80 banks and NBFCs across public and private sectors to recommend loan structures that serve clients’ best interests.
-      
-
-      
-
-        Peaceful-Loans reviews each client’s complete financial situation to provide clear, unbiased guidance with no hidden agenda. Founded by an IIM Calcutta alumnus who has witnessed widespread mis-selling in the market, the firm is built on the belief that every buyer deserves straightforward, transparent advice.
-      
-
-    
-
-    
-    
-      
-
-## About the Role
-
-      
-
-        Peaceful Loans is hiring a full-time **Marketing Executive** to be our voice on Reddit: someone who writes clear, original, genuinely useful posts and comments on personal finance, loans, economics and money maths.
-      
-
-      
-
-        This is a full-time role — don’t apply if you are still a student and can’t give 9:30 AM to 7:30 PM daily to this role.
-      
-
-      
-
-        Reddit readers spot generic or AI-written text instantly. We want a sharp, curious person who can explain a number properly, in their own words, and earn trust one thread at a time.
-      
-
-    
-
-    
-    
-      
-
-## What You Will Do
-
-      
-
-        
-- 
-          
-          Write original Reddit posts and comments on personal finance, borrowing, credit, interest, inflation and the wider economy, in plain and accurate English.
-        
-        
-- 
-          
-          Turn numbers into explanations: EMIs, interest rates, compounding, loan comparisons, with the working shown and the maths checked.
-        
-        
-- 
-          
-          Find and track relevant subreddits and conversations, learn each community’s rules and tone, and take part without spamming or hard-selling.
-        
-        
-- 
-          
-          Answer questions from real people helpfully, and disclose your affiliation wherever a subreddit requires it.
-        
-        
-- 
-          
-          Plan a weekly content calendar and share simple reports on posts, upvotes, comments and the conversations that led to enquiries.
-        
-        
-- 
-          
-          Fact-check every claim against reliable sources before it goes live, and flag any topic that needs compliance review.
-        
-      
-
-    
-
-    
-    
-      
-
-## What We Are Looking For
-
-      
-
-        
-- 
-          
-          **Real interest in finance and economics:** you read about interest rates, inflation, markets or personal finance for fun.
-        
-        
-- 
-          
-          **Strong maths:** comfortable with percentages, ratios, compound interest and simple financial calculations, and able to explain them step by step.
-        
-        
-- 
-          
-          **Excellent written English** that is clear, correct and in your own voice. **All content must be written by you, without AI tools.**
-        
-        
-- 
-          
-          **Curiosity and humility:** you check facts, accept feedback and say “I don’t know” instead of guessing.
-        
-        
-- 
-          
-          **Regular Reddit use:** you understand upvotes, karma, subreddit rules and how communities react to promotion.
-        
-        
-- 
-          
-          **Discipline** to work consistently, meet weekly publishing targets and manage your own time.
-        
-      
-
-    
-
-    
-    
-      
-
-## Educational Qualification
-
-      
-        
-          Mathematics
-          Above 90%
-          
-
-In each year from **Class 5 to Class 10**, or the equivalent grade or score in your board or curriculum.
-
-        
-        
-          English
-          Above 80%
-          
-
-In each year from **Class 5 to Class 10**, or the equivalent grade or score in your board or curriculum.
-
-        
-      
-      
-
-        **Verification Note:** Marksheets from Class 5 to Class 10 are verified at the final interview stage. Candidates from any board (CBSE, ICSE, State, IB, IGCSE or others) are welcome.
-      
-
-    
-
-    
-    
-      
-
-## Good to Have
-
-      
-
-        
-- 
-          
-          Prior writing on Reddit, a blog, Quora or a personal finance forum, with a link we can read.
-        
-        
-- 
-          
-          A degree or coursework in commerce, economics, statistics, mathematics or finance.
-        
-        
-- 
-          
-          Familiarity with Indian lending terms such as EMI, CIBIL score, APR and prepayment.
-        
-      
-
-    
-
-    
-    
-      
-
-### What This Role Is Not
-
-      
-
-        This is **not** a copy-paste, automation or bulk-posting job. It is also **not** a sales-calling role. We measure quality of writing and trust earned, not volume alone.
-      
-
-    
-
-    
-    
-      
-
-## Ready to Proceed? Complete the Qualification Round
-
-      
-
-        **For Shortlisted Candidates (Qualification Round):** Click the button below to complete the Google Form qualification step. Remember that clearing this form qualifies you for the 3 core evaluation stages (Written Test → Live Online Math Test on Zoom → 2 Rounds of Interviews).
-      
 
       
         [
           
-          Complete Qualification Google Form
+          Complete Qualification Form
         ](https://docs.google.com/forms/d/e/1FAIpQLSecW_GZLpKaUp3GsNyBkCOTmLC5cPvLwFcFPEEZAddME0lntg/viewform?usp=dialog)
         [
           
-          View Original LinkedIn Job Post
+          View LinkedIn Job Post
         ](https://www.linkedin.com/jobs/view/4476533896/)
       
-      
-        
 
-          **Applying directly via Email?** Email your CV, a short note on why finance and economics interest you, and a link to one piece of writing you are proud of to [mangesh@peaceful-loans.com](mailto:mangesh@peaceful-loans.com?subject=Marketing%20Executive%20(Reddit)%3A%20Your%20Name) (or [mangesh@peaceful-loan.com](mailto:mangesh@peaceful-loan.com?subject=Marketing%20Executive%20(Reddit)%3A%20Your%20Name)). Use the subject line "Marketing Executive (Reddit): Your Name". Shortlisted candidates will be contacted for the written task.
+      
+        **How to Apply via Email**
+        Email your CV, a short note on why finance and economics interest you, and a link to one piece of writing you are proud of to [mangesh@peaceful-loans.com](mailto:mangesh@peaceful-loans.com?subject=Marketing%20Executive%20(Reddit)%3A%20Your%20Name) (or [mangesh@peaceful-loan.com](mailto:mangesh@peaceful-loan.com?subject=Marketing%20Executive%20(Reddit)%3A%20Your%20Name)).
+
+        Subject line:
+
+        Marketing Executive (Reddit): Your Name
+      
+    
+
+  
+
+  
+  
+    
+      [← Back to peaceful-loans.com](/index.html)
+       · 
+      Independent Home Loan Advisory · IIM Calcutta Alumnus Initiative
+    
+    © 2026 Peaceful-Loans · Mumbai
