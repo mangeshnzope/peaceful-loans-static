@@ -54,13 +54,14 @@ function navHTML(currentPath) {
     { label: 'Reviews', href: '/reviews.html' },
     { label: 'Media Coverage', href: '/media-coverage.html' },
     { label: "From Founder's Desk", href: '/from-founders-desk/' },
+    { label: 'Work With Us', href: '/work-with-us.html' },
   ];
   return `
 <nav class="nav" id="navbar">
   <div class="container">
     <div class="nav-inner">
       <a href="/index.html" class="nav-logo"><img src="/assets/logo-horizontal.png" alt="Peaceful Loans"></a>
-      <div class="nav-links">${links.map(l => `<a href="${l.href}">${l.label}</a>`).join('')}</div>
+      <div class="nav-links">${links.map(l => `<a href="${l.href}"${currentPath === l.href ? ' style="color:var(--blue);font-weight:600"' : ''}>${l.label}</a>`).join('')}</div>
       <div class="nav-ctas">
         <a href="${URLS.callForm}" target="_blank" rel="noreferrer" class="btn btn-primary btn-sm">${icons.phone} Book a Free Call</a>
         <a href="${URLS.whatsappForm}" target="_blank" rel="noreferrer" class="btn btn-outline-gray btn-sm"><span style="color:#16a34a">${icons.whatsapp}</span> WhatsApp Us</a>
@@ -101,6 +102,7 @@ function footerHTML() {
           <li><a href="/from-founders-desk/">Founder's Desk (Blog)</a></li>
           <li><a href="/ask.html">Ask Anonymously</a></li>
           <li><a href="/about.html">About</a></li>
+          <li><a href="/work-with-us.html">Work With Us</a></li>
           <li><a href="/index-booster/">Sitemap Booster</a></li>
         </ul>
       </div>

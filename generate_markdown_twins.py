@@ -338,7 +338,8 @@ def main():
         ('FY26-27IntRates/index.html', 'FY26-27IntRates.md'),
         ('from-founders-desk/index.html', 'from-founders-desk.md'),
         ('index-booster/index.html', 'index-booster.md'),
-        ('q1-fy26-27-results.html', 'q1-fy26-27-results.md')
+        ('q1-fy26-27-results.html', 'q1-fy26-27-results.md'),
+        ('work-with-us.html', 'work-with-us.md')
     ]
     
     for src, dest in conversions:
