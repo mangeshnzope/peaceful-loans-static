@@ -20,17 +20,18 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>The Peaceful-Loans Manifesto · Internal Edition</title>
+  <title>Peaceful-Loans Manifesto · Internal Edition</title>
   <meta name="description" content="Employee-only cultural manifesto of Peaceful-Loans: Three Pillars, Nine Ingredients of Operating, and Live Team Field Dispatches.">
   <link rel="canonical" href="https://peaceful-loans.com/manifesto">
 
   <link rel="icon" type="image/jpeg" href="/assets/icon-jpg.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
+  <!-- Strictly Upright Brand Guidelines Typefaces: Source Serif 4 & Inter (No Italics / Cursive) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
 
   <style>
-    /* ===== PEACEFUL-LOANS OFFICIAL DESIGN GUIDELINES PALETTE ===== */
+    /* ===== PEACEFUL-LOANS OFFICIAL DESIGN GUIDELINES PALETTE & TYPOGRAPHY ===== */
     :root {
       --pl-gold: #FFB919;
       --pl-orange: #FE5B04;
@@ -41,11 +42,9 @@
       --pl-ink: #111111;
       --pl-ink-soft: #26231E;
       --pl-body: #332F29;
-      --pl-muted: #6A6256;
+      --pl-muted: #5C5549;
       --pl-hair: #D9CBB5;
       --pl-hair-soft: #E8DEC9;
-      --display: "Playfair Display", "Cormorant Garamond", Georgia, serif;
-      --editorial: "Cormorant Garamond", "Playfair Display", Georgia, serif;
       --serif: "Source Serif 4", Georgia, serif;
       --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -54,6 +53,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-style: normal;
     }
 
     html {
@@ -67,8 +67,8 @@
         linear-gradient(180deg, rgba(255, 185, 25, 0.06) 0%, rgba(251, 240, 224, 0) 420px);
       background-size: 26px 26px, 100% 100%;
       color: var(--pl-body);
-      font-family: var(--serif);
-      line-height: 1.68;
+      font-family: var(--sans);
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
       min-height: 100vh;
@@ -77,10 +77,13 @@
     h1, h2, h3, h4 {
       text-wrap: balance;
       color: var(--pl-ink);
+      font-family: var(--serif);
+      font-style: normal;
     }
 
     p, li, blockquote {
       text-wrap: pretty;
+      font-style: normal;
     }
 
     /* ===== TOP BRAND PALETTE STRIP ===== */
@@ -93,27 +96,28 @@
     .palette-top-strip .sw-orange { flex: 1; background: var(--pl-orange); }
     .palette-top-strip .sw-blue { flex: 1; background: var(--pl-blue); }
 
-    /* ===== GOLD EDITORIAL HIGHLIGHT (FROM DESIGN GUIDELINES INFOGRAPHICS) ===== */
+    /* ===== HIGH-CONTRAST INK TEXT WITH GOLD BAR UNDERLINE ===== */
     .gold-underline {
-      color: var(--pl-gold);
-      text-shadow: 0 1px 0 rgba(17, 17, 17, 0.12);
+      color: var(--pl-ink);
       position: relative;
       display: inline-block;
+      padding-bottom: 4px;
     }
     .gold-underline::after {
       content: "";
       position: absolute;
       left: 0;
       right: 0;
-      bottom: 2px;
-      height: 3px;
+      bottom: 0;
+      height: 5px;
       background: var(--pl-gold);
       border-radius: 2px;
     }
 
     .gold-marker {
-      background: linear-gradient(180deg, transparent 58%, rgba(255, 185, 25, 0.55) 58%);
-      padding: 0 4px;
+      background: rgba(255, 185, 25, 0.35);
+      padding: 1px 5px;
+      border-radius: 3px;
       color: var(--pl-ink);
     }
 
@@ -215,9 +219,20 @@
     }
 
     .auth-logo {
-      height: 38px;
+      height: 54px;
       width: auto;
-      margin-bottom: 14px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .auth-title {
+      font-family: var(--serif);
+      font-size: clamp(34px, 4.5vw, 46px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--pl-ink);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
     }
 
     .auth-kicker {
@@ -227,25 +242,19 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--pl-orange);
-      margin-bottom: 10px;
-    }
-
-    .auth-title {
-      font-family: var(--display);
-      font-size: clamp(28px, 4vw, 38px);
-      font-weight: 700;
-      line-height: 1.12;
-      color: var(--pl-ink);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .auth-subtitle {
-      font-family: var(--editorial);
-      font-style: italic;
-      font-size: 18px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 500;
       color: var(--pl-body);
       margin-bottom: 22px;
-      line-height: 1.42;
+      line-height: 1.55;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .auth-form {
@@ -351,10 +360,10 @@
       }
     }
 
-    /* ===== NEW YORKER MASTHEAD WITH DESIGN GUIDE ACCENTS ===== */
+    /* ===== MASTHEAD: LOGO ON LINE 1, MANIFESTO ON LINE 2 ===== */
     .masthead {
       text-align: center;
-      padding-bottom: 22px;
+      padding-bottom: 24px;
       border-bottom: 3px double var(--pl-ink);
       margin-bottom: 36px;
     }
@@ -380,18 +389,6 @@
       align-items: center;
       gap: 12px;
       flex-wrap: wrap;
-    }
-
-    .folio-home-link {
-      color: var(--pl-ink);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .folio-home-link img {
-      height: 28px;
-      width: auto;
     }
 
     .nav-strip-links {
@@ -454,23 +451,37 @@
       color: var(--pl-ink);
     }
 
+    .masthead-brand-stack {
+      padding: 22px 0 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .masthead-logo {
+      height: 54px;
+      width: auto;
+      display: block;
+    }
+
     .masthead-title {
-      font-family: var(--editorial);
-      font-size: clamp(30px, 4.4vw, 48px);
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.4vw, 48px);
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--pl-ink);
-      padding: 18px 0 6px;
-      line-height: 1.05;
+      line-height: 1.08;
     }
 
     .masthead-sub {
-      font-family: var(--editorial);
-      font-style: italic;
-      font-size: 17px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 500;
       color: var(--pl-ink-soft);
-      letter-spacing: 0.02em;
+      max-width: 720px;
+      margin: 6px auto 0;
     }
 
     /* ===== HERO SPREAD ===== */
@@ -510,21 +521,21 @@
     }
 
     .feature-headline {
-      font-family: var(--display);
-      font-size: clamp(36px, 5vw, 60px);
+      font-family: var(--serif);
+      font-size: clamp(36px, 4.8vw, 56px);
       font-weight: 700;
-      line-height: 1.07;
+      line-height: 1.1;
       letter-spacing: -0.015em;
       color: var(--pl-ink);
       margin-bottom: 18px;
     }
 
     .feature-dek {
-      font-family: var(--editorial);
-      font-size: clamp(20px, 2.2vw, 24px);
-      line-height: 1.42;
+      font-family: var(--sans);
+      font-size: clamp(16px, 1.8vw, 18.5px);
+      line-height: 1.6;
       color: var(--pl-ink-soft);
-      font-weight: 500;
+      font-weight: 400;
       margin-bottom: 22px;
     }
 
@@ -598,7 +609,7 @@
       font-weight: 700;
     }
 
-    /* ===== ILLUSTRATION CARD (NEW YORKER + DESIGN GUIDE) ===== */
+    /* ===== ILLUSTRATION CARD (DESIGN GUIDE STYLE) ===== */
     .illustration-card {
       background: var(--pl-paper);
       border: 2px solid var(--pl-ink);
@@ -623,10 +634,10 @@
       padding: 6px 0 12px;
     }
     .illustration-caption {
-      font-family: var(--editorial);
-      font-style: italic;
-      font-size: 16px;
-      line-height: 1.38;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.5;
       text-align: center;
       color: var(--pl-ink-soft);
       padding-top: 12px;
@@ -643,9 +654,9 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-family: var(--serif);
-      font-size: 13px;
-      line-height: 1.4;
+      font-family: var(--sans);
+      font-size: 12.5px;
+      line-height: 1.45;
       color: var(--pl-ink);
     }
     .infographic-callout-strip .bang-icon {
@@ -653,7 +664,7 @@
       height: 24px;
       border-radius: 50%;
       background: var(--pl-gold);
-      color: #FFFFFF;
+      color: var(--pl-ink);
       font-family: var(--sans);
       font-weight: 800;
       font-size: 14px;
@@ -696,7 +707,7 @@
     }
 
     .letter-banner-title {
-      font-family: var(--display);
+      font-family: var(--serif);
       font-size: 22px;
       font-weight: 700;
       color: var(--pl-ink);
@@ -704,7 +715,8 @@
     }
 
     .letter-banner-desc {
-      font-size: 15px;
+      font-family: var(--sans);
+      font-size: 14.5px;
       color: var(--pl-muted);
       line-height: 1.55;
     }
@@ -763,15 +775,15 @@
       border: 1.5px solid var(--pl-ink);
       padding: 36px 40px;
       box-shadow: 6px 6px 0 rgba(18, 63, 161, 0.12);
-      font-family: var(--serif);
-      font-size: 16.5px;
-      line-height: 1.78;
+      font-family: var(--sans);
+      font-size: 15.5px;
+      line-height: 1.75;
       color: var(--pl-ink-soft);
     }
     @media (max-width: 600px) {
       .letter-paper {
         padding: 22px 20px;
-        font-size: 15.5px;
+        font-size: 15px;
       }
     }
 
@@ -781,9 +793,9 @@
 
     .dropcap::first-letter {
       float: left;
-      font-family: var(--display);
-      font-size: 62px;
-      line-height: 0.82;
+      font-family: var(--serif);
+      font-size: 58px;
+      line-height: 0.85;
       padding-top: 4px;
       padding-right: 12px;
       padding-bottom: 4px;
@@ -794,12 +806,12 @@
     .letter-pullquote {
       border-left: 4px solid var(--pl-gold);
       background: var(--pl-cream);
-      padding: 12px 18px;
+      padding: 14px 18px;
       margin: 22px 0;
-      font-family: var(--editorial);
-      font-style: italic;
-      font-size: 22px;
-      line-height: 1.38;
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 1.4;
       color: var(--pl-ink);
     }
 
@@ -824,12 +836,13 @@
       margin-bottom: 6px;
     }
     .margin-note h4 {
-      font-family: var(--display);
+      font-family: var(--serif);
       font-size: 18px;
       margin-bottom: 6px;
     }
     .margin-note p {
-      font-size: 14px;
+      font-family: var(--sans);
+      font-size: 13.5px;
       line-height: 1.55;
       color: var(--pl-body);
     }
@@ -1038,7 +1051,7 @@
     }
 
     .pillar-title {
-      font-family: var(--display);
+      font-family: var(--serif);
       font-size: 26px;
       font-weight: 700;
       line-height: 1.15;
@@ -1047,9 +1060,8 @@
     }
 
     .pillar-question {
-      font-family: var(--editorial);
-      font-style: italic;
-      font-size: 17px;
+      font-family: var(--sans);
+      font-size: 13.5px;
       font-weight: 600;
       color: var(--pl-orange);
       margin-bottom: 12px;
@@ -1065,7 +1077,7 @@
 
     .preview-item {
       font-family: var(--sans);
-      font-size: 12px;
+      font-size: 12.5px;
       line-height: 1.45;
       color: var(--pl-ink-soft);
       display: flex;
@@ -1135,7 +1147,7 @@
     }
 
     .chapter-title {
-      font-family: var(--display);
+      font-family: var(--serif);
       font-size: clamp(26px, 3.4vw, 38px);
       font-weight: 700;
       color: #FFFFFF;
@@ -1144,10 +1156,10 @@
 
     .chapter-epigraph {
       max-width: 480px;
-      font-family: var(--editorial);
-      font-style: italic;
-      font-size: 18px;
-      line-height: 1.4;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.5;
       color: var(--pl-cream);
       text-align: right;
     }
@@ -1230,8 +1242,8 @@
     }
 
     .principle-name {
-      font-family: var(--display);
-      font-size: clamp(22px, 2.3vw, 28px);
+      font-family: var(--serif);
+      font-size: clamp(22px, 2.3vw, 27px);
       font-weight: 700;
       line-height: 1.24;
       color: var(--pl-ink);
@@ -1239,8 +1251,9 @@
     }
 
     .principle-canon {
-      font-size: 15.5px;
-      line-height: 1.72;
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.7;
       color: var(--pl-body);
       margin-bottom: 18px;
     }
@@ -1252,10 +1265,10 @@
       border-left: 5px solid var(--pl-orange);
       border-radius: 6px;
       padding: 12px 15px;
-      font-family: var(--editorial);
-      font-style: italic;
-      font-size: 17px;
-      line-height: 1.4;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.48;
       color: var(--pl-ink);
       margin-top: auto;
     }
@@ -1363,9 +1376,9 @@
     }
 
     .dispatch-story {
-      font-family: var(--serif);
-      font-size: 14.5px;
-      line-height: 1.62;
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.6;
       color: var(--pl-ink-soft);
       margin-bottom: 10px;
     }
@@ -1406,9 +1419,9 @@
       text-align: center;
     }
     .empty-dispatch-prompt p {
-      font-family: var(--editorial);
-      font-style: italic;
-      font-size: 17.5px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
       color: var(--pl-ink-soft);
       margin-bottom: 10px;
     }
@@ -1463,7 +1476,7 @@
       padding: 8px 10px;
       border: 1.5px solid var(--pl-ink);
       background: var(--pl-cream);
-      font-family: var(--serif);
+      font-family: var(--sans);
       font-size: 14px;
       color: var(--pl-ink);
     }
@@ -1505,9 +1518,9 @@
     }
 
     .epilogue-quote {
-      font-family: var(--display);
-      font-size: clamp(22px, 3vw, 32px);
-      font-style: italic;
+      font-family: var(--serif);
+      font-size: clamp(22px, 2.8vw, 30px);
+      font-weight: 700;
       line-height: 1.35;
       color: var(--pl-ink);
       max-width: 820px;
@@ -1521,13 +1534,12 @@
       display: inline-block;
     }
 
-    .signature-script {
-      font-family: var(--editorial);
-      font-style: italic;
-      font-size: 32px;
+    .signature-name {
+      font-family: var(--serif);
+      font-size: 28px;
       font-weight: 700;
       color: var(--pl-blue);
-      line-height: 1.1;
+      line-height: 1.15;
     }
 
     .signature-sub {
@@ -1607,9 +1619,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ===== PASSWORD PROTECTION GATE (SHOWN UNTIL UNLOCKED) ===== -->
 <div id="authGateScreen" class="auth-gate-wrapper">
   <div class="auth-gate-card">
-    <img src="/assets/logo-horizontal.png" alt="Peaceful-Loans" class="auth-logo">
+    <div>
+      <img src="/assets/logo-horizontal.png" alt="Peaceful-Loans" class="auth-logo">
+    </div>
+    <h1 class="auth-title"><span class="gold-underline">Manifesto</span></h1>
     <div class="auth-kicker">Employee-Only Archive &middot; Internal Edition</div>
-    <h1 class="auth-title">The Peaceful-Loans <span class="gold-underline">Manifesto.</span></h1>
     <p class="auth-subtitle">
       “A compass was invented before a watch, because direction is more important than speed in this journey.”
     </p>
@@ -1646,14 +1660,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="manifestoProtectedApp">
   <main class="magazine-shell">
 
-    <!-- ===== THE NEW YORKER + DESIGN GUIDELINES MASTHEAD ===== -->
+    <!-- ===== MASTHEAD: LOGO AT TOP, MANIFESTO ON SECOND LINE ===== -->
     <header class="masthead">
       <div class="folio-strip">
         <div class="folio-left">
-          <a href="/index.html" class="folio-home-link">
-            <img src="/assets/logo-horizontal.png" alt="Peaceful-Loans">
-          </a>
-          <span>&middot;</span>
           <nav class="nav-strip-links" aria-label="Manifesto Jump Links">
             <a href="#section-prologue">PROLOGUE</a>
             <a href="#section-pillars">3 PILLARS</a>
@@ -1669,7 +1679,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
-      <div class="masthead-title">The Peaceful-Loans Manifesto</div>
+      <div class="masthead-brand-stack">
+        <a href="/index.html" aria-label="Peaceful-Loans Home">
+          <img src="/assets/logo-horizontal.png" alt="Peaceful-Loans" class="masthead-logo">
+        </a>
+        <div class="masthead-title"><span class="gold-underline">Manifesto</span></div>
+      </div>
       <p class="masthead-sub">“A compass was invented before a watch, because the direction is more important than speed in this journey.”</p>
     </header>
 
@@ -1718,29 +1733,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <aside class="illustration-card">
         <div class="illustration-svg-wrap">
           <svg width="290" height="210" viewBox="0 0 290 210" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Editorial Illustration: The Compass, The Cut Diamond, and Saraswati's Ledger">
-            <!-- Warm circular halo -->
             <circle cx="145" cy="98" r="76" fill="#FBF0E0" stroke="#111111" stroke-width="1.5" stroke-dasharray="3 3"/>
             <circle cx="145" cy="98" r="60" fill="#FFFDF9" stroke="#111111" stroke-width="1.8"/>
-            <!-- Compass Rose crosshairs -->
             <line x1="145" y1="16" x2="145" y2="180" stroke="#111111" stroke-width="1.2" stroke-dasharray="3 3"/>
             <line x1="63" y1="98" x2="227" y2="98" stroke="#111111" stroke-width="1.2" stroke-dasharray="3 3"/>
-            <!-- True North Pointer -->
             <polygon points="145,18 151,36 145,32 139,36" fill="#FE5B04"/>
             <rect x="108" y="2" width="74" height="14" rx="3" fill="#111111"/>
             <text x="145" y="12" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" font-weight="800" fill="#FFB919" letter-spacing="1.5">TRUE NORTH</text>
-            <!-- Multi-faceted Cut Diamond -->
             <polygon points="118,78 172,78 188,98 145,150 102,98" fill="#FFB919" fill-opacity="0.28" stroke="#111111" stroke-width="2" stroke-linejoin="round"/>
             <polyline points="102,98 188,98" stroke="#111111" stroke-width="1.5"/>
             <polyline points="118,78 130,98 145,78 160,98 172,78" stroke="#111111" stroke-width="1.3" stroke-linejoin="round"/>
             <line x1="130" y1="98" x2="145" y2="150" stroke="#111111" stroke-width="1.3"/>
             <line x1="160" y1="98" x2="145" y2="150" stroke="#111111" stroke-width="1.3"/>
-            <!-- Sparkle rays -->
             <line x1="95" y1="64" x2="105" y2="72" stroke="#FE5B04" stroke-width="2" stroke-linecap="round"/>
             <line x1="195" y1="64" x2="185" y2="72" stroke="#FE5B04" stroke-width="2" stroke-linecap="round"/>
             <line x1="145" y1="54" x2="145" y2="66" stroke="#123FA1" stroke-width="2" stroke-linecap="round"/>
-            <!-- Bottom scroll banner -->
             <rect x="55" y="168" width="180" height="24" rx="4" fill="#123FA1" stroke="#111111" stroke-width="1.5"/>
-            <text x="145" y="184" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="11" fill="#FFFFFF">97.5% · Saraswati Before Laxmi</text>
+            <text x="145" y="184" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="10.5" fill="#FFFFFF">97.5% · Saraswati Before Laxmi</text>
           </svg>
         </div>
         <p class="illustration-caption">
@@ -1769,7 +1778,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="letter-kicker">Personal Dispatch &middot; Read Before Our 1-Hour Session</div>
           <h2 class="letter-banner-title">The Handwritten Letter From Mangesh Zope</h2>
           <p class="letter-banner-desc">
-            Every teammate received this handwritten letter prior to our Google Meet / Zoom session. Unfold it below to revisit the story of <em>Aai’s</em> Airbnb hospitality, the 97.5% benchmark, and the legacy we are building together.
+            Every teammate received this handwritten letter prior to our Google Meet / Zoom session. Unfold it below to revisit the story of Aai’s Airbnb hospitality, the 97.5% benchmark, and the legacy we are building together.
           </p>
         </div>
         <button type="button" class="btn-editorial-outline" id="toggleLetterBtn" onclick="toggleFounderLetter()">
@@ -1781,7 +1790,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="letter-drawer" id="founderLetterDrawer">
         <div class="letter-grid">
           <article class="letter-paper">
-            <p style="font-family:var(--editorial);font-style:italic;font-size:19px;color:var(--pl-ink);margin-bottom:20px">
+            <p style="font-family:var(--serif);font-weight:700;font-size:19px;color:var(--pl-ink);margin-bottom:20px">
               Dear Mrs. Harnehmat Kaur &amp; Every Builder of Peaceful-Loans,
             </p>
             <p class="dropcap">
@@ -1803,7 +1812,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               I studied in a Marathi medium school as my parents were uneducated and wanted to guide me in the journey. I never stood second in my entire school life. Second rank in my school was about 82–83% and I stood first with <strong>97.5%</strong>. As a 3-year-old kid studying day in, day out, I didn’t know why I was doing it.
             </p>
             <p>
-              Mom, whom I call <em>Aai</em>, kept telling me every day: <span class="gold-marker"><strong>“If you can see someone in the rear-view mirror, that means you are not working hard enough. Competition should just mentally give up looking at your Herculean effort, intensity and audacity.”</strong></span>
+              Mom, whom I call Aai, kept telling me every day: <span class="gold-marker"><strong>“If you can see someone in the rear-view mirror, that means you are not working hard enough. Competition should just mentally give up looking at your Herculean effort, intensity and audacity.”</strong></span>
             </p>
             <p>
               My beloved wife (whom I dragged through this difficult journey of entrepreneurship) wasn’t really aware of what it entails. But she has been a daily source of inspiration on <strong>“Grit”</strong>. Come rain or shine, her tireless quest of putting in hard yards every single day keeps me silently motivated to keep trying harder and never give up. The pride she feels in Peaceful-Loans’ team delivering such incredible customer service is the true reward which keeps me going.
@@ -1821,7 +1830,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <strong>Half-assing something is such a waste of time.</strong>
             </p>
             <p>
-              This brings me to a point: <em>“A compass was invented before a watch, because the direction is more important than speed in this journey.”</em> This is my job to help you understand what we are building here. Provide that direction to our true north. This is my shared dream which I want to communicate through this letter.
+              This brings me to a point: <strong>“A compass was invented before a watch, because the direction is more important than speed in this journey.”</strong> This is my job to help you understand what we are building here. Provide that direction to our true north. This is my shared dream which I want to communicate through this letter.
             </p>
             <p>
               We are building a company which stands on these three pillars:
@@ -1840,8 +1849,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </p>
             <p style="margin-top:24px;margin-bottom:0">
               Welcome to the rocketship,<br>
-              <strong style="font-family:var(--display);font-size:20px;color:var(--pl-blue)">Mangesh Zope</strong><br>
-              <span style="font-style:italic;color:var(--pl-muted)">Kabhi Employee, Kabhi Shareholder, But always an ace competitor.</span>
+              <strong style="font-family:var(--serif);font-size:20px;color:var(--pl-blue)">Mangesh Zope</strong><br>
+              <span style="color:var(--pl-muted);font-weight:600">Kabhi Employee, Kabhi Shareholder, But always an ace competitor.</span>
             </p>
           </article>
 
@@ -1912,14 +1921,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="pillar-art">
             <svg width="130" height="78" viewBox="0 0 130 78" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Warm Teacup + Clock/Time Saved (Anticipation & Care) -->
               <path d="M26 42H70V52C70 62 60 69 48 69C36 69 26 62 26 52V42Z" fill="#FFFDF9" stroke="#111111" stroke-width="1.8"/>
               <path d="M70 45H77C81 45 84 48 84 52C84 56 81 59 77 59H69" stroke="#111111" stroke-width="1.8"/>
               <line x1="18" y1="70" x2="78" y2="70" stroke="#111111" stroke-width="2"/>
               <path d="M38 35C38 29 42 27 42 21" stroke="#FE5B04" stroke-width="1.8" stroke-linecap="round"/>
               <path d="M49 33C49 26 53 24 53 17" stroke="#FE5B04" stroke-width="1.8" stroke-linecap="round"/>
               <path d="M60 35C60 29 64 27 64 21" stroke="#FE5B04" stroke-width="1.8" stroke-linecap="round"/>
-              <!-- Time Saved Stopwatch badge -->
               <circle cx="102" cy="48" r="16" fill="#FFB919" stroke="#111111" stroke-width="1.6"/>
               <polyline points="102,39 102,48 108,52" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
@@ -1952,7 +1959,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="pillar-art">
             <svg width="130" height="78" viewBox="0 0 130 78" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Compass + Balance Scale (Truth, Psychology of Money & Savings) -->
               <circle cx="65" cy="40" r="27" fill="#FFFDF9" stroke="#111111" stroke-width="1.8"/>
               <circle cx="65" cy="40" r="22" stroke="#D9CBB5" stroke-width="1" stroke-dasharray="2 2"/>
               <polygon points="65,18 70,40 65,36 60,40" fill="#FE5B04"/>
@@ -1988,7 +1994,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="pillar-art">
             <svg width="130" height="78" viewBox="0 0 130 78" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Open Book of Saraswati + Cut Diamond -->
               <polygon points="50,16 80,16 92,32 65,66 38,32" fill="#FFB919" fill-opacity="0.3" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
               <line x1="38" y1="32" x2="92" y2="32" stroke="#111111" stroke-width="1.4"/>
               <polyline points="50,16 57,32 65,16 73,32 80,16" stroke="#111111" stroke-width="1.2"/>
@@ -2026,11 +2031,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="epilogue-quote">
         “Every single person contributing to this mission should keep this in mind: when we are done building, <span class="gold-underline">we will be the last of the stars.</span> This will be our legacy.”
       </p>
-      <p style="max-width:680px;margin:0 auto;font-size:15.5px;color:var(--pl-body)">
+      <p style="max-width:680px;margin:0 auto;font-size:15px;color:var(--pl-body)">
         Half-assing something is such a waste of time. Bring the intensity of Nadal, the stamina of Djokovic, and the flair of Federer — and let’s write history together in the Indian Banking Industry.
       </p>
       <div class="epilogue-signoff">
-        <div class="signature-script">Mangesh Zope</div>
+        <div class="signature-name">Mangesh Zope</div>
         <div class="signature-sub">Kabhi Employee, Kabhi Shareholder, Always an Ace Competitor</div>
       </div>
     </section>
@@ -2053,7 +2058,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ===== GLOBAL MODAL FOR CONTRIBUTING TEAM EXAMPLES ===== -->
 <dialog class="editorial-modal" id="contributeModal">
   <div class="rubric" style="margin-bottom:6px">Field Dispatch &middot; Peer Recognition</div>
-  <h3 style="font-family:var(--display);font-size:26px;margin-bottom:8px">Spot a Teammate Living the Manifesto</h3>
+  <h3 style="font-family:var(--serif);font-size:26px;margin-bottom:8px">Spot a Teammate Living the Manifesto</h3>
   <p style="font-size:14px;color:var(--pl-muted);margin-bottom:18px;line-height:1.5">
     Share a real example of a behaviour you witnessed recently in a colleague during our breakout session. Your story will appear directly under that Operating Principle.
   </p>
