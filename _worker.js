@@ -10998,6 +10998,104 @@ async function handleApiRequest(request, env, ctx) {
       }
     }
   }
+  if (cleanPath === "/api/manifesto/auth" && request.method === "POST") {
+    try {
+      const body = await request.json();
+      const candidate = String(body.password || "").trim();
+      const validPassword = env.MANIFESTO_PASSWORD || "Peaceful-Loans-Manifesto";
+      if (candidate === validPassword || candidate.toLowerCase() === validPassword.toLowerCase()) {
+        return new Response(JSON.stringify({ authenticated: true }), { status: 200, headers });
+      }
+      return new Response(JSON.stringify({ authenticated: false, error: "Invalid password" }), { status: 401, headers });
+    } catch (err) {
+      return new Response(JSON.stringify({ error: err.message }), { status: 400, headers });
+    }
+  }
+  if (cleanPath === "/api/manifesto/examples") {
+    const providedPass = (request.headers.get("x-manifesto-password") || url.searchParams.get("password") || "").trim();
+    const validPassword = env.MANIFESTO_PASSWORD || "Peaceful-Loans-Manifesto";
+    if (providedPass.toLowerCase() !== validPassword.toLowerCase()) {
+      return new Response(JSON.stringify({ error: "Unauthorized. Manifesto password required." }), { status: 401, headers });
+    }
+    const kv = env.QUESTIONS_KV;
+    const storageKey = "manifesto:examples";
+    async function loadExamples() {
+      try {
+        if (kv) {
+          const raw = await kv.get(storageKey);
+          if (raw) return JSON.parse(raw);
+        }
+        const localRaw = localDB.get(storageKey);
+        if (localRaw) return JSON.parse(localRaw);
+      } catch {
+      }
+      return [];
+    }
+    async function saveExamples(list) {
+      const serialized = JSON.stringify(list);
+      if (kv) {
+        await kv.put(storageKey, serialized);
+      }
+      localDB.set(storageKey, serialized);
+    }
+    if (request.method === "GET") {
+      const examples = await loadExamples();
+      return new Response(JSON.stringify({ examples }), { status: 200, headers });
+    }
+    if (request.method === "POST") {
+      try {
+        const body = await request.json();
+        const action = body.action || "add";
+        let examples = await loadExamples();
+        if (action === "delete" && body.id) {
+          examples = examples.filter((item) => item.id !== body.id);
+          await saveExamples(examples);
+          return new Response(JSON.stringify({ success: true, examples }), { status: 200, headers });
+        }
+        if (action === "edit" && body.id) {
+          examples = examples.map((item) => {
+            if (item.id !== body.id) return item;
+            return {
+              ...item,
+              principleId: Number(body.principleId || item.principleId),
+              spottedIn: String(body.spottedIn ?? item.spottedIn).trim(),
+              contributedBy: String(body.contributedBy ?? item.contributedBy).trim(),
+              breakoutGroup: String(body.breakoutGroup ?? item.breakoutGroup ?? "").trim(),
+              story: String(body.story ?? item.story).trim(),
+              updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+            };
+          });
+          await saveExamples(examples);
+          return new Response(JSON.stringify({ success: true, examples }), { status: 200, headers });
+        }
+        const principleId = Number(body.principleId);
+        const spottedIn = String(body.spottedIn || "").trim();
+        const contributedBy = String(body.contributedBy || "").trim();
+        const breakoutGroup = String(body.breakoutGroup || "").trim();
+        const story = String(body.story || "").trim();
+        if (!principleId || principleId < 1 || principleId > 9 || !spottedIn || !contributedBy || !story) {
+          return new Response(
+            JSON.stringify({ error: "Please provide principle, colleague name, your name, and the example story." }),
+            { status: 400, headers }
+          );
+        }
+        const newEntry = {
+          id: "ex_" + Date.now() + "_" + Math.random().toString(36).substring(2, 7),
+          principleId,
+          spottedIn,
+          contributedBy,
+          breakoutGroup,
+          story,
+          createdAt: (/* @__PURE__ */ new Date()).toISOString()
+        };
+        examples.unshift(newEntry);
+        await saveExamples(examples);
+        return new Response(JSON.stringify({ success: true, example: newEntry, examples }), { status: 200, headers });
+      } catch (err) {
+        return new Response(JSON.stringify({ error: err.message }), { status: 400, headers });
+      }
+    }
+  }
   return new Response(JSON.stringify({ error: "Not Found" }), { status: 404, headers });
 }
 var worker_src_default = {
@@ -11098,6 +11196,9 @@ var worker_src_default = {
       '</.well-known/ai-catalog.json>; rel="ai-catalog"'
     ];
     resHeaders.set("Link", existingLink ? `${existingLink}, ${agentLinks.join(", ")}` : agentLinks.join(", "));
+    if (cleanPath === "/manifesto" || cleanPath === "/manifesto.html") {
+      resHeaders.set("X-Robots-Tag", "noindex, nofollow");
+    }
     if (cleanPath === "/linkedin-analytics" || cleanPath === "/linkedin-analytics.html") {
       resHeaders.set("X-Robots-Tag", "noindex, nofollow");
       resHeaders.set("X-Frame-Options", "DENY");
