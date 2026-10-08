@@ -631,7 +631,30 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 6px 0 12px;
+      padding: 4px 0 12px;
+    }
+    .illustration-svg-wrap img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+      border: 1.5px solid var(--pl-ink);
+      border-radius: 4px;
+      background: #FFFDF9;
+      display: block;
+    }
+    .auth-illustration-wrap {
+      margin: 16px auto 22px;
+      max-width: 340px;
+      border: 1.5px solid var(--pl-ink);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #FFFDF9;
+      box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.1);
+    }
+    .auth-illustration-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
     .illustration-caption {
       font-family: var(--sans);
@@ -1040,14 +1063,21 @@
     }
 
     .pillar-art {
-      height: 92px;
+      height: 176px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 4px 0 16px;
-      background: var(--pl-cream);
-      border: 1px solid var(--pl-hair);
+      background: #FFFDF9;
+      border: 1.5px solid var(--pl-ink);
       border-radius: 6px;
+      overflow: hidden;
+    }
+    .pillar-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .pillar-title {
@@ -1628,16 +1658,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       “A compass was invented before a watch, because direction is more important than speed in this journey.”
     </p>
 
-    <div style="margin: 18px auto 22px; display:flex; justify-content:center;">
-      <svg width="150" height="90" viewBox="0 0 150 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="15" y="12" width="120" height="66" rx="8" fill="#FBF0E0" stroke="#111111" stroke-width="1.8"/>
-        <circle cx="52" cy="45" r="18" fill="#FFFDF9" stroke="#111111" stroke-width="1.6"/>
-        <polygon points="52,30 56,45 52,42 48,45" fill="#FE5B04"/>
-        <polygon points="52,60 56,45 52,48 48,45" fill="#123FA1"/>
-        <rect x="82" y="38" width="32" height="24" rx="4" fill="#FFB919" stroke="#111111" stroke-width="1.6"/>
-        <path d="M90 38V32C90 27.5 93.5 24 98 24C102.5 24 106 27.5 106 32V38" stroke="#111111" stroke-width="1.8"/>
-        <circle cx="98" cy="49" r="2.5" fill="#111111"/>
-      </svg>
+    <div class="auth-illustration-wrap">
+      <img src="/assets/manifesto/compass-before-watch.jpg" alt="New Yorker style editorial illustration of a brass compass in the foreground before a pocket watch on a wooden study desk">
     </div>
 
     <form class="auth-form" onsubmit="handleUnlockManifesto(event)">
@@ -1729,31 +1751,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
-      <!-- Custom Editorial Illustration Card (Design Guide Style) -->
+      <!-- Custom New Yorker Editorial Illustration Card -->
       <aside class="illustration-card">
         <div class="illustration-svg-wrap">
-          <svg width="290" height="210" viewBox="0 0 290 210" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Editorial Illustration: The Compass, The Cut Diamond, and Saraswati's Ledger">
-            <circle cx="145" cy="98" r="76" fill="#FBF0E0" stroke="#111111" stroke-width="1.5" stroke-dasharray="3 3"/>
-            <circle cx="145" cy="98" r="60" fill="#FFFDF9" stroke="#111111" stroke-width="1.8"/>
-            <line x1="145" y1="16" x2="145" y2="180" stroke="#111111" stroke-width="1.2" stroke-dasharray="3 3"/>
-            <line x1="63" y1="98" x2="227" y2="98" stroke="#111111" stroke-width="1.2" stroke-dasharray="3 3"/>
-            <polygon points="145,18 151,36 145,32 139,36" fill="#FE5B04"/>
-            <rect x="108" y="2" width="74" height="14" rx="3" fill="#111111"/>
-            <text x="145" y="12" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" font-weight="800" fill="#FFB919" letter-spacing="1.5">TRUE NORTH</text>
-            <polygon points="118,78 172,78 188,98 145,150 102,98" fill="#FFB919" fill-opacity="0.28" stroke="#111111" stroke-width="2" stroke-linejoin="round"/>
-            <polyline points="102,98 188,98" stroke="#111111" stroke-width="1.5"/>
-            <polyline points="118,78 130,98 145,78 160,98 172,78" stroke="#111111" stroke-width="1.3" stroke-linejoin="round"/>
-            <line x1="130" y1="98" x2="145" y2="150" stroke="#111111" stroke-width="1.3"/>
-            <line x1="160" y1="98" x2="145" y2="150" stroke="#111111" stroke-width="1.3"/>
-            <line x1="95" y1="64" x2="105" y2="72" stroke="#FE5B04" stroke-width="2" stroke-linecap="round"/>
-            <line x1="195" y1="64" x2="185" y2="72" stroke="#FE5B04" stroke-width="2" stroke-linecap="round"/>
-            <line x1="145" y1="54" x2="145" y2="66" stroke="#123FA1" stroke-width="2" stroke-linecap="round"/>
-            <rect x="55" y="168" width="180" height="24" rx="4" fill="#123FA1" stroke="#111111" stroke-width="1.5"/>
-            <text x="145" y="184" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="10.5" fill="#FFFFFF">97.5% · Saraswati Before Laxmi</text>
-          </svg>
+          <img src="/assets/manifesto/compass-before-watch.jpg" alt="New Yorker style editorial illustration: A brass magnetic compass in the foreground before an antique pocket watch and fountain pen">
         </div>
         <p class="illustration-caption">
-          “A diamond only sparkles after high-intensity cutting. But a diamond also needs inner desire to showcase their A-game.”
+          “A compass was invented before a watch, because direction is more important than speed in this journey.”
         </p>
         <div class="infographic-callout-strip">
           <span class="bang-icon">!</span>
@@ -1920,16 +1924,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="pillar-count-pill" id="pillarCount-1">3 Ingredients</span>
           </div>
           <div class="pillar-art">
-            <svg width="130" height="78" viewBox="0 0 130 78" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M26 42H70V52C70 62 60 69 48 69C36 69 26 62 26 52V42Z" fill="#FFFDF9" stroke="#111111" stroke-width="1.8"/>
-              <path d="M70 45H77C81 45 84 48 84 52C84 56 81 59 77 59H69" stroke="#111111" stroke-width="1.8"/>
-              <line x1="18" y1="70" x2="78" y2="70" stroke="#111111" stroke-width="2"/>
-              <path d="M38 35C38 29 42 27 42 21" stroke="#FE5B04" stroke-width="1.8" stroke-linecap="round"/>
-              <path d="M49 33C49 26 53 24 53 17" stroke="#FE5B04" stroke-width="1.8" stroke-linecap="round"/>
-              <path d="M60 35C60 29 64 27 64 21" stroke="#FE5B04" stroke-width="1.8" stroke-linecap="round"/>
-              <circle cx="102" cy="48" r="16" fill="#FFB919" stroke="#111111" stroke-width="1.6"/>
-              <polyline points="102,39 102,48 108,52" stroke="#111111" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
+            <img src="/assets/manifesto/pillar-hospitality.jpg" alt="Unreasonable Hospitality — New Yorker style editorial illustration" loading="lazy">
           </div>
           <h2 class="pillar-title">Unreasonable Hospitality</h2>
           <p class="pillar-question">What are the ingredients of Unreasonable Hospitality?</p>
@@ -1958,13 +1953,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="pillar-count-pill" id="pillarCount-2">3 Ingredients</span>
           </div>
           <div class="pillar-art">
-            <svg width="130" height="78" viewBox="0 0 130 78" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="65" cy="40" r="27" fill="#FFFDF9" stroke="#111111" stroke-width="1.8"/>
-              <circle cx="65" cy="40" r="22" stroke="#D9CBB5" stroke-width="1" stroke-dasharray="2 2"/>
-              <polygon points="65,18 70,40 65,36 60,40" fill="#FE5B04"/>
-              <polygon points="65,62 70,40 65,44 60,40" fill="#123FA1"/>
-              <circle cx="65" cy="40" r="3" fill="#FFB919" stroke="#111111" stroke-width="1.5"/>
-            </svg>
+            <img src="/assets/manifesto/compass-before-watch.jpg" alt="Unbiased Advice — A Compass Before a Watch New Yorker style editorial illustration" loading="lazy">
           </div>
           <h2 class="pillar-title">Unbiased Advice</h2>
           <p class="pillar-question">What are the ingredients of Unbiased Advice?</p>
@@ -1993,16 +1982,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="pillar-count-pill" id="pillarCount-3">3 Ingredients</span>
           </div>
           <div class="pillar-art">
-            <svg width="130" height="78" viewBox="0 0 130 78" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <polygon points="50,16 80,16 92,32 65,66 38,32" fill="#FFB919" fill-opacity="0.3" stroke="#111111" stroke-width="1.8" stroke-linejoin="round"/>
-              <line x1="38" y1="32" x2="92" y2="32" stroke="#111111" stroke-width="1.4"/>
-              <polyline points="50,16 57,32 65,16 73,32 80,16" stroke="#111111" stroke-width="1.2"/>
-              <line x1="57" y1="32" x2="65" y2="66" stroke="#111111" stroke-width="1.2"/>
-              <line x1="73" y1="32" x2="65" y2="66" stroke="#111111" stroke-width="1.2"/>
-              <line x1="65" y1="5" x2="65" y2="11" stroke="#FE5B04" stroke-width="1.8" stroke-linecap="round"/>
-              <line x1="34" y1="14" x2="40" y2="19" stroke="#123FA1" stroke-width="1.8" stroke-linecap="round"/>
-              <line x1="96" y1="14" x2="90" y2="19" stroke="#123FA1" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
+            <img src="/assets/manifesto/pillar-depth-of-knowledge.jpg" alt="Unmatched Depth of Knowledge — New Yorker style editorial illustration" loading="lazy">
           </div>
           <h2 class="pillar-title">Unmatched Depth of Knowledge</h2>
           <p class="pillar-question">What are the ingredients of Unmatched Depth of Knowledge?</p>
