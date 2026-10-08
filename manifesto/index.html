@@ -185,284 +185,107 @@
       border: 1.5px solid var(--pl-ink);
     }
 
-    /* ===== PASSWORD PROTECTION GATE: BESPOKE EDITORIAL ENVELOPE & EMERGING LETTER ===== */
+    /* ===== PASSWORD PROTECTION GATE (EMPLOYEE ONLY) ===== */
     .auth-gate-wrapper {
       min-height: calc(100vh - 5px);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 18px 16px 28px;
+      padding: 32px 20px;
     }
 
-    .envelope-stage {
-      max-width: 620px;
+    .auth-gate-card {
+      max-width: 580px;
       width: 100%;
-      position: relative;
-      margin: 0 auto;
-    }
-
-    /* Top Open Triangular Flap of the Envelope */
-    .envelope-top-flap {
-      width: 100%;
-      line-height: 0;
-      position: relative;
-      z-index: 1;
-      margin-bottom: -24px;
-    }
-    .envelope-top-flap svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Envelope Back Throat Behind the Letter */
-    .envelope-back-throat {
-      position: relative;
-      background: #DFC8A2;
-      border-left: 2px solid var(--pl-ink);
-      border-right: 2px solid var(--pl-ink);
-      padding: 0 22px;
-      z-index: 2;
-    }
-    .envelope-back-throat::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 8px;
-      right: 8px;
-      height: 8px;
-      background: repeating-linear-gradient(
-        -45deg,
-        var(--pl-blue) 0px,
-        var(--pl-blue) 10px,
-        #FFFDF9 10px,
-        #FFFDF9 18px,
-        var(--pl-orange) 18px,
-        var(--pl-orange) 28px,
-        #FFFDF9 28px,
-        #FFFDF9 36px
-      );
-      border-bottom: 1.5px solid var(--pl-ink);
-      z-index: 1;
-    }
-
-    /* The Crisp Letter Sheet Rising Out of the Envelope */
-    .envelope-letter-sheet {
       background: var(--pl-paper);
       border: 2px solid var(--pl-ink);
-      padding: 20px 30px 44px;
+      padding: 44px 42px 38px;
       position: relative;
-      z-index: 3;
+      box-shadow: 10px 10px 0 var(--pl-ink);
       text-align: center;
-      box-shadow: 0 -4px 18px rgba(17, 17, 17, 0.08);
-      transform: translateY(-10px);
-      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .envelope-stage:hover .envelope-letter-sheet,
-    .envelope-stage:focus-within .envelope-letter-sheet {
-      transform: translateY(-16px);
-    }
-    .envelope-stage.unsealing .envelope-letter-sheet {
-      transform: translateY(-48px);
-    }
-
-    .envelope-letter-sheet::before {
+    .auth-gate-card::before {
       content: "";
       position: absolute;
-      inset: 5px;
+      inset: 6px;
       border: 1px solid var(--pl-hair);
       pointer-events: none;
     }
 
-    .letter-stationery-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding-bottom: 10px;
-      margin-bottom: 12px;
-      border-bottom: 1px dashed var(--pl-hair);
-      font-family: var(--sans);
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--pl-muted);
-      flex-wrap: wrap;
-    }
-
-    .postmark-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      color: var(--pl-blue);
-      background: var(--pl-cream);
-      border: 1px solid var(--pl-ink);
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-weight: 800;
+    @media (max-width: 560px) {
+      .auth-gate-card {
+        padding: 30px 22px 28px;
+      }
     }
 
     .auth-logo {
-      height: 44px;
+      height: 54px;
       width: auto;
       display: inline-block;
-      margin-bottom: 2px;
+      margin-bottom: 6px;
     }
 
     .auth-title {
       font-family: var(--serif);
-      font-size: clamp(30px, 4vw, 40px);
+      font-size: clamp(34px, 4.5vw, 46px);
       font-weight: 700;
-      line-height: 1.08;
+      line-height: 1.1;
       color: var(--pl-ink);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       letter-spacing: -0.01em;
+    }
+
+    .auth-kicker {
+      font-family: var(--sans);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--pl-orange);
+      margin-bottom: 14px;
     }
 
     .auth-subtitle {
       font-family: var(--sans);
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 500;
       color: var(--pl-body);
-      margin-bottom: 12px;
-      line-height: 1.5;
-      max-width: 450px;
+      margin-bottom: 22px;
+      line-height: 1.55;
+      max-width: 460px;
       margin-left: auto;
       margin-right: auto;
     }
 
-    /* Front Envelope Pocket Overlapping Bottom of the Letter */
-    .envelope-pocket-collar {
-      position: relative;
-      z-index: 4;
-      margin-top: -38px;
-      line-height: 0;
-      pointer-events: none;
-    }
-    .envelope-pocket-collar svg {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .envelope-front-pocket {
-      position: relative;
-      z-index: 4;
-      background: linear-gradient(180deg, #F3E2C3 0%, #E9D3AD 100%);
-      border: 2px solid var(--pl-ink);
-      border-top: none;
-      padding: 26px 32px 18px;
-      box-shadow: 10px 10px 0 var(--pl-ink);
-      text-align: center;
-    }
-
-    /* Diagonal Envelope Crease Lines on Front Pocket */
-    .envelope-front-pocket::before {
-      content: "";
-      position: absolute;
-      inset: 6px;
-      border: 1px dashed rgba(17, 17, 17, 0.22);
-      pointer-events: none;
-    }
-
-    /* Embossed Vermilion & Gold Wax Seal at Center V-Notch */
-    .envelope-wax-seal {
-      position: absolute;
-      top: -28px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #FF7426 0%, var(--pl-orange) 62%, #C94100 100%);
-      border: 2px solid var(--pl-ink);
-      box-shadow: 0 4px 0 var(--pl-ink), 0 6px 14px rgba(17, 17, 17, 0.22);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 6;
-    }
-    .envelope-wax-seal::before {
-      content: "";
-      position: absolute;
-      inset: 4px;
-      border-radius: 50%;
-      border: 1.5px dashed var(--pl-gold);
-    }
-    .wax-seal-monogram {
-      font-family: var(--serif);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: #FFFDF9;
-      line-height: 1;
-    }
-
-    .envelope-dispatch-meta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      font-family: var(--sans);
-      font-size: 10.5px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--pl-ink);
-      margin-bottom: 12px;
-      padding-top: 4px;
-    }
-    .envelope-dispatch-meta span.from-tag {
-      color: var(--pl-blue);
-    }
-
-    @media (max-width: 560px) {
-      .envelope-back-throat {
-        padding: 0 10px;
-      }
-      .envelope-letter-sheet {
-        padding: 16px 16px 38px;
-      }
-      .envelope-front-pocket {
-        padding: 24px 16px 16px;
-      }
-    }
-
     .auth-form {
-      max-width: 430px;
+      max-width: 400px;
       margin: 0 auto;
       text-align: left;
-      position: relative;
-      z-index: 2;
     }
 
     .auth-form label {
       display: block;
       font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.13em;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--pl-ink);
-      margin-bottom: 5px;
-      text-align: center;
+      margin-bottom: 6px;
     }
 
     .auth-input-row {
       display: flex;
       gap: 0;
-      border: 2px solid var(--pl-ink);
-      background: #FFFDF9;
-      box-shadow: 3px 3px 0 var(--pl-ink);
+      border: 1.5px solid var(--pl-ink);
+      background: var(--pl-cream);
     }
 
     .auth-input-row input {
       flex: 1;
       border: none;
       background: transparent;
-      padding: 11px 14px;
+      padding: 12px 14px;
       font-family: var(--sans);
       font-size: 14px;
       font-weight: 500;
@@ -470,23 +293,22 @@
     }
     .auth-input-row input:focus {
       outline: none;
-      background: #FFFFFF;
+      background: #FFFDF9;
     }
 
     .auth-submit-btn {
       background: var(--pl-blue);
       color: #FFFFFF;
       border: none;
-      border-left: 2px solid var(--pl-ink);
-      padding: 0 20px;
+      border-left: 1.5px solid var(--pl-ink);
+      padding: 0 22px;
       font-family: var(--sans);
       font-size: 11.5px;
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       cursor: pointer;
       transition: background 0.15s ease;
-      white-space: nowrap;
     }
     .auth-submit-btn:hover {
       background: var(--pl-orange);
@@ -494,33 +316,31 @@
 
     .auth-error {
       display: none;
-      margin-top: 8px;
+      margin-top: 10px;
       font-family: var(--sans);
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--pl-orange);
       text-align: center;
     }
 
     .auth-foot-note {
-      margin-top: 14px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(17, 17, 17, 0.18);
+      margin-top: 22px;
+      padding-top: 14px;
+      border-top: 1px solid var(--pl-hair-soft);
       font-family: var(--sans);
       font-size: 11px;
-      color: var(--pl-ink-soft);
+      color: var(--pl-muted);
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 8px;
-      position: relative;
-      z-index: 2;
     }
     .auth-foot-note a {
       color: var(--pl-blue);
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 600;
     }
 
     /* ===== PROTECTED MANIFESTO CONTENT ===== */
@@ -823,8 +643,8 @@
       display: block;
     }
     .auth-illustration-wrap {
-      margin: 8px auto 10px;
-      max-width: 265px;
+      margin: 16px auto 22px;
+      max-width: 340px;
       border: 1.5px solid var(--pl-ink);
       border-radius: 6px;
       overflow: hidden;
@@ -877,34 +697,14 @@
       flex-shrink: 0;
     }
 
-    /* ===== HANDWRITTEN LETTER PROLOGUE DRAWER (ENVELOPE DISPATCH STYLE) ===== */
+    /* ===== HANDWRITTEN LETTER PROLOGUE DRAWER ===== */
     .letter-banner {
       margin: 12px 0 36px;
-      background: linear-gradient(180deg, #F5E6CB 0%, #EFE0C2 100%);
-      border: 2px solid var(--pl-ink);
+      background: var(--pl-paper);
+      border: 1.5px solid var(--pl-ink);
+      border-left: 6px solid var(--pl-blue);
       padding: 24px 28px;
-      box-shadow: 8px 8px 0 var(--pl-ink);
-      position: relative;
-    }
-    .letter-banner::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 6px;
-      background: repeating-linear-gradient(
-        -45deg,
-        var(--pl-blue) 0px,
-        var(--pl-blue) 12px,
-        #FFFDF9 12px,
-        #FFFDF9 20px,
-        var(--pl-orange) 20px,
-        var(--pl-orange) 32px,
-        #FFFDF9 32px,
-        #FFFDF9 40px
-      );
-      border-bottom: 1.5px solid var(--pl-ink);
+      box-shadow: 0 8px 24px rgba(17, 17, 17, 0.05);
     }
 
     .letter-banner-top {
@@ -913,7 +713,6 @@
       justify-content: space-between;
       gap: 20px;
       flex-wrap: wrap;
-      padding-top: 6px;
     }
 
     .letter-banner-copy {
@@ -1847,79 +1646,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="sw-blue"></div>
 </div>
 
-<!-- ===== PASSWORD PROTECTION GATE: BESPOKE EDITORIAL ENVELOPE & EMERGING LETTER ===== -->
+<!-- ===== PASSWORD PROTECTION GATE (SHOWN UNTIL UNLOCKED) ===== -->
 <div id="authGateScreen" class="auth-gate-wrapper">
-  <div class="envelope-stage" id="envelopeStage">
+  <div class="auth-gate-card">
+    <div>
+      <img src="/assets/logo-horizontal.png" alt="Peaceful-Loans" class="auth-logo">
+    </div>
+    <h1 class="auth-title"><span class="gold-underline">Manifesto</span></h1>
+    <div class="auth-kicker">Employee-Only Archive &middot; Internal Edition</div>
+    <p class="auth-subtitle">
+      “A compass was invented before a watch, because direction is more important than speed in this journey.”
+    </p>
 
-    <!-- 1. Open Triangular Envelope Top Flap -->
-    <div class="envelope-top-flap" aria-hidden="true">
-      <svg viewBox="0 0 620 68" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <path d="M2 66L288 6C302 1.5 318 1.5 332 6L618 66H2Z" fill="#E9D3AD" stroke="#111111" stroke-width="2" stroke-linejoin="round"/>
-        <path d="M18 65L293 13C304 9.5 316 9.5 327 13L602 65" stroke="#111111" stroke-width="1" stroke-dasharray="4 4" stroke-opacity="0.35"/>
-      </svg>
+    <div class="auth-illustration-wrap">
+      <img src="/assets/manifesto/compass-before-watch.jpg" alt="New Yorker style editorial illustration of a brass compass in the foreground before a pocket watch on a wooden study desk">
     </div>
 
-    <!-- 2. Envelope Throat & Emerging Handwritten Letter Companion Sheet -->
-    <div class="envelope-back-throat">
-      <div class="envelope-letter-sheet">
-        <div class="letter-stationery-bar">
-          <span>Handwritten Letter Companion</span>
-          <span class="postmark-pill">&#9993; Personal Dispatch &middot; Internal Edition</span>
-        </div>
-
-        <div>
-          <img src="/assets/logo-horizontal.png" alt="Peaceful-Loans" class="auth-logo">
-        </div>
-        <h1 class="auth-title"><span class="gold-underline">Manifesto</span></h1>
-        <p class="auth-subtitle">
-          “A compass was invented before a watch, because direction is more important than speed in this journey.”
-        </p>
-
-        <div class="auth-illustration-wrap">
-          <img src="/assets/manifesto/compass-before-watch.jpg" alt="New Yorker style editorial illustration of a brass compass in the foreground before a pocket watch on a wooden study desk">
-        </div>
+    <form class="auth-form" onsubmit="handleUnlockManifesto(event)">
+      <label for="manifestoPasswordInput">Enter Internal Manifesto Passphrase</label>
+      <div class="auth-input-row">
+        <input type="password" id="manifestoPasswordInput" placeholder="Enter passphrase..." autocomplete="current-password" required>
+        <button type="submit" class="auth-submit-btn">Unlock Issue</button>
       </div>
+      <div class="auth-error" id="authErrorMsg">Incorrect passphrase. Please check your invitation and try again.</div>
+    </form>
+
+    <div class="auth-foot-note">
+      <span>Restricted to Peaceful-Loans Team Members</span>
+      <a href="/index.html">&larr; Back to peaceful-loans.com</a>
     </div>
-
-    <!-- 3. Front Envelope V-Collar Overlapping the Emerging Letter -->
-    <div class="envelope-pocket-collar" aria-hidden="true">
-      <svg viewBox="0 0 620 44" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-        <!-- Left & Right Diagonal Envelope Flaps Meeting at Center V-Notch -->
-        <polygon points="1,2 310,38 1,44" fill="#EAD5B1"/>
-        <polygon points="619,2 310,38 619,44" fill="#E4CCA3"/>
-        <polyline points="1,2 310,38 619,2" stroke="#111111" stroke-width="2" stroke-linejoin="round"/>
-        <line x1="1" y1="0" x2="1" y2="44" stroke="#111111" stroke-width="2"/>
-        <line x1="619" y1="0" x2="619" y2="44" stroke="#111111" stroke-width="2"/>
-      </svg>
-    </div>
-
-    <!-- 4. Front Envelope Pocket with Wax Seal & Passphrase Unsealing Bar -->
-    <div class="envelope-front-pocket">
-      <div class="envelope-wax-seal" title="Sealed by Mangesh Zope · 97.5% Standard">
-        <span class="wax-seal-monogram">MZ</span>
-      </div>
-
-      <div class="envelope-dispatch-meta">
-        <span class="from-tag">From: Mangesh Zope</span>
-        <span>&middot;</span>
-        <span>To: Every Builder of Peaceful-Loans</span>
-      </div>
-
-      <form class="auth-form" onsubmit="handleUnlockManifesto(event)">
-        <label for="manifestoPasswordInput">Enter Passphrase from Your Invitation to Unseal</label>
-        <div class="auth-input-row">
-          <input type="password" id="manifestoPasswordInput" placeholder="Enter passphrase..." autocomplete="current-password" required>
-          <button type="submit" class="auth-submit-btn">Unseal Letter</button>
-        </div>
-        <div class="auth-error" id="authErrorMsg">Incorrect passphrase. Please check your invitation and try again.</div>
-      </form>
-
-      <div class="auth-foot-note">
-        <span>Restricted to Peaceful-Loans Team Members</span>
-        <a href="/index.html">&larr; Back to peaceful-loans.com</a>
-      </div>
-    </div>
-
   </div>
 </div>
 
@@ -2351,7 +2106,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     e.preventDefault();
     const input = document.getElementById("manifestoPasswordInput");
     const errEl = document.getElementById("authErrorMsg");
-    const stage = document.getElementById("envelopeStage");
     const val = (input ? input.value : "").trim();
 
     if (val === REQUIRED_PASSPHRASE || val.toLowerCase() === REQUIRED_PASSPHRASE.toLowerCase()) {
@@ -2360,14 +2114,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         localStorage.setItem(SESSION_AUTH_KEY, REQUIRED_PASSPHRASE);
       } catch (err) {}
       if (errEl) errEl.style.display = "none";
-      if (stage) {
-        stage.classList.add("unsealing");
-        setTimeout(() => {
-          applyAuthViewState();
-        }, 320);
-      } else {
-        applyAuthViewState();
-      }
+      applyAuthViewState();
       return;
     }
 
@@ -2379,8 +2126,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       sessionStorage.removeItem(SESSION_AUTH_KEY);
       localStorage.removeItem(SESSION_AUTH_KEY);
     } catch (e) {}
-    const stage = document.getElementById("envelopeStage");
-    if (stage) stage.classList.remove("unsealing");
     const input = document.getElementById("manifestoPasswordInput");
     if (input) input.value = "";
     applyAuthViewState();
