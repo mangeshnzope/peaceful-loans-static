@@ -429,7 +429,7 @@ In **each year from Class 5 to Class 10**, or the equivalent grade or score in y
 
       
         **How to Apply via Email**
-        Email your CV, a short note on why finance and economics interest you, and a link to one piece of writing you are proud of to [mangesh@peaceful-loans.com](mailto:mangesh@peaceful-loans.com?subject=Marketing%20Executive%20(Reddit)%3A%20Your%20Name) (or [mangesh@peaceful-loan.com](mailto:mangesh@peaceful-loan.com?subject=Marketing%20Executive%20(Reddit)%3A%20Your%20Name)).
+        Email your CV, a short note on why finance and economics interest you, and a link to one piece of writing you are proud of to [mangesh@peaceful-loan.com](mailto:mangesh@peaceful-loan.com?subject=Marketing%20Executive%20(Reddit)%3A%20Your%20Name).
 
         Subject line:
 
