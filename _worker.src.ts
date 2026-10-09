@@ -1154,6 +1154,7 @@ export default {
 
     if (cleanPath === "/manifesto" || cleanPath === "/manifesto.html") {
       resHeaders.set("X-Robots-Tag", "noindex, nofollow");
+      resHeaders.set("Cache-Control", "no-cache, must-revalidate");
     }
 
     if (cleanPath === "/linkedin-analytics" || cleanPath === "/linkedin-analytics.html") {
