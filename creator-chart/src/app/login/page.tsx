@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -19,13 +18,13 @@ export default function LoginPage() {
       const res = await fetch("/api/auth", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ password }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "Email or password is incorrect");
+        setError(data.error || "Password is incorrect");
         setLoading(false);
         return;
       }
@@ -47,7 +46,7 @@ export default function LoginPage() {
           </span>
           <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Peaceful-Loans</h1>
           <p className="note" style={{ marginTop: 8, fontSize: 13 }}>
-            Sign in to access the LinkedIn TG reach dashboard
+            Enter your user or admin password to access the LinkedIn TG reach dashboard
           </p>
         </div>
 
@@ -70,30 +69,6 @@ export default function LoginPage() {
           )}
 
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-            <label htmlFor="email" style={{ font: "500 12px var(--mono)", color: "var(--muted)" }}>
-              Email address
-            </label>
-            <input
-              id="email"
-              type="email"
-              autoComplete="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@creatorchart.com"
-              style={{
-                width: "100%",
-                padding: "8px 12px",
-                borderRadius: 6,
-                border: "1px solid var(--rule)",
-                background: "var(--bg)",
-                color: "var(--ink)",
-                font: "14px var(--body)",
-              }}
-            />
-          </div>
-
-          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             <label htmlFor="password" style={{ font: "500 12px var(--mono)", color: "var(--muted)" }}>
               Password
             </label>
@@ -102,9 +77,10 @@ export default function LoginPage() {
               type="password"
               autoComplete="current-password"
               required
+              autoFocus
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••••••"
+              placeholder="Enter password"
               style={{
                 width: "100%",
                 padding: "8px 12px",
@@ -140,3 +116,4 @@ export default function LoginPage() {
     </div>
   );
 }
+

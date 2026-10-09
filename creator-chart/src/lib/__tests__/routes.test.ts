@@ -9,19 +9,19 @@ describe("API Route Handlers In-Process Tests", () => {
   it("Auth: Rejects invalid password", async () => {
     const req = new NextRequest("http://localhost/api/auth", {
       method: "POST",
-      body: JSON.stringify({ email: "test@creatorchart.com", password: "invalid" }),
+      body: JSON.stringify({ password: "invalid" }),
       headers: { "Content-Type": "application/json" },
     });
     const res = await authPost(req);
     expect(res.status).toBe(401);
     const body = await res.json();
-    expect(body.error).toBe("Email or password is incorrect");
+    expect(body.error).toBe("Password is incorrect");
   });
 
-  it("Auth: Accepts team password and returns viewer session", async () => {
+  it("Auth: Accepts user password without email and returns viewer session", async () => {
     const req = new NextRequest("http://localhost/api/auth", {
       method: "POST",
-      body: JSON.stringify({ email: "creator@creatorchart.com", password: "creatorchart2026" }),
+      body: JSON.stringify({ password: "creatorchart2026" }),
       headers: { "Content-Type": "application/json" },
     });
     const res = await authPost(req);
@@ -35,6 +35,19 @@ describe("API Route Handlers In-Process Tests", () => {
     expect(setCookie).toBeDefined();
     expect(setCookie).toContain("tg_dashboard_session=");
     expect(setCookie).toContain("HttpOnly");
+  });
+
+  it("Auth: Accepts admin password without email and returns admin session", async () => {
+    const req = new NextRequest("http://localhost/api/auth", {
+      method: "POST",
+      body: JSON.stringify({ password: "PeacefulLoansAdmin2026" }),
+      headers: { "Content-Type": "application/json" },
+    });
+    const res = await authPost(req);
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.success).toBe(true);
+    expect(body.user.role).toBe("admin");
   });
 
   it("Admin Upload: Rejects payload with forbidden total impressions keys", async () => {

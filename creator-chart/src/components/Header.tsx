@@ -46,11 +46,13 @@ export default function Header({
     <header>
       <div className="header-top">
         <span className="eyebrow" id="eyeb">
-          LinkedIn · target-audience reach · 1 Jan – {dd(meta.data_to)}
+          LinkedIn · target-audience reach · 1 Jan – {dd(meta.data_to)} 2026
         </span>
         {user && (
           <div className="user-status">
-            <span>{user.email}</span>
+            <span className={`chip ${user.role === "admin" ? "" : "w"}`} style={{ margin: 0 }}>
+              {user.role === "admin" ? "Admin" : "Viewer"}
+            </span>
             {user.role === "admin" && (
               <a
                 href="/admin"
@@ -61,7 +63,7 @@ export default function Header({
                   fontFamily: "var(--mono)",
                 }}
               >
-                Admin
+                Upload data
               </a>
             )}
             <button onClick={handleLogout} className="btn-logout" aria-label="Log out">

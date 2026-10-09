@@ -129,46 +129,24 @@ export function clearSessionCookie(response: NextResponse) {
 }
 
 /**
- * Validates credentials against allowed emails and passwords.
+ * Validates credentials against admin and user/team passwords (email optional).
  */
-export function authenticateUser(emailInput: string, passwordInput: string): SessionUser | null {
-  const email = emailInput.trim().toLowerCase();
-  const password = passwordInput.trim();
+export function authenticateUser(emailOrPasswordInput: string, passwordInput?: string): SessionUser | null {
+  const email = (passwordInput !== undefined ? emailOrPasswordInput : "").trim().toLowerCase();
+  const password = (passwordInput !== undefined ? passwordInput : emailOrPasswordInput).trim();
 
-  // Admin credentials check
-  if (password === DEFAULT_ADMIN_PASSWORD || (process.env.ADMIN_EMAILS && process.env.ADMIN_EMAILS.toLowerCase().includes(email))) {
-    if (password === DEFAULT_ADMIN_PASSWORD) {
-      return {
-        email: email || "admin@peaceful-loans.com",
-        role: "admin",
-        authenticatedAt: Date.now(),
-      };
-    }
+  if (!password) return null;
+
+  // Admin password check
+  if (password === DEFAULT_ADMIN_PASSWORD) {
+    return {
+      email: email || "admin@peaceful-loans.com",
+      role: "admin",
+      authenticatedAt: Date.now(),
+    };
   }
 
-  // Allowed emails check if configured
-  const allowedEmailsEnv = process.env.ALLOWED_EMAILS;
-  if (allowedEmailsEnv) {
-    const list = allowedEmailsEnv.split(",").map((s) => s.trim().toLowerCase());
-    const matched = list.find((item) => {
-      const [allowedEmail] = item.split(":");
-      return allowedEmail === email;
-    });
-
-    if (!matched) return null;
-
-    const [, role] = matched.split(":");
-    if (password === DEFAULT_TEAM_PASSWORD || password === DEFAULT_ADMIN_PASSWORD) {
-      return {
-        email,
-        role: role === "admin" ? "admin" : "viewer",
-        authenticatedAt: Date.now(),
-      };
-    }
-    return null;
-  }
-
-  // Shared team password check
+  // User / viewer password check
   if (password === DEFAULT_TEAM_PASSWORD) {
     return {
       email: email || "team@creatorchart.com",
@@ -179,3 +157,4 @@ export function authenticateUser(emailInput: string, passwordInput: string): Ses
 
   return null;
 }
+

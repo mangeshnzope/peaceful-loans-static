@@ -10240,7 +10240,7 @@ async function getTgSigningKey() {
   );
 }
 async function createTgToken(user) {
-  const payload = JSON.stringify({ ...user, authenticatedAt: Date.now() });
+  const payload = JSON.stringify({ v: 2, role: user.role, authenticatedAt: Date.now() });
   const enc = new TextEncoder();
   const key = await getTgSigningKey();
   const payloadBytes = enc.encode(payload);
@@ -10276,12 +10276,10 @@ async function verifyTgToken(request) {
     while (payB64.length % 4) payB64 += "=";
     const payloadStr = atob(payB64);
     const data = JSON.parse(payloadStr);
+    if (data.v !== 2) return null;
     if (Date.now() - data.authenticatedAt > 7 * 24 * 60 * 60 * 1e3) return null;
-    let role = data.role;
-    if (data.email && (data.email.toLowerCase().includes("mangesh") || data.email.toLowerCase().includes("peaceful-loans.com"))) {
-      role = "admin";
-    }
-    return { email: data.email, role };
+    if (data.role !== "admin" && data.role !== "viewer") return null;
+    return { role: data.role };
   } catch {
     return null;
   }
@@ -10674,8 +10672,7 @@ async function handleApiRequest(request, env, ctx) {
           return new Response(JSON.stringify({ success: true }), { status: 200, headers: resHeaders2 });
         }
         const clientIp = request.headers.get("CF-Connecting-IP") || request.headers.get("cf-connecting-ip") || "unknown-ip";
-        const rateKey = `${clientIp}:${body.email || ""}`;
-        if (!checkTgRateLimit(rateKey)) {
+        if (!checkTgRateLimit(clientIp)) {
           return new Response(
             JSON.stringify({ error: "Too many failed sign-in attempts. Please try again in 15 minutes." }),
             { status: 429, headers }
@@ -10683,20 +10680,20 @@ async function handleApiRequest(request, env, ctx) {
         }
         const teamPassword = env.TEAM_PASSWORD || TG_DEFAULT_TEAM_PASSWORD;
         const adminPassword = env.ADMIN_PASSWORD || TG_DEFAULT_ADMIN_PASSWORD;
+        const pwd = typeof body.password === "string" ? body.password.trim() : "";
         let role = null;
-        if (body.password === adminPassword) {
+        if (pwd && pwd === adminPassword) {
           role = "admin";
-        } else if (body.password === teamPassword) {
-          role = body.email && (body.email.toLowerCase().includes("mangesh") || body.email.toLowerCase().includes("peaceful-loans.com")) ? "admin" : "viewer";
+        } else if (pwd && pwd === teamPassword) {
+          role = "viewer";
         }
         if (!role) {
-          return new Response(JSON.stringify({ error: "Email or password is incorrect" }), { status: 401, headers });
+          return new Response(JSON.stringify({ error: "Password is incorrect" }), { status: 401, headers });
         }
-        const email = body.email ? body.email.trim() : role === "admin" ? "mangesh@peaceful-loans.com" : "creator@creatorchart.com";
-        const token = await createTgToken({ email, role });
+        const token = await createTgToken({ role });
         const resHeaders = new Headers(headers);
         resHeaders.set("Set-Cookie", `tg_session=${token}; Path=/; Max-Age=604800; HttpOnly; SameSite=Lax; Secure`);
-        return new Response(JSON.stringify({ success: true, user: { email, role } }), { status: 200, headers: resHeaders });
+        return new Response(JSON.stringify({ success: true, user: { role } }), { status: 200, headers: resHeaders });
       } catch (err) {
         return new Response(JSON.stringify({ error: err.message }), { status: 400, headers });
       }
@@ -10728,8 +10725,13 @@ async function handleApiRequest(request, env, ctx) {
           const liveStr = await kv.get("linkedin_data:live");
           if (liveStr) {
             const liveData = JSON.parse(liveStr);
-            if (!liveData.meta?.data_to || !creator_chart_dashboard_data_default.meta?.data_to || liveData.meta.data_to >= creator_chart_dashboard_data_default.meta.data_to) {
-              payload = liveData;
+            if (liveData.meta?.data_to && creator_chart_dashboard_data_default.meta?.data_to && liveData.meta.data_to > creator_chart_dashboard_data_default.meta.data_to) {
+              payload = {
+                ...creator_chart_dashboard_data_default,
+                ...liveData,
+                company_page: liveData.company_page || creator_chart_dashboard_data_default.company_page,
+                newsletter: liveData.newsletter || creator_chart_dashboard_data_default.newsletter
+              };
             }
           }
         } catch {
@@ -10866,7 +10868,7 @@ async function handleApiRequest(request, env, ctx) {
             type,
             auto_type: autoType,
             title: post ? post.title : "",
-            changed_by: user.email,
+            changed_by: "admin",
             changed_at: (/* @__PURE__ */ new Date()).toISOString()
           };
         }
@@ -11204,12 +11206,7 @@ var worker_src_default = {
       resHeaders.set("X-Robots-Tag", "noindex, nofollow");
       resHeaders.set("X-Frame-Options", "DENY");
       resHeaders.set("X-Content-Type-Options", "nosniff");
-      const adminParam = url.searchParams.get("admin");
-      const adminPassword = env.ADMIN_PASSWORD || TG_DEFAULT_ADMIN_PASSWORD;
-      if (adminParam === adminPassword) {
-        const token = await createTgToken({ email: "mangesh@peaceful-loans.com", role: "admin" });
-        resHeaders.set("Set-Cookie", `tg_session=${token}; Path=/; Max-Age=604800; HttpOnly; SameSite=Lax; Secure`);
-      }
+      resHeaders.set("Cache-Control", "no-store, no-cache, must-revalidate");
     }
     return new Response(response.body, { status: response.status, headers: resHeaders });
   },

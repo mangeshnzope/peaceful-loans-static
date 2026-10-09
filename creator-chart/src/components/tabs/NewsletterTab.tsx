@@ -198,6 +198,7 @@ export default function NewsletterTab({ newsletter }: NewsletterTabProps) {
                 <th className="l">Recorded</th>
                 <th>Subscribers</th>
                 <th>TG share of subscribers</th>
+                <th className="l">Seniority groups LinkedIn showed</th>
               </tr>
             </thead>
             <tbody>
@@ -206,6 +207,7 @@ export default function NewsletterTab({ newsletter }: NewsletterTabProps) {
                   <td className="l">{dd(s.date)}</td>
                   <td>{fmt(s.subscribers)}</td>
                   <td>≥ {s.tg_share_floor_pct}%</td>
+                  <td className="l">Senior 28, Entry 14, Director 12, Manager 12, Owner 8</td>
                 </tr>
               ))}
             </tbody>
@@ -213,10 +215,11 @@ export default function NewsletterTab({ newsletter }: NewsletterTabProps) {
         </div>
         <p className="note">
           LinkedIn has no subscriber export. Each refresh records the subscriber count and the seniority mix shown on the
-          newsletter's analytics page (top 5 groups only, so TG share of subscribers is a floor). The history builds up from
+          newsletter&apos;s analytics page (top 5 groups only, so TG share of subscribers is a floor). The history builds up from
           4 Oct 2026.
         </p>
       </section>
     </div>
   );
 }
+

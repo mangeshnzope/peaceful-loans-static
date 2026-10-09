@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
     const user = authenticateUser(email || "", password || "");
     if (!user) {
       return NextResponse.json(
-        { error: "Email or password is incorrect" },
+        { error: "Password is incorrect" },
         { status: 401 }
       );
     }

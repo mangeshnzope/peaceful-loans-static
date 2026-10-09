@@ -4,19 +4,30 @@ import fs from "fs";
 import path from "path";
 
 describe("Auth and Security Engine Tests", () => {
-  it("Validates team password and rejects incorrect password", () => {
-    const user = authenticateUser("mangesh@peaceful-loans.com", "creatorchart2026");
+  it("Validates user password without email and rejects incorrect or empty password", () => {
+    const user = authenticateUser("creatorchart2026");
     expect(user).not.toBeNull();
     expect(user!.role).toBe("viewer");
 
-    const failed = authenticateUser("mangesh@peaceful-loans.com", "wrongpassword");
+    const user2 = authenticateUser("", "creatorchart2026");
+    expect(user2).not.toBeNull();
+    expect(user2!.role).toBe("viewer");
+
+    const failed = authenticateUser("wrongpassword");
     expect(failed).toBeNull();
+
+    const empty = authenticateUser("");
+    expect(empty).toBeNull();
   });
 
-  it("Validates admin password and grants admin role", () => {
-    const admin = authenticateUser("mangesh@peaceful-loans.com", "PeacefulLoansAdmin2026");
+  it("Validates admin password without email and grants admin role", () => {
+    const admin = authenticateUser("PeacefulLoansAdmin2026");
     expect(admin).not.toBeNull();
     expect(admin!.role).toBe("admin");
+
+    const admin2 = authenticateUser("", "PeacefulLoansAdmin2026");
+    expect(admin2).not.toBeNull();
+    expect(admin2!.role).toBe("admin");
   });
 
   it("Generates and verifies cryptographic HMAC-SHA256 session token", async () => {

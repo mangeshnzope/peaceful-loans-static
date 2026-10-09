@@ -313,6 +313,136 @@ export default function CompanyPageTab({ companyPage }: CompanyPageTabProps) {
           </table>
         </div>
       </section>
+
+      {/* Seniority Breakdowns */}
+      <div className="grid2">
+        <section style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <h2>Who follows the page</h2>
+          <div className="card">
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {[
+                ["Senior", 143],
+                ["Entry", 87],
+                ["Manager", 43],
+                ["Director", 42],
+                ["Owner", 33],
+                ["VP", 21],
+                ["CXO", 9],
+                ["Training", 8],
+                ["Partner", 2],
+              ].map(([k, v]) => {
+                const isTg = ["Manager", "Director", "VP", "Owner", "CXO", "Partner"].includes(k as string);
+                return (
+                  <div key={k as string} className={`mr ${isTg ? "t" : ""}`}>
+                    <span>{k}</span>
+                    <span className="b">
+                      <i style={{ width: `${((v as number) / 143) * 100}%` }}></i>
+                    </span>
+                    <span className="num">{Math.round(((v as number) / 388) * 100)}%</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <p className="note">
+            Page followers by seniority, as of {dd(F.as_of)} (388 followers with a known seniority). TG groups in amber.
+          </p>
+        </section>
+
+        <section style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <h2>Who visited the page (last 12 months)</h2>
+          <div className="card">
+            <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              {[
+                ["Senior", 561],
+                ["Entry", 346],
+                ["Director", 196],
+                ["Owner", 173],
+                ["Manager", 142],
+                ["VP", 91],
+                ["CXO", 76],
+                ["Training", 63],
+                ["Partner", 24],
+              ].map(([k, v]) => {
+                const isTg = ["Manager", "Director", "VP", "Owner", "CXO", "Partner"].includes(k as string);
+                return (
+                  <div key={k as string} className={`mr ${isTg ? "t" : ""}`}>
+                    <span>{k}</span>
+                    <span className="b">
+                      <i style={{ width: `${((v as number) / 561) * 100}%` }}></i>
+                    </span>
+                    <span className="num">{Math.round(((v as number) / 1672) * 100)}%</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <p className="note">
+            Share of page views by seniority, {dy(V12.start)} – {dy(V12.end)}, from one 12-month visitor export.
+          </p>
+        </section>
+      </div>
+
+      {/* Page Posts */}
+      <section style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <h2>Page posts</h2>
+        <p className="note">
+          Posts published on the Page in the last 12 months. Reach is left out because LinkedIn doesn&apos;t report Page post
+          viewers by seniority.
+        </p>
+        <div className="card tw">
+          <table>
+            <thead>
+              <tr>
+                <th className="l">Post</th>
+                <th className="l">Published</th>
+                <th className="l">Posted by</th>
+                <th className="l">Format</th>
+                <th>Reactions</th>
+                <th>Comments</th>
+                <th>Reposts</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { date: "2026-05-30", by: "Vamsi Mullapudi", type: "Video", title: "Most people focus heavily on getting their home loan approved.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7466511570936721408", reactions: 3, comments: 0, reposts: 0 },
+                { date: "2026-05-22", by: "Vamsi Mullapudi", type: "Video", title: "A lot of borrowers assume that a good credit score is enough to get a home loan approved. ", url: "https://www.linkedin.com/feed/update/urn:li:activity:7463576320438865921", reactions: 3, comments: 0, reposts: 0 },
+                { date: "2026-05-21", by: "Vamsi Mullapudi", type: "Video", title: "A lot of people assume that once a home loan is approved and disbursed, there’s no way to ", url: "https://www.linkedin.com/feed/update/urn:li:activity:7463221984869580800", reactions: 1, comments: 0, reposts: 0 },
+                { date: "2026-05-19", by: "Vamsi Mullapudi", type: "Video", title: "One of the most expensive mistakes in home loans is often hidden inside the paperwork.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7462483258677673984", reactions: 5, comments: 0, reposts: 0 },
+                { date: "2026-05-16", by: "Vamsi Mullapudi", type: "Video", title: "A lot of freelancers and self employed professionals think irregular income automatically ", url: "https://www.linkedin.com/feed/update/urn:li:activity:7461300208111636481", reactions: 3, comments: 0, reposts: 0 },
+                { date: "2026-05-01", by: "Vamsi Mullapudi", type: "Video", title: "Most people think home loan interest rates are simple. Repo rate plus a spread, and your C", url: "https://www.linkedin.com/feed/update/urn:li:activity:7455936118308360192", reactions: 4, comments: 0, reposts: 0 },
+                { date: "2026-04-29", by: "Vamsi Mullapudi", type: "Video", title: "Many buyers assume banks will reject a home loan if the building is more than 60 years old", url: "https://www.linkedin.com/feed/update/urn:li:activity:7455247062046232576", reactions: 3, comments: 0, reposts: 0 },
+                { date: "2026-04-21", by: "Vamsi Mullapudi", type: "Video", title: "Most people think home loan prepayment is about paying a big lump sum once a year.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7452340408640245760", reactions: 5, comments: 0, reposts: 0 },
+                { date: "2026-04-21", by: "Mangesh Zope", type: "", title: "We're #hiring a new Marketing Content Specialist in Kurla, Maharashtra. Apply today or sha", url: "https://www.linkedin.com/feed/update/urn:li:activity:7452320558345617408", reactions: 1, comments: 2, reposts: 0 },
+                { date: "2026-04-15", by: "Vamsi Mullapudi", type: "Video", title: "It is a bit thin right now. Since the video is attached, the caption should give enough co", url: "https://www.linkedin.com/feed/update/urn:li:activity:7450162657258659841", reactions: 2, comments: 0, reposts: 0 },
+                { date: "2026-04-07", by: "Vamsi Mullapudi", type: "Video", title: "If you’re planning to take a home loan this year, there’s one thing you should not ignore", url: "https://www.linkedin.com/feed/update/urn:li:activity:7447255825133260800", reactions: 1, comments: 0, reposts: 0 },
+                { date: "2026-04-02", by: "Vamsi Mullapudi", type: "Video", title: "A customer asked me this recently.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7445452535563321346", reactions: 6, comments: 0, reposts: 3 },
+                { date: "2026-03-27", by: "Vamsi Mullapudi", type: "Video", title: "𝗠𝗼𝘀𝘁 𝗽𝗲𝗼𝗽𝗹𝗲 𝗺𝗮𝗸𝗲 𝗼𝗻𝗲 𝗺𝗶𝘀𝘁𝗮𝗸𝗲 𝘄𝗵𝗲𝗻 𝗰𝗵𝗼𝗼𝘀𝗶𝗻𝗴 𝗮 𝗵𝗼𝗺𝗲 𝗹𝗼𝗮𝗻.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7443249111262482433", reactions: 1, comments: 0, reposts: 0 },
+                { date: "2026-03-24", by: "Vamsi Mullapudi", type: "Video", title: "𝗢𝗻𝗲 𝘀𝗺𝗮𝗹𝗹 𝗺𝗶𝘀𝘁𝗮𝗸𝗲 𝗰𝗮𝗻 𝗿𝗲𝗱𝘂𝗰𝗲 𝘆𝗼𝘂𝗿 𝗵𝗼𝗺𝗲 𝗹𝗼𝗮𝗻 𝗲𝗹𝗶𝗴𝗶𝗯𝗶𝗹𝗶𝘁𝘆.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7442126548557701120", reactions: 3, comments: 0, reposts: 0 },
+                { date: "2026-03-16", by: "Vamsi Mullapudi", type: "Video", title: "Understanding how banks calculate home loan interest rates is one of the most overlooked a", url: "https://www.linkedin.com/feed/update/urn:li:activity:7439299469453512704", reactions: 1, comments: 0, reposts: 1 },
+                { date: "2026-03-11", by: "Vamsi Mullapudi", type: "Video", title: "Most borrowers assume that once they receive an in principle sanction for a home loan, the", url: "https://www.linkedin.com/feed/update/urn:li:activity:7437356539121790976", reactions: 3, comments: 0, reposts: 0 },
+              ].map((p) => (
+                <tr key={p.url}>
+                  <td className="l">
+                    <a href={p.url} target="_blank" rel="noopener">
+                      {p.title}
+                    </a>
+                  </td>
+                  <td className="l" style={{ whiteSpace: "nowrap" }}>
+                    {dd(p.date)}
+                  </td>
+                  <td className="l">{p.by}</td>
+                  <td className="l">{p.type || "–"}</td>
+                  <td>{p.reactions}</td>
+                  <td>{p.comments}</td>
+                  <td>{p.reposts}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
   );
 }
+

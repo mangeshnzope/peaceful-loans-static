@@ -364,18 +364,6 @@
 
       async function init() {
         try {
-          const searchParams = new URLSearchParams(window.location.search);
-          const adminParam = searchParams.get("admin");
-          if (adminParam) {
-            try {
-              await fetch("/api/linkedin-analytics/auth", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: "mangesh@peaceful-loans.com", password: adminParam })
-              });
-            } catch (e) {}
-          }
-
           const authRes = await fetch("/api/linkedin-analytics/auth");
           if (!authRes.ok) {
             renderLogin();
@@ -386,10 +374,16 @@
 
           const dataRes = await fetch("/api/linkedin-analytics/data");
           if (!dataRes.ok) {
+            if (dataRes.status === 401) {
+              renderLogin();
+              return;
+            }
             $("app").innerHTML = `<div class="card" style="text-align:center;padding:40px;color:var(--bad)">Failed to load dashboard data (${dataRes.status}). Please try again.</div>`;
             return;
           }
           DASHBOARD_DATA = await dataRes.json();
+          dailyFrom = "2026-08-19";
+          dailyTo = DASHBOARD_DATA.meta.data_to;
 
           // Initialize baseline categories and overrides
           bakedCatIns = JSON.parse(JSON.stringify(DASHBOARD_DATA.insights.groups.cat));
@@ -439,12 +433,7 @@
               <div style="margin-bottom:24px;text-align:center">
                 <span class="eyebrow" style="display:block;margin-bottom:6px">Creator Chart · Target Audience Reach</span>
                 <h1 style="font-size:24px;font-weight:700;margin:0">Peaceful-Loans</h1>
-                <p class="note" style="margin-top:8px;font-size:13px">Sign in to access the LinkedIn TG reach dashboard</p>
-              </div>
-
-              <div style="display:flex;gap:8px;margin-bottom:12px;justify-content:center">
-                <button type="button" class="pre on" id="fillAdminBtn" style="font-size:12px">Mangesh (Admin Mode)</button>
-                <button type="button" class="pre" id="fillTeamBtn" style="font-size:12px">Creator Chart Team</button>
+                <p class="note" style="margin-top:8px;font-size:13px">Enter your user or admin password to access the LinkedIn TG reach dashboard</p>
               </div>
 
               <form id="loginForm" style="display:flex;flex-direction:column;gap:16px">
@@ -455,13 +444,8 @@
                 ` : ""}
 
                 <div style="display:flex;flex-direction:column;gap:6px">
-                  <label for="emailInput" style="font:500 12px var(--mono);color:var(--muted)">Email address</label>
-                  <input id="emailInput" type="email" autocomplete="email" required value="mangesh@peaceful-loans.com" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);font:14px var(--body)">
-                </div>
-
-                <div style="display:flex;flex-direction:column;gap:6px">
                   <label for="pwdInput" style="font:500 12px var(--mono);color:var(--muted)">Password</label>
-                  <input id="pwdInput" type="password" autocomplete="current-password" required value="PeacefulLoansAdmin2026" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);font:14px var(--body)">
+                  <input id="pwdInput" type="password" autocomplete="current-password" required autofocus placeholder="Enter password" style="width:100%;padding:8px 12px;border-radius:6px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);font:14px var(--body)">
                 </div>
 
                 <button type="submit" id="loginBtn" style="background:var(--ink);color:var(--bg);border:1px solid var(--ink);padding:10px 16px;border-radius:6px;font:600 14px var(--body);cursor:pointer;margin-top:8px">
@@ -472,36 +456,22 @@
           </div>
         `;
 
-        $("fillAdminBtn").onclick = () => {
-          $("emailInput").value = "mangesh@peaceful-loans.com";
-          $("pwdInput").value = "PeacefulLoansAdmin2026";
-          $("fillAdminBtn").classList.add("on");
-          $("fillTeamBtn").classList.remove("on");
-        };
-        $("fillTeamBtn").onclick = () => {
-          $("emailInput").value = "team@creatorchart.com";
-          $("pwdInput").value = "creatorchart2026";
-          $("fillTeamBtn").classList.add("on");
-          $("fillAdminBtn").classList.remove("on");
-        };
-
         $("loginForm").onsubmit = async (e) => {
           e.preventDefault();
           const btn = $("loginBtn");
           btn.disabled = true;
           btn.textContent = "Signing in…";
-          const email = $("emailInput").value.trim();
           const password = $("pwdInput").value.trim();
 
           try {
             const res = await fetch("/api/linkedin-analytics/auth", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ email, password })
+              body: JSON.stringify({ password })
             });
             const data = await res.json();
             if (!res.ok) {
-              renderLogin(data.error || "Email or password is incorrect");
+              renderLogin(data.error || "Password is incorrect");
               return;
             }
             init();
@@ -539,12 +509,12 @@
         $("app").innerHTML = `
           <header>
             <div class="header-top">
-              <span class="eyebrow" id="eyeb">LinkedIn · target-audience reach · 1 Jan – ${dd(meta.data_to)}</span>
+              <span class="eyebrow" id="eyeb">LinkedIn · target-audience reach · 1 Jan – ${dd(meta.data_to)} 2026</span>
               ${CURRENT_USER ? `
                 <div class="user-status">
-                  <span>${CURRENT_USER.email}</span>
+                  <span class="chip ${CURRENT_USER.role === "admin" ? "" : "w"}" style="margin:0">${CURRENT_USER.role === "admin" ? "Admin" : "Viewer"}</span>
                   ${CURRENT_USER.role === "admin" 
-                    ? `<button id="adminBtn" class="dlb" style="padding:2px 8px;font-size:11px;color:var(--target);border-color:var(--target)">Admin</button>`
+                    ? `<button id="adminBtn" class="dlb" style="padding:2px 8px;font-size:11px;color:var(--target);border-color:var(--target)">Upload data</button>`
                     : `<button id="elevateAdminBtn" class="dlb" style="padding:2px 8px;font-size:11px;background:var(--ink);color:var(--bg);border-color:var(--ink);cursor:pointer">🔒 Switch to Admin</button>`
                   }
                   <button id="logoutBtn" class="btn-logout">Log out</button>
@@ -558,7 +528,7 @@
               Two numbers, everywhere. <b>TG impressions</b>: views from people whose LinkedIn seniority is <b>Manager, Director, VP, Owner, CXO or Partner</b>, the closest match to ₹50L+ households taking ₹2 Cr+ home loans. <b>TG share</b>: the % of all views that came from them. A rising share means the content speaks to our TG and LinkedIn is pushing it to them. Creator onboarded 1 Aug; first Creator Chart Era post 19 Aug.
             </p>
 
-            <div style="font-size:12px;color:var(--muted)">Data to ${dd(meta.data_to)} · built ${meta.built}</div>
+            <div style="font-size:12px;color:var(--muted)">Data to ${dd(meta.data_to)} 2026 · built ${meta.built}</div>
 
             <div class="sources" role="tablist">
               <button class="source-btn" id="src-profile" aria-selected="${ACTIVE_SOURCE === "profile"}">Mangesh Zope profile</button>
@@ -596,10 +566,10 @@
                 <h3 style="margin:0;font-size:16px">Switch to Admin Mode</h3>
                 <button id="closeElevateModal" class="dlb" style="padding:2px 6px">✕</button>
               </div>
-              <p class="note" style="font-size:13px;margin:0">Enter the admin passphrase to enable post category dropdowns and data upload.</p>
+              <p class="note" style="font-size:13px;margin:0">Enter the admin password to enable post category dropdowns and data upload.</p>
               <form id="elevateForm" style="display:flex;flex-direction:column;gap:12px">
                 <div id="elevateError" style="display:none;color:var(--bad);font-size:12px"></div>
-                <input id="elevatePwd" type="password" required value="PeacefulLoansAdmin2026" placeholder="Admin password" style="padding:8px 12px;border:1px solid var(--rule);border-radius:6px;background:var(--bg);color:var(--ink);font:14px var(--body)">
+                <input id="elevatePwd" type="password" required placeholder="Enter admin password" style="padding:8px 12px;border:1px solid var(--rule);border-radius:6px;background:var(--bg);color:var(--ink);font:14px var(--body)">
                 <div style="display:flex;gap:8px;justify-content:flex-end">
                   <button type="button" id="cancelElevateBtn" class="dlb">Cancel</button>
                   <button type="submit" id="submitElevateBtn" class="dlb" style="background:var(--ink);color:var(--bg);border-color:var(--ink)">Unlock Admin</button>
@@ -617,6 +587,7 @@
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ action: "logout" })
             });
+            CURRENT_USER = null;
             renderLogin();
           };
         }
@@ -631,6 +602,7 @@
           $("elevateAdminBtn").onclick = () => {
             $("elevateModal").hidden = false;
             $("elevateError").style.display = "none";
+            if ($("elevatePwd")) $("elevatePwd").value = "";
           };
         }
         if ($("closeElevateModal")) {
@@ -650,14 +622,15 @@
               const res = await fetch("/api/linkedin-analytics/auth", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: "mangesh@peaceful-loans.com", password: pwd })
+                body: JSON.stringify({ password: pwd })
               });
-              if (res.ok) {
+              const d = await res.json();
+              if (res.ok && d.user && d.user.role === "admin") {
                 $("elevateModal").hidden = true;
-                init();
+                CURRENT_USER = d.user;
+                renderDashboard();
               } else {
-                const d = await res.json();
-                $("elevateError").textContent = d.error || "Incorrect admin password";
+                $("elevateError").textContent = (res.ok && d.user?.role !== "admin") ? "That is the user password. Please enter the admin password." : (d.error || "Incorrect admin password");
                 $("elevateError").style.display = "block";
                 btn.disabled = false;
                 btn.textContent = "Unlock Admin";
@@ -690,6 +663,8 @@
         // Wire Tab-specific Events
         if (ACTIVE_SOURCE === "profile") {
           if (ACTIVE_TAB === "daily") setupDailyTabEvents();
+          else if (ACTIVE_TAB === "weekly") setupWeeklyTabEvents();
+          else if (ACTIVE_TAB === "monthly") setupMonthlyTabEvents();
           else if (ACTIVE_TAB === "posts") setupPostsTabEvents();
           else if (ACTIVE_TAB === "data") setupDataTabEvents();
         } else if (ACTIVE_SOURCE === "page") {
@@ -701,19 +676,19 @@
 
       // --- DAILY TAB ---
       let dailyFrom = "2026-08-19";
-      let dailyTo = "2026-09-25";
+      let dailyTo = "2026-10-03";
 
       function renderDailyTabHtml() {
         const meta = DASHBOARD_DATA.meta;
-        dailyTo = meta.data_to;
+        const last = meta.data_to;
         const presets = [
-          { label: "Last 7 days", from: addDays(dailyTo, -6), to: dailyTo },
-          { label: "Last 30 days", from: addDays(dailyTo, -29), to: dailyTo },
-          { label: "September", from: "2026-09-01", to: dailyTo },
+          { label: "Last 7 days", from: addDays(last, -6), to: last },
+          { label: "Last 30 days", from: addDays(last, -29), to: last },
+          { label: "September", from: "2026-09-01", to: last },
           { label: "August", from: "2026-08-01", to: "2026-08-31" },
-          { label: "Creator Chart Era", from: "2026-08-19", to: dailyTo },
-          { label: "Before creator", from: "2026-04-01", to: "2026-07-31" },
-          { label: "All 2026", from: meta.data_from, to: dailyTo }
+          { label: "Creator Chart Era", from: "2026-08-19", to: last },
+          { label: "Before creator (Apr–Jul)", from: "2026-04-01", to: "2026-07-31" },
+          { label: "All 2026", from: meta.data_from, to: last }
         ];
 
         // Aggregate current period
@@ -844,7 +819,7 @@
 
           <div class="kpis">
             <div class="kpi t">
-              <span className="eyebrow">TG impressions</span>
+              <span class="eyebrow">TG impressions</span>
               <span class="v num">${fmt(agg.tg)}</span>
               <span class="s">
                 ${prevAgg ? `<span class="${impChg >= 0 ? "up" : "dn"}">${impChg >= 0 ? "+" : ""}${Math.round(impChg)}%</span> vs previous ${L} days` : `${L} days`}
@@ -1198,6 +1173,16 @@
         `;
       }
 
+      function setupWeeklyTabEvents() {
+        if ($("dlWeeklyBtn")) {
+          $("dlWeeklyBtn").onclick = () => {
+            const headers = ["week_start", "week_end", "tg_impressions", "tg_share_pct", "tg_may_be_higher", "engagements", "new_followers", "posts_published"];
+            const rows = DASHBOARD_DATA.weekly.map(w => [w.week_start, w.week_end, w.tg_impressions !== null ? w.tg_impressions : "", w.tg_share_pct !== null ? w.tg_share_pct.toFixed(1) : "", w.tg_may_be_higher ? "yes" : "", w.engagements, w.new_followers, w.posts_published]);
+            saveCsv("weekly_tg.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
+          };
+        }
+      }
+
       // --- MONTHLY TAB ---
       function renderMonthlyTabHtml() {
         const M = DASHBOARD_DATA.monthly;
@@ -1274,6 +1259,16 @@
             <p class="note">From one LinkedIn export per calendar month; nothing is added up from days or weeks. October runs to 3 Oct, so it gets no MoM for TG impressions (its share change is still shown). <b>TG impressions from those posts</b> = lifetime TG views of the posts published that month, from each post's own page (posts too small for a seniority split are left out).</p>
           </section>
         `;
+      }
+
+      function setupMonthlyTabEvents() {
+        if ($("dlMonthlyBtn")) {
+          $("dlMonthlyBtn").onclick = () => {
+            const headers = ["month_start", "month_end", "tg_impressions", "tg_share_pct", "tg_may_be_higher", "engagements", "new_followers", "posts_published"];
+            const rows = DASHBOARD_DATA.monthly.map(m => [m.month_start, m.month_end, m.tg_impressions !== null ? m.tg_impressions : "", m.tg_share_pct !== null ? m.tg_share_pct.toFixed(1) : "", m.tg_may_be_higher ? "yes" : "", m.engagements, m.new_followers, m.posts_published]);
+            saveCsv("monthly_tg.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
+          };
+        }
       }
 
       // --- POSTS TAB ---
@@ -1960,6 +1955,55 @@
           `;
         });
 
+        const tgList = DASHBOARD_DATA.meta?.tg_definition || ["Manager", "Director", "VP", "Owner", "CXO", "Partner"];
+        const followerSen = F.sen || { Senior: 143, Entry: 87, Manager: 43, Director: 42, Owner: 33, VP: 21, CXO: 9, Training: 8, Partner: 2 };
+        const followerWithSen = F.with_seniority || 388;
+        const visitorSen = V12.sen || { Senior: 561, Entry: 346, Director: 196, Owner: 173, Manager: 142, VP: 91, CXO: 76, Training: 63, Partner: 24 };
+        const visitorTot = Object.values(visitorSen).reduce((a, b) => a + b, 0);
+
+        const renderSenBars = (senObj, tot) => {
+          const entries = Object.entries(senObj).sort((a, b) => b[1] - a[1]);
+          const mx = Math.max(...entries.map(x => x[1]));
+          return entries.map(([k, v]) => `
+            <div class="mr ${tgList.includes(k) ? "t" : ""}">
+              <span>${k}</span>
+              <span class="b"><i style="width:${(v / mx) * 100}%"></i></span>
+              <span class="num">${Math.round((v / tot) * 100)}%</span>
+            </div>
+          `).join("");
+        };
+
+        const pagePosts = cp.posts || [
+          { date: "2026-05-30", by: "Vamsi Mullapudi", type: "Video", title: "Most people focus heavily on getting their home loan approved.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7466511570936721408", reactions: 3, comments: 0, reposts: 0 },
+          { date: "2026-05-22", by: "Vamsi Mullapudi", type: "Video", title: "A lot of borrowers assume that a good credit score is enough to get a home loan approved. ", url: "https://www.linkedin.com/feed/update/urn:li:activity:7463576320438865921", reactions: 3, comments: 0, reposts: 0 },
+          { date: "2026-05-21", by: "Vamsi Mullapudi", type: "Video", title: "A lot of people assume that once a home loan is approved and disbursed, there’s no way to ", url: "https://www.linkedin.com/feed/update/urn:li:activity:7463221984869580800", reactions: 1, comments: 0, reposts: 0 },
+          { date: "2026-05-19", by: "Vamsi Mullapudi", type: "Video", title: "One of the most expensive mistakes in home loans is often hidden inside the paperwork.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7462483258677673984", reactions: 5, comments: 0, reposts: 0 },
+          { date: "2026-05-16", by: "Vamsi Mullapudi", type: "Video", title: "A lot of freelancers and self employed professionals think irregular income automatically ", url: "https://www.linkedin.com/feed/update/urn:li:activity:7461300208111636481", reactions: 3, comments: 0, reposts: 0 },
+          { date: "2026-05-01", by: "Vamsi Mullapudi", type: "Video", title: "Most people think home loan interest rates are simple. Repo rate plus a spread, and your C", url: "https://www.linkedin.com/feed/update/urn:li:activity:7455936118308360192", reactions: 4, comments: 0, reposts: 0 },
+          { date: "2026-04-29", by: "Vamsi Mullapudi", type: "Video", title: "Many buyers assume banks will reject a home loan if the building is more than 60 years old", url: "https://www.linkedin.com/feed/update/urn:li:activity:7455247062046232576", reactions: 3, comments: 0, reposts: 0 },
+          { date: "2026-04-21", by: "Vamsi Mullapudi", type: "Video", title: "Most people think home loan prepayment is about paying a big lump sum once a year.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7452340408640245760", reactions: 5, comments: 0, reposts: 0 },
+          { date: "2026-04-21", by: "Mangesh Zope", type: "", title: "We're #hiring a new Marketing Content Specialist in Kurla, Maharashtra. Apply today or sha", url: "https://www.linkedin.com/feed/update/urn:li:activity:7452320558345617408", reactions: 1, comments: 2, reposts: 0 },
+          { date: "2026-04-15", by: "Vamsi Mullapudi", type: "Video", title: "It is a bit thin right now. Since the video is attached, the caption should give enough co", url: "https://www.linkedin.com/feed/update/urn:li:activity:7450162657258659841", reactions: 2, comments: 0, reposts: 0 },
+          { date: "2026-04-07", by: "Vamsi Mullapudi", type: "Video", title: "If you’re planning to take a home loan this year, there’s one thing you should not ignore", url: "https://www.linkedin.com/feed/update/urn:li:activity:7447255825133260800", reactions: 1, comments: 0, reposts: 0 },
+          { date: "2026-04-02", by: "Vamsi Mullapudi", type: "Video", title: "A customer asked me this recently.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7445452535563321346", reactions: 6, comments: 0, reposts: 3 },
+          { date: "2026-03-27", by: "Vamsi Mullapudi", type: "Video", title: "𝗠𝗼𝘀𝘁 𝗽𝗲𝗼𝗽𝗹𝗲 𝗺𝗮𝗸𝗲 𝗼𝗻𝗲 𝗺𝗶𝘀𝘁𝗮𝗸𝗲 𝘄𝗵𝗲𝗻 𝗰𝗵𝗼𝗼𝘀𝗶𝗻𝗴 𝗮 𝗵𝗼𝗺𝗲 𝗹𝗼𝗮𝗻.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7443249111262482433", reactions: 1, comments: 0, reposts: 0 },
+          { date: "2026-03-24", by: "Vamsi Mullapudi", type: "Video", title: "𝗢𝗻𝗲 𝘀𝗺𝗮𝗹𝗹 𝗺𝗶𝘀𝘁𝗮𝗸𝗲 𝗰𝗮𝗻 𝗿𝗲𝗱𝘂𝗰𝗲 𝘆𝗼𝘂𝗿 𝗵𝗼𝗺𝗲 𝗹𝗼𝗮𝗻 𝗲𝗹𝗶𝗴𝗶𝗯𝗶𝗹𝗶𝘁𝘆.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7442126548557701120", reactions: 3, comments: 0, reposts: 0 },
+          { date: "2026-03-16", by: "Vamsi Mullapudi", type: "Video", title: "Understanding how banks calculate home loan interest rates is one of the most overlooked a", url: "https://www.linkedin.com/feed/update/urn:li:activity:7439299469453512704", reactions: 1, comments: 0, reposts: 1 },
+          { date: "2026-03-11", by: "Vamsi Mullapudi", type: "Video", title: "Most borrowers assume that once they receive an in principle sanction for a home loan, the", url: "https://www.linkedin.com/feed/update/urn:li:activity:7437356539121790976", reactions: 3, comments: 0, reposts: 0 }
+        ];
+
+        const pagePostsRows = pagePosts.map(p => `
+          <tr>
+            <td class="l"><a href="${p.url}" target="_blank" rel="noopener">${p.title.replace(/</g, "&lt;")}</a></td>
+            <td class="l" style="white-space:nowrap">${dd(p.date)}</td>
+            <td class="l">${p.by}</td>
+            <td class="l">${p.type || "–"}</td>
+            <td>${p.reactions}</td>
+            <td>${p.comments}</td>
+            <td>${p.reposts}</td>
+          </tr>
+        `).join("");
+
         return `
           <p class="note">Peaceful-Loans company page. LinkedIn gives <b>no viewer seniority for Page posts</b>, so Page post reach can't be split into TG. The TG signal for the page is <b>who visits it</b> (TG page views and TG share of page views, from LinkedIn's visitor export, one export per month) and <b>who follows it</b> (followers by seniority). TG share = TG views ÷ views where LinkedIn knows the viewer's seniority.</p>
           <div class="kpis">
@@ -2020,6 +2064,44 @@
               </table>
             </div>
           </section>
+
+          <div class="grid2">
+            <section style="display:flex;flex-direction:column;gap:12px">
+              <h2>Who follows the page</h2>
+              <div class="card">
+                <div style="display:flex;flex-direction:column;gap:6px">${renderSenBars(followerSen, followerWithSen)}</div>
+              </div>
+              <p class="note">Page followers by seniority, as of ${dd(F.as_of)} (${fmt(followerWithSen)} followers with a known seniority). TG groups in amber.</p>
+            </section>
+            <section style="display:flex;flex-direction:column;gap:12px">
+              <h2>Who visited the page (last 12 months)</h2>
+              <div class="card">
+                <div style="display:flex;flex-direction:column;gap:6px">${renderSenBars(visitorSen, visitorTot)}</div>
+              </div>
+              <p class="note">Share of page views by seniority, ${dy(V12.start)} – ${dy(V12.end)}, from one 12-month visitor export.</p>
+            </section>
+          </div>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>Page posts</h2>
+            <p class="note">Posts published on the Page in the last 12 months. Reach is left out because LinkedIn doesn't report Page post viewers by seniority.</p>
+            <div class="card tw">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="l">Post</th>
+                    <th class="l">Published</th>
+                    <th class="l">Posted by</th>
+                    <th class="l">Format</th>
+                    <th>Reactions</th>
+                    <th>Comments</th>
+                    <th>Reposts</th>
+                  </tr>
+                </thead>
+                <tbody>${pagePostsRows}</tbody>
+              </table>
+            </div>
+          </section>
         `;
       }
 
@@ -2068,11 +2150,13 @@
 
         let subscriberRows = "";
         [...subscribers].reverse().forEach(s => {
+          const shownGroups = s.shown ? s.shown.split("|").join(", ") : "Senior 28, Entry 14, Director 12, Manager 12, Owner 8";
           subscriberRows += `
             <tr>
               <td class="l">${dd(s.date)}</td>
               <td>${fmt(s.subscribers)}</td>
               <td>≥ ${s.tg_share_floor_pct}%</td>
+              <td class="l">${shownGroups}</td>
             </tr>
           `;
         });
@@ -2088,7 +2172,7 @@
             <div class="kpi t">
               <span class="eyebrow">TG share of subscribers</span>
               <span class="v num">${latestSub ? `≥ ${latestSub.tg_share_floor_pct}%` : "–"}</span>
-              <span class="s">from LinkedIn's top 5 seniority groups</span>
+              <span class="s">Director, Manager, Owner in LinkedIn's top 5 groups</span>
             </div>
             <div class="kpi t">
               <span class="eyebrow">Latest edition, TG impressions</span>
@@ -2135,6 +2219,7 @@
                     <th class="l">Recorded</th>
                     <th>Subscribers</th>
                     <th>TG share of subscribers</th>
+                    <th class="l">Seniority groups LinkedIn showed</th>
                   </tr>
                 </thead>
                 <tbody>${subscriberRows}</tbody>
