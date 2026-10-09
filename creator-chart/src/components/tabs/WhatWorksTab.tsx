@@ -291,6 +291,21 @@ export default function WhatWorksTab({ insights, posts }: WhatWorksTabProps) {
         </div>
       </section>
 
+      {/* By Image */}
+      {groups.img && (
+        <section style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <h2>By image: real vs AI-generated vs none</h2>
+          {renderGroupTable(groups.img, "Image", ["Real image", "AI-generated image", "No image"])}
+          <p className="note">
+            <b>Real image</b> = photo of Mangesh, team, event, document or real screenshot.{" "}
+            <b>AI-generated image</b> = illustration, cartoon, infographic or stylised graphic made for the post.{" "}
+            <b>No image</b> = text-only post (or link preview only). Mangesh can change any post&apos;s label in the Posts
+            tab. Note: most AI-image posts were published in the Creator Chart Era (newer, less time to accrue views),
+            so the TG-impressions gap between Real and AI partly reflects post age as well as the image itself.
+          </p>
+        </section>
+      )}
+
       {/* By Type */}
       <section style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         <h2>By type of post</h2>

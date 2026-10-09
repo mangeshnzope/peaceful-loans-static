@@ -323,10 +323,10 @@ export default function CompanyPageTab({ companyPage }: CompanyPageTabProps) {
               {[
                 ["Senior", 143],
                 ["Entry", 87],
-                ["Manager", 43],
-                ["Director", 42],
+                ["Manager", 44],
+                ["Director", 41],
                 ["Owner", 33],
-                ["VP", 21],
+                ["VP", 22],
                 ["CXO", 9],
                 ["Training", 8],
                 ["Partner", 2],
@@ -338,14 +338,14 @@ export default function CompanyPageTab({ companyPage }: CompanyPageTabProps) {
                     <span className="b">
                       <i style={{ width: `${((v as number) / 143) * 100}%` }}></i>
                     </span>
-                    <span className="num">{Math.round(((v as number) / 388) * 100)}%</span>
+                    <span className="num">{Math.round(((v as number) / 389) * 100)}%</span>
                   </div>
                 );
               })}
             </div>
           </div>
           <p className="note">
-            Page followers by seniority, as of {dd(F.as_of)} (388 followers with a known seniority). TG groups in amber.
+            Page followers by seniority, as of {dd(F.as_of)} (389 followers with a known seniority). TG groups in amber.
           </p>
         </section>
 
@@ -354,24 +354,24 @@ export default function CompanyPageTab({ companyPage }: CompanyPageTabProps) {
           <div className="card">
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {[
-                ["Senior", 561],
-                ["Entry", 346],
-                ["Director", 196],
-                ["Owner", 173],
-                ["Manager", 142],
-                ["VP", 91],
-                ["CXO", 76],
-                ["Training", 63],
-                ["Partner", 24],
+                ["Senior", 569],
+                ["Entry", 352],
+                ["Director", 192],
+                ["Owner", 186],
+                ["Manager", 141],
+                ["VP", 92],
+                ["CXO", 77],
+                ["Training", 62],
+                ["Partner", 25],
               ].map(([k, v]) => {
                 const isTg = ["Manager", "Director", "VP", "Owner", "CXO", "Partner"].includes(k as string);
                 return (
                   <div key={k as string} className={`mr ${isTg ? "t" : ""}`}>
                     <span>{k}</span>
                     <span className="b">
-                      <i style={{ width: `${((v as number) / 561) * 100}%` }}></i>
+                      <i style={{ width: `${((v as number) / 569) * 100}%` }}></i>
                     </span>
-                    <span className="num">{Math.round(((v as number) / 1672) * 100)}%</span>
+                    <span className="num">{Math.round(((v as number) / 1696) * 100)}%</span>
                   </div>
                 );
               })}
@@ -405,6 +405,7 @@ export default function CompanyPageTab({ companyPage }: CompanyPageTabProps) {
             </thead>
             <tbody>
               {[
+                { date: "2026-10-07", by: "Mangesh Zope", type: "", title: "We're #hiring a new Marketing Executive (Reddit Content) - Entry level in Mumbai, Maharash", url: "https://www.linkedin.com/feed/update/urn:li:activity:7513562597799903234", reactions: 1, comments: 0, reposts: 0 },
                 { date: "2026-05-30", by: "Vamsi Mullapudi", type: "Video", title: "Most people focus heavily on getting their home loan approved.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7466511570936721408", reactions: 3, comments: 0, reposts: 0 },
                 { date: "2026-05-22", by: "Vamsi Mullapudi", type: "Video", title: "A lot of borrowers assume that a good credit score is enough to get a home loan approved. ", url: "https://www.linkedin.com/feed/update/urn:li:activity:7463576320438865921", reactions: 3, comments: 0, reposts: 0 },
                 { date: "2026-05-21", by: "Vamsi Mullapudi", type: "Video", title: "A lot of people assume that once a home loan is approved and disbursed, there’s no way to ", url: "https://www.linkedin.com/feed/update/urn:li:activity:7463221984869580800", reactions: 1, comments: 0, reposts: 0 },

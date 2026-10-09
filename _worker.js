@@ -515,9 +515,9 @@ This page has moved to an external location.
 // creator-chart/data/creator_chart_dashboard_data.json
 var creator_chart_dashboard_data_default = {
   meta: {
-    built: "04 Oct 2026",
+    built: "09 Oct 2026",
     data_from: "2026-01-01",
-    data_to: "2026-10-03",
+    data_to: "2026-10-08",
     tg_definition: [
       "Manager",
       "Director",
@@ -528,6 +528,11 @@ var creator_chart_dashboard_data_default = {
     ],
     creator_chart_era_start: "2026-08-19",
     creator_onboarded: "2026-08-01",
+    image_types: [
+      "Real image",
+      "AI-generated image",
+      "No image"
+    ],
     post_types: [
       "Bank & industry critique",
       "Home-loan explainer",
@@ -3022,6 +3027,51 @@ var creator_chart_dashboard_data_default = {
       engagements: 6,
       new_followers: 0,
       posts_published: 1
+    },
+    {
+      date: "2026-10-04",
+      tg_impressions: 473,
+      tg_share_pct: 56,
+      tg_may_be_higher: false,
+      engagements: 10,
+      new_followers: 11,
+      posts_published: 0
+    },
+    {
+      date: "2026-10-05",
+      tg_impressions: 120,
+      tg_share_pct: 42,
+      tg_may_be_higher: false,
+      engagements: 8,
+      new_followers: 6,
+      posts_published: 0
+    },
+    {
+      date: "2026-10-06",
+      tg_impressions: 302,
+      tg_share_pct: 44,
+      tg_may_be_higher: false,
+      engagements: 14,
+      new_followers: 3,
+      posts_published: 1
+    },
+    {
+      date: "2026-10-07",
+      tg_impressions: 1013,
+      tg_share_pct: 53,
+      tg_may_be_higher: false,
+      engagements: 13,
+      new_followers: 5,
+      posts_published: 1
+    },
+    {
+      date: "2026-10-08",
+      tg_impressions: 2516,
+      tg_share_pct: 46,
+      tg_may_be_higher: false,
+      engagements: 15,
+      new_followers: 6,
+      posts_published: 1
     }
   ],
   weekly: [
@@ -3417,12 +3467,22 @@ var creator_chart_dashboard_data_default = {
     },
     {
       week_start: "2026-09-28",
-      week_end: "2026-10-03",
-      tg_impressions: 1409,
+      week_end: "2026-10-04",
+      tg_impressions: 1836,
+      tg_share_pct: 47,
+      tg_may_be_higher: false,
+      engagements: 43,
+      new_followers: 22,
+      posts_published: 3
+    },
+    {
+      week_start: "2026-10-05",
+      week_end: "2026-10-08",
+      tg_impressions: 3843,
       tg_share_pct: 46,
       tg_may_be_higher: false,
-      engagements: 33,
-      new_followers: 11,
+      engagements: 50,
+      new_followers: 20,
       posts_published: 3
     }
   ],
@@ -3519,16 +3579,85 @@ var creator_chart_dashboard_data_default = {
     },
     {
       month_start: "2026-10-01",
-      month_end: "2026-10-03",
-      tg_impressions: 755,
-      tg_share_pct: 51,
+      month_end: "2026-10-08",
+      tg_impressions: 5020,
+      tg_share_pct: 47,
       tg_may_be_higher: false,
-      engagements: 7,
-      new_followers: 5,
-      posts_published: 1
+      engagements: 67,
+      new_followers: 36,
+      posts_published: 4
     }
   ],
   posts: [
+    {
+      post_id: "7513904742264229889",
+      published: "2026-10-08",
+      weekday: "Thu",
+      time: "3:44 PM",
+      title: "Ms im not selling my stock chose to owe",
+      url: "https://www.linkedin.com/posts/mangeshzope_ms-im-not-selling-my-stock-chose-to-owe-share-7513904742264229889-qs1G",
+      type: "Client story",
+      auto_type: "Client story",
+      image_type: "No image",
+      auto_image_type: "No image",
+      format: "Text/share",
+      creator_chart_era: true,
+      tg_impressions_lifetime: 1963,
+      tg_share_pct: 46,
+      out_of_network_pct: 78,
+      in_network_pct: 22,
+      engagements: 11,
+      comments: 2,
+      reposts: 1,
+      followers_gained: 0,
+      engagement_rate_pct: 0.26
+    },
+    {
+      post_id: "7513526971423858688",
+      published: "2026-10-07",
+      weekday: "Wed",
+      time: "2:43 PM",
+      title: "Rbi announced its repo rate going up by 025",
+      url: "https://www.linkedin.com/posts/mangeshzope_rbi-announced-its-repo-rate-going-up-by-025-share-7513526971423858688-z7LW",
+      type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
+      image_type: "No image",
+      auto_image_type: "No image",
+      format: "Text/share",
+      creator_chart_era: true,
+      tg_impressions_lifetime: 1411,
+      tg_share_pct: 52,
+      out_of_network_pct: 66,
+      in_network_pct: 34,
+      engagements: 13,
+      comments: 0,
+      reposts: 1,
+      followers_gained: 2,
+      engagement_rate_pct: 0.48
+    },
+    {
+      post_id: "7513121763409580033",
+      published: "2026-10-06",
+      weekday: "Tue",
+      time: "11:53 AM",
+      title: "Ms ive already done the maths is the most",
+      url: "https://www.linkedin.com/posts/mangeshzope_ms-ive-already-done-the-maths-is-the-most-share-7513121763409580033-Phzg",
+      type: "Client story",
+      auto_type: "Client story",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
+      format: "Text/share",
+      creator_chart_era: true,
+      tg_impressions_lifetime: 238,
+      tg_share_pct: 49,
+      out_of_network_pct: 41,
+      in_network_pct: 59,
+      engagements: 12,
+      comments: 0,
+      reposts: 1,
+      followers_gained: 0,
+      engagement_rate_pct: 2.47
+    },
     {
       post_id: "7512042073336733696",
       published: "2026-10-03",
@@ -3538,17 +3667,19 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_i-was-recently-talking-to-a-clienta-former-ugcPost-7512042073336733696-lIf5",
       type: "Client story",
       auto_type: "Client story",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Media (ugcPost)",
       creator_chart_era: true,
-      tg_impressions_lifetime: null,
-      tg_share_pct: null,
-      out_of_network_pct: 2,
-      in_network_pct: 98,
-      engagements: 6,
-      comments: 0,
+      tg_impressions_lifetime: 612,
+      tg_share_pct: 44,
+      out_of_network_pct: 8,
+      in_network_pct: 92,
+      engagements: 7,
+      comments: 1,
       reposts: 0,
       followers_gained: 0,
-      engagement_rate_pct: 0.58
+      engagement_rate_pct: 0.5
     },
     {
       post_id: "7510982370678865920",
@@ -3559,17 +3690,19 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_the-day-you-bought-your-house-6-people-made-share-7510982370678865920-DcFI",
       type: "Bank & industry critique",
       auto_type: "Bank & industry critique",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 112,
-      tg_share_pct: 41,
-      out_of_network_pct: 48,
-      in_network_pct: 52,
-      engagements: 10,
+      tg_impressions_lifetime: 161,
+      tg_share_pct: 45,
+      out_of_network_pct: 43,
+      in_network_pct: 57,
+      engagements: 12,
       comments: 0,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 3.66
+      engagement_rate_pct: 3.36
     },
     {
       post_id: "7510245222912692224",
@@ -3580,17 +3713,19 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_feeling-embarrassed-about-taking-a-home-loan-share-7510245222912692224-7MEv",
       type: "Opinion & life lessons",
       auto_type: "Opinion & life lessons",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 226,
-      tg_share_pct: 55,
+      tg_impressions_lifetime: 228,
+      tg_share_pct: 51,
       out_of_network_pct: 29,
       in_network_pct: 71,
       engagements: 11,
       comments: 0,
       reposts: 1,
       followers_gained: 1,
-      engagement_rate_pct: 2.68
+      engagement_rate_pct: 2.46
     },
     {
       post_id: "7509209819720032256",
@@ -3601,17 +3736,19 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_your-bank-may-just-have-lost-a-revenue-share-7509209819720032256-3mbB",
       type: "Bank & industry critique",
       auto_type: "Bank & industry critique",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 359,
-      tg_share_pct: 48,
-      out_of_network_pct: 66,
-      in_network_pct: 34,
+      tg_impressions_lifetime: 361,
+      tg_share_pct: 46,
+      out_of_network_pct: 64,
+      in_network_pct: 36,
       engagements: 15,
       comments: 2,
       reposts: 1,
       followers_gained: 1,
-      engagement_rate_pct: 2.01
+      engagement_rate_pct: 1.91
     },
     {
       post_id: "7508405750621310978",
@@ -3622,17 +3759,19 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_waiting-for-the-right-time-to-buy-a-home-share-7508405750621310978-nuDC",
       type: "Home-loan explainer",
       auto_type: "Home-loan explainer",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 249,
-      tg_share_pct: 51,
+      tg_impressions_lifetime: 262,
+      tg_share_pct: 50,
       out_of_network_pct: 24,
       in_network_pct: 76,
       engagements: 15,
       comments: 4,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 3.07
+      engagement_rate_pct: 2.87
     },
     {
       post_id: "7507720186268119040",
@@ -3643,17 +3782,19 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_should-i-take-a-home-loan-is-the-wrong-share-7507720186268119040-lN6l",
       type: "Home-loan explainer",
       auto_type: "Home-loan explainer",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 316,
-      tg_share_pct: 49,
-      out_of_network_pct: 59,
-      in_network_pct: 41,
+      tg_impressions_lifetime: 336,
+      tg_share_pct: 50,
+      out_of_network_pct: 58,
+      in_network_pct: 42,
       engagements: 10,
       comments: 1,
       reposts: 2,
       followers_gained: 0,
-      engagement_rate_pct: 1.55
+      engagement_rate_pct: 1.49
     },
     {
       post_id: "7506575936201408512",
@@ -3664,15 +3805,17 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_a-10000-crore-listed-company-and-peaceful-loans-share-7506575936201408512-zFxQ",
       type: "Founder journey & milestones",
       auto_type: "Founder journey & milestones",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 7866,
+      tg_impressions_lifetime: 7904,
       tg_share_pct: 47,
       out_of_network_pct: 66,
       in_network_pct: 34,
-      engagements: 587,
+      engagements: 590,
       comments: 143,
-      reposts: 4,
+      reposts: 5,
       followers_gained: 5,
       engagement_rate_pct: 3.51
     },
@@ -3685,9 +3828,11 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_i-have-been-using-instahelp-services-across-share-7506232694943473666-3DiR",
       type: "Founder journey & milestones",
       auto_type: "Client story",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 2444,
+      tg_impressions_lifetime: 2454,
       tg_share_pct: 31,
       out_of_network_pct: 86,
       in_network_pct: 14,
@@ -3706,17 +3851,19 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_the-bank-manager-convinces-you-to-fix-your-share-7505589782421544960-AhLg",
       type: "Bank & industry critique",
       auto_type: "Bank & industry critique",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 252,
-      tg_share_pct: 44,
-      out_of_network_pct: 51,
-      in_network_pct: 49,
-      engagements: 14,
+      tg_impressions_lifetime: 269,
+      tg_share_pct: 46,
+      out_of_network_pct: 50,
+      in_network_pct: 50,
+      engagements: 15,
       comments: 2,
       reposts: 1,
       followers_gained: 2,
-      engagement_rate_pct: 2.44
+      engagement_rate_pct: 2.56
     },
     {
       post_id: "7504055163360362496",
@@ -3727,17 +3874,19 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_i-saw-an-sbi-ad-recently-aapka-bachcha-ugcPost-7504055163360362496-EDO2",
       type: "Bank & industry critique",
       auto_type: "Bank & industry critique",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Media (ugcPost)",
       creator_chart_era: true,
-      tg_impressions_lifetime: 484,
-      tg_share_pct: 50,
-      out_of_network_pct: 30,
-      in_network_pct: 70,
+      tg_impressions_lifetime: 509,
+      tg_share_pct: 51,
+      out_of_network_pct: 29,
+      in_network_pct: 71,
       engagements: 19,
       comments: 4,
       reposts: 1,
       followers_gained: 1,
-      engagement_rate_pct: 1.96
+      engagement_rate_pct: 1.9
     },
     {
       post_id: "7503390922131562496",
@@ -3748,17 +3897,19 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_your-interest-rate-went-up-but-your-emi-share-7503390922131562496-JObH",
       type: "Home-loan explainer",
       auto_type: "Home-loan explainer",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 184,
+      tg_impressions_lifetime: 190,
       tg_share_pct: 44,
-      out_of_network_pct: 46,
-      in_network_pct: 54,
+      out_of_network_pct: 45,
+      in_network_pct: 55,
       engagements: 12,
       comments: 0,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 2.86
+      engagement_rate_pct: 2.78
     },
     {
       post_id: "7502607226914639873",
@@ -3769,17 +3920,19 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_paying-full-in-cash-for-your-dream-home-isnt-share-7502607226914639873-ndxG",
       type: "Home-loan explainer",
       auto_type: "Home-loan explainer",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 193,
+      tg_impressions_lifetime: 196,
       tg_share_pct: 46,
-      out_of_network_pct: 39,
-      in_network_pct: 61,
+      out_of_network_pct: 38,
+      in_network_pct: 62,
       engagements: 9,
       comments: 0,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 2.15
+      engagement_rate_pct: 2.11
     },
     {
       post_id: "7501557451943743492",
@@ -3790,9 +3943,11 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_if-a-bank-employee-cant-figure-out-his-own-share-7501557451943743492-1SXu",
       type: "Bank & industry critique",
       auto_type: "Bank & industry critique",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 283,
+      tg_impressions_lifetime: 285,
       tg_share_pct: 43,
       out_of_network_pct: 60,
       in_network_pct: 40,
@@ -3800,7 +3955,7 @@ var creator_chart_dashboard_data_default = {
       comments: 2,
       reposts: 1,
       followers_gained: 1,
-      engagement_rate_pct: 2.74
+      engagement_rate_pct: 2.72
     },
     {
       post_id: "7500800657218744321",
@@ -3811,9 +3966,11 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_one-of-our-clients-had-been-banking-with-share-7500800657218744321-AucK",
       type: "Client story",
       auto_type: "Client story",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 209,
+      tg_impressions_lifetime: 210,
       tg_share_pct: 41,
       out_of_network_pct: 47,
       in_network_pct: 53,
@@ -3821,7 +3978,7 @@ var creator_chart_dashboard_data_default = {
       comments: 2,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 3.54
+      engagement_rate_pct: 3.52
     },
     {
       post_id: "7500092783240769536",
@@ -3832,6 +3989,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_net-worth-doesnt-buy-financial-judgment-share-7500092783240769536-tWkF",
       type: "Opinion & life lessons",
       auto_type: "Opinion & life lessons",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 158,
@@ -3842,7 +4001,7 @@ var creator_chart_dashboard_data_default = {
       comments: 1,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 3.38
+      engagement_rate_pct: 3.37
     },
     {
       post_id: "7498993755644076033",
@@ -3853,9 +4012,11 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_mint-quoted-me-in-their-article-on-the-rbis-ugcPost-7498993755644076033-SoRP",
       type: "Bank & industry critique",
       auto_type: "Bank & industry critique",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Media (ugcPost)",
       creator_chart_era: true,
-      tg_impressions_lifetime: 491,
+      tg_impressions_lifetime: 492,
       tg_share_pct: 49,
       out_of_network_pct: null,
       in_network_pct: null,
@@ -3863,7 +4024,7 @@ var creator_chart_dashboard_data_default = {
       comments: 6,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 3.39
+      engagement_rate_pct: 3.38
     },
     {
       post_id: "7498269296268324865",
@@ -3874,9 +4035,11 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_financial-freedom-is-a-lie-sold-to-people-share-7498269296268324865-ZI2A",
       type: "Opinion & life lessons",
       auto_type: "Opinion & life lessons",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 428,
+      tg_impressions_lifetime: 429,
       tg_share_pct: 50,
       out_of_network_pct: 24,
       in_network_pct: 76,
@@ -3884,7 +4047,7 @@ var creator_chart_dashboard_data_default = {
       comments: 4,
       reposts: 0,
       followers_gained: 0,
-      engagement_rate_pct: 2.22
+      engagement_rate_pct: 2.21
     },
     {
       post_id: "7497535248835076096",
@@ -3895,6 +4058,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_a-yes-from-a-bank-means-nothing-until-the-share-7497535248835076096-GvMH",
       type: "Bank & industry critique",
       auto_type: "Bank & industry critique",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 356,
@@ -3916,6 +4081,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_we-were-on-a-zoom-call-with-one-of-our-clients-share-7496445774369669121-LRnO",
       type: "Client story",
       auto_type: "Client story",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 231,
@@ -3937,6 +4104,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_when-i-started-peaceful-loans-i-went-to-share-7495072253953609731-g83Z",
       type: "Founder journey & milestones",
       auto_type: "Founder journey & milestones",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
       tg_impressions_lifetime: 423,
@@ -3958,6 +4127,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_i-was-talking-to-one-of-our-clients-today-share-7495063360074477570-XVvU",
       type: "Client story",
       auto_type: "Client story",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 282,
@@ -3979,6 +4150,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_recently-had-a-great-conversation-with-an-share-7486245321606619138-me99",
       type: "Client story",
       auto_type: "Client story",
+      image_type: "No image",
+      auto_image_type: "No image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 5160,
@@ -4000,6 +4173,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_smita-is-looking-for-her-next-challenge-in-ugcPost-7485494610555781120-9WyG",
       type: "Hiring & team",
       auto_type: "Hiring & team",
+      image_type: "No image",
+      auto_image_type: "No image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 1376,
@@ -4021,6 +4196,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_love-and-greed-both-are-blind-despite-knowledge-share-7485527693921431552-Uhs9",
       type: "Opinion & life lessons",
       auto_type: "Opinion & life lessons",
+      image_type: "No image",
+      auto_image_type: "No image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 212,
@@ -4042,6 +4219,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_trying-to-find-interns-who-are-really-interested-share-7484796987507335168-oFCC",
       type: "Hiring & team",
       auto_type: "Hiring & team",
+      image_type: "No image",
+      auto_image_type: "No image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 1071,
@@ -4063,6 +4242,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_peaceful-loans-why-property-prices-almost-ugcPost-7484122133548347392-oQg_",
       type: "Home-loan explainer",
       auto_type: "Home-loan explainer",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 450,
@@ -4084,6 +4265,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_kickass-ugcPost-7483663913348358144-abrO",
       type: "Founder journey & milestones",
       auto_type: "Founder journey & milestones",
+      image_type: "No image",
+      auto_image_type: "No image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 118,
@@ -4105,6 +4288,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_god-rationed-brains-but-he-was-generous-share-7482591414866874368-f09T",
       type: "Opinion & life lessons",
       auto_type: "Opinion & life lessons",
+      image_type: "No image",
+      auto_image_type: "No image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 147,
@@ -4126,6 +4311,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_moments-like-these-are-a-validation-for-us-share-7482720969816604672-2K7s",
       type: "Founder journey & milestones",
       auto_type: "Founder journey & milestones",
+      image_type: "No image",
+      auto_image_type: "No image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 388,
@@ -4147,6 +4334,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_looking-to-hire-for-full-time-role-in-our-share-7481948324732866560-PeR4",
       type: "Hiring & team",
       auto_type: "Hiring & team",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 692,
@@ -4168,6 +4357,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_grateful-and-honestly-a-little-pleasantly-ugcPost-7479916369271144448-gX5C",
       type: "Founder journey & milestones",
       auto_type: "Founder journey & milestones",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 735,
@@ -4189,6 +4380,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_started-this-journey-of-ensuring-home-loan-share-7477531824806875137-sMqv",
       type: "Founder journey & milestones",
       auto_type: "Founder journey & milestones",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 773,
@@ -4210,6 +4403,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_witneesed-a-game-of-cat-and-mouse-at-bluedart-share-7476601108128342016-GDa0",
       type: "Client story",
       auto_type: "Client story",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 253,
@@ -4231,6 +4426,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_when-i-started-my-journey-10-years-back-as-share-7475722402409250816-3ZUJ",
       type: "Founder journey & milestones",
       auto_type: "Founder journey & milestones",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 689,
@@ -4252,6 +4449,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_winners-ego-is-termed-as-principles-loser-share-7475171466703982593-GPG_",
       type: "Opinion & life lessons",
       auto_type: "Opinion & life lessons",
+      image_type: "No image",
+      auto_image_type: "No image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 166,
@@ -4273,6 +4472,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_komal-nishad-25-of-this-came-in-last-30-share-7474086780779040768-Z-O-",
       type: "Founder journey & milestones",
       auto_type: "Founder journey & milestones",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 1043,
@@ -4294,6 +4495,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_a-small-but-meaningful-milestone-for-us-at-share-7470747187702984704-bz3M",
       type: "Founder journey & milestones",
       auto_type: "Founder journey & milestones",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 848,
@@ -4315,6 +4518,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_in-this-day-and-age-where-the-govt-wants-ugcPost-7459504747939799040-2ig5",
       type: "Opinion & life lessons",
       auto_type: "Opinion & life lessons",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: null,
@@ -4336,6 +4541,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_we-are-looking-to-hire-a-follow-up-expert-share-7458344649280167936-WASz",
       type: "Hiring & team",
       auto_type: "Hiring & team",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 820,
@@ -4357,6 +4564,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_plot-loans-a-topic-of-interest-for-every-ugcPost-7458404010568540160-GDvs",
       type: "Home-loan explainer",
       auto_type: "Home-loan explainer",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: null,
@@ -4378,6 +4587,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_not-able-to-make-sense-of-emi-number-on-net-banking-ugcPost-7458129287511023616-8EtG",
       type: "Home-loan explainer",
       auto_type: "Home-loan explainer",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: null,
@@ -4399,6 +4610,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_3rd-and-4th-home-loan-will-attract-higher-ugcPost-7457669375664377856-wo-C",
       type: "Home-loan explainer",
       auto_type: "Home-loan explainer",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: null,
@@ -4420,6 +4633,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_one-consumer-conversation-over-the-last-few-ugcPost-7457212195207172096-6BrX",
       type: "Client story",
       auto_type: "Client story",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: null,
@@ -4441,6 +4656,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_can-self-employed-professionals-get-home-ugcPost-7457285339645116416-ndNf",
       type: "Home-loan explainer",
       auto_type: "Home-loan explainer",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: null,
@@ -4462,6 +4679,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_one-consumer-conversation-over-the-last-few-share-7456915367701979138-Gm-S",
       type: "Client story",
       auto_type: "Client story",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 386,
@@ -4483,6 +4702,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_after-4-years-of-tireless-consumer-conversations-ugcPost-7455583847884226561-E0Hk",
       type: "Founder journey & milestones",
       auto_type: "Founder journey & milestones",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 926,
@@ -4504,6 +4725,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_there-is-a-professional-bias-called-curse-share-7455200922739130368-PKjS",
       type: "Opinion & life lessons",
       auto_type: "Opinion & life lessons",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 272,
@@ -4525,6 +4748,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_over-this-weekend-a-customer-asked-us-a-question-share-7454381198119694336-4McC",
       type: "Client story",
       auto_type: "Client story",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 187,
@@ -4546,6 +4771,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_freak-this-is-the-problem-we-are-solving-share-7454396670374494208-Rc2G",
       type: "Founder journey & milestones",
       auto_type: "Founder journey & milestones",
+      image_type: "No image",
+      auto_image_type: "No image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 1188,
@@ -4567,6 +4794,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_perfect-example-of-andha-andhe-ko-rah-dikha-ugcPost-7453637000353603584-3WJo",
       type: "Opinion & life lessons",
       auto_type: "Opinion & life lessons",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 588,
@@ -4588,6 +4817,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_one-of-our-consumers-recently-wrote-a-review-share-7453301722514341888-7hJb",
       type: "Client story",
       auto_type: "Client story",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 443,
@@ -4609,6 +4840,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_recently-i-was-reading-a-book-called-trusted-share-7452932302931750913-j4rg",
       type: "Opinion & life lessons",
       auto_type: "Opinion & life lessons",
+      image_type: "No image",
+      auto_image_type: "No image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 415,
@@ -4630,6 +4863,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_we-at-peaceful-loans-are-looking-to-hire-share-7452195169958850560-1oh6",
       type: "Hiring & team",
       auto_type: "Hiring & team",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 658,
@@ -4651,6 +4886,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_google-we-peaceful-loanscom-had-132-share-7449605775037145088-Gvoq",
       type: "Founder journey & milestones",
       auto_type: "Founder journey & milestones",
+      image_type: "No image",
+      auto_image_type: "No image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 2382,
@@ -4672,6 +4909,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_demystifying-home-loans-contd-ugcPost-7445459598284767232-zx9E",
       type: "Home-loan explainer",
       auto_type: "Home-loan explainer",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 315,
@@ -4693,6 +4932,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_busting-the-myths-on-home-loans-ugcPost-7442690322368974849-PsfV",
       type: "Home-loan explainer",
       auto_type: "Home-loan explainer",
+      image_type: "Real image",
+      auto_image_type: "Real image",
       format: "Media (ugcPost)",
       creator_chart_era: false,
       tg_impressions_lifetime: 448,
@@ -4714,6 +4955,8 @@ var creator_chart_dashboard_data_default = {
       url: "https://www.linkedin.com/posts/mangeshzope_do-you-think-we-have-a-similar-state-of-affairs-share-7432637819463974912-BU6o",
       type: "Bank & industry critique",
       auto_type: "Bank & industry critique",
+      image_type: "No image",
+      auto_image_type: "No image",
       format: "Text/share",
       creator_chart_era: false,
       tg_impressions_lifetime: 593,
@@ -4922,7 +5165,12 @@ var creator_chart_dashboard_data_default = {
       "2026-09-30": 0.0369,
       "2026-10-01": 0.0177,
       "2026-10-02": 0.0114,
-      "2026-10-03": 0.0813
+      "2026-10-03": 0.0813,
+      "2026-10-04": 0.063,
+      "2026-10-05": 0.0214,
+      "2026-10-06": 0.0512,
+      "2026-10-07": 0.1426,
+      "2026-10-08": 0.4079
     },
     pct_of_views: {
       Seniority: {
@@ -5112,7 +5360,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 30,
           "2026-10-01": 29,
           "2026-10-02": 26,
-          "2026-10-03": 22
+          "2026-10-03": 22,
+          "2026-10-04": 23,
+          "2026-10-05": 28,
+          "2026-10-06": 26,
+          "2026-10-07": 26,
+          "2026-10-08": 30
         },
         Entry: {
           "2026-02-16": 41,
@@ -5279,7 +5532,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 13,
           "2026-10-01": 14,
           "2026-10-02": 14,
-          "2026-10-03": 11
+          "2026-10-03": 11,
+          "2026-10-04": 9,
+          "2026-10-05": 16,
+          "2026-10-06": 14,
+          "2026-10-07": 11,
+          "2026-10-08": 12
         },
         Director: {
           "2026-02-26": 15,
@@ -5422,7 +5680,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-29": 11,
           "2026-09-30": 11,
           "2026-10-01": 7,
-          "2026-10-03": 17
+          "2026-10-03": 17,
+          "2026-10-04": 19,
+          "2026-10-05": 12,
+          "2026-10-06": 10,
+          "2026-10-07": 14,
+          "2026-10-08": 14
         },
         Manager: {
           "2026-02-26": 11,
@@ -5574,7 +5837,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 14,
           "2026-10-01": 13,
           "2026-10-02": 12,
-          "2026-10-03": 10
+          "2026-10-03": 10,
+          "2026-10-04": 10,
+          "2026-10-05": 13,
+          "2026-10-06": 8,
+          "2026-10-07": 16,
+          "2026-10-08": 14
         },
         Owner: {
           "2026-02-26": 8,
@@ -5694,7 +5962,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-29": 4,
           "2026-09-30": 7,
           "2026-10-02": 10,
-          "2026-10-03": 10
+          "2026-10-03": 10,
+          "2026-10-04": 5,
+          "2026-10-05": 4,
+          "2026-10-06": 9,
+          "2026-10-07": 6,
+          "2026-10-08": 4
         },
         VP: {
           "2026-02-26": 7,
@@ -5807,7 +6080,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 5,
           "2026-10-01": 8,
           "2026-10-02": 7,
-          "2026-10-03": 7
+          "2026-10-03": 7,
+          "2026-10-04": 12,
+          "2026-10-05": 7,
+          "2026-10-06": 9,
+          "2026-10-07": 9,
+          "2026-10-08": 9
         },
         CXO: {
           "2026-02-26": 5,
@@ -5894,7 +6172,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-27": 4,
           "2026-09-28": 4,
           "2026-09-30": 2,
-          "2026-10-03": 9
+          "2026-10-03": 9,
+          "2026-10-04": 6,
+          "2026-10-05": 6,
+          "2026-10-06": 6,
+          "2026-10-07": 6,
+          "2026-10-08": 3
         },
         Partner: {
           "2026-04-14": 2,
@@ -5943,7 +6226,11 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 1,
           "2026-09-25": 2,
           "2026-09-28": 2,
-          "2026-10-03": 3
+          "2026-10-03": 3,
+          "2026-10-04": 4,
+          "2026-10-06": 2,
+          "2026-10-07": 2,
+          "2026-10-08": 2
         },
         Training: {
           "2026-04-14": 1,
@@ -5981,7 +6268,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-21": 1,
           "2026-09-22": 2,
           "2026-09-25": 2,
-          "2026-09-28": 1
+          "2026-09-28": 1,
+          "2026-10-08": 0.5
         }
       },
       Location: {
@@ -6178,7 +6466,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 29,
           "2026-10-01": 24,
           "2026-10-02": 19,
-          "2026-10-03": 31
+          "2026-10-03": 31,
+          "2026-10-04": 21,
+          "2026-10-05": 22,
+          "2026-10-06": 29,
+          "2026-10-07": 25,
+          "2026-10-08": 22
         },
         "Greater Delhi Area": {
           "2026-02-26": 15,
@@ -6326,7 +6619,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 14,
           "2026-10-01": 12,
           "2026-10-02": 13,
-          "2026-10-03": 14
+          "2026-10-03": 14,
+          "2026-10-04": 12,
+          "2026-10-05": 14,
+          "2026-10-06": 10,
+          "2026-10-07": 16,
+          "2026-10-08": 17
         },
         "Greater Bengaluru Area": {
           "2026-02-26": 14,
@@ -6474,7 +6772,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 18,
           "2026-10-01": 15,
           "2026-10-02": 20,
-          "2026-10-03": 13
+          "2026-10-03": 13,
+          "2026-10-04": 16,
+          "2026-10-05": 21,
+          "2026-10-06": 19,
+          "2026-10-07": 12,
+          "2026-10-08": 15
         },
         "Greater Hyderabad Area": {
           "2026-02-26": 3,
@@ -6548,7 +6851,11 @@ var creator_chart_dashboard_data_default = {
           "2026-09-28": 4,
           "2026-09-29": 5,
           "2026-09-30": 2,
-          "2026-10-03": 2
+          "2026-10-03": 2,
+          "2026-10-04": 4,
+          "2026-10-06": 5,
+          "2026-10-07": 3,
+          "2026-10-08": 4
         },
         "Pune/Pimpri-Chinchwad Area": {
           "2026-02-26": 2,
@@ -6624,7 +6931,10 @@ var creator_chart_dashboard_data_default = {
           "2026-09-28": 2,
           "2026-09-30": 5,
           "2026-10-01": 4,
-          "2026-10-03": 2
+          "2026-10-03": 2,
+          "2026-10-06": 3,
+          "2026-10-07": 4,
+          "2026-10-08": 4
         },
         "New York City Metropolitan Area": {
           "2026-02-26": 2,
@@ -6642,7 +6952,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-17": 1,
           "2026-09-26": 1,
           "2026-09-27": 2,
-          "2026-10-03": 2
+          "2026-10-03": 2,
+          "2026-10-04": 3
         },
         "San Francisco Bay Area": {
           "2026-02-26": 2,
@@ -6670,7 +6981,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-19": 1,
           "2026-09-20": 2,
           "2026-09-21": 1,
-          "2026-10-03": 3
+          "2026-10-03": 3,
+          "2026-10-04": 3
         },
         "London Area, United Kingdom": {
           "2026-02-26": 2,
@@ -6679,7 +6991,8 @@ var creator_chart_dashboard_data_default = {
           "2026-06-21": 2,
           "2026-06-25": 2,
           "2026-08-28": 2,
-          "2026-10-03": 2
+          "2026-10-03": 2,
+          "2026-10-04": 2
         },
         "Greater Kolkata Area": {
           "2026-02-26": 2,
@@ -6720,7 +7033,11 @@ var creator_chart_dashboard_data_default = {
           "2026-09-26": 2,
           "2026-09-27": 2,
           "2026-09-29": 5,
-          "2026-09-30": 3
+          "2026-09-30": 3,
+          "2026-10-04": 2,
+          "2026-10-06": 3,
+          "2026-10-07": 2,
+          "2026-10-08": 2
         },
         "Greater Ahmedabad Area": {
           "2026-03-26": 3,
@@ -6761,7 +7078,10 @@ var creator_chart_dashboard_data_default = {
           "2026-09-22": 2,
           "2026-09-23": 2,
           "2026-09-26": 2,
-          "2026-09-27": 2
+          "2026-09-27": 2,
+          "2026-10-06": 2,
+          "2026-10-07": 2,
+          "2026-10-08": 2
         },
         Noida: {
           "2026-03-26": 2,
@@ -6793,7 +7113,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-18": 2,
           "2026-09-21": 2,
           "2026-09-23": 2,
-          "2026-09-30": 2
+          "2026-09-30": 2,
+          "2026-10-08": 2
         },
         "Greater Chennai Area": {
           "2026-04-14": 2,
@@ -6837,7 +7158,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-24": 2,
           "2026-09-26": 2,
           "2026-09-30": 2,
-          "2026-10-03": 2
+          "2026-10-03": 2,
+          "2026-10-04": 2,
+          "2026-10-05": 3,
+          "2026-10-06": 3,
+          "2026-10-07": 2,
+          "2026-10-08": 3
         },
         "Greater Jaipur Area": {
           "2026-04-21": 1,
@@ -6846,7 +7172,8 @@ var creator_chart_dashboard_data_default = {
           "2026-07-26": 2,
           "2026-07-29": 2,
           "2026-08-25": 5,
-          "2026-08-26": 2
+          "2026-08-26": 2,
+          "2026-10-07": 1
         },
         "Greater Toronto Area, Canada": {
           "2026-06-20": 1
@@ -7040,7 +7367,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 26,
           "2026-10-01": 23,
           "2026-10-02": 27,
-          "2026-10-03": 23
+          "2026-10-03": 23,
+          "2026-10-04": 36,
+          "2026-10-05": 36,
+          "2026-10-06": 20,
+          "2026-10-07": 28,
+          "2026-10-08": 33
         },
         "1,001-5,000 employees": {
           "2026-02-26": 16,
@@ -7184,7 +7516,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 10,
           "2026-10-01": 15,
           "2026-10-02": 7,
-          "2026-10-03": 12
+          "2026-10-03": 12,
+          "2026-10-04": 11,
+          "2026-10-05": 10,
+          "2026-10-06": 15,
+          "2026-10-07": 13,
+          "2026-10-08": 13
         },
         "51-200 employees": {
           "2026-02-26": 11,
@@ -7318,7 +7655,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-29": 14,
           "2026-09-30": 8,
           "2026-10-01": 10,
-          "2026-10-03": 9
+          "2026-10-03": 9,
+          "2026-10-04": 8,
+          "2026-10-05": 9,
+          "2026-10-06": 11,
+          "2026-10-07": 8,
+          "2026-10-08": 8
         },
         "2-10 employees": {
           "2026-02-26": 9,
@@ -7451,7 +7793,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 9,
           "2026-10-01": 5,
           "2026-10-02": 10,
-          "2026-10-03": 10
+          "2026-10-03": 10,
+          "2026-10-04": 7,
+          "2026-10-05": 7,
+          "2026-10-06": 8,
+          "2026-10-07": 7,
+          "2026-10-08": 5
         },
         "11-50 employees": {
           "2026-02-26": 8,
@@ -7587,7 +7934,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-29": 9,
           "2026-09-30": 11,
           "2026-10-02": 10,
-          "2026-10-03": 11
+          "2026-10-03": 11,
+          "2026-10-04": 8,
+          "2026-10-05": 9,
+          "2026-10-06": 12,
+          "2026-10-07": 10,
+          "2026-10-08": 7
         },
         "501-1,000 employees": {
           "2026-02-26": 7,
@@ -7689,7 +8041,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-29": 6,
           "2026-09-30": 8,
           "2026-10-01": 6,
-          "2026-10-03": 6
+          "2026-10-03": 6,
+          "2026-10-04": 4,
+          "2026-10-05": 6,
+          "2026-10-06": 8,
+          "2026-10-07": 6,
+          "2026-10-08": 6
         },
         "201-500 employees": {
           "2026-02-26": 6,
@@ -7803,7 +8160,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-29": 6,
           "2026-09-30": 5,
           "2026-10-01": 9,
-          "2026-10-03": 8
+          "2026-10-03": 8,
+          "2026-10-04": 7,
+          "2026-10-05": 6,
+          "2026-10-06": 6,
+          "2026-10-07": 7,
+          "2026-10-08": 6
         },
         "5,001-10,000 employees": {
           "2026-02-26": 5,
@@ -7907,7 +8269,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-29": 4,
           "2026-09-30": 6,
           "2026-10-01": 6,
-          "2026-10-03": 6
+          "2026-10-03": 6,
+          "2026-10-04": 5,
+          "2026-10-05": 3,
+          "2026-10-06": 2,
+          "2026-10-07": 6,
+          "2026-10-08": 6
         }
       },
       "Job title": {
@@ -8009,7 +8376,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-28": 5,
           "2026-09-29": 3,
           "2026-09-30": 6,
-          "2026-10-03": 8
+          "2026-10-03": 8,
+          "2026-10-04": 4,
+          "2026-10-05": 4,
+          "2026-10-06": 8,
+          "2026-10-07": 6,
+          "2026-10-08": 3
         },
         "Co-Founder": {
           "2026-02-26": 5,
@@ -8088,7 +8460,11 @@ var creator_chart_dashboard_data_default = {
           "2026-09-28": 6,
           "2026-09-29": 3,
           "2026-09-30": 3,
-          "2026-10-03": 6
+          "2026-10-03": 6,
+          "2026-10-04": 4,
+          "2026-10-06": 4,
+          "2026-10-07": 4,
+          "2026-10-08": 2
         },
         "Sales Manager": {
           "2026-02-26": 3,
@@ -8155,7 +8531,9 @@ var creator_chart_dashboard_data_default = {
           "2026-09-26": 2,
           "2026-09-27": 3,
           "2026-09-29": 3,
-          "2026-10-03": 2
+          "2026-10-03": 2,
+          "2026-10-07": 3,
+          "2026-10-08": 2
         },
         "Product Manager": {
           "2026-02-26": 2,
@@ -8199,7 +8577,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-21": 2,
           "2026-09-22": 1,
           "2026-09-28": 2,
-          "2026-10-03": 2
+          "2026-10-03": 2,
+          "2026-10-04": 3,
+          "2026-10-05": 4,
+          "2026-10-06": 3,
+          "2026-10-07": 2,
+          "2026-10-08": 1
         },
         "Program Manager": {
           "2026-02-26": 2,
@@ -8263,7 +8646,11 @@ var creator_chart_dashboard_data_default = {
           "2026-09-26": 2,
           "2026-09-27": 2,
           "2026-09-28": 2,
-          "2026-09-29": 4
+          "2026-09-29": 4,
+          "2026-10-04": 2,
+          "2026-10-06": 3,
+          "2026-10-07": 1,
+          "2026-10-08": 3
         },
         "General Manager": {
           "2026-03-26": 2,
@@ -8289,7 +8676,10 @@ var creator_chart_dashboard_data_default = {
           "2026-09-20": 1,
           "2026-09-21": 1,
           "2026-09-23": 1,
-          "2026-10-03": 1
+          "2026-10-03": 1,
+          "2026-10-04": 1,
+          "2026-10-07": 1,
+          "2026-10-08": 2
         },
         "Growth Specialist": {
           "2026-03-26": 2
@@ -8329,7 +8719,11 @@ var creator_chart_dashboard_data_default = {
           "2026-09-11": 2,
           "2026-09-18": 0.5,
           "2026-09-26": 1,
-          "2026-09-28": 2
+          "2026-09-28": 2,
+          "2026-10-04": 2,
+          "2026-10-06": 2,
+          "2026-10-07": 1,
+          "2026-10-08": 0.5
         },
         "Business Development Manager": {
           "2026-04-14": 0.5,
@@ -8343,7 +8737,8 @@ var creator_chart_dashboard_data_default = {
           "2026-05-11": 1,
           "2026-07-26": 2,
           "2026-09-09": 3,
-          "2026-09-23": 1
+          "2026-09-23": 1,
+          "2026-10-07": 1
         },
         "Head of Sales": {
           "2026-04-26": 3,
@@ -8361,7 +8756,8 @@ var creator_chart_dashboard_data_default = {
           "2026-10-03": 1
         },
         "Project Manager": {
-          "2026-05-08": 0.5
+          "2026-05-08": 0.5,
+          "2026-10-08": 0.5
         },
         "Credit Manager": {
           "2026-05-11": 2,
@@ -8374,7 +8770,9 @@ var creator_chart_dashboard_data_default = {
           "2026-07-28": 3,
           "2026-07-29": 3,
           "2026-07-30": 4,
-          "2026-09-15": 3
+          "2026-09-15": 3,
+          "2026-10-07": 4,
+          "2026-10-08": 1
         },
         "Technical Manager": {
           "2026-05-11": 1,
@@ -8598,7 +8996,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 15,
           "2026-10-01": 10,
           "2026-10-02": 9,
-          "2026-10-03": 13
+          "2026-10-03": 13,
+          "2026-10-04": 15,
+          "2026-10-05": 18,
+          "2026-10-06": 24,
+          "2026-10-07": 26,
+          "2026-10-08": 19
         },
         "Technology, Information and Internet": {
           "2026-02-26": 8,
@@ -8708,7 +9111,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 7,
           "2026-10-01": 10,
           "2026-10-02": 7,
-          "2026-10-03": 9
+          "2026-10-03": 9,
+          "2026-10-04": 11,
+          "2026-10-05": 7,
+          "2026-10-06": 8,
+          "2026-10-07": 5,
+          "2026-10-08": 4
         },
         "Education Administration Programs": {
           "2026-02-26": 5,
@@ -8764,7 +9172,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-18": 2,
           "2026-09-24": 4,
           "2026-09-29": 3,
-          "2026-10-03": 4
+          "2026-10-03": 4,
+          "2026-10-07": 2
         },
         "Business Consulting and Services": {
           "2026-02-26": 5,
@@ -8847,7 +9256,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-27": 4,
           "2026-09-29": 3,
           "2026-09-30": 3,
-          "2026-10-03": 5
+          "2026-10-03": 5,
+          "2026-10-04": 11,
+          "2026-10-05": 6,
+          "2026-10-06": 4,
+          "2026-10-07": 3,
+          "2026-10-08": 5
         },
         "IT Services and IT Consulting": {
           "2026-02-26": 5,
@@ -8965,7 +9379,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 9,
           "2026-10-01": 10,
           "2026-10-02": 9,
-          "2026-10-03": 5
+          "2026-10-03": 5,
+          "2026-10-04": 7,
+          "2026-10-05": 10,
+          "2026-10-06": 9,
+          "2026-10-07": 5,
+          "2026-10-08": 9
         },
         Banking: {
           "2026-02-26": 5,
@@ -9084,7 +9503,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-30": 5,
           "2026-10-01": 5,
           "2026-10-02": 7,
-          "2026-10-03": 4
+          "2026-10-03": 4,
+          "2026-10-04": 5,
+          "2026-10-05": 6,
+          "2026-10-06": 9,
+          "2026-10-07": 16,
+          "2026-10-08": 11
         },
         "Higher Education": {
           "2026-02-26": 4,
@@ -9154,7 +9578,9 @@ var creator_chart_dashboard_data_default = {
           "2026-09-17": 2,
           "2026-09-24": 3,
           "2026-09-28": 3,
-          "2026-09-29": 3
+          "2026-09-29": 3,
+          "2026-10-06": 4,
+          "2026-10-07": 2
         },
         Manufacturing: {
           "2026-02-26": 4,
@@ -9261,7 +9687,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-21": 2,
           "2026-09-25": 2,
           "2026-09-30": 3,
-          "2026-10-02": 8
+          "2026-10-02": 8,
+          "2026-10-06": 2
         },
         "Food and Beverage Services": {
           "2026-03-26": 3,
@@ -9285,7 +9712,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-28": 3,
           "2026-09-29": 3,
           "2026-09-30": 3,
-          "2026-10-03": 3
+          "2026-10-03": 3,
+          "2026-10-07": 2
         },
         "Software Development": {
           "2026-03-26": 2,
@@ -9359,7 +9787,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-28": 4,
           "2026-09-29": 3,
           "2026-09-30": 5,
-          "2026-10-02": 7
+          "2026-10-02": 7,
+          "2026-10-04": 4,
+          "2026-10-05": 6,
+          "2026-10-06": 4,
+          "2026-10-07": 3,
+          "2026-10-08": 4
         },
         "Real Estate": {
           "2026-04-02": 5,
@@ -9369,7 +9802,10 @@ var creator_chart_dashboard_data_default = {
           "2026-07-28": 2,
           "2026-07-29": 3,
           "2026-09-15": 4,
-          "2026-09-23": 3
+          "2026-09-23": 3,
+          "2026-10-06": 2,
+          "2026-10-07": 2,
+          "2026-10-08": 2
         },
         "Transportation, Logistics, Supply Chain and Storage": {
           "2026-04-15": 2,
@@ -9389,7 +9825,8 @@ var creator_chart_dashboard_data_default = {
           "2026-07-21": 3
         },
         "Motor Vehicle Manufacturing": {
-          "2026-04-23": 3
+          "2026-04-23": 3,
+          "2026-10-04": 2
         },
         Retail: {
           "2026-04-25": 2,
@@ -9406,12 +9843,15 @@ var creator_chart_dashboard_data_default = {
           "2026-09-26": 2,
           "2026-09-27": 4,
           "2026-09-28": 2,
-          "2026-09-29": 3
+          "2026-09-29": 3,
+          "2026-10-04": 2,
+          "2026-10-08": 2
         },
         Insurance: {
           "2026-05-01": 5,
           "2026-07-27": 2,
-          "2026-08-31": 5
+          "2026-08-31": 5,
+          "2026-10-08": 2
         },
         "Chemical Manufacturing": {
           "2026-05-04": 3,
@@ -9424,7 +9864,8 @@ var creator_chart_dashboard_data_default = {
           "2026-05-12": 4,
           "2026-07-29": 3,
           "2026-08-31": 3,
-          "2026-09-15": 4
+          "2026-09-15": 4,
+          "2026-10-08": 2
         },
         "Public Relations and Communications Services": {
           "2026-06-11": 2
@@ -9459,11 +9900,13 @@ var creator_chart_dashboard_data_default = {
         "Venture Capital and Private Equity Principals": {
           "2026-07-14": 3,
           "2026-08-28": 3,
-          "2026-10-03": 3
+          "2026-10-03": 3,
+          "2026-10-06": 2
         },
         "Pharmaceutical Manufacturing": {
           "2026-07-18": 3,
-          "2026-07-19": 5
+          "2026-07-19": 5,
+          "2026-10-04": 2
         },
         "Human Resources Services": {
           "2026-07-21": 3
@@ -9478,7 +9921,8 @@ var creator_chart_dashboard_data_default = {
           "2026-07-25": 1,
           "2026-07-26": 1,
           "2026-07-27": 2,
-          "2026-07-28": 2
+          "2026-07-28": 2,
+          "2026-10-04": 2
         },
         "Broadcast Media Production and Distribution": {
           "2026-07-28": 2,
@@ -9510,7 +9954,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-19": 1,
           "2026-09-20": 1,
           "2026-09-21": 1,
-          "2026-10-03": 0.5
+          "2026-10-03": 0.5,
+          "2026-10-04": 2
         },
         Google: {
           "2026-04-14": 0.5,
@@ -9527,7 +9972,8 @@ var creator_chart_dashboard_data_default = {
           "2026-07-22": 0.5,
           "2026-07-26": 1,
           "2026-09-17": 0.5,
-          "2026-09-18": 0.5
+          "2026-09-18": 0.5,
+          "2026-10-08": 0.5
         },
         "Wipro Linecraft AI": {
           "2026-04-14": 0.5
@@ -9553,7 +9999,9 @@ var creator_chart_dashboard_data_default = {
           "2026-07-27": 3,
           "2026-08-19": 2,
           "2026-08-21": 3,
-          "2026-09-25": 2
+          "2026-09-25": 2,
+          "2026-10-07": 0.5,
+          "2026-10-08": 0.5
         },
         EY: {
           "2026-04-14": 0.5,
@@ -9563,7 +10011,8 @@ var creator_chart_dashboard_data_default = {
           "2026-07-14": 1,
           "2026-07-22": 0.5,
           "2026-09-18": 0.5,
-          "2026-09-19": 0.5
+          "2026-09-19": 0.5,
+          "2026-10-08": 0.5
         },
         Tesla: {
           "2026-04-15": 1
@@ -9583,7 +10032,9 @@ var creator_chart_dashboard_data_default = {
           "2026-07-25": 1,
           "2026-07-27": 1,
           "2026-09-20": 0.5,
-          "2026-09-24": 2
+          "2026-09-24": 2,
+          "2026-10-07": 0.5,
+          "2026-10-08": 0.5
         },
         "Poonawalla Fincorp": {
           "2026-04-25": 0.5,
@@ -9621,7 +10072,8 @@ var creator_chart_dashboard_data_default = {
         "Tata Capital": {
           "2026-05-11": 1,
           "2026-07-25": 1,
-          "2026-07-26": 0.5
+          "2026-07-26": 0.5,
+          "2026-10-08": 0.5
         },
         "Bajaj Housing Finance Limited": {
           "2026-05-11": 0.5
@@ -9641,7 +10093,9 @@ var creator_chart_dashboard_data_default = {
           "2026-07-26": 2,
           "2026-07-27": 2,
           "2026-07-28": 2,
-          "2026-07-30": 2
+          "2026-07-30": 2,
+          "2026-10-07": 1,
+          "2026-10-08": 0.5
         },
         "Aakash Educational Services Limited": {
           "2026-07-20": 1
@@ -9663,7 +10117,9 @@ var creator_chart_dashboard_data_default = {
           "2026-07-26": 2,
           "2026-07-27": 2,
           "2026-07-29": 2,
-          "2026-07-30": 2
+          "2026-07-30": 2,
+          "2026-10-07": 1,
+          "2026-10-08": 0.5
         },
         "Kotak Mahindra Bank": {
           "2026-07-24": 0.5,
@@ -9678,7 +10134,8 @@ var creator_chart_dashboard_data_default = {
         },
         "YES BANK": {
           "2026-07-24": 0.5,
-          "2026-07-27": 1
+          "2026-07-27": 1,
+          "2026-10-07": 0.5
         },
         HSBC: {
           "2026-07-25": 0.5
@@ -9687,16 +10144,20 @@ var creator_chart_dashboard_data_default = {
           "2026-07-25": 0.5,
           "2026-07-26": 2,
           "2026-07-27": 2,
-          "2026-07-28": 2
+          "2026-07-28": 2,
+          "2026-10-08": 0.5
         },
         "Bandhan Bank": {
-          "2026-07-26": 1
+          "2026-07-26": 1,
+          "2026-10-07": 0.5
         },
         "Bajaj Finserv": {
           "2026-07-27": 2,
           "2026-07-28": 2,
           "2026-07-30": 2,
-          "2026-08-28": 2
+          "2026-08-28": 2,
+          "2026-10-07": 1,
+          "2026-10-08": 0.5
         },
         Citi: {
           "2026-07-27": 1
@@ -9757,6 +10218,12 @@ var creator_chart_dashboard_data_default = {
         },
         Swiggy: {
           "2026-09-21": 0.5
+        },
+        "Cholamandalam Investment and Finance Company Limited": {
+          "2026-10-07": 0.5
+        },
+        "L&T Finance": {
+          "2026-10-07": 0.5
         }
       }
     }
@@ -9768,20 +10235,20 @@ var creator_chart_dashboard_data_default = {
           {
             g: "Bank & industry critique",
             n: 8,
-            tg: 357.5,
-            tgsum: 2930,
-            sh: 45.5,
-            out: 51,
+            tg: 358.5,
+            tgsum: 3026,
+            sh: 46,
+            out: 50,
             er: 2.5,
             com: 2
           },
           {
             g: "Home-loan explainer",
-            n: 11,
-            tg: 315,
-            tgsum: 2155,
-            sh: 46,
-            out: 25,
+            n: 12,
+            tg: 325.5,
+            tgsum: 3608,
+            sh: 46.5,
+            out: 31.5,
             er: 1.7,
             com: 1
           },
@@ -9789,7 +10256,7 @@ var creator_chart_dashboard_data_default = {
             g: "Founder journey & milestones",
             n: 13,
             tg: 848,
-            tgsum: 19823,
+            tgsum: 19871,
             sh: 46,
             out: 35,
             er: 1.5,
@@ -9808,8 +10275,8 @@ var creator_chart_dashboard_data_default = {
           {
             g: "Opinion & life lessons",
             n: 10,
-            tg: 226,
-            tgsum: 2612,
+            tg: 228,
+            tgsum: 2615,
             sh: 47,
             out: 29,
             er: 2,
@@ -9817,39 +10284,79 @@ var creator_chart_dashboard_data_default = {
           },
           {
             g: "Client story",
-            n: 10,
-            tg: 267.5,
-            tgsum: 7151,
+            n: 12,
+            tg: 282,
+            tgsum: 9965,
             sh: 45,
-            out: 32.5,
+            out: 37,
             er: 1.6,
-            com: 0
+            com: 0.5
           }
         ],
         p: {
-          tg: 1e-3,
-          sh: 0.226,
-          outnet: 0.27,
-          er: 0.455
+          tg: 2e-3,
+          sh: 0.207,
+          outnet: 0.405,
+          er: 0.522
+        }
+      },
+      img: {
+        rows: [
+          {
+            g: "No image",
+            n: 14,
+            tg: 832,
+            tgsum: 16590,
+            sh: 47,
+            out: 25,
+            er: 0.7,
+            com: 0.5
+          },
+          {
+            g: "Real image",
+            n: 18,
+            tg: 623,
+            tgsum: 19297,
+            sh: 46,
+            out: 33,
+            er: 2.1,
+            com: 2
+          },
+          {
+            g: "AI-generated image",
+            n: 28,
+            tg: 310.5,
+            tgsum: 7815,
+            sh: 45,
+            out: 42.5,
+            er: 2,
+            com: 1
+          }
+        ],
+        p: {
+          tg: 0.019,
+          sh: 0.241,
+          outnet: 0.488,
+          er: 3e-3
         }
       },
       fmt: {
         rows: [
           {
             g: "Text/share",
-            n: 40,
-            tg: 372.5,
-            tgsum: 33357,
-            sh: 45.5,
-            out: 39.5,
+            n: 43,
+            tg: 386,
+            tgsum: 37133,
+            sh: 46,
+            out: 40,
             er: 2.1,
-            com: 1.5
+            com: 1
           },
           {
             g: "Media (ugcPost)",
             n: 17,
-            tg: 487.5,
-            tgsum: 5931,
+            tg: 509,
+            tgsum: 6569,
             sh: 47,
             out: 18,
             er: 1.5,
@@ -9857,10 +10364,10 @@ var creator_chart_dashboard_data_default = {
           }
         ],
         p: {
-          tg: 0.254,
-          sh: 0.342,
-          outnet: 4e-3,
-          er: 0.03
+          tg: 0.318,
+          sh: 0.524,
+          outnet: 3e-3,
+          er: 0.056
         }
       },
       era: {
@@ -9877,82 +10384,82 @@ var creator_chart_dashboard_data_default = {
           },
           {
             g: "Creator Chart Era",
-            n: 20,
-            tg: 283,
-            tgsum: 15264,
-            sh: 45,
-            out: 46,
-            er: 2.6,
+            n: 23,
+            tg: 336,
+            tgsum: 19678,
+            sh: 46,
+            out: 44.5,
+            er: 2.5,
             com: 2
           }
         ],
         p: {
-          tg: 0.026,
-          sh: 0.88,
-          outnet: 9e-3,
-          er: 2e-3
+          tg: 0.122,
+          sh: 0.66,
+          outnet: 3e-3,
+          er: 0.015
         }
       },
       dow: {
         rows: [
           {
             g: "Thu",
-            n: 9,
-            tg: 641,
-            tgsum: 6678,
+            n: 10,
+            tg: 689,
+            tgsum: 8651,
             sh: 46,
-            out: 28,
-            er: 1.7,
+            out: 30.5,
+            er: 1.6,
             com: 2
           },
           {
             g: "Tue",
-            n: 9,
-            tg: 388,
-            tgsum: 4766,
-            sh: 44,
-            out: 25,
-            er: 1.5,
+            n: 10,
+            tg: 328.5,
+            tgsum: 5021,
+            sh: 46,
+            out: 29,
+            er: 2,
             com: 1
           },
           {
             g: "Fri",
             n: 11,
-            tg: 463.5,
-            tgsum: 16255,
-            sh: 47,
+            tg: 467.5,
+            tgsum: 16323,
+            sh: 46.5,
             out: 60,
-            er: 2,
+            er: 1.9,
             com: 4
           },
           {
             g: "Sat",
             n: 5,
-            tg: 519,
-            tgsum: 2334,
-            sh: 49,
+            tg: 588,
+            tgsum: 2946,
+            sh: 47,
             out: 29,
             er: 1.2,
-            com: 0
+            com: 1
           },
           {
             g: "Mon",
             n: 12,
-            tg: 316,
-            tgsum: 5098,
+            tg: 336,
+            tgsum: 5123,
             sh: 44,
-            out: 41,
+            out: 40.5,
             er: 2.2,
             com: 1
           },
           {
             g: "Wed",
-            n: 10,
-            tg: 249,
-            tgsum: 3465,
-            sh: 47,
+            n: 11,
+            tg: 267,
+            tgsum: 4946,
+            sh: 48.5,
             out: 29,
-            er: 2.1,
+            er: 1.9,
             com: 1
           },
           {
@@ -9967,51 +10474,51 @@ var creator_chart_dashboard_data_default = {
           }
         ],
         p: {
-          tg: 0.177,
-          sh: 0.58,
-          outnet: 0.058,
-          er: 0.652
+          tg: 0.184,
+          sh: 0.547,
+          outnet: 0.151,
+          er: 0.733
         }
       }
     },
     corr: {
       out_vs_share: {
-        rho: -0.53,
-        p: 1e-4,
-        n: 48
+        rho: -0.4,
+        p: 29e-4,
+        n: 52
       },
       out_vs_tg: {
-        rho: 0.17,
-        p: 0.2547,
-        n: 48
+        rho: 0.24,
+        p: 0.0863,
+        n: 52
       },
       comments_vs_out: {
-        rho: 0.53,
-        p: 0,
-        n: 55
+        rho: 0.45,
+        p: 3e-4,
+        n: 58
       },
       reposts_vs_out: {
         rho: 0.53,
         p: 0,
-        n: 55
+        n: 58
       },
       er_vs_share: {
-        rho: -0.19,
-        p: 0.1797,
-        n: 50
+        rho: -0.22,
+        p: 0.109,
+        n: 54
       },
       hour_vs_share: {
-        rho: 0.02,
-        p: 0.9124,
-        n: 50
+        rho: 0.04,
+        p: 0.7513,
+        n: 54
       }
     },
     fit: {
-      slope10: -1.43,
-      r2: 0.29,
-      p: 1e-4,
-      a: 50.41554548104095,
-      b: -0.14314327423436468
+      slope10: -1.03,
+      r2: 0.18,
+      p: 16e-4,
+      a: 49.20058753327825,
+      b: -0.10323143303038645
     }
   },
   company_page: {
@@ -10073,21 +10580,21 @@ var creator_chart_dashboard_data_default = {
       },
       {
         month_start: "2026-10-01",
-        month_end: "2026-10-02",
-        tg_page_views: 3,
-        tg_share_pct: 50
+        month_end: "2026-10-07",
+        tg_page_views: 19,
+        tg_share_pct: 42.2
       }
     ],
     visitors_12m: {
-      start: "2025-10-03",
-      end: "2026-10-02",
-      tg_page_views: 702,
+      start: "2025-10-08",
+      end: "2026-10-07",
+      tg_page_views: 713,
       tg_share_pct: 42
     },
     followers: {
-      as_of: "2026-10-02",
-      tg_followers: 150,
-      tg_share_pct: 38.7
+      as_of: "2026-10-07",
+      tg_followers: 151,
+      tg_share_pct: 38.8
     }
   },
   newsletter: {
@@ -10100,12 +10607,12 @@ var creator_chart_dashboard_data_default = {
         published: "2026-10-03",
         title: "Are you switching homes every 8-10 years like cars?",
         url: "https://www.linkedin.com/posts/mangeshzope_i-was-recently-talking-to-a-clienta-former-ugcPost-7512042073336733696-lIf5",
-        tg_impressions_lifetime: 332,
-        tg_share_pct: 32,
-        tg_is_floor: true,
-        out_of_network_pct: 2,
-        engagements: 6,
-        comments: 0,
+        tg_impressions_lifetime: 612,
+        tg_share_pct: 44,
+        tg_is_floor: false,
+        out_of_network_pct: 8,
+        engagements: 7,
+        comments: 1,
         reposts: 0
       },
       {
@@ -10196,6 +10703,11 @@ var creator_chart_dashboard_data_default = {
     subscribers: [
       {
         date: "2026-10-04",
+        subscribers: 1843,
+        tg_share_floor_pct: 32
+      },
+      {
+        date: "2026-10-09",
         subscribers: 1843,
         tg_share_floor_pct: 32
       }
@@ -10738,27 +11250,50 @@ async function handleApiRequest(request, env, ctx) {
         }
       }
       let overrides = {};
+      let imageOverrides = {};
       if (kv) {
         try {
           const ovStr = await kv.get("linkedin_data:post_type_overrides");
           if (ovStr) overrides = JSON.parse(ovStr);
         } catch {
         }
+        try {
+          const imgOvStr = await kv.get("linkedin_data:post_image_overrides");
+          if (imgOvStr) imageOverrides = JSON.parse(imgOvStr);
+        } catch {
+        }
       } else {
         const memStr = localDB.get("linkedin_data:post_type_overrides");
         if (memStr) overrides = JSON.parse(memStr);
+        const imgMemStr = localDB.get("linkedin_data:post_image_overrides");
+        if (imgMemStr) imageOverrides = JSON.parse(imgMemStr);
       }
       let overridesChanged = false;
-      if (overrides && typeof overrides === "object" && Array.isArray(payload.posts)) {
+      let imgOverridesChanged = false;
+      if (Array.isArray(payload.posts)) {
         for (const p of payload.posts) {
-          const ov = overrides[p.post_id];
-          if (ov) {
-            const ovType = typeof ov === "string" ? ov : ov.type;
-            if (ovType === p.type) {
-              delete overrides[p.post_id];
-              overridesChanged = true;
-            } else {
-              p.type = ovType;
+          if (overrides && typeof overrides === "object") {
+            const ov = overrides[p.post_id];
+            if (ov) {
+              const ovType = typeof ov === "string" ? ov : ov.type;
+              if (ovType === (p.auto_type || p.type)) {
+                delete overrides[p.post_id];
+                overridesChanged = true;
+              } else {
+                p.type = ovType;
+              }
+            }
+          }
+          if (imageOverrides && typeof imageOverrides === "object") {
+            const iov = imageOverrides[p.post_id];
+            if (iov) {
+              const ovImg = typeof iov === "string" ? iov : iov.image_type;
+              if (ovImg === (p.auto_image_type || p.image_type)) {
+                delete imageOverrides[p.post_id];
+                imgOverridesChanged = true;
+              } else {
+                p.image_type = ovImg;
+              }
             }
           }
         }
@@ -10770,7 +11305,15 @@ async function handleApiRequest(request, env, ctx) {
         }
         localDB.set("linkedin_data:post_type_overrides", serialized);
       }
+      if (imgOverridesChanged) {
+        const serializedImg = JSON.stringify(imageOverrides);
+        if (kv) {
+          ctx.waitUntil(kv.put("linkedin_data:post_image_overrides", serializedImg));
+        }
+        localDB.set("linkedin_data:post_image_overrides", serializedImg);
+      }
       payload.overrides = overrides;
+      payload.image_overrides = imageOverrides;
       const forbidden = ["impressions", "imp", "members_reached", "sv"];
       const resHeaders = new Headers(headers);
       resHeaders.set("Cache-Control", "private, no-cache, no-store, must-revalidate");
@@ -10803,6 +11346,86 @@ async function handleApiRequest(request, env, ctx) {
     resHeaders.set("Content-Disposition", 'attachment; filename="post_type_changes.json"');
     resHeaders.set("Content-Type", "application/json");
     return new Response(JSON.stringify(out, null, 2), { status: 200, headers: resHeaders });
+  }
+  if (cleanPath === "/api/linkedin-analytics/post-image" || cleanPath === "/api/post-image") {
+    const user = await verifyTgToken(request);
+    if (!user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers });
+    }
+    const kv = env.QUESTIONS_KV;
+    if (request.method === "GET") {
+      let overrides = {};
+      if (kv) {
+        try {
+          const ovStr = await kv.get("linkedin_data:post_image_overrides");
+          if (ovStr) overrides = JSON.parse(ovStr);
+        } catch {
+        }
+      } else {
+        const memStr = localDB.get("linkedin_data:post_image_overrides");
+        if (memStr) overrides = JSON.parse(memStr);
+      }
+      return new Response(JSON.stringify({ overrides }), { status: 200, headers });
+    }
+    if (request.method === "POST") {
+      if (user.role !== "admin") {
+        return new Response(JSON.stringify({ error: "Only admins can change image types." }), { status: 403, headers });
+      }
+      try {
+        const body = await request.json();
+        const { post_id, image_type } = body;
+        if (!post_id || typeof post_id !== "string" || !image_type || typeof image_type !== "string") {
+          return new Response(JSON.stringify({ error: "post_id and image_type are required" }), { status: 400, headers });
+        }
+        const validImageTypes = creator_chart_dashboard_data_default.meta?.image_types || [
+          "Real image",
+          "AI-generated image",
+          "No image"
+        ];
+        if (!validImageTypes.includes(image_type) && image_type !== "RESET" && image_type !== "DELETE") {
+          return new Response(JSON.stringify({ error: `Invalid image_type. Must be one of: ${validImageTypes.join(", ")}` }), { status: 400, headers });
+        }
+        const post = creator_chart_dashboard_data_default.posts.find((p) => p.post_id === post_id);
+        if (!post && image_type !== "RESET" && image_type !== "DELETE") {
+          return new Response(JSON.stringify({ error: `Unknown post_id '${post_id}'` }), { status: 404, headers });
+        }
+        const autoImageType = post ? post.auto_image_type || post.image_type : null;
+        let overrides = {};
+        if (kv) {
+          try {
+            const ovStr = await kv.get("linkedin_data:post_image_overrides");
+            if (ovStr) overrides = JSON.parse(ovStr);
+          } catch {
+          }
+        } else {
+          const memStr = localDB.get("linkedin_data:post_image_overrides");
+          if (memStr) overrides = JSON.parse(memStr);
+        }
+        if (image_type === "RESET" || image_type === "DELETE" || autoImageType && image_type === autoImageType || !post && overrides[post_id]) {
+          delete overrides[post_id];
+        } else {
+          overrides[post_id] = {
+            image_type,
+            auto_image_type: autoImageType,
+            title: post ? post.title : "",
+            changed_by: "admin",
+            changed_at: (/* @__PURE__ */ new Date()).toISOString()
+          };
+        }
+        const serialized = JSON.stringify(overrides);
+        if (kv) {
+          await kv.put("linkedin_data:post_image_overrides", serialized);
+        }
+        localDB.set("linkedin_data:post_image_overrides", serialized);
+        const outMap = {};
+        for (const [k, v] of Object.entries(overrides)) {
+          outMap[k] = typeof v === "string" ? v : v.image_type;
+        }
+        return new Response(JSON.stringify({ success: true, post_id, image_type, auto_image_type: autoImageType, overrides: outMap }), { status: 200, headers });
+      } catch (err) {
+        return new Response(JSON.stringify({ error: err.message }), { status: 400, headers });
+      }
+    }
   }
   if (cleanPath === "/api/linkedin-analytics/post-type" || cleanPath === "/api/post-type") {
     const user = await verifyTgToken(request);
@@ -10962,6 +11585,7 @@ async function handleApiRequest(request, env, ctx) {
         if (!Array.isArray(postTypes) || postTypes.length === 0) {
           return new Response(JSON.stringify({ error: "Validation failed: meta.post_types is required." }), { status: 400, headers });
         }
+        const imageTypes = Array.isArray(payload.meta?.image_types) ? payload.meta.image_types : null;
         if (!Array.isArray(payload.posts)) {
           return new Response(JSON.stringify({ error: "Validation failed: posts must be an array." }), { status: 400, headers });
         }
@@ -10974,6 +11598,12 @@ async function handleApiRequest(request, env, ctx) {
           }
           if (!p.auto_type || !postTypes.includes(p.auto_type)) {
             return new Response(JSON.stringify({ error: `Validation failed: post ${p.post_id} auto_type '${p.auto_type}' not in meta.post_types.` }), { status: 400, headers });
+          }
+          if (imageTypes && p.image_type && !imageTypes.includes(p.image_type)) {
+            return new Response(JSON.stringify({ error: `Validation failed: post ${p.post_id} image_type '${p.image_type}' not in meta.image_types.` }), { status: 400, headers });
+          }
+          if (imageTypes && p.auto_image_type && !imageTypes.includes(p.auto_image_type)) {
+            return new Response(JSON.stringify({ error: `Validation failed: post ${p.post_id} auto_image_type '${p.auto_image_type}' not in meta.image_types.` }), { status: 400, headers });
           }
         }
         if (kv) {
@@ -11109,6 +11739,17 @@ var worker_src_default = {
     }
     if (cleanPath.startsWith("/api/")) {
       return handleApiRequest(request, env, ctx);
+    }
+    if (cleanPath.startsWith("/thumbs/")) {
+      const user = await verifyTgToken(request);
+      if (!user) {
+        return new Response("Unauthorized", { status: 401 });
+      }
+      const assetRes = await env.ASSETS.fetch(request);
+      const thumbHeaders = new Headers(assetRes.headers);
+      thumbHeaders.set("Cache-Control", "private, max-age=86400");
+      thumbHeaders.set("X-Robots-Tag", "noindex, nofollow");
+      return new Response(assetRes.body, { status: assetRes.status, headers: thumbHeaders });
     }
     if (cleanPath === "/.well-known/api-catalog") {
       try {

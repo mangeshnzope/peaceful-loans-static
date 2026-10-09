@@ -101,12 +101,12 @@ export default function NewsletterTab({ newsletter }: NewsletterTabProps) {
           <span className="eyebrow">Latest edition, TG impressions</span>
           <span className="v num">
             {latestEd && latestEd.tg_impressions_lifetime !== null
-              ? `≥ ${fmt(latestEd.tg_impressions_lifetime)}`
+              ? `${latestEd.tg_is_floor ? "≥ " : ""}${fmt(latestEd.tg_impressions_lifetime)}`
               : "–"}
           </span>
           <span className="s">
             {latestEd
-              ? `${dd(latestEd.published)} · TG share ≥ ${pct(latestEd.tg_share_pct)}`
+              ? `${dd(latestEd.published)} · TG share ${latestEd.tg_is_floor ? "≥ " : ""}${pct(latestEd.tg_share_pct)}`
               : "–"}
           </span>
         </div>
@@ -202,14 +202,20 @@ export default function NewsletterTab({ newsletter }: NewsletterTabProps) {
               </tr>
             </thead>
             <tbody>
-              {[...subscribers].reverse().map((s) => (
-                <tr key={s.date}>
-                  <td className="l">{dd(s.date)}</td>
-                  <td>{fmt(s.subscribers)}</td>
-                  <td>≥ {s.tg_share_floor_pct}%</td>
-                  <td className="l">Senior 28, Entry 14, Director 12, Manager 12, Owner 8</td>
-                </tr>
-              ))}
+              {[...subscribers].reverse().map((s) => {
+                const shownByDate: Record<string, string> = {
+                  "2026-10-09": "Senior 28, Entry 14, Manager 12, Director 12, Owner 8",
+                  "2026-10-04": "Senior 28, Entry 14, Director 12, Manager 12, Owner 8",
+                };
+                return (
+                  <tr key={s.date}>
+                    <td className="l">{dd(s.date)}</td>
+                    <td>{fmt(s.subscribers)}</td>
+                    <td>≥ {s.tg_share_floor_pct}%</td>
+                    <td className="l">{shownByDate[s.date] || "Senior 28, Entry 14, Manager 12, Director 12, Owner 8"}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

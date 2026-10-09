@@ -160,10 +160,10 @@ export default function MonthlyTab({ monthly, posts }: MonthlyTabProps) {
         </div>
 
         <p className="note">
-          From one LinkedIn export per calendar month; nothing is added up from days or weeks. September runs to 25 Sep,
-          so it gets no MoM for TG impressions (its share change is still shown). <b>TG impressions from those posts</b> =
-          lifetime TG views of the posts published that month, from each post's own page (posts too small for a seniority
-          split are left out).
+          From one LinkedIn export per calendar month; nothing is added up from days or weeks. October runs to{" "}
+          {dd(monthly[monthly.length - 1]?.month_end || "2026-10-08")}, so it gets no MoM for TG impressions (its share
+          change is still shown). <b>TG impressions from those posts</b> = lifetime TG views of the posts published that
+          month, from each post&apos;s own page (posts too small for a seniority split are left out).
         </p>
       </section>
     </div>

@@ -228,8 +228,26 @@
       let ACTIVE_SOURCE = "profile";
 
       const OV = {};
+      const IOV = {};
       let bakedCatIns = null;
+      let bakedImgIns = null;
       let catMsg = "";
+      let imgMsg = "";
+
+      const THUMB_IDS = new Set([
+        "7442690322368974849", "7445459598284767232", "7452195169958850560", "7453301722514341888",
+        "7453637000353603584", "7454381198119694336", "7455200922739130368", "7455583847884226561",
+        "7456915367701979138", "7457212195207172096", "7457285339645116416", "7457669375664377856",
+        "7458129287511023616", "7458344649280167936", "7458404010568540160", "7459504747939799040",
+        "7470747187702984704", "7474086780779040768", "7475722402409250816", "7476601108128342016",
+        "7477531824806875137", "7479916369271144448", "7481948324732866560", "7484122133548347392",
+        "7495063360074477570", "7495072253953609731", "7496445774369669121", "7497535248835076096",
+        "7498269296268324865", "7498993755644076033", "7500092783240769536", "7500800657218744321",
+        "7501557451943743492", "7502607226914639873", "7503390922131562496", "7504055163360362496",
+        "7505589782421544960", "7506232694943473666", "7506575936201408512", "7507720186268119040",
+        "7508405750621310978", "7509209819720032256", "7510245222912692224", "7510982370678865920",
+        "7512042073336733696", "7513121763409580033"
+      ]);
 
       const median = a => {
         a = a.filter(v => v !== null && v !== undefined).sort((x, y) => x - y);
@@ -295,9 +313,12 @@
         return Math.round(p * 1000) / 1000;
       }
 
-      function catGroups(posts) {
+      function groupsByKey(posts, keyName) {
         const G = {};
-        posts.forEach(p => (G[p.type] = G[p.type] || []).push(p));
+        posts.forEach(p => {
+          const val = p[keyName];
+          if (val) (G[val] = G[val] || []).push(p);
+        });
         const rows = Object.entries(G).map(([g, rs]) => ({
           g,
           n: rs.length,
@@ -324,9 +345,20 @@
         if (!DASHBOARD_DATA) return;
         const changed = DASHBOARD_DATA.posts.some(p => p.type !== p.baked);
         if (changed) {
-          DASHBOARD_DATA.insights.groups.cat = catGroups(DASHBOARD_DATA.posts);
+          DASHBOARD_DATA.insights.groups.cat = groupsByKey(DASHBOARD_DATA.posts, "type");
         } else if (bakedCatIns) {
           DASHBOARD_DATA.insights.groups.cat = JSON.parse(JSON.stringify(bakedCatIns));
+        }
+        if (triggerRender) renderDashboard();
+      }
+
+      function refreshImgs(triggerRender = true) {
+        if (!DASHBOARD_DATA) return;
+        const changed = DASHBOARD_DATA.posts.some(p => p.image_type !== p.imgBaked);
+        if (changed || !bakedImgIns) {
+          DASHBOARD_DATA.insights.groups.img = groupsByKey(DASHBOARD_DATA.posts, "image_type");
+        } else {
+          DASHBOARD_DATA.insights.groups.img = JSON.parse(JSON.stringify(bakedImgIns));
         }
         if (triggerRender) renderDashboard();
       }
@@ -362,6 +394,37 @@
         refreshCats();
       }
 
+      async function setImg(post, newImg) {
+        const prev = post.image_type;
+        post.image_type = newImg;
+        if (newImg === post.auto_image_type) {
+          delete IOV[post.post_id];
+        } else {
+          IOV[post.post_id] = newImg;
+        }
+        imgMsg = "Saving image type…";
+        refreshImgs();
+
+        try {
+          const res = await fetch("/api/linkedin-analytics/post-image", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ post_id: post.post_id, image_type: newImg })
+          });
+          if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.error || "Failed to save image type override");
+          }
+          imgMsg = "Image type saved. What works has been recalculated.";
+        } catch (e) {
+          post.image_type = prev;
+          if (prev === post.auto_image_type) delete IOV[post.post_id];
+          else IOV[post.post_id] = prev;
+          imgMsg = e.message || "Couldn't save that change. Try again.";
+        }
+        refreshImgs();
+      }
+
       async function init() {
         try {
           const authRes = await fetch("/api/linkedin-analytics/auth");
@@ -387,19 +450,33 @@
 
           // Initialize baseline categories and overrides
           bakedCatIns = JSON.parse(JSON.stringify(DASHBOARD_DATA.insights.groups.cat));
+          bakedImgIns = DASHBOARD_DATA.insights.groups.img ? JSON.parse(JSON.stringify(DASHBOARD_DATA.insights.groups.img)) : null;
           for (const k in OV) delete OV[k];
+          for (const k in IOV) delete IOV[k];
           if (DASHBOARD_DATA.overrides) {
             for (const pid in DASHBOARD_DATA.overrides) {
               const ov = DASHBOARD_DATA.overrides[pid];
               OV[pid] = typeof ov === "string" ? ov : ov.type;
             }
           }
+          if (DASHBOARD_DATA.image_overrides) {
+            for (const pid in DASHBOARD_DATA.image_overrides) {
+              const iov = DASHBOARD_DATA.image_overrides[pid];
+              IOV[pid] = typeof iov === "string" ? iov : iov.image_type;
+            }
+          }
           DASHBOARD_DATA.posts.forEach(p => {
             if (!p.auto_type) p.auto_type = p.type;
             p.baked = p.type;
             if (OV[p.post_id]) p.type = OV[p.post_id];
+
+            if (!p.auto_image_type) p.auto_image_type = p.image_type || "No image";
+            if (!p.image_type) p.image_type = p.auto_image_type;
+            p.imgBaked = p.image_type;
+            if (IOV[p.post_id]) p.image_type = IOV[p.post_id];
           });
           refreshCats(false);
+          refreshImgs(false);
 
           // Sync with URL hash
           const syncHash = () => {
@@ -1256,7 +1333,7 @@
                 <tbody>${rowsHtml}</tbody>
               </table>
             </div>
-            <p class="note">From one LinkedIn export per calendar month; nothing is added up from days or weeks. October runs to 3 Oct, so it gets no MoM for TG impressions (its share change is still shown). <b>TG impressions from those posts</b> = lifetime TG views of the posts published that month, from each post's own page (posts too small for a seniority split are left out).</p>
+            <p class="note">From one LinkedIn export per calendar month; nothing is added up from days or weeks. October runs to ${dd(M[M.length - 1].month_end)}, so it gets no MoM for TG impressions (its share change is still shown). <b>TG impressions from those posts</b> = lifetime TG views of the posts published that month, from each post's own page (posts too small for a seniority split are left out).</p>
           </section>
         `;
       }
@@ -1273,6 +1350,7 @@
 
       // --- POSTS TAB ---
       let postCatFilter = "All";
+      let postImgFilter = "All";
       let postSortCol = "published";
       let postSortAsc = false;
 
@@ -1286,12 +1364,19 @@
           "Opinion & life lessons",
           "Hiring & team"
         ];
+        const IMGS = DASHBOARD_DATA.meta?.image_types || [
+          "Real image",
+          "AI-generated image",
+          "No image"
+        ];
         const cats = ["All", ...CATS];
+        const imgs = ["All", ...IMGS];
         const maxTg = Math.max(...P.map(p => p.tg_impressions_lifetime || 0));
         const isAdmin = CURRENT_USER && CURRENT_USER.role === "admin";
         const nEd = P.filter(p => p.type !== (p.auto_type || p.type)).length;
+        const nIe = P.filter(p => (p.image_type || "No image") !== (p.auto_image_type || p.image_type || "No image")).length;
 
-        let filtered = P.filter(p => postCatFilter === "All" || p.type === postCatFilter);
+        let filtered = P.filter(p => (postCatFilter === "All" || p.type === postCatFilter) && (postImgFilter === "All" || (p.image_type || "No image") === postImgFilter));
         filtered.sort((a, b) => {
           const va = a[postSortCol];
           const vb = b[postSortCol];
@@ -1306,6 +1391,7 @@
           { key: "published", label: "Published", align: "l" },
           { key: "title", label: "Post", align: "l" },
           { key: "type", label: "Type", align: "l" },
+          { key: "image_type", label: "Image", align: "l" },
           { key: "tg_impressions_lifetime", label: "TG impressions", align: "r" },
           { key: "tg_share_pct", label: "TG share", align: "r" },
           { key: "out_of_network_pct", label: "Out-of-network", align: "r" },
@@ -1320,9 +1406,9 @@
           catBarHtml = `
             <div id="catbar">
               <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-                <span>Don’t agree with a post’s type? Change it in the <b>Type</b> column. It saves for everyone, recalculates <b>What works</b>, and is kept on every refresh. To undo, pick the option marked “(auto)”.</span>
-                <span class="num" style="font-weight:600">${nEd} changed</span>
-                ${catMsg ? `<span role="status" style="font-style:italic">${catMsg}</span>` : ""}
+                <span>Don’t agree with a post’s type or image label? Change it in the <b>Type</b> or <b>Image</b> column. It saves for everyone, recalculates <b>What works</b>, and is kept on every refresh. To undo, pick the option marked “(auto)”.</span>
+                <span class="num" style="font-weight:600">${nEd} type, ${nIe} image changed</span>
+                ${(catMsg || imgMsg) ? `<span role="status" style="font-style:italic">${catMsg || imgMsg}</span>` : ""}
               </div>
               <div>
                 <button class="dlb" id="dlTypeChangesBtn" style="font-size:11px;padding:4px 8px">↓ Download type changes (JSON)</button>
@@ -1333,7 +1419,7 @@
           catBarHtml = `
             <div id="catbar" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
               <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-                <span>${nEd > 0 ? `${nEd} post type${nEd > 1 ? "s were" : " was"} changed by Mangesh (marked “edited”).` : "You are currently viewing in Team / Viewer mode (post categories are read-only)."}</span>
+                <span>${(nEd > 0 || nIe > 0) ? `${nEd} post type${nEd !== 1 ? "s" : ""} and ${nIe} image label${nIe !== 1 ? "s" : ""} changed by Mangesh (marked “edited”).` : "You are currently viewing in Team / Viewer mode (post categories & image labels are read-only)."}</span>
               </div>
               <button id="unlockAdminBtn" class="dlb" style="font-size:12px;padding:4px 10px;background:var(--ink);color:var(--bg);border-color:var(--ink);cursor:pointer">🔒 Enable Dropdowns (Switch to Admin)</button>
             </div>
@@ -1351,10 +1437,19 @@
             ${catBarHtml}
 
             <div class="filters">
-              <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+                <span style="font-size:11px;color:var(--muted);margin-right:2px">Type:</span>
                 ${cats.map(c => `
                   <button class="pre ${postCatFilter === c ? "on" : ""}" data-c="${c}">
                     ${c}${c === "All" ? "" : ` <span class="num" style="opacity:.6">${P.filter(p => p.type === c).length}</span>`}
+                  </button>
+                `).join("")}
+              </div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+                <span style="font-size:11px;color:var(--muted);margin-right:2px">Image:</span>
+                ${imgs.map(im => `
+                  <button class="pre ${postImgFilter === im ? "on" : ""}" data-i="${im}">
+                    ${im}${im === "All" ? "" : ` <span class="num" style="opacity:.6">${P.filter(p => (p.image_type || "No image") === im).length}</span>`}
                   </button>
                 `).join("")}
               </div>
@@ -1375,6 +1470,11 @@
                   ${filtered.map(p => {
                     const isMedia = p.format && p.format.startsWith("Media");
                     const isEdited = p.type !== (p.auto_type || p.type);
+                    const imgVal = p.image_type || "No image";
+                    const autoImgVal = p.auto_image_type || imgVal;
+                    const isImgEdited = imgVal !== autoImgVal;
+                    const hasThumb = THUMB_IDS.has(p.post_id);
+                    const thumbHtml = hasThumb ? `<a href="${p.url}" target="_blank" rel="noopener noreferrer" style="display:block;margin-bottom:4px"><img src="/thumbs/${p.post_id}.jpg" alt="" loading="lazy" style="width:84px;max-height:84px;object-fit:cover;border-radius:3px;border:1px solid var(--rule);display:block"/></a>` : "";
                     return `
                       <tr class="${p.creator_chart_era ? "cr" : ""}">
                         <td class="l" style="min-width:70px;white-space:nowrap">${dd(p.published)}</td>
@@ -1394,6 +1494,21 @@
                             ${isEdited ? `<span class="chip" title="You changed this">edited</span>` : ""}
                           ` : `
                             ${p.type}${isEdited ? `<span class="chip" title="Changed by Mangesh">edited</span>` : ""}
+                          `}
+                        </td>
+                        <td class="l" style="min-width:${isAdmin ? 150 : 110}px;font-size:12px">
+                          ${thumbHtml}
+                          ${isAdmin ? `
+                            <select class="catsel imgsel" data-id="${p.post_id}" aria-label="Image type for this post">
+                              ${IMGS.map(im => `
+                                <option value="${im}" ${im === imgVal ? "selected" : ""}>
+                                  ${im}${isImgEdited && im === autoImgVal ? " (auto)" : ""}
+                                </option>
+                              `).join("")}
+                            </select>
+                            ${isImgEdited ? `<span class="chip" title="You changed this">edited</span>` : ""}
+                          ` : `
+                            ${imgVal}${isImgEdited ? `<span class="chip" title="Changed by Mangesh">edited</span>` : ""}
                           `}
                         </td>
                         <td>${p.tg_impressions_lifetime !== null ? `<span class="tbar" style="width:${(p.tg_impressions_lifetime / maxTg) * 90}px"></span>${fmt(p.tg_impressions_lifetime)}` : `<span class="muted">–</span>`}</td>
@@ -1421,6 +1536,13 @@
           };
         });
 
+        document.querySelectorAll(".pre[data-i]").forEach(b => {
+          b.onclick = () => {
+            postImgFilter = b.dataset.i;
+            renderDashboard();
+          };
+        });
+
         document.querySelectorAll("th.sort").forEach(th => {
           th.onclick = () => {
             const k = th.dataset.k;
@@ -1428,16 +1550,23 @@
               postSortAsc = !postSortAsc;
             } else {
               postSortCol = k;
-              postSortAsc = (k === "title" || k === "type");
+              postSortAsc = (k === "title" || k === "type" || k === "image_type");
             }
             renderDashboard();
           };
         });
 
-        document.querySelectorAll("select.catsel").forEach(s => {
+        document.querySelectorAll("select.catsel:not(.imgsel)").forEach(s => {
           s.onchange = () => {
             const post = DASHBOARD_DATA.posts.find(x => x.post_id === s.dataset.id);
             if (post) setCat(post, s.value);
+          };
+        });
+
+        document.querySelectorAll("select.imgsel").forEach(s => {
+          s.onchange = () => {
+            const post = DASHBOARD_DATA.posts.find(x => x.post_id === s.dataset.id);
+            if (post) setImg(post, s.value);
           };
         });
 
@@ -1470,13 +1599,15 @@
         }
 
         $("dlPostsBtn").onclick = () => {
-          const headers = ["published", "post", "url", "type", "auto_type", "format", "tg_impressions_lifetime", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
+          const headers = ["published", "post", "url", "type", "auto_type", "image_type", "auto_image_type", "format", "tg_impressions_lifetime", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
           const rows = DASHBOARD_DATA.posts.map(p => [
             p.published,
             `"${p.title.replace(/"/g, '""')}"`,
             p.url,
             `"${p.type.replace(/"/g, '""')}"`,
             `"${(p.auto_type || p.type).replace(/"/g, '""')}"`,
+            `"${(p.image_type || "No image").replace(/"/g, '""')}"`,
+            `"${(p.auto_image_type || p.image_type || "No image").replace(/"/g, '""')}"`,
             p.format,
             p.tg_impressions_lifetime !== null ? p.tg_impressions_lifetime : "",
             p.tg_share_pct !== null ? p.tg_share_pct.toFixed(1) : "",
@@ -1502,6 +1633,7 @@
         const word = p => p === null || p === undefined ? "" : p < 0.05 ? "reliable" : p < 0.15 ? "a lean" : "not proven";
 
         const renderTable = (grp, label, order = null) => {
+          if (!grp || !grp.rows) return "";
           let rows = [...grp.rows];
           if (order) rows.sort((a, b) => order.indexOf(a.g) - order.indexOf(b.g));
           else rows.sort((a, b) => (b.tg || 0) - (a.tg || 0));
@@ -1574,6 +1706,7 @@
         const eraN = DASHBOARD_DATA.posts.filter(p => p.creator_chart_era).length;
         const eraDw = DASHBOARD_DATA.posts.filter(p => p.creator_chart_era && p.type === dw.g).length;
         const nEd = DASHBOARD_DATA.posts.filter(p => p.type !== (p.auto_type || p.type)).length;
+        const nIe = DASHBOARD_DATA.posts.filter(p => (p.image_type || "No image") !== (p.auto_image_type || p.image_type || "No image")).length;
 
         const kf = [
           {
@@ -1644,11 +1777,17 @@
             <h2>What works: TG share, TG impressions and out-of-network reach</h2>
             <p class="note">Statistical read of all ${DASHBOARD_DATA.posts.length} posts of 2026, each from its own post export. Medians are used because a few viral posts would distort averages. <b>p</b> = chance the gap between groups is just noise (Kruskal–Wallis test for groups, Spearman for relationships). Under 0.05 = reliable, 0.05–0.15 = a lean, above = not proven. With 5–13 posts per group, treat leans as hypotheses to test, not rules.</p>
             <div class="card">
-              ${nEd ? `<p style="font-size:12px;color:var(--muted);margin:0 0 10px">Includes ${nEd} post type${nEd > 1 ? "s" : ""} changed by Mangesh.</p>` : ""}
+              ${(nEd || nIe) ? `<p style="font-size:12px;color:var(--muted);margin:0 0 10px">Includes ${nEd} post type${nEd !== 1 ? "s" : ""} and ${nIe} image label${nIe !== 1 ? "s" : ""} changed by Mangesh.</p>` : ""}
               <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:14px">
                 ${kf.map(item => `<li><b>${item.title}</b><br><span style="font-size:13px;color:var(--muted);display:inline-block;margin-top:2px">${item.desc}</span></li>`).join("")}
               </ol>
             </div>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>By image: real vs AI-generated vs none</h2>
+            ${renderTable(I.groups.img, "Image", ["Real image", "AI-generated image", "No image"])}
+            <p class="note"><b>Real image</b> = photo of Mangesh, team, event, document or real screenshot. <b>AI-generated image</b> = illustration, cartoon, infographic or stylised graphic made for the post. <b>No image</b> = text-only post (or link preview only). Mangesh can change any post's label in the Posts tab. Note: most AI-image posts were published in the Creator Chart Era (newer, less time to accrue views), so the TG-impressions gap between Real and AI partly reflects post age as well as the image itself.</p>
           </section>
 
           <section style="display:flex;flex-direction:column;gap:12px">
@@ -1714,7 +1853,7 @@
 
               <div class="card" style="display:flex;flex-direction:column;gap:8px">
                 <h3>Posts</h3>
-                <span style="font-size:13px;color:var(--muted);flex:1">Every 2026 post: type, format, lifetime TG impressions, TG share, out-of-network %, engagements, comments, reposts, followers gained.</span>
+                <span style="font-size:13px;color:var(--muted);flex:1">Every 2026 post: type, image type, format, lifetime TG impressions, TG share, out-of-network %, engagements, comments, reposts, followers gained.</span>
                 <div><button class="dlb" id="dlFullPosts">↓ posts_tg.csv</button></div>
               </div>
 
@@ -1774,8 +1913,8 @@
         };
 
         $("dlFullPosts").onclick = () => {
-          const headers = ["published", "post", "url", "type", "auto_type", "format", "tg_impressions_lifetime", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
-          const rows = DASHBOARD_DATA.posts.map(p => [p.published, `"${p.title.replace(/"/g, '""')}"`, p.url, `"${p.type.replace(/"/g, '""')}"`, `"${(p.auto_type || p.type).replace(/"/g, '""')}"`, p.format, p.tg_impressions_lifetime !== null ? p.tg_impressions_lifetime : "", p.tg_share_pct !== null ? p.tg_share_pct.toFixed(1) : "", p.out_of_network_pct !== null ? p.out_of_network_pct : "", p.engagements, p.comments, p.reposts, p.followers_gained, p.creator_chart_era ? "yes" : ""]);
+          const headers = ["published", "post", "url", "type", "auto_type", "image_type", "auto_image_type", "format", "tg_impressions_lifetime", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
+          const rows = DASHBOARD_DATA.posts.map(p => [p.published, `"${p.title.replace(/"/g, '""')}"`, p.url, `"${p.type.replace(/"/g, '""')}"`, `"${(p.auto_type || p.type).replace(/"/g, '""')}"`, `"${(p.image_type || "No image").replace(/"/g, '""')}"`, `"${(p.auto_image_type || p.image_type || "No image").replace(/"/g, '""')}"`, p.format, p.tg_impressions_lifetime !== null ? p.tg_impressions_lifetime : "", p.tg_share_pct !== null ? p.tg_share_pct.toFixed(1) : "", p.out_of_network_pct !== null ? p.out_of_network_pct : "", p.engagements, p.comments, p.reposts, p.followers_gained, p.creator_chart_era ? "yes" : ""]);
           saveCsv("posts_tg.csv", [headers.join(","), ...rows.map(r => r.join(","))].join("\n"));
         };
 
@@ -1956,9 +2095,9 @@
         });
 
         const tgList = DASHBOARD_DATA.meta?.tg_definition || ["Manager", "Director", "VP", "Owner", "CXO", "Partner"];
-        const followerSen = F.sen || { Senior: 143, Entry: 87, Manager: 43, Director: 42, Owner: 33, VP: 21, CXO: 9, Training: 8, Partner: 2 };
-        const followerWithSen = F.with_seniority || 388;
-        const visitorSen = V12.sen || { Senior: 561, Entry: 346, Director: 196, Owner: 173, Manager: 142, VP: 91, CXO: 76, Training: 63, Partner: 24 };
+        const followerSen = F.sen || { Senior: 143, Entry: 87, Manager: 44, Director: 41, Owner: 33, VP: 22, CXO: 9, Training: 8, Partner: 2 };
+        const followerWithSen = F.with_seniority || 389;
+        const visitorSen = V12.sen || { Senior: 569, Entry: 352, Director: 192, Owner: 186, Manager: 141, VP: 92, CXO: 77, Training: 62, Partner: 25 };
         const visitorTot = Object.values(visitorSen).reduce((a, b) => a + b, 0);
 
         const renderSenBars = (senObj, tot) => {
@@ -1974,6 +2113,7 @@
         };
 
         const pagePosts = cp.posts || [
+          { date: "2026-10-07", by: "Mangesh Zope", type: "", title: "We're #hiring a new Marketing Executive (Reddit Content) - Entry level in Mumbai, Maharash", url: "https://www.linkedin.com/feed/update/urn:li:activity:7513562597799903234", reactions: 1, comments: 0, reposts: 0 },
           { date: "2026-05-30", by: "Vamsi Mullapudi", type: "Video", title: "Most people focus heavily on getting their home loan approved.", url: "https://www.linkedin.com/feed/update/urn:li:activity:7466511570936721408", reactions: 3, comments: 0, reposts: 0 },
           { date: "2026-05-22", by: "Vamsi Mullapudi", type: "Video", title: "A lot of borrowers assume that a good credit score is enough to get a home loan approved. ", url: "https://www.linkedin.com/feed/update/urn:li:activity:7463576320438865921", reactions: 3, comments: 0, reposts: 0 },
           { date: "2026-05-21", by: "Vamsi Mullapudi", type: "Video", title: "A lot of people assume that once a home loan is approved and disbursed, there’s no way to ", url: "https://www.linkedin.com/feed/update/urn:li:activity:7463221984869580800", reactions: 1, comments: 0, reposts: 0 },
@@ -2148,9 +2288,13 @@
           `;
         });
 
+        const subShownByDate = {
+          "2026-10-09": "Senior 28, Entry 14, Manager 12, Director 12, Owner 8",
+          "2026-10-04": "Senior 28, Entry 14, Director 12, Manager 12, Owner 8"
+        };
         let subscriberRows = "";
         [...subscribers].reverse().forEach(s => {
-          const shownGroups = s.shown ? s.shown.split("|").join(", ") : "Senior 28, Entry 14, Director 12, Manager 12, Owner 8";
+          const shownGroups = s.shown ? s.shown.split("|").join(", ") : (subShownByDate[s.date] || "Senior 28, Entry 14, Manager 12, Director 12, Owner 8");
           subscriberRows += `
             <tr>
               <td class="l">${dd(s.date)}</td>
@@ -2176,8 +2320,8 @@
             </div>
             <div class="kpi t">
               <span class="eyebrow">Latest edition, TG impressions</span>
-              <span class="v num">${latestEd && latestEd.tg_impressions_lifetime !== null ? `≥ ${fmt(latestEd.tg_impressions_lifetime)}` : "–"}</span>
-              <span class="s">${latestEd ? `${dd(latestEd.published)} · TG share ≥ ${pct(latestEd.tg_share_pct)}` : "–"}</span>
+              <span class="v num">${latestEd && latestEd.tg_impressions_lifetime !== null ? `${fl(latestEd)}${fmt(latestEd.tg_impressions_lifetime)}` : "–"}</span>
+              <span class="s">${latestEd ? `${dd(latestEd.published)} · TG share ${fl(latestEd)}${pct(latestEd.tg_share_pct)}` : "–"}</span>
             </div>
             <div class="kpi">
               <span class="eyebrow">2026 editions, median TG impressions</span>

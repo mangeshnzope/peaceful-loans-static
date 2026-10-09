@@ -613,27 +613,49 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
 
       // Merge post type overrides (§7.4.1)
       let overrides: Record<string, any> = {};
+      let imageOverrides: Record<string, any> = {};
       if (kv) {
         try {
           const ovStr = await kv.get("linkedin_data:post_type_overrides");
           if (ovStr) overrides = JSON.parse(ovStr);
         } catch {}
+        try {
+          const imgOvStr = await kv.get("linkedin_data:post_image_overrides");
+          if (imgOvStr) imageOverrides = JSON.parse(imgOvStr);
+        } catch {}
       } else {
         const memStr = localDB.get("linkedin_data:post_type_overrides");
         if (memStr) overrides = JSON.parse(memStr);
+        const imgMemStr = localDB.get("linkedin_data:post_image_overrides");
+        if (imgMemStr) imageOverrides = JSON.parse(imgMemStr);
       }
 
       let overridesChanged = false;
-      if (overrides && typeof overrides === "object" && Array.isArray(payload.posts)) {
+      let imgOverridesChanged = false;
+      if (Array.isArray(payload.posts)) {
         for (const p of payload.posts) {
-          const ov = overrides[p.post_id];
-          if (ov) {
-            const ovType = typeof ov === "string" ? ov : ov.type;
-            if (ovType === p.type) {
-              delete overrides[p.post_id];
-              overridesChanged = true;
-            } else {
-              p.type = ovType;
+          if (overrides && typeof overrides === "object") {
+            const ov = overrides[p.post_id];
+            if (ov) {
+              const ovType = typeof ov === "string" ? ov : ov.type;
+              if (ovType === (p.auto_type || p.type)) {
+                delete overrides[p.post_id];
+                overridesChanged = true;
+              } else {
+                p.type = ovType;
+              }
+            }
+          }
+          if (imageOverrides && typeof imageOverrides === "object") {
+            const iov = imageOverrides[p.post_id];
+            if (iov) {
+              const ovImg = typeof iov === "string" ? iov : iov.image_type;
+              if (ovImg === (p.auto_image_type || p.image_type)) {
+                delete imageOverrides[p.post_id];
+                imgOverridesChanged = true;
+              } else {
+                p.image_type = ovImg;
+              }
             }
           }
         }
@@ -645,7 +667,15 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
         }
         localDB.set("linkedin_data:post_type_overrides", serialized);
       }
+      if (imgOverridesChanged) {
+        const serializedImg = JSON.stringify(imageOverrides);
+        if (kv) {
+          ctx.waitUntil(kv.put("linkedin_data:post_image_overrides", serializedImg));
+        }
+        localDB.set("linkedin_data:post_image_overrides", serializedImg);
+      }
       payload.overrides = overrides;
+      payload.image_overrides = imageOverrides;
 
       // Guarantee zero total impressions
       const forbidden = ["impressions", "imp", "members_reached", "sv"];
@@ -695,6 +725,99 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
     resHeaders.set("Content-Disposition", 'attachment; filename="post_type_changes.json"');
     resHeaders.set("Content-Type", "application/json");
     return new Response(JSON.stringify(out, null, 2), { status: 200, headers: resHeaders });
+  }
+
+  // 8b. Post Image Overrides (§2 of v5.2 brief)
+  if (cleanPath === "/api/linkedin-analytics/post-image" || cleanPath === "/api/post-image") {
+    const user = await verifyTgToken(request);
+    if (!user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers });
+    }
+
+    const kv = env.QUESTIONS_KV;
+
+    if (request.method === "GET") {
+      let overrides: Record<string, any> = {};
+      if (kv) {
+        try {
+          const ovStr = await kv.get("linkedin_data:post_image_overrides");
+          if (ovStr) overrides = JSON.parse(ovStr);
+        } catch {}
+      } else {
+        const memStr = localDB.get("linkedin_data:post_image_overrides");
+        if (memStr) overrides = JSON.parse(memStr);
+      }
+      return new Response(JSON.stringify({ overrides }), { status: 200, headers });
+    }
+
+    if (request.method === "POST") {
+      if (user.role !== "admin") {
+        return new Response(JSON.stringify({ error: "Only admins can change image types." }), { status: 403, headers });
+      }
+
+      try {
+        const body = await request.json() as any;
+        const { post_id, image_type } = body;
+        if (!post_id || typeof post_id !== "string" || !image_type || typeof image_type !== "string") {
+          return new Response(JSON.stringify({ error: "post_id and image_type are required" }), { status: 400, headers });
+        }
+
+        const validImageTypes = (defaultDashboardData.meta as any)?.image_types || [
+          "Real image",
+          "AI-generated image",
+          "No image"
+        ];
+
+        if (!validImageTypes.includes(image_type) && image_type !== "RESET" && image_type !== "DELETE") {
+          return new Response(JSON.stringify({ error: `Invalid image_type. Must be one of: ${validImageTypes.join(", ")}` }), { status: 400, headers });
+        }
+
+        const post = (defaultDashboardData.posts as any[]).find((p: any) => p.post_id === post_id);
+        if (!post && image_type !== "RESET" && image_type !== "DELETE") {
+          return new Response(JSON.stringify({ error: `Unknown post_id '${post_id}'` }), { status: 404, headers });
+        }
+
+        const autoImageType = post ? (post.auto_image_type || post.image_type) : null;
+
+        let overrides: Record<string, any> = {};
+        if (kv) {
+          try {
+            const ovStr = await kv.get("linkedin_data:post_image_overrides");
+            if (ovStr) overrides = JSON.parse(ovStr);
+          } catch {}
+        } else {
+          const memStr = localDB.get("linkedin_data:post_image_overrides");
+          if (memStr) overrides = JSON.parse(memStr);
+        }
+
+        if (image_type === "RESET" || image_type === "DELETE" || (autoImageType && image_type === autoImageType) || (!post && overrides[post_id])) {
+          delete overrides[post_id];
+        } else {
+          overrides[post_id] = {
+            image_type,
+            auto_image_type: autoImageType,
+            title: post ? post.title : "",
+            changed_by: "admin",
+            changed_at: new Date().toISOString()
+          };
+        }
+
+        const serialized = JSON.stringify(overrides);
+        if (kv) {
+          await kv.put("linkedin_data:post_image_overrides", serialized);
+        }
+        localDB.set("linkedin_data:post_image_overrides", serialized);
+
+        const outMap: Record<string, string> = {};
+        for (const [k, v] of Object.entries(overrides)) {
+          outMap[k] = typeof v === "string" ? v : v.image_type;
+        }
+
+        return new Response(JSON.stringify({ success: true, post_id, image_type, auto_image_type: autoImageType, overrides: outMap }), { status: 200, headers });
+      } catch (err: any) {
+        return new Response(JSON.stringify({ error: err.message }), { status: 400, headers });
+      }
+    }
   }
 
   // 8. Post Type Overrides (§7.4.1)
@@ -881,11 +1004,12 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
           }
         }
 
-        // New for v3: check meta.post_types and validate all posts
+        // New for v3+: check meta.post_types and optional meta.image_types and validate all posts
         const postTypes = payload.meta?.post_types;
         if (!Array.isArray(postTypes) || postTypes.length === 0) {
           return new Response(JSON.stringify({ error: "Validation failed: meta.post_types is required." }), { status: 400, headers });
         }
+        const imageTypes = Array.isArray(payload.meta?.image_types) ? payload.meta.image_types : null;
         if (!Array.isArray(payload.posts)) {
           return new Response(JSON.stringify({ error: "Validation failed: posts must be an array." }), { status: 400, headers });
         }
@@ -898,6 +1022,12 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
           }
           if (!p.auto_type || !postTypes.includes(p.auto_type)) {
             return new Response(JSON.stringify({ error: `Validation failed: post ${p.post_id} auto_type '${p.auto_type}' not in meta.post_types.` }), { status: 400, headers });
+          }
+          if (imageTypes && p.image_type && !imageTypes.includes(p.image_type)) {
+            return new Response(JSON.stringify({ error: `Validation failed: post ${p.post_id} image_type '${p.image_type}' not in meta.image_types.` }), { status: 400, headers });
+          }
+          if (imageTypes && p.auto_image_type && !imageTypes.includes(p.auto_image_type)) {
+            return new Response(JSON.stringify({ error: `Validation failed: post ${p.post_id} auto_image_type '${p.auto_image_type}' not in meta.image_types.` }), { status: 400, headers });
           }
         }
 
@@ -1057,6 +1187,19 @@ export default {
     // Intercept our API routes
     if (cleanPath.startsWith("/api/")) {
       return handleApiRequest(request, env, ctx);
+    }
+
+    // Protect post thumbnails behind the dashboard password (§2b)
+    if (cleanPath.startsWith("/thumbs/")) {
+      const user = await verifyTgToken(request);
+      if (!user) {
+        return new Response("Unauthorized", { status: 401 });
+      }
+      const assetRes = await env.ASSETS.fetch(request);
+      const thumbHeaders = new Headers(assetRes.headers);
+      thumbHeaders.set("Cache-Control", "private, max-age=86400");
+      thumbHeaders.set("X-Robots-Tag", "noindex, nofollow");
+      return new Response(assetRes.body, { status: assetRes.status, headers: thumbHeaders });
     }
 
     // Intercept Agent Discovery & Protocol Endpoints

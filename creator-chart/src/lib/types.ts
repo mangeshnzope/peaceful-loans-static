@@ -6,6 +6,7 @@ export interface Meta {
   creator_chart_era_start: string;
   creator_onboarded: string;
   post_types?: string[];
+  image_types?: string[];
   notes: string;
 }
 
@@ -50,6 +51,8 @@ export interface PostRow {
   url: string;
   type: string;
   auto_type?: string;
+  image_type?: string;
+  auto_image_type?: string;
   format: "Media (ugcPost)" | "Text/share";
   creator_chart_era: boolean;
   tg_impressions_lifetime: number | null;
@@ -108,6 +111,7 @@ export interface LinearFit {
 export interface Insights {
   groups: {
     cat: GroupInsights;
+    img?: GroupInsights;
     fmt: GroupInsights;
     era: GroupInsights;
     dow: GroupInsights;
