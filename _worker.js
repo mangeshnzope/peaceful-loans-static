@@ -515,9 +515,9 @@ This page has moved to an external location.
 // creator-chart/data/creator_chart_dashboard_data.json
 var creator_chart_dashboard_data_default = {
   meta: {
-    built: "09 Oct 2026",
+    built: "16 Oct 2026",
     data_from: "2026-01-01",
-    data_to: "2026-10-08",
+    data_to: "2026-10-16",
     tg_definition: [
       "Manager",
       "Director",
@@ -3072,6 +3072,78 @@ var creator_chart_dashboard_data_default = {
       engagements: 15,
       new_followers: 6,
       posts_published: 1
+    },
+    {
+      date: "2026-10-09",
+      tg_impressions: 2180,
+      tg_share_pct: 46,
+      tg_may_be_higher: false,
+      engagements: 32,
+      new_followers: 9,
+      posts_published: 1
+    },
+    {
+      date: "2026-10-10",
+      tg_impressions: 789,
+      tg_share_pct: 44,
+      tg_may_be_higher: false,
+      engagements: 5,
+      new_followers: 2,
+      posts_published: 1
+    },
+    {
+      date: "2026-10-11",
+      tg_impressions: 477,
+      tg_share_pct: 42,
+      tg_may_be_higher: false,
+      engagements: 3,
+      new_followers: 3,
+      posts_published: 0
+    },
+    {
+      date: "2026-10-12",
+      tg_impressions: 724,
+      tg_share_pct: 46,
+      tg_may_be_higher: false,
+      engagements: 7,
+      new_followers: 3,
+      posts_published: 1
+    },
+    {
+      date: "2026-10-13",
+      tg_impressions: 206,
+      tg_share_pct: 39,
+      tg_may_be_higher: true,
+      engagements: 3,
+      new_followers: 3,
+      posts_published: 0
+    },
+    {
+      date: "2026-10-14",
+      tg_impressions: 422,
+      tg_share_pct: 43,
+      tg_may_be_higher: false,
+      engagements: 7,
+      new_followers: 4,
+      posts_published: 1
+    },
+    {
+      date: "2026-10-15",
+      tg_impressions: 107,
+      tg_share_pct: 37,
+      tg_may_be_higher: false,
+      engagements: 1,
+      new_followers: 4,
+      posts_published: 0
+    },
+    {
+      date: "2026-10-16",
+      tg_impressions: 718,
+      tg_share_pct: 49,
+      tg_may_be_higher: false,
+      engagements: 19,
+      new_followers: 4,
+      posts_published: 1
     }
   ],
   weekly: [
@@ -3477,12 +3549,22 @@ var creator_chart_dashboard_data_default = {
     },
     {
       week_start: "2026-10-05",
-      week_end: "2026-10-08",
-      tg_impressions: 3843,
-      tg_share_pct: 46,
+      week_end: "2026-10-11",
+      tg_impressions: 7211,
+      tg_share_pct: 45,
       tg_may_be_higher: false,
-      engagements: 50,
-      new_followers: 20,
+      engagements: 90,
+      new_followers: 34,
+      posts_published: 5
+    },
+    {
+      week_start: "2026-10-12",
+      week_end: "2026-10-16",
+      tg_impressions: 2128,
+      tg_share_pct: 44,
+      tg_may_be_higher: false,
+      engagements: 37,
+      new_followers: 18,
       posts_published: 3
     }
   ],
@@ -3579,16 +3661,131 @@ var creator_chart_dashboard_data_default = {
     },
     {
       month_start: "2026-10-01",
-      month_end: "2026-10-08",
-      tg_impressions: 5020,
-      tg_share_pct: 47,
+      month_end: "2026-10-16",
+      tg_impressions: 10665,
+      tg_share_pct: 46,
       tg_may_be_higher: false,
-      engagements: 67,
-      new_followers: 36,
-      posts_published: 4
+      engagements: 144,
+      new_followers: 68,
+      posts_published: 9
     }
   ],
   posts: [
+    {
+      post_id: "7516732253280964608",
+      published: "2026-10-16",
+      weekday: "Fri",
+      time: "11:00 AM",
+      title: "Did you know if you wanted to take a home",
+      url: "https://www.linkedin.com/posts/mangeshzope_did-you-know-if-you-wanted-to-take-a-home-share-7516732253280964608-sQOh",
+      type: "Bank & industry critique",
+      auto_type: "Bank & industry critique",
+      image_type: "No image",
+      auto_image_type: "No image",
+      format: "Text/share",
+      creator_chart_era: true,
+      tg_impressions_lifetime: 616,
+      tg_share_pct: 49,
+      out_of_network_pct: 55,
+      in_network_pct: 45,
+      engagements: 19,
+      comments: 3,
+      reposts: 1,
+      followers_gained: 1,
+      engagement_rate_pct: 1.51
+    },
+    {
+      post_id: "7516009337883058176",
+      published: "2026-10-14",
+      weekday: "Wed",
+      time: "11:07 AM",
+      title: "Fixed rate is safer is what home loan borrowers",
+      url: "https://www.linkedin.com/posts/mangeshzope_fixed-rate-is-safer-is-what-home-loan-borrowers-share-7516009337883058176-pcMl",
+      type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
+      image_type: "No image",
+      auto_image_type: "No image",
+      format: "Text/share",
+      creator_chart_era: true,
+      tg_impressions_lifetime: 393,
+      tg_share_pct: 43,
+      out_of_network_pct: 60,
+      in_network_pct: 40,
+      engagements: 7,
+      comments: 0,
+      reposts: 1,
+      followers_gained: 0,
+      engagement_rate_pct: 0.77
+    },
+    {
+      post_id: "7515300227357044737",
+      published: "2026-10-12",
+      weekday: "Mon",
+      time: "12:10 PM",
+      title: "Imagine that two hni professional friends",
+      url: "https://www.linkedin.com/posts/mangeshzope_imagine-that-two-hni-professional-friends-share-7515300227357044737-zNm0",
+      type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
+      image_type: "No image",
+      auto_image_type: "No image",
+      format: "Text/share",
+      creator_chart_era: true,
+      tg_impressions_lifetime: 577,
+      tg_share_pct: 46,
+      out_of_network_pct: 46,
+      in_network_pct: 54,
+      engagements: 9,
+      comments: 0,
+      reposts: 1,
+      followers_gained: 0,
+      engagement_rate_pct: 0.72
+    },
+    {
+      post_id: "7514580222193610752",
+      published: "2026-10-10",
+      weekday: "Sat",
+      time: "12:28 PM",
+      title: "A home loan top up can offer cheaper credit",
+      url: "https://www.linkedin.com/posts/mangeshzope_a-home-loan-top-up-can-offer-cheaper-credit-ugcPost-7514580222193610752-KFMp",
+      type: "Home-loan explainer",
+      auto_type: "Home-loan explainer",
+      image_type: "AI-generated image",
+      auto_image_type: "AI-generated image",
+      format: "Media (ugcPost)",
+      creator_chart_era: true,
+      tg_impressions_lifetime: null,
+      tg_share_pct: null,
+      out_of_network_pct: 33,
+      in_network_pct: 67,
+      engagements: 3,
+      comments: 0,
+      reposts: 0,
+      followers_gained: 0,
+      engagement_rate_pct: 0.86
+    },
+    {
+      post_id: "7514174593708883969",
+      published: "2026-10-09",
+      weekday: "Fri",
+      time: "9:37 AM",
+      title: "If the real estate is down why is government",
+      url: "https://www.linkedin.com/posts/mangeshzope_if-the-real-estate-is-down-why-is-government-share-7514174593708883969-aJkq",
+      type: "Bank & industry critique",
+      auto_type: "Bank & industry critique",
+      image_type: "No image",
+      auto_image_type: "No image",
+      format: "Text/share",
+      creator_chart_era: true,
+      tg_impressions_lifetime: 929,
+      tg_share_pct: 47,
+      out_of_network_pct: 55,
+      in_network_pct: 45,
+      engagements: 28,
+      comments: 2,
+      reposts: 0,
+      followers_gained: 0,
+      engagement_rate_pct: 1.42
+    },
     {
       post_id: "7513904742264229889",
       published: "2026-10-08",
@@ -3602,15 +3799,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "No image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 1963,
+      tg_impressions_lifetime: 4236,
       tg_share_pct: 46,
-      out_of_network_pct: 78,
-      in_network_pct: 22,
-      engagements: 11,
+      out_of_network_pct: 82,
+      in_network_pct: 18,
+      engagements: 15,
       comments: 2,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 0.26
+      engagement_rate_pct: 0.16
     },
     {
       post_id: "7513526971423858688",
@@ -3625,15 +3822,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "No image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 1411,
-      tg_share_pct: 52,
-      out_of_network_pct: 66,
-      in_network_pct: 34,
+      tg_impressions_lifetime: 1801,
+      tg_share_pct: 51,
+      out_of_network_pct: 69,
+      in_network_pct: 31,
       engagements: 13,
       comments: 0,
       reposts: 1,
       followers_gained: 2,
-      engagement_rate_pct: 0.48
+      engagement_rate_pct: 0.37
     },
     {
       post_id: "7513121763409580033",
@@ -3648,15 +3845,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 238,
-      tg_share_pct: 49,
-      out_of_network_pct: 41,
-      in_network_pct: 59,
+      tg_impressions_lifetime: 276,
+      tg_share_pct: 47,
+      out_of_network_pct: 40,
+      in_network_pct: 60,
       engagements: 12,
       comments: 0,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 2.47
+      engagement_rate_pct: 2.04
     },
     {
       post_id: "7512042073336733696",
@@ -3671,7 +3868,7 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Media (ugcPost)",
       creator_chart_era: true,
-      tg_impressions_lifetime: 612,
+      tg_impressions_lifetime: 653,
       tg_share_pct: 44,
       out_of_network_pct: 8,
       in_network_pct: 92,
@@ -3679,7 +3876,7 @@ var creator_chart_dashboard_data_default = {
       comments: 1,
       reposts: 0,
       followers_gained: 0,
-      engagement_rate_pct: 0.5
+      engagement_rate_pct: 0.47
     },
     {
       post_id: "7510982370678865920",
@@ -3694,15 +3891,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 161,
-      tg_share_pct: 45,
-      out_of_network_pct: 43,
-      in_network_pct: 57,
-      engagements: 12,
+      tg_impressions_lifetime: 175,
+      tg_share_pct: 42,
+      out_of_network_pct: 41,
+      in_network_pct: 59,
+      engagements: 13,
       comments: 0,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 3.36
+      engagement_rate_pct: 3.12
     },
     {
       post_id: "7510245222912692224",
@@ -3717,11 +3914,11 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 228,
+      tg_impressions_lifetime: 248,
       tg_share_pct: 51,
       out_of_network_pct: 29,
       in_network_pct: 71,
-      engagements: 11,
+      engagements: 12,
       comments: 0,
       reposts: 1,
       followers_gained: 1,
@@ -3740,15 +3937,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 361,
-      tg_share_pct: 46,
-      out_of_network_pct: 64,
-      in_network_pct: 36,
+      tg_impressions_lifetime: 365,
+      tg_share_pct: 45,
+      out_of_network_pct: 62,
+      in_network_pct: 38,
       engagements: 15,
       comments: 2,
       reposts: 1,
       followers_gained: 1,
-      engagement_rate_pct: 1.91
+      engagement_rate_pct: 1.85
     },
     {
       post_id: "7508405750621310978",
@@ -3763,15 +3960,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 262,
+      tg_impressions_lifetime: 282,
       tg_share_pct: 50,
-      out_of_network_pct: 24,
-      in_network_pct: 76,
+      out_of_network_pct: 23,
+      in_network_pct: 77,
       engagements: 15,
       comments: 4,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 2.87
+      engagement_rate_pct: 2.66
     },
     {
       post_id: "7507720186268119040",
@@ -3786,15 +3983,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 336,
-      tg_share_pct: 50,
-      out_of_network_pct: 58,
-      in_network_pct: 42,
+      tg_impressions_lifetime: 342,
+      tg_share_pct: 49,
+      out_of_network_pct: 56,
+      in_network_pct: 44,
       engagements: 10,
       comments: 1,
       reposts: 2,
       followers_gained: 0,
-      engagement_rate_pct: 1.49
+      engagement_rate_pct: 1.43
     },
     {
       post_id: "7506575936201408512",
@@ -3809,15 +4006,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 7904,
+      tg_impressions_lifetime: 7947,
       tg_share_pct: 47,
       out_of_network_pct: 66,
       in_network_pct: 34,
-      engagements: 590,
+      engagements: 591,
       comments: 143,
       reposts: 5,
       followers_gained: 5,
-      engagement_rate_pct: 3.51
+      engagement_rate_pct: 3.5
     },
     {
       post_id: "7506232694943473666",
@@ -3832,10 +4029,10 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 2454,
+      tg_impressions_lifetime: 2464,
       tg_share_pct: 31,
-      out_of_network_pct: 86,
-      in_network_pct: 14,
+      out_of_network_pct: 85,
+      in_network_pct: 15,
       engagements: 41,
       comments: 4,
       reposts: 0,
@@ -3855,15 +4052,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "Real image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 269,
+      tg_impressions_lifetime: 276,
       tg_share_pct: 46,
       out_of_network_pct: 50,
       in_network_pct: 50,
-      engagements: 15,
+      engagements: 16,
       comments: 2,
       reposts: 1,
       followers_gained: 2,
-      engagement_rate_pct: 2.56
+      engagement_rate_pct: 2.67
     },
     {
       post_id: "7504055163360362496",
@@ -3878,7 +4075,7 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Media (ugcPost)",
       creator_chart_era: true,
-      tg_impressions_lifetime: 509,
+      tg_impressions_lifetime: 518,
       tg_share_pct: 51,
       out_of_network_pct: 29,
       in_network_pct: 71,
@@ -3886,7 +4083,7 @@ var creator_chart_dashboard_data_default = {
       comments: 4,
       reposts: 1,
       followers_gained: 1,
-      engagement_rate_pct: 1.9
+      engagement_rate_pct: 1.87
     },
     {
       post_id: "7503390922131562496",
@@ -3901,15 +4098,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 190,
+      tg_impressions_lifetime: 193,
       tg_share_pct: 44,
-      out_of_network_pct: 45,
-      in_network_pct: 55,
+      out_of_network_pct: 44,
+      in_network_pct: 56,
       engagements: 12,
       comments: 0,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 2.78
+      engagement_rate_pct: 2.74
     },
     {
       post_id: "7502607226914639873",
@@ -3924,15 +4121,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 196,
-      tg_share_pct: 46,
+      tg_impressions_lifetime: 189,
+      tg_share_pct: 44,
       out_of_network_pct: 38,
       in_network_pct: 62,
       engagements: 9,
       comments: 0,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 2.11
+      engagement_rate_pct: 2.09
     },
     {
       post_id: "7501557451943743492",
@@ -3947,15 +4144,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 285,
+      tg_impressions_lifetime: 287,
       tg_share_pct: 43,
-      out_of_network_pct: 60,
-      in_network_pct: 40,
+      out_of_network_pct: 59,
+      in_network_pct: 41,
       engagements: 18,
       comments: 2,
       reposts: 1,
       followers_gained: 1,
-      engagement_rate_pct: 2.72
+      engagement_rate_pct: 2.7
     },
     {
       post_id: "7500800657218744321",
@@ -3970,15 +4167,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 210,
-      tg_share_pct: 41,
+      tg_impressions_lifetime: 206,
+      tg_share_pct: 40,
       out_of_network_pct: 47,
       in_network_pct: 53,
       engagements: 18,
       comments: 2,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 3.52
+      engagement_rate_pct: 3.5
     },
     {
       post_id: "7500092783240769536",
@@ -3993,15 +4190,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 158,
-      tg_share_pct: 41,
-      out_of_network_pct: 43,
-      in_network_pct: 57,
+      tg_impressions_lifetime: 164,
+      tg_share_pct: 42,
+      out_of_network_pct: 42,
+      in_network_pct: 58,
       engagements: 13,
       comments: 1,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 3.37
+      engagement_rate_pct: 3.32
     },
     {
       post_id: "7498993755644076033",
@@ -4016,7 +4213,7 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "Real image",
       format: "Media (ugcPost)",
       creator_chart_era: true,
-      tg_impressions_lifetime: 492,
+      tg_impressions_lifetime: 496,
       tg_share_pct: 49,
       out_of_network_pct: null,
       in_network_pct: null,
@@ -4024,7 +4221,7 @@ var creator_chart_dashboard_data_default = {
       comments: 6,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 3.38
+      engagement_rate_pct: 3.36
     },
     {
       post_id: "7498269296268324865",
@@ -4039,7 +4236,7 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 429,
+      tg_impressions_lifetime: 430,
       tg_share_pct: 50,
       out_of_network_pct: 24,
       in_network_pct: 76,
@@ -4062,7 +4259,7 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 356,
+      tg_impressions_lifetime: 358,
       tg_share_pct: 44,
       out_of_network_pct: 57,
       in_network_pct: 43,
@@ -4070,7 +4267,7 @@ var creator_chart_dashboard_data_default = {
       comments: 2,
       reposts: 1,
       followers_gained: 1,
-      engagement_rate_pct: 2.47
+      engagement_rate_pct: 2.46
     },
     {
       post_id: "7496445774369669121",
@@ -4085,7 +4282,7 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 231,
+      tg_impressions_lifetime: 233,
       tg_share_pct: 45,
       out_of_network_pct: 44,
       in_network_pct: 56,
@@ -4093,7 +4290,7 @@ var creator_chart_dashboard_data_default = {
       comments: 0,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 3.51
+      engagement_rate_pct: 3.48
     },
     {
       post_id: "7495072253953609731",
@@ -4108,15 +4305,15 @@ var creator_chart_dashboard_data_default = {
       auto_image_type: "AI-generated image",
       format: "Text/share",
       creator_chart_era: true,
-      tg_impressions_lifetime: 423,
-      tg_share_pct: 45,
+      tg_impressions_lifetime: 416,
+      tg_share_pct: 44,
       out_of_network_pct: 38,
       in_network_pct: 62,
       engagements: 18,
       comments: 1,
       reposts: 1,
       followers_gained: 0,
-      engagement_rate_pct: 1.91
+      engagement_rate_pct: 1.9
     },
     {
       post_id: "7495063360074477570",
@@ -5170,7 +5367,15 @@ var creator_chart_dashboard_data_default = {
       "2026-10-05": 0.0214,
       "2026-10-06": 0.0512,
       "2026-10-07": 0.1426,
-      "2026-10-08": 0.4079
+      "2026-10-08": 0.4079,
+      "2026-10-09": 0.3535,
+      "2026-10-10": 0.1337,
+      "2026-10-11": 0.0847,
+      "2026-10-12": 0.1174,
+      "2026-10-13": 0.0393,
+      "2026-10-14": 0.0732,
+      "2026-10-15": 0.0216,
+      "2026-10-16": 0.1093
     },
     pct_of_views: {
       Seniority: {
@@ -5365,7 +5570,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 28,
           "2026-10-06": 26,
           "2026-10-07": 26,
-          "2026-10-08": 30
+          "2026-10-08": 30,
+          "2026-10-09": 30,
+          "2026-10-10": 31,
+          "2026-10-11": 31,
+          "2026-10-12": 28,
+          "2026-10-13": 26,
+          "2026-10-14": 30,
+          "2026-10-15": 32,
+          "2026-10-16": 28
         },
         Entry: {
           "2026-02-16": 41,
@@ -5537,7 +5750,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 16,
           "2026-10-06": 14,
           "2026-10-07": 11,
-          "2026-10-08": 12
+          "2026-10-08": 12,
+          "2026-10-09": 12,
+          "2026-10-10": 11,
+          "2026-10-11": 12,
+          "2026-10-12": 11,
+          "2026-10-13": 13,
+          "2026-10-14": 12,
+          "2026-10-15": 14,
+          "2026-10-16": 10
         },
         Director: {
           "2026-02-26": 15,
@@ -5685,7 +5906,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 12,
           "2026-10-06": 10,
           "2026-10-07": 14,
-          "2026-10-08": 14
+          "2026-10-08": 14,
+          "2026-10-09": 13,
+          "2026-10-10": 12,
+          "2026-10-11": 12,
+          "2026-10-12": 13,
+          "2026-10-13": 9,
+          "2026-10-14": 11,
+          "2026-10-15": 13,
+          "2026-10-16": 13
         },
         Manager: {
           "2026-02-26": 11,
@@ -5842,7 +6071,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 13,
           "2026-10-06": 8,
           "2026-10-07": 16,
-          "2026-10-08": 14
+          "2026-10-08": 14,
+          "2026-10-09": 14,
+          "2026-10-10": 15,
+          "2026-10-11": 15,
+          "2026-10-12": 14,
+          "2026-10-13": 14,
+          "2026-10-14": 18,
+          "2026-10-15": 16,
+          "2026-10-16": 17
         },
         Owner: {
           "2026-02-26": 8,
@@ -5967,7 +6204,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 4,
           "2026-10-06": 9,
           "2026-10-07": 6,
-          "2026-10-08": 4
+          "2026-10-08": 4,
+          "2026-10-09": 3,
+          "2026-10-10": 4,
+          "2026-10-11": 3,
+          "2026-10-12": 6,
+          "2026-10-13": 7,
+          "2026-10-14": 4,
+          "2026-10-15": 4,
+          "2026-10-16": 5
         },
         VP: {
           "2026-02-26": 7,
@@ -6085,7 +6330,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 7,
           "2026-10-06": 9,
           "2026-10-07": 9,
-          "2026-10-08": 9
+          "2026-10-08": 9,
+          "2026-10-09": 10,
+          "2026-10-10": 9,
+          "2026-10-11": 8,
+          "2026-10-12": 7,
+          "2026-10-13": 6,
+          "2026-10-14": 7,
+          "2026-10-15": 4,
+          "2026-10-16": 7
         },
         CXO: {
           "2026-02-26": 5,
@@ -6177,7 +6430,14 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 6,
           "2026-10-06": 6,
           "2026-10-07": 6,
-          "2026-10-08": 3
+          "2026-10-08": 3,
+          "2026-10-09": 4,
+          "2026-10-10": 3,
+          "2026-10-11": 3,
+          "2026-10-12": 5,
+          "2026-10-13": 3,
+          "2026-10-14": 2,
+          "2026-10-16": 5
         },
         Partner: {
           "2026-04-14": 2,
@@ -6230,7 +6490,13 @@ var creator_chart_dashboard_data_default = {
           "2026-10-04": 4,
           "2026-10-06": 2,
           "2026-10-07": 2,
-          "2026-10-08": 2
+          "2026-10-08": 2,
+          "2026-10-09": 2,
+          "2026-10-10": 1,
+          "2026-10-11": 1,
+          "2026-10-12": 1,
+          "2026-10-14": 1,
+          "2026-10-16": 2
         },
         Training: {
           "2026-04-14": 1,
@@ -6269,7 +6535,12 @@ var creator_chart_dashboard_data_default = {
           "2026-09-22": 2,
           "2026-09-25": 2,
           "2026-09-28": 1,
-          "2026-10-08": 0.5
+          "2026-10-08": 0.5,
+          "2026-10-09": 0.5,
+          "2026-10-10": 1,
+          "2026-10-11": 1,
+          "2026-10-12": 1,
+          "2026-10-16": 0.5
         }
       },
       Location: {
@@ -6471,7 +6742,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 22,
           "2026-10-06": 29,
           "2026-10-07": 25,
-          "2026-10-08": 22
+          "2026-10-08": 22,
+          "2026-10-09": 24,
+          "2026-10-10": 22,
+          "2026-10-11": 21,
+          "2026-10-12": 23,
+          "2026-10-13": 24,
+          "2026-10-14": 23,
+          "2026-10-15": 19,
+          "2026-10-16": 24
         },
         "Greater Delhi Area": {
           "2026-02-26": 15,
@@ -6624,7 +6903,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 14,
           "2026-10-06": 10,
           "2026-10-07": 16,
-          "2026-10-08": 17
+          "2026-10-08": 17,
+          "2026-10-09": 16,
+          "2026-10-10": 16,
+          "2026-10-11": 16,
+          "2026-10-12": 17,
+          "2026-10-13": 14,
+          "2026-10-14": 16,
+          "2026-10-15": 12,
+          "2026-10-16": 16
         },
         "Greater Bengaluru Area": {
           "2026-02-26": 14,
@@ -6777,7 +7064,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 21,
           "2026-10-06": 19,
           "2026-10-07": 12,
-          "2026-10-08": 15
+          "2026-10-08": 15,
+          "2026-10-09": 14,
+          "2026-10-10": 15,
+          "2026-10-11": 14,
+          "2026-10-12": 12,
+          "2026-10-13": 12,
+          "2026-10-14": 10,
+          "2026-10-15": 9,
+          "2026-10-16": 11
         },
         "Greater Hyderabad Area": {
           "2026-02-26": 3,
@@ -6855,7 +7150,14 @@ var creator_chart_dashboard_data_default = {
           "2026-10-04": 4,
           "2026-10-06": 5,
           "2026-10-07": 3,
-          "2026-10-08": 4
+          "2026-10-08": 4,
+          "2026-10-09": 4,
+          "2026-10-10": 5,
+          "2026-10-11": 4,
+          "2026-10-12": 4,
+          "2026-10-13": 3,
+          "2026-10-14": 3,
+          "2026-10-16": 3
         },
         "Pune/Pimpri-Chinchwad Area": {
           "2026-02-26": 2,
@@ -6934,7 +7236,14 @@ var creator_chart_dashboard_data_default = {
           "2026-10-03": 2,
           "2026-10-06": 3,
           "2026-10-07": 4,
-          "2026-10-08": 4
+          "2026-10-08": 4,
+          "2026-10-09": 4,
+          "2026-10-10": 4,
+          "2026-10-11": 4,
+          "2026-10-12": 4,
+          "2026-10-13": 2,
+          "2026-10-14": 4,
+          "2026-10-16": 3
         },
         "New York City Metropolitan Area": {
           "2026-02-26": 2,
@@ -7037,7 +7346,13 @@ var creator_chart_dashboard_data_default = {
           "2026-10-04": 2,
           "2026-10-06": 3,
           "2026-10-07": 2,
-          "2026-10-08": 2
+          "2026-10-08": 2,
+          "2026-10-09": 2,
+          "2026-10-10": 2,
+          "2026-10-11": 3,
+          "2026-10-12": 3,
+          "2026-10-14": 3,
+          "2026-10-16": 1
         },
         "Greater Ahmedabad Area": {
           "2026-03-26": 3,
@@ -7081,7 +7396,13 @@ var creator_chart_dashboard_data_default = {
           "2026-09-27": 2,
           "2026-10-06": 2,
           "2026-10-07": 2,
-          "2026-10-08": 2
+          "2026-10-08": 2,
+          "2026-10-09": 2,
+          "2026-10-10": 2,
+          "2026-10-11": 3,
+          "2026-10-12": 3,
+          "2026-10-14": 3,
+          "2026-10-16": 2
         },
         Noida: {
           "2026-03-26": 2,
@@ -7114,7 +7435,11 @@ var creator_chart_dashboard_data_default = {
           "2026-09-21": 2,
           "2026-09-23": 2,
           "2026-09-30": 2,
-          "2026-10-08": 2
+          "2026-10-08": 2,
+          "2026-10-09": 1,
+          "2026-10-10": 2,
+          "2026-10-11": 2,
+          "2026-10-12": 2
         },
         "Greater Chennai Area": {
           "2026-04-14": 2,
@@ -7163,7 +7488,14 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 3,
           "2026-10-06": 3,
           "2026-10-07": 2,
-          "2026-10-08": 3
+          "2026-10-08": 3,
+          "2026-10-09": 4,
+          "2026-10-10": 3,
+          "2026-10-11": 3,
+          "2026-10-12": 2,
+          "2026-10-13": 6,
+          "2026-10-14": 2,
+          "2026-10-16": 3
         },
         "Greater Jaipur Area": {
           "2026-04-21": 1,
@@ -7173,13 +7505,18 @@ var creator_chart_dashboard_data_default = {
           "2026-07-29": 2,
           "2026-08-25": 5,
           "2026-08-26": 2,
-          "2026-10-07": 1
+          "2026-10-07": 1,
+          "2026-10-13": 4,
+          "2026-10-16": 2
         },
         "Greater Toronto Area, Canada": {
           "2026-06-20": 1
         },
         Singapore: {
           "2026-07-24": 2
+        },
+        "Greater Patna Area": {
+          "2026-10-14": 1
         }
       },
       "Company size": {
@@ -7372,7 +7709,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 36,
           "2026-10-06": 20,
           "2026-10-07": 28,
-          "2026-10-08": 33
+          "2026-10-08": 33,
+          "2026-10-09": 34,
+          "2026-10-10": 38,
+          "2026-10-11": 38,
+          "2026-10-12": 28,
+          "2026-10-13": 22,
+          "2026-10-14": 29,
+          "2026-10-15": 30,
+          "2026-10-16": 28
         },
         "1,001-5,000 employees": {
           "2026-02-26": 16,
@@ -7521,7 +7866,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 10,
           "2026-10-06": 15,
           "2026-10-07": 13,
-          "2026-10-08": 13
+          "2026-10-08": 13,
+          "2026-10-09": 12,
+          "2026-10-10": 14,
+          "2026-10-11": 12,
+          "2026-10-12": 12,
+          "2026-10-13": 11,
+          "2026-10-14": 13,
+          "2026-10-15": 14,
+          "2026-10-16": 12
         },
         "51-200 employees": {
           "2026-02-26": 11,
@@ -7660,7 +8013,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 9,
           "2026-10-06": 11,
           "2026-10-07": 8,
-          "2026-10-08": 8
+          "2026-10-08": 8,
+          "2026-10-09": 8,
+          "2026-10-10": 6,
+          "2026-10-11": 5,
+          "2026-10-12": 9,
+          "2026-10-13": 8,
+          "2026-10-14": 9,
+          "2026-10-15": 8,
+          "2026-10-16": 9
         },
         "2-10 employees": {
           "2026-02-26": 9,
@@ -7798,7 +8159,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 7,
           "2026-10-06": 8,
           "2026-10-07": 7,
-          "2026-10-08": 5
+          "2026-10-08": 5,
+          "2026-10-09": 4,
+          "2026-10-10": 4,
+          "2026-10-11": 5,
+          "2026-10-12": 7,
+          "2026-10-13": 7,
+          "2026-10-14": 6,
+          "2026-10-15": 7,
+          "2026-10-16": 6
         },
         "11-50 employees": {
           "2026-02-26": 8,
@@ -7939,7 +8308,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 9,
           "2026-10-06": 12,
           "2026-10-07": 10,
-          "2026-10-08": 7
+          "2026-10-08": 7,
+          "2026-10-09": 7,
+          "2026-10-10": 6,
+          "2026-10-11": 6,
+          "2026-10-12": 8,
+          "2026-10-13": 9,
+          "2026-10-14": 7,
+          "2026-10-15": 7,
+          "2026-10-16": 10
         },
         "501-1,000 employees": {
           "2026-02-26": 7,
@@ -8046,7 +8423,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 6,
           "2026-10-06": 8,
           "2026-10-07": 6,
-          "2026-10-08": 6
+          "2026-10-08": 6,
+          "2026-10-09": 6,
+          "2026-10-10": 6,
+          "2026-10-11": 5,
+          "2026-10-12": 6,
+          "2026-10-13": 5,
+          "2026-10-14": 6,
+          "2026-10-15": 6,
+          "2026-10-16": 5
         },
         "201-500 employees": {
           "2026-02-26": 6,
@@ -8165,7 +8550,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 6,
           "2026-10-06": 6,
           "2026-10-07": 7,
-          "2026-10-08": 6
+          "2026-10-08": 6,
+          "2026-10-09": 6,
+          "2026-10-10": 5,
+          "2026-10-11": 7,
+          "2026-10-12": 6,
+          "2026-10-13": 5,
+          "2026-10-14": 6,
+          "2026-10-15": 10,
+          "2026-10-16": 6
         },
         "5,001-10,000 employees": {
           "2026-02-26": 5,
@@ -8274,7 +8667,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 3,
           "2026-10-06": 2,
           "2026-10-07": 6,
-          "2026-10-08": 6
+          "2026-10-08": 6,
+          "2026-10-09": 6,
+          "2026-10-10": 6,
+          "2026-10-11": 6,
+          "2026-10-12": 6,
+          "2026-10-13": 5,
+          "2026-10-14": 5,
+          "2026-10-15": 4,
+          "2026-10-16": 6
         }
       },
       "Job title": {
@@ -8381,7 +8782,14 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 4,
           "2026-10-06": 8,
           "2026-10-07": 6,
-          "2026-10-08": 3
+          "2026-10-08": 3,
+          "2026-10-09": 3,
+          "2026-10-10": 3,
+          "2026-10-11": 2,
+          "2026-10-12": 5,
+          "2026-10-13": 5,
+          "2026-10-14": 4,
+          "2026-10-16": 5
         },
         "Co-Founder": {
           "2026-02-26": 5,
@@ -8464,7 +8872,14 @@ var creator_chart_dashboard_data_default = {
           "2026-10-04": 4,
           "2026-10-06": 4,
           "2026-10-07": 4,
-          "2026-10-08": 2
+          "2026-10-08": 2,
+          "2026-10-09": 2,
+          "2026-10-10": 1,
+          "2026-10-11": 1,
+          "2026-10-12": 2,
+          "2026-10-13": 3,
+          "2026-10-14": 2,
+          "2026-10-16": 2
         },
         "Sales Manager": {
           "2026-02-26": 3,
@@ -8533,7 +8948,15 @@ var creator_chart_dashboard_data_default = {
           "2026-09-29": 3,
           "2026-10-03": 2,
           "2026-10-07": 3,
-          "2026-10-08": 2
+          "2026-10-08": 2,
+          "2026-10-09": 2,
+          "2026-10-10": 2,
+          "2026-10-11": 2,
+          "2026-10-12": 3,
+          "2026-10-13": 5,
+          "2026-10-14": 6,
+          "2026-10-15": 4,
+          "2026-10-16": 4
         },
         "Product Manager": {
           "2026-02-26": 2,
@@ -8582,7 +9005,12 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 4,
           "2026-10-06": 3,
           "2026-10-07": 2,
-          "2026-10-08": 1
+          "2026-10-08": 1,
+          "2026-10-09": 2,
+          "2026-10-10": 0.5,
+          "2026-10-11": 1,
+          "2026-10-12": 1,
+          "2026-10-16": 2
         },
         "Program Manager": {
           "2026-02-26": 2,
@@ -8650,7 +9078,12 @@ var creator_chart_dashboard_data_default = {
           "2026-10-04": 2,
           "2026-10-06": 3,
           "2026-10-07": 1,
-          "2026-10-08": 3
+          "2026-10-08": 3,
+          "2026-10-09": 2,
+          "2026-10-10": 3,
+          "2026-10-11": 3,
+          "2026-10-12": 2,
+          "2026-10-14": 1
         },
         "General Manager": {
           "2026-03-26": 2,
@@ -8679,7 +9112,12 @@ var creator_chart_dashboard_data_default = {
           "2026-10-03": 1,
           "2026-10-04": 1,
           "2026-10-07": 1,
-          "2026-10-08": 2
+          "2026-10-08": 2,
+          "2026-10-09": 2,
+          "2026-10-10": 2,
+          "2026-10-11": 1,
+          "2026-10-12": 0.5,
+          "2026-10-16": 2
         },
         "Growth Specialist": {
           "2026-03-26": 2
@@ -8704,7 +9142,9 @@ var creator_chart_dashboard_data_default = {
           "2026-09-18": 0.5,
           "2026-09-20": 0.5,
           "2026-09-21": 0.5,
-          "2026-10-03": 2
+          "2026-10-03": 2,
+          "2026-10-09": 0.5,
+          "2026-10-16": 1
         },
         "Managing Director": {
           "2026-04-14": 0.5,
@@ -8723,7 +9163,11 @@ var creator_chart_dashboard_data_default = {
           "2026-10-04": 2,
           "2026-10-06": 2,
           "2026-10-07": 1,
-          "2026-10-08": 0.5
+          "2026-10-08": 0.5,
+          "2026-10-10": 0.5,
+          "2026-10-11": 0.5,
+          "2026-10-12": 1,
+          "2026-10-14": 1
         },
         "Business Development Manager": {
           "2026-04-14": 0.5,
@@ -8738,7 +9182,10 @@ var creator_chart_dashboard_data_default = {
           "2026-07-26": 2,
           "2026-09-09": 3,
           "2026-09-23": 1,
-          "2026-10-07": 1
+          "2026-10-07": 1,
+          "2026-10-09": 0.5,
+          "2026-10-14": 2,
+          "2026-10-16": 1
         },
         "Head of Sales": {
           "2026-04-26": 3,
@@ -8753,11 +9200,13 @@ var creator_chart_dashboard_data_default = {
           "2026-07-25": 0.5,
           "2026-07-27": 1,
           "2026-09-28": 1,
-          "2026-10-03": 1
+          "2026-10-03": 1,
+          "2026-10-14": 1
         },
         "Project Manager": {
           "2026-05-08": 0.5,
-          "2026-10-08": 0.5
+          "2026-10-08": 0.5,
+          "2026-10-10": 0.5
         },
         "Credit Manager": {
           "2026-05-11": 2,
@@ -8772,7 +9221,15 @@ var creator_chart_dashboard_data_default = {
           "2026-07-30": 4,
           "2026-09-15": 3,
           "2026-10-07": 4,
-          "2026-10-08": 1
+          "2026-10-08": 1,
+          "2026-10-09": 1,
+          "2026-10-10": 2,
+          "2026-10-11": 1,
+          "2026-10-12": 2,
+          "2026-10-13": 4,
+          "2026-10-14": 3,
+          "2026-10-15": 10,
+          "2026-10-16": 3
         },
         "Technical Manager": {
           "2026-05-11": 1,
@@ -8841,6 +9298,17 @@ var creator_chart_dashboard_data_default = {
         },
         "Managing Partner": {
           "2026-10-03": 0.5
+        },
+        "Chief Financial Officer": {
+          "2026-10-11": 0.5
+        },
+        Owner: {
+          "2026-10-12": 0.5
+        },
+        "Branch Manager": {
+          "2026-10-14": 1,
+          "2026-10-15": 4,
+          "2026-10-16": 2
         }
       },
       Industry: {
@@ -9001,7 +9469,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 18,
           "2026-10-06": 24,
           "2026-10-07": 26,
-          "2026-10-08": 19
+          "2026-10-08": 19,
+          "2026-10-09": 20,
+          "2026-10-10": 22,
+          "2026-10-11": 19,
+          "2026-10-12": 18,
+          "2026-10-13": 24,
+          "2026-10-14": 24,
+          "2026-10-15": 31,
+          "2026-10-16": 25
         },
         "Technology, Information and Internet": {
           "2026-02-26": 8,
@@ -9116,7 +9592,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 7,
           "2026-10-06": 8,
           "2026-10-07": 5,
-          "2026-10-08": 4
+          "2026-10-08": 4,
+          "2026-10-09": 4,
+          "2026-10-10": 4,
+          "2026-10-11": 4,
+          "2026-10-12": 5,
+          "2026-10-13": 4,
+          "2026-10-14": 4,
+          "2026-10-15": 6,
+          "2026-10-16": 4
         },
         "Education Administration Programs": {
           "2026-02-26": 5,
@@ -9173,7 +9657,10 @@ var creator_chart_dashboard_data_default = {
           "2026-09-24": 4,
           "2026-09-29": 3,
           "2026-10-03": 4,
-          "2026-10-07": 2
+          "2026-10-07": 2,
+          "2026-10-12": 3,
+          "2026-10-14": 2,
+          "2026-10-16": 2
         },
         "Business Consulting and Services": {
           "2026-02-26": 5,
@@ -9261,7 +9748,14 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 6,
           "2026-10-06": 4,
           "2026-10-07": 3,
-          "2026-10-08": 5
+          "2026-10-08": 5,
+          "2026-10-09": 4,
+          "2026-10-10": 4,
+          "2026-10-11": 4,
+          "2026-10-12": 4,
+          "2026-10-13": 5,
+          "2026-10-14": 4,
+          "2026-10-16": 3
         },
         "IT Services and IT Consulting": {
           "2026-02-26": 5,
@@ -9384,7 +9878,14 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 10,
           "2026-10-06": 9,
           "2026-10-07": 5,
-          "2026-10-08": 9
+          "2026-10-08": 9,
+          "2026-10-09": 8,
+          "2026-10-10": 9,
+          "2026-10-11": 10,
+          "2026-10-12": 7,
+          "2026-10-13": 7,
+          "2026-10-14": 6,
+          "2026-10-16": 3
         },
         Banking: {
           "2026-02-26": 5,
@@ -9508,7 +10009,15 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 6,
           "2026-10-06": 9,
           "2026-10-07": 16,
-          "2026-10-08": 11
+          "2026-10-08": 11,
+          "2026-10-09": 12,
+          "2026-10-10": 12,
+          "2026-10-11": 12,
+          "2026-10-12": 10,
+          "2026-10-13": 15,
+          "2026-10-14": 17,
+          "2026-10-15": 20,
+          "2026-10-16": 16
         },
         "Higher Education": {
           "2026-02-26": 4,
@@ -9580,7 +10089,11 @@ var creator_chart_dashboard_data_default = {
           "2026-09-28": 3,
           "2026-09-29": 3,
           "2026-10-06": 4,
-          "2026-10-07": 2
+          "2026-10-07": 2,
+          "2026-10-09": 2,
+          "2026-10-12": 2,
+          "2026-10-14": 2,
+          "2026-10-16": 2
         },
         Manufacturing: {
           "2026-02-26": 4,
@@ -9614,7 +10127,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-25": 3,
           "2026-09-27": 3,
           "2026-09-28": 2,
-          "2026-10-03": 3
+          "2026-10-03": 3,
+          "2026-10-13": 2
         },
         "Advertising Services": {
           "2026-02-26": 3,
@@ -9654,7 +10168,9 @@ var creator_chart_dashboard_data_default = {
           "2026-09-26": 4,
           "2026-09-27": 4,
           "2026-09-28": 3,
-          "2026-10-03": 4
+          "2026-10-03": 4,
+          "2026-10-14": 2,
+          "2026-10-16": 2
         },
         Education: {
           "2026-02-26": 3,
@@ -9688,7 +10204,9 @@ var creator_chart_dashboard_data_default = {
           "2026-09-25": 2,
           "2026-09-30": 3,
           "2026-10-02": 8,
-          "2026-10-06": 2
+          "2026-10-06": 2,
+          "2026-10-12": 2,
+          "2026-10-13": 4
         },
         "Food and Beverage Services": {
           "2026-03-26": 3,
@@ -9713,7 +10231,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-29": 3,
           "2026-09-30": 3,
           "2026-10-03": 3,
-          "2026-10-07": 2
+          "2026-10-07": 2,
+          "2026-10-12": 2
         },
         "Software Development": {
           "2026-03-26": 2,
@@ -9792,7 +10311,12 @@ var creator_chart_dashboard_data_default = {
           "2026-10-05": 6,
           "2026-10-06": 4,
           "2026-10-07": 3,
-          "2026-10-08": 4
+          "2026-10-08": 4,
+          "2026-10-09": 4,
+          "2026-10-10": 4,
+          "2026-10-11": 2,
+          "2026-10-12": 3,
+          "2026-10-14": 2
         },
         "Real Estate": {
           "2026-04-02": 5,
@@ -9805,7 +10329,8 @@ var creator_chart_dashboard_data_default = {
           "2026-09-23": 3,
           "2026-10-06": 2,
           "2026-10-07": 2,
-          "2026-10-08": 2
+          "2026-10-08": 2,
+          "2026-10-16": 3
         },
         "Transportation, Logistics, Supply Chain and Storage": {
           "2026-04-15": 2,
@@ -9826,7 +10351,9 @@ var creator_chart_dashboard_data_default = {
         },
         "Motor Vehicle Manufacturing": {
           "2026-04-23": 3,
-          "2026-10-04": 2
+          "2026-10-04": 2,
+          "2026-10-09": 2,
+          "2026-10-11": 2
         },
         Retail: {
           "2026-04-25": 2,
@@ -9845,13 +10372,18 @@ var creator_chart_dashboard_data_default = {
           "2026-09-28": 2,
           "2026-09-29": 3,
           "2026-10-04": 2,
-          "2026-10-08": 2
+          "2026-10-08": 2,
+          "2026-10-10": 2,
+          "2026-10-15": 4
         },
         Insurance: {
           "2026-05-01": 5,
           "2026-07-27": 2,
           "2026-08-31": 5,
-          "2026-10-08": 2
+          "2026-10-08": 2,
+          "2026-10-11": 2,
+          "2026-10-14": 2,
+          "2026-10-16": 2
         },
         "Chemical Manufacturing": {
           "2026-05-04": 3,
@@ -9865,7 +10397,10 @@ var creator_chart_dashboard_data_default = {
           "2026-07-29": 3,
           "2026-08-31": 3,
           "2026-09-15": 4,
-          "2026-10-08": 2
+          "2026-10-08": 2,
+          "2026-10-09": 2,
+          "2026-10-10": 3,
+          "2026-10-11": 2
         },
         "Public Relations and Communications Services": {
           "2026-06-11": 2
@@ -9886,7 +10421,10 @@ var creator_chart_dashboard_data_default = {
           "2026-07-06": 3,
           "2026-08-21": 3,
           "2026-08-24": 4,
-          "2026-09-27": 3
+          "2026-09-27": 3,
+          "2026-10-09": 2,
+          "2026-10-10": 2,
+          "2026-10-11": 2
         },
         "Marketing Services": {
           "2026-07-12": 3,
@@ -9922,7 +10460,9 @@ var creator_chart_dashboard_data_default = {
           "2026-07-26": 1,
           "2026-07-27": 2,
           "2026-07-28": 2,
-          "2026-10-04": 2
+          "2026-10-04": 2,
+          "2026-10-10": 2,
+          "2026-10-13": 2
         },
         "Broadcast Media Production and Distribution": {
           "2026-07-28": 2,
@@ -9973,7 +10513,9 @@ var creator_chart_dashboard_data_default = {
           "2026-07-26": 1,
           "2026-09-17": 0.5,
           "2026-09-18": 0.5,
-          "2026-10-08": 0.5
+          "2026-10-08": 0.5,
+          "2026-10-10": 1,
+          "2026-10-11": 0.5
         },
         "Wipro Linecraft AI": {
           "2026-04-14": 0.5
@@ -10001,7 +10543,14 @@ var creator_chart_dashboard_data_default = {
           "2026-08-21": 3,
           "2026-09-25": 2,
           "2026-10-07": 0.5,
-          "2026-10-08": 0.5
+          "2026-10-08": 0.5,
+          "2026-10-09": 1,
+          "2026-10-10": 2,
+          "2026-10-11": 0.5,
+          "2026-10-12": 1,
+          "2026-10-13": 2,
+          "2026-10-14": 2,
+          "2026-10-16": 1
         },
         EY: {
           "2026-04-14": 0.5,
@@ -10012,7 +10561,8 @@ var creator_chart_dashboard_data_default = {
           "2026-07-22": 0.5,
           "2026-09-18": 0.5,
           "2026-09-19": 0.5,
-          "2026-10-08": 0.5
+          "2026-10-08": 0.5,
+          "2026-10-09": 0.5
         },
         Tesla: {
           "2026-04-15": 1
@@ -10034,7 +10584,11 @@ var creator_chart_dashboard_data_default = {
           "2026-09-20": 0.5,
           "2026-09-24": 2,
           "2026-10-07": 0.5,
-          "2026-10-08": 0.5
+          "2026-10-08": 0.5,
+          "2026-10-10": 0.5,
+          "2026-10-12": 0.5,
+          "2026-10-14": 1,
+          "2026-10-16": 1
         },
         "Poonawalla Fincorp": {
           "2026-04-25": 0.5,
@@ -10045,7 +10599,9 @@ var creator_chart_dashboard_data_default = {
           "2026-05-08": 0.5,
           "2026-05-11": 0.5,
           "2026-09-01": 5,
-          "2026-09-23": 1
+          "2026-09-23": 1,
+          "2026-10-12": 0.5,
+          "2026-10-16": 0.5
         },
         "Avanse Financial Services Ltd.": {
           "2026-04-27": 0.5
@@ -10095,7 +10651,12 @@ var creator_chart_dashboard_data_default = {
           "2026-07-28": 2,
           "2026-07-30": 2,
           "2026-10-07": 1,
-          "2026-10-08": 0.5
+          "2026-10-08": 0.5,
+          "2026-10-09": 0.5,
+          "2026-10-10": 1,
+          "2026-10-11": 1,
+          "2026-10-12": 1,
+          "2026-10-16": 1
         },
         "Aakash Educational Services Limited": {
           "2026-07-20": 1
@@ -10119,7 +10680,12 @@ var creator_chart_dashboard_data_default = {
           "2026-07-29": 2,
           "2026-07-30": 2,
           "2026-10-07": 1,
-          "2026-10-08": 0.5
+          "2026-10-08": 0.5,
+          "2026-10-09": 1,
+          "2026-10-11": 2,
+          "2026-10-12": 1,
+          "2026-10-14": 1,
+          "2026-10-16": 1
         },
         "Kotak Mahindra Bank": {
           "2026-07-24": 0.5,
@@ -10127,7 +10693,10 @@ var creator_chart_dashboard_data_default = {
           "2026-07-26": 1,
           "2026-07-28": 2,
           "2026-07-29": 2,
-          "2026-07-30": 2
+          "2026-07-30": 2,
+          "2026-10-09": 0.5,
+          "2026-10-10": 1,
+          "2026-10-16": 1
         },
         "Aditya Birla Capital": {
           "2026-07-24": 0.5
@@ -10135,21 +10704,27 @@ var creator_chart_dashboard_data_default = {
         "YES BANK": {
           "2026-07-24": 0.5,
           "2026-07-27": 1,
-          "2026-10-07": 0.5
+          "2026-10-07": 0.5,
+          "2026-10-09": 0.5
         },
         HSBC: {
-          "2026-07-25": 0.5
+          "2026-07-25": 0.5,
+          "2026-10-10": 0.5
         },
         "IndusInd Bank": {
           "2026-07-25": 0.5,
           "2026-07-26": 2,
           "2026-07-27": 2,
           "2026-07-28": 2,
-          "2026-10-08": 0.5
+          "2026-10-08": 0.5,
+          "2026-10-09": 0.5,
+          "2026-10-11": 0.5
         },
         "Bandhan Bank": {
           "2026-07-26": 1,
-          "2026-10-07": 0.5
+          "2026-10-07": 0.5,
+          "2026-10-14": 1,
+          "2026-10-16": 0.5
         },
         "Bajaj Finserv": {
           "2026-07-27": 2,
@@ -10157,13 +10732,19 @@ var creator_chart_dashboard_data_default = {
           "2026-07-30": 2,
           "2026-08-28": 2,
           "2026-10-07": 1,
-          "2026-10-08": 0.5
+          "2026-10-08": 0.5,
+          "2026-10-09": 0.5,
+          "2026-10-10": 0.5,
+          "2026-10-14": 1,
+          "2026-10-16": 0.5
         },
         Citi: {
-          "2026-07-27": 1
+          "2026-07-27": 1,
+          "2026-10-10": 0.5
         },
         "Standard Chartered": {
-          "2026-07-27": 1
+          "2026-07-27": 1,
+          "2026-10-09": 0.5
         },
         Dr\u00E4ger: {
           "2026-09-17": 0.5
@@ -10224,6 +10805,15 @@ var creator_chart_dashboard_data_default = {
         },
         "L&T Finance": {
           "2026-10-07": 0.5
+        },
+        Barclays: {
+          "2026-10-10": 0.5
+        },
+        "Morgan Stanley": {
+          "2026-10-11": 0.5
+        },
+        "HDB Financial Services Ltd.": {
+          "2026-10-16": 0.5
         }
       }
     }
@@ -10234,29 +10824,29 @@ var creator_chart_dashboard_data_default = {
         rows: [
           {
             g: "Bank & industry critique",
-            n: 8,
-            tg: 358.5,
-            tgsum: 3026,
-            sh: 46,
-            out: 50,
-            er: 2.5,
+            n: 10,
+            tg: 430.5,
+            tgsum: 4613,
+            sh: 46.5,
+            out: 55,
+            er: 2.2,
             com: 2
           },
           {
             g: "Home-loan explainer",
-            n: 12,
-            tg: 325.5,
-            tgsum: 3608,
-            sh: 46.5,
-            out: 31.5,
-            er: 1.7,
+            n: 15,
+            tg: 367.5,
+            tgsum: 4990,
+            sh: 46,
+            out: 38,
+            er: 1.5,
             com: 1
           },
           {
             g: "Founder journey & milestones",
             n: 13,
             tg: 848,
-            tgsum: 19871,
+            tgsum: 19917,
             sh: 46,
             out: 35,
             er: 1.5,
@@ -10275,8 +10865,8 @@ var creator_chart_dashboard_data_default = {
           {
             g: "Opinion & life lessons",
             n: 10,
-            tg: 228,
-            tgsum: 2615,
+            tg: 248,
+            tgsum: 2642,
             sh: 47,
             out: 29,
             er: 2,
@@ -10286,37 +10876,37 @@ var creator_chart_dashboard_data_default = {
             g: "Client story",
             n: 12,
             tg: 282,
-            tgsum: 9965,
+            tgsum: 12315,
             sh: 45,
-            out: 37,
+            out: 36.5,
             er: 1.6,
             com: 0.5
           }
         ],
         p: {
           tg: 2e-3,
-          sh: 0.207,
-          outnet: 0.405,
-          er: 0.522
+          sh: 0.208,
+          outnet: 0.267,
+          er: 0.519
         }
       },
       img: {
         rows: [
           {
             g: "No image",
-            n: 14,
-            tg: 832,
-            tgsum: 16590,
+            n: 18,
+            tg: 604.5,
+            tgsum: 21768,
             sh: 47,
-            out: 25,
-            er: 0.7,
+            out: 34.5,
+            er: 0.8,
             com: 0.5
           },
           {
             g: "Real image",
             n: 18,
             tg: 623,
-            tgsum: 19297,
+            tgsum: 19361,
             sh: 46,
             out: 33,
             er: 2.1,
@@ -10324,50 +10914,50 @@ var creator_chart_dashboard_data_default = {
           },
           {
             g: "AI-generated image",
-            n: 28,
-            tg: 310.5,
-            tgsum: 7815,
-            sh: 45,
-            out: 42.5,
-            er: 2,
+            n: 29,
+            tg: 314.5,
+            tgsum: 7965,
+            sh: 44,
+            out: 41,
+            er: 1.9,
             com: 1
           }
         ],
         p: {
-          tg: 0.019,
-          sh: 0.241,
-          outnet: 0.488,
-          er: 3e-3
+          tg: 0.012,
+          sh: 0.141,
+          outnet: 0.899,
+          er: 1e-3
         }
       },
       fmt: {
         rows: [
           {
             g: "Text/share",
-            n: 43,
-            tg: 386,
-            tgsum: 37133,
+            n: 47,
+            tg: 393,
+            tgsum: 42471,
             sh: 46,
-            out: 40,
-            er: 2.1,
+            out: 41,
+            er: 1.9,
             com: 1
           },
           {
             g: "Media (ugcPost)",
-            n: 17,
-            tg: 509,
-            tgsum: 6569,
+            n: 18,
+            tg: 518,
+            tgsum: 6623,
             sh: 47,
-            out: 18,
+            out: 21.5,
             er: 1.5,
             com: 1
           }
         ],
         p: {
-          tg: 0.318,
-          sh: 0.524,
-          outnet: 3e-3,
-          er: 0.056
+          tg: 0.388,
+          sh: 0.461,
+          outnet: 1e-3,
+          er: 0.088
         }
       },
       era: {
@@ -10384,20 +10974,20 @@ var creator_chart_dashboard_data_default = {
           },
           {
             g: "Creator Chart Era",
-            n: 23,
-            tg: 336,
-            tgsum: 19678,
+            n: 28,
+            tg: 365,
+            tgsum: 25070,
             sh: 46,
-            out: 44.5,
-            er: 2.5,
-            com: 2
+            out: 46,
+            er: 2.1,
+            com: 1.5
           }
         ],
         p: {
-          tg: 0.122,
-          sh: 0.66,
-          outnet: 3e-3,
-          er: 0.015
+          tg: 0.236,
+          sh: 0.876,
+          outnet: 1e-3,
+          er: 0.12
         }
       },
       dow: {
@@ -10406,7 +10996,7 @@ var creator_chart_dashboard_data_default = {
             g: "Thu",
             n: 10,
             tg: 689,
-            tgsum: 8651,
+            tgsum: 10934,
             sh: 46,
             out: 30.5,
             er: 1.6,
@@ -10415,52 +11005,52 @@ var creator_chart_dashboard_data_default = {
           {
             g: "Tue",
             n: 10,
-            tg: 328.5,
-            tgsum: 5021,
+            tg: 332,
+            tgsum: 5066,
             sh: 46,
             out: 29,
-            er: 2,
+            er: 1.8,
             com: 1
           },
           {
             g: "Fri",
-            n: 11,
-            tg: 467.5,
-            tgsum: 16323,
-            sh: 46.5,
-            out: 60,
-            er: 1.9,
-            com: 4
+            n: 13,
+            tg: 507,
+            tgsum: 17932,
+            sh: 47,
+            out: 57,
+            er: 1.7,
+            com: 3
           },
           {
             g: "Sat",
-            n: 5,
+            n: 6,
             tg: 588,
-            tgsum: 2946,
+            tgsum: 2987,
             sh: 47,
-            out: 29,
-            er: 1.2,
-            com: 1
+            out: 33,
+            er: 1,
+            com: 0.5
           },
           {
             g: "Mon",
-            n: 12,
-            tg: 336,
-            tgsum: 5123,
+            n: 13,
+            tg: 350,
+            tgsum: 5727,
             sh: 44,
-            out: 40.5,
-            er: 2.2,
+            out: 42,
+            er: 2.1,
             com: 1
           },
           {
             g: "Wed",
-            n: 11,
-            tg: 267,
-            tgsum: 4946,
-            sh: 48.5,
-            out: 29,
+            n: 12,
+            tg: 282,
+            tgsum: 5756,
+            sh: 47,
+            out: 33.5,
             er: 1.9,
-            com: 1
+            com: 0.5
           },
           {
             g: "Sun",
@@ -10474,51 +11064,51 @@ var creator_chart_dashboard_data_default = {
           }
         ],
         p: {
-          tg: 0.184,
-          sh: 0.547,
-          outnet: 0.151,
-          er: 0.733
+          tg: 0.166,
+          sh: 0.659,
+          outnet: 0.069,
+          er: 0.694
         }
       }
     },
     corr: {
       out_vs_share: {
-        rho: -0.4,
-        p: 29e-4,
-        n: 52
+        rho: -0.38,
+        p: 36e-4,
+        n: 56
       },
       out_vs_tg: {
-        rho: 0.24,
-        p: 0.0863,
-        n: 52
+        rho: 0.29,
+        p: 0.0324,
+        n: 56
       },
       comments_vs_out: {
-        rho: 0.45,
-        p: 3e-4,
-        n: 58
+        rho: 0.41,
+        p: 7e-4,
+        n: 63
       },
       reposts_vs_out: {
-        rho: 0.53,
+        rho: 0.51,
         p: 0,
-        n: 58
+        n: 63
       },
       er_vs_share: {
         rho: -0.22,
-        p: 0.109,
-        n: 54
+        p: 0.0935,
+        n: 58
       },
       hour_vs_share: {
-        rho: 0.04,
-        p: 0.7513,
-        n: 54
+        rho: 0.02,
+        p: 0.89,
+        n: 58
       }
     },
     fit: {
-      slope10: -1.03,
-      r2: 0.18,
-      p: 16e-4,
-      a: 49.20058753327825,
-      b: -0.10323143303038645
+      slope10: -0.97,
+      r2: 0.17,
+      p: 15e-4,
+      a: 48.95167152777717,
+      b: -0.09736192892118208
     }
   },
   company_page: {
@@ -10580,21 +11170,21 @@ var creator_chart_dashboard_data_default = {
       },
       {
         month_start: "2026-10-01",
-        month_end: "2026-10-07",
-        tg_page_views: 19,
-        tg_share_pct: 42.2
+        month_end: "2026-10-14",
+        tg_page_views: 33,
+        tg_share_pct: 34
       }
     ],
     visitors_12m: {
-      start: "2025-10-08",
-      end: "2026-10-07",
-      tg_page_views: 713,
-      tg_share_pct: 42
+      start: "2025-10-15",
+      end: "2026-10-14",
+      tg_page_views: 724,
+      tg_share_pct: 41.7
     },
     followers: {
-      as_of: "2026-10-07",
-      tg_followers: 151,
-      tg_share_pct: 38.8
+      as_of: "2026-10-14",
+      tg_followers: 154,
+      tg_share_pct: 37.7
     }
   },
   newsletter: {
@@ -10602,12 +11192,26 @@ var creator_chart_dashboard_data_default = {
     note: "Per-edition TG from each edition export. LinkedIn lists only the top 3-4 seniority groups, so tg_is_floor=true means the real TG is at least this.",
     editions: [
       {
+        activity_id: "7514580222638460928",
+        post_id: "7514580222193610752",
+        published: "2026-10-10",
+        title: "What is a home loan top-up and when should you consider it?",
+        url: "https://www.linkedin.com/posts/mangeshzope_a-home-loan-top-up-can-offer-cheaper-credit-ugcPost-7514580222193610752-KFMp",
+        tg_impressions_lifetime: null,
+        tg_share_pct: null,
+        tg_is_floor: true,
+        out_of_network_pct: 33,
+        engagements: 3,
+        comments: 0,
+        reposts: 0
+      },
+      {
         activity_id: "7512042073810837504",
         post_id: "7512042073336733696",
         published: "2026-10-03",
         title: "Are you switching homes every 8-10 years like cars?",
         url: "https://www.linkedin.com/posts/mangeshzope_i-was-recently-talking-to-a-clienta-former-ugcPost-7512042073336733696-lIf5",
-        tg_impressions_lifetime: 612,
+        tg_impressions_lifetime: 653,
         tg_share_pct: 44,
         tg_is_floor: false,
         out_of_network_pct: 8,
@@ -10709,6 +11313,16 @@ var creator_chart_dashboard_data_default = {
       {
         date: "2026-10-09",
         subscribers: 1843,
+        tg_share_floor_pct: 32
+      },
+      {
+        date: "2026-10-12",
+        subscribers: 1841,
+        tg_share_floor_pct: 32
+      },
+      {
+        date: "2026-10-17",
+        subscribers: 1844,
         tg_share_floor_pct: 32
       }
     ]

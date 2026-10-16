@@ -246,7 +246,7 @@
         "7501557451943743492", "7502607226914639873", "7503390922131562496", "7504055163360362496",
         "7505589782421544960", "7506232694943473666", "7506575936201408512", "7507720186268119040",
         "7508405750621310978", "7509209819720032256", "7510245222912692224", "7510982370678865920",
-        "7512042073336733696", "7513121763409580033"
+        "7512042073336733696", "7513121763409580033", "7514580222193610752"
       ]);
 
       const median = a => {
@@ -2095,9 +2095,9 @@
         });
 
         const tgList = DASHBOARD_DATA.meta?.tg_definition || ["Manager", "Director", "VP", "Owner", "CXO", "Partner"];
-        const followerSen = F.sen || { Senior: 143, Entry: 87, Manager: 44, Director: 41, Owner: 33, VP: 22, CXO: 9, Training: 8, Partner: 2 };
-        const followerWithSen = F.with_seniority || 389;
-        const visitorSen = V12.sen || { Senior: 569, Entry: 352, Director: 192, Owner: 186, Manager: 141, VP: 92, CXO: 77, Training: 62, Partner: 25 };
+        const followerSen = F.sen || { Senior: 149, Entry: 96, Manager: 46, Director: 41, Owner: 34, VP: 23, Training: 9, CXO: 8, Partner: 2 };
+        const followerWithSen = F.with_seniority || 408;
+        const visitorSen = V12.sen || { Senior: 594, Entry: 359, Director: 199, Owner: 185, Manager: 143, VP: 92, CXO: 80, Training: 61, Partner: 25 };
         const visitorTot = Object.values(visitorSen).reduce((a, b) => a + b, 0);
 
         const renderSenBars = (senObj, tot) => {
@@ -2289,6 +2289,8 @@
         });
 
         const subShownByDate = {
+          "2026-10-17": "Senior 28, Entry 14, Manager 12, Director 12, Owner 8",
+          "2026-10-12": "Senior 28, Entry 14, Manager 12, Director 12, Owner 8",
           "2026-10-09": "Senior 28, Entry 14, Manager 12, Director 12, Owner 8",
           "2026-10-04": "Senior 28, Entry 14, Director 12, Manager 12, Owner 8"
         };

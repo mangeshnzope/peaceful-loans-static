@@ -204,6 +204,8 @@ export default function NewsletterTab({ newsletter }: NewsletterTabProps) {
             <tbody>
               {[...subscribers].reverse().map((s) => {
                 const shownByDate: Record<string, string> = {
+                  "2026-10-17": "Senior 28, Entry 14, Manager 12, Director 12, Owner 8",
+                  "2026-10-12": "Senior 28, Entry 14, Manager 12, Director 12, Owner 8",
                   "2026-10-09": "Senior 28, Entry 14, Manager 12, Director 12, Owner 8",
                   "2026-10-04": "Senior 28, Entry 14, Director 12, Manager 12, Owner 8",
                 };

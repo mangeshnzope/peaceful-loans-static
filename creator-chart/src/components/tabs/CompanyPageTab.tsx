@@ -321,14 +321,14 @@ export default function CompanyPageTab({ companyPage }: CompanyPageTabProps) {
           <div className="card">
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {[
-                ["Senior", 143],
-                ["Entry", 87],
-                ["Manager", 44],
+                ["Senior", 149],
+                ["Entry", 96],
+                ["Manager", 46],
                 ["Director", 41],
-                ["Owner", 33],
-                ["VP", 22],
-                ["CXO", 9],
-                ["Training", 8],
+                ["Owner", 34],
+                ["VP", 23],
+                ["Training", 9],
+                ["CXO", 8],
                 ["Partner", 2],
               ].map(([k, v]) => {
                 const isTg = ["Manager", "Director", "VP", "Owner", "CXO", "Partner"].includes(k as string);
@@ -336,16 +336,16 @@ export default function CompanyPageTab({ companyPage }: CompanyPageTabProps) {
                   <div key={k as string} className={`mr ${isTg ? "t" : ""}`}>
                     <span>{k}</span>
                     <span className="b">
-                      <i style={{ width: `${((v as number) / 143) * 100}%` }}></i>
+                      <i style={{ width: `${((v as number) / 149) * 100}%` }}></i>
                     </span>
-                    <span className="num">{Math.round(((v as number) / 389) * 100)}%</span>
+                    <span className="num">{Math.round(((v as number) / 408) * 100)}%</span>
                   </div>
                 );
               })}
             </div>
           </div>
           <p className="note">
-            Page followers by seniority, as of {dd(F.as_of)} (389 followers with a known seniority). TG groups in amber.
+            Page followers by seniority, as of {dd(F.as_of)} (408 followers with a known seniority). TG groups in amber.
           </p>
         </section>
 
@@ -354,14 +354,14 @@ export default function CompanyPageTab({ companyPage }: CompanyPageTabProps) {
           <div className="card">
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
               {[
-                ["Senior", 569],
-                ["Entry", 352],
-                ["Director", 192],
-                ["Owner", 186],
-                ["Manager", 141],
+                ["Senior", 594],
+                ["Entry", 359],
+                ["Director", 199],
+                ["Owner", 185],
+                ["Manager", 143],
                 ["VP", 92],
-                ["CXO", 77],
-                ["Training", 62],
+                ["CXO", 80],
+                ["Training", 61],
                 ["Partner", 25],
               ].map(([k, v]) => {
                 const isTg = ["Manager", "Director", "VP", "Owner", "CXO", "Partner"].includes(k as string);
@@ -369,9 +369,9 @@ export default function CompanyPageTab({ companyPage }: CompanyPageTabProps) {
                   <div key={k as string} className={`mr ${isTg ? "t" : ""}`}>
                     <span>{k}</span>
                     <span className="b">
-                      <i style={{ width: `${((v as number) / 569) * 100}%` }}></i>
+                      <i style={{ width: `${((v as number) / 594) * 100}%` }}></i>
                     </span>
-                    <span className="num">{Math.round(((v as number) / 1696) * 100)}%</span>
+                    <span className="num">{Math.round(((v as number) / 1738) * 100)}%</span>
                   </div>
                 );
               })}
