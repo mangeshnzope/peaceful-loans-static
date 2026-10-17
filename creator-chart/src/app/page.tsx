@@ -119,9 +119,13 @@ export default function DashboardPage() {
 
             {activeTab === "monthly" && <MonthlyTab monthly={data.monthly} posts={data.posts} />}
 
-            {activeTab === "posts" && <PostsTab posts={data.posts} />}
-
-            {activeTab === "works" && <WhatWorksTab insights={data.insights} posts={data.posts} />}
+            {activeTab === "works" && (
+              <WhatWorksTab
+                insights={data.insights}
+                posts={data.posts}
+                engagement={data.engagement}
+              />
+            )}
 
             {activeTab === "data" && <DataTab data={data} />}
           </>

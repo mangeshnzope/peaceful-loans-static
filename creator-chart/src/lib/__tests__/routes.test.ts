@@ -52,7 +52,7 @@ describe("API Route Handlers In-Process Tests", () => {
 
   it("Admin Upload: Rejects payload with forbidden total impressions keys", async () => {
     const badPayload = {
-      meta: { data_to: "2026-10-16", built: "16 Oct 2026" },
+      meta: { data_to: "2026-10-16", built: "17 Oct 2026" },
       daily: [],
       weekly: [],
       monthly: [],

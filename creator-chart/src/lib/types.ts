@@ -6,6 +6,7 @@ export interface Meta {
   creator_chart_era_start: string;
   creator_onboarded: string;
   post_types?: string[];
+  post_types_excluded_from_stats?: string[];
   image_types?: string[];
   notes: string;
 }
@@ -80,6 +81,7 @@ export interface GroupRow {
   out: number | null;
   er: number | null;
   com: number;
+  ex?: boolean;
 }
 
 export interface GroupPValues {
@@ -109,6 +111,7 @@ export interface LinearFit {
 }
 
 export interface Insights {
+  excl?: string[];
   groups: {
     cat: GroupInsights;
     img?: GroupInsights;
@@ -154,6 +157,37 @@ export interface Newsletter {
   subscribers: { date: string; subscribers: number; tg_share_floor_pct: number }[];
 }
 
+export interface EngagementSummary {
+  posts: number;
+  people: number;
+  engaged_once: number;
+  regulars: number;
+  regulars_6plus: number;
+  median_regular_pct: number;
+  median_new_people: number;
+  median_first_degree_pct: number;
+}
+
+export interface EngagementPost {
+  post_id: string;
+  published: string;
+  type: string;
+  engagers: number;
+  reactors: number;
+  commenters: number;
+  commenters_is_floor: boolean;
+  first_degree_pct: number | null;
+  regular_pct: number | null;
+  new_people: number;
+  senior_title_pct: number | null;
+}
+
+export interface EngagementData {
+  note: string;
+  summary: EngagementSummary;
+  posts: EngagementPost[];
+}
+
 export interface DashboardData {
   meta: Meta;
   daily: DailyRow[];
@@ -164,4 +198,5 @@ export interface DashboardData {
   insights: Insights;
   company_page?: CompanyPage;
   newsletter?: Newsletter;
+  engagement?: EngagementData;
 }

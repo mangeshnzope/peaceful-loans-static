@@ -1,15 +1,16 @@
 "use client";
 
 import { useMemo } from "react";
-import { Insights, PostRow, GroupInsights } from "@/lib/types";
+import { Insights, PostRow, GroupInsights, EngagementData } from "@/lib/types";
 import { fmt, pct, dd } from "@/lib/formatters";
 
 interface WhatWorksTabProps {
   insights: Insights;
   posts: PostRow[];
+  engagement?: EngagementData;
 }
 
-export default function WhatWorksTab({ insights, posts }: WhatWorksTabProps) {
+export default function WhatWorksTab({ insights, posts, engagement }: WhatWorksTabProps) {
   const { groups, corr, fit } = insights;
 
   const formatPValue = (p: number | null | undefined): string => {
@@ -39,10 +40,10 @@ export default function WhatWorksTab({ insights, posts }: WhatWorksTabProps) {
     if (order) {
       rows.sort((a, b) => order.indexOf(a.g) - order.indexOf(b.g));
     } else {
-      rows.sort((a, b) => (b.tg || 0) - (a.tg || 0));
+      rows.sort((a, b) => (!!a.ex ? 1 : 0) - (!!b.ex ? 1 : 0) || ((b.tg || 0) - (a.tg || 0)));
     }
 
-    const eligible = rows.filter((r) => r.n >= 3);
+    const eligible = rows.filter((r) => r.n >= 3 && !r.ex);
     const maxMedianTg = Math.max(...eligible.map((r) => r.tg || 0));
     const maxMedianSh = Math.max(...eligible.map((r) => r.sh || 0));
     const maxMedianOut = Math.max(...eligible.map((r) => r.out || 0));
@@ -64,15 +65,22 @@ export default function WhatWorksTab({ insights, posts }: WhatWorksTabProps) {
           </thead>
           <tbody>
             {rows.map((r) => {
-              const isEligible = r.n >= 3;
+              const isEligible = r.n >= 3 && !r.ex;
               const isBestTg = isEligible && r.tg === maxMedianTg;
               const isBestSh = isEligible && r.sh === maxMedianSh;
               const isBestOut = isEligible && r.out === maxMedianOut;
               const isBestEr = isEligible && r.er === maxMedianEr;
 
               return (
-                <tr key={r.g}>
-                  <td className="l">{r.g}</td>
+                <tr key={r.g} style={{ opacity: r.ex ? 0.55 : 1 }}>
+                  <td className="l">
+                    {r.g}
+                    {r.ex && (
+                      <span className="chip w" style={{ marginLeft: 6 }}>
+                        not in stats
+                      </span>
+                    )}
+                  </td>
                   <td>{r.n}</td>
 
                   <td>
@@ -146,14 +154,23 @@ export default function WhatWorksTab({ insights, posts }: WhatWorksTabProps) {
     );
   };
 
+  const exclList = useMemo(() => insights.excl || ["Awards", "Media mention / PR"], [insights.excl]);
+  const excludedCount = useMemo(() => posts.filter((p) => exclList.includes(p.type)).length, [posts, exclList]);
+  const postsById = useMemo(() => Object.fromEntries(posts.map((p) => [p.post_id || p.url, p])), [posts]);
+  const sortedEngagementPosts = useMemo(
+    () => (engagement ? [...engagement.posts].sort((a, b) => b.published.localeCompare(a.published)) : []),
+    [engagement]
+  );
+
   // Dynamic Key Findings
   const keyFindings = useMemo(() => {
+    const validPosts = posts.filter((p) => !exclList.includes(p.type));
     const GC = groups.cat;
-    const big = GC.rows.filter((r) => r.n >= 3);
+    const big = GC.rows.filter((r) => r.n >= 3 && !r.ex);
     const byTg = [...big].sort((a, b) => (b.tg || 0) - (a.tg || 0));
     const bySh = [...big].sort((a, b) => (b.sh || 0) - (a.sh || 0));
     const topPost =
-      [...posts].sort(
+      [...validPosts].sort(
         (a, b) => (b.tg_impressions_lifetime || 0) - (a.tg_impressions_lifetime || 0)
       )[0] || { title: "", type: "", tg_impressions_lifetime: 0 };
     const A = byTg[0] || { g: "", tg: 0 };
@@ -163,8 +180,8 @@ export default function WhatWorksTab({ insights, posts }: WhatWorksTabProps) {
     const lowSh = bySh[bySh.length - 1] || { g: "", sh: 0 };
     const isTop = (m: "out" | "er", r: typeof dw) =>
       Math.max(...big.map((x) => x[m] || 0)) === r[m];
-    const eraN = posts.filter((p) => p.creator_chart_era).length;
-    const eraDw = posts.filter((p) => p.creator_chart_era && p.type === dw.g).length;
+    const eraN = validPosts.filter((p) => p.creator_chart_era).length;
+    const eraDw = validPosts.filter((p) => p.creator_chart_era && p.type === dw.g).length;
 
     const word = (p: number | null | undefined) =>
       p === null || p === undefined
@@ -253,12 +270,14 @@ export default function WhatWorksTab({ insights, posts }: WhatWorksTabProps) {
         )}). Newer posts have had less time to collect views, so the last point partly reflects post age.`,
       },
     ];
-  }, [groups, corr, fit, posts]);
+  }, [groups, corr, fit, posts, exclList]);
 
-  // Scatter Plot Data
+  // Scatter Plot Data (non-brag posts only)
   const scatterPosts = useMemo(() => {
-    return posts.filter((p) => p.out_of_network_pct !== null && p.tg_share_pct !== null);
-  }, [posts]);
+    return posts.filter(
+      (p) => !exclList.includes(p.type) && p.out_of_network_pct !== null && p.tg_share_pct !== null
+    );
+  }, [posts, exclList]);
 
   const maxTg = useMemo(() => {
     return Math.max(...scatterPosts.map((p) => p.tg_impressions_lifetime || 0));
@@ -270,10 +289,7 @@ export default function WhatWorksTab({ insights, posts }: WhatWorksTabProps) {
       <section style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         <h2>What works: TG share, TG impressions and out-of-network reach</h2>
         <p className="note">
-          Statistical read of all {posts.length} posts of 2026, each from its own post export. Medians are used because a
-          few viral posts would distort averages. <b>p</b> = chance the gap between groups is just noise (Kruskal–Wallis
-          test for groups, Spearman for relationships). Under 0.05 = reliable, 0.05–0.15 = a lean, above = not proven.
-          With 5–12 posts per group, treat leans as hypotheses to test, not rules.
+          Statistical read of {posts.length - excludedCount} posts of 2026, each from its own post export. <b>Awards</b> and <b>Media mention / PR</b> posts ({excludedCount}: e.g. BW 40 Under 40, quotes in Mint and ET) are left out of every number on this tab: wins and press mentions can't be produced every week, so they shouldn't steer what to post. They still show in the Posts tab and, greyed out, in the type table. Medians are used because a few viral posts would distort averages. <b>p</b> = chance the gap between groups is just noise (Kruskal–Wallis test for groups, Spearman for relationships). Under 0.05 = reliable, 0.05–0.15 = a lean, above = not proven. With 5–12 posts per group, treat leans as hypotheses to test, not rules.
         </p>
 
         <div className="card">
@@ -290,6 +306,119 @@ export default function WhatWorksTab({ insights, posts }: WhatWorksTabProps) {
           </ol>
         </div>
       </section>
+
+      {/* Who engages: the same people, or new ones? */}
+      {engagement && engagement.summary && (
+        <section style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          <h2>Who engages: the same people, or new ones?</h2>
+          <div className="kpis">
+            <div className="kpi">
+              <span className="eyebrow">People who engaged</span>
+              <span className="v num">{fmt(engagement.summary.people)}</span>
+              <span className="s">
+                across {engagement.summary.posts} non-award Creator Chart Era posts
+              </span>
+            </div>
+            <div className="kpi">
+              <span className="eyebrow">Engaged only once</span>
+              <span className="v num">
+                {Math.round((engagement.summary.engaged_once / engagement.summary.people) * 100)}%
+              </span>
+              <span className="s">{fmt(engagement.summary.engaged_once)} people never came back</span>
+            </div>
+            <div className="kpi">
+              <span className="eyebrow">Regulars</span>
+              <span className="v num">{fmt(engagement.summary.regulars)}</span>
+              <span className="s">
+                engaged with 3+ posts; {engagement.summary.regulars_6plus} of them with 6+
+              </span>
+            </div>
+            <div className="kpi">
+              <span className="eyebrow">Typical post</span>
+              <span className="v num">{engagement.summary.median_regular_pct}% regulars</span>
+              <span className="s">
+                median {engagement.summary.median_new_people} new people per post;{" "}
+                {engagement.summary.median_first_degree_pct}% of reactors are 1st-degree
+              </span>
+            </div>
+          </div>
+
+          <div className="card tw">
+            <table>
+              <thead>
+                <tr>
+                  <th className="l">Published</th>
+                  <th className="l">Post</th>
+                  <th className="l">Type</th>
+                  <th>Engagers</th>
+                  <th>Reactors</th>
+                  <th>Commenters</th>
+                  <th>1st-degree</th>
+                  <th>Regulars</th>
+                  <th>New people</th>
+                  <th>Senior titles</th>
+                  <th>Out-of-network</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sortedEngagementPosts.map((r) => {
+                  const p = postsById[r.post_id];
+                  const isExcluded = exclList.includes(r.type || p?.type || "");
+                  return (
+                    <tr key={r.post_id} style={{ opacity: isExcluded ? 0.55 : 1 }}>
+                      <td className="l" style={{ minWidth: 70, whiteSpace: "nowrap" }}>
+                        {dd(r.published)}
+                      </td>
+                      <td className="l" style={{ minWidth: 200 }}>
+                        {p?.url ? (
+                          <a href={p.url} target="_blank" rel="noopener noreferrer">
+                            {p.title}
+                          </a>
+                        ) : (
+                          r.post_id
+                        )}
+                      </td>
+                      <td className="l" style={{ fontSize: 12 }}>
+                        {r.type}
+                        {isExcluded && (
+                          <span className="chip w" style={{ marginLeft: 6 }}>
+                            not in stats
+                          </span>
+                        )}
+                      </td>
+                      <td>{fmt(r.engagers)}</td>
+                      <td>{fmt(r.reactors)}</td>
+                      <td>
+                        {fmt(r.commenters)}
+                        {r.commenters_is_floor ? "+" : ""}
+                      </td>
+                      <td>{r.first_degree_pct !== null ? `${r.first_degree_pct}%` : "–"}</td>
+                      <td>{r.regular_pct !== null ? `${r.regular_pct}%` : "–"}</td>
+                      <td>{fmt(r.new_people)}</td>
+                      <td>{r.senior_title_pct !== null ? `${r.senior_title_pct}%` : "–"}</td>
+                      <td>
+                        {p?.out_of_network_pct !== null && p?.out_of_network_pct !== undefined
+                          ? `${p.out_of_network_pct}%`
+                          : "–"}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p className="note">
+            From the reactions list and comments on each Creator Chart Era post, read at refresh.{" "}
+            <b>Regulars</b> = people who engaged with 3 or more of these posts (Awards and Media mention / PR posts don&apos;t
+            count towards it). <b>New people</b> = engaged for the first time in the Creator Chart Era with this post.{" "}
+            <b>1st-degree</b> = share of reactors who are your direct connections. <b>Senior titles</b> = share of reactors
+            whose LinkedIn headline names a TG-type role (manager, director, VP, head, founder, CXO, partner, owner); a rough guide
+            from headlines, not LinkedIn&apos;s seniority field. Out-of-network is views, from the post export. Awards and Media
+            mention / PR posts are shown greyed out.
+          </p>
+        </section>
+      )}
+
 
       {/* By Image */}
       {groups.img && (

@@ -1362,7 +1362,9 @@
           "Client story",
           "Founder journey & milestones",
           "Opinion & life lessons",
-          "Hiring & team"
+          "Hiring & team",
+          "Media mention / PR",
+          "Awards"
         ];
         const IMGS = DASHBOARD_DATA.meta?.image_types || [
           "Real image",
@@ -1625,7 +1627,9 @@
       // --- WHAT WORKS TAB ---
       function renderWhatWorksTabHtml() {
         const I = DASHBOARD_DATA.insights;
-        const P = DASHBOARD_DATA.posts.filter(p => p.out_of_network_pct !== null && p.tg_share_pct !== null);
+        const EXCL = DASHBOARD_DATA.meta?.post_types_excluded_from_stats || ["Awards", "Media mention / PR"];
+        const NOAW = () => DASHBOARD_DATA.posts.filter(p => !EXCL.includes(p.type));
+        const P = NOAW().filter(p => p.out_of_network_pct !== null && p.tg_share_pct !== null);
         const maxTg = Math.max(...P.map(p => p.tg_impressions_lifetime || 0));
 
         const formatP = p => p === null || p === undefined ? "–" : p < 0.001 ? "<0.001" : p.toFixed(3);
@@ -1636,9 +1640,9 @@
           if (!grp || !grp.rows) return "";
           let rows = [...grp.rows];
           if (order) rows.sort((a, b) => order.indexOf(a.g) - order.indexOf(b.g));
-          else rows.sort((a, b) => (b.tg || 0) - (a.tg || 0));
+          else rows.sort((a, b) => (!!a.ex - !!b.ex) || ((b.tg || 0) - (a.tg || 0)));
 
-          const eligible = rows.filter(r => r.n >= 3);
+          const eligible = rows.filter(r => r.n >= 3 && !r.ex);
           const maxTg = Math.max(...eligible.map(r => r.tg || 0));
           const maxSh = Math.max(...eligible.map(r => r.sh || 0));
           const maxOut = Math.max(...eligible.map(r => r.out || 0));
@@ -1660,10 +1664,10 @@
                 </thead>
                 <tbody>
                   ${rows.map(r => {
-                    const isEl = r.n >= 3;
+                    const isEl = r.n >= 3 && !r.ex;
                     return `
-                      <tr>
-                        <td class="l">${r.g}</td>
+                      <tr style="${r.ex ? 'opacity:.55' : ''}">
+                        <td class="l">${r.g}${r.ex ? ' <span class="chip w">not in stats</span>' : ''}</td>
                         <td>${r.n}</td>
                         <td>${isEl && r.tg === maxTg ? `<b style="color:var(--target)">${fmt(r.tg)}</b>` : fmt(r.tg)}</td>
                         <td>${fmt(r.tgsum)}</td>
@@ -1693,20 +1697,22 @@
         const slopeVal = Math.abs(I.fit.slope10).toFixed(2);
 
         const GC = I.groups.cat;
-        const big = GC.rows.filter(r => r.n >= 3);
+        const big = GC.rows.filter(r => r.n >= 3 && !r.ex);
         const byTg = [...big].sort((a, b) => (b.tg || 0) - (a.tg || 0));
         const bySh = [...big].sort((a, b) => (b.sh || 0) - (a.sh || 0));
-        const topPost = [...DASHBOARD_DATA.posts].sort((a, b) => (b.tg_impressions_lifetime || 0) - (a.tg_impressions_lifetime || 0))[0];
+        const topPost = [...NOAW()].sort((a, b) => (b.tg_impressions_lifetime || 0) - (a.tg_impressions_lifetime || 0))[0] || { title: "", type: "", tg_impressions_lifetime: 0 };
         const A = byTg[0] || { g: "", tg: 0 };
         const B = byTg[1] || { g: "", tg: 0 };
         const lo = byTg.slice(-2);
         const dw = bySh[0] || { g: "", sh: 0, out: 0, er: 0, tg: 0 };
         const lowSh = bySh[bySh.length - 1] || { g: "", sh: 0 };
         const isTop = (m, r) => Math.max(...big.map(x => x[m] || 0)) === r[m];
-        const eraN = DASHBOARD_DATA.posts.filter(p => p.creator_chart_era).length;
-        const eraDw = DASHBOARD_DATA.posts.filter(p => p.creator_chart_era && p.type === dw.g).length;
+        const eraN = NOAW().filter(p => p.creator_chart_era).length;
+        const eraDw = NOAW().filter(p => p.creator_chart_era && p.type === dw.g).length;
         const nEd = DASHBOARD_DATA.posts.filter(p => p.type !== (p.auto_type || p.type)).length;
         const nIe = DASHBOARD_DATA.posts.filter(p => (p.image_type || "No image") !== (p.auto_image_type || p.image_type || "No image")).length;
+        const nw = NOAW().length;
+        const na = DASHBOARD_DATA.posts.length - nw;
 
         const kf = [
           {
@@ -1735,7 +1741,7 @@
           }
         ];
 
-        // Scatter chart SVG
+        // Scatter chart SVG (non-brag posts only)
         const width = 800, height = 320;
         const margin = { left: 48, right: 24, top: 16, bottom: 44 };
         const innerWidth = width - margin.left - margin.right;
@@ -1772,10 +1778,86 @@
           `;
         });
 
+        let engHtml = "";
+        if (DASHBOARD_DATA.engagement && DASHBOARD_DATA.engagement.summary) {
+          const EG = DASHBOARD_DATA.engagement;
+          const S = EG.summary;
+          const byId = Object.fromEntries(DASHBOARD_DATA.posts.map(p => [p.post_id || p.url, p]));
+          const sortedEng = [...EG.posts].sort((a, b) => b.published.localeCompare(a.published));
+          engHtml = `
+            <section style="display:flex;flex-direction:column;gap:12px">
+              <h2>Who engages: the same people, or new ones?</h2>
+              <div class="kpis">
+                <div class="kpi">
+                  <span class="eyebrow">People who engaged</span>
+                  <span class="v num">${fmt(S.people)}</span>
+                  <span class="s">across ${S.posts} non-award Creator Chart Era posts</span>
+                </div>
+                <div class="kpi">
+                  <span class="eyebrow">Engaged only once</span>
+                  <span class="v num">${Math.round((S.engaged_once / S.people) * 100)}%</span>
+                  <span class="s">${fmt(S.engaged_once)} people never came back</span>
+                </div>
+                <div class="kpi">
+                  <span class="eyebrow">Regulars</span>
+                  <span class="v num">${fmt(S.regulars)}</span>
+                  <span class="s">engaged with 3+ posts; ${S.regulars_6plus} of them with 6+</span>
+                </div>
+                <div class="kpi">
+                  <span class="eyebrow">Typical post</span>
+                  <span class="v num">${S.median_regular_pct}% regulars</span>
+                  <span class="s">median ${S.median_new_people} new people per post; ${S.median_first_degree_pct}% of reactors are 1st-degree</span>
+                </div>
+              </div>
+              <div class="card tw">
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="l">Published</th>
+                      <th class="l">Post</th>
+                      <th class="l">Type</th>
+                      <th>Engagers</th>
+                      <th>Reactors</th>
+                      <th>Commenters</th>
+                      <th>1st-degree</th>
+                      <th>Regulars</th>
+                      <th>New people</th>
+                      <th>Senior titles</th>
+                      <th>Out-of-network</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${sortedEng.map(r => {
+                      const p = byId[r.post_id] || {};
+                      const isExcluded = EXCL.includes(r.type || p.type || "");
+                      return `
+                        <tr style="${isExcluded ? 'opacity:.55' : ''}">
+                          <td class="l" style="min-width:70px;white-space:nowrap">${dd(r.published)}</td>
+                          <td class="l" style="min-width:200px">${p.url ? `<a href="${p.url}" target="_blank" rel="noopener noreferrer">${p.title || ''}</a>` : r.post_id}</td>
+                          <td class="l" style="font-size:12px">${r.type}${isExcluded ? ' <span class="chip w">not in stats</span>' : ''}</td>
+                          <td>${fmt(r.engagers)}</td>
+                          <td>${fmt(r.reactors)}</td>
+                          <td>${fmt(r.commenters)}${r.commenters_is_floor ? '+' : ''}</td>
+                          <td>${r.first_degree_pct !== null ? `${r.first_degree_pct}%` : '–'}</td>
+                          <td>${r.regular_pct !== null ? `${r.regular_pct}%` : '–'}</td>
+                          <td>${fmt(r.new_people)}</td>
+                          <td>${r.senior_title_pct !== null ? `${r.senior_title_pct}%` : '–'}</td>
+                          <td>${p.out_of_network_pct !== null && p.out_of_network_pct !== undefined ? `${p.out_of_network_pct}%` : '–'}</td>
+                        </tr>
+                      `;
+                    }).join("")}
+                  </tbody>
+                </table>
+              </div>
+              <p class="note">From the reactions list and comments on each Creator Chart Era post, read at refresh. <b>Regulars</b> = people who engaged with 3 or more of these posts (Awards and Media mention / PR posts don’t count towards it). <b>New people</b> = engaged for the first time in the Creator Chart Era with this post. <b>1st-degree</b> = share of reactors who are your direct connections. <b>Senior titles</b> = share of reactors whose LinkedIn headline names a TG-type role (manager, director, VP, head, founder, CXO, partner, owner); a rough guide from headlines, not LinkedIn’s seniority field. Out-of-network is views, from the post export. Awards and Media mention / PR posts are shown greyed out.</p>
+            </section>
+          `;
+        }
+
         return `
           <section style="display:flex;flex-direction:column;gap:12px">
             <h2>What works: TG share, TG impressions and out-of-network reach</h2>
-            <p class="note">Statistical read of all ${DASHBOARD_DATA.posts.length} posts of 2026, each from its own post export. Medians are used because a few viral posts would distort averages. <b>p</b> = chance the gap between groups is just noise (Kruskal–Wallis test for groups, Spearman for relationships). Under 0.05 = reliable, 0.05–0.15 = a lean, above = not proven. With 5–13 posts per group, treat leans as hypotheses to test, not rules.</p>
+            <p class="note">Statistical read of ${nw} posts of 2026, each from its own post export. <b>Awards</b> and <b>Media mention / PR</b> posts (${na}: e.g. BW 40 Under 40, quotes in Mint and ET) are left out of every number on this tab: wins and press mentions can't be produced every week, so they shouldn't steer what to post. They still show in the Posts tab and, greyed out, in the type table. Medians are used because a few viral posts would distort averages. <b>p</b> = chance the gap between groups is just noise (Kruskal–Wallis test for groups, Spearman for relationships). Under 0.05 = reliable, 0.05–0.15 = a lean, above = not proven. With 5–12 posts per group, treat leans as hypotheses to test, not rules.</p>
             <div class="card">
               ${(nEd || nIe) ? `<p style="font-size:12px;color:var(--muted);margin:0 0 10px">Includes ${nEd} post type${nEd !== 1 ? "s" : ""} and ${nIe} image label${nIe !== 1 ? "s" : ""} changed by Mangesh.</p>` : ""}
               <ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:14px">
@@ -1783,6 +1865,8 @@
               </ol>
             </div>
           </section>
+
+          ${engHtml}
 
           <section style="display:flex;flex-direction:column;gap:12px">
             <h2>By image: real vs AI-generated vs none</h2>

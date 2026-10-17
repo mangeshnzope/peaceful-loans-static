@@ -1,6 +1,6 @@
 {
  "meta": {
-  "built": "16 Oct 2026",
+  "built": "17 Oct 2026",
   "data_from": "2026-01-01",
   "data_to": "2026-10-16",
   "tg_definition": [
@@ -24,7 +24,13 @@
    "Client story",
    "Founder journey & milestones",
    "Opinion & life lessons",
-   "Hiring & team"
+   "Hiring & team",
+   "Media mention / PR",
+   "Awards"
+  ],
+  "post_types_excluded_from_stats": [
+   "Awards",
+   "Media mention / PR"
   ],
   "notes": "TG impressions = impressions from viewers whose LinkedIn seniority is in tg_definition. TG share = % of all views from TG. Every grain comes from its own LinkedIn export. No total impressions are included by design."
  },
@@ -3485,8 +3491,8 @@
    "time": "10:33 AM",
    "title": "A 10000 crore listed company and peaceful loans",
    "url": "https://www.linkedin.com/posts/mangeshzope_a-10000-crore-listed-company-and-peaceful-loans-share-7506575936201408512-zFxQ",
-   "type": "Founder journey & milestones",
-   "auto_type": "Founder journey & milestones",
+   "type": "Awards",
+   "auto_type": "Awards",
    "image_type": "Real image",
    "auto_image_type": "Real image",
    "format": "Text/share",
@@ -3692,8 +3698,8 @@
    "time": "12:13 PM",
    "title": "Mint quoted me in their article on the rbis",
    "url": "https://www.linkedin.com/posts/mangeshzope_mint-quoted-me-in-their-article-on-the-rbis-ugcPost-7498993755644076033-SoRP",
-   "type": "Bank & industry critique",
-   "auto_type": "Bank & industry critique",
+   "type": "Media mention / PR",
+   "auto_type": "Media mention / PR",
    "image_type": "Real image",
    "auto_image_type": "Real image",
    "format": "Media (ugcPost)",
@@ -3991,8 +3997,8 @@
    "time": "2:31 PM",
    "title": "Moments like these are a validation for us",
    "url": "https://www.linkedin.com/posts/mangeshzope_moments-like-these-are-a-validation-for-us-share-7482720969816604672-2K7s",
-   "type": "Founder journey & milestones",
-   "auto_type": "Founder journey & milestones",
+   "type": "Media mention / PR",
+   "auto_type": "Media mention / PR",
    "image_type": "No image",
    "auto_image_type": "No image",
    "format": "Text/share",
@@ -4037,8 +4043,8 @@
    "time": "8:47 PM",
    "title": "Grateful and honestly a little pleasantly",
    "url": "https://www.linkedin.com/posts/mangeshzope_grateful-and-honestly-a-little-pleasantly-ugcPost-7479916369271144448-gX5C",
-   "type": "Founder journey & milestones",
-   "auto_type": "Founder journey & milestones",
+   "type": "Media mention / PR",
+   "auto_type": "Media mention / PR",
    "image_type": "Real image",
    "auto_image_type": "Real image",
    "format": "Media (ugcPost)",
@@ -4175,8 +4181,8 @@
    "time": "1:32 PM",
    "title": "A small but meaningful milestone for us at",
    "url": "https://www.linkedin.com/posts/mangeshzope_a-small-but-meaningful-milestone-for-us-at-share-7470747187702984704-bz3M",
-   "type": "Founder journey & milestones",
-   "auto_type": "Founder journey & milestones",
+   "type": "Media mention / PR",
+   "auto_type": "Media mention / PR",
    "image_type": "Real image",
    "auto_image_type": "Real image",
    "format": "Text/share",
@@ -10309,13 +10315,13 @@
     "rows": [
      {
       "g": "Bank & industry critique",
-      "n": 10,
-      "tg": 430.5,
-      "tgsum": 4613,
-      "sh": 46.5,
+      "n": 9,
+      "tg": 365,
+      "tgsum": 4117,
+      "sh": 46.0,
       "out": 55,
-      "er": 2.2,
-      "com": 2.0
+      "er": 1.9,
+      "com": 2
      },
      {
       "g": "Home-loan explainer",
@@ -10329,12 +10335,12 @@
      },
      {
       "g": "Founder journey & milestones",
-      "n": 13,
-      "tg": 848,
-      "tgsum": 19917,
+      "n": 9,
+      "tg": 926,
+      "tgsum": 9999,
       "sh": 46.0,
-      "out": 35,
-      "er": 1.5,
+      "out": 33,
+      "er": 1.2,
       "com": 2
      },
      {
@@ -10366,36 +10372,58 @@
       "out": 36.5,
       "er": 1.6,
       "com": 0.5
+     },
+     {
+      "g": "Media mention / PR",
+      "n": 4,
+      "tg": 615.5,
+      "tgsum": 2467,
+      "sh": 46.5,
+      "out": 35,
+      "er": 2.4,
+      "com": 2.0,
+      "ex": true
+     },
+     {
+      "g": "Awards",
+      "n": 1,
+      "tg": 7947,
+      "tgsum": 7947,
+      "sh": 47.0,
+      "out": 66,
+      "er": 3.5,
+      "com": 143,
+      "ex": true
      }
     ],
     "p": {
-     "tg": 0.002,
-     "sh": 0.208,
-     "outnet": 0.267,
-     "er": 0.519
+     "tg": 0.006,
+     "sh": 0.231,
+     "outnet": 0.262,
+     "er": 0.467
     }
    },
    "img": {
     "rows": [
      {
       "g": "No image",
-      "n": 18,
-      "tg": 604.5,
-      "tgsum": 21768,
+      "n": 17,
+      "tg": 616,
+      "tgsum": 21380,
       "sh": 47.0,
-      "out": 34.5,
+      "out": 40,
       "er": 0.8,
-      "com": 0.5
+      "com": 1
      },
      {
       "g": "Real image",
-      "n": 18,
-      "tg": 623.0,
-      "tgsum": 19361,
+      "n": 14,
+      "tg": 518.0,
+      "tgsum": 9335,
       "sh": 46.0,
-      "out": 33.0,
-      "er": 2.1,
-      "com": 2.0
+      "out": 33,
+      "er": 1.6,
+      "com": 1.0
      },
      {
       "g": "AI-generated image",
@@ -10409,9 +10437,9 @@
      }
     ],
     "p": {
-     "tg": 0.012,
-     "sh": 0.141,
-     "outnet": 0.899,
+     "tg": 0.031,
+     "sh": 0.174,
+     "outnet": 0.683,
      "er": 0.001
     }
    },
@@ -10419,93 +10447,93 @@
     "rows": [
      {
       "g": "Text/share",
-      "n": 47,
-      "tg": 393,
-      "tgsum": 42471,
+      "n": 44,
+      "tg": 389.5,
+      "tgsum": 33288,
       "sh": 46.0,
-      "out": 41,
-      "er": 1.9,
-      "com": 1
+      "out": 41.5,
+      "er": 1.8,
+      "com": 1.0
      },
      {
       "g": "Media (ugcPost)",
-      "n": 18,
+      "n": 16,
       "tg": 518,
-      "tgsum": 6623,
+      "tgsum": 5392,
       "sh": 47.0,
-      "out": 21.5,
-      "er": 1.5,
+      "out": 18,
+      "er": 1.3,
       "com": 1.0
      }
     ],
     "p": {
-     "tg": 0.388,
-     "sh": 0.461,
+     "tg": 0.434,
+     "sh": 0.372,
      "outnet": 0.001,
-     "er": 0.088
+     "er": 0.037
     }
    },
    "era": {
     "rows": [
      {
       "g": "Before",
-      "n": 37,
-      "tg": 588,
-      "tgsum": 24024,
+      "n": 34,
+      "tg": 519.0,
+      "tgsum": 22053,
       "sh": 46.0,
-      "out": 29.0,
+      "out": 29,
       "er": 1.5,
-      "com": 1
+      "com": 1.0
      },
      {
       "g": "Creator Chart Era",
-      "n": 28,
-      "tg": 365,
-      "tgsum": 25070,
-      "sh": 46.0,
-      "out": 46,
-      "er": 2.1,
-      "com": 1.5
+      "n": 26,
+      "tg": 358,
+      "tgsum": 16627,
+      "sh": 45.0,
+      "out": 45.0,
+      "er": 2.0,
+      "com": 1.0
      }
     ],
     "p": {
-     "tg": 0.236,
-     "sh": 0.876,
-     "outnet": 0.001,
-     "er": 0.12
+     "tg": 0.196,
+     "sh": 0.851,
+     "outnet": 0.002,
+     "er": 0.177
     }
    },
    "dow": {
     "rows": [
      {
       "g": "Thu",
-      "n": 10,
-      "tg": 689,
-      "tgsum": 10934,
+      "n": 9,
+      "tg": 641.0,
+      "tgsum": 10086,
       "sh": 46.0,
-      "out": 30.5,
-      "er": 1.6,
-      "com": 2.0
+      "out": 28,
+      "er": 1.5,
+      "com": 2
      },
      {
       "g": "Tue",
-      "n": 10,
-      "tg": 332.0,
-      "tgsum": 5066,
+      "n": 9,
+      "tg": 276,
+      "tgsum": 4678,
       "sh": 46.0,
-      "out": 29.0,
-      "er": 1.8,
-      "com": 1.0
+      "out": 33,
+      "er": 2.0,
+      "com": 1
      },
      {
       "g": "Fri",
-      "n": 13,
-      "tg": 507.0,
-      "tgsum": 17932,
-      "sh": 47.0,
-      "out": 57.0,
-      "er": 1.7,
-      "com": 3
+      "n": 11,
+      "tg": 480.5,
+      "tgsum": 9489,
+      "sh": 46.0,
+      "out": 55,
+      "er": 1.5,
+      "com": 2
      },
      {
       "g": "Sat",
@@ -10519,13 +10547,13 @@
      },
      {
       "g": "Mon",
-      "n": 13,
-      "tg": 350.0,
-      "tgsum": 5727,
+      "n": 12,
+      "tg": 342,
+      "tgsum": 4992,
       "sh": 44.0,
-      "out": 42,
-      "er": 2.1,
-      "com": 1
+      "out": 43.0,
+      "er": 1.8,
+      "com": 1.0
      },
      {
       "g": "Wed",
@@ -10549,51 +10577,55 @@
      }
     ],
     "p": {
-     "tg": 0.166,
-     "sh": 0.659,
-     "outnet": 0.069,
-     "er": 0.694
+     "tg": 0.221,
+     "sh": 0.832,
+     "outnet": 0.148,
+     "er": 0.578
     }
    }
   },
+  "excl": [
+   "Awards",
+   "Media mention / PR"
+  ],
   "corr": {
    "out_vs_share": {
-    "rho": -0.38,
-    "p": 0.0036,
-    "n": 56
+    "rho": -0.4,
+    "p": 0.0037,
+    "n": 52
    },
    "out_vs_tg": {
-    "rho": 0.29,
-    "p": 0.0324,
-    "n": 56
+    "rho": 0.26,
+    "p": 0.06,
+    "n": 52
    },
    "comments_vs_out": {
-    "rho": 0.41,
-    "p": 0.0007,
-    "n": 63
+    "rho": 0.37,
+    "p": 0.0037,
+    "n": 59
    },
    "reposts_vs_out": {
-    "rho": 0.51,
-    "p": 0.0,
-    "n": 63
+    "rho": 0.48,
+    "p": 0.0001,
+    "n": 59
    },
    "er_vs_share": {
-    "rho": -0.22,
-    "p": 0.0935,
-    "n": 58
+    "rho": -0.24,
+    "p": 0.0782,
+    "n": 53
    },
    "hour_vs_share": {
-    "rho": 0.02,
-    "p": 0.89,
-    "n": 58
+    "rho": 0.04,
+    "p": 0.7668,
+    "n": 53
    }
   },
   "fit": {
-   "slope10": -0.97,
-   "r2": 0.17,
-   "p": 0.0015,
-   "a": 48.95167152777717,
-   "b": -0.09736192892118208
+   "slope10": -1.04,
+   "r2": 0.18,
+   "p": 0.0016,
+   "a": 49.19866232827187,
+   "b": -0.10375994215473608
   }
  },
  "company_page": {
@@ -10809,6 +10841,385 @@
     "date": "2026-10-17",
     "subscribers": 1844,
     "tg_share_floor_pct": 32.0
+   }
+  ]
+ },
+ "engagement": {
+  "note": "Who engages with each Creator Chart Era post, from the reactions list and comments read at refresh. Counts only, no names. regular = engaged with 3+ posts whose type is not in meta.post_types_excluded_from_stats; new_people = first engagement in the Creator Chart Era; first_degree_pct = % of reactors who are direct connections; senior_title_pct = % of reactors whose headline names a TG-type role (rough guide). commenters_is_floor = LinkedIn showed only the most relevant comments.",
+  "summary": {
+   "posts": 26,
+   "people": 132,
+   "engaged_once": 95,
+   "regulars": 20,
+   "regulars_6plus": 12,
+   "median_regular_pct": 67,
+   "median_new_people": 2,
+   "median_first_degree_pct": 80
+  },
+  "posts": [
+   {
+    "post_id": "7495072253953609731",
+    "published": "2026-08-19",
+    "type": "Founder journey & milestones",
+    "engagers": 14,
+    "reactors": 13,
+    "commenters": 1,
+    "commenters_is_floor": false,
+    "first_degree_pct": 77,
+    "regular_pct": 64,
+    "new_people": 14,
+    "senior_title_pct": 69
+   },
+   {
+    "post_id": "7496445774369669121",
+    "published": "2026-08-21",
+    "type": "Client story",
+    "engagers": 16,
+    "reactors": 16,
+    "commenters": 0,
+    "commenters_is_floor": false,
+    "first_degree_pct": 88,
+    "regular_pct": 62,
+    "new_people": 9,
+    "senior_title_pct": 62
+   },
+   {
+    "post_id": "7497535248835076096",
+    "published": "2026-08-24",
+    "type": "Bank & industry critique",
+    "engagers": 17,
+    "reactors": 17,
+    "commenters": 1,
+    "commenters_is_floor": false,
+    "first_degree_pct": 65,
+    "regular_pct": 65,
+    "new_people": 8,
+    "senior_title_pct": 41
+   },
+   {
+    "post_id": "7498269296268324865",
+    "published": "2026-08-26",
+    "type": "Opinion & life lessons",
+    "engagers": 16,
+    "reactors": 15,
+    "commenters": 2,
+    "commenters_is_floor": false,
+    "first_degree_pct": 87,
+    "regular_pct": 75,
+    "new_people": 4,
+    "senior_title_pct": 67
+   },
+   {
+    "post_id": "7498993755644076033",
+    "published": "2026-08-28",
+    "type": "Media mention / PR",
+    "engagers": 27,
+    "reactors": 24,
+    "commenters": 4,
+    "commenters_is_floor": false,
+    "first_degree_pct": 58,
+    "regular_pct": 33,
+    "new_people": 16,
+    "senior_title_pct": 54
+   },
+   {
+    "post_id": "7500092783240769536",
+    "published": "2026-08-31",
+    "type": "Opinion & life lessons",
+    "engagers": 10,
+    "reactors": 10,
+    "commenters": 1,
+    "commenters_is_floor": false,
+    "first_degree_pct": 90,
+    "regular_pct": 90,
+    "new_people": 0,
+    "senior_title_pct": 60
+   },
+   {
+    "post_id": "7500800657218744321",
+    "published": "2026-09-02",
+    "type": "Client story",
+    "engagers": 14,
+    "reactors": 14,
+    "commenters": 1,
+    "commenters_is_floor": false,
+    "first_degree_pct": 86,
+    "regular_pct": 64,
+    "new_people": 2,
+    "senior_title_pct": 64
+   },
+   {
+    "post_id": "7501557451943743492",
+    "published": "2026-09-04",
+    "type": "Bank & industry critique",
+    "engagers": 15,
+    "reactors": 15,
+    "commenters": 1,
+    "commenters_is_floor": false,
+    "first_degree_pct": 73,
+    "regular_pct": 67,
+    "new_people": 4,
+    "senior_title_pct": 67
+   },
+   {
+    "post_id": "7502607226914639873",
+    "published": "2026-09-07",
+    "type": "Home-loan explainer",
+    "engagers": 7,
+    "reactors": 7,
+    "commenters": 0,
+    "commenters_is_floor": false,
+    "first_degree_pct": 86,
+    "regular_pct": 100,
+    "new_people": 0,
+    "senior_title_pct": 71
+   },
+   {
+    "post_id": "7503390922131562496",
+    "published": "2026-09-09",
+    "type": "Home-loan explainer",
+    "engagers": 8,
+    "reactors": 8,
+    "commenters": 0,
+    "commenters_is_floor": false,
+    "first_degree_pct": 88,
+    "regular_pct": 75,
+    "new_people": 1,
+    "senior_title_pct": 75
+   },
+   {
+    "post_id": "7504055163360362496",
+    "published": "2026-09-11",
+    "type": "Bank & industry critique",
+    "engagers": 14,
+    "reactors": 13,
+    "commenters": 2,
+    "commenters_is_floor": false,
+    "first_degree_pct": 62,
+    "regular_pct": 36,
+    "new_people": 8,
+    "senior_title_pct": 38
+   },
+   {
+    "post_id": "7505589782421544960",
+    "published": "2026-09-15",
+    "type": "Bank & industry critique",
+    "engagers": 9,
+    "reactors": 9,
+    "commenters": 0,
+    "commenters_is_floor": false,
+    "first_degree_pct": 78,
+    "regular_pct": 78,
+    "new_people": 2,
+    "senior_title_pct": 67
+   },
+   {
+    "post_id": "7506232694943473666",
+    "published": "2026-09-17",
+    "type": "Founder journey & milestones",
+    "engagers": 38,
+    "reactors": 36,
+    "commenters": 4,
+    "commenters_is_floor": false,
+    "first_degree_pct": 44,
+    "regular_pct": 24,
+    "new_people": 30,
+    "senior_title_pct": 47
+   },
+   {
+    "post_id": "7506575936201408512",
+    "published": "2026-09-18",
+    "type": "Awards",
+    "engagers": 466,
+    "reactors": 432,
+    "commenters": 41,
+    "commenters_is_floor": true,
+    "first_degree_pct": 79,
+    "regular_pct": 3,
+    "new_people": 438,
+    "senior_title_pct": 44
+   },
+   {
+    "post_id": "7507720186268119040",
+    "published": "2026-09-21",
+    "type": "Home-loan explainer",
+    "engagers": 5,
+    "reactors": 5,
+    "commenters": 1,
+    "commenters_is_floor": false,
+    "first_degree_pct": 60,
+    "regular_pct": 80,
+    "new_people": 1,
+    "senior_title_pct": 80
+   },
+   {
+    "post_id": "7508405750621310978",
+    "published": "2026-09-23",
+    "type": "Home-loan explainer",
+    "engagers": 8,
+    "reactors": 8,
+    "commenters": 2,
+    "commenters_is_floor": false,
+    "first_degree_pct": 62,
+    "regular_pct": 75,
+    "new_people": 1,
+    "senior_title_pct": 75
+   },
+   {
+    "post_id": "7509209819720032256",
+    "published": "2026-09-25",
+    "type": "Bank & industry critique",
+    "engagers": 9,
+    "reactors": 9,
+    "commenters": 1,
+    "commenters_is_floor": false,
+    "first_degree_pct": 44,
+    "regular_pct": 33,
+    "new_people": 5,
+    "senior_title_pct": 56
+   },
+   {
+    "post_id": "7510245222912692224",
+    "published": "2026-09-28",
+    "type": "Opinion & life lessons",
+    "engagers": 9,
+    "reactors": 9,
+    "commenters": 0,
+    "commenters_is_floor": false,
+    "first_degree_pct": 89,
+    "regular_pct": 67,
+    "new_people": 1,
+    "senior_title_pct": 56
+   },
+   {
+    "post_id": "7510982370678865920",
+    "published": "2026-09-30",
+    "type": "Bank & industry critique",
+    "engagers": 11,
+    "reactors": 11,
+    "commenters": 0,
+    "commenters_is_floor": false,
+    "first_degree_pct": 91,
+    "regular_pct": 73,
+    "new_people": 0,
+    "senior_title_pct": 36
+   },
+   {
+    "post_id": "7512042073336733696",
+    "published": "2026-10-03",
+    "type": "Client story",
+    "engagers": 6,
+    "reactors": 5,
+    "commenters": 1,
+    "commenters_is_floor": false,
+    "first_degree_pct": 80,
+    "regular_pct": 50,
+    "new_people": 1,
+    "senior_title_pct": 40
+   },
+   {
+    "post_id": "7513121763409580033",
+    "published": "2026-10-06",
+    "type": "Client story",
+    "engagers": 8,
+    "reactors": 8,
+    "commenters": 0,
+    "commenters_is_floor": false,
+    "first_degree_pct": 88,
+    "regular_pct": 62,
+    "new_people": 0,
+    "senior_title_pct": 50
+   },
+   {
+    "post_id": "7513526971423858688",
+    "published": "2026-10-07",
+    "type": "Home-loan explainer",
+    "engagers": 11,
+    "reactors": 10,
+    "commenters": 1,
+    "commenters_is_floor": false,
+    "first_degree_pct": 80,
+    "regular_pct": 45,
+    "new_people": 2,
+    "senior_title_pct": 60
+   },
+   {
+    "post_id": "7513904742264229889",
+    "published": "2026-10-08",
+    "type": "Client story",
+    "engagers": 10,
+    "reactors": 10,
+    "commenters": 1,
+    "commenters_is_floor": false,
+    "first_degree_pct": 80,
+    "regular_pct": 70,
+    "new_people": 2,
+    "senior_title_pct": 40
+   },
+   {
+    "post_id": "7514174593708883969",
+    "published": "2026-10-09",
+    "type": "Bank & industry critique",
+    "engagers": 26,
+    "reactors": 25,
+    "commenters": 3,
+    "commenters_is_floor": false,
+    "first_degree_pct": 64,
+    "regular_pct": 31,
+    "new_people": 8,
+    "senior_title_pct": 48
+   },
+   {
+    "post_id": "7514580222193610752",
+    "published": "2026-10-10",
+    "type": "Home-loan explainer",
+    "engagers": 2,
+    "reactors": 2,
+    "commenters": 0,
+    "commenters_is_floor": false,
+    "first_degree_pct": 50,
+    "regular_pct": 100,
+    "new_people": 0,
+    "senior_title_pct": 50
+   },
+   {
+    "post_id": "7515300227357044737",
+    "published": "2026-10-12",
+    "type": "Home-loan explainer",
+    "engagers": 5,
+    "reactors": 5,
+    "commenters": 0,
+    "commenters_is_floor": false,
+    "first_degree_pct": 40,
+    "regular_pct": 60,
+    "new_people": 2,
+    "senior_title_pct": 60
+   },
+   {
+    "post_id": "7516009337883058176",
+    "published": "2026-10-14",
+    "type": "Home-loan explainer",
+    "engagers": 4,
+    "reactors": 4,
+    "commenters": 0,
+    "commenters_is_floor": false,
+    "first_degree_pct": 75,
+    "regular_pct": 100,
+    "new_people": 0,
+    "senior_title_pct": 50
+   },
+   {
+    "post_id": "7516732253280964608",
+    "published": "2026-10-16",
+    "type": "Bank & industry critique",
+    "engagers": 13,
+    "reactors": 12,
+    "commenters": 2,
+    "commenters_is_floor": false,
+    "first_degree_pct": 92,
+    "regular_pct": 62,
+    "new_people": 3,
+    "senior_title_pct": 50
    }
   ]
  }

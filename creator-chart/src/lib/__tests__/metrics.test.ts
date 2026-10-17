@@ -12,7 +12,7 @@ import { DashboardData } from "../types";
 
 const typedData = data as unknown as DashboardData;
 
-describe("Creator Chart TG Dashboard Acceptance Tests (Spec v5.3 - 17 Oct 2026)", () => {
+describe("Creator Chart TG Dashboard Acceptance Tests (Spec v5.4 - 17 Oct 2026)", () => {
   it("Daily · All 2026 (1 Jan – 16 Oct): TG impressions=51,043, share=44.7%, eng=1,935, nf=883, posts=65", () => {
     const agg = aggregateDailyRange(typedData.daily, "2026-01-01", "2026-10-16");
     expect(agg.tgImpressions).toBe(51043);
@@ -142,19 +142,19 @@ describe("Creator Chart TG Dashboard Acceptance Tests (Spec v5.3 - 17 Oct 2026)"
     expect(top.out_of_network_pct).toBe(66);
   });
 
-  it("What works · By image: Real image (18, 623), AI-generated image (29, 314.5), No image (18, 604.5)", () => {
+  it("What works · By image (excluding brag posts): Real image (14, 518), AI-generated image (29, 314.5), No image (17, 616)", () => {
     expect(typedData.insights.groups.img).toBeDefined();
     const imgGrp = typedData.insights.groups.img!;
     const real = imgGrp.rows.find((r) => r.g === "Real image");
     const ai = imgGrp.rows.find((r) => r.g === "AI-generated image");
     const none = imgGrp.rows.find((r) => r.g === "No image");
-    expect(real?.n).toBe(18);
-    expect(real?.tg).toBe(623);
+    expect(real?.n).toBe(14);
+    expect(real?.tg).toBe(518);
     expect(ai?.n).toBe(29);
     expect(Math.round(ai?.tg || 0)).toBe(315);
-    expect(none?.n).toBe(18);
-    expect(Math.round(none?.tg || 0)).toBe(605);
-    expect(imgGrp.p.tg).toBe(0.012);
+    expect(none?.n).toBe(17);
+    expect(none?.tg).toBe(616);
+    expect(imgGrp.p.tg).toBe(0.031);
     expect(imgGrp.p.er).toBe(0.001);
   });
 
@@ -215,6 +215,56 @@ describe("Creator Chart TG Dashboard Acceptance Tests (Spec v5.3 - 17 Oct 2026)"
       .sort((a, b) => a - b);
     const medSh = shares[Math.floor(shares.length / 2)];
     expect(medSh).toBe(31.0);
+  });
+
+  it("What works · By type with brag exclusion: 6 normal rows + 2 excluded rows (Media mention / PR: 4 posts, Awards: 1 post). Founder journey shows 9 posts", () => {
+    expect(typedData.insights.groups.cat).toBeDefined();
+    const catGrp = typedData.insights.groups.cat;
+    const normalRows = catGrp.rows.filter((r) => !r.ex);
+    const exRows = catGrp.rows.filter((r) => r.ex);
+    expect(normalRows.length).toBe(6);
+    expect(exRows.length).toBe(2);
+
+    const mm = exRows.find((r) => r.g === "Media mention / PR");
+    expect(mm).toBeDefined();
+    expect(mm!.n).toBe(4);
+    expect(mm!.ex).toBe(true);
+
+    const aw = exRows.find((r) => r.g === "Awards");
+    expect(aw).toBeDefined();
+    expect(aw!.n).toBe(1);
+    expect(aw!.ex).toBe(true);
+
+    const fj = normalRows.find((r) => r.g === "Founder journey & milestones");
+    expect(fj).toBeDefined();
+    expect(fj!.n).toBe(9);
+
+    const exclList = typedData.meta.post_types_excluded_from_stats || [];
+    expect(exclList).toContain("Awards");
+    expect(exclList).toContain("Media mention / PR");
+
+    const nonBragPosts = typedData.posts.filter((p) => !exclList.includes(p.type));
+    expect(nonBragPosts.length).toBe(60);
+  });
+
+  it("Engagement mix · summary KPIs and per-post breakdown: 132 people, 72% once, 20 regulars (12 on 6+), 18 Sep row has 438 new people", () => {
+    expect(typedData.engagement).toBeDefined();
+    const eg = typedData.engagement!;
+    const s = eg.summary;
+    expect(s.people).toBe(132);
+    expect(Math.round((s.engaged_once / s.people) * 100)).toBe(72);
+    expect(s.engaged_once).toBe(95);
+    expect(s.regulars).toBe(20);
+    expect(s.regulars_6plus).toBe(12);
+    expect(s.median_regular_pct).toBe(67);
+    expect(s.median_new_people).toBe(2);
+    expect(s.median_first_degree_pct).toBe(80);
+
+    expect(eg.posts.length).toBe(28);
+    const sep18 = eg.posts.find((p) => p.published === "2026-09-18");
+    expect(sep18).toBeDefined();
+    expect(sep18!.new_people).toBe(438);
+    expect(sep18!.type).toBe("Awards");
   });
 
   it("Zero total impressions anywhere in dataset keys", () => {
