@@ -3161,7 +3161,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 0,
       new_followers: 4,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: null,
+      tg_frequency_est: null
     },
     {
       week_start: "2026-01-05",
@@ -3171,7 +3173,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 0,
       new_followers: 11,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: null,
+      tg_frequency_est: null
     },
     {
       week_start: "2026-01-12",
@@ -3181,7 +3185,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 1,
       new_followers: 6,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: null,
+      tg_frequency_est: null
     },
     {
       week_start: "2026-01-19",
@@ -3191,7 +3197,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 0,
       new_followers: 5,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: null,
+      tg_frequency_est: null
     },
     {
       week_start: "2026-01-26",
@@ -3201,7 +3209,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 1,
       new_followers: 5,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: null,
+      tg_frequency_est: null
     },
     {
       week_start: "2026-02-02",
@@ -3211,7 +3221,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 1,
       new_followers: 2,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: null,
+      tg_frequency_est: null
     },
     {
       week_start: "2026-02-09",
@@ -3221,7 +3233,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 0,
       new_followers: 5,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: null,
+      tg_frequency_est: null
     },
     {
       week_start: "2026-02-16",
@@ -3231,7 +3245,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 0,
       new_followers: 11,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: null,
+      tg_frequency_est: null
     },
     {
       week_start: "2026-02-23",
@@ -3241,7 +3257,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 9,
       new_followers: 10,
-      posts_published: 1
+      posts_published: 1,
+      tg_people_reached_est: 260,
+      tg_frequency_est: 1.49
     },
     {
       week_start: "2026-03-02",
@@ -3251,7 +3269,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 1,
       new_followers: 6,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: 54,
+      tg_frequency_est: 1.62
     },
     {
       week_start: "2026-03-09",
@@ -3261,7 +3281,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 2,
       new_followers: 11,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: 41,
+      tg_frequency_est: 1.77
     },
     {
       week_start: "2026-03-16",
@@ -3271,7 +3293,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 0,
       new_followers: 8,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: null,
+      tg_frequency_est: null
     },
     {
       week_start: "2026-03-23",
@@ -3281,7 +3305,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 13,
       new_followers: 11,
-      posts_published: 1
+      posts_published: 1,
+      tg_people_reached_est: 263,
+      tg_frequency_est: 1.55
     },
     {
       week_start: "2026-03-30",
@@ -3291,7 +3317,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 9,
       new_followers: 6,
-      posts_published: 1
+      posts_published: 1,
+      tg_people_reached_est: 180,
+      tg_frequency_est: 1.74
     },
     {
       week_start: "2026-04-06",
@@ -3301,7 +3329,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: true,
       engagements: 2,
       new_followers: 10,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: 30,
+      tg_frequency_est: 1.58
     },
     {
       week_start: "2026-04-13",
@@ -3311,7 +3341,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 68,
       new_followers: 13,
-      posts_published: 1
+      posts_published: 1,
+      tg_people_reached_est: 1465,
+      tg_frequency_est: 1.55
     },
     {
       week_start: "2026-04-20",
@@ -3321,7 +3353,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 69,
       new_followers: 18,
-      posts_published: 4
+      posts_published: 4,
+      tg_people_reached_est: 787,
+      tg_frequency_est: 2.12
     },
     {
       week_start: "2026-04-27",
@@ -3331,7 +3365,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 105,
       new_followers: 24,
-      posts_published: 4
+      posts_published: 4,
+      tg_people_reached_est: 1135,
+      tg_frequency_est: 2.27
     },
     {
       week_start: "2026-05-04",
@@ -3341,7 +3377,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 100,
       new_followers: 48,
-      posts_published: 7
+      posts_published: 7,
+      tg_people_reached_est: 1071,
+      tg_frequency_est: 2.47
     },
     {
       week_start: "2026-05-11",
@@ -3351,7 +3389,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 27,
       new_followers: 22,
-      posts_published: 1
+      posts_published: 1,
+      tg_people_reached_est: 632,
+      tg_frequency_est: 1.7
     },
     {
       week_start: "2026-05-18",
@@ -3361,7 +3401,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 15,
       new_followers: 13,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: 127,
+      tg_frequency_est: 2.15
     },
     {
       week_start: "2026-05-25",
@@ -3371,7 +3413,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 8,
       new_followers: 28,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: 110,
+      tg_frequency_est: 2.65
     },
     {
       week_start: "2026-06-01",
@@ -3381,7 +3425,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: true,
       engagements: 2,
       new_followers: 12,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: 41,
+      tg_frequency_est: 2.52
     },
     {
       week_start: "2026-06-08",
@@ -3391,7 +3437,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 50,
       new_followers: 13,
-      posts_published: 1
+      posts_published: 1,
+      tg_people_reached_est: 450,
+      tg_frequency_est: 1.73
     },
     {
       week_start: "2026-06-15",
@@ -3401,7 +3449,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 30,
       new_followers: 31,
-      posts_published: 1
+      posts_published: 1,
+      tg_people_reached_est: 575,
+      tg_frequency_est: 1.55
     },
     {
       week_start: "2026-06-22",
@@ -3411,7 +3461,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 86,
       new_followers: 44,
-      posts_published: 3
+      posts_published: 3,
+      tg_people_reached_est: 644,
+      tg_frequency_est: 1.82
     },
     {
       week_start: "2026-06-29",
@@ -3421,7 +3473,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 28,
       new_followers: 38,
-      posts_published: 1
+      posts_published: 1,
+      tg_people_reached_est: 546,
+      tg_frequency_est: 1.69
     },
     {
       week_start: "2026-07-06",
@@ -3431,7 +3485,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 71,
       new_followers: 38,
-      posts_published: 2
+      posts_published: 2,
+      tg_people_reached_est: 638,
+      tg_frequency_est: 1.81
     },
     {
       week_start: "2026-07-13",
@@ -3441,7 +3497,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 49,
       new_followers: 43,
-      posts_published: 4
+      posts_published: 4,
+      tg_people_reached_est: 586,
+      tg_frequency_est: 2.11
     },
     {
       week_start: "2026-07-20",
@@ -3451,7 +3509,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 73,
       new_followers: 38,
-      posts_published: 4
+      posts_published: 4,
+      tg_people_reached_est: 3585,
+      tg_frequency_est: 1.71
     },
     {
       week_start: "2026-07-27",
@@ -3461,7 +3521,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 9,
       new_followers: 22,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: 1051,
+      tg_frequency_est: 1.48
     },
     {
       week_start: "2026-08-03",
@@ -3471,7 +3533,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: true,
       engagements: 7,
       new_followers: 13,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: 191,
+      tg_frequency_est: 2.03
     },
     {
       week_start: "2026-08-10",
@@ -3481,7 +3545,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: true,
       engagements: 0,
       new_followers: 25,
-      posts_published: 0
+      posts_published: 0,
+      tg_people_reached_est: 73,
+      tg_frequency_est: 2.85
     },
     {
       week_start: "2026-08-17",
@@ -3491,7 +3557,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 54,
       new_followers: 16,
-      posts_published: 3
+      posts_published: 3,
+      tg_people_reached_est: 415,
+      tg_frequency_est: 2.23
     },
     {
       week_start: "2026-08-24",
@@ -3501,7 +3569,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 66,
       new_followers: 19,
-      posts_published: 3
+      posts_published: 3,
+      tg_people_reached_est: 599,
+      tg_frequency_est: 2.04
     },
     {
       week_start: "2026-08-31",
@@ -3511,7 +3581,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 53,
       new_followers: 21,
-      posts_published: 3
+      posts_published: 3,
+      tg_people_reached_est: 356,
+      tg_frequency_est: 2.31
     },
     {
       week_start: "2026-09-07",
@@ -3521,7 +3593,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 35,
       new_followers: 26,
-      posts_published: 3
+      posts_published: 3,
+      tg_people_reached_est: 358,
+      tg_frequency_est: 2.14
     },
     {
       week_start: "2026-09-14",
@@ -3531,7 +3605,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 595,
       new_followers: 88,
-      posts_published: 3
+      posts_published: 3,
+      tg_people_reached_est: 5802,
+      tg_frequency_est: 1.55
     },
     {
       week_start: "2026-09-21",
@@ -3541,7 +3617,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 108,
       new_followers: 28,
-      posts_published: 3
+      posts_published: 3,
+      tg_people_reached_est: 1233,
+      tg_frequency_est: 1.74
     },
     {
       week_start: "2026-09-28",
@@ -3551,7 +3629,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 43,
       new_followers: 22,
-      posts_published: 3
+      posts_published: 3,
+      tg_people_reached_est: 1026,
+      tg_frequency_est: 1.79
     },
     {
       week_start: "2026-10-05",
@@ -3561,7 +3641,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 90,
       new_followers: 34,
-      posts_published: 5
+      posts_published: 5,
+      tg_people_reached_est: 4297,
+      tg_frequency_est: 1.68
     },
     {
       week_start: "2026-10-12",
@@ -3571,7 +3653,9 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 37,
       new_followers: 18,
-      posts_published: 3
+      posts_published: 3,
+      tg_people_reached_est: 1077,
+      tg_frequency_est: 1.98
     }
   ],
   monthly: [
@@ -3583,6 +3667,8 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 2,
       new_followers: 29,
+      tg_people_reached_est: null,
+      tg_frequency_est: null,
       posts_published: 0
     },
     {
@@ -3593,6 +3679,8 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 10,
       new_followers: 30,
+      tg_people_reached_est: 308,
+      tg_frequency_est: 1.81,
       posts_published: 1
     },
     {
@@ -3603,6 +3691,8 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 19,
       new_followers: 37,
+      tg_people_reached_est: 401,
+      tg_frequency_est: 1.83,
       posts_published: 1
     },
     {
@@ -3613,6 +3703,8 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 236,
       new_followers: 62,
+      tg_people_reached_est: 2404,
+      tg_frequency_est: 2.56,
       posts_published: 10
     },
     {
@@ -3623,6 +3715,8 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 164,
       new_followers: 119,
+      tg_people_reached_est: 1701,
+      tg_frequency_est: 2.65,
       posts_published: 8
     },
     {
@@ -3633,6 +3727,8 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 189,
       new_followers: 116,
+      tg_people_reached_est: 1549,
+      tg_frequency_est: 2.28,
       posts_published: 6
     },
     {
@@ -3643,6 +3739,8 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 207,
       new_followers: 160,
+      tg_people_reached_est: 5177,
+      tg_frequency_est: 1.96,
       posts_published: 10
     },
     {
@@ -3653,6 +3751,8 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 139,
       new_followers: 78,
+      tg_people_reached_est: 1202,
+      tg_frequency_est: 2.42,
       posts_published: 7
     },
     {
@@ -3663,6 +3763,8 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 807,
       new_followers: 167,
+      tg_people_reached_est: 7281,
+      tg_frequency_est: 1.77,
       posts_published: 13
     },
     {
@@ -3673,6 +3775,8 @@ var creator_chart_dashboard_data_default = {
       tg_may_be_higher: false,
       engagements: 144,
       new_followers: 68,
+      tg_people_reached_est: 5508,
+      tg_frequency_est: 1.94,
       posts_published: 9
     }
   ],
@@ -11356,6 +11460,28 @@ var creator_chart_dashboard_data_default = {
         date: "2026-10-17",
         subscribers: 1844,
         tg_share_floor_pct: 32
+      }
+    ]
+  },
+  tg_frequency: {
+    goal: 6,
+    note: "TG frequency (est.) = impressions / members reached from that period's own export; TG people reached (est.) = members reached x TG share. LinkedIn has no reach by seniority, so TG viewers are assumed to see posts as often as everyone else. Goal: 6+ per TG member over rolling 90 days.",
+    windows_90d: [
+      {
+        start: "2026-04-20",
+        end: "2026-07-18",
+        tg_impressions: 13996,
+        tg_share_pct: 41,
+        tg_people_reached_est: 4189,
+        tg_frequency_est: 3.34
+      },
+      {
+        start: "2026-07-19",
+        end: "2026-10-16",
+        tg_impressions: 34567,
+        tg_share_pct: 44,
+        tg_people_reached_est: 16281,
+        tg_frequency_est: 2.12
       }
     ]
   },

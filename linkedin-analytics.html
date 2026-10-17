@@ -485,7 +485,7 @@
               ACTIVE_SOURCE = "page";
             } else if (h === "news" || h === "newsletter") {
               ACTIVE_SOURCE = "news";
-            } else if (["daily", "weekly", "monthly", "posts", "works", "data"].includes(h)) {
+            } else if (["daily", "weekly", "monthly", "posts", "works", "plan", "data"].includes(h)) {
               ACTIVE_SOURCE = "profile";
               ACTIVE_TAB = h;
             }
@@ -566,6 +566,7 @@
           { id: "monthly", label: "Monthly" },
           { id: "posts", label: "Posts" },
           { id: "works", label: "What works" },
+          { id: "plan", label: "Reach plan" },
           { id: "data", label: "Data" }
         ];
 
@@ -580,6 +581,7 @@
           else if (ACTIVE_TAB === "monthly") contentHtml = renderMonthlyTabHtml();
           else if (ACTIVE_TAB === "posts") contentHtml = renderPostsTabHtml();
           else if (ACTIVE_TAB === "works") contentHtml = renderWhatWorksTabHtml();
+          else if (ACTIVE_TAB === "plan") contentHtml = renderReachPlanTabHtml();
           else if (ACTIVE_TAB === "data") contentHtml = renderDataTabHtml();
         }
 
@@ -1905,6 +1907,159 @@
           <section style="display:flex;flex-direction:column;gap:12px">
             <h2>By day posted</h2>
             ${renderTable(I.groups.dow, "Day", ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"])}
+          </section>
+        `;
+      }
+
+      // --- REACH PLAN TAB ---
+      function renderReachPlanTabHtml() {
+        const tgFreq = DASHBOARD_DATA.tg_frequency;
+        const W = tgFreq?.windows_90d || [];
+        const L = W.length > 0 ? W[W.length - 1] : null;
+        const Pv = W.length > 1 ? W[W.length - 2] : null;
+
+        const bar = f => f == null ? '<span class="muted">–</span>' : `<span class="tbar" style="width:${Math.min(f / 6, 1) * 90}px;background:${f >= 6 ? 'var(--good)' : 'var(--target)'}"></span>${f.toFixed(1)}×`;
+        const need = L && L.tg_people_reached_est ? Math.round(L.tg_people_reached_est * 6) : null;
+
+        const kpisHtml = L ? `
+          <div class="kpi t">
+            <span class="eyebrow">TG frequency, last 90 days</span>
+            <span class="v num">${L.tg_frequency_est.toFixed(1)}×</span>
+            <span class="s">${dd(L.start)} – ${dd(L.end)}; goal 6×${Pv && Pv.tg_frequency_est ? ` · previous 90 days ${Pv.tg_frequency_est.toFixed(1)}×` : ''}</span>
+          </div>
+          <div class="kpi">
+            <span class="eyebrow">TG people reached, last 90 days</span>
+            <span class="v num">${fmt(L.tg_people_reached_est)}</span>
+            <span class="s">${Pv && Pv.tg_people_reached_est ? `previous 90 days ${fmt(Pv.tg_people_reached_est)}` : 'estimate'}</span>
+          </div>
+          <div class="kpi">
+            <span class="eyebrow">TG impressions, last 90 days</span>
+            <span class="v num">${fmt(L.tg_impressions)}</span>
+            <span class="s">TG share ${pct(L.tg_share_pct)}</span>
+          </div>
+          <div class="kpi">
+            <span class="eyebrow">Needed for 6× on that reach</span>
+            <span class="v num">${fmt(need)}</span>
+            <span class="s">${(need / L.tg_impressions).toFixed(1)}× today's TG impressions, or about ${fmt(need / 13)} a week</span>
+          </div>
+        ` : `<div class="kpi"><span class="s">No 90-day export yet.</span></div>`;
+
+        let tableRowsHtml = "";
+        const row = (o, g, start, end, tg, sh, reach, freq) => `
+          <tr class="${start >= '2026-08-19' ? 'cr' : ''}">
+            <td class="l" style="white-space:nowrap">${dd(start)} – ${dd(end)}</td>
+            <td class="l">${g}</td>
+            <td>${fmt(tg)}</td>
+            <td>${pct(sh)}</td>
+            <td>${fmt(reach)}</td>
+            <td style="text-align:left">${bar(freq)}</td>
+          </tr>
+        `;
+
+        [...W].reverse().forEach(o => {
+          tableRowsHtml += row(o, '90 days', o.start, o.end, o.tg_impressions, o.tg_share_pct, o.tg_people_reached_est, o.tg_frequency_est);
+        });
+
+        const validMonths = (DASHBOARD_DATA.monthly || []).filter(m => m.tg_frequency_est != null);
+        validMonths.slice(-4).reverse().forEach(o => {
+          tableRowsHtml += row(o, 'Month', o.month_start, o.month_end, o.tg_impressions, o.tg_share_pct, o.tg_people_reached_est, o.tg_frequency_est);
+        });
+
+        const validWeeks = (DASHBOARD_DATA.weekly || []).filter(w => w.tg_frequency_est != null);
+        validWeeks.slice(-6).reverse().forEach(o => {
+          tableRowsHtml += row(o, 'Week', o.week_start, o.week_end, o.tg_impressions, o.tg_share_pct, o.tg_people_reached_est, o.tg_frequency_est);
+        });
+
+        // Strategy calculation
+        const G = Object.fromEntries((DASHBOARD_DATA.insights.groups.cat.rows || []).filter(r => !r.ex).map(r => [r.g, r]));
+        const top = Object.values(G).filter(r => r.n >= 3).sort((a, b) => (b.tg || 0) - (a.tg || 0));
+        const wk8 = (DASHBOARD_DATA.weekly || []).slice(-9, -1);
+        const ppw = wk8.length ? (wk8.reduce((s, w) => s + (w.posts_published || 0), 0) / wk8.length) : null;
+        const ES = DASHBOARD_DATA.engagement && DASHBOARD_DATA.engagement.summary;
+        const NL = DASHBOARD_DATA.newsletter;
+        const CP = DASHBOARD_DATA.company_page;
+        const subs = NL && NL.subscribers && NL.subscribers.length ? NL.subscribers[NL.subscribers.length - 1] : null;
+
+        const EXCL = DASHBOARD_DATA.meta?.post_types_excluded_from_stats || ["Awards", "Media mention / PR"];
+        const NOAW = () => DASHBOARD_DATA.posts.filter(p => !EXCL.includes(p.type));
+        const median = (arr) => {
+          if (!arr.length) return null;
+          const s = [...arr].sort((a, b) => a - b);
+          const mid = Math.floor(s.length / 2);
+          return s.length % 2 !== 0 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
+        };
+
+        const N = NOAW();
+        const m = (f, k) => median(N.filter(f).map(p => p[k]).filter(v => v !== null && v !== undefined));
+        const c0 = m(p => p.comments === 0, 'tg_impressions_lifetime');
+        const c2 = m(p => p.comments >= 2, 'tg_impressions_lifetime');
+        const r0o = m(p => p.reposts === 0, 'out_of_network_pct');
+        const r1o = m(p => p.reposts >= 1, 'out_of_network_pct');
+        const r0 = m(p => p.reposts === 0, 'tg_impressions_lifetime');
+        const r1 = m(p => p.reposts >= 1, 'tg_impressions_lifetime');
+        const r0s = m(p => p.reposts === 0, 'tg_share_pct');
+        const r1s = m(p => p.reposts >= 1, 'tg_share_pct');
+
+        const S = [
+          ['1. Measure frequency on a fixed TG pool over 90 days', `Last 90 days: ${L ? L.tg_frequency_est.toFixed(1) : '–'}× on about ${L ? fmt(L.tg_people_reached_est) : '–'} TG people${Pv ? `; the 90 days before: ${Pv.tg_frequency_est.toFixed(1)}× on ${fmt(Pv.tg_people_reached_est)}` : ''}. Reach grew, frequency fell: more TG people see us, but fewer times each.`, `Target 6× over rolling 90 days. Track the 90-day row above every refresh.`],
+          ['2. Post more often, at a steady rhythm, in series', `About ${ppw == null ? '–' : ppw.toFixed(1)} posts a week over the last 8 full weeks. LinkedIn shows each post to only part of the network, so posting frequency drives frequency per person.`, `5 posts a week at the same times; run each theme as a 3–4 post series instead of one-offs.`],
+          ['3. Lean on the types that bring the most TG impressions', top.length ? `Median TG impressions per post: ${top.map(r => `${r.g} ${fmt(r.tg)}`).join(' · ')}. TG share is ${pct(Math.min(...top.map(r => r.sh)))}–${pct(Math.max(...top.map(r => r.sh)))} across types (p ${DASHBOARD_DATA.insights.groups.cat.p.sh}), so type changes volume, not quality.` : '–', (() => { const c = top.filter(r => r.g !== 'Hiring & team'); return `Weekly mix: 1–2 ${c[0] ? c[0].g : ''} posts, with ${c.slice(1, 3).map(r => r.g).join(' and ')} as the steady base. Hiring & team posts reach many people but have the lowest TG share (${G['Hiring & team'] ? pct(G['Hiring & team'].sh) : '–'}): post them when hiring, not for awareness.`; })()],
+          ['4. Stay TG-dense: grow the network inside the TG', `Every +10 pts of out-of-network views costs about ${Math.abs(DASHBOARD_DATA.insights.fit.slope10)} pts of TG share.${ES ? ` ${ES.median_first_degree_pct}% of reactors on a typical post are 1st-degree connections.` : ''}`, `20–30 connection requests a week to founders, CXOs, VPs and partners in our cities; each new TG connection raises future frequency.`],
+          ['5. Get new TG people engaging, not just the regulars', ES ? `${fmt(ES.people)} people engaged across ${ES.posts} Creator Chart Era posts; ${Math.round(ES.engaged_once / (ES.people || 1) * 100)}% only once, ${ES.regulars} regulars, median ${ES.median_new_people} new people per post. Personal, newsworthy or contrarian posts drew the most new people.` : 'See What works → Who engages.', `Comment daily on TG creators' posts, end posts with a question a senior professional would answer, tag 1–2 relevant people.`],
+          ['6. Repeat each message on every surface', `Newsletter ${subs ? fmt(+subs.subscribers) + ' subscribers (≥' + subs.tg_share_floor_pct + '% TG)' : ''}; company page ${CP && CP.followers ? fmt(CP.followers.tg_followers) + ' TG followers' : ''}.`, `One idea a week as a post, a newsletter section and a team reshare: three chances at the same TG member.`],
+          ['7. Amplify through people, not paid: comments and quote-reposts from TG voices', `Comments go with more TG impressions: median ${fmt(c0)} TG for posts with no comments vs ${fmt(c2)} with 2+. Reposts push posts out of network (median out-of-network ${r0o}% with none vs ${r1o}% with 1+) but don't add TG impressions (${fmt(r0)} vs ${fmt(r1)}) and dilute TG share (${pct(r0s)} vs ${pct(r1s)}): who reposts matters more than how many. Correlations, not proof; most posts have 0–1 reposts.`, `No paid promotion. Line up 5–10 senior voices (founders, CXOs, wealth advisers, journalists) to comment in the first hours and to quote-repost with their own take; a plain repost from a non-TG account mostly adds non-TG views. A thoughtful TG comment beats a like.`]
+        ];
+
+        return `
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>Goal: every TG member sees us 6+ times</h2>
+            <p class="note"><b>TG frequency</b> = how many times, on average, each person who saw the content saw it in that period: impressions ÷ members reached, from that period's own LinkedIn export. LinkedIn doesn't report reach by seniority, so TG viewers are assumed to see posts as often as everyone else, and <b>TG people reached</b> = members reached × TG share. Both are estimates. The goal is measured over rolling 90 days (one 90-day export each refresh), organically: no paid promotion.</p>
+            <div class="kpis">${kpisHtml}</div>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>TG frequency by period</h2>
+            <div class="card tw">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="l">Period</th>
+                    <th class="l">Grain</th>
+                    <th>TG impressions</th>
+                    <th>TG share</th>
+                    <th>TG people reached (est.)</th>
+                    <th style="text-align:left">TG frequency (est.)</th>
+                  </tr>
+                </thead>
+                <tbody>${tableRowsHtml}</tbody>
+              </table>
+            </div>
+            <p class="note">Each row comes from its own export (90-day, month or week); nothing is added up. Frequency over a longer window is always higher than over a shorter one, because people see more posts as time passes, so only compare rows of the same length. The bar shows progress to 6.</p>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <h2>Strategy: what to do, and what the data says</h2>
+            <div class="card tw">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="l">Lever</th>
+                    <th class="l">What the data says</th>
+                    <th class="l">Target / next step</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${S.map(r => `
+                    <tr>
+                      <td class="l" style="min-width:200px"><b>${r[0]}</b></td>
+                      <td class="l" style="min-width:300px;font-size:13px">${r[1]}</td>
+                      <td class="l" style="min-width:260px;font-size:13px">${r[2]}</td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+            <p class="note">Numbers update on every refresh. Awards and Media mention / PR posts are left out of the type and engagement figures. No paid promotion (Mangesh, 17 Oct 2026).</p>
           </section>
         `;
       }

@@ -39,6 +39,7 @@ export default function Header({
     { id: "monthly", label: "Monthly" },
     { id: "posts", label: "Posts" },
     { id: "works", label: "What works" },
+    { id: "plan", label: "Reach plan" },
     { id: "data", label: "Data" },
   ];
 

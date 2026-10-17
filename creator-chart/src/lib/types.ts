@@ -30,6 +30,8 @@ export interface WeeklyRow {
   engagements: number;
   new_followers: number;
   posts_published: number;
+  tg_people_reached_est?: number | null;
+  tg_frequency_est?: number | null;
 }
 
 export interface MonthlyRow {
@@ -41,6 +43,8 @@ export interface MonthlyRow {
   engagements: number;
   new_followers: number;
   posts_published: number;
+  tg_people_reached_est?: number | null;
+  tg_frequency_est?: number | null;
 }
 
 export interface PostRow {
@@ -188,6 +192,21 @@ export interface EngagementData {
   posts: EngagementPost[];
 }
 
+export interface Window90d {
+  start: string;
+  end: string;
+  tg_impressions: number;
+  tg_share_pct: number;
+  tg_people_reached_est: number;
+  tg_frequency_est: number;
+}
+
+export interface TgFrequency {
+  goal: number;
+  note: string;
+  windows_90d: Window90d[];
+}
+
 export interface DashboardData {
   meta: Meta;
   daily: DailyRow[];
@@ -199,4 +218,5 @@ export interface DashboardData {
   company_page?: CompanyPage;
   newsletter?: Newsletter;
   engagement?: EngagementData;
+  tg_frequency?: TgFrequency;
 }

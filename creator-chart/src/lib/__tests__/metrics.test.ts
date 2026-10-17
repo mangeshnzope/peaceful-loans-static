@@ -267,6 +267,59 @@ describe("Creator Chart TG Dashboard Acceptance Tests (Spec v5.4 - 17 Oct 2026)"
     expect(sep18!.type).toBe("Awards");
   });
 
+  it("Reach plan · goal, 90-day windows, KPIs and strategy calculations: 2.1×, 16,281, 34,567, 97,686", () => {
+    expect(typedData.tg_frequency).toBeDefined();
+    const tgFreq = typedData.tg_frequency!;
+    expect(tgFreq.goal).toBe(6);
+    expect(tgFreq.windows_90d.length).toBe(2);
+
+    const prev = tgFreq.windows_90d[0];
+    const latest = tgFreq.windows_90d[1];
+
+    expect(prev.start).toBe("2026-04-20");
+    expect(prev.end).toBe("2026-07-18");
+    expect(prev.tg_impressions).toBe(13996);
+    expect(prev.tg_share_pct).toBe(41.0);
+    expect(prev.tg_people_reached_est).toBe(4189);
+    expect(prev.tg_frequency_est).toBeCloseTo(3.34, 2);
+
+    expect(latest.start).toBe("2026-07-19");
+    expect(latest.end).toBe("2026-10-16");
+    expect(latest.tg_impressions).toBe(34567);
+    expect(latest.tg_share_pct).toBe(44.0);
+    expect(latest.tg_people_reached_est).toBe(16281);
+    expect(latest.tg_frequency_est).toBeCloseTo(2.12, 2);
+    expect(latest.tg_frequency_est.toFixed(1)).toBe("2.1");
+
+    const needed = Math.round(latest.tg_people_reached_est * 6);
+    expect(needed).toBe(97686);
+
+    // Strategy row 7 check (non-brag posts):
+    const exclList = typedData.meta.post_types_excluded_from_stats || [];
+    const nonBrag = typedData.posts.filter((p) => !exclList.includes(p.type));
+
+    const calculateMedian = (arr: number[]) => {
+      const s = [...arr].sort((a, b) => a - b);
+      const mid = Math.floor(s.length / 2);
+      return s.length % 2 !== 0 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
+    };
+
+    const c0 = calculateMedian(nonBrag.filter((p) => p.comments === 0 && p.tg_impressions_lifetime != null).map((p) => p.tg_impressions_lifetime!));
+    const c2 = calculateMedian(nonBrag.filter((p) => p.comments >= 2 && p.tg_impressions_lifetime != null).map((p) => p.tg_impressions_lifetime!));
+    expect(c0).toBe(282);
+    expect(c2).toBe(637);
+
+    const r0o = calculateMedian(nonBrag.filter((p) => p.reposts === 0 && p.out_of_network_pct != null).map((p) => p.out_of_network_pct!));
+    const r1o = calculateMedian(nonBrag.filter((p) => p.reposts >= 1 && p.out_of_network_pct != null).map((p) => p.out_of_network_pct!));
+    expect(r0o).toBe(26.5);
+    expect(r1o).toBe(44);
+
+    const r0 = calculateMedian(nonBrag.filter((p) => p.reposts === 0 && p.tg_impressions_lifetime != null).map((p) => p.tg_impressions_lifetime!));
+    const r1 = calculateMedian(nonBrag.filter((p) => p.reposts >= 1 && p.tg_impressions_lifetime != null).map((p) => p.tg_impressions_lifetime!));
+    expect(r0).toBe(443);
+    expect(r1).toBe(379);
+  });
+
   it("Zero total impressions anywhere in dataset keys", () => {
     const forbiddenKeys = ["impressions", "imp", "members_reached", "sv"];
     function checkKeys(obj: any) {

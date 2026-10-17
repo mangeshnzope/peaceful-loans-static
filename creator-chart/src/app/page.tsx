@@ -7,6 +7,7 @@ import WeeklyTab from "@/components/tabs/WeeklyTab";
 import MonthlyTab from "@/components/tabs/MonthlyTab";
 import PostsTab from "@/components/tabs/PostsTab";
 import WhatWorksTab from "@/components/tabs/WhatWorksTab";
+import ReachPlanTab from "@/components/tabs/ReachPlanTab";
 import DataTab from "@/components/tabs/DataTab";
 import CompanyPageTab from "@/components/tabs/CompanyPageTab";
 import NewsletterTab from "@/components/tabs/NewsletterTab";
@@ -29,7 +30,7 @@ export default function DashboardPage() {
         setActiveSource("page");
       } else if (hash === "news" || hash === "newsletter") {
         setActiveSource("news");
-      } else if (["daily", "weekly", "monthly", "posts", "works", "data"].includes(hash)) {
+      } else if (["daily", "weekly", "monthly", "posts", "works", "plan", "data"].includes(hash)) {
         setActiveSource("profile");
         setActiveTab(hash);
       }
@@ -119,6 +120,8 @@ export default function DashboardPage() {
 
             {activeTab === "monthly" && <MonthlyTab monthly={data.monthly} posts={data.posts} />}
 
+            {activeTab === "posts" && <PostsTab posts={data.posts} />}
+
             {activeTab === "works" && (
               <WhatWorksTab
                 insights={data.insights}
@@ -126,6 +129,8 @@ export default function DashboardPage() {
                 engagement={data.engagement}
               />
             )}
+
+            {activeTab === "plan" && <ReachPlanTab data={data} />}
 
             {activeTab === "data" && <DataTab data={data} />}
           </>
