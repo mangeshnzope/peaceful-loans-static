@@ -6,7 +6,6 @@
 
 - **The Ken Article:** [Read on The Ken](https://the-ken.com/story/retail-investors-piled-into-the-unlisted-markets-favourite-stock-regret-followed/)
 - **Founder's POV on LinkedIn:** [Read Mangesh Zope's LinkedIn Note](https://www.linkedin.com/posts/mangeshzope_i-made-a-financial-mistake-i-still-regret-activity-7519324828751773697-7BJK)
-- **Downloadable PDF:** [Download The Ken Article PDF](/assets/pdfs/articles/retail-investors-piled-into-the-unlisted-markets-favourite-stock-regret-followed-the-ken.pdf)
 
 ---
 
