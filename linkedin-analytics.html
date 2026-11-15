@@ -1466,6 +1466,17 @@
             </div>
             <p class="note">Every post published in 2026 (${P.length}), newest first, from one LinkedIn export per post (lifetime numbers). <b>Out-of-network</b> = % of the post's views from people who are not your followers or connections: reach LinkedIn gave the post beyond your network. "–" TG = post too small for LinkedIn to give a seniority split. Shaded rows = Creator Chart Era (from 19 Aug). Click a column to sort.</p>
 
+            ${(() => {
+              const B = P.filter(p => p.custom_button_clicks != null);
+              const tot = B.reduce((a, p) => a + p.custom_button_clicks, 0);
+              const top = B.slice().sort((a, b) => b.custom_button_clicks - a.custom_button_clicks)[0];
+              return `<div class="card" style="display:flex;flex-direction:column;gap:6px">
+                <b>Book-a-call intent: website button clicks</b>
+                <span>${B.length ? `<b>${fmt(tot)}</b> clicks across the ${B.length} posts with data${top && top.custom_button_clicks > 0 ? `, most on "${String(top.title).replace(/</g, "&lt;")}" (${top.custom_button_clicks})` : ""}.` : "No button data yet."}</span>
+                <span class="note"><b>Website button clicks</b> = how many people clicked the "Visit my website" button on your LinkedIn profile, counted per post by LinkedIn ("Custom button engagements"). It opens peaceful-loans.com with the tag <code>utm_source=LinkedInProfileMZBookacallbutton</code>, so these visits show up in Google Analytics under that source. LinkedIn's export only lists the newest 3 posts, so older posts show "–" until their own export is added. The button is the same on every post, so a click is credited to the post the person was viewing.</span>
+              </div>`;
+            })()}
+
             ${catBarHtml}
 
             <div class="filters">
