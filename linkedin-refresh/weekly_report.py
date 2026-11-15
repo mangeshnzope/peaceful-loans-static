@@ -111,20 +111,29 @@ print()
 if "--html" in sys.argv:
     import html
     esc = html.escape
-    # Homepage design language: warm ground, ink + body greys, blue/red/amber tricolor, serif headlines.
+    # Homepage design language, built email-safe: tables, bgcolor attrs, background-color (never `background:`).
     BLUE, RED, AMBER = "#1A4CC8", "#E84118", "#FFB800"
     INK, BODY, GROUND, HAIR, MUTED = "#1a1a1a", "#4a4a4a", "#fbfaf7", "#e5e7eb", "#6b7280"
     SERIF = "Georgia,Times New Roman,serif"
     SANS = "Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif"
     LOGO = "https://peaceful-loans.com/assets/logo-horizontal.png"
+    LINK = f"{URL}#works"
+
+    def cell(bg, inner="", h=None, w=None, extra=""):
+        """Coloured table cell that survives Gmail/Outlook."""
+        hh = f" height='{h}'" if h else ""
+        ww = f" width='{w}'" if w else ""
+        st = f"background-color:{bg};" + (f"height:{h}px;line-height:{h}px;font-size:{h}px;" if h else "")
+        return f"<td bgcolor='{bg}'{hh}{ww} style='{st}{extra}'>{inner}</td>"
 
     def chip(delta, label):
         if delta is None:
             return f"<span style='color:{MUTED};font-size:12px'>first week tracked</span>"
         up = delta >= 0
         c, bg, arr = (BLUE, "#EAF0FD", "&#9650;") if up else (RED, "#FDECE8", "&#9660;")
-        return (f"<span style='display:inline-block;background:{bg};color:{c};font-weight:600;font-size:12px;"
-                f"padding:3px 9px;border-radius:999px'>{arr}&nbsp;{label}</span>")
+        return (f"<table role='presentation' cellpadding='0' cellspacing='0'><tr><td bgcolor='{bg}' "
+                f"style='background-color:{bg};border-radius:999px;padding:3px 10px;font-size:12px;font-weight:bold;color:{c}'>"
+                f"{arr}&nbsp;{label}</td></tr></table>")
 
     pct_chg = (w["tg_impressions"] - prev["tg_impressions"]) / prev["tg_impressions"] * 100 if prev and prev["tg_impressions"] else None
     pts_chg = w["tg_share_pct"] - prev["tg_share_pct"] if prev and w["tg_share_pct"] is not None and prev["tg_share_pct"] is not None else None
@@ -137,16 +146,17 @@ if "--html" in sys.argv:
 
     def card(title, big, sub):
         return (f"<td width='33%' valign='top' style='padding:0 5px'>"
-                f"<div style='background:#ffffff;border:1px solid {HAIR};border-radius:8px;padding:16px 14px'>"
-                f"<div style='font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:{MUTED}'>{title}</div>"
-                f"<div style='font-family:{SERIF};font-size:32px;font-weight:600;line-height:1.15;margin:6px 0 8px;color:{INK}'>{big}</div>"
-                f"<div>{sub}</div></div></td>")
+                f"<table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>"
+                f"<td bgcolor='#ffffff' style='background-color:#ffffff;border:1px solid {HAIR};border-radius:8px;padding:16px 14px'>"
+                f"<div style='font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:{MUTED}'>{title}</div>"
+                f"<div style='font-family:{SERIF};font-size:32px;font-weight:bold;line-height:38px;margin:6px 0 8px;color:{INK}'>{big}</div>"
+                f"{sub}</td></tr></table></td>")
 
     btn_week = sum(p["custom_button_clicks"] for p in btn)
     cards = (card("TG impressions", n(w["tg_impressions"]), chip(pct_chg, f"{abs(pct_chg):.0f}% vs last week") if pct_chg is not None else chip(None, ""))
              + card("TG share", pc(w["tg_share_pct"]), chip(pts_chg, f"{abs(pts_chg):.1f} pts") if pts_chg is not None else chip(None, ""))
              + card("Button clicks", str(btn_week),
-                    f"<span style='font-size:12px;color:{MUTED}'>{tot_clicks} on {len(allb)} posts so far</span>"))
+                    f"<div style='font-size:12px;color:{MUTED}'>{tot_clicks} on {len(allb)} posts so far</div>"))
 
     ws = weeks[-8:]
     mx = max(x["tg_impressions"] for x in ws) or 1
@@ -154,68 +164,70 @@ if "--html" in sys.argv:
     for i, x in enumerate(ws):
         h = max(4, round(x["tg_impressions"] / mx * 90))
         last = i == len(ws) - 1
+        col = BLUE if last else "#C9D6F5"
         bars += (f"<td valign='bottom' align='center' style='padding:0 3px'>"
-                 f"<div style='font-size:10px;color:{MUTED};margin-bottom:3px'>{n(x['tg_impressions'])}</div>"
-                 f"<div style='height:{h}px;background:{BLUE if last else '#C9D6F5'};border-radius:3px 3px 0 0'></div>"
-                 f"<div style='font-size:10px;color:{MUTED};margin-top:4px;border-top:1px solid {HAIR};padding-top:3px'>{fd(x['week_start'])}</div></td>")
+                 f"<div style='font-size:10px;color:{MUTED};padding-bottom:3px'>{n(x['tg_impressions'])}</div>"
+                 f"<table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>{cell(col, '&nbsp;', h=h)}</tr></table>"
+                 f"<div style='font-size:10px;color:{MUTED};padding-top:4px;border-top:1px solid {HAIR}'>{fd(x['week_start'])}</div></td>")
 
     def line(p, tail, color):
-        return (f"<div style='padding:8px 0;border-top:1px solid {HAIR};font-size:13px;line-height:1.45;color:{BODY}'>"
+        return (f"<div style='padding:8px 0;border-top:1px solid {HAIR};font-size:13px;line-height:19px;color:{BODY}'>"
                 f"<b style='color:{color}'>{tail}</b><br>{esc(p['type'])} &middot; {fd(p['published'])}</div>")
 
     none = f"<div style='font-size:13px;color:{MUTED};border-top:1px solid {HAIR};padding-top:8px'>None yet</div>"
     w_html = "".join(line(p, f"{p['custom_button_clicks']} click{'s' if p['custom_button_clicks'] != 1 else ''} on {n(p['impressions_total'])} views", BLUE)
                      for p in worked[:2]) or none
     f_html = "".join(line(p, f"0 clicks on {n(p['impressions_total'])} views", RED) for p in failed[:2]) or none
-    early = (f"<div style='font-size:12px;color:{MUTED};margin-top:10px;text-align:center'>Early read: {len(allb)} of {len(d['posts'])} posts have button data. A hint, not a result.</div>")
+    early = (f"<div style='font-size:12px;color:{MUTED};padding-top:10px;text-align:center'>Early read: {len(allb)} of {len(d['posts'])} posts have button data. A hint, not a result.</div>")
+
+    def box(inner):
+        return (f"<table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>"
+                f"<td bgcolor='#ffffff' style='background-color:#ffffff;border:1px solid {HAIR};border-radius:8px;padding:14px'>{inner}</td></tr></table>")
 
     page = f"""<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
 <meta name='color-scheme' content='light only'></head>
-<body style='margin:0;padding:0;background:{GROUND};font-family:{SANS};color:{BODY}'>
-<table role='presentation' width='100%' cellpadding='0' cellspacing='0' style='background:{GROUND}'><tr><td align='center' style='padding:0 0 24px'>
+<body bgcolor='{GROUND}' style='margin:0;padding:0;background-color:{GROUND};font-family:{SANS};color:{BODY}'>
+<table role='presentation' width='100%' cellpadding='0' cellspacing='0' bgcolor='{GROUND}' style='background-color:{GROUND}'><tr><td align='center' style='padding:0 0 24px'>
 <table role='presentation' width='620' cellpadding='0' cellspacing='0' style='max-width:620px;width:100%'>
-<tr><td style='background:#ffffff;padding:16px 20px'>
+<tr><td bgcolor='#ffffff' style='background-color:#ffffff;padding:16px 20px'>
   <table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>
-    <td align='left'><img src='{LOGO}' alt='Peaceful-Loans' height='34' style='height:34px;display:block;border:0'></td>
-    <td align='right' style='font-size:12px;font-weight:600;color:{MUTED};letter-spacing:.04em;text-transform:uppercase'>Weekly LinkedIn report</td>
+    <td align='left'><a href='https://peaceful-loans.com/'><img src='{LOGO}' alt='Peaceful-Loans' width='150' height='34' style='display:block;border:0;width:150px;height:34px;color:{BLUE};font-weight:bold;font-size:16px'></a></td>
+    <td align='right' style='font-size:12px;font-weight:bold;color:{MUTED};letter-spacing:1px;text-transform:uppercase'>Weekly LinkedIn report</td>
   </tr></table>
 </td></tr>
-<tr><td style='font-size:0;line-height:0'>
+<tr><td style='padding:0'>
   <table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>
-    <td width='34%' height='3' style='background:{BLUE};height:3px;font-size:0;line-height:0'>&nbsp;</td>
-    <td width='33%' height='3' style='background:{RED};height:3px;font-size:0;line-height:0'>&nbsp;</td>
-    <td width='33%' height='3' style='background:{AMBER};height:3px;font-size:0;line-height:0'>&nbsp;</td>
+    {cell(BLUE, '&nbsp;', h=4, w='34%')}{cell(RED, '&nbsp;', h=4, w='33%')}{cell(AMBER, '&nbsp;', h=4, w='33%')}
   </tr></table>
 </td></tr>
 <tr><td style='padding:28px 20px 6px'>
-  <div style='font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:{BLUE}'>Week of {fd(w['week_start'])} &ndash; {fd(w['week_end'])} {D(w['week_end']).year}</div>
-  <div style='font-family:{SERIF};font-size:30px;line-height:1.2;font-weight:600;color:{INK};margin-top:8px'>{headline}</div>
-  <div style='font-size:14px;color:{BODY};margin-top:8px'>Are we reaching the people who take home loans? Three numbers, one chart, one question.</div>
+  <div style='font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:{BLUE}'>Week of {fd(w['week_start'])} &ndash; {fd(w['week_end'])} {D(w['week_end']).year}</div>
+  <div style='font-family:{SERIF};font-size:30px;line-height:36px;font-weight:bold;color:{INK};padding-top:8px'>{headline}</div>
+  <div style='font-size:14px;line-height:21px;color:{BODY};padding-top:8px'>Are we reaching the people who take home loans? Three numbers, one chart, one question.</div>
 </td></tr>
 <tr><td style='padding:14px 15px 4px'>
   <table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>{cards}</tr></table>
 </td></tr>
 <tr><td style='padding:10px 20px'>
-  <div style='background:#ffffff;border:1px solid {HAIR};border-radius:8px;padding:16px 14px'>
-    <div style='font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:{MUTED};margin-bottom:12px'>TG impressions, last 8 weeks</div>
-    <table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>{bars}</tr></table>
-  </div>
+  {box(f"<div style='font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:{MUTED};padding-bottom:12px'>TG impressions, last 8 weeks</div><table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>{bars}</tr></table>")}
 </td></tr>
 <tr><td style='padding:0 15px 6px'>
   <table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>
-    <td width='50%' valign='top' style='padding:0 5px'>
-      <div style='background:#ffffff;border:1px solid {HAIR};border-radius:8px;padding:14px'>
-        <div style='font-family:{SERIF};font-size:16px;font-weight:600;color:{INK};margin-bottom:8px'><span style='color:{BLUE}'>&#9650;</span> Got clicks</div>{w_html}</div></td>
-    <td width='50%' valign='top' style='padding:0 5px'>
-      <div style='background:#ffffff;border:1px solid {HAIR};border-radius:8px;padding:14px'>
-        <div style='font-family:{SERIF};font-size:16px;font-weight:600;color:{INK};margin-bottom:8px'><span style='color:{RED}'>&#9660;</span> Got none</div>{f_html}</div></td>
+    <td width='50%' valign='top' style='padding:0 5px'>{box(f"<div style='font-family:{SERIF};font-size:16px;font-weight:bold;color:{INK};padding-bottom:8px'><span style='color:{BLUE}'>&#9650;</span> Got clicks</div>{w_html}")}</td>
+    <td width='50%' valign='top' style='padding:0 5px'>{box(f"<div style='font-family:{SERIF};font-size:16px;font-weight:bold;color:{INK};padding-bottom:8px'><span style='color:{RED}'>&#9660;</span> Got none</div>{f_html}")}</td>
   </tr></table>
   {early}
 </td></tr>
-<tr><td align='center' style='padding:20px 20px 8px'>
-  <a href='{URL}#works' style='display:inline-block;background:{BLUE};color:#ffffff;text-decoration:none;font-weight:600;font-size:15px;padding:14px 28px;border-radius:6px'>See what works &rarr;</a>
+<tr><td align='center' style='padding:24px 20px 6px'>
+  <table role='presentation' cellpadding='0' cellspacing='0'><tr>
+    <td bgcolor='{BLUE}' style='background-color:{BLUE};border-radius:6px'>
+      <a href='{LINK}' style='display:block;padding:15px 32px;font-family:{SANS};font-size:16px;font-weight:bold;color:#ffffff;text-decoration:none'>Read the full report &rarr;</a>
+    </td></tr></table>
 </td></tr>
-<tr><td align='center' style='padding:6px 20px 0;font-size:12px;color:{MUTED}'>Password protected &middot; ask Mangesh for access</td></tr>
+<tr><td align='center' style='padding:10px 20px 0;font-size:13px;color:{MUTED}'>
+  Or open: <a href='{LINK}' style='color:{BLUE};text-decoration:underline'>peaceful-loans.com/linkedin-analytics</a><br>
+  <span style='font-size:12px'>Password protected &middot; ask Mangesh for access</span>
+</td></tr>
 <tr><td align='center' style='padding:22px 20px 0'>
   <div style='border-top:1px solid {HAIR};padding-top:14px;font-family:{SERIF};font-size:13px;font-style:italic;color:{MUTED}'>Peaceful-Loans &middot; We work for you and not for the bank.</div>
 </td></tr>
