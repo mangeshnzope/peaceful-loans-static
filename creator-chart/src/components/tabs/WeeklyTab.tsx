@@ -13,7 +13,21 @@ export default function WeeklyTab({ weekly }: WeeklyTabProps) {
   const calculatedWeeks = useMemo(() => calculateWeeklyWoW(weekly), [weekly]);
 
   // KPI Calculations
-  const { avgPostImpressions, avgPreImpressions, postShare, preShare, bestWeekImp, bestWeekShare, postEnd } = useMemo(() => {
+  const {
+    latestFullWeek,
+    prevFullWeek,
+    latestWoWImp,
+    latestWoWSharePts,
+    avgPostImpressions,
+    avgPreImpressions,
+    postWeeksCount,
+    preWeeksCount,
+    postShare,
+    preShare,
+    bestWeekImp,
+    bestWeekShare,
+    postEnd,
+  } = useMemo(() => {
     const fullWeeks = weekly.filter((w) => !isPartialWeek(w.week_start, w.week_end));
 
     // Creator Chart Era: all full weeks starting on or after 17 Aug with data
@@ -22,10 +36,23 @@ export default function WeeklyTab({ weekly }: WeeklyTabProps) {
     );
     const postEnd = postWeeks.length ? postWeeks[postWeeks.length - 1].week_end : "2026-09-27";
 
-    // Baseline: 13 Apr – 2 Aug (16 full weeks)
+    // Baseline: full weeks whose start is between 11 May and 27 Jul 2026 (the 12 full weeks before onboarding on 1 Aug)
     const preWeeks = fullWeeks.filter(
-      (w) => w.week_start >= "2026-04-13" && w.week_start <= "2026-07-27" && w.tg_impressions !== null
+      (w) => w.week_start >= "2026-05-11" && w.week_start <= "2026-07-27" && w.tg_impressions !== null
     );
+
+    const fwWithTg = fullWeeks.filter((w) => w.tg_impressions !== null);
+    const latestFullWeek = fwWithTg.length > 0 ? fwWithTg[fwWithTg.length - 1] : null;
+    const prevFullWeek = fwWithTg.length > 1 ? fwWithTg[fwWithTg.length - 2] : null;
+
+    let latestWoWImp: number | null = null;
+    let latestWoWSharePts: number | null = null;
+    if (latestFullWeek && prevFullWeek && prevFullWeek.tg_impressions && prevFullWeek.tg_impressions > 0 && latestFullWeek.tg_impressions !== null) {
+      latestWoWImp = ((latestFullWeek.tg_impressions - prevFullWeek.tg_impressions) / prevFullWeek.tg_impressions) * 100;
+    }
+    if (latestFullWeek && prevFullWeek && latestFullWeek.tg_share_pct !== null && prevFullWeek.tg_share_pct !== null) {
+      latestWoWSharePts = latestFullWeek.tg_share_pct - prevFullWeek.tg_share_pct;
+    }
 
     const avgPost = postWeeks.length
       ? postWeeks.reduce((acc, w) => acc + (w.tg_impressions || 0), 0) / postWeeks.length
@@ -49,8 +76,14 @@ export default function WeeklyTab({ weekly }: WeeklyTabProps) {
       .sort((a, b) => (b.tg_share_pct || 0) - (a.tg_share_pct || 0))[0];
 
     return {
+      latestFullWeek,
+      prevFullWeek,
+      latestWoWImp,
+      latestWoWSharePts,
       avgPostImpressions: avgPost,
       avgPreImpressions: avgPre,
+      postWeeksCount: postWeeks.length,
+      preWeeksCount: preWeeks.length,
       postShare: calcShare(postWeeks),
       preShare: calcShare(preWeeks),
       bestWeekImp: bestImp,
@@ -93,20 +126,61 @@ export default function WeeklyTab({ weekly }: WeeklyTabProps) {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-      {/* KPI Tiles (4 tiles) */}
-      <div className="kpis">
+      {/* KPI Tiles (6 tiles: 2 rows × 3) */}
+      <div className="kpis" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" }}>
+        <div className="kpi t">
+          <span className="eyebrow">Latest full week, TG impressions</span>
+          <span className="v num">{latestFullWeek && latestFullWeek.tg_impressions !== null ? fmt(latestFullWeek.tg_impressions) : "–"}</span>
+          <span className="s">
+            {latestFullWeek && prevFullWeek ? (
+              <>
+                {dd(latestFullWeek.week_start)} – {dd(latestFullWeek.week_end)}:{" "}
+                {latestWoWImp !== null ? (
+                  <span className={latestWoWImp >= 0 ? "up" : "dn"}>
+                    {latestWoWImp >= 0 ? "+" : "−"}
+                    {Math.abs(Math.round(latestWoWImp))}%
+                  </span>
+                ) : (
+                  "–"
+                )}{" "}
+                vs {fmt(prevFullWeek.tg_impressions)} ({dd(prevFullWeek.week_start)} – {dd(prevFullWeek.week_end)})
+              </>
+            ) : (
+              "–"
+            )}
+          </span>
+        </div>
+
+        <div className="kpi t">
+          <span className="eyebrow">Latest full week, TG share</span>
+          <span className="v num">{latestFullWeek && latestFullWeek.tg_share_pct !== null ? pct(latestFullWeek.tg_share_pct) : "–"}</span>
+          <span className="s">
+            {latestFullWeek && prevFullWeek && latestWoWSharePts !== null ? (
+              <>
+                <span className={latestWoWSharePts >= 0 ? "up" : "dn"}>
+                  {latestWoWSharePts >= 0 ? "+" : "−"}
+                  {Math.abs(latestWoWSharePts).toFixed(1)} pts
+                </span>{" "}
+                vs {pct(prevFullWeek.tg_share_pct)} the week before
+              </>
+            ) : (
+              "–"
+            )}
+          </span>
+        </div>
+
         <div className="kpi t">
           <span className="eyebrow">Avg weekly TG impressions</span>
           <span className="v num">{fmt(avgPostImpressions)}</span>
           <span className="s">
-            Creator Chart Era (17 Aug – {dd(postEnd)}) vs {fmt(avgPreImpressions)} (13 Apr – 2 Aug)
+            Creator Chart Era ({postWeeksCount} weeks, 17 Aug – {dd(postEnd)}) vs {fmt(avgPreImpressions)} in the {preWeeksCount} weeks before onboarding (11 May – 2 Aug)
           </span>
         </div>
 
         <div className="kpi t">
           <span className="eyebrow">TG share, Creator Chart Era</span>
           <span className="v num">{pct(postShare)}</span>
-          <span className="s">vs {pct(preShare)} for 13 Apr – 2 Aug</span>
+          <span className="s">vs {pct(preShare)} in the {preWeeksCount} weeks before onboarding (11 May – 2 Aug)</span>
         </div>
 
         <div className="kpi">
@@ -388,8 +462,9 @@ export default function WeeklyTab({ weekly }: WeeklyTabProps) {
         </div>
 
         <p className="note">
-          Weeks run Monday–Sunday, from one LinkedIn export per week. The first (1–4 Jan) and last (21–25 Sep) weeks are
-          partial, so they get no WoW figure.
+          Weeks run Monday–Sunday, from one LinkedIn export per week. The first week (1–4 Jan) is partial, and so is the
+          latest week until its Sunday is in; partial weeks get no WoW figure. The &quot;before&quot; comparison in the cards above
+          uses the 12 full weeks before Creator Chart onboarding (11 May – 2 Aug), so the two periods are about the same length.
         </p>
       </section>
     </div>

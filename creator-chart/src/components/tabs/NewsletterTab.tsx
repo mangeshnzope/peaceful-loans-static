@@ -156,10 +156,15 @@ export default function NewsletterTab({ newsletter }: NewsletterTabProps) {
                       {dd(e.published)}
                     </td>
                     <td>
-                      {e.tg_impressions_lifetime !== null ? (
+                      {e.tg_impressions_lifetime !== null && e.tg_impressions_lifetime > 0 ? (
                         <>
                           {e.tg_is_floor ? "≥ " : ""}
                           {fmt(e.tg_impressions_lifetime)}
+                          {e.tg_is_floor && <span className="chip w">TG may be higher</span>}
+                        </>
+                      ) : e.tg_impressions_lifetime === 0 ? (
+                        <>
+                          –
                           {e.tg_is_floor && <span className="chip w">TG may be higher</span>}
                         </>
                       ) : (
@@ -167,7 +172,7 @@ export default function NewsletterTab({ newsletter }: NewsletterTabProps) {
                       )}
                     </td>
                     <td>
-                      {e.tg_share_pct !== null ? (
+                      {e.tg_share_pct !== null && e.tg_share_pct > 0 ? (
                         <>
                           {e.tg_is_floor ? "≥ " : ""}
                           {pct(e.tg_share_pct)}

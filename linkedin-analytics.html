@@ -1070,8 +1070,20 @@
         const W = DASHBOARD_DATA.weekly;
         const fullWeeks = W.filter(w => daysBetween(w.week_start, w.week_end) === 7);
         const postWeeks = fullWeeks.filter(w => w.week_start >= "2026-08-17" && w.tg_impressions !== null);
-        const preWeeks = fullWeeks.filter(w => w.week_start >= "2026-04-13" && w.week_start <= "2026-07-27" && w.tg_impressions !== null);
+        const preWeeks = fullWeeks.filter(w => w.week_start >= "2026-05-11" && w.week_start <= "2026-07-27" && w.tg_impressions !== null);
         const eraEnd = postWeeks.length ? postWeeks[postWeeks.length - 1].week_end : "2026-09-20";
+
+        const fwWithTg = fullWeeks.filter(w => w.tg_impressions !== null);
+        const lw = fwWithTg.length > 0 ? fwWithTg[fwWithTg.length - 1] : null;
+        const pw = fwWithTg.length > 1 ? fwWithTg[fwWithTg.length - 2] : null;
+
+        let latestWoWImp = null, latestWoWSharePts = null;
+        if (lw && pw && pw.tg_impressions && pw.tg_impressions > 0 && lw.tg_impressions !== null) {
+          latestWoWImp = ((lw.tg_impressions - pw.tg_impressions) / pw.tg_impressions) * 100;
+        }
+        if (lw && pw && lw.tg_share_pct !== null && pw.tg_share_pct !== null) {
+          latestWoWSharePts = lw.tg_share_pct - pw.tg_share_pct;
+        }
 
         const avgPost = postWeeks.length ? postWeeks.reduce((acc, w) => acc + (w.tg_impressions || 0), 0) / postWeeks.length : 0;
         const avgPre = preWeeks.length ? preWeeks.reduce((acc, w) => acc + (w.tg_impressions || 0), 0) / preWeeks.length : 0;
@@ -1192,16 +1204,30 @@
         });
 
         return `
-          <div class="kpis">
+          <div class="kpis" style="grid-template-columns:repeat(auto-fit, minmax(300px, 1fr))">
+            <div class="kpi t">
+              <span class="eyebrow">Latest full week, TG impressions</span>
+              <span class="v num">${lw && lw.tg_impressions !== null ? fmt(lw.tg_impressions) : "–"}</span>
+              <span class="s">
+                ${lw && pw ? `${dd(lw.week_start)} – ${dd(lw.week_end)}: ${latestWoWImp !== null ? `<span class="${latestWoWImp >= 0 ? "up" : "dn"}">${latestWoWImp >= 0 ? "+" : "−"}${Math.abs(Math.round(latestWoWImp))}%</span>` : "–"} vs ${fmt(pw.tg_impressions)} (${dd(pw.week_start)} – ${dd(pw.week_end)})` : "–"}
+              </span>
+            </div>
+            <div class="kpi t">
+              <span class="eyebrow">Latest full week, TG share</span>
+              <span class="v num">${lw && lw.tg_share_pct !== null ? pct(lw.tg_share_pct) : "–"}</span>
+              <span class="s">
+                ${lw && pw && latestWoWSharePts !== null ? `<span class="${latestWoWSharePts >= 0 ? "up" : "dn"}">${latestWoWSharePts >= 0 ? "+" : "−"}${Math.abs(latestWoWSharePts).toFixed(1)} pts</span> vs ${pct(pw.tg_share_pct)} the week before` : "–"}
+              </span>
+            </div>
             <div class="kpi t">
               <span class="eyebrow">Avg weekly TG impressions</span>
               <span class="v num">${fmt(avgPost)}</span>
-              <span class="s">Creator Chart Era (17 Aug – ${dd(eraEnd)}) vs ${fmt(avgPre)} (13 Apr – 2 Aug)</span>
+              <span class="s">Creator Chart Era (${postWeeks.length} weeks, 17 Aug – ${dd(eraEnd)}) vs ${fmt(avgPre)} in the ${preWeeks.length} weeks before onboarding (11 May – 2 Aug)</span>
             </div>
             <div class="kpi t">
               <span class="eyebrow">TG share, Creator Chart Era</span>
               <span class="v num">${pct(calcShare(postWeeks))}</span>
-              <span class="s">vs ${pct(calcShare(preWeeks))} for 13 Apr – 2 Aug</span>
+              <span class="s">vs ${pct(calcShare(preWeeks))} in the ${preWeeks.length} weeks before onboarding (11 May – 2 Aug)</span>
             </div>
             <div class="kpi">
               <span class="eyebrow">Best week, TG impressions</span>
@@ -1248,7 +1274,7 @@
                 <tbody>${tableRows}</tbody>
               </table>
             </div>
-            <p class="note">Weeks run Monday–Sunday, from one LinkedIn export per week. The first week (1–4 Jan) is partial, and so is the latest week until its Sunday is in; partial weeks get no WoW figure.</p>
+            <p class="note">Weeks run Monday–Sunday, from one LinkedIn export per week. The first week (1–4 Jan) is partial, and so is the latest week until its Sunday is in; partial weeks get no WoW figure. The "before" comparison in the cards above uses the 12 full weeks before Creator Chart onboarding (11 May – 2 Aug), so the two periods are about the same length.</p>
           </section>
         `;
       }
@@ -2518,8 +2544,8 @@
             <tr class="${isEra ? "cr" : ""}">
               <td class="l"><a href="${e.url}" target="_blank" rel="noopener">${e.title.replace(/</g, "&lt;")}</a></td>
               <td class="l" style="white-space:nowrap">${dd(e.published)}</td>
-              <td>${e.tg_impressions_lifetime !== null ? `${fl(e)}${fmt(e.tg_impressions_lifetime)}${e.tg_is_floor ? `<span class="chip w">TG may be higher</span>` : ""}` : `<span class="muted">–</span>`}</td>
-              <td>${e.tg_share_pct !== null ? `${fl(e)}${pct(e.tg_share_pct)}` : `<span class="muted">–</span>`}</td>
+              <td>${e.tg_impressions_lifetime !== null && e.tg_impressions_lifetime > 0 ? `${fl(e)}${fmt(e.tg_impressions_lifetime)}${e.tg_is_floor ? `<span class="chip w">TG may be higher</span>` : ""}` : e.tg_impressions_lifetime === 0 ? `–${e.tg_is_floor ? `<span class="chip w">TG may be higher</span>` : ""}` : `<span class="muted">–</span>`}</td>
+              <td>${e.tg_share_pct !== null && e.tg_share_pct > 0 ? `${fl(e)}${pct(e.tg_share_pct)}` : `<span class="muted">–</span>`}</td>
               <td>${e.out_of_network_pct !== null ? `${e.out_of_network_pct}%` : `<span class="muted">–</span>`}</td>
               <td>${fmt(e.engagements)}</td>
               <td>${e.comments}</td>
