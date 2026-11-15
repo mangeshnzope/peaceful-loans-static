@@ -4983,7 +4983,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 0,
       engagement_rate_pct: 2.08,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 436
     },
     {
       post_id: "7501557451943743492",
@@ -5007,7 +5008,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 1,
       engagement_rate_pct: 2.69,
-      custom_button_clicks: null
+      custom_button_clicks: 1,
+      impressions_total: 670
     },
     {
       post_id: "7500800657218744321",
@@ -5031,7 +5033,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 0,
       engagement_rate_pct: 3.47,
-      custom_button_clicks: null
+      custom_button_clicks: 1,
+      impressions_total: 521
     },
     {
       post_id: "7500092783240769536",
@@ -5055,7 +5058,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 0,
       engagement_rate_pct: 3.32,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 394
     },
     {
       post_id: "7498993755644076033",
@@ -5079,7 +5083,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 0,
       engagement_rate_pct: 3.15,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 1020
     },
     {
       post_id: "7498269296268324865",
@@ -5103,7 +5108,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 2.21,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 862
     },
     {
       post_id: "7497535248835076096",
@@ -5127,7 +5133,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 1,
       engagement_rate_pct: 2.46,
-      custom_button_clicks: null
+      custom_button_clicks: 1,
+      impressions_total: 817
     },
     {
       post_id: "7496445774369669121",
@@ -5151,7 +5158,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 0,
       engagement_rate_pct: 3.48,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 518
     },
     {
       post_id: "7495072253953609731",
@@ -5175,7 +5183,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 0,
       engagement_rate_pct: 1.9,
-      custom_button_clicks: null
+      custom_button_clicks: 1,
+      impressions_total: 949
     },
     {
       post_id: "7495063360074477570",
@@ -5199,7 +5208,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 1,
       engagement_rate_pct: 3.66,
-      custom_button_clicks: null
+      custom_button_clicks: 1,
+      impressions_total: 604
     },
     {
       post_id: "7486245321606619138",
@@ -5223,7 +5233,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 6,
       engagement_rate_pct: 0.26,
-      custom_button_clicks: null
+      custom_button_clicks: 6,
+      impressions_total: 10337
     },
     {
       post_id: "7485494610555781120",
@@ -5247,7 +5258,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 1,
       engagement_rate_pct: 0.19,
-      custom_button_clicks: null
+      custom_button_clicks: 5,
+      impressions_total: 2706
     },
     {
       post_id: "7485527693921431552",
@@ -5271,7 +5283,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 1.11,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 460
     },
     {
       post_id: "7484796987507335168",
@@ -5320,7 +5333,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 3,
       engagement_rate_pct: 1.73,
-      custom_button_clicks: null
+      custom_button_clicks: 2,
+      impressions_total: 1106
     },
     {
       post_id: "7483663913348358144",
