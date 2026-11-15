@@ -607,7 +607,10 @@
             <h1>Is our content getting people to click the button?</h1>
 
             <p class="note">
-              <b>One KPI: Premium button clicks</b>, people who click <b>Visit my website</b> under Mangesh's name. Everything else here is supporting context, always in this order: <b>button clicks, TG impressions, total impressions, TG share</b>. <b>TG impressions</b> = views from people whose LinkedIn seniority is <b>Manager, Director, VP, Owner, CXO or Partner</b>, the closest match to ₹50L+ households taking ₹2 Cr+ home loans; <b>TG share</b> = the % of all views from them. Reach only matters if it leads to clicks. Creator onboarded 1 Aug; first Creator Chart Era post 19 Aug.
+              <b>One KPI: Premium button clicks.</b> Context after it, in order: TG impressions, total impressions, TG share.
+              <details style="display:inline"><summary style="cursor:pointer;color:var(--accent)">What is TG?</summary>
+                <span>Views from people whose LinkedIn seniority is Manager, Director, VP, Owner, CXO or Partner, the closest match to ₹50L+ households taking ₹2 Cr+ home loans. TG share = the % of all views from them. Creator onboarded 1 Aug; first Creator Chart Era post 19 Aug.</span>
+              </details>
             </p>
 
             <div style="font-size:12px;color:var(--muted)">Data to ${dd(meta.data_to)} 2026 · <b>Refreshed ${meta.refreshed_at ? new Date(meta.refreshed_at).toLocaleString("en-IN", { timeZone: "Asia/Kolkata", day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit", hour12: true }) + " IST" : meta.built}</b></div>
@@ -1476,7 +1479,7 @@
               return `<div class="card" style="display:flex;flex-direction:column;gap:6px">
                 <b>Book-a-call intent: website button clicks</b>
                 <span>${B.length ? `<b>${fmt(tot)}</b> clicks across the ${B.length} posts with data${top && top.custom_button_clicks > 0 ? `, most on "${String(top.title).replace(/</g, "&lt;")}" (${top.custom_button_clicks})` : ""}.` : "No button data yet."}</span>
-                <span class="note"><b>Website button clicks</b> = how many people clicked the "Visit my website" button on your LinkedIn profile, counted per post by LinkedIn ("Custom button engagements"). It opens peaceful-loans.com with the tag <code>utm_source=LinkedInProfileMZBookacallbutton</code>, so these visits show up in Google Analytics under that source. LinkedIn's export only lists the newest 3 posts, so older posts show "–" until their own export is added. The button is the same on every post, so a click is credited to the post the person was viewing.</span>
+                <span class="note">Clicks on "Visit my website", per post, lifetime. Opens the <b>Button clicks</b> tab for patterns.</span>
               </div>`;
             })()}
 
@@ -1744,7 +1747,10 @@
         return `
           <section style="display:flex;flex-direction:column;gap:14px">
             <h2>Button clicks: which posts bring book-a-call intent</h2>
-            <p class="note">The goal: readers click <b>Visit my website</b> under your name, which opens peaceful-loans.com (tagged <code>utm_source=LinkedInProfileMZBookacallbutton</code> in Google Analytics). <b>Clicks per 1,000 views</b> uses total impressions, so big and small posts compare fairly. Only <b>${B.length} of ${all.length} posts</b> have button data so far (the button exists from 28 Oct 2026, and older posts are being filled in, about ${days} more day${days !== 1 ? "s" : ""}). A pattern shows only when each group has ${MIN_POSTS}+ posts and ${fmt(MIN_VIEWS)}+ views. Clicks are lifetime and credited to the post the person was viewing.</p>
+            <p class="note">Clicks on <b>Visit my website</b> under your name.${B.length < all.length ? ` Data for ${B.length} of ${all.length} posts so far.` : ""}
+              <details style="display:inline"><summary style="cursor:pointer;color:var(--accent)">How to read this</summary>
+                <span>Clicks per 1,000 views = clicks ÷ total views × 1,000, so big and small posts compare fairly. Clicks are lifetime and credited to the post being viewed. The button exists from 28 Oct 2026. A pattern shows only when each group has ${MIN_POSTS}+ posts and ${fmt(MIN_VIEWS)}+ views. The button opens peaceful-loans.com tagged <code>utm_source=LinkedInProfileMZBookacallbutton</code> in Google Analytics.</span>
+              </details></p>
             <div class="kpis">
               <div class="kpi"><span class="s">Button clicks, posts with data</span><span class="v">${fmt(sumC(B))}</span></div>
               <div class="kpi"><span class="s">Overall rate</span><span class="v">${f1(rate(B))}</span><span class="s">per 1,000 views</span></div>
@@ -1760,16 +1766,18 @@
               <div class="card"><b style="color:var(--accent)">▲ Top 3 for button clicks</b><ol style="margin:10px 0 0;padding-left:20px;font-size:13px">${top3.map(p => ex(p, "var(--accent)")).join("")}</ol></div>
               <div class="card"><b style="color:var(--bad)">▼ Bottom 3</b><ol style="margin:10px 0 0;padding-left:20px;font-size:13px">${worst3.map(p => ex(p, "var(--bad)")).join("") || "<li class='muted'>None yet</li>"}</ol></div>
             </div>
-            ${DIMS.map(dimTable).join("")}
-            <div class="card">
-              <b>Experiments to try (hypotheses, not findings)</b>
+            <details class="card"><summary style="cursor:pointer"><b>Breakdowns by type, image, format, day and time</b></summary>
+              ${DIMS.map(dimTable).join("")}
+            </details>
+            <details class="card">
+              <summary style="cursor:pointer"><b>Ideas to test</b></summary>
               <ol style="margin:8px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:13px">
                 <li>Name the button in the post's last line, e.g. "Want help with your home loan? Tap Visit my website under my name." Compare click rate with and without that line.</li>
                 <li>Repeat the post kinds the pattern above favours, and cut back on the ones it flags, once each group has ${MIN_POSTS}+ posts.</li>
                 <li>Give each campaign its own tag. The button link carries one tag for every post, so Google Analytics can't tell posts apart.</li>
                 <li>Check the landing page. The button opens the homepage; a visitor needs another click to book. Test pointing it straight at the booking page.</li>
               </ol>
-            </div>
+            </details>
           </section>`;
       }
 

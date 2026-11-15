@@ -38,8 +38,8 @@
     var recent = (st === "done" || st === "skipped") && d.finished_at &&
       Date.now() - Date.parse(d.finished_at) < MIN_GAP_H * 3600e3;
     var dot = "dot", line;
-    if (st === "requested") { dot += " run"; line = "<b>Refresh requested</b> " + ago(d.requested_at) + ". Your Mac picks it up within an hour. Keep it awake with Chrome open."; }
-    else if (st === "running") { dot += " run"; line = "<b>Refresh running</b> since " + ago(d.started_at) + ". It takes about 20 to 40 minutes."; }
+    if (st === "requested") { dot += " run"; line = "<b>Refresh requested</b> " + ago(d.requested_at) + ". Starts within an hour."; }
+    else if (st === "running") { dot += " run"; line = "<b>Refresh running</b> since " + ago(d.started_at) + "."; }
     else if (st === "failed") { dot += " bad"; line = "<b>Last refresh failed</b> " + ago(d.finished_at) + ": " + esc(d.note || "see the scheduled task"); }
     else if (d.finished_at) { dot += " ok"; line = "<b>Last refreshed</b> " + ago(d.finished_at) + (d.note ? ". " + esc(d.note) : ""); }
     else { line = "No refresh has been requested from this page yet."; }
@@ -48,7 +48,7 @@
     if (state.canWrite) {
       if (state.confirming && !busy) {
         action = '<button id="rfYes">Start refresh</button><button id="rfNo" class="sec">Cancel</button>' +
-          '<span>Pulls the newest LinkedIn data on Mangesh’s Mac, then updates the website and this page. No email goes to the team.</span>';
+          '<span>Takes about 30 minutes. No team email.</span>';
       } else {
         var why = busy ? "A refresh is already in progress." :
           recent ? "Refreshed less than " + MIN_GAP_H + " hours ago. Next refresh allowed after " + new Date(Date.parse(d.finished_at) + MIN_GAP_H * 3600e3).toLocaleString() + "." : "";
