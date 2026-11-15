@@ -677,8 +677,8 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
       payload.overrides = overrides;
       payload.image_overrides = imageOverrides;
 
-      // Guarantee zero total impressions
-      const forbidden = ["impressions", "imp", "members_reached", "sv"];
+      // Strip reach keys (total impressions are now allowed)
+      const forbidden = ["members_reached", "sv"]; // total impressions allowed since 16 Nov 2026 (key: impressions_total)
       function sanitizeData(obj: any): any {
         if (Array.isArray(obj)) return obj.map(sanitizeData);
         if (obj !== null && typeof obj === "object") {
@@ -969,7 +969,7 @@ async function handleApiRequest(request: Request, env: any, ctx: any): Promise<R
         }
 
         // Section 9 validation: reject total impressions keys
-        const forbidden = ["impressions", "imp", "members_reached", "sv"];
+        const forbidden = ["members_reached", "sv"]; // total impressions allowed since 16 Nov 2026 (key: impressions_total)
         function checkForbiddenKeys(obj: any): string | null {
           if (Array.isArray(obj)) {
             for (const item of obj) {
