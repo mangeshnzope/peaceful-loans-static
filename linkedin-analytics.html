@@ -486,7 +486,7 @@
               ACTIVE_SOURCE = "page";
             } else if (h === "news" || h === "newsletter") {
               ACTIVE_SOURCE = "news";
-            } else if (["daily", "weekly", "monthly", "posts", "works", "plan", "data"].includes(h)) {
+            } else if (["daily", "weekly", "monthly", "posts", "works", "clicks", "plan", "data"].includes(h)) {
               ACTIVE_SOURCE = "profile";
               ACTIVE_TAB = h;
             }
@@ -567,6 +567,7 @@
           { id: "monthly", label: "Monthly" },
           { id: "posts", label: "Posts" },
           { id: "works", label: "What works" },
+          { id: "clicks", label: "Button clicks" },
           { id: "plan", label: "Reach plan" },
           { id: "data", label: "Data" }
         ];
@@ -582,6 +583,7 @@
           else if (ACTIVE_TAB === "monthly") contentHtml = renderMonthlyTabHtml();
           else if (ACTIVE_TAB === "posts") contentHtml = renderPostsTabHtml();
           else if (ACTIVE_TAB === "works") contentHtml = renderWhatWorksTabHtml();
+          else if (ACTIVE_TAB === "clicks") contentHtml = renderButtonClicksTabHtml();
           else if (ACTIVE_TAB === "plan") contentHtml = renderReachPlanTabHtml();
           else if (ACTIVE_TAB === "data") contentHtml = renderDataTabHtml();
         }
@@ -1671,6 +1673,106 @@
       }
 
       // --- WHAT WORKS TAB ---
+      function renderButtonClicksTabHtml() {
+        const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+        const all = DASHBOARD_DATA.posts;
+        const B = all.filter(p => p.custom_button_clicks != null && p.impressions_total);
+        const sumC = a => a.reduce((s, p) => s + p.custom_button_clicks, 0);
+        const sumI = a => a.reduce((s, p) => s + p.impressions_total, 0);
+        const rate = a => sumI(a) ? sumC(a) / sumI(a) * 1000 : 0;
+        const bucket = p => {
+          const m = /(\d+):\d+\s*(AM|PM)/i.exec(p.time || "");
+          if (!m) return null;
+          const h = (+m[1] % 12) + (m[2].toUpperCase() === "PM" ? 12 : 0);
+          return h < 12 ? "Mornings" : h < 17 ? "Afternoons" : "Evenings";
+        };
+        const FMT = { "Media (ugcPost)": "Image/video posts", "Text/share": "Text posts" };
+        const DIMS = [
+          ["Post type", p => p.type],
+          ["Image", p => p.image_type || "No image"],
+          ["Format", p => FMT[p.format] || p.format],
+          ["Posting day", p => p.weekday],
+          ["Posting time", bucket]
+        ];
+        const groupsOf = fn => {
+          const g = {};
+          B.forEach(p => { const k = fn(p); if (k) (g[k] = g[k] || []).push(p); });
+          return g;
+        };
+        const MIN_POSTS = 3, MIN_VIEWS = 2000;
+        const found = [];
+        DIMS.forEach(([label, fn]) => {
+          const g = Object.entries(groupsOf(fn)).filter(([, v]) => v.length >= MIN_POSTS && sumI(v) >= MIN_VIEWS);
+          if (g.length < 2) return;
+          g.sort((a, b) => rate(b[1]) - rate(a[1]));
+          const best = g[0], worst = g[g.length - 1];
+          if (rate(best[1]) <= 0) return;
+          found.push({ label, best, worst, score: rate(worst[1]) ? rate(best[1]) / rate(worst[1]) : 99 });
+        });
+        found.sort((a, b) => b.score - a.score);
+        const pats = found.slice(0, 3);
+
+        const f1 = x => x.toFixed(1);
+        const patLine = c => {
+          const rb = rate(c.best[1]), rw = rate(c.worst[1]);
+          const rel = rw > 0 ? `${(rb / rw).toFixed(1)}× the clicks of` : "clicks, while";
+          const tail = rw > 0 ? `${esc(c.worst[0])} (${f1(rw)} per 1,000 views, ${c.worst[1].length} posts)` : `${esc(c.worst[0])} got none (${c.worst[1].length} posts)`;
+          return `<li><b>${c.label}:</b> <b style="color:var(--accent)">${esc(c.best[0])}</b> get ${f1(rb)} clicks per 1,000 views (${c.best[1].length} posts), ${rel} ${tail}. <b>Do more of ${esc(c.best[0])}; do less of ${esc(c.worst[0])}.</b></li>`;
+        };
+        const postsLeft = all.filter(p => !p.impressions_total).length;
+        const days = Math.ceil(postsLeft / 5);
+
+        const ex = (p, color) => {
+          const r = p.custom_button_clicks / p.impressions_total * 1000;
+          return `<li style="margin-bottom:10px"><b style="color:${color}">${p.custom_button_clicks} click${p.custom_button_clicks !== 1 ? "s" : ""} · ${f1(r)} per 1,000 views</b><br>“${esc(String(p.title).slice(0, 80))}…”<br><span class="muted" style="font-size:12px">${esc(p.type)} · ${dd(p.published)} · ${fmt(p.impressions_total)} views</span></li>`;
+        };
+        const byRate = B.slice().sort((a, b) => (b.custom_button_clicks / b.impressions_total) - (a.custom_button_clicks / a.impressions_total) || b.impressions_total - a.impressions_total);
+        const top3 = byRate.slice(0, 3);
+        const worst3 = B.filter(p => !top3.includes(p)).sort((a, b) => (a.custom_button_clicks / a.impressions_total) - (b.custom_button_clicks / b.impressions_total) || b.impressions_total - a.impressions_total).slice(0, 3);
+
+        const dimTable = ([label, fn]) => {
+          const rows = Object.entries(groupsOf(fn)).sort((a, b) => rate(b[1]) - rate(a[1]));
+          if (!rows.length) return "";
+          const maxR = Math.max(...rows.map(r => rate(r[1])), 0.001);
+          return `<h3 style="margin:8px 0 0;font:600 15px var(--disp)">By ${label.toLowerCase()}</h3>
+            <div class="card tw"><table><thead><tr><th class="l">${label}</th><th>Posts</th><th>Total views</th><th>Button clicks</th><th>Clicks per 1,000 views</th></tr></thead><tbody>${rows.map(([k, a]) => `<tr><td class="l">${esc(k)}${a.length < MIN_POSTS ? ` <span class="chip w" title="Fewer than ${MIN_POSTS} posts">too few</span>` : ""}</td><td>${a.length}</td><td>${fmt(sumI(a))}</td><td>${fmt(sumC(a))}</td><td><span class="tbar" style="width:${rate(a) / maxR * 80}px"></span>${f1(rate(a))}</td></tr>`).join("")}</tbody></table></div>`;
+        };
+
+        if (!B.length) {
+          return `<section style="display:flex;flex-direction:column;gap:12px"><h2>Button clicks: what brings them</h2><p class="note">No button data yet. It fills in as each post's export is added.</p></section>`;
+        }
+        return `
+          <section style="display:flex;flex-direction:column;gap:14px">
+            <h2>Button clicks: which posts bring book-a-call intent</h2>
+            <p class="note">The goal: readers click <b>Visit my website</b> under your name, which opens peaceful-loans.com (tagged <code>utm_source=LinkedInProfileMZBookacallbutton</code> in Google Analytics). <b>Clicks per 1,000 views</b> uses total impressions, so big and small posts compare fairly. Only <b>${B.length} of ${all.length} posts</b> have button data so far (the button exists from 28 Oct 2026, and older posts are being filled in, about ${days} more day${days !== 1 ? "s" : ""}). A pattern shows only when each group has ${MIN_POSTS}+ posts and ${fmt(MIN_VIEWS)}+ views. Clicks are lifetime and credited to the post the person was viewing.</p>
+            <div class="kpis">
+              <div class="kpi"><span class="s">Button clicks, posts with data</span><span class="v">${fmt(sumC(B))}</span></div>
+              <div class="kpi"><span class="s">Overall rate</span><span class="v">${f1(rate(B))}</span><span class="s">per 1,000 views</span></div>
+              <div class="kpi"><span class="s">Posts with at least 1 click</span><span class="v">${B.filter(p => p.custom_button_clicks > 0).length} of ${B.length}</span></div>
+            </div>
+            <div class="card">
+              <b>What the pattern says</b>
+              ${pats.length
+                ? `<ol style="margin:8px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:10px;font-size:14px">${pats.map(patLine).join("")}</ol>`
+                : `<p style="margin:8px 0 0;font-size:14px">Too early to call a pattern: no kind of post has ${MIN_POSTS}+ posts with button data yet. The backfill adds 5 posts a day.</p>`}
+            </div>
+            <div class="grid2">
+              <div class="card"><b style="color:var(--accent)">▲ Top 3 for button clicks</b><ol style="margin:10px 0 0;padding-left:20px;font-size:13px">${top3.map(p => ex(p, "var(--accent)")).join("")}</ol></div>
+              <div class="card"><b style="color:var(--bad)">▼ Bottom 3</b><ol style="margin:10px 0 0;padding-left:20px;font-size:13px">${worst3.map(p => ex(p, "var(--bad)")).join("") || "<li class='muted'>None yet</li>"}</ol></div>
+            </div>
+            ${DIMS.map(dimTable).join("")}
+            <div class="card">
+              <b>Experiments to try (hypotheses, not findings)</b>
+              <ol style="margin:8px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:13px">
+                <li>Name the button in the post's last line, e.g. "Want help with your home loan? Tap Visit my website under my name." Compare click rate with and without that line.</li>
+                <li>Repeat the post kinds the pattern above favours, and cut back on the ones it flags, once each group has ${MIN_POSTS}+ posts.</li>
+                <li>Give each campaign its own tag. The button link carries one tag for every post, so Google Analytics can't tell posts apart.</li>
+                <li>Check the landing page. The button opens the homepage; a visitor needs another click to book. Test pointing it straight at the booking page.</li>
+              </ol>
+            </div>
+          </section>`;
+      }
+
       function renderWhatWorksTabHtml() {
         const I = DASHBOARD_DATA.insights;
         const EXCL = DASHBOARD_DATA.meta?.post_types_excluded_from_stats || ["Awards", "Media mention / PR"];
@@ -1900,56 +2002,7 @@
           `;
         }
 
-        const btnHtml = (() => {
-          const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
-          const B = DASHBOARD_DATA.posts.filter(p => p.custom_button_clicks != null && p.impressions_total);
-          const all = DASHBOARD_DATA.posts.length;
-          const sumC = a => a.reduce((s, p) => s + p.custom_button_clicks, 0);
-          const sumI = a => a.reduce((s, p) => s + p.impressions_total, 0);
-          const rate = a => sumI(a) ? sumC(a) / sumI(a) * 1000 : 0;
-          if (!B.length) {
-            return `<section style="display:flex;flex-direction:column;gap:12px"><h2>What gets people to click the website button</h2><p class="note">No button data yet. It fills in as each post's export is added.</p></section>`;
-          }
-          const groupTable = (key, label, fallback) => {
-            const g = {};
-            B.forEach(p => { const k = p[key] || fallback; (g[k] = g[k] || []).push(p); });
-            const rows = Object.entries(g).sort((a, b) => rate(b[1]) - rate(a[1]));
-            const maxR = Math.max(...rows.map(r => rate(r[1])), 0.001);
-            return `<div class="card tw"><table><thead><tr><th class="l">${label}</th><th>Posts</th><th>Total impressions</th><th>Button clicks</th><th>Clicks per 1,000 impressions</th></tr></thead><tbody>${rows.map(([k, a]) => `<tr><td class="l">${esc(k)}${a.length < 3 ? ` <span class="chip w" title="Fewer than 3 posts">too few</span>` : ""}</td><td>${a.length}</td><td>${fmt(sumI(a))}</td><td>${fmt(sumC(a))}</td><td><span class="tbar" style="width:${rate(a) / maxR * 80}px"></span>${rate(a).toFixed(2)}</td></tr>`).join("")}</tbody></table></div>`;
-          };
-          const top = B.slice().sort((a, b) => b.custom_button_clicks - a.custom_button_clicks || b.impressions_total - a.impressions_total).slice(0, 5);
-          const zero = B.filter(p => p.custom_button_clicks === 0).sort((a, b) => b.impressions_total - a.impressions_total).slice(0, 5);
-          const li = (p, extra) => `<li>${dd(p.published)} · ${esc(p.type)} · ${esc(String(p.title).slice(0, 60))} <span class="muted">${extra}</span></li>`;
-          return `
-          <section style="display:flex;flex-direction:column;gap:12px">
-            <h2>What gets people to click the website button (book-a-call intent)</h2>
-            <p class="note">The goal: people who read a post click <b>Visit my website</b> under your name, which opens peaceful-loans.com. <b>Clicks per 1,000 impressions</b> uses total impressions, so a big post and a small post compare fairly. Only <b>${B.length} of ${all} posts</b> have button data so far (the button exists from 28 Oct 2026, and older posts are still being filled in), so treat every pattern below as a hint to test, not a result. Clicks are lifetime and credited to the post the person was viewing.</p>
-            <div class="kpis">
-              <div class="kpi"><span class="s">Button clicks, posts with data</span><span class="v">${fmt(sumC(B))}</span></div>
-              <div class="kpi"><span class="s">Overall rate</span><span class="v">${rate(B).toFixed(2)}</span><span class="s">per 1,000 impressions</span></div>
-              <div class="kpi"><span class="s">Posts with at least 1 click</span><span class="v">${B.filter(p => p.custom_button_clicks > 0).length} of ${B.length}</span></div>
-            </div>
-            <div class="grid2">
-              <div><b>Worked: most clicks</b><ol style="margin:6px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:13px">${top.filter(p => p.custom_button_clicks > 0).map(p => li(p, `${p.custom_button_clicks} click${p.custom_button_clicks !== 1 ? "s" : ""} on ${fmt(p.impressions_total)} impressions`)).join("") || "<li class='muted'>None yet</li>"}</ol></div>
-              <div><b>Did not work: reach but no clicks</b><ol style="margin:6px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:13px">${zero.map(p => li(p, `0 clicks on ${fmt(p.impressions_total)} impressions`)).join("") || "<li class='muted'>None yet</li>"}</ol></div>
-            </div>
-            <h3 style="margin:8px 0 0;font:600 15px var(--disp)">By type of post</h3>
-            ${groupTable("type", "Type", "Unknown")}
-            <h3 style="margin:8px 0 0;font:600 15px var(--disp)">By image</h3>
-            ${groupTable("image_type", "Image", "No image")}
-            <h3 style="margin:8px 0 0;font:600 15px var(--disp)">By format</h3>
-            ${groupTable("format", "Format", "Unknown")}
-            <div class="card">
-              <b>Experiments to try (hypotheses, not findings)</b>
-              <ol style="margin:8px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:13px">
-                <li>Name the button in the post's last line, e.g. "Want help with your home loan? Tap Visit my website under my name." The button is easy to miss unless the post points at it. Compare click rate with and without that line.</li>
-                <li>Repeat the format of the posts that got clicks above, and drop what reached people but got none, once at least 3 posts per group have data.</li>
-                <li>Give each campaign its own tag. The button link today carries one tag for every post, so Google Analytics can't tell posts apart; changing the link per campaign would show which content converts.</li>
-                <li>Check the landing page. The button opens the homepage; a visitor needs another click to book. Test pointing it straight at the booking page.</li>
-              </ol>
-            </div>
-          </section>`;
-        })();
+        const btnHtml = `<div class="card"><b>Website button clicks</b> moved to their own tab. <a href="#clicks">Open the Button clicks tab →</a></div>`;
 
         return `
           <section style="display:flex;flex-direction:column;gap:12px">

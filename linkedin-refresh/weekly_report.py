@@ -118,7 +118,7 @@ if "--html" in sys.argv:
     SERIF = "Georgia,Times New Roman,serif"
     SANS = "Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif"
     LOGO = "https://peaceful-loans.com/assets/logo-horizontal.png"
-    LINK = f"{URL}#works"
+    LINK = f"{URL}#clicks"
     k = lambda x: f"{x / 1000:.1f}k" if x >= 1000 else f"{x:.0f}"
 
     def cell(bg, inner="", h=None, w=None):
@@ -179,10 +179,67 @@ if "--html" in sys.argv:
         return (f"<div style='padding:9px 0;border-top:1px solid {HAIR};font-size:14px;line-height:20px;color:{BODY}'>"
                 f"<b style='color:{color}'>{tail}</b><br>{esc(p['type'])} &middot; {fd(p['published'])}</div>")
 
-    none = f"<div style='font-size:14px;color:{MUTED};border-top:1px solid {HAIR};padding-top:9px'>None yet</div>"
-    w_html = "".join(line(p, f"{p['custom_button_clicks']} click{'s' if p['custom_button_clicks'] != 1 else ''} on {n(p['impressions_total'])} views", BLUE)
-                     for p in worked[:2]) or none
-    f_html = "".join(line(p, f"0 clicks on {n(p['impressions_total'])} views", RED) for p in failed[:2]) or none
+    def bucket(p):
+        t = (p.get("time") or "").upper()
+        try:
+            hh = int(t.split(":")[0]) % 12 + (12 if "PM" in t else 0)
+        except ValueError:
+            return None
+        return "mornings" if hh < 12 else "afternoons" if hh < 17 else "evenings"
+
+    FMT = {"Media (ugcPost)": "image/video posts", "Text/share": "text posts"}
+    DIMS = [("type", "post type", lambda p: p.get("type")),
+            ("image", "image", lambda p: p.get("image_type") or "No image"),
+            ("format", "format", lambda p: FMT.get(p.get("format"), p.get("format"))),
+            ("day", "posting day", lambda p: p.get("weekday")),
+            ("time", "posting time", bucket)]
+
+    def pattern_insights():
+        found = []
+        for _k, label, fn in DIMS:
+            g = {}
+            for p in allb:
+                g.setdefault(fn(p), []).append(p)
+            g = {a: v for a, v in g.items() if a and len(v) >= 3 and sum(x["impressions_total"] for x in v) >= 2000}
+            if len(g) < 2:
+                continue
+            ranked = sorted(g.items(), key=lambda kv: -rate(kv[1]))
+            (bn, bv), (wn, wv) = ranked[0], ranked[-1]
+            rb, rw = rate(bv), rate(wv)
+            if rb <= 0:
+                continue
+            found.append(dict(label=label, bn=bn, bv=bv, rb=rb, wn=wn, wv=wv, rw=rw, score=(rb / rw if rw else 99)))
+        return sorted(found, key=lambda c: -c["score"])[:2]
+
+    pats = pattern_insights()
+    left_days = -(-(len(d["posts"]) - len([p for p in d["posts"] if p.get("impressions_total")])) // 5)
+
+    def pat_line(txt, sub, color):
+        return (f"<div style='padding:9px 0;border-top:1px solid {HAIR};font-size:14px;line-height:20px;color:{BODY}'>"
+                f"<b style='color:{color}'>{txt}</b><br>{sub}</div>")
+
+    if pats:
+        more_html = "".join(pat_line(f"{esc(str(c['bn']))}", f"{c['rb']:.1f} clicks per 1,000 views &middot; {len(c['bv'])} posts &middot; by {c['label']}", BLUE) for c in pats)
+        less_html = "".join(pat_line(f"{esc(str(c['wn']))}", f"{c['rw']:.1f} clicks per 1,000 views &middot; {len(c['wv'])} posts &middot; by {c['label']}", RED) for c in pats)
+    else:
+        more_html = less_html = ""
+    npost = len(d["posts"])
+    early_html = pat_line("Too early to call a pattern",
+                          f"Only {len(allb)} of {npost} posts have button data. We need 3+ posts of each kind. The backfill finishes in about {left_days} days.", MUTED)
+
+    def ex(p, color):
+        r = p["custom_button_clicks"] / p["impressions_total"] * 1000
+        return (f"<div style='padding:9px 0;border-top:1px solid {HAIR};font-size:14px;line-height:20px;color:{BODY}'>"
+                f"<b style='color:{color}'>{p['custom_button_clicks']} click{'s' if p['custom_button_clicks'] != 1 else ''} &middot; {r:.1f} per 1,000 views</b><br>"
+                f"&ldquo;{esc(p['title'][:58])}&hellip;&rdquo;<br>"
+                f"<span style='font-size:12px;color:{MUTED}'>{esc(p['type'])} &middot; {fd(p['published'])} &middot; {n(p['impressions_total'])} views</span></div>")
+
+    by_rate = sorted(allb, key=lambda p: (-p["custom_button_clicks"] / p["impressions_total"], -p["impressions_total"]))
+    top3 = by_rate[:3]
+    rest = [p for p in allb if p not in top3]
+    worst3 = sorted(rest, key=lambda p: (p["custom_button_clicks"] / p["impressions_total"], -p["impressions_total"]))[:3]
+    w_html = "".join(ex(p, BLUE) for p in top3) or ""
+    f_html = "".join(ex(p, RED) for p in worst3) or ""
 
     def box(inner):
         return (f"<table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>"
@@ -192,6 +249,11 @@ if "--html" in sys.argv:
         return f"<div style='font-family:{SERIF};font-size:18px;font-weight:bold;color:{INK};padding-bottom:6px'><span style='color:{color}'>{arrow}</span> {t}</div>"
 
     gap = "<tr><td height='12' style='height:12px;line-height:12px;font-size:12px'>&nbsp;</td></tr>"
+    if pats:
+        pat_boxes = (f"<tr><td>{box(title('Do more of this', BLUE, '&#9650;') + more_html)}</td></tr>{gap}"
+                     f"<tr><td>{box(title('Do less of this', RED, '&#9660;') + less_html)}</td></tr>{gap}")
+    else:
+        pat_boxes = f"<tr><td>{box(title('What the pattern says', BLUE, '&#9679;') + early_html)}</td></tr>{gap}"
 
     page = f"""<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
 <meta name='color-scheme' content='light dark'><meta name='supported-color-schemes' content='light dark'></head>
@@ -223,10 +285,11 @@ if "--html" in sys.argv:
     {gap}
     <tr><td>{box(f"<div style='font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:{MUTED};padding-bottom:12px'>TG impressions, last 8 weeks</div><table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>{bars}</tr></table>")}</td></tr>
     {gap}
-    <tr><td>{box(title('Got button clicks', BLUE, '&#9650;') + w_html)}</td></tr>
+    {pat_boxes}
+    <tr><td>{box(title('Top 3 for button clicks', BLUE, '&#9650;') + w_html)}</td></tr>
     {gap}
-    <tr><td>{box(title('Got none', RED, '&#9660;') + f_html)}</td></tr>
-    <tr><td style='font-size:12px;color:{MUTED};padding-top:10px;text-align:center'>Early read: {len(allb)} of {len(d['posts'])} posts have button data. A hint, not a result.</td></tr>
+    <tr><td>{box(title('Bottom 3', RED, '&#9660;') + f_html)}</td></tr>
+    <tr><td style='font-size:12px;color:{MUTED};padding-top:10px;text-align:center'>Based on {len(allb)} of {len(d['posts'])} posts with button data. Clicks per 1,000 total views, so big and small posts compare fairly.</td></tr>
   </table>
 </td></tr>
 <tr><td align='center' style='padding:26px 16px 6px'>
