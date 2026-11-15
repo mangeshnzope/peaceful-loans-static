@@ -10,11 +10,11 @@ TG = seniority Manager, Director, VP, Owner, CXO, Partner. Total impressions are
 - No retry loops. One retry at most; on any warning, captcha, login, "unusual activity" or error page: STOP, push nothing, report.
 - Never click the profile's "Visit my website" button (clicks are counted in analytics).
 
-## Task 1: daily (about 8:32): 1 export, 2 on Mondays or the 1st
-1. Export yesterday only (custom range). Save to `~/Downloads/Linkedin analysis/daily/YYYY-MM-DD.xlsx`.
-2. `python3 -I linkedin-refresh/ingest.py daily <file> --write`, then `ingest.py buttons <same file> --write`.
-3. Mondays: also export last Mon-Sun week -> `ingest.py weekly`. 1st of month: previous month -> `ingest.py monthly`.
-4. `publish.py --check`, then `publish.py --push "Daily TG dashboard refresh"`.
+## Weekly task: Tuesday 8 AM (about 9 exports, spaced 60-90 s apart)
+1. Export the previous full Mon-Sun week, the month to date, and each of its 7 days (custom ranges). Save under `~/Downloads/Linkedin analysis/{weekly,monthly,daily}/`.
+2. `ingest.py daily <file> --write` for each day, `ingest.py weekly`, `ingest.py monthly`, then `ingest.py buttons <weekly file> --write`.
+3. `publish.py --check`, then `publish.py --push "Weekly TG dashboard refresh"`.
+4. Email (only if the push succeeded): `python3 -I linkedin-refresh/weekly_report.py --html` -> send via Gmail to tanya@creatorchart.in, CC ananya@creatorchart.in and mangesh@peaceful-loans.com. One email per run, nothing extra in it.
 
 ## Task 2: post backfill (about 14:17): at most 5 per-post exports
 1. `python3 -I linkedin-refresh/next_posts.py 5` lists the posts that still need an export.
