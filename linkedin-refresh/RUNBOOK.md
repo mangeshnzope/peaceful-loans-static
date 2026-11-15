@@ -1,23 +1,26 @@
-# Daily LinkedIn TG refresh: runbook for the scheduled Claude task
+# LinkedIn TG refresh: runbook (slow, small runs)
 
-Goal: add yesterday's data to `creator-chart/data/creator_chart_dashboard_data.json`, then publish with `publish.py`.
-Spec for the JSON: `creator-chart/data/creator_chart_dashboard_spec.md` §4. TG = seniority Manager, Director, VP, Owner, CXO, Partner.
-Never write total impressions or reach into the JSON (keys `impressions`, `imp`, `members_reached`, `sv` are rejected).
+Goal: keep `creator-chart/data/creator_chart_dashboard_data.json` current, then publish with `publish.py`.
+TG = seniority Manager, Director, VP, Owner, CXO, Partner. Total impressions are stored as `impressions_total`
+(allowed since 16 Nov 2026); reach (`members_reached`) and `sv` stay out.
 
-## Every day (incremental)
-1. Chrome (the signed-in LinkedIn profile): open
-   `https://www.linkedin.com/analytics/creator/content?metricType=IMPRESSIONS&timeRange=custom` and set the range to yesterday only, then Export. Save to `~/Downloads/Linkedin analysis/daily/YYYY-MM-DD.xlsx`.
-2. Same for the current Monday-to-yesterday week and the current month-to-date (weekly/monthly rows are their own exports, never summed from days).
-3. Open the Posts list (Content analytics, Top posts); for any post published since the last `data_to` and every post of the last 14 days, export its post analytics to `~/Downloads/Linkedin analysis/posts/<post_id>.xlsx`.
-3b. Post button clicks: `python3 -I linkedin-refresh/ingest.py buttons <weekly export> --write` (column "Custom button engagements" = clicks on the profile's "Visit my website" button, which opens https://www.peaceful-loans.com/?utm_source=LinkedInProfileMZBookacallbutton). The export lists only the 3 newest posts, so older posts need a per-post export.
-4. Merge the exports into the JSON (ingest step, see "Not built yet").
-5. `python3 -I linkedin-refresh/publish.py --check`, and if it prints OK, `python3 -I linkedin-refresh/publish.py --push`.
+## Pacing rules (LinkedIn can restrict accounts that look automated)
+- Do the minimum: a handful of exports per run, never a burst.
+- Wait at least 60 seconds between LinkedIn page loads or exports (use several waits); no extra browsing.
+- No retry loops. One retry at most; on any warning, captcha, login, "unusual activity" or error page: STOP, push nothing, report.
+- Never click the profile's "Visit my website" button (clicks are counted in analytics).
 
-## Mondays also
-90-day export (two windows), company page visitors and followers, newsletter subscribers and editions.
+## Task 1: daily (about 8:32): 1 export, 2 on Mondays or the 1st
+1. Export yesterday only (custom range). Save to `~/Downloads/Linkedin analysis/daily/YYYY-MM-DD.xlsx`.
+2. `python3 -I linkedin-refresh/ingest.py daily <file> --write`, then `ingest.py buttons <same file> --write`.
+3. Mondays: also export last Mon-Sun week -> `ingest.py weekly`. 1st of month: previous month -> `ingest.py monthly`.
+4. `publish.py --check`, then `publish.py --push "Daily TG dashboard refresh"`.
 
-## Stop and report, don't push, if
-LinkedIn shows a login or captcha page, an export fails, or `--check` raises.
+## Task 2: post backfill (about 14:17): at most 5 per-post exports
+1. `python3 -I linkedin-refresh/next_posts.py 5` lists the posts that still need an export.
+2. For each, open its analytics URL, click Export, Confirm; move the file to `~/Downloads/Linkedin analysis/posts/`.
+3. `ingest.py post <file> --write` for each, then `publish.py --check` and `--push`.
+Stops by itself when the list is empty.
 
-## Not built yet
-`ingest.py` (xlsx to JSON merge). It needs one real export of each kind to match the sheet layout.
+## Not automated
+New posts' types and image types, the 90-day windows, company page, newsletter, engagement.
