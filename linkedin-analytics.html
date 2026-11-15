@@ -224,7 +224,7 @@
 
       let DASHBOARD_DATA = null;
       let CURRENT_USER = null;
-      let ACTIVE_TAB = "daily";
+      let ACTIVE_TAB = "clicks";
       let ACTIVE_SOURCE = "profile";
 
       const OV = {};
@@ -562,12 +562,12 @@
       function renderDashboard() {
         const meta = DASHBOARD_DATA.meta;
         const tabs = [
+          { id: "clicks", label: "Button clicks" },
           { id: "daily", label: "Daily" },
           { id: "weekly", label: "Weekly" },
           { id: "monthly", label: "Monthly" },
           { id: "posts", label: "Posts" },
           { id: "works", label: "What works" },
-          { id: "clicks", label: "Button clicks" },
           { id: "plan", label: "Reach plan" },
           { id: "data", label: "Data" }
         ];
@@ -604,10 +604,10 @@
               ` : ""}
             </div>
 
-            <h1>Is our content reaching our target audience?</h1>
+            <h1>Is our content getting people to click the button?</h1>
 
             <p class="note">
-              Two numbers, everywhere. <b>TG impressions</b>: views from people whose LinkedIn seniority is <b>Manager, Director, VP, Owner, CXO or Partner</b>, the closest match to ₹50L+ households taking ₹2 Cr+ home loans. <b>TG share</b>: the % of all views that came from them. A rising share means the content speaks to our TG and LinkedIn is pushing it to them. Creator onboarded 1 Aug; first Creator Chart Era post 19 Aug.
+              <b>One KPI: Premium button clicks</b>, people who click <b>Visit my website</b> under Mangesh's name. Everything else here is supporting context, always in this order: <b>button clicks, TG impressions, total impressions, TG share</b>. <b>TG impressions</b> = views from people whose LinkedIn seniority is <b>Manager, Director, VP, Owner, CXO or Partner</b>, the closest match to ₹50L+ households taking ₹2 Cr+ home loans; <b>TG share</b> = the % of all views from them. Reach only matters if it leads to clicks. Creator onboarded 1 Aug; first Creator Chart Era post 19 Aug.
             </p>
 
             <div style="font-size:12px;color:var(--muted)">Data to ${dd(meta.data_to)} 2026 · built ${meta.built}</div>
@@ -1425,9 +1425,9 @@
           { key: "title", label: "Post", align: "l" },
           { key: "type", label: "Type", align: "l" },
           { key: "image_type", label: "Image", align: "l" },
-          { key: "impressions_total", label: "Total impressions", align: "r" },
+          { key: "custom_button_clicks", label: "Button clicks", align: "r" },
           { key: "tg_impressions_lifetime", label: "TG impressions", align: "r" },
-          { key: "custom_button_clicks", label: "Website button clicks", align: "r" },
+          { key: "impressions_total", label: "Total impressions", align: "r" },
           { key: "tg_share_pct", label: "TG share", align: "r" },
           { key: "out_of_network_pct", label: "Out-of-network", align: "r" },
           { key: "engagements", label: "Engagements", align: "r" },
@@ -1557,9 +1557,9 @@
                             ${imgVal}${isImgEdited ? `<span class="chip" title="Changed by Mangesh">edited</span>` : ""}
                           `}
                         </td>
-                        <td>${p.impressions_total != null ? fmt(p.impressions_total) : `<span class="muted">–</span>`}</td>
+                        <td style="font-weight:700">${p.custom_button_clicks != null ? fmt(p.custom_button_clicks) : `<span class="muted">–</span>`}</td>
                         <td>${p.tg_impressions_lifetime !== null ? `<span class="tbar" style="width:${(p.tg_impressions_lifetime / maxTg) * 90}px"></span>${fmt(p.tg_impressions_lifetime)}` : `<span class="muted">–</span>`}</td>
-                        <td>${p.custom_button_clicks != null ? fmt(p.custom_button_clicks) : `<span class="muted">–</span>`}</td>
+                        <td>${p.impressions_total != null ? fmt(p.impressions_total) : `<span class="muted">–</span>`}</td>
                         <td>${p.tg_share_pct !== null ? `<span class="tbar" style="width:${p.tg_share_pct * 1.2}px;background:var(--accent)"></span>${pct(p.tg_share_pct)}` : `<span class="muted">–</span>`}</td>
                         <td>${p.out_of_network_pct !== null ? `${p.out_of_network_pct}%` : `<span class="muted">n/a</span>`}</td>
                         <td>${fmt(p.engagements)}</td>
@@ -1647,7 +1647,7 @@
         }
 
         $("dlPostsBtn").onclick = () => {
-          const headers = ["published", "post", "url", "type", "auto_type", "image_type", "auto_image_type", "format", "impressions_total", "tg_impressions_lifetime", "custom_button_clicks", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
+          const headers = ["published", "post", "url", "type", "auto_type", "image_type", "auto_image_type", "format", "custom_button_clicks", "tg_impressions_lifetime", "impressions_total", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
           const rows = DASHBOARD_DATA.posts.map(p => [
             p.published,
             `"${p.title.replace(/"/g, '""')}"`,
@@ -1657,9 +1657,9 @@
             `"${(p.image_type || "No image").replace(/"/g, '""')}"`,
             `"${(p.auto_image_type || p.image_type || "No image").replace(/"/g, '""')}"`,
             p.format,
-            p.impressions_total != null ? p.impressions_total : "",
-            p.tg_impressions_lifetime !== null ? p.tg_impressions_lifetime : "",
             p.custom_button_clicks != null ? p.custom_button_clicks : "",
+            p.tg_impressions_lifetime !== null ? p.tg_impressions_lifetime : "",
+            p.impressions_total != null ? p.impressions_total : "",
             p.tg_share_pct !== null ? p.tg_share_pct.toFixed(1) : "",
             p.out_of_network_pct !== null ? p.out_of_network_pct : "",
             p.engagements,
