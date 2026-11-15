@@ -610,7 +610,7 @@
               <b>One KPI: Premium button clicks</b>, people who click <b>Visit my website</b> under Mangesh's name. Everything else here is supporting context, always in this order: <b>button clicks, TG impressions, total impressions, TG share</b>. <b>TG impressions</b> = views from people whose LinkedIn seniority is <b>Manager, Director, VP, Owner, CXO or Partner</b>, the closest match to ₹50L+ households taking ₹2 Cr+ home loans; <b>TG share</b> = the % of all views from them. Reach only matters if it leads to clicks. Creator onboarded 1 Aug; first Creator Chart Era post 19 Aug.
             </p>
 
-            <div style="font-size:12px;color:var(--muted)">Data to ${dd(meta.data_to)} 2026 · built ${meta.built}</div>
+            <div style="font-size:12px;color:var(--muted)">Data to ${dd(meta.data_to)} 2026 · <b>Refreshed ${meta.refreshed_at ? new Date(meta.refreshed_at).toLocaleString("en-IN", { timeZone: "Asia/Kolkata", day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit", hour12: true }) + " IST" : meta.built}</b></div>
 
             <div class="sources" role="tablist">
               <button class="source-btn" id="src-profile" aria-selected="${ACTIVE_SOURCE === "profile"}">Mangesh Zope profile</button>

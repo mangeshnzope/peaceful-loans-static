@@ -9,7 +9,7 @@ the Artifact tool adds the skeleton) with the data embedded and the website's lo
 replaced by a local stub, so the page works standalone as an artifact.
 Standard library only.
 """
-import json, re
+import json, re, subprocess
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
@@ -19,6 +19,10 @@ OUT = REPO / "linkedin-refresh/out/linkedin-tg-reach.html"
 
 page = PAGE.read_text()
 data = json.loads(DATA.read_text())
+if not data["meta"].get("refreshed_at"):  # older data files: use the time the data was last published
+    data["meta"]["refreshed_at"] = subprocess.run(
+        ["git", "log", "-1", "--format=%cI", "--", str(DATA.relative_to(REPO))],
+        cwd=REPO, capture_output=True, text=True).stdout.strip()
 data["overrides"], data["image_overrides"] = {}, {}  # edits are made in the repo data, not in the artifact
 
 head = page[page.index("<head>") + 6: page.index("</head>")]
@@ -39,5 +43,6 @@ prelude = (
 hide = "<style>#elevateAdminBtn,#logoutBtn{display:none!important}</style>"
 
 OUT.parent.mkdir(parents=True, exist_ok=True)
-OUT.write_text(f"<title>{title}</title>\n{extras}\n{hide}\n{prelude}\n{body}\n")
+refresh_js = (REPO / "linkedin-refresh/artifact_refresh.js").read_text()
+OUT.write_text(f"<title>{title}</title>\n{extras}\n{hide}\n{prelude}\n{body}\n<script>\n{refresh_js}</script>\n")
 print(f"wrote {OUT} ({OUT.stat().st_size:,} bytes), data_to {data['meta']['data_to']}, built {data['meta']['built']}")

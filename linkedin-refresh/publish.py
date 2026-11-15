@@ -90,6 +90,11 @@ def main():
     new = json.loads(DATA.read_text())
     old = json.loads(run("git", "show", "HEAD:creator-chart/data/creator_chart_dashboard_data.json"))
     validate(new, old)
+    if "--push" in sys.argv:
+        # stamp the refresh time (IST) so the page can show "Refreshed <time>"
+        from datetime import datetime, timedelta, timezone
+        new["meta"]["refreshed_at"] = datetime.now(timezone(timedelta(hours=5, minutes=30))).isoformat(timespec="seconds")
+        DATA.write_text(json.dumps(new, indent=1, ensure_ascii=True))
     patched = patch_worker(WORKER.read_text(), new)
     print(f"OK: data_to {old['meta']['data_to']} -> {new['meta']['data_to']}, "
           f"daily {len(old['daily'])}->{len(new['daily'])}, posts {len(old['posts'])}->{len(new['posts'])}")
