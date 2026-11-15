@@ -4,6 +4,7 @@
   python3 -I ingest.py daily   export.xlsx [--write]
   python3 -I ingest.py weekly  export.xlsx [--write]
   python3 -I ingest.py monthly export.xlsx [--write]
+  python3 -I ingest.py buttons export.xlsx [--write]   # post custom-button clicks
 
 Each export is one grain (day / Mon-Sun week / calendar month) and becomes one
 row; nothing is summed across grains. Without --write it only prints the row.
@@ -102,7 +103,30 @@ def tg_fields(imp, sen):
     return round(imp * share / 100), round(share, 1), any(k not in sen for k in TG)
 
 
+def buttons(path, write):
+    """Set posts[].custom_button_clicks from the export's MOST RECENT POSTS sheet
+    (column 'Custom button engagements' = clicks on the 'Visit my website' button)."""
+    wb = read_xlsx(path)
+    rows = wb["MOST RECENT POSTS"]
+    col = rows[0].index("Custom button engagements")
+    data = json.loads(DATA.read_text())
+    by_id = {p["post_id"]: p for p in data["posts"]}
+    n = 0
+    for r in rows[1:]:
+        if len(r) > col and r[0] and post_id(r[0]) in by_id:
+            by_id[post_id(r[0])]["custom_button_clicks"] = num(r[col])
+            print(post_id(r[0]), r[1], "button clicks:", num(r[col]))
+            n += 1
+    for p in data["posts"]:
+        p.setdefault("custom_button_clicks", None)  # None = not exported yet
+    if write:
+        DATA.write_text(json.dumps(data, indent=1, ensure_ascii=True))
+    print(n, "posts updated" if write else "posts matched (dry run)")
+
+
 def main():
+    if len(sys.argv) >= 3 and sys.argv[1] == "buttons":
+        return buttons(sys.argv[2], "--write" in sys.argv)
     if len(sys.argv) < 3 or sys.argv[1] not in ("daily", "weekly", "monthly"):
         sys.exit(__doc__)
     grain, path = sys.argv[1], sys.argv[2]

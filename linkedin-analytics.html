@@ -1429,7 +1429,8 @@
           { key: "engagements", label: "Engagements", align: "r" },
           { key: "comments", label: "Comments", align: "r" },
           { key: "reposts", label: "Reposts", align: "r" },
-          { key: "followers_gained", label: "Followers gained", align: "r" }
+          { key: "followers_gained", label: "Followers gained", align: "r" },
+          { key: "custom_button_clicks", label: "Website button clicks", align: "r" }
         ];
 
         let catBarHtml = "";
@@ -1549,6 +1550,7 @@
                         <td>${fmt(p.comments)}</td>
                         <td>${fmt(p.reposts)}</td>
                         <td>${fmt(p.followers_gained)}</td>
+                        <td>${p.custom_button_clicks != null ? fmt(p.custom_button_clicks) : `<span class="muted">–</span>`}</td>
                       </tr>
                     `;
                   }).join("")}

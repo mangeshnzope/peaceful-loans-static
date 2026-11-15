@@ -9,6 +9,7 @@ Never write total impressions or reach into the JSON (keys `impressions`, `imp`,
    `https://www.linkedin.com/analytics/creator/content?metricType=IMPRESSIONS&timeRange=custom` and set the range to yesterday only, then Export. Save to `~/Downloads/Linkedin analysis/daily/YYYY-MM-DD.xlsx`.
 2. Same for the current Monday-to-yesterday week and the current month-to-date (weekly/monthly rows are their own exports, never summed from days).
 3. Open the Posts list (Content analytics, Top posts); for any post published since the last `data_to` and every post of the last 14 days, export its post analytics to `~/Downloads/Linkedin analysis/posts/<post_id>.xlsx`.
+3b. Post button clicks: `python3 -I linkedin-refresh/ingest.py buttons <weekly export> --write` (column "Custom button engagements" = clicks on the profile's "Visit my website" button, which opens https://www.peaceful-loans.com/?utm_source=LinkedInProfileMZBookacallbutton). The export lists only the 3 newest posts, so older posts need a per-post export.
 4. Merge the exports into the JSON (ingest step, see "Not built yet").
 5. `python3 -I linkedin-refresh/publish.py --check`, and if it prints OK, `python3 -I linkedin-refresh/publish.py --push`.
 
