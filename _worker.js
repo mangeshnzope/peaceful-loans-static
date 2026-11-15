@@ -5358,7 +5358,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 0,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 260
     },
     {
       post_id: "7482591414866874368",
@@ -5382,7 +5383,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 3.58,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 339
     },
     {
       post_id: "7482720969816604672",
@@ -5406,7 +5408,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 1.01,
-      custom_button_clicks: null
+      custom_button_clicks: 1,
+      impressions_total: 801
     },
     {
       post_id: "7481948324732866560",
@@ -5430,7 +5433,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 1,
       engagement_rate_pct: 2.08,
-      custom_button_clicks: null
+      custom_button_clicks: 5,
+      impressions_total: 1736
     },
     {
       post_id: "7479916369271144448",
@@ -5454,7 +5458,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 2,
       engagement_rate_pct: 2.34,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 1764
     },
     {
       post_id: "7477531824806875137",
@@ -5478,7 +5483,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 2,
       engagement_rate_pct: 1.49,
-      custom_button_clicks: null
+      custom_button_clicks: 1,
+      impressions_total: 1619
     },
     {
       post_id: "7476601108128342016",
@@ -5502,7 +5508,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 1.81,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 502
     },
     {
       post_id: "7475722402409250816",
@@ -5526,7 +5533,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 3,
       followers_gained: 3,
       engagement_rate_pct: 4.34,
-      custom_button_clicks: null
+      custom_button_clicks: 2,
+      impressions_total: 1574
     },
     {
       post_id: "7475171466703982593",
@@ -5550,7 +5558,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 4.16,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 364
     },
     {
       post_id: "7474086780779040768",
@@ -5574,7 +5583,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 2,
       engagement_rate_pct: 1.22,
-      custom_button_clicks: null
+      custom_button_clicks: 6,
+      impressions_total: 2228
     },
     {
       post_id: "7470747187702984704",
@@ -5598,7 +5608,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 2,
       engagement_rate_pct: 2.54,
-      custom_button_clicks: null
+      custom_button_clicks: 4,
+      impressions_total: 1965
     },
     {
       post_id: "7459504747939799040",
@@ -5622,7 +5633,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 3,
       engagement_rate_pct: 0.83,
-      custom_button_clicks: null
+      custom_button_clicks: 2,
+      impressions_total: 1851
     },
     {
       post_id: "7458344649280167936",
@@ -5646,7 +5658,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 0,
       engagement_rate_pct: 1.16,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 2415
     },
     {
       post_id: "7458404010568540160",
@@ -5670,7 +5683,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 0,
       engagement_rate_pct: 1.68,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 833
     },
     {
       post_id: "7458129287511023616",
@@ -5694,7 +5708,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 0,
       engagement_rate_pct: 1.86,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 601
     },
     {
       post_id: "7457669375664377856",
@@ -5718,7 +5733,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 0,
       engagement_rate_pct: 1.94,
-      custom_button_clicks: null
+      custom_button_clicks: 2,
+      impressions_total: 629
     },
     {
       post_id: "7457212195207172096",
@@ -5742,7 +5758,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 0.86,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 1173
     },
     {
       post_id: "7457285339645116416",
@@ -5766,7 +5783,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 0,
       engagement_rate_pct: 1.18,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 1207
     },
     {
       post_id: "7456915367701979138",
@@ -5790,7 +5808,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 1.38,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 1021
     },
     {
       post_id: "7455583847884226561",
@@ -5814,7 +5833,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 2,
       followers_gained: 0,
       engagement_rate_pct: 2.57,
-      custom_button_clicks: null
+      custom_button_clicks: 1,
+      impressions_total: 2276
     },
     {
       post_id: "7455200922739130368",
@@ -5838,7 +5858,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 1.72,
-      custom_button_clicks: null
+      custom_button_clicks: 2,
+      impressions_total: 524
     },
     {
       post_id: "7454381198119694336",
@@ -5862,7 +5883,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 2.42,
-      custom_button_clicks: null
+      custom_button_clicks: 2,
+      impressions_total: 455
     },
     {
       post_id: "7454396670374494208",
@@ -5886,7 +5908,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 0.39,
-      custom_button_clicks: null
+      custom_button_clicks: 1,
+      impressions_total: 2294
     },
     {
       post_id: "7453637000353603584",
@@ -5910,7 +5933,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 0.69,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 1155
     },
     {
       post_id: "7453301722514341888",
@@ -5934,7 +5958,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 0.91,
-      custom_button_clicks: null
+      custom_button_clicks: 1,
+      impressions_total: 988
     },
     {
       post_id: "7452932302931750913",
@@ -5958,7 +5983,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 1.66,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 909
     },
     {
       post_id: "7452195169958850560",
@@ -5982,7 +6008,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 2,
       followers_gained: 1,
       engagement_rate_pct: 2.67,
-      custom_button_clicks: null
+      custom_button_clicks: 5,
+      impressions_total: 1647
     },
     {
       post_id: "7449605775037145088",
@@ -6006,7 +6033,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 2,
       engagement_rate_pct: 0.66,
-      custom_button_clicks: null
+      custom_button_clicks: 7,
+      impressions_total: 5417
     },
     {
       post_id: "7445459598284767232",
@@ -6030,7 +6058,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 1.49,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 675
     },
     {
       post_id: "7442690322368974849",
@@ -6054,7 +6083,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 1,
       engagement_rate_pct: 1.44,
-      custom_button_clicks: null
+      custom_button_clicks: 2,
+      impressions_total: 979
     },
     {
       post_id: "7432637819463974912",
@@ -6078,7 +6108,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 0.87,
-      custom_button_clicks: null
+      custom_button_clicks: 3,
+      impressions_total: 1262
     }
   ],
   viewer_mix: {
