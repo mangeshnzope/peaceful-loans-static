@@ -14,6 +14,7 @@ TG = seniority Manager, Director, VP, Owner, CXO, Partner. Total impressions are
 1. Export the previous full Mon-Sun week, the month to date, and each of its 7 days (custom ranges). Save under `~/Downloads/Linkedin analysis/{weekly,monthly,daily}/`.
 2. `ingest.py daily <file> --write` for each day, `ingest.py weekly`, `ingest.py monthly`, then `ingest.py buttons <weekly file> --write`.
 3. `publish.py --check`, then `publish.py --push "Weekly TG dashboard refresh"`.
+3b. Artifact: `python3 -I linkedin-refresh/build_artifact.py`, then Artifact tool: read, then publish `linkedin-refresh/out/linkedin-tg-reach.html` to https://claude.ai/artifact/UTmFubhq9qBzGGbdHiwZ3b (same data and design as the website page, embedded). Done every week whether or not the team email is held.
 4. Email (only if the push succeeded). Gate: `weekly_report.py --coverage` must print `ok` (90%+ of posts have button data). If it prints `hold`, email only mangesh@peaceful-loans.com a short "report held" note and do NOT email the team.
    Then: `python3 -I linkedin-refresh/weekly_report.py --html` -> send via Gmail To tanya@creatorchart.in and rishita@creatorchart.in, CC ananya@creatorchart.in and mangesh@peaceful-loans.com (the HTML has a button to the Button clicks tab; subject starts with "Premium button clicks"; the email shows ONLY button clicks, no impressions, TG share or reach: the team should not chase vanity metrics). One email per run, nothing extra in it.
 
