@@ -14,6 +14,12 @@ from pathlib import Path
 DATA = Path(__file__).resolve().parent.parent / "creator-chart/data/creator_chart_dashboard_data.json"
 URL = "https://peaceful-loans.com/linkedin-analytics"
 d = json.loads(DATA.read_text())
+if "--coverage" in sys.argv:
+    # Gate for the team email: send only when 90%+ of posts have button data.
+    have = sum(1 for p in d["posts"] if p.get("custom_button_clicks") is not None)
+    total_posts = len(d["posts"])
+    print("ok" if have / total_posts >= 0.9 else "hold", have, total_posts)
+    sys.exit(0)
 D = lambda s: date.fromisoformat(s)
 fd = lambda s: D(s).strftime("%-d %b")
 n = lambda x: "–" if x is None else f"{round(x):,}"
