@@ -1423,14 +1423,15 @@
           { key: "title", label: "Post", align: "l" },
           { key: "type", label: "Type", align: "l" },
           { key: "image_type", label: "Image", align: "l" },
+          { key: "impressions_total", label: "Total impressions", align: "r" },
           { key: "tg_impressions_lifetime", label: "TG impressions", align: "r" },
+          { key: "custom_button_clicks", label: "Website button clicks", align: "r" },
           { key: "tg_share_pct", label: "TG share", align: "r" },
           { key: "out_of_network_pct", label: "Out-of-network", align: "r" },
           { key: "engagements", label: "Engagements", align: "r" },
           { key: "comments", label: "Comments", align: "r" },
           { key: "reposts", label: "Reposts", align: "r" },
-          { key: "followers_gained", label: "Followers gained", align: "r" },
-          { key: "custom_button_clicks", label: "Website button clicks", align: "r" }
+          { key: "followers_gained", label: "Followers gained", align: "r" }
         ];
 
         let catBarHtml = "";
@@ -1554,14 +1555,15 @@
                             ${imgVal}${isImgEdited ? `<span class="chip" title="Changed by Mangesh">edited</span>` : ""}
                           `}
                         </td>
+                        <td>${p.impressions_total != null ? fmt(p.impressions_total) : `<span class="muted">–</span>`}</td>
                         <td>${p.tg_impressions_lifetime !== null ? `<span class="tbar" style="width:${(p.tg_impressions_lifetime / maxTg) * 90}px"></span>${fmt(p.tg_impressions_lifetime)}` : `<span class="muted">–</span>`}</td>
+                        <td>${p.custom_button_clicks != null ? fmt(p.custom_button_clicks) : `<span class="muted">–</span>`}</td>
                         <td>${p.tg_share_pct !== null ? `<span class="tbar" style="width:${p.tg_share_pct * 1.2}px;background:var(--accent)"></span>${pct(p.tg_share_pct)}` : `<span class="muted">–</span>`}</td>
                         <td>${p.out_of_network_pct !== null ? `${p.out_of_network_pct}%` : `<span class="muted">n/a</span>`}</td>
                         <td>${fmt(p.engagements)}</td>
                         <td>${fmt(p.comments)}</td>
                         <td>${fmt(p.reposts)}</td>
                         <td>${fmt(p.followers_gained)}</td>
-                        <td>${p.custom_button_clicks != null ? fmt(p.custom_button_clicks) : `<span class="muted">–</span>`}</td>
                       </tr>
                     `;
                   }).join("")}
@@ -1643,7 +1645,7 @@
         }
 
         $("dlPostsBtn").onclick = () => {
-          const headers = ["published", "post", "url", "type", "auto_type", "image_type", "auto_image_type", "format", "tg_impressions_lifetime", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
+          const headers = ["published", "post", "url", "type", "auto_type", "image_type", "auto_image_type", "format", "impressions_total", "tg_impressions_lifetime", "custom_button_clicks", "tg_share_pct", "out_of_network_pct", "engagements", "comments", "reposts", "followers_gained", "creator_chart_era"];
           const rows = DASHBOARD_DATA.posts.map(p => [
             p.published,
             `"${p.title.replace(/"/g, '""')}"`,
@@ -1653,7 +1655,9 @@
             `"${(p.image_type || "No image").replace(/"/g, '""')}"`,
             `"${(p.auto_image_type || p.image_type || "No image").replace(/"/g, '""')}"`,
             p.format,
+            p.impressions_total != null ? p.impressions_total : "",
             p.tg_impressions_lifetime !== null ? p.tg_impressions_lifetime : "",
+            p.custom_button_clicks != null ? p.custom_button_clicks : "",
             p.tg_share_pct !== null ? p.tg_share_pct.toFixed(1) : "",
             p.out_of_network_pct !== null ? p.out_of_network_pct : "",
             p.engagements,

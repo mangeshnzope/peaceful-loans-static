@@ -4133,7 +4133,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 2,
       engagement_rate_pct: 0.87,
-      custom_button_clicks: 6
+      custom_button_clicks: 6,
+      impressions_total: 3542
     },
     {
       post_id: "7526538909279744000",
@@ -4157,7 +4158,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 0,
       followers_gained: 0,
       engagement_rate_pct: 2.75,
-      custom_button_clicks: 0
+      custom_button_clicks: 0,
+      impressions_total: 493
     },
     {
       post_id: "7525811196332269568",
@@ -4181,7 +4183,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 0,
       engagement_rate_pct: 1.03,
-      custom_button_clicks: 1
+      custom_button_clicks: 1,
+      impressions_total: 783
     },
     {
       post_id: "7523973515906179072",
@@ -4277,7 +4280,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 1,
       followers_gained: 0,
       engagement_rate_pct: 2.02,
-      custom_button_clicks: null
+      custom_button_clicks: 1,
+      impressions_total: 647
     },
     {
       post_id: "7521488028213596160",
@@ -4397,7 +4401,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 3,
       followers_gained: 5,
       engagement_rate_pct: 2.48,
-      custom_button_clicks: null
+      custom_button_clicks: 0,
+      impressions_total: 3222
     },
     {
       post_id: "7518545678244073473",
@@ -5261,7 +5266,8 @@ var creator_chart_dashboard_data_default = {
       reposts: 2,
       followers_gained: 0,
       engagement_rate_pct: 0.77,
-      custom_button_clicks: null
+      custom_button_clicks: 2,
+      impressions_total: 3479
     },
     {
       post_id: "7484122133548347392",
@@ -14487,7 +14493,7 @@ async function handleApiRequest(request, env, ctx) {
       }
       payload.overrides = overrides;
       payload.image_overrides = imageOverrides;
-      const forbidden = ["impressions", "imp", "members_reached", "sv"];
+      const forbidden = ["members_reached", "sv"]; // total impressions allowed since 16 Nov 2026 (key: impressions_total)
       const resHeaders = new Headers(headers);
       resHeaders.set("Cache-Control", "private, no-cache, no-store, must-revalidate");
       resHeaders.set("X-Robots-Tag", "noindex, nofollow");
@@ -14738,7 +14744,7 @@ async function handleApiRequest(request, env, ctx) {
             return new Response(JSON.stringify({ error: `Validation failed: missing section '${sec}'.` }), { status: 400, headers });
           }
         }
-        const forbidden = ["impressions", "imp", "members_reached", "sv"];
+        const forbidden = ["members_reached", "sv"]; // total impressions allowed since 16 Nov 2026 (key: impressions_total)
         const forbiddenKey = checkForbiddenKeys(payload);
         if (forbiddenKey) {
           return new Response(

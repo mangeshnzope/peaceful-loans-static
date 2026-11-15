@@ -4,7 +4,8 @@
   python3 -I ingest.py daily   export.xlsx [--write]
   python3 -I ingest.py weekly  export.xlsx [--write]
   python3 -I ingest.py monthly export.xlsx [--write]
-  python3 -I ingest.py buttons export.xlsx [--write]   # post custom-button clicks
+  python3 -I ingest.py buttons export.xlsx [--write]   # post custom-button clicks + total impressions
+  python3 -I ingest.py post SinglePostAnalytics_*.xlsx [--write]  # one post, any age
 
 Each export is one grain (day / Mon-Sun week / calendar month) and becomes one
 row; nothing is summed across grains. Without --write it only prints the row.
@@ -115,6 +116,7 @@ def buttons(path, write):
     for r in rows[1:]:
         if len(r) > col and r[0] and post_id(r[0]) in by_id:
             by_id[post_id(r[0])]["custom_button_clicks"] = num(r[col])
+            by_id[post_id(r[0])]["impressions_total"] = num(r[rows[0].index("Impressions")])
             print(post_id(r[0]), r[1], "button clicks:", num(r[col]))
             n += 1
     for p in data["posts"]:
@@ -124,7 +126,26 @@ def buttons(path, write):
     print(n, "posts updated" if write else "posts matched (dry run)")
 
 
+def single(path, write):
+    """Per-post export (SinglePostAnalytics_*_<post_id>.xlsx): total impressions + button clicks."""
+    pid = re.search(r"(\d{15,})", Path(path).name).group(1)
+    rows = read_xlsx(path)["Post analytics"]
+    g = lambda k: next((r[1] for r in rows if r and r[0] == k and len(r) > 1), None)
+    imp = num(g("Impressions") or "0")
+    btn = g("Premium custom button engagements")
+    data = json.loads(DATA.read_text())
+    post = next((p for p in data["posts"] if p["post_id"] == pid), None)
+    assert post, f"post {pid} not in data"
+    post["impressions_total"] = imp
+    post["custom_button_clicks"] = None if btn is None else num(btn)
+    print(pid, "impressions_total", imp, "button clicks", post["custom_button_clicks"])
+    if write:
+        DATA.write_text(json.dumps(data, indent=1, ensure_ascii=True))
+
+
 def main():
+    if len(sys.argv) >= 3 and sys.argv[1] == "post":
+        return single(sys.argv[2], "--write" in sys.argv)
     if len(sys.argv) >= 3 and sys.argv[1] == "buttons":
         return buttons(sys.argv[2], "--write" in sys.argv)
     if len(sys.argv) < 3 or sys.argv[1] not in ("daily", "weekly", "monthly"):
@@ -132,7 +153,7 @@ def main():
     grain, path = sys.argv[1], sys.argv[2]
     start, end, imp, reached, eng, fol, sen, pub = parse(path)
     tg, share, higher = tg_fields(imp, sen)
-    base = dict(tg_impressions=tg, tg_share_pct=share, tg_may_be_higher=higher,
+    base = dict(impressions_total=imp, tg_impressions=tg, tg_share_pct=share, tg_may_be_higher=higher,
                 engagements=eng, new_followers=fol, posts_published=pub)
     if grain == "daily":
         assert start == end, "daily export must cover one day"

@@ -16,7 +16,7 @@ REPO = Path(__file__).resolve().parent.parent
 DATA = REPO / "creator-chart/data/creator_chart_dashboard_data.json"
 WORKER = REPO / "_worker.js"
 REQUIRED = ["meta", "daily", "weekly", "monthly", "posts", "viewer_mix", "insights"]
-FORBIDDEN = {"impressions", "imp", "members_reached", "sv"}  # spec §9: TG-only
+FORBIDDEN = {"members_reached", "sv"}  # reach stays out; total impressions allowed (impressions_total) since 16 Nov 2026
 
 
 # --- esbuild-compatible JS literal (verified byte-identical on the 15 Nov bundle) ---
