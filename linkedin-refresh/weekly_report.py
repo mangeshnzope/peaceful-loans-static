@@ -105,13 +105,13 @@ L.append(f"Dashboard: {URL}")
 if gaps:
     L.append(f"Note: {gaps} older posts are still waiting for their total-impressions / button data (slow backfill in progress).")
 
-subject = f"LinkedIn TG reach: week of {fd(w['week_start'])} – {fd(w['week_end'])}"
+subject = f"Premium button clicks: week of {fd(w['week_start'])} – {fd(w['week_end'])}"
 print("SUBJECT:", subject)
 print()
 if "--html" in sys.argv:
     import html
     esc = html.escape
-    # Mobile-first, single column, email-safe (bgcolor attrs, background-color, table bars), dark-mode tolerant.
+    # Button-clicks-only email. Mobile-first, email-safe (bgcolor attrs, background-color, table bars).
     BLUE, RED, AMBER = "#1A4CC8", "#E84118", "#FFB800"
     INK, BODY, GROUND, HAIR, MUTED = "#1a1a1a", "#4a4a4a", "#fbfaf7", "#e5e7eb", "#6b7280"
     BAR = "#9DB4EE"
@@ -119,65 +119,62 @@ if "--html" in sys.argv:
     SANS = "Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif"
     LOGO = "https://peaceful-loans.com/assets/logo-horizontal.png"
     LINK = f"{URL}#clicks"
-    k = lambda x: f"{x / 1000:.1f}k" if x >= 1000 else f"{x:.0f}"
+    clk = lambda p: p["custom_button_clicks"]
+    s_ = lambda x: "" if x == 1 else "s"
 
-    def cell(bg, inner="", h=None, w=None):
-        hh = f" height='{h}'" if h else ""
-        ww = f" width='{w}'" if w else ""
-        st = f"background-color:{bg};" + (f"height:{h}px;line-height:{h}px;font-size:{h}px;" if h else "")
-        return f"<td bgcolor='{bg}'{hh}{ww} style='{st}'>{inner}</td>"
+    allc = [p for p in d["posts"] if p.get("custom_button_clicks") is not None]
+    ncl = len(allc)
+    npost = len(d["posts"])
+    tot = sum(clk(p) for p in allc)
+    wk = [p for p in posts if p.get("custom_button_clicks") is not None]
+    wk_clicks = sum(clk(p) for p in wk)
+    avg_post = lambda ps: sum(clk(p) for p in ps) / len(ps) if ps else 0
 
-    def chip(delta, label):
-        if delta is None:
-            return f"<span style='color:{MUTED};font-size:13px'>first week tracked</span>"
-        up = delta >= 0
-        c, bg, arr = (BLUE, "#EAF0FD", "&#9650;") if up else (RED, "#FDECE8", "&#9660;")
+    # last week's posts, only if every one of them has button data
+    pw = [p for p in d["posts"] if prev and prev["week_start"] <= p["published"] <= prev["week_end"]]
+    pw_ok = bool(pw) and all(p.get("custom_button_clicks") is not None for p in pw)
+    pw_clicks = sum(clk(p) for p in pw) if pw_ok else None
+
+    def chip(txt, color, bg, arrow):
         return (f"<table role='presentation' cellpadding='0' cellspacing='0'><tr><td bgcolor='{bg}' "
-                f"style='background-color:{bg};border-radius:999px;padding:4px 11px;font-size:13px;font-weight:bold;color:{c};white-space:nowrap'>"
-                f"{arr}&nbsp;{label}</td></tr></table>")
+                f"style='background-color:{bg};border-radius:999px;padding:4px 11px;font-size:13px;font-weight:bold;color:{color};white-space:nowrap'>"
+                f"{arrow}&nbsp;{txt}</td></tr></table>")
 
-    pct_chg = (w["tg_impressions"] - prev["tg_impressions"]) / prev["tg_impressions"] * 100 if prev and prev["tg_impressions"] else None
-    pts_chg = w["tg_share_pct"] - prev["tg_share_pct"] if prev and w["tg_share_pct"] is not None and prev["tg_share_pct"] is not None else None
-    # Primary comparison: trailing 13-week average (the 13 full weeks before this one). WoW is secondary.
-    base = weeks[-14:-1]
-    avg13 = sum(x["tg_impressions"] for x in base) / len(base) if base else None
-    avg_chg = (w["tg_impressions"] - avg13) / avg13 * 100 if avg13 else None
-    if avg_chg is None:
-        headline = "Our TG reach this week."
-    elif avg_chg >= 0:
-        headline = f"TG reach is {avg_chg:.0f}% above our {len(base)}-week average."
+    if wk:
+        headline = f"{wk_clicks} click{s_(wk_clicks)} on the button from this week's posts."
     else:
-        headline = f"TG reach is {abs(avg_chg):.0f}% below our {len(base)}-week average."
+        headline = "No button data for this week's posts yet."
 
-    def card(title, big, sub, pad="16px"):
+    def card(title_, big, sub, pad="16px"):
         return (f"<table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>"
                 f"<td bgcolor='#ffffff' style='background-color:#ffffff;border:1px solid {HAIR};border-radius:8px;padding:{pad}'>"
-                f"<div style='font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:{MUTED}'>{title}</div>"
+                f"<div style='font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:{MUTED}'>{title_}</div>"
                 f"<div style='font-family:{SERIF};font-size:34px;font-weight:bold;line-height:40px;padding:6px 0 8px;color:{INK}'>{big}</div>"
                 f"{sub}</td></tr></table>")
 
-    btn_week = sum(p["custom_button_clicks"] for p in btn)
-    wow = (f"<div style='font-size:13px;color:{MUTED};padding-top:8px'>"
-           f"{'&#9650;' if pct_chg >= 0 else '&#9660;'} {abs(pct_chg):.0f}% vs last week ({n(prev['tg_impressions'])})</div>") if pct_chg is not None else ""
-    c1 = card("TG impressions", n(w["tg_impressions"]),
-              (chip(avg_chg, f"{abs(avg_chg):.0f}% vs {len(base)}-wk avg ({n(avg13)})") if avg_chg is not None else chip(None, "")) + wow)
-    c2 = card("TG share", pc(w["tg_share_pct"]), chip(pts_chg, f"{abs(pts_chg):.1f} pts") if pts_chg is not None else chip(None, ""), pad="14px")
-    c3 = card("Button clicks", str(btn_week), f"<div style='font-size:13px;color:{MUTED}'>{tot_clicks} on {len(allb)} posts</div>", pad="14px")
+    if pw_clicks is None:
+        vs = f"<div style='font-size:13px;color:{MUTED}'>{len(wk)} of {len(posts)} posts have data</div>"
+    elif wk_clicks >= pw_clicks:
+        vs = chip(f"{wk_clicks - pw_clicks} vs last week's posts ({pw_clicks})", BLUE, "#EAF0FD", "&#9650;")
+    else:
+        vs = chip(f"{pw_clicks - wk_clicks} vs last week's posts ({pw_clicks})", RED, "#FDECE8", "&#9660;")
+    c1 = card("Button clicks, this week's posts", str(wk_clicks), vs)
+    c2 = card("Clicks per post", f"{avg_post(wk):.1f}" if wk else "–", f"<div style='font-size:13px;color:{MUTED}'>this week's posts</div>", pad="14px")
+    c3 = card("All posts so far", str(tot), f"<div style='font-size:13px;color:{MUTED}'>on {ncl} posts</div>", pad="14px")
 
-    ws = weeks[-8:]
-    mx = max(x["tg_impressions"] for x in ws) or 1
+    # bars: clicks on the latest 8 posts with data
+    latest = sorted(allc, key=lambda p: p["published"])[-8:]
+    mx = max([clk(p) for p in latest] + [1])
     bars = ""
-    for i, x in enumerate(ws):
-        h = max(4, round(x["tg_impressions"] / mx * 96))
-        last = i == len(ws) - 1
+    for i, p in enumerate(latest):
+        v = clk(p)
+        h = max(3, round(v / mx * 90))
+        last = i == len(latest) - 1
+        col = BLUE if last else BAR
         bars += (f"<td valign='bottom' align='center' style='padding:0 2px'>"
-                 f"<div style='font-size:11px;color:{INK if last else MUTED};font-weight:{'bold' if last else 'normal'};padding-bottom:3px'>{k(x['tg_impressions'])}</div>"
-                 f"<table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>{cell(BLUE if last else BAR, '&nbsp;', h=h)}</tr></table>"
-                 f"<div style='font-size:10px;color:{MUTED};padding-top:4px'>{fd(x['week_start']).replace(' ', '&nbsp;')}</div></td>")
-
-    def line(p, tail, color):
-        return (f"<div style='padding:9px 0;border-top:1px solid {HAIR};font-size:14px;line-height:20px;color:{BODY}'>"
-                f"<b style='color:{color}'>{tail}</b><br>{esc(p['type'])} &middot; {fd(p['published'])}</div>")
+                 f"<div style='font-size:12px;color:{INK if last else MUTED};font-weight:{'bold' if last else 'normal'};padding-bottom:3px'>{v}</div>"
+                 f"<table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr><td bgcolor='{col if v else HAIR}' height='{h}' style='background-color:{col if v else HAIR};height:{h}px;line-height:{h}px;font-size:{h}px'>&nbsp;</td></tr></table>"
+                 f"<div style='font-size:10px;color:{MUTED};padding-top:4px'>{fd(p['published']).replace(' ', '&nbsp;')}</div></td>")
 
     def bucket(p):
         t = (p.get("time") or "").upper()
@@ -188,58 +185,53 @@ if "--html" in sys.argv:
         return "mornings" if hh < 12 else "afternoons" if hh < 17 else "evenings"
 
     FMT = {"Media (ugcPost)": "image/video posts", "Text/share": "text posts"}
-    DIMS = [("type", "post type", lambda p: p.get("type")),
-            ("image", "image", lambda p: p.get("image_type") or "No image"),
-            ("format", "format", lambda p: FMT.get(p.get("format"), p.get("format"))),
-            ("day", "posting day", lambda p: p.get("weekday")),
-            ("time", "posting time", bucket)]
+    DIMS = [("post type", lambda p: p.get("type")),
+            ("image", lambda p: p.get("image_type") or "No image"),
+            ("format", lambda p: FMT.get(p.get("format"), p.get("format"))),
+            ("posting day", lambda p: p.get("weekday")),
+            ("posting time", bucket)]
 
     def pattern_insights():
         found = []
-        for _k, label, fn in DIMS:
+        for label, fn in DIMS:
             g = {}
-            for p in allb:
+            for p in allc:
                 g.setdefault(fn(p), []).append(p)
-            g = {a: v for a, v in g.items() if a and len(v) >= 3 and sum(x["impressions_total"] for x in v) >= 2000}
+            g = {a: v for a, v in g.items() if a and len(v) >= 3}
             if len(g) < 2:
                 continue
-            ranked = sorted(g.items(), key=lambda kv: -rate(kv[1]))
+            ranked = sorted(g.items(), key=lambda kv: -avg_post(kv[1]))
             (bn, bv), (wn, wv) = ranked[0], ranked[-1]
-            rb, rw = rate(bv), rate(wv)
-            if rb <= 0:
+            if avg_post(bv) <= 0:
                 continue
-            found.append(dict(label=label, bn=bn, bv=bv, rb=rb, wn=wn, wv=wv, rw=rw, score=(rb / rw if rw else 99)))
+            found.append(dict(label=label, bn=bn, bv=bv, wn=wn, wv=wv,
+                              score=(avg_post(bv) / avg_post(wv) if avg_post(wv) else 99)))
         return sorted(found, key=lambda c: -c["score"])[:2]
 
     pats = pattern_insights()
-    left_days = -(-(len(d["posts"]) - len([p for p in d["posts"] if p.get("impressions_total")])) // 5)
+    left_days = -(-(npost - len([p for p in d["posts"] if p.get("custom_button_clicks") is not None])) // 5)
 
     def pat_line(txt, sub, color):
         return (f"<div style='padding:9px 0;border-top:1px solid {HAIR};font-size:14px;line-height:20px;color:{BODY}'>"
                 f"<b style='color:{color}'>{txt}</b><br>{sub}</div>")
 
-    if pats:
-        more_html = "".join(pat_line(f"{esc(str(c['bn']))}", f"{c['rb']:.1f} clicks per 1,000 views &middot; {len(c['bv'])} posts &middot; by {c['label']}", BLUE) for c in pats)
-        less_html = "".join(pat_line(f"{esc(str(c['wn']))}", f"{c['rw']:.1f} clicks per 1,000 views &middot; {len(c['wv'])} posts &middot; by {c['label']}", RED) for c in pats)
-    else:
-        more_html = less_html = ""
-    npost = len(d["posts"])
+    more_html = "".join(pat_line(esc(str(c["bn"])), f"{avg_post(c['bv']):.1f} clicks per post &middot; {len(c['bv'])} posts &middot; by {c['label']}", BLUE) for c in pats)
+    less_html = "".join(pat_line(esc(str(c["wn"])), f"{avg_post(c['wv']):.1f} clicks per post &middot; {len(c['wv'])} posts &middot; by {c['label']}", RED) for c in pats)
     early_html = pat_line("Too early to call a pattern",
-                          f"Only {len(allb)} of {npost} posts have button data. We need 3+ posts of each kind. The backfill finishes in about {left_days} days.", MUTED)
+                          f"Only {ncl} of {npost} posts have button data. We need 3+ posts of each kind. The backfill finishes in about {left_days} days.", MUTED)
 
     def ex(p, color):
-        r = p["custom_button_clicks"] / p["impressions_total"] * 1000
         return (f"<div style='padding:9px 0;border-top:1px solid {HAIR};font-size:14px;line-height:20px;color:{BODY}'>"
-                f"<b style='color:{color}'>{p['custom_button_clicks']} click{'s' if p['custom_button_clicks'] != 1 else ''} &middot; {r:.1f} per 1,000 views</b><br>"
+                f"<b style='color:{color}'>{clk(p)} click{s_(clk(p))}</b><br>"
                 f"&ldquo;{esc(p['title'][:58])}&hellip;&rdquo;<br>"
-                f"<span style='font-size:12px;color:{MUTED}'>{esc(p['type'])} &middot; {fd(p['published'])} &middot; {n(p['impressions_total'])} views</span></div>")
+                f"<span style='font-size:12px;color:{MUTED}'>{esc(p['type'])} &middot; {fd(p['published'])}</span></div>")
 
-    by_rate = sorted(allb, key=lambda p: (-p["custom_button_clicks"] / p["impressions_total"], -p["impressions_total"]))
-    top3 = by_rate[:3]
-    rest = [p for p in allb if p not in top3]
-    worst3 = sorted(rest, key=lambda p: (p["custom_button_clicks"] / p["impressions_total"], -p["impressions_total"]))[:3]
-    w_html = "".join(ex(p, BLUE) for p in top3) or ""
-    f_html = "".join(ex(p, RED) for p in worst3) or ""
+    by_clicks = sorted(allc, key=lambda p: (-clk(p), p["published"]), reverse=False)
+    top3 = [p for p in by_clicks if clk(p) > 0][:3]
+    rest = [p for p in allc if p not in top3]
+    worst3 = sorted(rest, key=lambda p: (clk(p), p["published"]))[:3]
+    w_html = "".join(ex(p, BLUE) for p in top3) or f"<div style='font-size:14px;color:{MUTED};border-top:1px solid {HAIR};padding-top:9px'>None yet</div>"
+    f_html = "".join(ex(p, RED) for p in worst3) or f"<div style='font-size:14px;color:{MUTED};border-top:1px solid {HAIR};padding-top:9px'>None yet</div>"
 
     def box(inner):
         return (f"<table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>"
@@ -268,13 +260,13 @@ if "--html" in sys.argv:
 </td></tr>
 <tr><td style='padding:0'>
   <table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>
-    {cell(BLUE, '&nbsp;', h=4, w='34%')}{cell(RED, '&nbsp;', h=4, w='33%')}{cell(AMBER, '&nbsp;', h=4, w='33%')}
+    <td bgcolor='{BLUE}' height='4' width='34%' style='background-color:{BLUE};height:4px;line-height:4px;font-size:4px'>&nbsp;</td><td bgcolor='{RED}' height='4' width='33%' style='background-color:{RED};height:4px;line-height:4px;font-size:4px'>&nbsp;</td><td bgcolor='{AMBER}' height='4' width='33%' style='background-color:{AMBER};height:4px;line-height:4px;font-size:4px'>&nbsp;</td>
   </tr></table>
 </td></tr>
 <tr><td style='padding:26px 16px 14px'>
-  <div style='font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:{BLUE}'>{fd(w['week_start'])} &ndash; {fd(w['week_end'])} {D(w['week_end']).year}</div>
+  <div style='font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;color:{BLUE}'>Premium button &middot; {fd(w['week_start'])} &ndash; {fd(w['week_end'])} {D(w['week_end']).year}</div>
   <div style='font-family:{SERIF};font-size:32px;line-height:38px;font-weight:bold;color:{INK};padding-top:8px'>{headline}</div>
-  <div style='font-size:15px;line-height:22px;color:{BODY};padding-top:8px'>Are we reaching the people who take home loans?</div>
+  <div style='font-size:15px;line-height:22px;color:{BODY};padding-top:8px'>People who clicked <b>Visit my website</b>, and the posts that earn those clicks.</div>
 </td></tr>
 <tr><td style='padding:0 16px'>
   <table role='presentation' width='100%' cellpadding='0' cellspacing='0'>
@@ -283,13 +275,13 @@ if "--html" in sys.argv:
       <td width='50%' valign='top' style='padding-right:6px'>{c2}</td>
       <td width='50%' valign='top' style='padding-left:6px'>{c3}</td></tr></table></td></tr>
     {gap}
-    <tr><td>{box(f"<div style='font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:{MUTED};padding-bottom:12px'>TG impressions, last 8 weeks</div><table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>{bars}</tr></table>")}</td></tr>
+    <tr><td>{box(f"<div style='font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:{MUTED};padding-bottom:12px'>Button clicks on our latest {len(latest)} posts</div><table role='presentation' width='100%' cellpadding='0' cellspacing='0'><tr>{bars}</tr></table>")}</td></tr>
     {gap}
     {pat_boxes}
-    <tr><td>{box(title('Top 3 for button clicks', BLUE, '&#9650;') + w_html)}</td></tr>
+    <tr><td>{box(title('Top 3 posts for clicks', BLUE, '&#9650;') + w_html)}</td></tr>
     {gap}
     <tr><td>{box(title('Bottom 3', RED, '&#9660;') + f_html)}</td></tr>
-    <tr><td style='font-size:12px;color:{MUTED};padding-top:10px;text-align:center'>Based on {len(allb)} of {len(d['posts'])} posts with button data. Clicks per 1,000 total views, so big and small posts compare fairly.</td></tr>
+    <tr><td style='font-size:12px;color:{MUTED};padding-top:10px;text-align:center'>Based on {ncl} of {npost} posts with button data. Clicks are lifetime, credited to the post being viewed.</td></tr>
   </table>
 </td></tr>
 <tr><td align='center' style='padding:26px 16px 6px'>
