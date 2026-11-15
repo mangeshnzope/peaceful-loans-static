@@ -17,8 +17,8 @@ TG = seniority Manager, Director, VP, Owner, CXO, Partner. Total impressions are
 4. Email (only if the push succeeded). Gate: `weekly_report.py --coverage` must print `ok` (90%+ of posts have button data). If it prints `hold`, email only mangesh@peaceful-loans.com a short "report held" note and do NOT email the team.
    Then: `python3 -I linkedin-refresh/weekly_report.py --html` -> send via Gmail To tanya@creatorchart.in and rishita@creatorchart.in, CC ananya@creatorchart.in and mangesh@peaceful-loans.com (the HTML has a button to the Button clicks tab; subject starts with "Premium button clicks"; the email shows ONLY button clicks, no impressions, TG share or reach: the team should not chase vanity metrics). One email per run, nothing extra in it.
 
-## Task 2: post backfill (about 14:17): at most 15 per-post exports, 75-90 s apart
-1. `python3 -I linkedin-refresh/next_posts.py 15` lists the posts that still need an export.
+## Task 2: post backfill (about 14:17): at most 5 per-post exports, 60-90 s apart
+1. `python3 -I linkedin-refresh/next_posts.py 5` lists the posts that still need an export.
 2. For each, open its analytics URL, click Export, Confirm; move the file to `~/Downloads/Linkedin analysis/posts/`.
 3. `ingest.py post <file> --write` for each, then `publish.py --check` and `--push`.
 Stops by itself when the list is empty.
