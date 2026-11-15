@@ -54,11 +54,52 @@ if top:
     for p in top:
         L.append(f"  - {fd(p['published'])} {p['title'][:70]} · {n(p['tg_impressions_lifetime'])} TG ({pc(p['tg_share_pct'])})")
     L.append("")
+allb = [p for p in d["posts"] if p.get("custom_button_clicks") is not None and p.get("impressions_total")]
+tot_clicks = sum(p["custom_button_clicks"] for p in allb)
+L.append("PREMIUM BUTTON ('Visit my website', opens peaceful-loans.com): clicks per post, lifetime so far")
 if btn:
-    L.append(f"Book-a-call intent: {sum(p['custom_button_clicks'] for p in btn)} website-button clicks on this week's posts "
+    L.append(f"  Posts published this week: {sum(p['custom_button_clicks'] for p in btn)} clicks "
              f"({len(btn)} of {len(posts)} posts have button data).")
 else:
-    L.append("Book-a-call intent: no button data yet for this week's posts.")
+    L.append("  Posts published this week: no button data yet.")
+L.append(f"  All posts with button data: {tot_clicks} clicks across {len(allb)} of {len(d['posts'])} posts "
+         f"(the button exists from 28 Oct 2026; older posts are being filled in).")
+L.append("")
+
+
+def rate(ps):
+    imp = sum(p["impressions_total"] for p in ps)
+    return sum(p["custom_button_clicks"] for p in ps) / imp * 1000 if imp else 0
+
+
+def groups(key):
+    g = {}
+    for p in allb:
+        g.setdefault(p.get(key) or "Unknown", []).append(p)
+    return g
+
+
+L.append("WHAT WORKED AND WHAT DID NOT (getting people to click the button)")
+if len(allb) < 8:
+    L.append(f"  Early read only: {len(allb)} posts have button data, too few for conclusions. Treat as a hint, not a result.")
+ranked = sorted(allb, key=lambda p: -p["custom_button_clicks"] / p["impressions_total"])
+worked = [p for p in ranked if p["custom_button_clicks"] > 0][:3]
+if worked:
+    L.append("  Worked (most clicks per 1,000 total impressions):")
+    for p in worked:
+        L.append(f"    - {fd(p['published'])} [{p['type']}] {p['title'][:55]}: {p['custom_button_clicks']} click{'s' if p['custom_button_clicks'] != 1 else ''} on "
+                 f"{n(p['impressions_total'])} impressions ({rate([p]):.1f} per 1,000)")
+failed = sorted((p for p in allb if p["custom_button_clicks"] == 0), key=lambda p: -p["impressions_total"])[:3]
+if failed:
+    L.append("  Did not work (no clicks despite reach):")
+    for p in failed:
+        L.append(f"    - {fd(p['published'])} [{p['type']}] {p['title'][:55]}: 0 clicks on {n(p['impressions_total'])} impressions")
+for key, label in (("type", "post type"), ("image_type", "image")):
+    gs = {k: v for k, v in groups(key).items() if len(v) >= 2}
+    if len(gs) >= 2:
+        order = sorted(gs.items(), key=lambda kv: -rate(kv[1]))
+        L.append(f"  By {label} (groups with 2+ posts): " + "; ".join(
+            f"{k} {rate(v):.1f} per 1,000 ({len(v)} posts)" for k, v in order))
 L.append("")
 L.append(f"Dashboard: {URL}")
 if gaps:
