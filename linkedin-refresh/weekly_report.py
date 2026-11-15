@@ -110,7 +110,10 @@ print("SUBJECT:", subject)
 print()
 if "--html" in sys.argv:
     import html
+    cta = (f"<p style='margin:18px 0 6px'><a href='{URL}#works' style='display:inline-block;background:#1F6F66;color:#ffffff;"
+           "text-decoration:none;font-weight:600;padding:10px 18px;border-radius:6px'>Open the full report: What works tab</a></p>"
+           "<p style='margin:0 0 6px;font-size:12px;color:#5C6A65'>The page is password protected; ask Mangesh if you need access.</p>")
     print("<div style='font:14px/1.5 -apple-system,Arial,sans-serif;color:#15201C'>" +
-          "".join(f"<p style='margin:0 0 6px'>{html.escape(x)}</p>" if x else "<br>" for x in L) + "</div>")
+          "".join(f"<p style='margin:0 0 6px'>{html.escape(x)}</p>" if x else "<br>" for x in L) + cta + "</div>")
 else:
     print("\n".join(L))
