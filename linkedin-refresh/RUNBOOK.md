@@ -26,3 +26,10 @@ Stops by itself when the list is empty.
 
 ## Not automated
 New posts' types and image types, the 90-day windows, company page, newsletter, engagement.
+
+## Manual refresh (Refresh button on the artifact)
+- An editor/owner clicks "Refresh all data" on the artifact. The page saves refresh/request = status "requested" in the artifact's shared db.
+- Task `linkedin-refresh-poller` runs at :07 every hour 07:00-22:59. It reads that note; if status is not "requested" it stops at once (no LinkedIn access).
+- If requested: refuses when the last refresh finished under 12 hours ago, else sets "running", exports yesterday's missing days + current week + month, runs ingest, publish.py --push, rebuilds and republishes the artifact, then sets "done" (or "failed" with the reason). No team email on manual refreshes.
+- The page shows the status to everyone and disables the button while a refresh is running or within 12 hours of the last one.
+- The website and artifact both show "Refreshed <time> IST" (meta.refreshed_at, stamped by publish.py --push).
