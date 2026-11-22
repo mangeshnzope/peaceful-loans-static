@@ -515,9 +515,9 @@ This page has moved to an external location.
 // creator-chart/data/creator_chart_dashboard_data.json
 var creator_chart_dashboard_data_default = {
   meta: {
-    built: "17 Nov 2026",
+    built: "22 Nov 2026",
     data_from: "2026-01-01",
-    data_to: "2026-11-17",
+    data_to: "2026-11-21",
     tg_definition: [
       "Manager",
       "Director",
@@ -548,7 +548,7 @@ var creator_chart_dashboard_data_default = {
       "Media mention / PR"
     ],
     notes: "TG impressions = impressions from viewers whose LinkedIn seniority is in tg_definition. TG share = % of all views from TG. Every grain comes from its own LinkedIn export. No total impressions are included by design.",
-    refreshed_at: "2026-11-17T09:27:31+05:30"
+    refreshed_at: "2026-11-22T21:34:13+05:30"
   },
   daily: [
     {
@@ -3421,6 +3421,46 @@ var creator_chart_dashboard_data_default = {
       engagements: 5,
       new_followers: 13,
       posts_published: 0
+    },
+    {
+      date: "2026-11-18",
+      impressions_total: 1741,
+      tg_impressions: 818,
+      tg_share_pct: 47,
+      tg_may_be_higher: false,
+      engagements: 5,
+      new_followers: 5,
+      posts_published: 1
+    },
+    {
+      date: "2026-11-19",
+      impressions_total: 1272,
+      tg_impressions: 623,
+      tg_share_pct: 49,
+      tg_may_be_higher: false,
+      engagements: 10,
+      new_followers: 10,
+      posts_published: 1
+    },
+    {
+      date: "2026-11-20",
+      impressions_total: 389,
+      tg_impressions: 183,
+      tg_share_pct: 47,
+      tg_may_be_higher: true,
+      engagements: 0,
+      new_followers: 8,
+      posts_published: 0
+    },
+    {
+      date: "2026-11-21",
+      impressions_total: 7336,
+      tg_impressions: 3668,
+      tg_share_pct: 50,
+      tg_may_be_higher: false,
+      engagements: 13,
+      new_followers: 8,
+      posts_published: 1
     }
   ],
   weekly: [
@@ -3975,6 +4015,19 @@ var creator_chart_dashboard_data_default = {
       posts_published: 3,
       tg_people_reached_est: 1456,
       tg_frequency_est: 1.87
+    },
+    {
+      week_start: "2026-11-16",
+      week_end: "2026-11-21",
+      impressions_total: 11425,
+      tg_impressions: 5370,
+      tg_share_pct: 47,
+      tg_may_be_higher: false,
+      engagements: 32,
+      new_followers: 52,
+      posts_published: 3,
+      tg_people_reached_est: 3227,
+      tg_frequency_est: 1.66
     }
   ],
   monthly: [
@@ -4100,16 +4153,16 @@ var creator_chart_dashboard_data_default = {
     },
     {
       month_start: "2026-11-01",
-      month_end: "2026-11-17",
-      tg_impressions: 4923,
-      tg_share_pct: 45,
+      month_end: "2026-11-21",
+      tg_impressions: 10088,
+      tg_share_pct: 46,
       tg_may_be_higher: false,
-      engagements: 111,
-      new_followers: 56,
-      tg_people_reached_est: 2318,
-      tg_frequency_est: 2.12,
-      posts_published: 6,
-      impressions_total: 10939
+      engagements: 139,
+      new_followers: 106,
+      tg_people_reached_est: 4885,
+      tg_frequency_est: 2.06,
+      posts_published: 9,
+      impressions_total: 21930
     }
   ],
   posts: [
