@@ -515,9 +515,9 @@ This page has moved to an external location.
 // creator-chart/data/creator_chart_dashboard_data.json
 var creator_chart_dashboard_data_default = {
   meta: {
-    built: "22 Nov 2026",
+    built: "23 Nov 2026",
     data_from: "2026-01-01",
-    data_to: "2026-11-21",
+    data_to: "2026-11-22",
     tg_definition: [
       "Manager",
       "Director",
@@ -548,7 +548,7 @@ var creator_chart_dashboard_data_default = {
       "Media mention / PR"
     ],
     notes: "TG impressions = impressions from viewers whose LinkedIn seniority is in tg_definition. TG share = % of all views from TG. Every grain comes from its own LinkedIn export. No total impressions are included by design.",
-    refreshed_at: "2026-11-22T21:34:13+05:30"
+    refreshed_at: "2026-11-23T16:17:16+05:30"
   },
   daily: [
     {
@@ -3461,6 +3461,16 @@ var creator_chart_dashboard_data_default = {
       engagements: 13,
       new_followers: 8,
       posts_published: 1
+    },
+    {
+      date: "2026-11-22",
+      impressions_total: 23883,
+      tg_impressions: 10747,
+      tg_share_pct: 45,
+      tg_may_be_higher: false,
+      engagements: 18,
+      new_followers: 13,
+      posts_published: 0
     }
   ],
   weekly: [
@@ -4153,16 +4163,16 @@ var creator_chart_dashboard_data_default = {
     },
     {
       month_start: "2026-11-01",
-      month_end: "2026-11-21",
-      tg_impressions: 10088,
-      tg_share_pct: 46,
+      month_end: "2026-11-22",
+      tg_impressions: 20617,
+      tg_share_pct: 45,
       tg_may_be_higher: false,
-      engagements: 139,
-      new_followers: 106,
-      tg_people_reached_est: 4885,
-      tg_frequency_est: 2.06,
+      engagements: 157,
+      new_followers: 119,
+      tg_people_reached_est: 12717,
+      tg_frequency_est: 1.62,
       posts_published: 9,
-      impressions_total: 21930
+      impressions_total: 45816
     }
   ],
   posts: [
