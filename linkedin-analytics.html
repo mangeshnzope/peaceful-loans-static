@@ -224,7 +224,7 @@
 
       let DASHBOARD_DATA = null;
       let CURRENT_USER = null;
-      let ACTIVE_TAB = "clicks";
+      let ACTIVE_TAB = "wclicks";
       let ACTIVE_SOURCE = "profile";
 
       const OV = {};
@@ -562,8 +562,8 @@
       function renderDashboard() {
         const meta = DASHBOARD_DATA.meta;
         const tabs = [
-          { id: "clicks", label: "Button clicks" },
           { id: "wclicks", label: "Weekly clicks" },
+          { id: "clicks", label: "Button clicks" },
           { id: "daily", label: "Daily" },
           { id: "weekly", label: "Weekly" },
           { id: "monthly", label: "Monthly" },
