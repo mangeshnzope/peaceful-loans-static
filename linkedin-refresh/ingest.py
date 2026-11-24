@@ -104,6 +104,54 @@ def tg_fields(imp, sen):
     return round(imp * share / 100), round(share, 1), any(k not in sen for k in TG)
 
 
+def add_new_posts(wb, rows, data, by_id):
+    """Add posts that are in the export but not yet in the data (new posts since the last refresh).
+    MOST RECENT POSTS rows carry clicks and totals; TOP POSTS rows add older unseen posts without clicks
+    (next_posts.py then queues them for a per-post export). Type and image are 'Unclassified' until labelled."""
+    h = rows[0]
+    ix = lambda name: h.index(name) if name in h else None
+    new = []
+
+    def base(url, dt, imp, eng):
+        pid = post_id(url)
+        slug = re.search(r"posts/[^_]+_(.+?)-(?:share|ugcPost|activity)-\d{15,}", url)
+        title = (slug.group(1).replace("-", " ") if slug else pid)[:42]
+        return {"post_id": pid, "published": str(dt), "weekday": dt.strftime("%a"), "time": "", "title": title.capitalize(),
+                "url": url, "type": "Unclassified", "auto_type": "Unclassified", "image_type": "Unclassified",
+                "auto_image_type": "Unclassified", "format": "Text/share", "creator_chart_era": str(dt) >= "2026-08-19",
+                "tg_impressions_lifetime": None, "tg_share_pct": None, "out_of_network_pct": None, "in_network_pct": None,
+                "engagements": eng, "comments": 0, "reposts": 0, "followers_gained": 0,
+                "engagement_rate_pct": round(eng / imp * 100, 2) if imp else None,
+                "custom_button_clicks": None, "impressions_total": imp}
+
+    for r in rows[1:]:
+        if len(r) > 1 and r[0] and post_id(r[0]) not in by_id and d(r[1]) >= date(2026, 1, 1):
+            imp = num(r[ix("Impressions")])
+            reac, com, rep = (num(r[ix(c)]) if ix(c) is not None and len(r) > ix(c) else 0 for c in ("Reactions", "Comments", "Reposts"))
+            p = base(r[0], d(r[1]), imp, reac + com + rep)
+            p.update(comments=com, reposts=rep, followers_gained=num(r[ix("Followers gained")]) if ix("Followers gained") is not None else 0,
+                     custom_button_clicks=num(r[ix("Custom button engagements")]),
+                     format="Text/share" if r[ix("Post type")] == "Text" else "Media (ugcPost)")
+            out = r[ix("Impressions (out-of-network)")] if ix("Impressions (out-of-network)") is not None else ""
+            if out.endswith("%"):
+                p["out_of_network_pct"], p["in_network_pct"] = int(float(out[:-1])), 100 - int(float(out[:-1]))
+            new.append(p)
+            by_id[p["post_id"]] = p
+    top = wb.get("TOP POSTS", [])
+    for r in top[2:]:
+        if len(r) > 6 and r[4] and r[5] and post_id(r[4]) not in by_id and d(r[5]) >= date(2026, 1, 1):
+            eng = next((num(x[2]) for x in top[2:] if len(x) > 2 and x[0] and post_id(x[0]) == post_id(r[4])), 0)
+            p = base(r[4], d(r[5]), num(r[6]), eng)
+            new.append(p)
+            by_id[p["post_id"]] = p
+    if new:
+        data["posts"].extend(new)
+        data["posts"].sort(key=lambda p: p["published"], reverse=True)
+        for p in new:
+            print("NEW POST added:", p["post_id"], p["published"], "clicks", p["custom_button_clicks"], "views", p["impressions_total"])
+    return len(new)
+
+
 def buttons(path, write):
     """Set posts[].custom_button_clicks from the export's MOST RECENT POSTS sheet
     (column 'Custom button engagements' = clicks on the 'Visit my website' button)."""
@@ -119,6 +167,9 @@ def buttons(path, write):
             by_id[post_id(r[0])]["impressions_total"] = num(r[rows[0].index("Impressions")])
             print(post_id(r[0]), r[1], "button clicks:", num(r[col]))
             n += 1
+    added = add_new_posts(wb, rows, data, by_id)
+    if added:
+        print(added, "new post(s); type/image are Unclassified until labelled")
     for p in data["posts"]:
         p.setdefault("custom_button_clicks", None)  # None = not exported yet
     if write:

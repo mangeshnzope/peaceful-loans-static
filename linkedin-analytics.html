@@ -486,7 +486,7 @@
               ACTIVE_SOURCE = "page";
             } else if (h === "news" || h === "newsletter") {
               ACTIVE_SOURCE = "news";
-            } else if (["daily", "weekly", "monthly", "posts", "works", "clicks", "plan", "data"].includes(h)) {
+            } else if (["daily", "weekly", "monthly", "posts", "works", "clicks", "wclicks", "plan", "data"].includes(h)) {
               ACTIVE_SOURCE = "profile";
               ACTIVE_TAB = h;
             }
@@ -563,6 +563,7 @@
         const meta = DASHBOARD_DATA.meta;
         const tabs = [
           { id: "clicks", label: "Button clicks" },
+          { id: "wclicks", label: "Weekly clicks" },
           { id: "daily", label: "Daily" },
           { id: "weekly", label: "Weekly" },
           { id: "monthly", label: "Monthly" },
@@ -584,6 +585,7 @@
           else if (ACTIVE_TAB === "posts") contentHtml = renderPostsTabHtml();
           else if (ACTIVE_TAB === "works") contentHtml = renderWhatWorksTabHtml();
           else if (ACTIVE_TAB === "clicks") contentHtml = renderButtonClicksTabHtml();
+          else if (ACTIVE_TAB === "wclicks") contentHtml = renderWeeklyClicksTabHtml();
           else if (ACTIVE_TAB === "plan") contentHtml = renderReachPlanTabHtml();
           else if (ACTIVE_TAB === "data") contentHtml = renderDataTabHtml();
         }
@@ -1676,6 +1678,65 @@
       }
 
       // --- WHAT WORKS TAB ---
+      function renderWeeklyClicksTabHtml() {
+        const posts = DASHBOARD_DATA.posts.filter(p => p.custom_button_clicks != null);
+        const DAY = 86400000;
+        const utc = s => { const [y, m, d] = s.split("-").map(Number); return Date.UTC(y, m - 1, d); };
+        const iso = t => new Date(t).toISOString().slice(0, 10);
+        const monday = t => t - ((new Date(t).getUTCDay() + 6) % 7) * DAY;
+        const dataTo = utc(DASHBOARD_DATA.meta.data_to);
+        const wk = {};
+        posts.forEach(p => {
+          const k = iso(monday(utc(p.published)));
+          const w = wk[k] || (wk[k] = { posts: 0, clicks: 0 });
+          w.posts++; w.clicks += p.custom_button_clicks;
+        });
+        const weeks = [];
+        for (let t = monday(utc("2026-09-07")); t <= monday(dataTo); t += 7 * DAY) {
+          const w = wk[iso(t)] || { posts: 0, clicks: 0 };
+          weeks.push({ start: t, end: t + 6 * DAY, partial: t + 6 * DAY > dataTo, posts: w.posts, clicks: w.clicks });
+        }
+        const full = weeks.filter(w => !w.partial);
+        const lastFull = full[full.length - 1];
+        const last4 = full.slice(-4);
+        const avg4 = last4.length ? last4.reduce((s, w) => s + w.clicks, 0) / last4.length : 0;
+        const lbl = t => dd(iso(t));
+
+        const W = 760, H = 240, L = 34, R = 8, T = 16, B = 44;
+        const maxV = Math.max(5, ...weeks.map(w => w.clicks));
+        const step = Math.max(1, Math.ceil(maxV / 5));
+        const top = Math.ceil(maxV / step) * step;
+        const bw = (W - L - R) / weeks.length;
+        const y = v => T + (H - T - B) * (1 - v / top);
+        let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Button clicks by week of posting" style="width:100%;min-width:520px;height:auto">`;
+        for (let v = 0; v <= top; v += step) svg += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)"/><text x="${L - 6}" y="${y(v) + 3}" text-anchor="end">${v}</text>`;
+        weeks.forEach((w, i) => {
+          const x = L + i * bw + bw * 0.16, ww = bw * 0.68, h = (H - T - B) * (w.clicks / top);
+          svg += `<rect x="${x}" y="${y(0) - h}" width="${ww}" height="${h}" fill="var(--accent)" opacity="${w.partial ? 0.45 : 1}"><title>${lbl(w.start)} – ${lbl(w.end)}: ${w.clicks} clicks, ${w.posts} posts</title></rect>`;
+          svg += `<text x="${x + ww / 2}" y="${y(w.clicks) - 4}" text-anchor="middle" style="fill:var(--ink)">${w.clicks}</text>`;
+          svg += `<text x="${x + ww / 2}" y="${H - B + 14}" text-anchor="middle">${lbl(w.start)}</text>`;
+          if (w.partial) svg += `<text x="${x + ww / 2}" y="${H - B + 26}" text-anchor="middle">so far</text>`;
+        });
+        svg += `</svg>`;
+
+        const rows = weeks.slice().reverse().map(w => `<tr><td class="l">${lbl(w.start)} – ${lbl(w.end)}${w.partial ? ` <span class="chip w">so far</span>` : ""}</td><td>${w.posts}</td><td><b>${w.clicks}</b></td></tr>`).join("");
+
+        return `
+          <section style="display:flex;flex-direction:column;gap:14px">
+            <h2>Weekly button clicks, Monday to Sunday</h2>
+            <p class="note">Clicks on <b>Visit my website</b>, by the week the post was published.
+              <details style="display:inline"><summary style="cursor:pointer;color:var(--accent)">How to read this</summary>
+                <span>LinkedIn gives clicks per post for its whole life, with no dates. So a week here means the posts published that week and the clicks they have collected so far. Recent weeks keep growing a little.</span>
+              </details></p>
+            <div class="kpis">
+              <div class="kpi"><span class="s">Last full week</span><span class="v">${lastFull ? lastFull.clicks : "–"}</span><span class="s">${lastFull ? lbl(lastFull.start) + " – " + lbl(lastFull.end) : ""}</span></div>
+              <div class="kpi"><span class="s">Average, last ${last4.length} full weeks</span><span class="v">${(Math.round(avg4 * 10) / 10)}</span><span class="s">clicks a week</span></div>
+            </div>
+            <div class="card chart">${svg}</div>
+            <div class="card tw"><table><thead><tr><th class="l">Week (Mon–Sun)</th><th>Posts</th><th>Button clicks</th></tr></thead><tbody>${rows}</tbody></table></div>
+          </section>`;
+      }
+
       function renderButtonClicksTabHtml() {
         const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
         const all = DASHBOARD_DATA.posts;
