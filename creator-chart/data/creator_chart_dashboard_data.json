@@ -33,7 +33,7 @@
    "Media mention / PR"
   ],
   "notes": "TG impressions = impressions from viewers whose LinkedIn seniority is in tg_definition. TG share = % of all views from TG. Every grain comes from its own LinkedIn export. No total impressions are included by design.",
-  "refreshed_at": "2026-11-24T08:10:52+05:30"
+  "refreshed_at": "2026-11-24T08:12:04+05:30"
  },
  "daily": [
   {
@@ -3713,8 +3713,8 @@
    "url": "https://www.linkedin.com/posts/mangeshzope_mr-no-more-landlords-had-lived-in-the-same-share-7529791308484427776-YYzy",
    "type": "Unclassified",
    "auto_type": "Unclassified",
-   "image_type": "Unclassified",
-   "auto_image_type": "Unclassified",
+   "image_type": "No image",
+   "auto_image_type": "No image",
    "format": "Text/share",
    "creator_chart_era": true,
    "tg_impressions_lifetime": null,
@@ -3739,8 +3739,8 @@
    "url": "https://www.linkedin.com/posts/mangeshzope_a-home-loan-borrower-who-thinks-he-could-share-7529055838993321984-u3f3",
    "type": "Unclassified",
    "auto_type": "Unclassified",
-   "image_type": "Unclassified",
-   "auto_image_type": "Unclassified",
+   "image_type": "No image",
+   "auto_image_type": "No image",
    "format": "Text/share",
    "creator_chart_era": true,
    "tg_impressions_lifetime": null,
@@ -3765,8 +3765,8 @@
    "url": "https://www.linkedin.com/posts/mangeshzope_i-call-him-mr-i-know-my-bankers-he-came-share-7528711302547156993-NMlo",
    "type": "Unclassified",
    "auto_type": "Unclassified",
-   "image_type": "Unclassified",
-   "auto_image_type": "Unclassified",
+   "image_type": "No image",
+   "auto_image_type": "No image",
    "format": "Text/share",
    "creator_chart_era": true,
    "tg_impressions_lifetime": null,
@@ -3791,8 +3791,8 @@
    "url": "https://www.linkedin.com/posts/mangeshzope_please-vote-with-what-you-are-seeing-the-ugcPost-7528686441120428032-p77W",
    "type": "Unclassified",
    "auto_type": "Unclassified",
-   "image_type": "Unclassified",
-   "auto_image_type": "Unclassified",
+   "image_type": "No image",
+   "auto_image_type": "No image",
    "format": "Text/share",
    "creator_chart_era": true,
    "tg_impressions_lifetime": null,
