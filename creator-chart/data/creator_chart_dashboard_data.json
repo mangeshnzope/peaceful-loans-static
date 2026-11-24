@@ -1,8 +1,8 @@
 {
  "meta": {
-  "built": "23 Nov 2026",
+  "built": "24 Nov 2026",
   "data_from": "2026-01-01",
-  "data_to": "2026-11-22",
+  "data_to": "2026-11-23",
   "tg_definition": [
    "Manager",
    "Director",
@@ -33,7 +33,7 @@
    "Media mention / PR"
   ],
   "notes": "TG impressions = impressions from viewers whose LinkedIn seniority is in tg_definition. TG share = % of all views from TG. Every grain comes from its own LinkedIn export. No total impressions are included by design.",
-  "refreshed_at": "2026-11-23T16:17:16+05:30"
+  "refreshed_at": "2026-11-24T08:01:57+05:30"
  },
  "daily": [
   {
@@ -2956,6 +2956,16 @@
    "engagements": 18,
    "new_followers": 13,
    "posts_published": 0
+  },
+  {
+   "date": "2026-11-23",
+   "impressions_total": 523,
+   "tg_impressions": 220,
+   "tg_share_pct": 42.0,
+   "tg_may_be_higher": true,
+   "engagements": 0,
+   "new_followers": 4,
+   "posts_published": 0
   }
  ],
  "weekly": [
@@ -3523,6 +3533,19 @@
    "posts_published": 3,
    "tg_people_reached_est": 3227,
    "tg_frequency_est": 1.66
+  },
+  {
+   "week_start": "2026-11-23",
+   "week_end": "2026-11-23",
+   "impressions_total": 523,
+   "tg_impressions": 220,
+   "tg_share_pct": 42.0,
+   "tg_may_be_higher": true,
+   "engagements": 0,
+   "new_followers": 4,
+   "posts_published": 0,
+   "tg_people_reached_est": 132,
+   "tg_frequency_est": 1.66
   }
  ],
  "monthly": [
@@ -3648,16 +3671,16 @@
   },
   {
    "month_start": "2026-11-01",
-   "month_end": "2026-11-22",
-   "tg_impressions": 20617,
+   "month_end": "2026-11-23",
+   "tg_impressions": 20853,
    "tg_share_pct": 45.0,
    "tg_may_be_higher": false,
    "engagements": 157,
-   "new_followers": 119,
-   "tg_people_reached_est": 12717,
-   "tg_frequency_est": 1.62,
+   "new_followers": 123,
+   "tg_people_reached_est": 12810,
+   "tg_frequency_est": 1.63,
    "posts_published": 9,
-   "impressions_total": 45816
+   "impressions_total": 46339
   }
  ],
  "posts": [
