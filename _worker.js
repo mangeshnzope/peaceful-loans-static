@@ -548,7 +548,7 @@ var creator_chart_dashboard_data_default = {
       "Media mention / PR"
     ],
     notes: "TG impressions = impressions from viewers whose LinkedIn seniority is in tg_definition. TG share = % of all views from TG. Every grain comes from its own LinkedIn export. No total impressions are included by design.",
-    refreshed_at: "2026-11-24T08:01:57+05:30"
+    refreshed_at: "2026-11-24T08:10:52+05:30"
   },
   daily: [
     {
@@ -3423,6 +3423,26 @@ var creator_chart_dashboard_data_default = {
       posts_published: 0
     },
     {
+      date: "2026-11-16",
+      impressions_total: 399,
+      tg_impressions: 172,
+      tg_share_pct: 43,
+      tg_may_be_higher: true,
+      engagements: 4,
+      new_followers: 2,
+      posts_published: 0
+    },
+    {
+      date: "2026-11-17",
+      impressions_total: 290,
+      tg_impressions: 90,
+      tg_share_pct: 31,
+      tg_may_be_higher: true,
+      engagements: 0,
+      new_followers: 19,
+      posts_published: 0
+    },
+    {
       date: "2026-11-18",
       impressions_total: 1741,
       tg_impressions: 818,
@@ -4038,16 +4058,16 @@ var creator_chart_dashboard_data_default = {
     },
     {
       week_start: "2026-11-16",
-      week_end: "2026-11-21",
-      impressions_total: 11425,
-      tg_impressions: 5370,
-      tg_share_pct: 47,
+      week_end: "2026-11-22",
+      impressions_total: 35314,
+      tg_impressions: 16244,
+      tg_share_pct: 46,
       tg_may_be_higher: false,
-      engagements: 32,
-      new_followers: 52,
-      posts_published: 3,
-      tg_people_reached_est: 3227,
-      tg_frequency_est: 1.66
+      engagements: 50,
+      new_followers: 65,
+      posts_published: 4,
+      tg_people_reached_est: 11412,
+      tg_frequency_est: 1.42
     },
     {
       week_start: "2026-11-23",
@@ -4200,6 +4220,110 @@ var creator_chart_dashboard_data_default = {
   ],
   posts: [
     {
+      post_id: "7529791308484427776",
+      published: "2026-11-21",
+      weekday: "Sat",
+      time: "",
+      title: "Mr no more landlords had lived in the same",
+      url: "https://www.linkedin.com/posts/mangeshzope_mr-no-more-landlords-had-lived-in-the-same-share-7529791308484427776-YYzy",
+      type: "Unclassified",
+      auto_type: "Unclassified",
+      image_type: "Unclassified",
+      auto_image_type: "Unclassified",
+      format: "Text/share",
+      creator_chart_era: true,
+      tg_impressions_lifetime: null,
+      tg_share_pct: null,
+      out_of_network_pct: 92,
+      in_network_pct: 8,
+      engagements: 27,
+      comments: 8,
+      reposts: 1,
+      followers_gained: 11,
+      engagement_rate_pct: 0.09,
+      custom_button_clicks: 4,
+      impressions_total: 31194,
+      clicks_read_at: "2026-11-24T08:10:20+05:30"
+    },
+    {
+      post_id: "7529055838993321984",
+      published: "2026-11-19",
+      weekday: "Thu",
+      time: "",
+      title: "A home loan borrower who thinks he could",
+      url: "https://www.linkedin.com/posts/mangeshzope_a-home-loan-borrower-who-thinks-he-could-share-7529055838993321984-u3f3",
+      type: "Unclassified",
+      auto_type: "Unclassified",
+      image_type: "Unclassified",
+      auto_image_type: "Unclassified",
+      format: "Text/share",
+      creator_chart_era: true,
+      tg_impressions_lifetime: null,
+      tg_share_pct: null,
+      out_of_network_pct: 39,
+      in_network_pct: 61,
+      engagements: 7,
+      comments: 0,
+      reposts: 1,
+      followers_gained: 1,
+      engagement_rate_pct: 0.68,
+      custom_button_clicks: 0,
+      impressions_total: 1023,
+      clicks_read_at: "2026-11-24T08:10:20+05:30"
+    },
+    {
+      post_id: "7528711302547156993",
+      published: "2026-11-18",
+      weekday: "Wed",
+      time: "",
+      title: "I call him mr i know my bankers he came",
+      url: "https://www.linkedin.com/posts/mangeshzope_i-call-him-mr-i-know-my-bankers-he-came-share-7528711302547156993-NMlo",
+      type: "Unclassified",
+      auto_type: "Unclassified",
+      image_type: "Unclassified",
+      auto_image_type: "Unclassified",
+      format: "Text/share",
+      creator_chart_era: true,
+      tg_impressions_lifetime: null,
+      tg_share_pct: null,
+      out_of_network_pct: 49,
+      in_network_pct: 51,
+      engagements: 9,
+      comments: 1,
+      reposts: 0,
+      followers_gained: 1,
+      engagement_rate_pct: 0.51,
+      custom_button_clicks: 0,
+      impressions_total: 1774,
+      clicks_read_at: "2026-11-24T08:10:20+05:30"
+    },
+    {
+      post_id: "7528686441120428032",
+      published: "2026-11-18",
+      weekday: "Wed",
+      time: "",
+      title: "Please vote with what you are seeing the",
+      url: "https://www.linkedin.com/posts/mangeshzope_please-vote-with-what-you-are-seeing-the-ugcPost-7528686441120428032-p77W",
+      type: "Unclassified",
+      auto_type: "Unclassified",
+      image_type: "Unclassified",
+      auto_image_type: "Unclassified",
+      format: "Text/share",
+      creator_chart_era: true,
+      tg_impressions_lifetime: null,
+      tg_share_pct: null,
+      out_of_network_pct: null,
+      in_network_pct: null,
+      engagements: 0,
+      comments: 0,
+      reposts: 0,
+      followers_gained: 0,
+      engagement_rate_pct: 0,
+      custom_button_clicks: 0,
+      impressions_total: 450,
+      clicks_read_at: "2026-11-24T08:10:25+05:30"
+    },
+    {
       post_id: "7527244337932574720",
       published: "2026-11-14",
       weekday: "Sat",
@@ -4222,7 +4346,8 @@ var creator_chart_dashboard_data_default = {
       followers_gained: 2,
       engagement_rate_pct: 0.87,
       custom_button_clicks: 6,
-      impressions_total: 3542
+      impressions_total: 3542,
+      clicks_read_at: "2026-11-24T08:08:59+05:30"
     },
     {
       post_id: "7526538909279744000",
@@ -4247,7 +4372,8 @@ var creator_chart_dashboard_data_default = {
       followers_gained: 0,
       engagement_rate_pct: 2.75,
       custom_button_clicks: 0,
-      impressions_total: 493
+      impressions_total: 493,
+      clicks_read_at: "2026-11-24T08:08:59+05:30"
     },
     {
       post_id: "7525811196332269568",
@@ -4272,7 +4398,8 @@ var creator_chart_dashboard_data_default = {
       followers_gained: 0,
       engagement_rate_pct: 1.03,
       custom_button_clicks: 1,
-      impressions_total: 783
+      impressions_total: 783,
+      clicks_read_at: "2026-11-24T08:08:59+05:30"
     },
     {
       post_id: "7523973515906179072",
