@@ -91,6 +91,19 @@ def main():
     old = json.loads(run("git", "show", "HEAD:creator-chart/data/creator_chart_dashboard_data.json"))
     validate(new, old)
     if "--push" in sys.argv:
+        # accuracy gate: never publish data that fails verify.py
+        v = subprocess.run([sys.executable, "-I", str(Path(__file__).resolve().parent / "verify.py")], capture_output=True, text=True)
+        if v.returncode != 0:
+            sys.exit("verify.py failed, NOT publishing:\n" + v.stdout)
+        # keep a dated snapshot of every post's lifetime clicks (the only way to get clicks by date)
+        snap_path = REPO / "creator-chart/data/click_snapshots.json"
+        snaps = json.loads(snap_path.read_text()) if snap_path.exists() else []
+        from datetime import datetime, timedelta, timezone
+        now = datetime.now(timezone(timedelta(hours=5, minutes=30)))
+        if not snaps or (now - datetime.fromisoformat(snaps[-1]["taken_at"])).total_seconds() > 6 * 3600:
+            snaps.append({"taken_at": now.isoformat(timespec="seconds"),
+                          "clicks": {p["post_id"]: p["custom_button_clicks"] for p in new["posts"]}})
+            snap_path.write_text(json.dumps(snaps[-120:], separators=(",", ":")))
         # stamp the refresh time (IST) so the page can show "Refreshed <time>"
         from datetime import datetime, timedelta, timezone
         new["meta"]["refreshed_at"] = datetime.now(timezone(timedelta(hours=5, minutes=30))).isoformat(timespec="seconds")
@@ -103,7 +116,7 @@ def main():
         return
     WORKER.write_text(patched)
     msg = sys.argv[2] if len(sys.argv) > 2 else f"Daily TG dashboard refresh (data to {new['meta']['data_to']})"
-    run("git", "add", str(DATA.relative_to(REPO)), "_worker.js")
+    run("git", "add", str(DATA.relative_to(REPO)), "_worker.js", "creator-chart/data/click_snapshots.json")
     run("git", "commit", "-m", msg)
     run("git", "push", "origin", "HEAD:main")
     print("pushed")

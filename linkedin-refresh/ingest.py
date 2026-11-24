@@ -6,6 +6,7 @@
   python3 -I ingest.py monthly export.xlsx [--write]
   python3 -I ingest.py buttons export.xlsx [--write]   # post custom-button clicks + total impressions
   python3 -I ingest.py post SinglePostAnalytics_*.xlsx [--write]  # one post, any age
+  python3 -I ingest.py classify <post_id> "<type>" ["<image type>"]  # label a new post after reading it
 
 Each export is one grain (day / Mon-Sun week / calendar month) and becomes one
 row; nothing is summed across grains. Without --write it only prints the row.
@@ -14,6 +15,7 @@ DEMOGRAPHICS sheet (viewers). TG impressions = Impressions x TG share.
 Standard library only.
 """
 import json, re, sys, zipfile
+from datetime import timedelta, timezone
 from datetime import date, datetime
 from pathlib import Path
 
@@ -79,6 +81,10 @@ def parse(path):
     return start, end, imp, reached, eng, fol, sen, pub
 
 
+def now_ist():
+    return datetime.now(timezone(timedelta(hours=5, minutes=30))).isoformat(timespec="seconds")
+
+
 def post_id(url):
     m = re.search(r"(\d{15,})", url)
     return m.group(1) if m else url
@@ -125,12 +131,14 @@ def add_new_posts(wb, rows, data, by_id):
                 "custom_button_clicks": None, "impressions_total": imp}
 
     for r in rows[1:]:
-        if len(r) > 1 and r[0] and post_id(r[0]) not in by_id and d(r[1]) >= date(2026, 1, 1):
+        if len(r) > 1 and r[0] and "groupPost" not in r[0] and post_id(r[0]) not in by_id and d(r[1]) >= date(2026, 1, 1):
             imp = num(r[ix("Impressions")])
             reac, com, rep = (num(r[ix(c)]) if ix(c) is not None and len(r) > ix(c) else 0 for c in ("Reactions", "Comments", "Reposts"))
             p = base(r[0], d(r[1]), imp, reac + com + rep)
+            if r[ix("Post type")] == "Text":
+                p["image_type"] = p["auto_image_type"] = "No image"
             p.update(comments=com, reposts=rep, followers_gained=num(r[ix("Followers gained")]) if ix("Followers gained") is not None else 0,
-                     custom_button_clicks=num(r[ix("Custom button engagements")]),
+                     custom_button_clicks=num(r[ix("Custom button engagements")]), clicks_read_at=now_ist(),
                      format="Text/share" if r[ix("Post type")] == "Text" else "Media (ugcPost)")
             out = r[ix("Impressions (out-of-network)")] if ix("Impressions (out-of-network)") is not None else ""
             if out.endswith("%"):
@@ -138,12 +146,20 @@ def add_new_posts(wb, rows, data, by_id):
             new.append(p)
             by_id[p["post_id"]] = p
     top = wb.get("TOP POSTS", [])
+    # TOP POSTS has two side-by-side lists: by engagements (cols 0-2) and by impressions (cols 4-6).
+    # A post can be in either list, so read both. Posts found only here have no click count until
+    # their own per-post export is read (verify.py blocks publishing until then).
+    imp_of = {post_id(x[4]): num(x[6]) for x in top[2:] if len(x) > 6 and x[4] and x[6]}
+    eng_of = {post_id(x[0]): num(x[2]) for x in top[2:] if len(x) > 2 and x[0] and x[2]}
+    # Posts inside LinkedIn groups (urn:li:groupPost) are skipped: they have no per-post analytics page.
     for r in top[2:]:
-        if len(r) > 6 and r[4] and r[5] and post_id(r[4]) not in by_id and d(r[5]) >= date(2026, 1, 1):
-            eng = next((num(x[2]) for x in top[2:] if len(x) > 2 and x[0] and post_id(x[0]) == post_id(r[4])), 0)
-            p = base(r[4], d(r[5]), num(r[6]), eng)
-            new.append(p)
-            by_id[p["post_id"]] = p
+        for ucol, dcol in ((0, 1), (4, 5)):
+            if len(r) > dcol and r[ucol] and r[dcol]:
+                pid = post_id(r[ucol])
+                if pid not in by_id and "groupPost" not in r[ucol] and d(r[dcol]) >= date(2026, 1, 1):
+                    p = base(r[ucol], d(r[dcol]), imp_of.get(pid), eng_of.get(pid, 0))
+                    new.append(p)
+                    by_id[pid] = p
     if new:
         data["posts"].extend(new)
         data["posts"].sort(key=lambda p: p["published"], reverse=True)
@@ -164,6 +180,7 @@ def buttons(path, write):
     for r in rows[1:]:
         if len(r) > col and r[0] and post_id(r[0]) in by_id:
             by_id[post_id(r[0])]["custom_button_clicks"] = num(r[col])
+            by_id[post_id(r[0])]["clicks_read_at"] = now_ist()
             by_id[post_id(r[0])]["impressions_total"] = num(r[rows[0].index("Impressions")])
             print(post_id(r[0]), r[1], "button clicks:", num(r[col]))
             n += 1
@@ -175,6 +192,20 @@ def buttons(path, write):
     if write:
         DATA.write_text(json.dumps(data, indent=1, ensure_ascii=True))
     print(n, "posts updated" if write else "posts matched (dry run)")
+
+
+def classify(pid, ptype, image_type=None):
+    """Set a post's type (and optionally image type) after reading its text. Types come from meta.post_types."""
+    data = json.loads(DATA.read_text())
+    allowed = data["meta"]["post_types"]
+    assert ptype in allowed, f"type must be one of {allowed}"
+    post = next(p for p in data["posts"] if p["post_id"] == pid)
+    post["type"] = post["auto_type"] = ptype
+    if image_type:
+        assert image_type in data["meta"]["image_types"], data["meta"]["image_types"]
+        post["image_type"] = post["auto_image_type"] = image_type
+    DATA.write_text(json.dumps(data, indent=1, ensure_ascii=True))
+    print(pid, "->", ptype, image_type or "")
 
 
 def single(path, write):
@@ -189,12 +220,15 @@ def single(path, write):
     assert post, f"post {pid} not in data"
     post["impressions_total"] = imp
     post["custom_button_clicks"] = None if btn is None else num(btn)
+    post["clicks_read_at"] = now_ist()
     print(pid, "impressions_total", imp, "button clicks", post["custom_button_clicks"])
     if write:
         DATA.write_text(json.dumps(data, indent=1, ensure_ascii=True))
 
 
 def main():
+    if len(sys.argv) >= 4 and sys.argv[1] == "classify":
+        return classify(sys.argv[2], sys.argv[3], sys.argv[4] if len(sys.argv) > 4 else None)
     if len(sys.argv) >= 3 and sys.argv[1] == "post":
         return single(sys.argv[2], "--write" in sys.argv)
     if len(sys.argv) >= 3 and sys.argv[1] == "buttons":

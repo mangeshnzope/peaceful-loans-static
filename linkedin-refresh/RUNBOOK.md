@@ -33,3 +33,12 @@ New posts' types and image types, the 90-day windows, company page, newsletter, 
 - If requested: refuses when the last refresh finished under 12 hours ago, else sets "running", exports yesterday's missing days + current week + month, runs ingest, publish.py --push, rebuilds and republishes the artifact, then sets "done" (or "failed" with the reason). No team email on manual refreshes.
 - The page shows the status to everyone and disables the button while a refresh is running or within 12 hours of the last one.
 - The website and artifact both show "Refreshed <time> IST" (meta.refreshed_at, stamped by publish.py --push).
+
+## Accuracy rules (owner requirement: 100% accurate, every week)
+- The weekly task re-reads EVERY post from LinkedIn each run (`next_posts.py --all`, about 85 per-post exports, 2.5-3 hours). No sampling.
+- New posts are found from LinkedIn's exports (`ingest.py buttons` on the weekly and month-to-date files) and labelled by reading their text (`ingest.py classify`).
+- `verify.py` is the gate. `publish.py --push` runs it and refuses to publish on any failure; the weekly task also runs `verify.py --fresh-hours 8` to prove every post was re-read in this run.
+  Checks: no duplicate/invalid posts, no blank clicks or views, clicks <= views, every post in LinkedIn's newest exports is in the data, every post re-read recently, no duplicate weekly/monthly/daily rows.
+- Group posts (urn:li:groupPost) are not profile posts, have no analytics page, and are excluded.
+- A manual refresh (artifact button) adds new posts and the latest days only; it does NOT re-read old posts.
+- Each publish saves a dated snapshot of every post's lifetime clicks (`creator-chart/data/click_snapshots.json`). LinkedIn does not date clicks; the difference between two snapshots is the only exact count of clicks made in between.
